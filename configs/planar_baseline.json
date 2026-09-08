@@ -1,0 +1,206 @@
+{
+  "status": "proposed_experiment_defaults_not_executed_controller",
+  "version": "2026-09-08",
+  "state_order": [
+    "px",
+    "pz",
+    "vx",
+    "vz",
+    "phi",
+    "omega"
+  ],
+  "input_order": [
+    "T",
+    "tau"
+  ],
+  "plant": {
+    "mass_kg": 1.0,
+    "inertia_kg_m2": 0.02,
+    "gravity_m_s2": 9.81,
+    "dt_s": 0.02,
+    "truth_semantics": "defined_discrete_euler",
+    "residual_formula_source": "docs/research/01_model_and_bounds.md",
+    "wind_bounds_m_s": [
+      [
+        -0.5,
+        0.5
+      ],
+      [
+        -0.5,
+        0.5
+      ]
+    ],
+    "external_process_halfwidth": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "domain": {
+    "state_lower": [
+      -5,
+      0.5,
+      -3,
+      -3,
+      -0.45,
+      -2
+    ],
+    "state_upper": [
+      5,
+      3.5,
+      3,
+      3,
+      0.45,
+      2
+    ],
+    "input_lower": [
+      4.905,
+      -0.08
+    ],
+    "input_upper": [
+      14.715,
+      0.08
+    ]
+  },
+  "initial_set": {
+    "center": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    "halfwidth": [
+      0.02,
+      0.02,
+      0.1,
+      0.1,
+      0.005,
+      0.01
+    ],
+    "interpretation": "benchmark prior; sample truth inside; measurement update at tick zero"
+  },
+  "sensing": {
+    "position_period_ticks": 5,
+    "max_consecutive_missed_packets": 2,
+    "always_observed_indices": [
+      4,
+      5
+    ],
+    "position_indices": [
+      0,
+      1
+    ],
+    "observed_noise_halfwidth": {
+      "px": 0.02,
+      "pz": 0.02,
+      "phi": 0.005,
+      "omega": 0.01
+    },
+    "delay_ticks": 0
+  },
+  "network": {
+    "layers": [
+      5,
+      32,
+      32,
+      2
+    ],
+    "hidden_activation": "tanh",
+    "output_activation": "linear",
+    "dtype": "float64",
+    "features": [
+      "vx/3",
+      "vz/3",
+      "phi/0.45",
+      "T/(mass*gravity)-1",
+      "tau/0.08"
+    ],
+    "output_scale_m_s2": [
+      1,
+      1
+    ]
+  },
+  "training": {
+    "window_ticks": 25,
+    "state_width_scale": [
+      5,
+      3,
+      3,
+      3,
+      0.45,
+      2
+    ],
+    "state_width_weights": [
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666
+    ],
+    "initialization_seeds": [
+      61001,
+      61002,
+      61003,
+      61004,
+      61005
+    ],
+    "epoch_cap_candidate": 200,
+    "batch_candidate": 128,
+    "hyperparameter_trials_per_method_candidate": 12,
+    "freeze_hyperparameters_after_validation_pilot": true
+  },
+  "mpc": {
+    "horizon": 25,
+    "state_cost_scale": [
+      5,
+      3,
+      3,
+      3,
+      0.45,
+      2
+    ],
+    "input_cost_scale": [
+      9.81,
+      0.08
+    ],
+    "normalized_Q_diag": [
+      10,
+      10,
+      1,
+      1,
+      2,
+      0.2
+    ],
+    "normalized_R_diag": [
+      0.1,
+      0.1
+    ],
+    "normalized_Rdelta_diag": [
+      0.01,
+      0.01
+    ],
+    "max_candidate_iterations": 3,
+    "deadline_s": 0.02,
+    "terminal_certificate": null,
+    "K": null,
+    "L_by_mode": null
+  },
+  "evaluation": {
+    "episode_seconds": 20,
+    "bootstrap_seed": 62001,
+    "bootstrap_resamples": 10000,
+    "primary_endpoint": "paired relative change of posterior velocity width D versus C in S2/S3",
+    "formal_test_locked": false
+  },
+  "notes": [
+    "External process noise zero isolates the first benchmark; nonzero process noise needs a new frozen bound.",
+    "Domain limits initially also serve as task constraints; certification of observer evaluation outside them requires extension.",
+    "Null gains and terminal certificate are required future synthesis outputs; this config cannot run a guaranteed controller."
+  ]
+}
