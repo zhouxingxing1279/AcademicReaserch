@@ -1,0 +1,28 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "config_sha256": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+  "source_sha256": {
+    "src/smf_mpc/__init__.py": "52c7dffd0592eb5db86e8becf424034e931db07f354075d07c894d79b57ec555",
+    "src/smf_mpc/data.py": "d11062e1241b65430a16c0726628b7b1f3a5c41d57a7d062f572e6ce5904ea2a",
+    "src/smf_mpc/filter.py": "191de019c8cd453b265aea0b9f45d1774539728efaf54068f2fbc7a6fec48fed",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "src/smf_mpc/sensing.py": "24a326c187f9cf7956a2ed8812922f97712fa10f72d09be1f1ac7e9d91614dc8",
+    "src/smf_mpc/sets.py": "d052bacd0fcf239d29beb2a6a5055acde7f44b1056e0e24e8ed082b7efec670a",
+    "scripts/run_g1.py": "2bfb2430c0e92c16039a194442450a40ee4c3aa96d134e7eefaa5a514aa85a43"
+  },
+  "artifact_sha256": {
+    "linear_steps.csv": "e76cf50d75221994a3070331139bb01edb2cb852a49321c2bd54d3c1adf095a4",
+    "planar_steps.csv": "749a9cc112ff6abef4ed737cc2b9853c2744fcf4b3b3832e39a3f6c7bd2c4143",
+    "summary.json": "93d177f5c0108676f8875db5192002d91dcd38a8d7a021e04f71bd6adc39b8a9",
+    "window_index.json": "52272295c8db8c384760254ebd4e9bb198c75f6cccc19638878abb54ab3ad7da"
+  },
+  "seeds": [
+    70001,
+    70002,
+    70003
+  ],
+  "split": "g1_pilot",
+  "prior_plan_commit": "1323ab4e1315f112018561d1e502c987e48386bb"
+}

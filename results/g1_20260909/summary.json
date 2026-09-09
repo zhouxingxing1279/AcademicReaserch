@@ -1,0 +1,209 @@
+{
+  "kind": "G1_pilot_not_learning_or_control_evaluation",
+  "arithmetic": "FLOAT64_ENGINEERING_MARGIN_NOT_CERTIFIED",
+  "discrete_residual_halfwidth": [
+    0.0,
+    0.0,
+    0.03759796088016961,
+    0.041709951100212014,
+    0.0,
+    0.0
+  ],
+  "planar": [
+    {
+      "seed": 70001,
+      "split": "g1_pilot",
+      "scenario": "S0",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.628935533533534,
+        2.894571813563227
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70001,
+      "split": "g1_pilot",
+      "scenario": "S1",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.628935533533534,
+        2.894571813563227
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70001,
+      "split": "g1_pilot",
+      "scenario": "S2",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.628935533533534,
+        2.894571813563227
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70002,
+      "split": "g1_pilot",
+      "scenario": "S0",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.625342360042492,
+        2.8945699731889714
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70002,
+      "split": "g1_pilot",
+      "scenario": "S1",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.625342360042492,
+        2.8945699731889714
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70002,
+      "split": "g1_pilot",
+      "scenario": "S2",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.625342360042492,
+        2.8945699731889714
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70003,
+      "split": "g1_pilot",
+      "scenario": "S0",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.6295767644182892,
+        2.894572602613791
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70003,
+      "split": "g1_pilot",
+      "scenario": "S1",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.6295767644182892,
+        2.894572602613791
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "planned_ticks": 1000
+    },
+    {
+      "seed": 70003,
+      "split": "g1_pilot",
+      "scenario": "S2",
+      "status": "OUT_OF_DOMAIN",
+      "stop_tick": 68,
+      "stop_time_s": 1.36,
+      "valid_steps_including_initial": 68,
+      "membership_failures_on_valid_steps": 0,
+      "exact_membership_failures_on_valid_steps": 0,
+      "final_valid_velocity_halfwidth": [
+        2.6295767644182892,
+        2.894572602613791
+      ],
+      "full_truth_remains_in_domain": true,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "planned_ticks": 1000
+    }
+  ],
+  "linear": [
+    {
+      "scenario": "S0",
+      "ticks": 1000,
+      "hull_membership_failures": 0,
+      "zonotope_lp_membership_failures": 0,
+      "box_final_velocity_radius": 2.0999999999999903,
+      "zonotope_final_velocity_hull_radius": 0.38272936034485316
+    },
+    {
+      "scenario": "S1",
+      "ticks": 1000,
+      "hull_membership_failures": 0,
+      "zonotope_lp_membership_failures": 0,
+      "box_final_velocity_radius": 2.0999999999999903,
+      "zonotope_final_velocity_hull_radius": 0.33309591636582647
+    },
+    {
+      "scenario": "S2",
+      "ticks": 1000,
+      "hull_membership_failures": 0,
+      "zonotope_lp_membership_failures": 0,
+      "box_final_velocity_radius": 2.0999999999999903,
+      "zonotope_final_velocity_hull_radius": 0.3680741766507748
+    }
+  ],
+  "limitations": [
+    "No neural model or MPC",
+    "No formal test seeds consumed",
+    "Global residual envelope assumes the fixed analytic benchmark",
+    "Zonotope membership uses numerical LP witnesses with 1e-8 tolerance",
+    "No rigorous floating point error certificate"
+  ]
+}
