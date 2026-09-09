@@ -1,0 +1,14 @@
+{
+  "model_unchanged": true,
+  "source_sha256": {
+    "src/smf_mpc/affine_model.py": "67528a7c504ec87fd37259623037c4ec0fd086537e03a086be89058d122d2a50",
+    "src/smf_mpc/neural_model.py": "8c136e2cd048fd61409375f736d83e51a024d151bc2baf918ce2cae528603f49",
+    "src/smf_mpc/residual_envelope.py": "e7734b214eeb84f4c0602fbae065667932053517e90d1f206e037e47b87928de",
+    "scripts/build_affine_envelope.py": "6aaf788bd46ce664399dcc3a9ec0f9c836c1ed02e718cfb520e40eb4d63ac252"
+  },
+  "artifact_sha256": {
+    "envelope_leaves.npz": "279b096eb6e468584b777d8703ac72ec36c5b4b1990e598c532d85cb1e532b04",
+    "model.json": "b0d9ae4526fe5f76f7df009053c32e3fc8651744545b05bf6519917414122446",
+    "envelope.json": "a29a29315e6a54cc68605349ce5548faa8b991d1fee3b263bd6b6f38ce14c78f"
+  }
+}

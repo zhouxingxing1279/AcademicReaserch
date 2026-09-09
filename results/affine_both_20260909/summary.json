@@ -1,0 +1,295 @@
+{
+  "propagation": "affine",
+  "scope": "fixed model A affine-bound ablation, no real-time guarantee",
+  "model_sha256": "98b084b43cb6286a6849424d63ace5fd85ab50440cdddb05aff19c9350900ce9",
+  "runs": [
+    {
+      "seed": 70001,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.13426867227896172,
+        0.1282042139595605,
+        1.452275235195792,
+        1.2773630168368064,
+        0.006206630421074905,
+        0.011204459613121318
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.023809541166859228,
+        0.014221879267620832
+      ],
+      "filter_timing_ms": {
+        "p50": 3.0171885,
+        "p95": 10.30658974999999,
+        "p99": 18.17206059,
+        "max": 105.849938
+      },
+      "over_20ms": 7,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70001,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 66,
+      "stop_time_s": 1.32,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.4081145990970041,
+        0.36950314714426646,
+        2.85448643547887,
+        2.673310939017124,
+        0.006268230256442907,
+        0.0111880437145493
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.12291329994641242,
+        0.07155823816069327
+      ],
+      "filter_timing_ms": {
+        "p50": 3.1358985,
+        "p95": 6.47560525,
+        "p99": 21.92167514999979,
+        "max": 46.154591
+      },
+      "over_20ms": 1,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70001,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 52,
+      "stop_time_s": 1.04,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.5430137680219123,
+        0.4541708262058126,
+        2.8150417134169556,
+        2.513116107323695,
+        0.006468536146407819,
+        0.01109818669312589
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.11003210086014605,
+        0.06382150318523058
+      ],
+      "filter_timing_ms": {
+        "p50": 3.2630305,
+        "p95": 6.355807049999999,
+        "p99": 6.6362049700000005,
+        "max": 6.739558
+      },
+      "over_20ms": 0,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70002,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.13603642951596634,
+        0.1285130602058242,
+        1.4758248558120945,
+        1.298163277469398,
+        0.0062066384739490246,
+        0.011204462755655197
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.025516939461453822,
+        0.015120918982693696
+      ],
+      "filter_timing_ms": {
+        "p50": 3.0621140000000002,
+        "p95": 10.749840699999996,
+        "p99": 20.22876475,
+        "max": 180.58621
+      },
+      "over_20ms": 11,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70002,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 69,
+      "stop_time_s": 1.3800000000000001,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.38286128991349233,
+        0.3579135195465408,
+        2.8231214592299536,
+        2.531033966851061,
+        0.006268235007012044,
+        0.01118804653128597
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.11531000756827041,
+        0.06653924885082281
+      ],
+      "filter_timing_ms": {
+        "p50": 2.956593,
+        "p95": 4.723259199999998,
+        "p99": 13.244668239999918,
+        "max": 21.429255
+      },
+      "over_20ms": 1,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70002,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 52,
+      "stop_time_s": 1.04,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.5480139529317503,
+        0.4559706781372319,
+        2.8685364892092347,
+        2.546300833330596,
+        0.0064685341552597345,
+        0.011098186693119296
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.11948548170444583,
+        0.06876311653712522
+      ],
+      "filter_timing_ms": {
+        "p50": 3.0434275,
+        "p95": 9.876219099999975,
+        "p99": 14.95852952,
+        "max": 14.979362
+      },
+      "over_20ms": 0,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70003,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.1350914059682957,
+        0.1284602442108791,
+        1.4639701365784634,
+        1.2813621701406261,
+        0.006206640367298507,
+        0.011204468391724124
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.024771638965419163,
+        0.014819406894357677
+      ],
+      "filter_timing_ms": {
+        "p50": 2.968839,
+        "p95": 6.0619618499999985,
+        "p99": 12.961261819999997,
+        "max": 86.141933
+      },
+      "over_20ms": 5,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70003,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 67,
+      "stop_time_s": 1.34,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.40551813435466094,
+        0.3697920047512069,
+        2.893695347770649,
+        2.5091522069253633,
+        0.006268242821905266,
+        0.011188052557258028
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.12203330281256922,
+        0.07098404332645421
+      ],
+      "filter_timing_ms": {
+        "p50": 2.939156,
+        "p95": 7.406481499999998,
+        "p99": 10.420808200000018,
+        "max": 13.569985
+      },
+      "over_20ms": 0,
+      "baseline_completed_20s": true
+    },
+    {
+      "seed": 70003,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "OutOfDomain",
+      "stop_tick": 51,
+      "stop_time_s": 1.02,
+      "failure_detail": "OUT_OF_DOMAIN: posterior cannot support next prediction",
+      "lp_membership_failures": 0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_baseline_source": true,
+      "max_posterior_radius_on_valid_prefix": [
+        0.5476590124537679,
+        0.4560714227588991,
+        2.834250898337254,
+        2.4458377477812308,
+        0.006468537393175605,
+        0.011098186693136046
+      ],
+      "max_neural_discrete_remainder_on_valid_prefix": [
+        0.11358294678852328,
+        0.06578280159355006
+      ],
+      "filter_timing_ms": {
+        "p50": 3.026805,
+        "p95": 8.196069,
+        "p99": 10.0625535,
+        "max": 11.698016
+      },
+      "over_20ms": 0,
+      "baseline_completed_20s": true
+    }
+  ]
+}

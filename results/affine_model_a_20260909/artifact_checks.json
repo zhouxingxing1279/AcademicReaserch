@@ -1,0 +1,13 @@
+{
+  "all_passed": true,
+  "cells_regenerated": 16384,
+  "all_cells_no_wider_than_legacy": true,
+  "diagnostic_points": 10000,
+  "seed": 75003,
+  "sample_max_abs_error": [
+    1.4897623493235532,
+    1.8690195992359337
+  ],
+  "scope": "floating-point regression and diagnostics; not certification or formal test split",
+  "checker_sha256": "0754b49979ced8bc657aaebe6972363db8f21eeaff840fd099a43e1e800517e6"
+}
