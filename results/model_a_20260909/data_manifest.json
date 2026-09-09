@@ -1,0 +1,1289 @@
+{
+  "kind": "G2_pilot_subsets_not_full_protocol",
+  "train": [
+    {
+      "seed": 10000,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "c38f5307cf7d1f62ffae5704d90fc6ec22635544a71158a758c1978542e3e1b3"
+    },
+    {
+      "seed": 10001,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "1c1817c3f163f4ded6c2ed7de8330802efec1d0724323dd203e01a9f65ea9c17"
+    },
+    {
+      "seed": 10002,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "acb7909b6deaacd259dbc6f9ee11fd3b8ab595141473c9a93cc501c4285ba4da"
+    },
+    {
+      "seed": 10003,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "fbe47ef8c62340eda23ab9ffb81b3694614a328efa1c994d4789e21fd44a5fb5"
+    },
+    {
+      "seed": 10004,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "18b979e21bc065f4b157735a02e245b6635e6c5f6613a43b359e2eb9f31de7ad"
+    },
+    {
+      "seed": 10005,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b7abc0eed8bb82a9682ef7ddc368a3bb804c2e808f7670a5990a9f92a2288c1a"
+    },
+    {
+      "seed": 10006,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "a2d40ad6222515950eeece5b0b9477b5fdf1ea5e00861711893add5fa95ff4ed"
+    },
+    {
+      "seed": 10007,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "843728b737034a9627b5dd2b29770285c663fe8d6c355d37551b1c35efa4b1f6"
+    },
+    {
+      "seed": 10008,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2b082c45317a5d83a66ddcd549baa60b879c844bc157d8d40549a9c7a57f9d78"
+    },
+    {
+      "seed": 10009,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "76195cc3328a32d838737c917d62ce026200de8bf4450e8b12ac9345ae484896"
+    },
+    {
+      "seed": 10010,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "94e8e3ec28a35ecda5bde27157e7ce9cb8c470009f82eed0acd3e8f6e8af24cc"
+    },
+    {
+      "seed": 10011,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "42848911db3946a6fed3e3c5ff2ada9c2a381b07e9e014e81e22886d359f6266"
+    },
+    {
+      "seed": 10012,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "8779554f45270c807ee2805b285230c83733fae6f09ddb5259819268391527e8"
+    },
+    {
+      "seed": 10013,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "ff29b7dd5fabaa4915bae00382ea51ad9ebe578394e97d5ebbbdb770ac1dd74b"
+    },
+    {
+      "seed": 10014,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b7d0d2168a6766afe0bdc688d0dd65febc6d7aeb12ce5e47dc028cd75d4e1149"
+    },
+    {
+      "seed": 10015,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "625e6b289c49f28dcaf36eaf73816eba87323ddcfcd15ca73c35c4e8a3fe1b45"
+    },
+    {
+      "seed": 10016,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "4abc38e5589f1539deb2f690f89929d2789b4cfdfabe09fe3dd6fa7fd89791e0"
+    },
+    {
+      "seed": 10017,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2c609c7ba9f4f26b5f5847fbe7e2d7a91fc5f5115bd3778ea338abc9687a1ba5"
+    },
+    {
+      "seed": 10018,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "40cdc9b1669ed95e3f0fa48531ddd369a79a7a85f0e0335a964fcf1f05c1898e"
+    },
+    {
+      "seed": 10019,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "eb02b2954e8ef38f405c6dcb086265db63dc96c589c5822de3004955ad7d95ae"
+    },
+    {
+      "seed": 10020,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "91312eaf8511980734183b94cb24f5f217548bd89ba2c52a98de8b0872fc0b4b"
+    },
+    {
+      "seed": 10021,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0e9f8bc5e316d2cfebf19dd4d17c642c0862779e788c4871b2fac8e55a06a4ee"
+    },
+    {
+      "seed": 10022,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0d6d85358143d26f326a6ba24985b5119d4e7c4ca14063b26eea7f5e4d61795a"
+    },
+    {
+      "seed": 10023,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f0c17995043d65d98f7f5fb64e51cf053effe2f0acd0781f2a464de420e7db4d"
+    },
+    {
+      "seed": 10024,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "c66261046e0ed32d7fb63b2018e9217a116e783203a7cdb9757014c507c7e479"
+    },
+    {
+      "seed": 10025,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d54bebde3340458456bcc1445d400a2c73289f52b680691507523e3f94c491e0"
+    },
+    {
+      "seed": 10026,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "67a66fc25631167c0430700e5f752b6359ac5cf6d5e67b6bbc25f3770ab4a91c"
+    },
+    {
+      "seed": 10027,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b9db3bb374c0b37ef990b1a894d658f47e2cd2ef191ac6697681ee285dd3ddf0"
+    },
+    {
+      "seed": 10028,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "8ebae8d49603028984a9e89756e9304810e8830ef89a8b48b719cfbacc16c065"
+    },
+    {
+      "seed": 10029,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "774fcc6ff7792ee70bc24ef8e6915c4ee2786f7bdbec62a40e220b964035e8ee"
+    },
+    {
+      "seed": 10030,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "6158a9ed0ad9c9f7f7a0b8a6d9e62f9fc03fa2075fd23e6bf52d565bc44b317c"
+    },
+    {
+      "seed": 10031,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "a42e717cdb925c7616a4339cfa7e9c0dd0abf256222a88c434bcd1292c3f2a5a"
+    },
+    {
+      "seed": 10032,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "cbb57f1a54a41abd7c66e57b0e0eaadd64d8a9f31065bbe2b8e0f19437a0a0fe"
+    },
+    {
+      "seed": 10033,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "aa1b691a9ba917900c069a5d9bb5765f2c12eefe1f90325d2feceff3094246fa"
+    },
+    {
+      "seed": 10034,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "30b9deae33b4c4edbe76b906b5ddfccdc39a3799ab97a288df18cde42284ec84"
+    },
+    {
+      "seed": 10035,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "c7025877474257d9a2cd8ce03a4c4e7cdea2b4e8e5ba4ad61227f362de0ff947"
+    },
+    {
+      "seed": 10036,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b771ee3758cf8433161f4ab04ca712dd87734615f1d882540a0738e5809bd1bc"
+    },
+    {
+      "seed": 10037,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "1cde19889047ba783408ab2c46cfa06b39f24aac2eb8e6fcd374cb0dd670180e"
+    },
+    {
+      "seed": 10038,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "3eb43e6cacf538bb71bb394039cb357c88927ebebe7bb251a3a1f0b182d371c8"
+    },
+    {
+      "seed": 10039,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "237022d5dc4c0f87d54232af500936f96423ce176a721d1f1ea98b45e277ef64"
+    },
+    {
+      "seed": 10040,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "14e8ff48a072d50c619f3977240d42f46874d5515af104a4d9ceb2f577decb01"
+    },
+    {
+      "seed": 10041,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "dcc30c89bdfcb18a83ddab27b69e58a5778af534b8725493936682510da027e7"
+    },
+    {
+      "seed": 10042,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "bb1e20d2533410b33cb7c2667033a14c36cae3c1e6e251aabd4ecc2839095627"
+    },
+    {
+      "seed": 10043,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b4f171a9bfb5ef54a09c84248bb8c800605e0c98d8da6cc30d3f77125bfad3dd"
+    },
+    {
+      "seed": 10044,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "155cbb088b4db7f2676f8ef3d1479c0ba6f1b670055b7bf2e951f4dbf60a4939"
+    },
+    {
+      "seed": 10045,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "a4522faf0c1dab3c2412317e525fc18a7ce62f0a8c32263d18607dbbbdd3acc2"
+    },
+    {
+      "seed": 10046,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "a62ec6ecd06585e86ced709685aae4362067bc33dc121783f0c76b118c2db85e"
+    },
+    {
+      "seed": 10047,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "710030abf68fc37951f36ed3e7f557cdae454a6eea64bdf7e55aaeb6af79b563"
+    },
+    {
+      "seed": 10048,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7a45318b1b991f8c0ccac17811dad991b69099cbe5c24b7c42a2e075c6db5826"
+    },
+    {
+      "seed": 10049,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "77a1ca047e124b3dfe1a2e8768a51690d23656a9f88ddc3d4342a6fb25046acd"
+    },
+    {
+      "seed": 10050,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f2dd84bbade041640512965822e46c2863fbd3e01132aff6da94bca484b436c4"
+    },
+    {
+      "seed": 10051,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "5634b27099e9e021c03054a18ed2b54562dab837a96d4ad66ffb9d7455c42bc2"
+    },
+    {
+      "seed": 10052,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f22fddd98085a99a47d6803f049510f2cbe6d762d0cdd14f25b86d68bcb5e164"
+    },
+    {
+      "seed": 10053,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "be1bde47319deffa557d06d9649cddd545cb0516118e1d9ac36c8216cf9f7477"
+    },
+    {
+      "seed": 10054,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "fea9299d0466de7ec940a14ff458724bd2b43fa1177cdb35acaa9cb5ca28c134"
+    },
+    {
+      "seed": 10055,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2e4dcbf589df6b01cc2010410f5caf42a5278669fb1c524da4f47deb25295fe0"
+    },
+    {
+      "seed": 10056,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "3bc1a0d1af3764e0ceaac9e441ae306f595972cf20af81d9cca2678038cbe44c"
+    },
+    {
+      "seed": 10057,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "a8b0534d8ca0613806c550e733b49dd1d411ccff39b961fd84a77e34adcd6d79"
+    },
+    {
+      "seed": 10058,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "87452ed48928f59d882fe30802734b596fc9d2711418fa537c6a3483a5829a93"
+    },
+    {
+      "seed": 10059,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0255d92406b9ae57ae33da5b4371bbce70e4158ca0445faa33160dffa065916c"
+    },
+    {
+      "seed": 10060,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7699a9fbd1c9829affbbeaf68b6ac739af7ac412e0272dbe2dbca64de8d5e302"
+    },
+    {
+      "seed": 10061,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d53297774cc584800f7720776b0ffb285e971fa9a52534264dce94ad7951acfe"
+    },
+    {
+      "seed": 10062,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "bc6838b39852d8dbc518a8c2d1405ed0dc26ae367ba19f2c289a5afa385699b4"
+    },
+    {
+      "seed": 10063,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "1923978c485f9ec6346a84eee1b68de46a59be55bca39e0aa6310dcf9132be35"
+    },
+    {
+      "seed": 10064,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "22d53ed9ca17a77a7cf0c87bedfaf706780b0abb9be6c19ea40b8d527eff1d53"
+    },
+    {
+      "seed": 10065,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "3404afc74e86f8efb1c8f76c7252f199a88d915e80dd10da7267ccec831a8d92"
+    },
+    {
+      "seed": 10066,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "79f7a62d97b1aa74917a8af98db984da31ad6b0f2ce9a4ea7fb3f7ff639a983e"
+    },
+    {
+      "seed": 10067,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "67aaf58dfbb761d8372c421826d009d2467e64bf890fa0ed869d8d94f40de67b"
+    },
+    {
+      "seed": 10068,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f77f92bb63b472538c3ceba1369585d0223399c633d5b0cf72c162b350c1c615"
+    },
+    {
+      "seed": 10069,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "1d2eafdc2aac33ee8e994cf6c2fbeb18e45a9dbec040b63f3d24bac12f42113e"
+    },
+    {
+      "seed": 10070,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "571b62433d0bd68542b7d37405e0aa3c5675120532f6cd18dbb5bd12a71b60a9"
+    },
+    {
+      "seed": 10071,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "23cdf89665846bf5ea8f2542866a5c6c6cfb0825346d292285e804da8d1fe7ba"
+    },
+    {
+      "seed": 10072,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b63a8b0c680d05daec58ee4a5742504e38cea8ce2482e1b28e4e1d971409cb62"
+    },
+    {
+      "seed": 10073,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "ccd3a9b9857cd5b23be5eb15772c408194b24aa8ac6a881c13bdc02042ea9169"
+    },
+    {
+      "seed": 10074,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7396baedd051a5f9af5cc3c202a7db98bd403d749157a8a4507cbee36adee9a4"
+    },
+    {
+      "seed": 10075,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b3014ff6b095d805c64d23c380f7318ae9588fe2a77f2a66a95ab51b78abf01a"
+    },
+    {
+      "seed": 10076,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "08fb3ebd2109d02ba3a38838f7c58cc3ed734a77a762757ac456cddeb5834352"
+    },
+    {
+      "seed": 10077,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "e91b7bad7b4e369a60eebd175a1ab3f791874504c3df2472fc1bbe638045dd63"
+    },
+    {
+      "seed": 10078,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7ebed9618bbedad66226ff95dfa4a3b53754bdfdb7b1c3fd30a49885092912a3"
+    },
+    {
+      "seed": 10079,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "151a047b10c2713b48d52c1754ad5cd83f4abeb8e1a32793267ef0ba1afef746"
+    },
+    {
+      "seed": 10080,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "9c92bc16bb84e63f4fb807cc4393336035b90b5cd0aa740494e2ba17f0707a07"
+    },
+    {
+      "seed": 10081,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f026dfabf7dec3705bd3158adc3153b90bef80aafb5d97ea9a18feafd9e9dd0e"
+    },
+    {
+      "seed": 10082,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "e08a9bbf3ecb341951f08fc0b98f88fc64d23d5054cca78840ee4b4e72dae5f5"
+    },
+    {
+      "seed": 10083,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d44e233dc654f02b5c503d9ce5f532df62a6d59f72d299592af50ca88ca60ebb"
+    },
+    {
+      "seed": 10084,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "5ee04cdc601dff16c8d46d8ebd5c8754286f02f1771d39094a10f5ab8b910042"
+    },
+    {
+      "seed": 10085,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0f2ae962385abd6a8bd61048c8ab03c978af6ae6bbe5bec06b81a0354381a5ce"
+    },
+    {
+      "seed": 10086,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b8eab9c0d60664c5891b96d20bc3dffdc93ec58fabeabd348c5ec79d8dc5799c"
+    },
+    {
+      "seed": 10087,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "afdb5769bd169fce68a8eb7ca581a541e4f2fc5f61c518d8df4567a8a91b098c"
+    },
+    {
+      "seed": 10088,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "c0f2eba1649fcc2486412ca377d3db7ecea55c8725b63ab0f3725ea5f9a7c66e"
+    },
+    {
+      "seed": 10089,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "751bd9a801bca97eba27733fc95144cc9cb30776046d8a9d39fcb4cc0b9c3bb4"
+    },
+    {
+      "seed": 10090,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "6129a200434fed03cbc0ed74eaa93aa5f94e2250e164a89c428efa1b7d318245"
+    },
+    {
+      "seed": 10091,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7fe7d0a74caafa851e7357be3dce8d3aa747beeac6ad39d43b086657f1f48ba7"
+    },
+    {
+      "seed": 10092,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "982aa93a05bc0a7c302b3d62a7f4809053738f9f9b81776367a29df35744d567"
+    },
+    {
+      "seed": 10093,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "17838fd2bd0c442a6ac338847c26144741571efba81fc8e9046df5512bc9ed7e"
+    },
+    {
+      "seed": 10094,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2051817620f6edf96dfd36593992409fa5aaa09545f49c7f1de1ae19c3a7954f"
+    },
+    {
+      "seed": 10095,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2accb7fe970d537ec82e0e2979fe90ff5dadd08d19775eec9750e842488cb18b"
+    },
+    {
+      "seed": 10096,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "be81d928404a1e888409f09bd292b0b106304ce27cae592ff90511fa3dbfbf82"
+    },
+    {
+      "seed": 10097,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f681f058c01a093a512bbaafaf45e5ac04468c2c9dfecee2109c5d7a4e7c31f2"
+    },
+    {
+      "seed": 10098,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "ab90198164277f695b680c8d2533a4f19d23cfb923e6f5b550638c3ab5e4bcda"
+    },
+    {
+      "seed": 10099,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "54a910fe7eec98d3c5822f8bc5f902b8b31edc9ce2b72bf791eb265a71e69a9d"
+    },
+    {
+      "seed": 10100,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0624736f9b1a08af7babcbe2ac59e10c9a9d02bc5a6a216bc67ebcf629c4ad33"
+    },
+    {
+      "seed": 10101,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "bec258cc05849a4a2bab416c8d48e6242e27fb0e2c0bb2c77e4fcbb925347875"
+    },
+    {
+      "seed": 10102,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "2f63964059a567a3b16409f1998da96c430184305e00f0a72bbf7904f00fab0d"
+    },
+    {
+      "seed": 10103,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "658b3edd00a1b4c12472ce90f9c09e36aa73b42549314f9e805581f7508bfca8"
+    },
+    {
+      "seed": 10104,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "41ae01012953d1c28a0472cf608efff6810da501047e1e86946f6088a6bce5bf"
+    },
+    {
+      "seed": 10105,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "26b64ee3b2607c528c6333e457aaea243c382b2e5c60d5f73e4887dafd568f14"
+    },
+    {
+      "seed": 10106,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "015155d9e5f0975f1a98cb6db1f1cd523070eaeefac836bff4f633c10d75b284"
+    },
+    {
+      "seed": 10107,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "10a562bf86e3b7fbdbeec29e42e0e996a6388617306ae52dcd9ee8ff32b9313d"
+    },
+    {
+      "seed": 10108,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "16a53d74eb484ca5ef69cfcdfda2bb8ee297195589a889d812967f9597933027"
+    },
+    {
+      "seed": 10109,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d864be807ce8fe51bf19c953fbdf492538c1251468cad629a5bea9ed6dc07f55"
+    },
+    {
+      "seed": 10110,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "3591f42372f73fbc9157eece49e17b6ee327a76da16382e91d542ef1b1b73b09"
+    },
+    {
+      "seed": 10111,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "c2dbce15ebaa742ef158b3956ebe183b9479a6c4e6274fe1426b10832a507d71"
+    },
+    {
+      "seed": 10112,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "001524c617368b1f0a93865db36db43cfbd0e127de34e8266f6b2281185e10fc"
+    },
+    {
+      "seed": 10113,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "58895b06a7c16114d960d03d34cda6604f443d367d605e85f206461ae5e78bd9"
+    },
+    {
+      "seed": 10114,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "87b05d34a27da4c56b303a457672fe49b858207788058bc7586dc56d5eaecd08"
+    },
+    {
+      "seed": 10115,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f068b024f8bbee061741ea407d6751f4f325197e0b1a18ba7b095f496570d96a"
+    },
+    {
+      "seed": 10116,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7362ac3c476dd1c230b1b2bcb80ab4a728db14116008cb56b383c04617265e7a"
+    },
+    {
+      "seed": 10117,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "6a1112761d16b28f1b158937d47f9317b5f1376c330190049d63fd71eb67af8f"
+    },
+    {
+      "seed": 10118,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "b8ea3a2dc409f5a9e8a3c1caeb4cea7d5cca81edca4f409c399880dcc45bfbd5"
+    },
+    {
+      "seed": 10119,
+      "split": "train",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "cbccfca355e086ee5fa96357b32013e93c777b9b71dc41cc22edca0b8e387694"
+    }
+  ],
+  "validation": [
+    {
+      "seed": 20000,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "29349dcca5a19055e2e5abeebe6c0e12e946adb570517a681cf2a3cedf558e81"
+    },
+    {
+      "seed": 20001,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "615d57adf2f02ff2355a9177a2608a8242dbfdfb5d5cab3ebe3c71e77319014e"
+    },
+    {
+      "seed": 20002,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7d657790580c9a10f1789e292835dc6ab499cdffd58d2fed7ab79012121bcbe2"
+    },
+    {
+      "seed": 20003,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "4d864ae287bece52e2bcfc40fcbba2bb84b78b26fbcf6b3dde89fdf288942b18"
+    },
+    {
+      "seed": 20004,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "105335cd8aa833f3248bebd6aaf30c3e24c78f8de2a9a9c7400a485d4b788f05"
+    },
+    {
+      "seed": 20005,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "9b45d3c7e7ad91305521800f5b230260bab1f085d1ac29c3f1cb2d01099378b9"
+    },
+    {
+      "seed": 20006,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "ee4611935423048312033db78d758df87ef3823e9cb636201bfd471806f8d4ff"
+    },
+    {
+      "seed": 20007,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "eafc2dca325f16dfdc96174c323bb0bffe6d56bc430250baa1838a5ff3db41e3"
+    },
+    {
+      "seed": 20008,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "f6485294e23443b4249f4a577c566ee61e8aed36d494100a2590dab4971bea4a"
+    },
+    {
+      "seed": 20009,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "79716697cd9c51086f7def07e9644ca1fe3a29c45a5f902cce8dfdb81699060a"
+    },
+    {
+      "seed": 20010,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "be4375c2534849e06db285f65add2b73e863b636e0e3a2bbcc390453d2de90e4"
+    },
+    {
+      "seed": 20011,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "7e153cc4d779cf83fb528bf5fe45512183648956279b472235e6d4e3e6d24342"
+    },
+    {
+      "seed": 20012,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0ca0c51f79c6852022d0b2907e948db76c10d58fe9cebaa983bb2b5544883187"
+    },
+    {
+      "seed": 20013,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "5a7ec3de3ee915d0759fe9378b990131e0e10ac66018f7ff03d595126d7e5a22"
+    },
+    {
+      "seed": 20014,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0ae02650aa79373c50a781dfb7f9744052e7a166016c44b02c4ea145e6685d12"
+    },
+    {
+      "seed": 20015,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "fd8940c47244f8c6815ac1e8cf6611deed2de249d911a00b191a6f8e889f3050"
+    },
+    {
+      "seed": 20016,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "5b8cad1f8c093f49499374bb81798339c21f7b2f82dda627c3f34858816e17ba"
+    },
+    {
+      "seed": 20017,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "8a727a986ec60b34783113b1444f2b1c9967ae3eee7fd88d755a96411c6698a8"
+    },
+    {
+      "seed": 20018,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d1b322cce7a07db371e8f70cfb7a348cdbaf2069d0154dece34afb2064af74ca"
+    },
+    {
+      "seed": 20019,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "3842b087d6502c808f453b01fbc18b33f23335372cce1865a307342166092534"
+    },
+    {
+      "seed": 20020,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "17beeafbaeb40a34b4a511a670d5a28250b789ba228e7e2fc771580a84e3602b"
+    },
+    {
+      "seed": 20021,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "63ea049672b465f2ff6fb14a65df846b314f22bc15ee828649dae772bab9459e"
+    },
+    {
+      "seed": 20022,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "36627c11cdaeb5e389d37f352667a4b145f2d3b835a96b19574fc9ab214961cc"
+    },
+    {
+      "seed": 20023,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "e815d50c5abebef3d7e1851bd57beae3520b51beee19987b9c39c237a66342a8"
+    },
+    {
+      "seed": 20024,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d4f2a0cee01b990b1d5c54f897657a51d5c7918079a72f26026661992e9ee669"
+    },
+    {
+      "seed": 20025,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "97f565f751b3133e021111da8e1626de3ca7b1ab0ab60c154f20753afdc10e81"
+    },
+    {
+      "seed": 20026,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "87240d220140989c746626b7dcb5537e79bbc48abb567bbdb5e6d38260392918"
+    },
+    {
+      "seed": 20027,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "75fed3735dba6b4c9737844d84b09bc9bdc15a4f92a37c60062a2b060098d662"
+    },
+    {
+      "seed": 20028,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "e0aa6dfaf445c73cdb872807ce5050506f673010180a4415ec620b6d2a2f78bc"
+    },
+    {
+      "seed": 20029,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0be5d81dcdde08cf6b970ddd7f6da0428b6c7ebec7bf09648f6773d812127ce7"
+    },
+    {
+      "seed": 20030,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "8f500c4c90f98d58f4d7b7db5f16c84306b32ff93a621cc4de6e736f0951b3cb"
+    },
+    {
+      "seed": 20031,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "39708779a4922a0ffc6d9ccb8923d08b48ef2095769f559dba64ce72d5eda916"
+    },
+    {
+      "seed": 20032,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "6a96cd564105a0c330009e1d63af1ee509140fa54d2a9b63e43785c40b3bcd50"
+    },
+    {
+      "seed": 20033,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "0a9c3cb1a7dc20c4323d825218d4afdc59db379ae2c55df9ece292816df76392"
+    },
+    {
+      "seed": 20034,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "aa9f9c87af862d667f50feccdb87bd2d0e23340529f6a4c76551a8e790e7161e"
+    },
+    {
+      "seed": 20035,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "12c5627f3a9efcf104cbbd0c77fc7552b9f029f2e8e72ac0befad70a46e1e9b6"
+    },
+    {
+      "seed": 20036,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "6b3ecb0ac419442de4fe44e9639dd31b740870532f41e0a33023c9c4eaa280e9"
+    },
+    {
+      "seed": 20037,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "87b8864c9ac84acdc95cbcae06e62ad704040102ae4c49727324ed69fb9e6227"
+    },
+    {
+      "seed": 20038,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "d359f4c1933906d20e39059ddb321977f5057107eba739162b5ca00932d567a7"
+    },
+    {
+      "seed": 20039,
+      "split": "validation",
+      "status": "COMPLETED",
+      "last_tick": 999,
+      "sample_count": 200,
+      "sample_sha256": "db9fa9c7dbf4687df758da3b491e2974f2e918a49a6b5309a31ef4177b351bcc"
+    }
+  ],
+  "collection": "20s episodes; current-state offline PD excitation; stride5; retain valid prefixes; analytic labels; static random wind",
+  "formal_test_used": false
+}

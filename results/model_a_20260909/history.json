@@ -1,0 +1,1007 @@
+[
+  {
+    "iteration": 0,
+    "train_sum_squared_error_mean": 0.051405510802683706,
+    "validation_sum_squared_error_mean": 0.03755951072246699
+  },
+  {
+    "iteration": 1,
+    "train_sum_squared_error_mean": 0.037373672423390875,
+    "validation_sum_squared_error_mean": 0.030554972442713463
+  },
+  {
+    "iteration": 2,
+    "train_sum_squared_error_mean": 0.021638391981065045,
+    "validation_sum_squared_error_mean": 0.018620365257507054
+  },
+  {
+    "iteration": 3,
+    "train_sum_squared_error_mean": 0.013531748364312108,
+    "validation_sum_squared_error_mean": 0.01067618955611977
+  },
+  {
+    "iteration": 4,
+    "train_sum_squared_error_mean": 0.012714922465330503,
+    "validation_sum_squared_error_mean": 0.012392898325999699
+  },
+  {
+    "iteration": 5,
+    "train_sum_squared_error_mean": 0.012361440728088667,
+    "validation_sum_squared_error_mean": 0.011111505718795505
+  },
+  {
+    "iteration": 6,
+    "train_sum_squared_error_mean": 0.012208120958114852,
+    "validation_sum_squared_error_mean": 0.010738821320348325
+  },
+  {
+    "iteration": 7,
+    "train_sum_squared_error_mean": 0.011523408248804823,
+    "validation_sum_squared_error_mean": 0.009453184856215407
+  },
+  {
+    "iteration": 8,
+    "train_sum_squared_error_mean": 0.011103937274210779,
+    "validation_sum_squared_error_mean": 0.00909800499223764
+  },
+  {
+    "iteration": 9,
+    "train_sum_squared_error_mean": 0.010776608768184669,
+    "validation_sum_squared_error_mean": 0.009164557151062779
+  },
+  {
+    "iteration": 10,
+    "train_sum_squared_error_mean": 0.010748568321357062,
+    "validation_sum_squared_error_mean": 0.009383896387106589
+  },
+  {
+    "iteration": 11,
+    "train_sum_squared_error_mean": 0.01074382839187336,
+    "validation_sum_squared_error_mean": 0.009450314275900427
+  },
+  {
+    "iteration": 12,
+    "train_sum_squared_error_mean": 0.010736801755449667,
+    "validation_sum_squared_error_mean": 0.009498647224558428
+  },
+  {
+    "iteration": 13,
+    "train_sum_squared_error_mean": 0.010720633583707912,
+    "validation_sum_squared_error_mean": 0.009581073603922664
+  },
+  {
+    "iteration": 14,
+    "train_sum_squared_error_mean": 0.010709528410412773,
+    "validation_sum_squared_error_mean": 0.009544296350498064
+  },
+  {
+    "iteration": 15,
+    "train_sum_squared_error_mean": 0.010690411629533441,
+    "validation_sum_squared_error_mean": 0.009531705418253053
+  },
+  {
+    "iteration": 16,
+    "train_sum_squared_error_mean": 0.010675336216948746,
+    "validation_sum_squared_error_mean": 0.009427131822967531
+  },
+  {
+    "iteration": 17,
+    "train_sum_squared_error_mean": 0.010671871213786554,
+    "validation_sum_squared_error_mean": 0.009370470767797399
+  },
+  {
+    "iteration": 18,
+    "train_sum_squared_error_mean": 0.010668389568497557,
+    "validation_sum_squared_error_mean": 0.009334446128054575
+  },
+  {
+    "iteration": 19,
+    "train_sum_squared_error_mean": 0.010661172134274288,
+    "validation_sum_squared_error_mean": 0.009290890139981642
+  },
+  {
+    "iteration": 20,
+    "train_sum_squared_error_mean": 0.010646921641515945,
+    "validation_sum_squared_error_mean": 0.00929093606119234
+  },
+  {
+    "iteration": 21,
+    "train_sum_squared_error_mean": 0.010632031340704739,
+    "validation_sum_squared_error_mean": 0.009125490166705873
+  },
+  {
+    "iteration": 22,
+    "train_sum_squared_error_mean": 0.01061659910325722,
+    "validation_sum_squared_error_mean": 0.009238220511591077
+  },
+  {
+    "iteration": 23,
+    "train_sum_squared_error_mean": 0.010604801560109407,
+    "validation_sum_squared_error_mean": 0.00935429384846033
+  },
+  {
+    "iteration": 24,
+    "train_sum_squared_error_mean": 0.010599211121317254,
+    "validation_sum_squared_error_mean": 0.009360127856808525
+  },
+  {
+    "iteration": 25,
+    "train_sum_squared_error_mean": 0.010575510784692689,
+    "validation_sum_squared_error_mean": 0.009358908710124713
+  },
+  {
+    "iteration": 26,
+    "train_sum_squared_error_mean": 0.010570058188928477,
+    "validation_sum_squared_error_mean": 0.00939343229254794
+  },
+  {
+    "iteration": 27,
+    "train_sum_squared_error_mean": 0.010549254899250807,
+    "validation_sum_squared_error_mean": 0.00935102206559692
+  },
+  {
+    "iteration": 28,
+    "train_sum_squared_error_mean": 0.010525369650232005,
+    "validation_sum_squared_error_mean": 0.009343981668114539
+  },
+  {
+    "iteration": 29,
+    "train_sum_squared_error_mean": 0.01050534156060088,
+    "validation_sum_squared_error_mean": 0.009272768190152825
+  },
+  {
+    "iteration": 30,
+    "train_sum_squared_error_mean": 0.010492025637661568,
+    "validation_sum_squared_error_mean": 0.0093118536902128
+  },
+  {
+    "iteration": 31,
+    "train_sum_squared_error_mean": 0.010480460121858274,
+    "validation_sum_squared_error_mean": 0.009232273757971882
+  },
+  {
+    "iteration": 32,
+    "train_sum_squared_error_mean": 0.010470109667271134,
+    "validation_sum_squared_error_mean": 0.009266039839998139
+  },
+  {
+    "iteration": 33,
+    "train_sum_squared_error_mean": 0.010462633664159896,
+    "validation_sum_squared_error_mean": 0.009240991007146187
+  },
+  {
+    "iteration": 34,
+    "train_sum_squared_error_mean": 0.0104525239576662,
+    "validation_sum_squared_error_mean": 0.009295449434098725
+  },
+  {
+    "iteration": 35,
+    "train_sum_squared_error_mean": 0.010439404156986501,
+    "validation_sum_squared_error_mean": 0.009245099497975964
+  },
+  {
+    "iteration": 36,
+    "train_sum_squared_error_mean": 0.010416325553497594,
+    "validation_sum_squared_error_mean": 0.009208574797731729
+  },
+  {
+    "iteration": 37,
+    "train_sum_squared_error_mean": 0.010412205085771321,
+    "validation_sum_squared_error_mean": 0.00923555392967857
+  },
+  {
+    "iteration": 38,
+    "train_sum_squared_error_mean": 0.010401452380227577,
+    "validation_sum_squared_error_mean": 0.009141705758333417
+  },
+  {
+    "iteration": 39,
+    "train_sum_squared_error_mean": 0.010397305820888953,
+    "validation_sum_squared_error_mean": 0.009154525723834354
+  },
+  {
+    "iteration": 40,
+    "train_sum_squared_error_mean": 0.010388091106550472,
+    "validation_sum_squared_error_mean": 0.009192965502045104
+  },
+  {
+    "iteration": 41,
+    "train_sum_squared_error_mean": 0.010373996473645865,
+    "validation_sum_squared_error_mean": 0.009187044819230595
+  },
+  {
+    "iteration": 42,
+    "train_sum_squared_error_mean": 0.010370210214031556,
+    "validation_sum_squared_error_mean": 0.009468977198338792
+  },
+  {
+    "iteration": 43,
+    "train_sum_squared_error_mean": 0.01031822270401264,
+    "validation_sum_squared_error_mean": 0.009189537750319627
+  },
+  {
+    "iteration": 44,
+    "train_sum_squared_error_mean": 0.01029192886525558,
+    "validation_sum_squared_error_mean": 0.009062022065130642
+  },
+  {
+    "iteration": 45,
+    "train_sum_squared_error_mean": 0.010269456348470743,
+    "validation_sum_squared_error_mean": 0.008923395300713795
+  },
+  {
+    "iteration": 46,
+    "train_sum_squared_error_mean": 0.01024774847619793,
+    "validation_sum_squared_error_mean": 0.009007479340526365
+  },
+  {
+    "iteration": 47,
+    "train_sum_squared_error_mean": 0.010226401093054796,
+    "validation_sum_squared_error_mean": 0.008880139505807872
+  },
+  {
+    "iteration": 48,
+    "train_sum_squared_error_mean": 0.010212442848601894,
+    "validation_sum_squared_error_mean": 0.009029967566704301
+  },
+  {
+    "iteration": 49,
+    "train_sum_squared_error_mean": 0.01020497143636579,
+    "validation_sum_squared_error_mean": 0.009067621109762987
+  },
+  {
+    "iteration": 50,
+    "train_sum_squared_error_mean": 0.01019134304909522,
+    "validation_sum_squared_error_mean": 0.009071979322699134
+  },
+  {
+    "iteration": 51,
+    "train_sum_squared_error_mean": 0.010177961033759227,
+    "validation_sum_squared_error_mean": 0.009073563647476442
+  },
+  {
+    "iteration": 52,
+    "train_sum_squared_error_mean": 0.010155264412875087,
+    "validation_sum_squared_error_mean": 0.009021589427753492
+  },
+  {
+    "iteration": 53,
+    "train_sum_squared_error_mean": 0.01012772205166298,
+    "validation_sum_squared_error_mean": 0.009036831379936435
+  },
+  {
+    "iteration": 54,
+    "train_sum_squared_error_mean": 0.01008621089859112,
+    "validation_sum_squared_error_mean": 0.009075148057466677
+  },
+  {
+    "iteration": 55,
+    "train_sum_squared_error_mean": 0.010078274856100855,
+    "validation_sum_squared_error_mean": 0.00893900285013131
+  },
+  {
+    "iteration": 56,
+    "train_sum_squared_error_mean": 0.010067082593476074,
+    "validation_sum_squared_error_mean": 0.00900485064765229
+  },
+  {
+    "iteration": 57,
+    "train_sum_squared_error_mean": 0.010063902133484133,
+    "validation_sum_squared_error_mean": 0.00899696418950828
+  },
+  {
+    "iteration": 58,
+    "train_sum_squared_error_mean": 0.010054530031323306,
+    "validation_sum_squared_error_mean": 0.008921724320465022
+  },
+  {
+    "iteration": 59,
+    "train_sum_squared_error_mean": 0.010042612594682183,
+    "validation_sum_squared_error_mean": 0.008962914566450573
+  },
+  {
+    "iteration": 60,
+    "train_sum_squared_error_mean": 0.010020712280754716,
+    "validation_sum_squared_error_mean": 0.008891968758782854
+  },
+  {
+    "iteration": 61,
+    "train_sum_squared_error_mean": 0.009967529973292696,
+    "validation_sum_squared_error_mean": 0.00891432878729898
+  },
+  {
+    "iteration": 62,
+    "train_sum_squared_error_mean": 0.009937070033956098,
+    "validation_sum_squared_error_mean": 0.008876299182654555
+  },
+  {
+    "iteration": 63,
+    "train_sum_squared_error_mean": 0.00992426657071487,
+    "validation_sum_squared_error_mean": 0.008909433754834216
+  },
+  {
+    "iteration": 64,
+    "train_sum_squared_error_mean": 0.009909280307330766,
+    "validation_sum_squared_error_mean": 0.008836831190257069
+  },
+  {
+    "iteration": 65,
+    "train_sum_squared_error_mean": 0.009902154738460924,
+    "validation_sum_squared_error_mean": 0.008848205336875775
+  },
+  {
+    "iteration": 66,
+    "train_sum_squared_error_mean": 0.009899841021388234,
+    "validation_sum_squared_error_mean": 0.008816586942328149
+  },
+  {
+    "iteration": 67,
+    "train_sum_squared_error_mean": 0.009899197704946265,
+    "validation_sum_squared_error_mean": 0.008917040312232217
+  },
+  {
+    "iteration": 68,
+    "train_sum_squared_error_mean": 0.009894563274302829,
+    "validation_sum_squared_error_mean": 0.00887813514054452
+  },
+  {
+    "iteration": 69,
+    "train_sum_squared_error_mean": 0.009889653045106797,
+    "validation_sum_squared_error_mean": 0.008852341236271535
+  },
+  {
+    "iteration": 70,
+    "train_sum_squared_error_mean": 0.009884555944666747,
+    "validation_sum_squared_error_mean": 0.008850395752194252
+  },
+  {
+    "iteration": 71,
+    "train_sum_squared_error_mean": 0.009881367485789187,
+    "validation_sum_squared_error_mean": 0.00884411714567285
+  },
+  {
+    "iteration": 72,
+    "train_sum_squared_error_mean": 0.00988005331608198,
+    "validation_sum_squared_error_mean": 0.008895508012039798
+  },
+  {
+    "iteration": 73,
+    "train_sum_squared_error_mean": 0.009878725642938072,
+    "validation_sum_squared_error_mean": 0.008878544626301593
+  },
+  {
+    "iteration": 74,
+    "train_sum_squared_error_mean": 0.009878288677265357,
+    "validation_sum_squared_error_mean": 0.008872629011945592
+  },
+  {
+    "iteration": 75,
+    "train_sum_squared_error_mean": 0.009877818878019211,
+    "validation_sum_squared_error_mean": 0.008872469696465142
+  },
+  {
+    "iteration": 76,
+    "train_sum_squared_error_mean": 0.009877397859368003,
+    "validation_sum_squared_error_mean": 0.008854376461069523
+  },
+  {
+    "iteration": 77,
+    "train_sum_squared_error_mean": 0.00987670070873884,
+    "validation_sum_squared_error_mean": 0.008861100265770168
+  },
+  {
+    "iteration": 78,
+    "train_sum_squared_error_mean": 0.009875080985826906,
+    "validation_sum_squared_error_mean": 0.008870793730199798
+  },
+  {
+    "iteration": 79,
+    "train_sum_squared_error_mean": 0.009873230920365919,
+    "validation_sum_squared_error_mean": 0.008882261749357134
+  },
+  {
+    "iteration": 80,
+    "train_sum_squared_error_mean": 0.009872059765428811,
+    "validation_sum_squared_error_mean": 0.008855350462646459
+  },
+  {
+    "iteration": 81,
+    "train_sum_squared_error_mean": 0.009870443568815737,
+    "validation_sum_squared_error_mean": 0.008869640749898433
+  },
+  {
+    "iteration": 82,
+    "train_sum_squared_error_mean": 0.009869216896147883,
+    "validation_sum_squared_error_mean": 0.008860791111960966
+  },
+  {
+    "iteration": 83,
+    "train_sum_squared_error_mean": 0.009864348111768777,
+    "validation_sum_squared_error_mean": 0.008900134157293692
+  },
+  {
+    "iteration": 84,
+    "train_sum_squared_error_mean": 0.009860543540122266,
+    "validation_sum_squared_error_mean": 0.008816220611708819
+  },
+  {
+    "iteration": 85,
+    "train_sum_squared_error_mean": 0.009855426113164454,
+    "validation_sum_squared_error_mean": 0.008833491059131766
+  },
+  {
+    "iteration": 86,
+    "train_sum_squared_error_mean": 0.009847866672357087,
+    "validation_sum_squared_error_mean": 0.00893862940573133
+  },
+  {
+    "iteration": 87,
+    "train_sum_squared_error_mean": 0.00984537281925945,
+    "validation_sum_squared_error_mean": 0.00888356004705171
+  },
+  {
+    "iteration": 88,
+    "train_sum_squared_error_mean": 0.009844374089283887,
+    "validation_sum_squared_error_mean": 0.008875296630436768
+  },
+  {
+    "iteration": 89,
+    "train_sum_squared_error_mean": 0.009842115697424995,
+    "validation_sum_squared_error_mean": 0.00887616729252662
+  },
+  {
+    "iteration": 90,
+    "train_sum_squared_error_mean": 0.009840049306458775,
+    "validation_sum_squared_error_mean": 0.008874225834692603
+  },
+  {
+    "iteration": 91,
+    "train_sum_squared_error_mean": 0.00983764129415114,
+    "validation_sum_squared_error_mean": 0.008915385634799657
+  },
+  {
+    "iteration": 92,
+    "train_sum_squared_error_mean": 0.00983647506060531,
+    "validation_sum_squared_error_mean": 0.008877420128499892
+  },
+  {
+    "iteration": 93,
+    "train_sum_squared_error_mean": 0.009835626386959739,
+    "validation_sum_squared_error_mean": 0.008896388249391566
+  },
+  {
+    "iteration": 94,
+    "train_sum_squared_error_mean": 0.00983486147290011,
+    "validation_sum_squared_error_mean": 0.008907098353682714
+  },
+  {
+    "iteration": 95,
+    "train_sum_squared_error_mean": 0.009833743322604994,
+    "validation_sum_squared_error_mean": 0.008909508233902947
+  },
+  {
+    "iteration": 96,
+    "train_sum_squared_error_mean": 0.009831218274347383,
+    "validation_sum_squared_error_mean": 0.008905779620444858
+  },
+  {
+    "iteration": 97,
+    "train_sum_squared_error_mean": 0.009825052207836875,
+    "validation_sum_squared_error_mean": 0.008901704865816353
+  },
+  {
+    "iteration": 98,
+    "train_sum_squared_error_mean": 0.009815532808701177,
+    "validation_sum_squared_error_mean": 0.008861705139066188
+  },
+  {
+    "iteration": 99,
+    "train_sum_squared_error_mean": 0.009811100662161095,
+    "validation_sum_squared_error_mean": 0.008877185122110937
+  },
+  {
+    "iteration": 100,
+    "train_sum_squared_error_mean": 0.00980156168078797,
+    "validation_sum_squared_error_mean": 0.008829025556125596
+  },
+  {
+    "iteration": 101,
+    "train_sum_squared_error_mean": 0.009789587916876702,
+    "validation_sum_squared_error_mean": 0.008868685491744056
+  },
+  {
+    "iteration": 102,
+    "train_sum_squared_error_mean": 0.009777220232958574,
+    "validation_sum_squared_error_mean": 0.008855685204658341
+  },
+  {
+    "iteration": 103,
+    "train_sum_squared_error_mean": 0.009768110494028436,
+    "validation_sum_squared_error_mean": 0.009081561653522998
+  },
+  {
+    "iteration": 104,
+    "train_sum_squared_error_mean": 0.009762507405472375,
+    "validation_sum_squared_error_mean": 0.00894065773421821
+  },
+  {
+    "iteration": 105,
+    "train_sum_squared_error_mean": 0.00975744838945644,
+    "validation_sum_squared_error_mean": 0.008923926608824065
+  },
+  {
+    "iteration": 106,
+    "train_sum_squared_error_mean": 0.009754845227295578,
+    "validation_sum_squared_error_mean": 0.008957802450085954
+  },
+  {
+    "iteration": 107,
+    "train_sum_squared_error_mean": 0.0097499225676538,
+    "validation_sum_squared_error_mean": 0.00897964945210579
+  },
+  {
+    "iteration": 108,
+    "train_sum_squared_error_mean": 0.009742438554037175,
+    "validation_sum_squared_error_mean": 0.00895279905147419
+  },
+  {
+    "iteration": 109,
+    "train_sum_squared_error_mean": 0.00972841034595166,
+    "validation_sum_squared_error_mean": 0.008899028536726599
+  },
+  {
+    "iteration": 110,
+    "train_sum_squared_error_mean": 0.009724884033031312,
+    "validation_sum_squared_error_mean": 0.008756966709303054
+  },
+  {
+    "iteration": 111,
+    "train_sum_squared_error_mean": 0.009716040116211537,
+    "validation_sum_squared_error_mean": 0.008783054437646964
+  },
+  {
+    "iteration": 112,
+    "train_sum_squared_error_mean": 0.009713317061356098,
+    "validation_sum_squared_error_mean": 0.00880086259565687
+  },
+  {
+    "iteration": 113,
+    "train_sum_squared_error_mean": 0.009703368096061184,
+    "validation_sum_squared_error_mean": 0.008823710289262567
+  },
+  {
+    "iteration": 114,
+    "train_sum_squared_error_mean": 0.009693361923482106,
+    "validation_sum_squared_error_mean": 0.008832889015026726
+  },
+  {
+    "iteration": 115,
+    "train_sum_squared_error_mean": 0.009671461046307577,
+    "validation_sum_squared_error_mean": 0.008810466961045748
+  },
+  {
+    "iteration": 116,
+    "train_sum_squared_error_mean": 0.009665568690597566,
+    "validation_sum_squared_error_mean": 0.008889022028491993
+  },
+  {
+    "iteration": 117,
+    "train_sum_squared_error_mean": 0.009650476386806824,
+    "validation_sum_squared_error_mean": 0.008811759655558131
+  },
+  {
+    "iteration": 118,
+    "train_sum_squared_error_mean": 0.009638971314623282,
+    "validation_sum_squared_error_mean": 0.008816652526260417
+  },
+  {
+    "iteration": 119,
+    "train_sum_squared_error_mean": 0.00963099552926377,
+    "validation_sum_squared_error_mean": 0.008723512962620953
+  },
+  {
+    "iteration": 120,
+    "train_sum_squared_error_mean": 0.009624546706843932,
+    "validation_sum_squared_error_mean": 0.00871636255415056
+  },
+  {
+    "iteration": 121,
+    "train_sum_squared_error_mean": 0.00956785610777207,
+    "validation_sum_squared_error_mean": 0.008725617867324892
+  },
+  {
+    "iteration": 122,
+    "train_sum_squared_error_mean": 0.009535672196796581,
+    "validation_sum_squared_error_mean": 0.008641724198936034
+  },
+  {
+    "iteration": 123,
+    "train_sum_squared_error_mean": 0.009531328709017892,
+    "validation_sum_squared_error_mean": 0.008716636960469511
+  },
+  {
+    "iteration": 124,
+    "train_sum_squared_error_mean": 0.009520125931018584,
+    "validation_sum_squared_error_mean": 0.008707581047960981
+  },
+  {
+    "iteration": 125,
+    "train_sum_squared_error_mean": 0.009501894785090217,
+    "validation_sum_squared_error_mean": 0.008684679580930804
+  },
+  {
+    "iteration": 126,
+    "train_sum_squared_error_mean": 0.009495626641152657,
+    "validation_sum_squared_error_mean": 0.008580368151501455
+  },
+  {
+    "iteration": 127,
+    "train_sum_squared_error_mean": 0.009489914129172362,
+    "validation_sum_squared_error_mean": 0.008634496831838779
+  },
+  {
+    "iteration": 128,
+    "train_sum_squared_error_mean": 0.009485464965257748,
+    "validation_sum_squared_error_mean": 0.008625533271227215
+  },
+  {
+    "iteration": 129,
+    "train_sum_squared_error_mean": 0.009443457147639943,
+    "validation_sum_squared_error_mean": 0.00856225815779383
+  },
+  {
+    "iteration": 130,
+    "train_sum_squared_error_mean": 0.009390073593047336,
+    "validation_sum_squared_error_mean": 0.008604431577904912
+  },
+  {
+    "iteration": 131,
+    "train_sum_squared_error_mean": 0.009338332486491371,
+    "validation_sum_squared_error_mean": 0.008616770648445099
+  },
+  {
+    "iteration": 132,
+    "train_sum_squared_error_mean": 0.00932948431331069,
+    "validation_sum_squared_error_mean": 0.008574700873310477
+  },
+  {
+    "iteration": 133,
+    "train_sum_squared_error_mean": 0.009307535157944021,
+    "validation_sum_squared_error_mean": 0.008509578570808975
+  },
+  {
+    "iteration": 134,
+    "train_sum_squared_error_mean": 0.009296158823453166,
+    "validation_sum_squared_error_mean": 0.008640804044595878
+  },
+  {
+    "iteration": 135,
+    "train_sum_squared_error_mean": 0.009274076281680074,
+    "validation_sum_squared_error_mean": 0.008611127652601469
+  },
+  {
+    "iteration": 136,
+    "train_sum_squared_error_mean": 0.009246359849900979,
+    "validation_sum_squared_error_mean": 0.008609418427506878
+  },
+  {
+    "iteration": 137,
+    "train_sum_squared_error_mean": 0.009230644635950198,
+    "validation_sum_squared_error_mean": 0.008508267841384285
+  },
+  {
+    "iteration": 138,
+    "train_sum_squared_error_mean": 0.009208799950413874,
+    "validation_sum_squared_error_mean": 0.008553132265819927
+  },
+  {
+    "iteration": 139,
+    "train_sum_squared_error_mean": 0.009176039546866726,
+    "validation_sum_squared_error_mean": 0.00840226040163116
+  },
+  {
+    "iteration": 140,
+    "train_sum_squared_error_mean": 0.009069895687700367,
+    "validation_sum_squared_error_mean": 0.008564811763593876
+  },
+  {
+    "iteration": 141,
+    "train_sum_squared_error_mean": 0.008922515544722271,
+    "validation_sum_squared_error_mean": 0.008400200645547407
+  },
+  {
+    "iteration": 142,
+    "train_sum_squared_error_mean": 0.008822870544422039,
+    "validation_sum_squared_error_mean": 0.008513860601667637
+  },
+  {
+    "iteration": 143,
+    "train_sum_squared_error_mean": 0.008763604178320027,
+    "validation_sum_squared_error_mean": 0.007693724392645922
+  },
+  {
+    "iteration": 144,
+    "train_sum_squared_error_mean": 0.008687700442790571,
+    "validation_sum_squared_error_mean": 0.007838856127338097
+  },
+  {
+    "iteration": 145,
+    "train_sum_squared_error_mean": 0.008662413701617163,
+    "validation_sum_squared_error_mean": 0.0078088798661078975
+  },
+  {
+    "iteration": 146,
+    "train_sum_squared_error_mean": 0.008602616470023887,
+    "validation_sum_squared_error_mean": 0.007620594395823644
+  },
+  {
+    "iteration": 147,
+    "train_sum_squared_error_mean": 0.008547634253008592,
+    "validation_sum_squared_error_mean": 0.007479450345408122
+  },
+  {
+    "iteration": 148,
+    "train_sum_squared_error_mean": 0.008510676889382179,
+    "validation_sum_squared_error_mean": 0.007340408187590509
+  },
+  {
+    "iteration": 149,
+    "train_sum_squared_error_mean": 0.008491502908206746,
+    "validation_sum_squared_error_mean": 0.007370630160962479
+  },
+  {
+    "iteration": 150,
+    "train_sum_squared_error_mean": 0.008449282491196525,
+    "validation_sum_squared_error_mean": 0.00749838134497199
+  },
+  {
+    "iteration": 151,
+    "train_sum_squared_error_mean": 0.00843060107517383,
+    "validation_sum_squared_error_mean": 0.007518171423617838
+  },
+  {
+    "iteration": 152,
+    "train_sum_squared_error_mean": 0.008398507009922437,
+    "validation_sum_squared_error_mean": 0.007419713726010069
+  },
+  {
+    "iteration": 153,
+    "train_sum_squared_error_mean": 0.008355686614566312,
+    "validation_sum_squared_error_mean": 0.007220087501656256
+  },
+  {
+    "iteration": 154,
+    "train_sum_squared_error_mean": 0.00830295994206814,
+    "validation_sum_squared_error_mean": 0.007161503769446732
+  },
+  {
+    "iteration": 155,
+    "train_sum_squared_error_mean": 0.008247621815848481,
+    "validation_sum_squared_error_mean": 0.006938137152469813
+  },
+  {
+    "iteration": 156,
+    "train_sum_squared_error_mean": 0.008167839962236417,
+    "validation_sum_squared_error_mean": 0.006876632687164432
+  },
+  {
+    "iteration": 157,
+    "train_sum_squared_error_mean": 0.008128542203882885,
+    "validation_sum_squared_error_mean": 0.006915587441508845
+  },
+  {
+    "iteration": 158,
+    "train_sum_squared_error_mean": 0.008102876421479532,
+    "validation_sum_squared_error_mean": 0.007078611788685814
+  },
+  {
+    "iteration": 159,
+    "train_sum_squared_error_mean": 0.008095997543196454,
+    "validation_sum_squared_error_mean": 0.007104937775558568
+  },
+  {
+    "iteration": 160,
+    "train_sum_squared_error_mean": 0.008083086607365448,
+    "validation_sum_squared_error_mean": 0.007134014541739548
+  },
+  {
+    "iteration": 161,
+    "train_sum_squared_error_mean": 0.008071245593272505,
+    "validation_sum_squared_error_mean": 0.007168338925796456
+  },
+  {
+    "iteration": 162,
+    "train_sum_squared_error_mean": 0.008047104377923492,
+    "validation_sum_squared_error_mean": 0.007162852898824304
+  },
+  {
+    "iteration": 163,
+    "train_sum_squared_error_mean": 0.008015278812108355,
+    "validation_sum_squared_error_mean": 0.007265172879388839
+  },
+  {
+    "iteration": 164,
+    "train_sum_squared_error_mean": 0.007984987086707387,
+    "validation_sum_squared_error_mean": 0.007171260467037372
+  },
+  {
+    "iteration": 165,
+    "train_sum_squared_error_mean": 0.007957663976857442,
+    "validation_sum_squared_error_mean": 0.007216055686860673
+  },
+  {
+    "iteration": 166,
+    "train_sum_squared_error_mean": 0.007922325837261816,
+    "validation_sum_squared_error_mean": 0.007198695783775906
+  },
+  {
+    "iteration": 167,
+    "train_sum_squared_error_mean": 0.007892008177285715,
+    "validation_sum_squared_error_mean": 0.007170100803197067
+  },
+  {
+    "iteration": 168,
+    "train_sum_squared_error_mean": 0.007844108287708505,
+    "validation_sum_squared_error_mean": 0.007119608105772472
+  },
+  {
+    "iteration": 169,
+    "train_sum_squared_error_mean": 0.007798960071754917,
+    "validation_sum_squared_error_mean": 0.006861105952591037
+  },
+  {
+    "iteration": 170,
+    "train_sum_squared_error_mean": 0.007763734376400168,
+    "validation_sum_squared_error_mean": 0.006888056512433728
+  },
+  {
+    "iteration": 171,
+    "train_sum_squared_error_mean": 0.007731625449656518,
+    "validation_sum_squared_error_mean": 0.007078457339576222
+  },
+  {
+    "iteration": 172,
+    "train_sum_squared_error_mean": 0.007697492633992612,
+    "validation_sum_squared_error_mean": 0.0069937213753816585
+  },
+  {
+    "iteration": 173,
+    "train_sum_squared_error_mean": 0.007676718938191224,
+    "validation_sum_squared_error_mean": 0.006960441001694821
+  },
+  {
+    "iteration": 174,
+    "train_sum_squared_error_mean": 0.007671250273402092,
+    "validation_sum_squared_error_mean": 0.006975025359473011
+  },
+  {
+    "iteration": 175,
+    "train_sum_squared_error_mean": 0.007655206728158184,
+    "validation_sum_squared_error_mean": 0.006994371958707123
+  },
+  {
+    "iteration": 176,
+    "train_sum_squared_error_mean": 0.0076435253679821595,
+    "validation_sum_squared_error_mean": 0.007135883052306581
+  },
+  {
+    "iteration": 177,
+    "train_sum_squared_error_mean": 0.007609393643779028,
+    "validation_sum_squared_error_mean": 0.007127177615456632
+  },
+  {
+    "iteration": 178,
+    "train_sum_squared_error_mean": 0.007571381222302814,
+    "validation_sum_squared_error_mean": 0.007099063312830088
+  },
+  {
+    "iteration": 179,
+    "train_sum_squared_error_mean": 0.00751299171025638,
+    "validation_sum_squared_error_mean": 0.007020981521181155
+  },
+  {
+    "iteration": 180,
+    "train_sum_squared_error_mean": 0.007442895660047053,
+    "validation_sum_squared_error_mean": 0.006893124286224358
+  },
+  {
+    "iteration": 181,
+    "train_sum_squared_error_mean": 0.007370552714283133,
+    "validation_sum_squared_error_mean": 0.006885167977760334
+  },
+  {
+    "iteration": 182,
+    "train_sum_squared_error_mean": 0.007344316626121414,
+    "validation_sum_squared_error_mean": 0.006612000167619579
+  },
+  {
+    "iteration": 183,
+    "train_sum_squared_error_mean": 0.0073189900986625625,
+    "validation_sum_squared_error_mean": 0.00675084260992027
+  },
+  {
+    "iteration": 184,
+    "train_sum_squared_error_mean": 0.007297003569848684,
+    "validation_sum_squared_error_mean": 0.006775547968792288
+  },
+  {
+    "iteration": 185,
+    "train_sum_squared_error_mean": 0.007272774804521035,
+    "validation_sum_squared_error_mean": 0.006804822342317911
+  },
+  {
+    "iteration": 186,
+    "train_sum_squared_error_mean": 0.007229456545253277,
+    "validation_sum_squared_error_mean": 0.006751997650466312
+  },
+  {
+    "iteration": 187,
+    "train_sum_squared_error_mean": 0.00718257901158419,
+    "validation_sum_squared_error_mean": 0.00667724093736803
+  },
+  {
+    "iteration": 188,
+    "train_sum_squared_error_mean": 0.007160256552087922,
+    "validation_sum_squared_error_mean": 0.006709626289265954
+  },
+  {
+    "iteration": 189,
+    "train_sum_squared_error_mean": 0.007148835800888619,
+    "validation_sum_squared_error_mean": 0.006605365191206763
+  },
+  {
+    "iteration": 190,
+    "train_sum_squared_error_mean": 0.0071346793136718226,
+    "validation_sum_squared_error_mean": 0.0065184132669838
+  },
+  {
+    "iteration": 191,
+    "train_sum_squared_error_mean": 0.007103487854763443,
+    "validation_sum_squared_error_mean": 0.006398795700852174
+  },
+  {
+    "iteration": 192,
+    "train_sum_squared_error_mean": 0.007063960261583122,
+    "validation_sum_squared_error_mean": 0.006344933303338045
+  },
+  {
+    "iteration": 193,
+    "train_sum_squared_error_mean": 0.007027599563476275,
+    "validation_sum_squared_error_mean": 0.006458581759629659
+  },
+  {
+    "iteration": 194,
+    "train_sum_squared_error_mean": 0.007014385000369624,
+    "validation_sum_squared_error_mean": 0.006544496760326341
+  },
+  {
+    "iteration": 195,
+    "train_sum_squared_error_mean": 0.007008221839215222,
+    "validation_sum_squared_error_mean": 0.006630085392533832
+  },
+  {
+    "iteration": 196,
+    "train_sum_squared_error_mean": 0.0070020414640024125,
+    "validation_sum_squared_error_mean": 0.006667213468124734
+  },
+  {
+    "iteration": 197,
+    "train_sum_squared_error_mean": 0.006991430543057077,
+    "validation_sum_squared_error_mean": 0.006654244020382721
+  },
+  {
+    "iteration": 198,
+    "train_sum_squared_error_mean": 0.006988275573829587,
+    "validation_sum_squared_error_mean": 0.006669855188103754
+  },
+  {
+    "iteration": 199,
+    "train_sum_squared_error_mean": 0.006980508690268418,
+    "validation_sum_squared_error_mean": 0.006614242083825545
+  },
+  {
+    "iteration": 200,
+    "train_sum_squared_error_mean": 0.006976091450602001,
+    "validation_sum_squared_error_mean": 0.006559019286980051
+  }
+]

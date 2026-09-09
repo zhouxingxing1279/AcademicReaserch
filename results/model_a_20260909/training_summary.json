@@ -1,0 +1,36 @@
+{
+  "backend": "NumPy analytic backprop + SciPy L-BFGS-B",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "seed": 61001,
+  "selected_iteration": 192,
+  "optimizer_iterations": 200,
+  "optimizer_success": false,
+  "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+  "training_seconds": 11.43306640999981,
+  "train_points": 24000,
+  "validation_points": 8000,
+  "validation_rmse_per_axis": [
+    0.07045660521477216,
+    0.03715911846300693
+  ],
+  "zero_residual_validation_rmse_per_axis": [
+    0.1857564913351806,
+    0.058747565827558364
+  ],
+  "validation_max_absolute_error": [
+    0.3452994589603574,
+    0.1837087309135696
+  ],
+  "global_partition_halfwidth": [
+    6.593940338343962,
+    5.697552546660293
+  ],
+  "architecture": [
+    5,
+    32,
+    32,
+    2
+  ],
+  "scope": "single seed A pilot; no B/C/D; float64 envelope not strict certification"
+}

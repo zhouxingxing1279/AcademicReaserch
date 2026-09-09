@@ -1,0 +1,23 @@
+{
+  "source_sha256": {
+    "src/smf_mpc/__init__.py": "52c7dffd0592eb5db86e8becf424034e931db07f354075d07c894d79b57ec555",
+    "src/smf_mpc/data.py": "d11062e1241b65430a16c0726628b7b1f3a5c41d57a7d062f572e6ce5904ea2a",
+    "src/smf_mpc/filter.py": "191de019c8cd453b265aea0b9f45d1774539728efaf54068f2fbc7a6fec48fed",
+    "src/smf_mpc/learned_filter.py": "ed01efd3d781e98695c0aa5f7ae41771c655a13f5eda0b0d5ea50a32a6a0df89",
+    "src/smf_mpc/neural_model.py": "8c136e2cd048fd61409375f736d83e51a024d151bc2baf918ce2cae528603f49",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "src/smf_mpc/residual_envelope.py": "e7734b214eeb84f4c0602fbae065667932053517e90d1f206e037e47b87928de",
+    "src/smf_mpc/sensing.py": "24a326c187f9cf7956a2ed8812922f97712fa10f72d09be1f1ac7e9d91614dc8",
+    "src/smf_mpc/sets.py": "d052bacd0fcf239d29beb2a6a5055acde7f44b1056e0e24e8ed082b7efec670a",
+    "src/smf_mpc/zonotope_filter.py": "117756527c6807832af679fa5b467de1df12e70d9288975ab19ba13e7b07dbea",
+    "scripts/evaluate_model_a.py": "3892e41d9f5ee07e1308c8522071f62bbf0241f56a9072a75bcebad79056137f",
+    "scripts/run_zonotope.py": "dfc3d849a48e1ea43e7e2c7f29a60b9d7640bd2bca39b4f64d0a7f49d6c5ac17",
+    "scripts/run_g1.py": "2bfb2430c0e92c16039a194442450a40ee4c3aa96d134e7eefaa5a514aa85a43"
+  },
+  "artifact_sha256": {
+    "steps.csv.gz": "cd79dcd4ed229e83153b51ce087c8cc830fcd03e81a25a95f87daa29b2696f46",
+    "summary.json": "03118215d7441c49300422d06eac380d67f75a27766e8657a889ceae3cfc0c9f"
+  },
+  "model_file_sha256": "b0d9ae4526fe5f76f7df009053c32e3fc8651744545b05bf6519917414122446",
+  "envelope_file_sha256": "801164934ff3bc016d316f01a0931323833bf8c0b6166e8b071e3d2511d40d4b"
+}

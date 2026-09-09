@@ -1,0 +1,19 @@
+{
+  "kind": "FINITE_ARTIFACT_CHECK_NOT_FORMAL_CERTIFICATION",
+  "weights_sha256": "98b084b43cb6286a6849424d63ace5fd85ab50440cdddb05aff19c9350900ce9",
+  "diagnostic_seed": 30000,
+  "partition_regenerated_identically": true,
+  "global_diagnostic_samples": 5000,
+  "global_sampled_max_error": [
+    1.277665454789212,
+    1.6819687794386153
+  ],
+  "sample_envelope_excess": [
+    0.0,
+    0.0
+  ],
+  "trained_jacobian_max_error": 4.29145607938608e-10,
+  "trained_remainder_sample_excess": 0.0,
+  "all_passed": true,
+  "checker_sha256": "ebea834ae78a0c96421d30e1d89778d829df55f70bd81264546dec01ed937375"
+}

@@ -4,9 +4,11 @@
 
 本仓库从零建立一条可证伪的研究路线：在物理状态上学习未建模加速度，研究测量更新与丢测模式是否改变模型训练的最优选择，并验证这种变化是否减少集合外包络冗余、改善控制可行性。
 
-**当前已有平面非线性 zonotope 滤波原型，26 项测试通过。27 条配对轨迹完成 20 秒数值重放；尚未实现神经训练与 MPC，实时门未通过。** 不预设论文级别，不将有限仿真覆盖率称作确定性安全保证。
+**当前已实现物理 zonotope 基线和点预测神经模型 A，32 项测试通过。模型 A 已训练并重新计算误差包络，但学习模型滤波尚未通过可用性门。**
 
-最新结果：采用与 G1 相同的源轨迹和误差界，非线性 zonotope 通过 27,027 次数值成员检查；保留 box 在 1.36 秒超域的失败基线。详见 [09 非线性 zonotope 实现与结果](docs/research/09_nonlinear_zonotope_implementation.md)。
+最新结果：模型 A 降低了验证集点预测误差，却在 0.26–0.36 秒因集合超域停止；物理 zonotope 对照仍完成 20 秒。完整训练权重、分区包络和失败日志见 [10 模型 A 实现与结果](docs/research/10_model_a_training_and_envelope.md)。
+
+此前 [09 非线性 zonotope 结果](docs/research/09_nonlinear_zonotope_implementation.md) 保留：27 条轨迹完成 20 秒，27,027 次数值成员检查通过；实时门未通过。
 
 ### 文档导航（建议按顺序阅读）
 
@@ -53,8 +55,17 @@ python scripts/run_zonotope.py --output results/my_zonotope_run
 
 默认比较 30/60/120 个生成元预算；完整日志、公式和计时范围见 09。
 
+### 模型 A 训练与重放
+
+```bash
+python scripts/train_model_a.py --output results/my_model_a
+python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_a_replay
+```
+
+当前 NumPy/SciPy 实现不依赖 PyTorch；默认单初始化、120/40 条训练/验证轨迹，属于 pilot。
+
 ### 后续工作的第一条指令
 
-按 [09 的后续任务](docs/research/09_nonlinear_zonotope_implementation.md) 完成模型 A 与逐模型误差包络，同时解决 LP/集合运算尾延迟。当前只达到有限时估计数值门；进入 MPC 前仍需统一观测器与理论误差管，并完成相应验证。
+按 [10 的后续任务](docs/research/10_model_a_training_and_envelope.md) 分开收紧模型差函数界和神经非线性余项。模型 A 尚未达到集合可用性门，暂不推进 B/C/D 正式消融或 MPC。
 
 方案版本：2026-09-08；G1 实现更新：2026-09-09。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
