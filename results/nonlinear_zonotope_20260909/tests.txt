@@ -1,0 +1,31 @@
+test_affine_box_extreme_corners (test_g1.G1Tests.test_affine_box_extreme_corners) ... ok
+test_box_empty_and_immutability (test_g1.G1Tests.test_box_empty_and_immutability) ... ok
+test_component_update_no_velocity_contraction (test_g1.G1Tests.test_component_update_no_velocity_contraction) ... ok
+test_domain_failure_does_not_clip (test_g1.G1Tests.test_domain_failure_does_not_clip) ... ok
+test_episode_split_and_window_isolation (test_g1.G1Tests.test_episode_split_and_window_isolation) ... ok
+test_filter_enforces_packet_contract_without_schedule (test_g1.G1Tests.test_filter_enforces_packet_contract_without_schedule) ... ok
+test_filter_has_no_truth_import (test_g1.G1Tests.test_filter_has_no_truth_import) ... ok
+test_filter_rejects_future_values_and_unexpected_channels (test_g1.G1Tests.test_filter_rejects_future_values_and_unexpected_channels) ... ok
+test_generator_reduction_outer_support (test_g1.G1Tests.test_generator_reduction_outer_support) ... ok
+test_mask_enumeration_matches_brute_force_all_phases (test_g1.G1Tests.test_mask_enumeration_matches_brute_force_all_phases) ... ok
+test_planar_prediction_contains_independent_truth_steps (test_g1.G1Tests.test_planar_prediction_contains_independent_truth_steps) ... ok
+test_residual_bound_global_random_and_boundary (test_g1.G1Tests.test_residual_bound_global_random_and_boundary) ... ok
+test_schedule_packet_vs_tick (test_g1.G1Tests.test_schedule_packet_vs_tick) ... ok
+test_schedule_rejects_third_drop_and_wrong_tick (test_g1.G1Tests.test_schedule_rejects_third_drop_and_wrong_tick) ... ok
+test_sin_cos_interior_extrema (test_g1.G1Tests.test_sin_cos_interior_extrema) ... ok
+test_truth_hover_and_torque_sign (test_g1.G1Tests.test_truth_hover_and_torque_sign) ... ok
+test_zonotope_strip_membership_via_lp (test_g1.G1Tests.test_zonotope_strip_membership_via_lp) ... ok
+test_budget_and_valid_measurement_update (test_nonlinear_zonotope.NonlinearZonotopeTests.test_budget_and_valid_measurement_update) ... ok
+test_contract_and_atomic_failure (test_nonlinear_zonotope.NonlinearZonotopeTests.test_contract_and_atomic_failure) ... ok
+test_domain_rejection (test_nonlinear_zonotope.NonlinearZonotopeTests.test_domain_rejection) ... ok
+test_empty_strip_detected (test_nonlinear_zonotope.NonlinearZonotopeTests.test_empty_strip_detected) ... ok
+test_independent_nonlinear_truth_in_predicted_zonotope (test_nonlinear_zonotope.NonlinearZonotopeTests.test_independent_nonlinear_truth_in_predicted_zonotope) ... ok
+test_lp_row_scaling_regression (test_nonlinear_zonotope.NonlinearZonotopeTests.test_lp_row_scaling_regression) ... ok
+test_lp_tolerance_regression (test_nonlinear_zonotope.NonlinearZonotopeTests.test_lp_tolerance_regression) ... ok
+test_nonhover_jacobian (test_nonlinear_zonotope.NonlinearZonotopeTests.test_nonhover_jacobian) ... ok
+test_whole_interval_remainder_and_missing_remainder_counterexample (test_nonlinear_zonotope.NonlinearZonotopeTests.test_whole_interval_remainder_and_missing_remainder_counterexample) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.355s
+
+OK

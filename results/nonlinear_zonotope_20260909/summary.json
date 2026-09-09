@@ -1,0 +1,1977 @@
+{
+  "kind": "nonlinear_zonotope_pilot_no_learning_or_mpc",
+  "arithmetic": "FLOAT64_ENGINEERING_MARGIN_NOT_CERTIFIED",
+  "runs": [
+    {
+      "seed": 70001,
+      "scenario": "S0",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010666423633618138,
+      "max_posterior_radius": [
+        0.10196943922533519,
+        0.10994906222466039,
+        1.0012564877280223,
+        1.1072747804384802,
+        0.005550625039314709,
+        0.010685099645667337
+      ],
+      "final_valid_radius": [
+        0.038436008919354336,
+        0.04152103706841537,
+        0.7349012275228497,
+        0.8539974954656673,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.482230437093097e-08,
+          3.0524789644807805e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.12199456897989563,
+          0.13209455783343,
+          1.00226775946227,
+          1.1072756770114263,
+          0.005762882239518551,
+          0.010685099645667337
+        ],
+        "measurement_radius": [
+          0.10196943922533519,
+          0.10994906222466039,
+          1.0012564877280226,
+          1.10727478043848,
+          0.00555062503931471,
+          0.01068509964566734
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.4678895,
+        "p95": 5.85148565,
+        "p99": 9.88706722,
+        "max": 116.934585
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S1",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.040845155115474374,
+      "max_posterior_radius": [
+        0.31509826155393783,
+        0.3101052412915224,
+        1.8184210518760897,
+        1.8047267988438636,
+        0.005543449805004232,
+        0.010735023751417183
+      ],
+      "final_valid_radius": [
+        0.02988114781398532,
+        0.028810824439940763,
+        1.2765559686241572,
+        1.2769002762262354,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.482230437093097e-08,
+          3.0445922507365677e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.35146668259145963,
+          0.3461997772683997,
+          1.8194350788488471,
+          1.8047273648377107,
+          0.005753623201681089,
+          0.010735023751417183
+        ],
+        "measurement_radius": [
+          0.31509826155393783,
+          0.3101052412915224,
+          1.8184210518760897,
+          1.8047267988438631,
+          0.005543449805004233,
+          0.010735023751417185
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.4348475,
+        "p95": 5.431265799999998,
+        "p99": 11.300801369999997,
+        "max": 155.450479
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S2",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.06333728904328761,
+      "max_posterior_radius": [
+        0.7423098067672949,
+        0.7443956067568384,
+        2.8628951064304187,
+        2.8968947015709823,
+        0.005543449805004232,
+        0.010735023751417183
+      ],
+      "final_valid_radius": [
+        0.4623226857157317,
+        0.35093495997984536,
+        2.4138628488318865,
+        1.8717222233039619,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.482230437093097e-08,
+          3.0445922507365677e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.7995677088959031,
+          0.8023335007882578,
+          2.8639215083780205,
+          2.8968972076450354,
+          0.005753623201681089,
+          0.010735023751417183
+        ],
+        "measurement_radius": [
+          0.7423098067672946,
+          0.744395606756838,
+          2.8628951064304182,
+          2.8968947015709814,
+          0.005543449805004233,
+          0.010735023751417185
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.1814445,
+        "p95": 5.772702299999999,
+        "p99": 8.327304169999996,
+        "max": 57.627034
+      },
+      "filter_calls": 1000,
+      "over_20ms": 2,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S0",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010666516083811306,
+      "max_posterior_radius": [
+        0.10196943907928235,
+        0.10994910193281715,
+        1.0012564873397103,
+        1.1072736539164565,
+        0.00555062883885453,
+        0.01068510038307579
+      ],
+      "final_valid_radius": [
+        0.03843600896190258,
+        0.04152102830543836,
+        0.7349012262750453,
+        0.8539986006811083,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.5034710613711785e-08,
+          3.0524831434765763e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.12199456882607655,
+          0.13209457501114627,
+          1.0022677545753615,
+          1.1072742855210416,
+          0.005762886023358197,
+          0.01068510038307579
+        ],
+        "measurement_radius": [
+          0.10196943907928235,
+          0.10994910193281715,
+          1.00125648733971,
+          1.1072736539164567,
+          0.005550628838854531,
+          0.010685100383075788
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.2790155,
+        "p95": 6.03012395,
+        "p99": 9.740836399999983,
+        "max": 82.67762
+      },
+      "filter_calls": 1000,
+      "over_20ms": 5,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S1",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.040845144075327244,
+      "max_posterior_radius": [
+        0.31509826032732474,
+        0.3101059858323687,
+        1.8184210437016493,
+        1.8047297714759434,
+        0.0055434498050047545,
+        0.010735023751415874
+      ],
+      "final_valid_radius": [
+        0.029881147859393387,
+        0.028810827081235058,
+        1.2765559638357145,
+        1.276900895864281,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.5034710613711785e-08,
+          3.044592250737141e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.3514666812013578,
+          0.3462005812618875,
+          1.8194350705764006,
+          1.8047303794350766,
+          0.00575362320168162,
+          0.010735023751415874
+        ],
+        "measurement_radius": [
+          0.31509826032732474,
+          0.3101059858323687,
+          1.8184210437016495,
+          1.8047297714759434,
+          0.005543449805004755,
+          0.010735023751415874
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.0933255,
+        "p95": 7.9283106,
+        "p99": 17.16717314,
+        "max": 165.070607
+      },
+      "filter_calls": 1000,
+      "over_20ms": 6,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S2",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.06333731888758243,
+      "max_posterior_radius": [
+        0.7423098076672482,
+        0.7443950995833108,
+        2.862895108954766,
+        2.896896486172581,
+        0.0055434498050047545,
+        0.010735023751415874
+      ],
+      "final_valid_radius": [
+        0.46232268695649786,
+        0.3509357142029961,
+        2.413862854789151,
+        1.8717264733647707,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.5034710613711785e-08,
+          3.044592250737141e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.7995677098463435,
+          0.8023330293067624,
+          2.8639215114787517,
+          2.8969002293883883,
+          0.00575362320168162,
+          0.010735023751415874
+        ],
+        "measurement_radius": [
+          0.7423098076672481,
+          0.7443950995833108,
+          2.862895108954766,
+          2.896896486172581,
+          0.005543449805004755,
+          0.010735023751415874
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.756948,
+        "p95": 6.654199249999999,
+        "p99": 9.89219132,
+        "max": 101.076813
+      },
+      "filter_calls": 1000,
+      "over_20ms": 2,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S0",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010666642329788867,
+      "max_posterior_radius": [
+        0.1019694390783849,
+        0.10994926758405876,
+        1.0012564836983964,
+        1.1072794232912742,
+        0.005550637323414188,
+        0.010685101784443232
+      ],
+      "final_valid_radius": [
+        0.038436008847148956,
+        0.04152103772679938,
+        0.7349012305797566,
+        0.8539985925121357,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.455739678954414e-08,
+          3.0524924753904482e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.12199456875235284,
+          0.13209485604988433,
+          1.0022677553744537,
+          1.1072807989368458,
+          0.005762894478574432,
+          0.010685101784443232
+        ],
+        "measurement_radius": [
+          0.1019694390783849,
+          0.10994926758405876,
+          1.0012564836983964,
+          1.1072794232912744,
+          0.005550637323414189,
+          0.010685101784443232
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.8041575,
+        "p95": 6.294142349999999,
+        "p99": 9.934423099999998,
+        "max": 137.617544
+      },
+      "filter_calls": 1000,
+      "over_20ms": 5,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S1",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.04084515740108108,
+      "max_posterior_radius": [
+        0.31509826235809324,
+        0.3101062103915573,
+        1.8184210544209762,
+        1.8047339002405893,
+        0.0055434498050064675,
+        0.010735023751425885
+      ],
+      "final_valid_radius": [
+        0.02988114791062843,
+        0.028810835953866132,
+        1.2765559566932638,
+        1.2769000240206574,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.4557396741769112e-08,
+          3.0445922507390228e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.35146668344651283,
+          0.346200888396369,
+          1.8194350824058256,
+          1.8047348833710675,
+          0.00575362320168349,
+          0.010735023751425885
+        ],
+        "measurement_radius": [
+          0.3150982623580933,
+          0.3101062103915573,
+          1.818421054420976,
+          1.8047339002405896,
+          0.0055434498050064675,
+          0.010735023751425883
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.6823069999999998,
+        "p95": 5.86491225,
+        "p99": 9.750366849999997,
+        "max": 95.694557
+      },
+      "filter_calls": 1000,
+      "over_20ms": 2,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S2",
+      "budget": 30,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.06333725653213373,
+      "max_posterior_radius": [
+        0.7423098005923203,
+        0.7443927156344771,
+        2.8628950828461495,
+        2.8968870456529374,
+        0.0055434498050064675,
+        0.010735023751425885
+      ],
+      "final_valid_radius": [
+        0.46232268559751977,
+        0.3509334047274608,
+        2.413862849350027,
+        1.8717152195291766,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.4557396741769112e-08,
+          3.0445922507390228e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.7995677022492433,
+          0.802330456547536,
+          2.8639214805552773,
+          2.896887781646222,
+          0.00575362320168349,
+          0.010735023751425885
+        ],
+        "measurement_radius": [
+          0.7423098005923203,
+          0.7443927156344771,
+          2.8628950828461495,
+          2.896887045652938,
+          0.0055434498050064675,
+          0.010735023751425883
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.5731124999999997,
+        "p95": 6.206238499999998,
+        "p99": 11.750988929999986,
+        "max": 162.635606
+      },
+      "filter_calls": 1000,
+      "over_20ms": 6,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010247721601869042,
+      "max_posterior_radius": [
+        0.11981158307278134,
+        0.12028695653468091,
+        1.1075775564045043,
+        1.1404004432308499,
+        0.006255530867223634,
+        0.0111045789894512
+      ],
+      "final_valid_radius": [
+        0.04786965299054774,
+        0.04781544371017876,
+        0.8574592353683486,
+        0.9566644624506487,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.8464934120773957e-08,
+          3.875709631377906e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.14097604224156926,
+          0.1413391233395108,
+          1.1086028251799815,
+          1.1404012821181166,
+          0.006465430867149173,
+          0.0111045789894512
+        ],
+        "measurement_radius": [
+          0.11981158307278134,
+          0.12028695653468091,
+          1.1075775564045043,
+          1.1404004432308497,
+          0.006255530867223633,
+          0.011104578989451202
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.1071429999999998,
+        "p95": 6.2735012999999995,
+        "p99": 11.324830739999989,
+        "max": 159.496372
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.0267212805163215,
+      "max_posterior_radius": [
+        0.3015759867728983,
+        0.32011147695752973,
+        1.713496751974406,
+        1.845489030576672,
+        0.006356615011772598,
+        0.011107291522813952
+      ],
+      "final_valid_radius": [
+        0.034483643564582694,
+        0.04155865300641093,
+        1.1426851957832447,
+        1.1499526312811923,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.9567653526864183e-08,
+          4.0019781004330995e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.33584592181238637,
+          0.3570212575690633,
+          1.7145213991286423,
+          1.8454910761427654,
+          0.006559834046314572,
+          0.011107291522813952
+        ],
+        "measurement_radius": [
+          0.3015759867728983,
+          0.32011147695752973,
+          1.7134967519744062,
+          1.8454890305766722,
+          0.006356615011772598,
+          0.011107291522813952
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.2859605,
+        "p95": 5.759050299999999,
+        "p99": 8.812482219999998,
+        "max": 93.819583
+      },
+      "filter_calls": 1000,
+      "over_20ms": 1,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.03277171039121762,
+      "max_posterior_radius": [
+        0.473404200059531,
+        0.5123902343335187,
+        1.895928881078079,
+        2.047091720637663,
+        0.006475186778590068,
+        0.01109818669312589
+      ],
+      "final_valid_radius": [
+        0.2776332343237625,
+        0.32168045863594363,
+        1.4656726045876058,
+        1.700382128383862,
+        0.0051889862941865575,
+        0.010384446264535474
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.9901309605939643e-08,
+          4.15243543627255e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.5113227776810926,
+          0.553332068746272,
+          1.89695669081503,
+          2.047093077060825,
+          0.006694033288598245,
+          0.01109818669312589
+        ],
+        "measurement_radius": [
+          0.473404200059531,
+          0.5123902343335187,
+          1.8959288810780786,
+          2.047091720637663,
+          0.0064751867785900665,
+          0.011098186693125893
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.9431535,
+        "p95": 7.14860445,
+        "p99": 12.98914844999998,
+        "max": 170.715888
+      },
+      "filter_calls": 1000,
+      "over_20ms": 8,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010247984774416852,
+      "max_posterior_radius": [
+        0.11981158333834818,
+        0.12028656417504813,
+        1.1075775578321663,
+        1.140401375616249,
+        0.006255534666363404,
+        0.011104581868533315
+      ],
+      "final_valid_radius": [
+        0.04786965282250272,
+        0.04781540772429915,
+        0.8574592319779406,
+        0.9566634659828082,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.6022952287890864e-08,
+          3.875714339009403e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.14097604178084916,
+          0.14133858267829597,
+          1.1086028286312286,
+          1.1404029360102188,
+          0.006465434623222505,
+          0.011104581868533315
+        ],
+        "measurement_radius": [
+          0.11981158333834818,
+          0.12028656417504813,
+          1.1075775578321665,
+          1.1404013756162485,
+          0.006255534666363405,
+          0.011104581868533313
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.336217,
+        "p95": 8.840761049999998,
+        "p99": 26.298133869999997,
+        "max": 54.25339
+      },
+      "filter_calls": 1000,
+      "over_20ms": 14,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.026721425678301824,
+      "max_posterior_radius": [
+        0.30157598323300805,
+        0.3201112832869084,
+        1.713496730369971,
+        1.845488843844522,
+        0.0063566188317378675,
+        0.011107294401032627
+      ],
+      "final_valid_radius": [
+        0.03448364376674984,
+        0.04155867048155404,
+        1.1426851876441526,
+        1.1499542551324755,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.7382931609497154e-08,
+          4.001982910358482e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.33584591784040746,
+          0.35702106016379875,
+          1.714521376758177,
+          1.8454925251788539,
+          0.006559837283466761,
+          0.011107294401032627
+        ],
+        "measurement_radius": [
+          0.30157598323300805,
+          0.3201112832869084,
+          1.7134967303699709,
+          1.845488843844522,
+          0.0063566188317378675,
+          0.011107294401032626
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.366761,
+        "p95": 8.25238675,
+        "p99": 15.368278099999987,
+        "max": 136.481479
+      },
+      "filter_calls": 1000,
+      "over_20ms": 7,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.032771578403738344,
+      "max_posterior_radius": [
+        0.47340420169764874,
+        0.5123902293440311,
+        1.8959288823736486,
+        2.047090937871881,
+        0.0064751845930445685,
+        0.011098186693119296
+      ],
+      "final_valid_radius": [
+        0.27763323380301513,
+        0.3216805681011762,
+        1.4656726014765509,
+        1.7003829965307276,
+        0.005188986294186135,
+        0.010384446264535285
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.8547934798041744e-08,
+          4.152432633161116e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.5113227793451217,
+          0.5533320481014687,
+          1.8969566950259062,
+          2.0470915058889676,
+          0.006694031099246719,
+          0.011098186693119296
+        ],
+        "measurement_radius": [
+          0.4734042016976488,
+          0.5123902293440311,
+          1.8959288823736486,
+          2.047090937871881,
+          0.006475184593044569,
+          0.011098186693119298
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.1018205,
+        "p95": 6.496513649999999,
+        "p99": 10.851741079999998,
+        "max": 43.838549
+      },
+      "filter_calls": 1000,
+      "over_20ms": 5,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S0",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.010247821396156043,
+      "max_posterior_radius": [
+        0.11981158290962798,
+        0.12028599867588019,
+        1.1075775544594533,
+        1.1404010387066423,
+        0.006255541498905341,
+        0.011104588245491386
+      ],
+      "final_valid_radius": [
+        0.0478696527628073,
+        0.047815390479661435,
+        0.8574592330593425,
+        0.9566644689723911,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          2.7770958995716695e-08,
+          3.875722805430463e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.14097604157729246,
+          0.1413378341160712,
+          1.1086028253569362,
+          1.1404044655293584,
+          0.006465441364419391,
+          0.011104588245491386
+        ],
+        "measurement_radius": [
+          0.11981158290962798,
+          0.12028599867588019,
+          1.1075775544594533,
+          1.1404010387066423,
+          0.006255541498905342,
+          0.011104588245491386
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 3.2711129999999997,
+        "p95": 6.300354099999997,
+        "p99": 9.028296869999998,
+        "max": 169.642845
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S1",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.026721389154895414,
+      "max_posterior_radius": [
+        0.3015759880772272,
+        0.32010980144987844,
+        1.7134967586974488,
+        1.8454789783192989,
+        0.0063566250793606945,
+        0.011107300651178657
+      ],
+      "final_valid_radius": [
+        0.03448364383168118,
+        0.041558663255087946,
+        1.142685180496544,
+        1.149953264017176,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          3.0237991387709376e-08,
+          4.001990777085349e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.3358459232511761,
+          0.3570193810162645,
+          1.7145214060774627,
+          1.8454798654133286,
+          0.006559842549982075,
+          0.011107300651178657
+        ],
+        "measurement_radius": [
+          0.30157598807722713,
+          0.32010980144987844,
+          1.7134967586974488,
+          1.8454789783192989,
+          0.006356625079360694,
+          0.011107300651178653
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.5593955,
+        "p95": 6.638096799999999,
+        "p99": 13.29675928999999,
+        "max": 170.329153
+      },
+      "filter_calls": 1000,
+      "over_20ms": 5,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S2",
+      "budget": 60,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.03277160768797183,
+      "max_posterior_radius": [
+        0.47340420007718886,
+        0.5123913051492504,
+        1.895928881026222,
+        2.0470969037659787,
+        0.0064751881580121535,
+        0.011098186693136046
+      ],
+      "final_valid_radius": [
+        0.2776332323612738,
+        0.3216794486146921,
+        1.4656725955997258,
+        1.70037784569659,
+        0.0051889862941864135,
+        0.010384446264535222
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          3.1609172266166006e-08,
+          4.152437205476113e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.5113227776977133,
+          0.55333324322457,
+          1.896956693884176,
+          2.0471001941064233,
+          0.006694034652708987,
+          0.011098186693136046
+        ],
+        "measurement_radius": [
+          0.47340420007718886,
+          0.5123913051492504,
+          1.8959288810262223,
+          2.0470969037659787,
+          0.006475188158012153,
+          0.011098186693136048
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.5934359999999996,
+        "p95": 7.825486899999998,
+        "p99": 13.62171188,
+        "max": 191.971389
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S0",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.005334386074345332,
+      "max_posterior_radius": [
+        0.10332645255935936,
+        0.10267895263763593,
+        0.7297940076167588,
+        0.7539837712079795,
+        0.007509835862886482,
+        0.011597030872030154
+      ],
+      "final_valid_radius": [
+        0.0582647496455064,
+        0.05613736708822881,
+        0.5738844794467349,
+        0.5806378226225736,
+        0.005606221423130322,
+        0.010698977680871156
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.44869282892829e-08,
+          5.580061621646488e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.11696414453575632,
+          0.11663624061486472,
+          0.7308274809785394,
+          0.7539834202334854,
+          0.00770243326050183,
+          0.011597030872030154
+        ],
+        "measurement_radius": [
+          0.10332645255935935,
+          0.10267895263763593,
+          0.7297940076167587,
+          0.7539837712079795,
+          0.007509835862886482,
+          0.011597030872030152
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.8925124999999996,
+        "p95": 6.0999741499999995,
+        "p99": 8.792017309999995,
+        "max": 80.6624
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S1",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.004643248143938794,
+      "max_posterior_radius": [
+        0.1848325747823109,
+        0.18466692318249944,
+        0.9624963836675353,
+        1.0005724438294101,
+        0.007626598931606491,
+        0.011617828611168547
+      ],
+      "final_valid_radius": [
+        0.05808589409861356,
+        0.05533628936785506,
+        0.6092480459487997,
+        0.6174865213612335,
+        0.005243834592605945,
+        0.010478341062770043
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.790899863167469e-08,
+          5.753081152843366e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.2033529857331236,
+          0.20376821927843253,
+          0.9634863057224008,
+          1.0005737121645295,
+          0.007828601143231795,
+          0.011617828611168547
+        ],
+        "measurement_radius": [
+          0.1848325747823109,
+          0.18466692318249944,
+          0.9624963836675353,
+          1.0005724438294101,
+          0.00762659893160649,
+          0.011617828611168547
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.688147,
+        "p95": 5.331968649999999,
+        "p99": 11.10454132,
+        "max": 111.341252
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70001,
+      "scenario": "S2",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "501ed38dcf4b9e0eda8a55c15ae5d04540e88596c350d000e52e95a51fc37072",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.005339617713433997,
+      "max_posterior_radius": [
+        0.2994659869059034,
+        0.309716453131465,
+        1.2104262615616281,
+        1.276652645230341,
+        0.007627817226735417,
+        0.011623622230961474
+      ],
+      "final_valid_radius": [
+        0.21075316484873607,
+        0.21112226566757053,
+        1.0549478694946206,
+        1.0841094799471076,
+        0.005220607952474083,
+        0.010481380321700878
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.8248484718655256e-08,
+          5.754919327532449e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.3236745121193907,
+          0.3351625935318783,
+          1.2114128949275464,
+          1.2766545718236348,
+          0.007819302055920843,
+          0.011623622230961474
+        ],
+        "measurement_radius": [
+          0.2994659869059034,
+          0.309716453131465,
+          1.2104262615616281,
+          1.276652645230341,
+          0.007627817226735418,
+          0.011623622230961474
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.706495,
+        "p95": 5.637690499999994,
+        "p99": 7.905697479999997,
+        "max": 157.621005
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S0",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.0053764277061384425,
+      "max_posterior_radius": [
+        0.10381401723595923,
+        0.1029218391041562,
+        0.7339873396682486,
+        0.7570144730435222,
+        0.007509836492051777,
+        0.011597033053270691
+      ],
+      "final_valid_radius": [
+        0.05814737761538724,
+        0.05627854752226469,
+        0.5715639747245713,
+        0.5855871056929822,
+        0.005529598252693148,
+        0.010694502815745122
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.367705561802066e-08,
+          5.5800625566286436e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.11749114863149808,
+          0.11691180266796969,
+          0.7350312682766608,
+          0.7570165574500769,
+          0.0077024338345065375,
+          0.011597033053270691
+        ],
+        "measurement_radius": [
+          0.10381401723595929,
+          0.1029218391041562,
+          0.7339873396682486,
+          0.7570144730435222,
+          0.007509836492051777,
+          0.011597033053270691
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.720497,
+        "p95": 5.951452499999999,
+        "p99": 10.502009559999998,
+        "max": 100.878876
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S1",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.004643244499429544,
+      "max_posterior_radius": [
+        0.18466598477462404,
+        0.1849685930142937,
+        0.9646415725931801,
+        1.001629909685659,
+        0.007626600621077743,
+        0.011617831338354052
+      ],
+      "final_valid_radius": [
+        0.05776852395485882,
+        0.05519777870774645,
+        0.6053722036819884,
+        0.615609287505977,
+        0.005246624492204749,
+        0.010533004526045815
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.559780599392168e-08,
+          5.753083701729544e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.20324210940358955,
+          0.20405319127650712,
+          0.9656346576091371,
+          1.0016312762244473,
+          0.007828602868826477,
+          0.011617831338354052
+        ],
+        "measurement_radius": [
+          0.18466598477462404,
+          0.1849685930142937,
+          0.96464157259318,
+          1.001629909685659,
+          0.007626600621077742,
+          0.011617831338354052
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.6353980000000004,
+        "p95": 4.967940149999998,
+        "p99": 11.634214069999997,
+        "max": 151.378135
+      },
+      "filter_calls": 1000,
+      "over_20ms": 2,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70002,
+      "scenario": "S2",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "b006cf41fc3c3e277333ca17e0f6371a75cd9a73ecbe87d8e4ecc72d9c7ed8d5",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.0054455932048489974,
+      "max_posterior_radius": [
+        0.3032610309638615,
+        0.3064038591844661,
+        1.2240865639015788,
+        1.2659997842079842,
+        0.007627816816590754,
+        0.011623624487756234
+      ],
+      "final_valid_radius": [
+        0.2063913518768861,
+        0.20736395773198257,
+        1.0316302168692373,
+        1.0741792668236658,
+        0.00529968983320205,
+        0.010462925266046664
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.563508876501958e-08,
+          5.754918708653073e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.327742762227121,
+          0.33172385486862543,
+          1.225058305701224,
+          1.2660011877221957,
+          0.007819301696462765,
+          0.011623624487756234
+        ],
+        "measurement_radius": [
+          0.3032610309638614,
+          0.3064038591844661,
+          1.2240865639015788,
+          1.2659997842079842,
+          0.007627816816590754,
+          0.011623624487756234
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.588311,
+        "p95": 4.9381115499999995,
+        "p99": 9.518946369999997,
+        "max": 159.398931
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S0",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.005397371701227616,
+      "max_posterior_radius": [
+        0.1033264517395045,
+        0.10267763947255304,
+        0.7297940212398797,
+        0.7539940186010576,
+        0.0075098516612722155,
+        0.011597039736107019
+      ],
+      "final_valid_radius": [
+        0.05827540820494742,
+        0.056348132735644096,
+        0.5734371610568327,
+        0.5831957434300713,
+        0.005514918861060074,
+        0.01057015798216332
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.549602055525792e-08,
+          5.580085099139272e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.11696414337570227,
+          0.11663465895195156,
+          0.73082749655241,
+          0.7539939101479952,
+          0.007702446872782371,
+          0.011597039736107019
+        ],
+        "measurement_radius": [
+          0.10332645173950449,
+          0.10267763947255304,
+          0.7297940212398798,
+          0.7539940186010576,
+          0.007509851661272216,
+          0.011597039736107019
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.6696429999999998,
+        "p95": 4.7706538999999974,
+        "p99": 8.768748599999993,
+        "max": 72.529155
+      },
+      "filter_calls": 1000,
+      "over_20ms": 2,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S1",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.004643236380192539,
+      "max_posterior_radius": [
+        0.18372632721900162,
+        0.18500058503268313,
+        0.9575369477318356,
+        1.0032509042929363,
+        0.007626611003768026,
+        0.011617837243931744
+      ],
+      "final_valid_radius": [
+        0.057683009809958594,
+        0.05523707949610568,
+        0.6025929337535869,
+        0.6036677597836283,
+        0.005260318565364224,
+        0.01056613491860416
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.7067525258583594e-08,
+          5.753099365989382e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.20213990373531907,
+          0.20419985490535814,
+          0.9585482883568336,
+          1.003251360832252,
+          0.007828613253635663,
+          0.011617837243931744
+        ],
+        "measurement_radius": [
+          0.18372632721900162,
+          0.18500058503268313,
+          0.9575369477318358,
+          1.003250904292936,
+          0.007626611003768026,
+          0.011617837243931742
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.580944,
+        "p95": 5.400625499999996,
+        "p99": 11.520525969999998,
+        "max": 79.703106
+      },
+      "filter_calls": 1000,
+      "over_20ms": 3,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    },
+    {
+      "seed": 70003,
+      "scenario": "S2",
+      "budget": 120,
+      "status": "COMPLETED",
+      "stop_tick": 1000,
+      "stop_time_s": 20.0,
+      "source_trajectory_sha256": "d1bfb0c8dac3db796112845e57058a86afa7dda26bbc683e1b72cf8d2ec29099",
+      "matches_g1_source": true,
+      "failure_detail": null,
+      "lp_membership_failures": 0,
+      "exact_hull_membership_failures": 0,
+      "max_reduction_mixed_width_increase": 0.004601760051808346,
+      "max_posterior_radius": [
+        0.300834723189213,
+        0.30486266908742143,
+        1.2146759583025641,
+        1.2628570708437477,
+        0.007627826863934067,
+        0.011623629697135795
+      ],
+      "final_valid_radius": [
+        0.2076971610278288,
+        0.20644029711273904,
+        1.0389096472931747,
+        1.0682222204377343,
+        0.005298910428148288,
+        0.010463792480189698
+      ],
+      "component_maxima": {
+        "model_radius": [
+          0.0,
+          0.0,
+          0.03759796088016961,
+          0.041709951100212014,
+          0.0,
+          0.0
+        ],
+        "remainder_radius": [
+          0.0,
+          0.0,
+          4.7192973595786953e-08,
+          5.754933869395256e-06,
+          0.0,
+          0.0
+        ],
+        "linear_radius": [
+          0.3251282423552634,
+          0.33011981050428874,
+          1.2157055408816695,
+          1.2628591437325345,
+          0.007819311761142,
+          0.011623629697135795
+        ],
+        "measurement_radius": [
+          0.300834723189213,
+          0.30486266908742143,
+          1.2146759583025641,
+          1.2628570708437477,
+          0.007627826863934067,
+          0.011623629697135797
+        ]
+      },
+      "filter_timing_ms": {
+        "p50": 2.859054,
+        "p95": 5.907319299999997,
+        "p99": 15.180953869999996,
+        "max": 172.408478
+      },
+      "filter_calls": 1000,
+      "over_20ms": 4,
+      "timing_scope": "filter advance incl strip consistency LP; excludes truth, membership evaluation, logging and MPC; no warmup excluded"
+    }
+  ]
+}

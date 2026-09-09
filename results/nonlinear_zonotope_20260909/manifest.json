@@ -1,0 +1,29 @@
+{
+  "base_commit": "53b442108038270d95de6158016b3c4458716f5c",
+  "config_sha256": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "machine": "x86_64",
+  "cpu_count": 9,
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": null
+  },
+  "source_sha256": {
+    "src/smf_mpc/__init__.py": "52c7dffd0592eb5db86e8becf424034e931db07f354075d07c894d79b57ec555",
+    "src/smf_mpc/data.py": "d11062e1241b65430a16c0726628b7b1f3a5c41d57a7d062f572e6ce5904ea2a",
+    "src/smf_mpc/filter.py": "191de019c8cd453b265aea0b9f45d1774539728efaf54068f2fbc7a6fec48fed",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "src/smf_mpc/sensing.py": "24a326c187f9cf7956a2ed8812922f97712fa10f72d09be1f1ac7e9d91614dc8",
+    "src/smf_mpc/sets.py": "d052bacd0fcf239d29beb2a6a5055acde7f44b1056e0e24e8ed082b7efec670a",
+    "src/smf_mpc/zonotope_filter.py": "117756527c6807832af679fa5b467de1df12e70d9288975ab19ba13e7b07dbea",
+    "scripts/run_zonotope.py": "dfc3d849a48e1ea43e7e2c7f29a60b9d7640bd2bca39b4f64d0a7f49d6c5ac17",
+    "scripts/run_g1.py": "2bfb2430c0e92c16039a194442450a40ee4c3aa96d134e7eefaa5a514aa85a43"
+  },
+  "artifact_sha256": {
+    "steps.csv.gz": "3437c38e757e59220b7bdf7fb53b1bc9f27b4d57e40cc81f21c0ac699b6ee571",
+    "summary.json": "834f7b32189246e2c901d2c58850b8e7e46d723446f734c9e666274788397875"
+  }
+}

@@ -4,9 +4,9 @@
 
 本仓库从零建立一条可证伪的研究路线：在物理状态上学习未建模加速度，研究测量更新与丢测模式是否改变模型训练的最优选择，并验证这种变化是否减少集合外包络冗余、改善控制可行性。
 
-**当前已有详细方案与可运行的 G1 数值原型（模拟器、测量调度、box SMF、线性 zonotope 对照）。17 项新增性质测试通过；尚未实现神经训练与 MPC。** 不预设论文级别，不将有限仿真覆盖率称作确定性安全保证。
+**当前已有平面非线性 zonotope 滤波原型，26 项测试通过。27 条配对轨迹完成 20 秒数值重放；尚未实现神经训练与 MPC，实时门未通过。** 不预设论文级别，不将有限仿真覆盖率称作确定性安全保证。
 
-最新结果：平面 box 基线在 9 次 pilot 中均于 1.36 秒因外包络超域停止。已保留全部失败记录，下一步先补齐非线性 zonotope 基线。详见 [08 G1 实现与发现](docs/research/08_g1_implementation_and_findings.md)。
+最新结果：采用与 G1 相同的源轨迹和误差界，非线性 zonotope 通过 27,027 次数值成员检查；保留 box 在 1.36 秒超域的失败基线。详见 [09 非线性 zonotope 实现与结果](docs/research/09_nonlinear_zonotope_implementation.md)。
 
 ### 文档导航（建议按顺序阅读）
 
@@ -45,8 +45,16 @@ python scripts/run_g1.py --output results/my_g1_run
 
 依赖沿用上面的 NumPy/SciPy。输出目录须为空；结果带源码、配置和数据哈希。已归档的 [实际结果](results/g1_20260909/summary.json) 与 [科研图](results/g1_20260909/g1_findings.svg) 均为数值 pilot，不是训练或控制性能。
 
+### 非线性 zonotope 重放
+
+```bash
+python scripts/run_zonotope.py --output results/my_zonotope_run
+```
+
+默认比较 30/60/120 个生成元预算；完整日志、公式和计时范围见 09。
+
 ### 后续工作的第一条指令
 
-先按 [08 的后续清单](docs/research/08_g1_implementation_and_findings.md) 实现带余项的非线性 zonotope，并重放同一输入/观测。当前 box 未通过长时可用性门，因此暂不进入神经训练和 MPC。每次提交记录命令、哈希、失败样本与尚未满足的证明假设。
+按 [09 的后续任务](docs/research/09_nonlinear_zonotope_implementation.md) 完成模型 A 与逐模型误差包络，同时解决 LP/集合运算尾延迟。当前只达到有限时估计数值门；进入 MPC 前仍需统一观测器与理论误差管，并完成相应验证。
 
 方案版本：2026-09-08；G1 实现更新：2026-09-09。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
