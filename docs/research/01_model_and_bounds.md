@@ -21,17 +21,27 @@
 
 由平动 Newton 方程和绕质心俯仰 Euler 方程：
 
-$$m\ddot p=\begin{bmatrix}-T\sin\phi\\T\cos\phi\end{bmatrix}-\begin{bmatrix}0\\mg\end{bmatrix}+F_a,$$
+```math
+m\ddot p=\begin{bmatrix}-T\sin\phi\\T\cos\phi\end{bmatrix}-\begin{bmatrix}0\\mg\end{bmatrix}+F_a,
+```
 
-$$J\dot\omega=\tau+\tau_a,\qquad \dot\phi=\omega.$$
+```math
+J\dot\omega=\tau+\tau_a,\qquad \dot\phi=\omega.
+```
 
 初版只学习平动残差 a=F_a/m；俯仰未知力矩 τ_a 放进已知有界过程不确定性。于是
 
-$$\dot x=f_c^0(x,u)+E_c a_\theta(s)+d_c,$$
+```math
+\dot x=f_c^0(x,u)+E_c a_\theta(s)+d_c,
+```
 
-$$f_c^0=\begin{bmatrix}v_x&v_z&-T\sin\phi/m&T\cos\phi/m-g&\omega&\tau/J\end{bmatrix}^{\!T},$$
+```math
+f_c^0=\begin{bmatrix}v_x&v_z&-T\sin\phi/m&T\cos\phi/m-g&\omega&\tau/J\end{bmatrix}^{\!T},
+```
 
-$$E_c=\begin{bmatrix}0&0\\0&0\\1&0\\0&1\\0&0\\0&0\end{bmatrix}.$$
+```math
+E_c=\begin{bmatrix}0&0\\0&0\\1&0\\0&1\\0&0\\0&0\end{bmatrix}.
+```
 
 不学习 p_dot=v 或 φ_dot=ω，避免通过篡改已知运动学制造估计收缩。若执行器动态重要，后续显式增加实际推力状态 T_act，使用 T_act_dot=(T_cmd−T_act)/t_m 等模型并重新推导状态/输入约束；不能默认为指令等于实际推力。
 
@@ -41,21 +51,31 @@ $$E_c=\begin{bmatrix}0&0\\0&0\\1&0\\0&1\\0&0\\0&0\end{bmatrix}.$$
 
 将真值基准**定义为**离散映射，不把 Euler 近似当成连续真实系统：
 
-$$x_{k+1}=F_*(x_k,u_k,\beta_k)+w_k^{ext},$$
+```math
+x_{k+1}=F_*(x_k,u_k,\beta_k)+w_k^{ext},
+```
 
-$$F_*=x+h f_c^0(x,u)+hE_c a_*(s,\beta).$$
+```math
+F_*=x+h f_c^0(x,u)+hE_c a_*(s,\beta).
+```
 
 控制器的预测模型：
 
-$$F_\theta(x,u)=x+h f_c^0(x,u)+hE_c a_\theta(s).\tag{M1}$$
+```math
+F_\theta(x,u)=x+h f_c^0(x,u)+hE_c a_\theta(s).\tag{M1}
+```
 
 在这个实验轨道，Euler 就是真值模型的定义，因此没有隐藏积分截断误差。它支持可检查的集合包含研究，但不能代替连续动力学验证。
 
 独立真值残差的一个固定解析实例（用于第一轮 benchmark，不是已辨识气动模型）：令 r_x=v_x−b_x、r_z=v_z−b_z，
 
-$$a_{*,x}=-0.12\,r_x\sqrt{r_x^2+0.04}-0.03\,r_xr_z+0.08\sin(2\phi)(T/(mg)-1),$$
+```math
+a_{*,x}=-0.12\,r_x\sqrt{r_x^2+0.04}-0.03\,r_xr_z+0.08\sin(2\phi)(T/(mg)-1),
+```
 
-$$a_{*,z}=-0.15\,r_z\sqrt{r_z^2+0.04}+0.02r_x^2\cos\phi.$$
+```math
+a_{*,z}=-0.15\,r_z\sqrt{r_z^2+0.04}+0.02r_x^2\cos\phi.
+```
 
 β=(b_x,b_z) 为隐藏环境参数，确定性轨道规定 β∈[-0.5,0.5]² m/s。训练数据使用分段常值与平滑变化；保证若覆盖该整箱则允许任意序列，不应再暗中假定风可预测。更大风速仅作域外压力测试。可先冻结 β=0 做机制隔离，再加入有界 β；所有基线一致。
 
@@ -67,11 +87,13 @@ $$a_{*,z}=-0.15\,r_z\sqrt{r_z^2+0.04}+0.02r_x^2\cos\phi.$$
 
 如果希望连续轨道仍声称确定性保证，需使
 
-$$\Phi_h^*(x,u)-F_\theta(x,u)\in\mathcal W_\theta(x,u)$$
+```math
+\Phi_h^*(x,u)-F_\theta(x,u)\in\mathcal W_\theta(x,u)
+```
 
 覆盖所有初值、输入、隐藏参数、执行器误差及积分余项。可使用有向舍入区间积分或 CORA 等可达性工具。仅对名义轨迹 RK4/Euler 作差不能给出全域余项界。
 
-例如在有效轨迹管内能认证 \(\|\ddot x(t)\|_\infty\le M\)，Euler 余项可取 \(h^2M/2\)；M 必须覆盖整段真实轨迹及输入保持条件。不能直接用某点 Hessian 最大值冒充 M。
+例如在有效轨迹管内能认证 $`\|\ddot x(t)\|_\infty\le M`$，Euler 余项可取 $`h^2M/2`$；M 必须覆盖整段真实轨迹及输入保持条件。不能直接用某点 Hessian 最大值冒充 M。
 
 ## 4. 工作域、控制约束与传感器
 
@@ -81,7 +103,9 @@ $$\Phi_h^*(x,u)-F_\theta(x,u)\in\mathcal W_\theta(x,u)$$
 
 基础测量为线性选择：
 
-$$y_k=C_{\sigma_k}x_k+v_k,\quad |v_k|\le\bar v_{\sigma_k}.$$
+```math
+y_k=C_{\sigma_k}x_k+v_k,\quad |v_k|\le\bar v_{\sigma_k}.
+```
 
 每 tick 观测 φ、ω；每第5 tick有机会观测 p_x、p_z。建议初始仿真界：位置0.02 m、角度0.005 rad、角速率0.01 rad/s。持续未知偏置必须计入该界，或增广偏置状态；若增广，所有可检测性/状态维度需重做。
 
@@ -93,18 +117,26 @@ $$y_k=C_{\sigma_k}x_k+v_k,\quad |v_k|\le\bar v_{\sigma_k}.$$
 
 令 F0=x+h f_c^0。状态 Jacobian A0 的对角全1，另外非零项为
 
-$$A^0_{1,3}=h,\quad A^0_{2,4}=h,\quad A^0_{5,6}=h,$$
+```math
+A^0_{1,3}=h,\quad A^0_{2,4}=h,\quad A^0_{5,6}=h,
+```
 
-$$A^0_{3,5}=-hT\cos\phi/m,\qquad A^0_{4,5}=-hT\sin\phi/m.$$
+```math
+A^0_{3,5}=-hT\cos\phi/m,\qquad A^0_{4,5}=-hT\sin\phi/m.
+```
 
 输入 Jacobian B0 非零项：
 
-$$B^0_{3,1}=-h\sin\phi/m,\quad B^0_{4,1}=h\cos\phi/m,\quad B^0_{6,2}=h/J.$$
+```math
+B^0_{3,1}=-h\sin\phi/m,\quad B^0_{4,1}=h\cos\phi/m,\quad B^0_{6,2}=h/J.
+```
 
 索引在公式中从1开始，代码从0开始。总 Jacobian：
 
-$$A_\theta=A^0+hE_c\,\frac{\partial a_\theta}{\partial s}\frac{\partial s}{\partial x},\quad
-B_\theta=B^0+hE_c\,\frac{\partial a_\theta}{\partial s}\frac{\partial s}{\partial u}.\tag{M2}$$
+```math
+A_\theta=A^0+hE_c\,\frac{\partial a_\theta}{\partial s}\frac{\partial s}{\partial x},\quad
+B_\theta=B^0+hE_c\,\frac{\partial a_\theta}{\partial s}\frac{\partial s}{\partial u}.\tag{M2}
+```
 
 如果网络输入包含 T、τ，就必须包含第二项；不能仅更新 A。悬停检验使用 φ=0,T=mg，名义 v_dot=0；残差非零时物理悬停输入/姿态可能偏移，不强制网络输出为0。
 
@@ -112,7 +144,9 @@ B_\theta=B^0+hE_c\,\frac{\partial a_\theta}{\partial s}\frac{\partial s}{\partia
 
 固定 MLP：5→32→32→2，隐藏层 tanh，输出线性；输入
 
-$$s=[v_x/3,\ v_z/3,\ \phi/0.45,\ T/(mg)-1,\ \tau/0.08]^T.$$
+```math
+s=[v_x/3,\ v_z/3,\ \phi/0.45,\ T/(mg)-1,\ \tau/0.08]^T.
+```
 
 输出以 m/s² 表示；可使用对角输出缩放 S_a，但必须同步应用于残差界和 Jacobian。输入缩放用固定物理尺度，不用测试集统计。初版 float64 训练/验证以便核查；float32 部署必须单独比较包络数值误差。
 
@@ -124,7 +158,9 @@ $$s=[v_x/3,\ v_z/3,\ \phi/0.45,\ T/(mg)-1,\ \tau/0.08]^T.$$
 
 需要对所有 (x,u)∈D、所有允许 β 证明
 
-$$F_*(x,u,\beta)-F_\theta(x,u)\in[-\bar w_\theta,\bar w_\theta].\tag{M3}$$
+```math
+F_*(x,u,\beta)-F_\theta(x,u)\in[-\bar w_\theta,\bar w_\theta].\tag{M3}
+```
 
 加上外部过程扰动界得到总 Wθ。每个网络 checkpoint 单独认证；模型更新使旧 certificate 失效。证书保存 network_sha、D、缩放、β界、积分方法、舍入策略、工具版本和分区。
 
@@ -145,13 +181,17 @@ auto_LiRPA/CROWN 的浮点实现不自动构成严格的实数有向舍入证书
 
 ### 7.3 数据覆盖 + 正则性界的备选推导 [CONDITIONAL]
 
-令残差函数 r(s)=a_*(s)−aθ(s)，已知 \(\|r(s)-r(t)\|_\infty\le L_r\|s-t\|_\infty\)。若采样点 s_j 对整域形成 δ-net，点残差测量误差≤ε_label，则对任意 s 选最近 s_j：
+令残差函数 r(s)=a_*(s)−aθ(s)，已知 $`\|r(s)-r(t)\|_\infty\le L_r\|s-t\|_\infty`$。若采样点 s_j 对整域形成 δ-net，点残差测量误差≤ε_label，则对任意 s 选最近 s_j：
 
-$$\|r(s)\|_\infty\le\|\tilde r(s_j)\|_\infty+\epsilon_{label}+L_r\delta.$$
+```math
+\|r(s)\|_\infty\le\|\tilde r(s_j)\|_\infty+\epsilon_{label}+L_r\delta.
+```
 
 所以
 
-$$\bar r=\max_j\|\tilde r(s_j)\|_\infty+\epsilon_{label}+L_r\delta.\tag{M4}$$
+```math
+\bar r=\max_j\|\tilde r(s_j)\|_\infty+\epsilon_{label}+L_r\delta.\tag{M4}
+```
 
 此处 L_r 必须是上界，不是经验斜率最大值；可用 L_true+L_network，但常很松。δ 必须覆盖整个连续域，不是测试样本最近距离的最大值。高维覆盖成本是本路线的真实风险，不能用“数据量足够”替代证明。
 

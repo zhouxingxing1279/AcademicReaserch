@@ -11,15 +11,21 @@
 
 用 z_i 表示名义状态，v_i 表示名义输入（与测量噪声 ν 区分）：
 
-$$z_{i+1}=F_\theta(z_i,v_i),\qquad u_i=v_i+K(\hat x_i-z_i).\tag{C1}$$
+```math
+z_{i+1}=F_\theta(z_i,v_i),\qquad u_i=v_i+K(\hat x_i-z_i).\tag{C1}
+```
 
 K 采用负反馈约定，要求局部 A+BK 稳定；若用 dlqr 返回的 K_lqr，则 K=−K_lqr。输入饱和必须在优化/验证中覆盖，不能执行后截断仍按未饱和公式分析。
 
 V1 采用与 zonotope 更新中心一致的观测器：
 
-$$\hat x_{i+1}^-=F_\theta(\hat x_i,u_i),$$
+```math
+\hat x_{i+1}^-=F_\theta(\hat x_i,u_i),
+```
 
-$$\hat x_{i+1}=\hat x_{i+1}^-+L_{\sigma_{i+1}}(y_{i+1}-C_{\sigma_{i+1}}\hat x_{i+1}^-).\tag{C2}$$
+```math
+\hat x_{i+1}=\hat x_{i+1}^-+L_{\sigma_{i+1}}(y_{i+1}-C_{\sigma_{i+1}}\hat x_{i+1}^-).\tag{C2}
+```
 
 σ包含已到达传感器集合。丢位置时仍使用姿态/角速率行；完全没有测量才 L=0。Lσ在离线选定并认证，在线 F5用同一 Lσ；生成元降阶不改变中心。若使用 F6 的在线变化增益或额外箱交集重置中心，C2不再是原观察器，必须把重置/增益变化加入预测验证，而非继续照搬以下公式。
 
@@ -29,21 +35,29 @@ $$\hat x_{i+1}=\hat x_{i+1}^-+L_{\sigma_{i+1}}(y_{i+1}-C_{\sigma_{i+1}}\hat x_{i
 
 第一步：
 
-$$e^+=(A+BK)e-BK\eta+w.\tag{C3}$$
+```math
+e^+=(A+BK)e-BK\eta+w.\tag{C3}
+```
 
 第二步：x−xhat=η，实际输入在真值与观测器预测中相同：
 
-$$x^+-(A\hat x+Bu)=A\eta+w.$$
+```math
+x^+-(A\hat x+Bu)=A\eta+w.
+```
 
 用测量更新：
 
-$$\eta^+=(I-LC)(A\eta+w)-L\nu.\tag{C4}$$
+```math
+\eta^+=(I-LC)(A\eta+w)-L\nu.\tag{C4}
+```
 
 增广 ξ=[eᵀ,ηᵀ]ᵀ：
 
-$$\xi^+=\underbrace{\begin{bmatrix}A+BK&-BK\\0&(I-LC)A\end{bmatrix}}_{M_\sigma}\xi+
+```math
+\xi^+=\underbrace{\begin{bmatrix}A+BK&-BK\\0&(I-LC)A\end{bmatrix}}_{M_\sigma}\xi+
 \begin{bmatrix}I\\I-LC\end{bmatrix}w+
-\begin{bmatrix}0\\-L\end{bmatrix}\nu.\tag{C5}$$
+\begin{bmatrix}0\\-L\end{bmatrix}\nu.\tag{C5}
+```
 
 遗漏 −BKη 会低估跟踪误差；把上下两块中的同一 w 视为独立扰动仍可给外包络，但更保守。尽量共享生成元保留依赖。
 
@@ -53,19 +67,29 @@ $$\xi^+=\underbrace{\begin{bmatrix}A+BK&-BK\\0&(I-LC)A\end{bmatrix}}_{M_\sigma}\
 
 围绕 (z,v) 选择 A=∂Fθ/∂x、B=∂Fθ/∂u；令 δu=K(e−η)。对真实状态和观测状态分别写
 
-$$F_\theta(z+e,v+\delta u)=F_\theta(z,v)+Ae+B\delta u+r_x,$$
+```math
+F_\theta(z+e,v+\delta u)=F_\theta(z,v)+Ae+B\delta u+r_x,
+```
 
-$$F_\theta(z+e-\eta,v+\delta u)=F_\theta(z,v)+A(e-\eta)+B\delta u+r_{\hat x}.$$
+```math
+F_\theta(z+e-\eta,v+\delta u)=F_\theta(z,v)+A(e-\eta)+B\delta u+r_{\hat x}.
+```
 
 注意两个展开使用同一个实际输入。代入 C1/C2得
 
-$$e^+=(A+BK)e-BK\eta+r_x+w,$$
+```math
+e^+=(A+BK)e-BK\eta+r_x+w,
+```
 
-$$\eta^+=(I-LC)(A\eta+r_x-r_{\hat x}+w)-L\nu.\tag{C6}$$
+```math
+\eta^+=(I-LC)(A\eta+r_x-r_{\hat x}+w)-L\nu.\tag{C6}
+```
 
 因此误差外包络递推为
 
-$$S_{i+1}\supseteq M_{i,\sigma}S_i\oplus D_{i,\sigma},\tag{C7}$$
+```math
+S_{i+1}\supseteq M_{i,\sigma}S_i\oplus D_{i,\sigma},\tag{C7}
+```
 
 D包含共享的 w、r_x以及 r_hat、ν。r_x、r_hat必须在由 S_i诱导的整个状态-输入域上认证。只用名义点的余项界无效。可用区间 Hessian 的二阶界，将状态与输入共同组成增广变量；若域太大导致界爆炸，縮短预测域或限定操作域，而非忽略项。
 
@@ -75,15 +99,21 @@ D包含共享的 w、r_x以及 r_hat、ν。r_x、r_hat必须在由 S_i诱导的
 
 已知 η0∈Ehat0=Xk−xhatk。若选 z0=xhatk，则 e0=η0；应初始化相关集合
 
-$$S_0=\{[\eta^T,\eta^T]^T:\eta\in Ehat_0\}.\tag{C8}$$
+```math
+S_0=\{[\eta^T,\eta^T]^T:\eta\in Ehat_0\}.\tag{C8}
+```
 
 若 z0作为优化变量，令 d=xhatk−z0，则 S0={[d+η;η]:η∈Ehat0}。把 e0、η0独立化会增大保守性。中心若不在 SMF 集内仍可定义误差集合，只需准确平移，不强行假设中心为真值。
 
 给定硬约束 Hx x≤bx、Hu u≤bu，定义 Π_e=[I,0]，Π_η=[0,I]。利用 x=z+Π_e ξ、u=v+K(Π_e−Π_η)ξ：
 
-$$H_{x,j}z_i+h_{S_i}(\Pi_e^T H_{x,j}^T)\le b_{x,j},\tag{C9}$$
+```math
+H_{x,j}z_i+h_{S_i}(\Pi_e^T H_{x,j}^T)\le b_{x,j},\tag{C9}
+```
 
-$$H_{u,j}v_i+h_{S_i}((\Pi_e-\Pi_\eta)^TK^TH_{u,j}^T)\le b_{u,j}.\tag{C10}$$
+```math
+H_{u,j}v_i+h_{S_i}((\Pi_e-\Pi_\eta)^TK^TH_{u,j}^T)\le b_{u,j}.\tag{C10}
+```
 
 这是针对估计反馈的输入收紧，不是简单 U⊖K Ehat。普通 zonotope用 F2，CZ支持函数用 LP。LP状态最优也需检查数值残差；若目标是严格上界可保存可行对偶证书并控制舍入，不能把原始可行解的目标下界当支持函数上界。
 
@@ -91,8 +121,10 @@ $$H_{u,j}v_i+h_{S_i}((\Pi_e-\Pi_\eta)^TK^TH_{u,j}^T)\le b_{u,j}.\tag{C10}$$
 
 初版参考轨迹使用平滑段连接，终端进入固定悬停位置；研究稳态跟踪与有限轨迹后悬停，避免未定义的任意时变终端。
 
-$$\min_{z_{0:N},v_{0:N-1}}\ \sum_{i=0}^{N-1}
-\bigl(\|z_i-x_i^{ref}\|_Q^2+\|v_i-u_i^{ref}\|_R^2+\|v_i-v_{i-1}\|_{R_\Delta}^2\bigr)+V_f(z_N),$$
+```math
+\min_{z_{0:N},v_{0:N-1}}\ \sum_{i=0}^{N-1}
+\bigl(\|z_i-x_i^{ref}\|_Q^2+\|v_i-u_i^{ref}\|_R^2+\|v_i-v_{i-1}\|_{R_\Delta}^2\bigr)+V_f(z_N),
+```
 
 约束：
 
@@ -147,7 +179,9 @@ A7 下个时刻初始tube与旧tube移位兼容；新测量外包络可能更宽
 
 先在线性悬停区域固定K、Lσ，为每个自动机节点寻找增广误差 RPI族 Sbarσ，使所有允许 σ→σ'有
 
-$$M_{\sigma'}\bar S_\sigma\oplus D_{\sigma'}\subseteq\bar S_{\sigma'}.$$
+```math
+M_{\sigma'}\bar S_\sigma\oplus D_{\sigma'}\subseteq\bar S_{\sigma'}.
+```
 
 同时构造名义终端控制 vf(z)，及 z的区域 Zfσ，满足收紧约束和下一步终端包含。非线性余项加入D并在区域内认证。可从候选多面体/zonotope族出发，用支持函数LP和区间余项验证；只把验证成功的内可行区域保留。
 
@@ -161,7 +195,9 @@ $$M_{\sigma'}\bar S_\sigma\oplus D_{\sigma'}\subseteq\bar S_{\sigma'}.$$
 
 证明终端代价下降条件及扰动影响，例如目标形式
 
-$$V_{k+1}-V_k\le-\alpha(\|z_k-x^{ref}\|)+\gamma(\|w_k\|+\|\nu_k\|),$$
+```math
+V_{k+1}-V_k\le-\alpha(\|z_k-x^{ref}\|)+\gamma(\|w_k\|+\|\nu_k\|),
+```
 
 还要联结估计误差、名义误差和实际误差，得到局部/实用ISS或最终有界。持续扰动下不承诺真值跟踪误差趋零。时变轨迹需额外可行参考和终端设计，本轮先避免。
 
