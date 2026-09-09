@@ -1,0 +1,16 @@
+{
+  "model_unchanged": true,
+  "source_sha256": {
+    "src/smf_mpc/joint_envelope.py": "f3fad53c3fd93681b4baf02553543b845ad8aa3d8f1884ea04281c88b36aad4b",
+    "src/smf_mpc/local_envelope.py": "63ecefbea478b019aa45c88ae67d4cc46aaabe74bad5baada111177b56dea25d",
+    "src/smf_mpc/affine_model.py": "67528a7c504ec87fd37259623037c4ec0fd086537e03a086be89058d122d2a50",
+    "src/smf_mpc/neural_model.py": "8c136e2cd048fd61409375f736d83e51a024d151bc2baf918ce2cae528603f49",
+    "src/smf_mpc/residual_envelope.py": "e7734b214eeb84f4c0602fbae065667932053517e90d1f206e037e47b87928de",
+    "scripts/build_joint_envelope.py": "b49f54b11b2df4c4100beeadcf43c9ace8ccdd248d432108b8e2d3c1968a8cca"
+  },
+  "artifact_sha256": {
+    "envelope_leaves.npz": "027585832b4d56b5e273251b1abbdfe2eae8dd30a1c8bea7a3f2cf03ac958a09",
+    "model.json": "b0d9ae4526fe5f76f7df009053c32e3fc8651744545b05bf6519917414122446",
+    "envelope.json": "6f8a3c063a41753411aa75c6a85648121ba9087a3d8460f822de416311d4f186"
+  }
+}

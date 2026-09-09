@@ -4,9 +4,9 @@
 
 本仓库从零建立一条可证伪的研究路线：在物理状态上学习未建模加速度，研究测量更新与丢测模式是否改变模型训练的最优选择，并验证这种变化是否减少集合外包络冗余、改善控制可行性。
 
-**当前已实现物理 zonotope 基线、点预测模型 A 及仿射包络改进，35 项测试通过。正常测量 S0 完成 20 秒，缺测 S1/S2 尚未通过可用性门。**
+**当前已实现物理 zonotope、模型 A、仿射传播、共享变量差函数界及局部包络查询，39 项测试通过。正常测量 S0 完成 20 秒，缺测 S1/S2 尚未通过可用性门。**
 
-最新 [11 仿射包络推导与消融](docs/research/11_affine_enclosure_ablation.md)：保持模型权重不变，新增 27 次配对重放；同时改进包络与余项后，S1/S2 从 0.26–0.30 秒延长到约 1.02–1.38 秒，但仍超域。原始 [10 模型 A 结果](docs/research/10_model_a_training_and_envelope.md) 保留为对照。
+最新 [12 联合界与局部查询](docs/research/12_joint_local_envelope.md)：新增 18 次配对重放，局部查询后 S1 有效前缀延长到 2.98–3.56 秒、S2 到 1.58 秒，但仍超域。上一轮 [11 仿射消融](docs/research/11_affine_enclosure_ablation.md) 和 [10 原模型 A 结果](docs/research/10_model_a_training_and_envelope.md) 保留为对照。
 
 此前 [09 非线性 zonotope 结果](docs/research/09_nonlinear_zonotope_implementation.md) 保留：27 条轨迹完成 20 秒，27,027 次数值成员检查通过；实时门未通过。
 
@@ -66,6 +66,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [11 的后续任务](docs/research/11_affine_enclosure_ablation.md) 实现共享变量差函数界及覆盖完整的局部包络查询。模型 A 尚未达到集合可用性门，暂不推进 B/C/D 正式消融或 MPC。
+按 [12 的后续任务](docs/research/12_joint_local_envelope.md) 诊断相交叶子取界的量化冗余，以分区加密消融判断剩余保守性的来源。模型 A 尚未达到集合可用性门，暂不推进 B/C/D 正式消融或 MPC。
 
 方案版本：2026-09-08；G1 实现更新：2026-09-09。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。

@@ -1,0 +1,35 @@
+{
+  "kind": "CONDITIONAL_ANALYTIC_PARTITION_FLOAT64_NOT_CERTIFIED",
+  "model_sha256": "98b084b43cb6286a6849424d63ace5fd85ab50440cdddb05aff19c9350900ce9",
+  "config_sha256": "b41e774947e01d03b36d28788aba76e9478326dc579bf3d827c3e88afba5f24a",
+  "depth": 14,
+  "leaf_count": 16384,
+  "domain_lower": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -0.5,
+    -1.0,
+    -0.5,
+    -0.5
+  ],
+  "domain_upper": [
+    1.0,
+    1.0,
+    1.0,
+    0.5,
+    1.0,
+    0.5,
+    0.5
+  ],
+  "acceleration_halfwidth": [
+    3.1230670333689403,
+    2.7247110382576514
+  ],
+  "algorithm": "shared_affine_difference_intersection_v1",
+  "worst_leaf_indices": [
+    13807,
+    5551
+  ],
+  "table_sha256": "dab446f6f37e1ab99c2e7db60db0493359d4a1787e3c9acd896d0524426610dd"
+}
