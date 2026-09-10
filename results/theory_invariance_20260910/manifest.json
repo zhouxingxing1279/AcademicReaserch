@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-10",
+  "base_commit": "b1b80b8453dcff0e9850e7f8d7f3d0bca1890a36",
+  "scope": "Analytic attitude regulation and governed-reference tracking certificates; no full six-state invariance or learning superiority claim",
+  "arithmetic": "Python fractions.Fraction; finite rational identities only",
+  "python_version": "3.12.14",
+  "independent_review": "ARS devil-advocate review of invariant sum, braking kernel, torque bounds and reference extension; not a formal proof assistant",
+  "figure_role": "Analytic phase-plane illustration, not containment verification; zero-reference bound shown",
+  "new_controller_implemented": false,
+  "new_training_or_closed_loop_simulation_executed": false,
+  "sha256": {
+    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+    "docs/theory/03_invariant_domain_analysis.md": "33f1741095ebf7a7f1ea31e4720a0b4011336d3810c3fe6035b8bd1553c02599",
+    "verification/check_invariance_theory.py": "e7c68bdd29ba336f4254ce3a7a4f931f82cd84dc109430db92a5a8ecb7d9a604",
+    "verification/plot_attitude_kernel.py": "5a6569079e5e36a278951c29be40bb34494b282727325e1eee1fcaf17b2891cf",
+    "results/theory_invariance_20260910/exact_checks.json": "00ba23898a747aff4c21e904dc626fc8f9bffe6a491ccd260636e24543381da2",
+    "results/theory_invariance_20260910/attitude_kernel.svg": "7a233982a819cc8744395654ce54f17b4c9e377cf1a4c1f47e3efb8ae56b317a"
+  }
+}

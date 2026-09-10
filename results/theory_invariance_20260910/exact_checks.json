@@ -1,0 +1,64 @@
+{
+  "status": "EXACT_RATIONAL_ATTITUDE_SUBSYSTEM_IDENTITIES_PASSED",
+  "scope": "Written infinite-horizon attitude proof plus exact finite arithmetic; not full-system certification",
+  "control_gains": [
+    "8/25",
+    "4/25"
+  ],
+  "eigenvalue": "23/25",
+  "N_squared_zero": true,
+  "torque_noise_halfwidth": "2/625",
+  "initial_orbit_hull_box": [
+    "1/80",
+    "1/25"
+  ],
+  "disturbance_invariant_sum_box": [
+    "1/100",
+    "2/25"
+  ],
+  "invariant_set_outer_box": [
+    "9/400",
+    "3/25"
+  ],
+  "torque_upper_bound": "37/1250",
+  "torque_limit": "2/25",
+  "attitude_bound_margin": "171/400",
+  "rate_bound_margin": "47/25",
+  "torque_margin": "63/1250",
+  "reference_tracking": {
+    "reference_limits_angle_rate_torque": [
+      "171/400",
+      "47/25",
+      "63/1250"
+    ],
+    "reference_max_deceleration": "63/25",
+    "maximum_braking_facet_index": 38,
+    "nonzero_reference_witness": {
+      "mu_magnitude": "1/40",
+      "ticks_per_phase": 20,
+      "duration_s": "4/5",
+      "final_angle": "1/5",
+      "final_rate": "0",
+      "peak_rate": "1/2",
+      "actual_angle_absolute_bound": "89/400",
+      "actual_rate_absolute_bound": "31/50",
+      "actual_torque_absolute_bound": "273/5000"
+    }
+  },
+  "unavoidable_exit_counterexample": {
+    "initial_phi": "0",
+    "initial_omega": "2",
+    "stopping_displacement": "13/25",
+    "angle_at_16": "56/125",
+    "angle_at_17": "289/625",
+    "limit": "9/20"
+  },
+  "independent_box_thrust_conflict": {
+    "lower_necessary": "47/5",
+    "upper_necessary": "1931/245"
+  },
+  "full_six_state_invariance_proved": false,
+  "neural_superiority_proved": false,
+  "config_sha256": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+  "checker_sha256": "e7c68bdd29ba336f4254ce3a7a4f931f82cd84dc109430db92a5a8ecb7d9a604"
+}

@@ -6,7 +6,11 @@
 
 **当前阶段已调整为理论优先设计。新的控制实现、分区加密和训练暂停，先完成域内保持与优势条件的证明。**
 
-最新 [理论设计](docs/theory/01_proof_first_design.md) 给出窗口误差显式界、相对物理基线的集合包含保证、严格改进见证，以及输出反馈 MPC 的证明接口；[审查与准入条件](docs/theory/02_review_and_gates.md) 明确尚未通过的不变族、学习独立优势与控制闭合条件。
+最新 [不变域分析与姿态证书](docs/theory/03_invariant_domain_analysis.md) 证明固定厚盒及原任务域的结构性限制，并构造包含当前初始姿态集合的输出反馈鲁棒不变集：角度、角速度、扭矩的已证上界分别为 0.0225 rad、0.12 rad/s、0.0296 N·m。结论仅适用于文中的固定零姿态反馈及精确离散角模型；六维系统域内保持仍未证明。
+
+该文 3.5 进一步证明受约束时变倾角参考的跟踪不变族，给出从零参考到 0.2 rad 的解析可行见证。参考生成规则、力矩收紧与初始误差条件必须同时满足，尚未证明它与平移控制需求相容。
+
+[理论设计](docs/theory/01_proof_first_design.md) 给出窗口误差显式界、相对物理基线的集合包含保证、严格改进见证，以及输出反馈 MPC 的证明接口；[审查与准入条件](docs/theory/02_review_and_gates.md) 明确尚未通过的不变族、学习独立优势与控制闭合条件。
 
 历史实现保留：模型 A、仿射传播、联合差函数界及局部包络查询；39 项历史测试通过，正常测量完成 20 秒，缺测仍超域。详见 [12](docs/research/12_joint_local_envelope.md)。这些结果不构成新理论的证明。
 
@@ -28,6 +32,14 @@
 默认物理参数、归一化、传感器时序和实验种子见 [planar_baseline.json](configs/planar_baseline.json)。其中控制增益与终端证书留空，表示后续需要求解的对象。
 
 ### 现在可以运行什么
+
+本轮姿态证明的有限有理数恒等式、约束余量和反例可用 Python 标准库精确核对：
+
+```bash
+python verification/check_invariance_theory.py --output /tmp/invariance_exact_checks.json
+```
+
+输出路径须不存在。[已归档结果](results/theory_invariance_20260910/exact_checks.json) 含脚本和配置哈希。无穷时域论证见理论文档，脚本不是自动定理证明器。以下命令属于历史实现复现，不代表已获新的控制实施准入。
 
 ```bash
 python -m venv .venv
@@ -68,6 +80,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [理论准入表](docs/theory/02_review_and_gates.md) 完成平面系统信息状态不变族的可解性分析，并核查学习提议的独立优势条件。未通过这些条件，不启动新的控制实现或训练消融。
+按 [理论准入表](docs/theory/02_review_and_gates.md)，基于已证时变倾角跟踪族，构造共享推力与参考动作下的平移—姿态耦合前驱，覆盖位置缺测和启动阶段。六维不变性与学习独立优势尚未通过，不启动新的控制实现或训练消融。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。

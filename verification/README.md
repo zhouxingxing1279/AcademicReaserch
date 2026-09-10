@@ -1,6 +1,26 @@
-# 公式与边界条件的有限数值检查
+# 理论核对与历史数值检查
 
-本目录只提供推进实现前的代数 smoke checks。**没有实现闭环 MPC，没有产生控制性能或实机结果，也没有完成任何安全证明。** 固定随机种子为 `20260908`；同一数值环境下可重复，跨 BLAS/平台允许浮点尾数差异。
+本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
+
+## 姿态子系统证明的精确核对
+
+[check_invariance_theory.py](check_invariance_theory.py) 使用 Python 标准库 `fractions.Fraction`，读取当前配置并核对姿态闭环矩阵、幂零恒等式、级数外包界、输入余量、时变参考收紧界、非零参考见证与不可恢复反例。
+
+```bash
+python verification/check_invariance_theory.py --output /tmp/invariance_exact_checks.json
+```
+
+输出文件须不存在。无穷时域与集合包含的证明见 [理论 03](../docs/theory/03_invariant_domain_analysis.md)，脚本仅复核有限算术，不能自动证明全系统安全。归档结果见 [exact_checks.json](../results/theory_invariance_20260910/exact_checks.json)。
+
+[plot_attitude_kernel.py](plot_attitude_kernel.py) 需要 NumPy、Matplotlib；按解析公式绘制示意图，浮点绘图不用于验证包含关系：
+
+```bash
+python verification/plot_attitude_kernel.py --output /tmp/attitude_kernel.svg
+```
+
+## 历史浮点检查的范围
+
+下文仅描述 `run_checks.py` 的代数 smoke checks，没有由该脚本完成安全证明。固定随机种子为 `20260908`；同一数值环境下可重复，跨 BLAS/平台允许浮点尾数差异。
 
 ## 运行
 
@@ -30,6 +50,8 @@ python verification/run_checks.py --output verification/algebra_checks.json
 观测器检查约定为：先以实际输入预测 `hat x^- = A hat x + B u`，再使用 **下一时刻** 测量 `y[k+1]` 校正。控制量由当前后验估计给出。改变更新顺序或时间索引时必须重新推导，不能沿用公式。
 
 ## 后续验证门槛
+
+以下为历史实现顺序；当前推进顺序以 [理论准入表](../docs/theory/02_review_and_gates.md) 为准，完整不变性及学习独立优势未通过前，不恢复新的训练或控制实现。
 
 1. 主文档中的符号推导和假设先经人工/独立复核；本脚本不替代推导。
 2. 实现带单位约束、真实测量时序的滤波器和控制器；加入非悬停线性化及数值积分收敛验证。
