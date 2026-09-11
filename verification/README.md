@@ -2,6 +2,24 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 六维有限时域证明的精确核对
+
+[check_coupled_theory.py](check_coupled_theory.py) 使用 Python 标准库 Fraction，核对 [理论 04](../docs/theory/04_coupled_predecessor_and_finite_horizon.md) 的参考多项式、41 个先验时刻的六维包络、域内余量、结构比较和终端反例。配置与解析基准公式的文件哈希必须匹配；它只读取公式文件哈希，不导入真值生成器。
+
+```bash
+python verification/check_coupled_theory.py --output /tmp/coupled_exact_checks.json
+```
+
+输出文件须不存在。该脚本复用下述姿态代数检查，不能只把六维数值表从旧报告复制过来。完整归档见 [exact_checks.json](../results/theory_coupling_20260910/exact_checks.json)。结论覆盖 0..40 tick，尚未证明六维无限时域不变性或学习优势。
+
+安装有 NumPy/Matplotlib 的原科学绘图环境可运行：
+
+```bash
+python verification/plot_coupled_bounds.py --output /tmp/finite_horizon_bounds.svg
+```
+
+图中显示解析集合上界，不是真实状态轨迹；浮点绘图不参与证书核对。
+
 ## 姿态子系统证明的精确核对
 
 [check_invariance_theory.py](check_invariance_theory.py) 使用 Python 标准库 `fractions.Fraction`，读取当前配置并核对姿态闭环矩阵、幂零恒等式、级数外包界、输入余量、时变参考收紧界、非零参考见证与不可恢复反例。

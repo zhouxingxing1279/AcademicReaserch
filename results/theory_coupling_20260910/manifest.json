@@ -1,0 +1,28 @@
+{
+  "analysis_date": "2026-09-10",
+  "review_completed_date": "2026-09-11",
+  "base_commit": "632620d03e4cfe54ef158ccbb296487414013639",
+  "scope": "One-step action convexity; robust finite-horizon six-state enclosure; offline abstraction comparison; invalid terminal-policy counterexample",
+  "arithmetic": "Python fractions.Fraction; no sampled plant trajectories",
+  "python_version": "3.12.14",
+  "independent_review": "ARS devil-advocate review of formulas, quantifiers, information fairness, and finite versus infinite horizon",
+  "final_review_corrections": [
+    "Include C_i*mu in each certified face upper bound",
+    "Require containment of all initial compatible information states, not a single observed I_0",
+    "Distinguish reference input vector b_c from translational intercept vector b_v"
+  ],
+  "new_controller_implemented": false,
+  "new_training_or_closed_loop_simulation_executed": false,
+  "infinite_horizon_six_state_invariance_proved": false,
+  "neural_superiority_proved": false,
+  "sha256": {
+    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "docs/theory/04_coupled_predecessor_and_finite_horizon.md": "525f49764591d07109d14ef3a576b2eeba7cb73f77b4905d5d4a437db3594b51",
+    "verification/check_invariance_theory.py": "e7c68bdd29ba336f4254ce3a7a4f931f82cd84dc109430db92a5a8ecb7d9a604",
+    "verification/check_coupled_theory.py": "55ee09554db1d322b7c3627df6bb63a307da19e2ab2ac7c4e841ee1098bf15ce",
+    "verification/plot_coupled_bounds.py": "f37cf95de43e86f1cc4c9dc9621ca0266019878efae4a5b3dbf1578f6fc4d0f0",
+    "results/theory_coupling_20260910/exact_checks.json": "05220a01c5e88aba78f5efd8edd68f21acb9534223b96b8bfe00c6bd4a104e32",
+    "results/theory_coupling_20260910/finite_horizon_bounds.svg": "d0ea0e9fd7c67470a9fa07d8f31bc79c80e2041796f529be49bf5cee3394db28"
+  }
+}
