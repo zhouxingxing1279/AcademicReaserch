@@ -2,6 +2,17 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 有限姿态多面体证书的精确核对
+
+[check_terminal_polytope.py](check_terminal_polytope.py) 使用标准库 Fraction 核对 [理论 05](../docs/theory/05_finite_terminal_polytope.md)：坐标变换、四面非负乘子、初始包含、参考严格见证和改进后的 40 步界。错误乘子与过小矩形必须被拒绝。
+
+```bash
+python verification/check_terminal_polytope.py --output /tmp/terminal_polytope_certificate.json
+python verification/plot_terminal_polytope.py --output /tmp/polytope_and_reference.svg
+```
+
+输出路径须不存在。绘图另需 NumPy/Matplotlib，浮点图形不参与包含验证。归档见 [certificate.json](../results/theory_terminal_polytope_20260911/certificate.json) 与 [manifest.json](../results/theory_terminal_polytope_20260911/manifest.json)。通用 `exact_inclusion` 只检查给定仿射映射的充分包含条件，不自动验证真实非线性外包、控制因果性或六维终端闭合。类内最小性及核包含仍需结合正文证明。
+
 ## 六维有限时域证明的精确核对
 
 [check_coupled_theory.py](check_coupled_theory.py) 使用 Python 标准库 Fraction，核对 [理论 04](../docs/theory/04_coupled_predecessor_and_finite_horizon.md) 的参考多项式、41 个先验时刻的六维包络、域内余量、结构比较和终端反例。配置与解析基准公式的文件哈希必须匹配；它只读取公式文件哈希，不导入真值生成器。

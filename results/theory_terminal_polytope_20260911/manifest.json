@@ -1,0 +1,15 @@
+{
+  "derived_on": "2026-09-11",
+  "reverified_on": "2026-09-13",
+  "base_commit": "1a196c4f95bf4dba8908bddfe8c0a3678859bc7b",
+  "verification": "Exact Fraction certificate reproduced identically; negative controls included. Plot visually inspected.",
+  "sha256": {
+    "docs/theory/05_finite_terminal_polytope.md": "3970675611c87230d40410d7f5f59758e27948295d1697df880a36fa669fd870",
+    "verification/check_terminal_polytope.py": "87a5eff5550963c1ca004053ff27a786d3e149ddcc72815c61740447f130b186",
+    "verification/plot_terminal_polytope.py": "f9787a8798d1de2b617a910339513a97c2ef6cdf69a20ac2d8b920dcf7b43327",
+    "results/theory_terminal_polytope_20260911/certificate.json": "96eae137e9bbc59ae8de052dba35b68c18d70e0646ecf7725687397d9d6ed2ff",
+    "results/theory_terminal_polytope_20260911/polytope_and_reference.svg": "30fca83798c6d9eaf1467d63b24e6b6cc42883cb10d1ee10a8fdfc49c1243622"
+  },
+  "scope": "Finite angular RPI certificate, fixed-transform rectangle class minimality, strict expansion of reference certificates; not full six-state terminal invariance or neural superiority.",
+  "review": "Independent AI mathematical review of angular proof and augmented sufficient-condition interface; not formal theorem proving."
+}
