@@ -2,6 +2,16 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 因果增广模型的精确核对
+
+[check_causal_model.py](check_causal_model.py) 生成 [06](../docs/theory/06_causal_augmented_model.md) 的成功/缺测两组 14 维有理数矩阵，核对全部线性误差系数、输入对未知真值的零直接依赖、遗漏校正负对照和最长 15 步包间隔。
+
+```bash
+python verification/check_causal_model.py --output /tmp/causal_matrices.json
+```
+
+输出路径须不存在。仅需标准库；复用前序证书核对。结果见 [matrices.json](../results/theory_causal_model_20260913/matrices.json)。解析余项界须结合正文证明；没有验证候选增益稳定性、全系统不变性或学习优势。
+
 ## 有限姿态多面体证书的精确核对
 
 [check_terminal_polytope.py](check_terminal_polytope.py) 使用标准库 Fraction 核对 [理论 05](../docs/theory/05_finite_terminal_polytope.md)：坐标变换、四面非负乘子、初始包含、参考严格见证和改进后的 40 步界。错误乘子与过小矩形必须被拒绝。

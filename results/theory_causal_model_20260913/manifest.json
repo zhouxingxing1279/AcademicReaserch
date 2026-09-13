@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-13",
+  "base_commit": "af0a613b7d855876c49a898d3ba8e56efc0a0f9f",
+  "sha256": {
+    "docs/theory/06_causal_augmented_model.md": "5fc59908e4ceb89980b8479f48177d0f38c22b08fa00ab2ec8b5da16fb570794",
+    "verification/check_causal_model.py": "df75f283190110d37da03d47efff7c1a31fbc106598909e8b54cdbc4bb65767b",
+    "results/theory_causal_model_20260913/matrices.json": "6f9900a40131940c3245b9075df13523fddb89545ff583c4cdfa34a155ae2d79"
+  },
+  "validation": "Exact rational coefficient identities, causality columns, negative control, finite mode paths; independent AI mathematical review.",
+  "scope": "Candidate augmented model only; gains, full invariance and neural advantage remain uncertified."
+}
