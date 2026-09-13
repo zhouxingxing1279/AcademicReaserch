@@ -6,7 +6,9 @@
 
 **当前阶段已调整为理论优先设计。新的控制实现、分区加密和训练暂停，先完成域内保持与优势条件的证明。**
 
-最新 [因果增广模型与非线性外包](docs/theory/06_causal_augmented_model.md) 明确了八维控制器内部状态、14 维增广后继、15 个观测模式与 17 条允许边，并归档成功/缺测两组有理数矩阵。全域余项具有解析界；候选增益仍待不变集证书验证，不代表已通过六维安全门。
+最新 [终端候选否证与必要条件](docs/theory/07_terminal_candidate_obstruction.md) 证明 06 的固定高度反馈与独立扰动盒组合无法保持原高度约束：解析平均高度与安全界矛盾，且有第 88 步越界的精确有理数见证。停止为该已否定组合搜索终端证书；先按一般高度增益必要条件修改候选结构。这不否定真实气动模型或其他反馈。
+
+[因果增广模型与非线性外包](docs/theory/06_causal_augmented_model.md) 明确了八维控制器内部状态、14 维增广后继、15 个观测模式与 17 条允许边，并归档成功/缺测两组有理数矩阵。全域余项具有解析界；候选增益仍待不变集证书验证，不代表已通过六维安全门。
 
 [有限姿态多面体与终端闭合接口](docs/theory/05_finite_terminal_polytope.md) 给出四面鲁棒不变集，并证明它在固定坐标变换的对称矩形类中最小。同一模型、噪声和反馈增益下，力矩校正界从 0.0296 降至 0.0128 N·m，参考力矩预算从 0.0504 增至 0.0672 N·m；参考核与动作证书均有严格扩张见证。这是证书保守性的改进，尚不证明实际控制性能或神经网络优势。六维终端闭合的有限乘子接口已写明，但完整实例尚未求出。
 
@@ -48,6 +50,7 @@ python verification/check_invariance_theory.py --output /tmp/invariance_exact_ch
 python verification/check_coupled_theory.py --output /tmp/coupled_exact_checks.json
 python verification/check_terminal_polytope.py --output /tmp/terminal_polytope_certificate.json
 python verification/check_causal_model.py --output /tmp/causal_matrices.json
+python verification/check_terminal_obstruction.py --output /tmp/terminal_counterexample.json
 ```
 
 输出路径须不存在。[姿态核对](results/theory_invariance_20260910/exact_checks.json) 与 [六维有限时域核对](results/theory_coupling_20260910/exact_checks.json) 均含脚本和配置哈希。论证与适用时域见理论文档，脚本不是自动定理证明器。以下命令属于历史实现复现，不代表已获新的控制实施准入。
@@ -91,6 +94,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [理论准入表](docs/theory/02_review_and_gates.md)，基于 [06 的明确候选映射](docs/theory/06_causal_augmented_model.md)，求解并验证具有平移反馈的终端信息状态族及逐模式非负乘子证书，证明原初始信息状态包含以及全部观测/缺测后继闭合。不能把 40 步先验管重复拼接成无限时域结论。完整不变性与学习独立优势尚未通过，不启动新的控制实现或训练消融。
+按 [理论准入表](docs/theory/02_review_and_gates.md)，先依据 [07 的必要条件与否证范围](docs/theory/07_terminal_candidate_obstruction.md) 修订候选反馈或外包结构，再求解并验证终端信息状态族及逐模式非负乘子证书，证明原初始信息状态包含以及全部观测/缺测后继闭合。不能把 40 步先验管重复拼接成无限时域结论。完整不变性与学习独立优势尚未通过，不启动新的控制实现或训练消融。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。

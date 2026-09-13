@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-13",
+  "base_commit": "90f1f111dfedc22111db4465666e4e0849b454ed",
+  "sha256": {
+    "docs/theory/07_terminal_candidate_obstruction.md": "f2d334d5c66aad4830dc5591c69c7eb1d4e4bb557041ad85a2b07cbb364d3ec9",
+    "verification/check_terminal_obstruction.py": "c6711dc96d48953d5542702f31463ca837fef5502837862a7f1f5e95c31ab3cb",
+    "results/theory_obstruction_20260913/counterexample.json": "d72c3944a3849427b50f457bb316bf88b56d9681f1e1390a58783c8b44974d7c"
+  },
+  "validation": "Exact rational counterexample and periodic error identities reproduced; independent AI mathematical review passed.",
+  "scope": "Rejects fixed candidate for independent enclosure; does not establish aerodynamic realizability or impossibility for other controllers."
+}

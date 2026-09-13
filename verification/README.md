@@ -2,6 +2,16 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 终端候选否证的精确核对
+
+[check_terminal_obstruction.py](check_terminal_obstruction.py) 核对 [07](../docs/theory/07_terminal_candidate_obstruction.md) 的周期误差均值、增益必要条件，以及独立盒模型第 88 步首次越界的有理数见证。它复用 06 映射，不调用气动真值或运行经验控制试验。
+
+```bash
+python verification/check_terminal_obstruction.py --output /tmp/terminal_counterexample.json
+```
+
+输出路径须不存在。归档见 [counterexample.json](../results/theory_obstruction_20260913/counterexample.json)。结论只否定当前候选与独立盒的组合，不能推断原解析气动世界可实现该反例。
+
 ## 因果增广模型的精确核对
 
 [check_causal_model.py](check_causal_model.py) 生成 [06](../docs/theory/06_causal_augmented_model.md) 的成功/缺测两组 14 维有理数矩阵，核对全部线性误差系数、输入对未知真值的零直接依赖、遗漏校正负对照和最长 15 步包间隔。
