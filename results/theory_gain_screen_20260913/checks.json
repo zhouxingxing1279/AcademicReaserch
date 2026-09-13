@@ -1,0 +1,62 @@
+{
+  "status": "EXACT_GAIN_SCREEN_AND_OBSERVER_BOUND_PASSED",
+  "source_sha256": "4ed2408e67682394e14564543af0eeba0fcdc8950dd465539a7f845175ee52a9",
+  "candidate": {
+    "kp": "5",
+    "kd": "3",
+    "vertical_observer_gain": "9/2"
+  },
+  "D": "572143/160000",
+  "epsilon": "1/50",
+  "rows": [
+    {
+      "L": 5,
+      "a": "11/20",
+      "b": "41/500",
+      "individual_R": "37857863/36000000",
+      "invariance_slack": "0",
+      "constant_disturbance_mean_height": "2197601263/1800000000"
+    },
+    {
+      "L": 10,
+      "a": "1/10",
+      "b": "119/1000",
+      "individual_R": "96885017/144000000",
+      "invariance_slack": "10909287/32000000",
+      "constant_disturbance_mean_height": "6008073643/4800000000"
+    },
+    {
+      "L": 15,
+      "a": "7/20",
+      "b": "657/5000",
+      "individual_R": "519897951/520000000",
+      "invariance_slack": "242440631/7200000000",
+      "constant_disturbance_mean_height": "143607893/112500000"
+    }
+  ],
+  "old_R": "10637859/8000000",
+  "new_R": "37857863/36000000",
+  "old_R_display": 1.329732375,
+  "new_R_display": 1.0516073055555555,
+  "startup": [
+    {
+      "first_packet_tick": 5,
+      "velocity_error_bound": "42257863/80000000"
+    },
+    {
+      "first_packet_tick": 10,
+      "velocity_error_bound": "98485017/160000000"
+    }
+  ],
+  "jury_slacks": [
+    "1/500",
+    "29/500",
+    "1941/500"
+  ],
+  "lifted_error_coefficients_checked": true,
+  "negative_control_signed_sum_rejected": true,
+  "observer_bound_is_global_minimum": false,
+  "hard_constraints_certified": false,
+  "full_six_state_invariance_certified": false,
+  "neural_advantage_proved": false
+}

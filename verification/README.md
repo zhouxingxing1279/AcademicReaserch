@@ -2,6 +2,16 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 新增益筛选与任意缺测观测界
+
+[check_gain_screen.py](check_gain_screen.py) 核对 [08](../docs/theory/08_gain_screen_and_switched_observer.md) 的提升误差映射全部系数、任意间隔统一界、启动期、恒定扰动必要条件与 Jury 余量，并拒绝遗漏绝对值的负对照。
+
+```bash
+python verification/check_gain_screen.py --output /tmp/gain_screen.json
+```
+
+输出路径须不存在。结果见 [checks.json](../results/theory_gain_screen_20260913/checks.json)。没有原硬约束或六维终端安全认证，不改写 06 的旧矩阵。
+
 ## 终端候选否证的精确核对
 
 [check_terminal_obstruction.py](check_terminal_obstruction.py) 核对 [07](../docs/theory/07_terminal_candidate_obstruction.md) 的周期误差均值、增益必要条件，以及独立盒模型第 88 步首次越界的有理数见证。它复用 06 映射，不调用气动真值或运行经验控制试验。

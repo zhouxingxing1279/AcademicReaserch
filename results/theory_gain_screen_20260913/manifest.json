@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-13",
+  "base_commit": "27eb123e3acd2c93850ad21a0224865e5aceebf9",
+  "sha256": {
+    "docs/theory/08_gain_screen_and_switched_observer.md": "aa8b5ac65796886c9465486e50265234f6dfd0bd1547bd511535e64f7b2c6dfa",
+    "verification/check_gain_screen.py": "4ed2408e67682394e14564543af0eeba0fcdc8950dd465539a7f845175ee52a9",
+    "results/theory_gain_screen_20260913/checks.json": "b6d87fd282181831be5c1601b215ecb737f6e9019c3d19240aa23ffb67cc4651"
+  },
+  "validation": "Fraction coefficient identities, scalar containment, startup, gain screen and Jury checks reproduced; independent AI review.",
+  "scope": "Uniform observer bound and unconstrained vertical boundedness; no hard constraint or full-system certificate."
+}
