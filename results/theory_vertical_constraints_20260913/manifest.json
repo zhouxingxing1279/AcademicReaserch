@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-13",
+  "base_commit": "2f42721ad8a9beba67b8872737cfe75f80078714",
+  "sha256": {
+    "docs/theory/09_vertical_input_certificate.md": "27a2d9a5fef264820b0e7d3aab92b9aa6b593579a9526e3268c928ea95f053dc",
+    "verification/check_vertical_hard_constraints.py": "38d3f4d56d4d6b42c71933c4b8d50dad8e2c356a092aa2090d521feb33ec7e45",
+    "results/theory_vertical_constraints_20260913/checks.json": "75b6ee9b446ef324bb1326a74160e04391a7f0ffbc4377b52ec5f15bd34c930f"
+  },
+  "validation": "Exact correlated reachable supports, attaining primitive witness and common-input error coefficient identities; independent AI review and exact checker pass.",
+  "scope": "Rejects unsaturated vertical candidate for independent enclosure. Saturated state safety and aerodynamic realizability remain unproved."
+}

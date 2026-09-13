@@ -2,6 +2,16 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 竖直硬约束的精确可达支持
+
+[check_vertical_hard_constraints.py](check_vertical_hard_constraints.py) 核对 [09](../docs/theory/09_vertical_input_certificate.md) 的完整生成元传播、固定序列第 30 步首次输入支持越限及达到该值的 39 个原始参数；另核对任意实际共同输入从误差方程消去。
+
+```bash
+python verification/check_vertical_hard_constraints.py --output /tmp/vertical_constraints.json
+```
+
+输出路径须不存在。归档见 [checks.json](../results/theory_vertical_constraints_20260913/checks.json)。没有认证受限输入下的状态安全，也没有证明反例可由原气动风场实现。
+
 ## 新增益筛选与任意缺测观测界
 
 [check_gain_screen.py](check_gain_screen.py) 核对 [08](../docs/theory/08_gain_screen_and_switched_observer.md) 的提升误差映射全部系数、任意间隔统一界、启动期、恒定扰动必要条件与 Jury 余量，并拒绝遗漏绝对值的负对照。

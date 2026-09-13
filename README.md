@@ -6,7 +6,9 @@
 
 **当前阶段已调整为理论优先设计。新的控制实现、分区加密和训练暂停，先完成域内保持与优势条件的证明。**
 
-最新 [增益筛选与切换观测误差界](docs/theory/08_gain_screen_and_switched_observer.md) 给出新竖直候选 kp=5、kd=3、观测速度增益 4.5：通过完整外包的恒定扰动平均必要条件，并证明任意允许包间隔切换的统一观测误差界。同一合同下，成功包速度误差界由 1.3297 降至 1.0516 m/s。仅认证误差界与无约束竖直有界性，原硬约束及六维终端仍未通过。
+最新 [竖直硬约束核查](docs/theory/09_vertical_input_certificate.md) 对 08 新候选给出准确可达支持证书：每 5 步成功测量时，第 30 步输入偏移可达 5.347934 N，超过原 4.905 N 限制。未限幅候选因此被否定；同时证明实际受限输入进入观测器时，08 的观测误差界仍保留。下一步转向带限幅分支或共同动作区间的竖直不变族，不再为此未限幅候选搜索安全证书。
+
+[增益筛选与切换观测误差界](docs/theory/08_gain_screen_and_switched_observer.md) 给出新竖直候选 kp=5、kd=3、观测速度增益 4.5：通过完整外包的恒定扰动平均必要条件，并证明任意允许包间隔切换的统一观测误差界。同一合同下，成功包速度误差界由 1.3297 降至 1.0516 m/s。仅认证误差界与无约束竖直有界性，原硬约束及六维终端仍未通过。
 
 [终端候选否证与必要条件](docs/theory/07_terminal_candidate_obstruction.md) 证明 06 的固定高度反馈与独立扰动盒组合无法保持原高度约束：解析平均高度与安全界矛盾，且有第 88 步越界的精确有理数见证。停止为该已否定组合搜索终端证书；先按一般高度增益必要条件修改候选结构。这不否定真实气动模型或其他反馈。
 
@@ -54,6 +56,7 @@ python verification/check_terminal_polytope.py --output /tmp/terminal_polytope_c
 python verification/check_causal_model.py --output /tmp/causal_matrices.json
 python verification/check_terminal_obstruction.py --output /tmp/terminal_counterexample.json
 python verification/check_gain_screen.py --output /tmp/gain_screen.json
+python verification/check_vertical_hard_constraints.py --output /tmp/vertical_constraints.json
 ```
 
 输出路径须不存在。[姿态核对](results/theory_invariance_20260910/exact_checks.json) 与 [六维有限时域核对](results/theory_coupling_20260910/exact_checks.json) 均含脚本和配置哈希。论证与适用时域见理论文档，脚本不是自动定理证明器。以下命令属于历史实现复现，不代表已获新的控制实施准入。
@@ -97,6 +100,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [理论准入表](docs/theory/02_review_and_gates.md)，基于 [08 的已筛选竖直候选](docs/theory/08_gain_screen_and_switched_observer.md)，先验证竖直位置、速度、估计误差及当前噪声联合集合的高度/速度/推力硬约束，再合并完整六维终端信息状态族，证明原初始信息状态包含以及全部观测/缺测后继闭合。不能把 40 步先验管重复拼接成无限时域结论。完整不变性与学习独立优势尚未通过，不启动新的控制实现或训练消融。
+按 [理论准入表](docs/theory/02_review_and_gates.md)，依据 [09 的受限输入接口](docs/theory/09_vertical_input_certificate.md)，构造含限幅分支或共同动作区间的竖直信息状态不变族，证明高度、速度及初始入口，再合并完整六维终端信息状态族，证明原初始信息状态包含以及全部观测/缺测后继闭合。不能把 40 步先验管重复拼接成无限时域结论。完整不变性与学习独立优势尚未通过，不启动新的控制实现或训练消融。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
