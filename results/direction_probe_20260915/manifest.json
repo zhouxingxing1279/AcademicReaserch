@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "base_commit": "d550b5049a4fcafaafcedf8fe1e6ac4c4b93c0f3",
+  "sha256": {
+    "README.md": "9f83a26db0a60aa0ceb41361a4413b80c2e29246f6377c8879d2a18bd9ddc6ba",
+    "docs/research_framework.md": "63bf478b7670509cc8e4bf05abcf7b9266e84f1e0e4df6c91537683b099ee22b",
+    "docs/learning/01_direction_selection_probe.md": "5d23b0a0c14a53f574984d91fe69bd71e66d5e4103562b45a9bdc91a40b81187",
+    "verification/README.md": "69d5a5a2c5e0c176b9ef3def543aa4a71fe12ad10328c23737f93bf368fe83da",
+    "verification/check_direction_selection.py": "f4bf329b3609a2faa172b1e1b2dd0b4046b940a42b9953434b7c5688d6895d03",
+    "results/direction_probe_20260915/checks.json": "26f37729c950a63b6e105c1fefbe7879bf4d69afeb94935a7dc1bf63b61665c6"
+  },
+  "validation": "8 rational geometry probes; independent mathematical review; no trained model or total-time benchmark.",
+  "scope": "A strong single-target baseline reaches the support lower bound. Multi-target learning contribution remains unverified."
+}

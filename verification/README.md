@@ -127,3 +127,13 @@ python verification/run_checks.py --output verification/algebra_checks.json
 3. 单独建立每个训练模型的残差包络、工作域覆盖条件，以及状态/输入误差处理。
 4. 按主文档的 A/B/C/D 对照开展完整闭环实验，日志与本目录代数检查结果分开。
 5. 在满足安全与模型有效性条件前，不从有限仿真声称确定性约束保证或实飞可用。
+
+## 学习方向选择的机制核查
+
+[check_direction_selection.py](check_direction_selection.py) 使用 Fraction 核对八个二维集合的四类单查询规则、可靠包含与冗余负对照，见 [报告](../docs/learning/01_direction_selection_probe.md)。这是无量纲几何探针，不是网络或四旋翼性能实验。
+
+```bash
+python verification/check_direction_selection.py --output /tmp/direction_probe.json
+```
+
+输出须不存在。结果见 [checks.json](../results/direction_probe_20260915/checks.json)。
