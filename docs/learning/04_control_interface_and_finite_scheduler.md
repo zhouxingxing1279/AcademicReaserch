@@ -2,7 +2,7 @@
 
 日期：2026-09-16。承接 [03 主方案](03_selected_plan.md)。本文件完成当前唯一交付物：把“有限预算验证调度”接到控制器实际使用的估计误差量上，并给出一个可精确枚举的序列决策实例。
 
-**状态结论：控制相关集合接口已闭合一层，序列决策价值已有精确见证；但 Köhler–Müller–Allgöwer 的闭环定理尚不能直接实例化到当前间歇位置测量四旋翼。下一步不是训练 RL，而是先处理观测误差递推与控制基础的兼容性。**
+**状态结论：控制相关集合接口已闭合一层，序列决策价值已有精确见证。后续 [05 C1](05_intermittent_error_interface.md) 已证明固定 metric 直接套用失败，但 mode-dependent metric 可在全部允许丢包模式上构造统一标量递推。当前仍不能直接宣称 Köhler–Müller–Allgöwer 闭环定理已实例化；下一步是 C2 的 mode-dependent nestedness/constraint-tightening 适配。**
 
 ## 1. 本轮消除的证明缺口
 
