@@ -1,6 +1,6 @@
 # 研究总框架：学习辅助集员估计与约束预测控制
 
-**主方案已确定（2026-09-15）：[强化学习调度集合验证的输出反馈 MPC](learning/03_selected_plan.md)。[04 控制接口与有限调度环境规范](learning/04_control_interface_and_finite_scheduler.md) 已完成：学习位置固定为有限预算验证任务调度，候选方向已与控制器读取的标量估计误差界对齐，并已有精确序列价值见证。当前唯一下一任务是 C1：间歇测量误差接口兼容性核查；尚未证明 Double DQN 独立优势或完整闭环安全。**
+**主方案已确定（2026-09-15）：[强化学习调度集合验证的输出反馈 MPC](learning/03_selected_plan.md)。[04 控制接口](learning/04_control_interface_and_finite_scheduler.md) 与 [05 C1](learning/05_intermittent_error_interface.md) 已完成：学习位置固定为有限预算验证任务调度，候选方向与控制器标量估计误差界对齐；间歇测量下已构造覆盖 15 模式的 mode-dependent quadratic metric 与统一鲁棒标量递推。当前唯一下一任务是 C2：mode-dependent 估计集合到 MPC nestedness/constraint tightening 的适配；尚未证明 Double DQN 独立优势或完整闭环安全。**
 
 **方法选型阶段已经收敛：首版固定离散序列调度，规模化算法候选为带动作屏蔽的 Double DQN。是否真正进入训练仍取决于控制接口兼容性、预算瓶颈以及相对强有限前瞻基线的可改善空间。见 [方法选型](learning/02_learning_paradigm.md) 与 [04](learning/04_control_interface_and_finite_scheduler.md)。**
 
@@ -125,7 +125,7 @@ B2 对 B0 的改进可能完全来自额外验证预算；只有 B2 对具有相
 | F4 证明与实现准入 | 实际安全/可靠性证书与关键比较条件满足所声明范围 | 缺少条件时保留条件结论，不宣称完整闭环已证 |
 | F5 实现与实验 | 锁定协议后实现、复现、比较与核查理论适用边界 | 失败按对应合同定位，避免同时改多个模块 |
 
-**下一次唯一活动任务：C1 间歇测量误差接口兼容性核查。** 以现有 15 模式、17 条边及最大 15 tick 成功包间隔为输入，构造或否证 mode-dependent / lifted 的可靠标量误差递推，并检查其是否具有 MPC 未来传播所需的单调性。若主参考原假设不能直接满足，要明确区分“可扩展证明”与“控制基础不相容”，在形成证据前不启动训练或新控制分支。
+**下一次唯一活动任务：C2 mode-dependent 估计集合到 MPC 的 nestedness 与收紧接口。** 正式实例化六维 \(P_\sigma,G_{\sigma,\gamma}\) 及统一扰动增益，比较 future-mode union envelope 与 mode-conditioned tube，并重写递归可行证明中关于误差集合嵌套的关键一步。C2 未通过前不启动训练或新控制分支。
 
 每次新任务必须写清：对应哪个模块、消除哪个证明缺口、需要什么输入、交付什么可复核结果。若与 F1 无直接依赖，先放入待办，不执行。只有明确反例否定当前合同、接口冲突或用户改变目标时才修改主路线，并记录原因。
 
