@@ -156,3 +156,13 @@ python verification/check_mode_radius.py --output /tmp/mode_radius.json
 ```
 
 使用 Fraction 与整数平方根向外舍入，核查模式条件半径、442项移位关系，以及全允许路径生成元坐标支持的312项后向方向复核。结果将 `radius_control_gate=blocked` 与 `geometry_coordinate_width_gate=pass_finite_horizon_only` 分开报告。原初始盒下的25步坐标宽度通过不代表 MPC、终端、任意滚动窗口、实时性或完整闭环通过。精确值、峰值路径及哈希见 `results/theory_mode_radius_20260916/exact_checks.json`，论证见 `docs/learning/07_mode_radius_and_geometry.md`。
+
+
+## C2-G/CZ：约束 zonotope 有界试验（2026-09-16）
+
+```bash
+python -m unittest discover -s verification -p test_constrained_zonotope.py -v
+python verification/check_constrained_zonotope.py --output /tmp/cz_certificates.json
+```
+
+输出路径须不存在。SciPy 仅提议 LP 对偶乘子，Fraction 复算可靠支持上界；三项解析回归覆盖非零条带、中心变换、任意乘子和删除等式反例。两条指定观测记录另生成36项证书，见 results/constrained_zonotope_20260916/certificates.json 与 docs/learning/08_constrained_zonotope_interface.md。physical_domain_gate 若为 blocked，则不得解释为完整25步物理外包证书。此比较不证明 MPC、固定复杂度、实时性、任意未来观测或学习优势。

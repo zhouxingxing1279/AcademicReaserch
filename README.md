@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [07 C2-R](docs/learning/07_mode_radius_and_geometry.md) 证明模式条件半径的可靠性和移位关系，但完整椭球收紧仍失败：零半径种子的速度宽度在第17步阻断，角度更早阻断。同合同下保留生成元相关性的集合，在原初始误差盒、两种初始模式和全部允许路径下，25步内速度半宽峰值为1.968913625/1.665996345625 m/s，角误差保持0.005 rad，仅通过状态坐标宽度必要条件。下一任务 C2-G：有限复杂度几何预测/更新合同；不训练 RL，不宣称完整闭环可行。**
+**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [08 CZ 试验](docs/learning/08_constrained_zonotope_interface.md) 完成约束 zonotope 的预测、测量求交和有理支持证书。两条25步观测记录中，36项坐标比较有9项严格收紧；正常位置包下末步速度半宽上界为0.661587/0.593348 m/s。保留 CZ 为候选，下一步解决有限复杂度与旧预测包含；尚未证明完整闭环、实时性或学习优势。此前 [07 C2-R](docs/learning/07_mode_radius_and_geometry.md) 的全路径误差比较仍单独有效。**
 
 ## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
 
