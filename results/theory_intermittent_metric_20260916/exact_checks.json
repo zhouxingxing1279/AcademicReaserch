@@ -1,0 +1,54 @@
+{
+  "status": "pass",
+  "fixed_quadratic_metric_direct_fit": {
+    "possible": false,
+    "reason": "on a missed-measurement tick A0*[1,0]^T=[1,0]^T, so no fixed PD quadratic V can satisfy V(A0 e)<=eta V(e) for all e with eta<1",
+    "exact_obstruction_verified": true
+  },
+  "mode_dependent_metric": {
+    "eta0": "19/20",
+    "eta0_decimal": 0.95,
+    "age_mapping": "j=5*m+r for mode (r,m), hence j in {0,...,14}",
+    "axes": {
+      "x": {
+        "ell": "5",
+        "p0": [["120", "0"], ["0", "1"]],
+        "mode_metric_formula": "P_j=eta0^j A0^{-jT} P0 A0^{-j}, j=0,...,14",
+        "all_mode_metrics_pd": true,
+        "all_no_success_edges_exact_eta0_equalities": true,
+        "success_edges": [
+          {"L": 5, "a_L": "1/2", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "3028297/80000", "scalar_margin_decimal": 37.8537125, "lift_margin_det": "7498363173403/256000000000", "lift_margin_det_decimal": 29.290481146105467},
+          {"L": 10, "a_L": "0", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "11993198773403/256000000000", "scalar_margin_decimal": 46.84843270860547, "lift_margin_det": "73531096322711474580066803/2621440000000000000000000", "lift_margin_det_decimal": 28.049887208065595},
+          {"L": 15, "a_L": "-1/2", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "487381089624394897/819200000000000000", "scalar_margin_decimal": 0.594947619170404, "lift_margin_det": "7398994233546732976784558217799880203/26843545600000000000000000000000000000", "lift_margin_det_decimal": 0.2756340143660729}
+        ],
+        "pass": true
+      },
+      "z": {
+        "ell": "9/2",
+        "p0": [["60", "0"], ["0", "1"]],
+        "mode_metric_formula": "P_j=eta0^j A0^{-jT} P0 A0^{-j}, j=0,...,14",
+        "all_mode_metrics_pd": true,
+        "all_no_success_edges_exact_eta0_equalities": true,
+        "success_edges": [
+          {"L": 5, "a_L": "11/20", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "1284297/160000", "scalar_margin_decimal": 8.02685625, "lift_margin_det": "3180046517403/512000000000", "lift_margin_det_decimal": 6.2110283543027345},
+          {"L": 10, "a_L": "1/10", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "7717998773403/512000000000", "scalar_margin_decimal": 15.074216354302735, "lift_margin_det": "47319561857360639380066803/5242880000000000000000000", "lift_margin_det_decimal": 9.025490161392334},
+          {"L": 15, "a_L": "-7/20", "edge_margin_psd": true, "lift_margin_psd": true, "scalar_margin": "323541089624394897/1638400000000000000", "scalar_margin_decimal": 0.19747380958520197, "lift_margin_det": "4911718380972046023476398217799880203/53687091200000000000000000000000000000", "lift_margin_det_decimal": 0.0914878841670611}
+        ],
+        "pass": true
+      }
+    }
+  },
+  "robust_extension": {
+    "eta_robust": "99/100",
+    "young_epsilon": "4/95",
+    "noise_multiplier": "99/4",
+    "identity_verified": true,
+    "bound": "V_next <= eta_robust V + (99/4)*||G_sigma d||_{P_next}^2; finite modes imply a finite uniform sigma_4 after bounding d"
+  },
+  "interpretation": {
+    "direct_original_fixed_metric_assumption": "blocked",
+    "uniform_mode_dependent_scalar_recursion": "constructively feasible for the homogeneous translational observer, with robust additive extension by Young inequality",
+    "remaining_issue": "the MPC/set-membership proof must explicitly carry the mode-dependent metric (or a mode-robust envelope); full six-state and terminal/control assumptions remain separate"
+  },
+  "source_blob_sha": "1d4711526445599106561fdbb6ed549b98f0331a"
+}
