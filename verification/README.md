@@ -137,3 +137,12 @@ python verification/check_direction_selection.py --output /tmp/direction_probe.j
 ```
 
 输出须不存在。结果见 [checks.json](../results/direction_probe_20260915/checks.json)。
+
+
+## C2：六维模式集合与控制接口否证（2026-09-16）
+
+```bash
+python verification/check_mode_nestedness.py --output /tmp/mode_nestedness.json
+```
+
+标准库 Fraction；路径须不存在。核查15个六维度量、17条模式边、2176个盒顶点与442个模式移位关系，并验证统一 Young 椭球收紧在第3步违反原速度区间宽度必要条件。`status=pass` 表示代数和否证核查通过，`mpc_ellipsoid_only_gate.status=blocked` 表示该控制接口不通过；不等同于物理系统不可控。来源哈希及精确分数见 `results/theory_mode_nestedness_20260916/exact_checks.json`，解析证明及 C2-R 任务见 `docs/learning/06_mode_dependent_nestedness.md`。

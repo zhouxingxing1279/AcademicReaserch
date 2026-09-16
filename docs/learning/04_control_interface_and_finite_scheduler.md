@@ -1,6 +1,10 @@
 # 控制接口与有限调度环境规范
 
-日期：2026-09-16。承接 [03 主方案](03_selected_plan.md)。本文件完成当前唯一交付物：把“有限预算验证调度”接到控制器实际使用的估计误差量上，并给出一个可精确枚举的序列决策实例。
+日期：2026-09-16。承接 [03 主方案](03_selected_plan.md)。
+
+**后续状态见 [06 C2](06_mode_dependent_nestedness.md)：真实 MPC 标量必须与预测上界取最小值；调度奖励相应按被截断后的有效标量计算。本文件的未截断小实例仍是序列互补性的见证。当前任务为 C2-R。**
+
+本文件完成当前唯一交付物：把“有限预算验证调度”接到控制器实际使用的估计误差量上，并给出一个可精确枚举的序列决策实例。
 
 **状态结论：控制相关集合接口已闭合一层，序列决策价值已有精确见证。后续 [05 C1](05_intermittent_error_interface.md) 已证明固定 metric 直接套用失败，但 mode-dependent metric 可在全部允许丢包模式上构造统一标量递推。当前仍不能直接宣称 Köhler–Müller–Allgöwer 闭环定理已实例化；下一步是 C2 的 mode-dependent nestedness/constraint-tightening 适配。**
 
@@ -8,7 +12,7 @@
 
 03 中的候选任务原先表述为一般方向支持查询。控制主参考
 
-- L. Köhler, M. A. Müller, F. Allgöwer, *Robust output feedback model predictive control using online estimation bounds*, 2021, https://arxiv.org/abs/2105.03427
+- J. Köhler, M. A. Müller, F. Allgöwer, *Robust output feedback model predictive control using online estimation bounds*, 2021, https://arxiv.org/abs/2105.03427
 
 实际将在线估计信息压缩成标量误差界：
 
@@ -101,9 +105,9 @@ b_{r,\pm}^+ =
 只要独立验证器可靠，则不论调度策略是 DP、规则、随机策略还是 OOD 后失效的神经策略：
 
 ```math
-e_{t,mathrm{after}}^{\mathrm{cert}}
+e_{t,\mathrm{after}}^{\mathrm{cert}}
 \le
-e_{t,mathrm{before}}^{\mathrm{cert}},
+e_{t,\mathrm{before}}^{\mathrm{cert}},
 ```
 
 且相容真值仍在证书内。

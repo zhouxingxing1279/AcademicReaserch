@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**主方案已确定（2026-09-15）：[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。[04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 与 [05 C1 间歇测量误差接口](docs/learning/05_intermittent_error_interface.md) 已完成。C1 证明固定二次 metric 不能逐 tick 严格收缩，但构造了覆盖 15 模式/17 条边的 mode-dependent 二次 metric，并得到统一鲁棒标量递推。当前唯一下一任务是 C2：把 mode-dependent 估计集合接入 set-membership 与 MPC nestedness/constraint tightening；C2 前不训练 Double DQN，也不宣称完整闭环安全。**
+**主方案固定为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [06 C2](docs/learning/06_mode_dependent_nestedness.md) 已完成六维误差度量、扰动映射、SMF 预测截断与未来模式嵌套推导，但否定了“统一 Young 递推 + 未求交椭球收紧”的可行性：即使当前误差为零，第3步速度半宽也超过原 ±3 m/s 限制。下一唯一任务是 C2-R：模式条件半径传播的保守性修复；不训练 Double DQN，不宣称完整闭环安全。**
 
 ## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
 
@@ -106,6 +106,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [05 C1](docs/learning/05_intermittent_error_interface.md) 执行 C2：正式实例化六维 mode-dependent 误差集合，计算统一扰动增益，并证明 future-mode uncertainty 下的集合 nestedness 与 MPC constraint tightening 接口。优先比较 future-mode union envelope 与 mode-conditioned tube；C2 未通过前不训练 RL，也不继续扩展新的控制器分支。
+按 [06 C2](docs/learning/06_mode_dependent_nestedness.md) 执行 C2-R：保留每条模式边的噪声能量，用不经 Young 分离的半径递推，重证模式条件移位并检查原速度约束的非空必要条件。现有统一递推的第三步不可行已被精确否定，不继续为这一组合合成反馈或终端集。通过误差接口可用性核查后再进入 C3 控制构件；当前不启动 RL 训练。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
