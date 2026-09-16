@@ -1,0 +1,53 @@
+{
+  "status": "pass",
+  "purpose": "exact finite-MDP witness for control-aligned set-verification scheduling",
+  "metric": "e_cert=sum_r max(b_r_plus,b_r_minus)^2 with P_o=I_2",
+  "true_error_set": {"x1": ["-1/2", "1/2"], "x2": ["-1", "1"]},
+  "budget_queries": 2,
+  "baseline_energy": {"exact": "25/4", "decimal": 6.25},
+  "task_immediate_gains": {
+    "A+": {"exact": "0", "decimal": 0.0},
+    "A-": {"exact": "0", "decimal": 0.0},
+    "B+": {"exact": "5/4", "decimal": 1.25}
+  },
+  "greedy": {
+    "sequence": ["B+", "A+"],
+    "energy_history": [
+      {"exact": "25/4", "decimal": 6.25},
+      {"exact": "5", "decimal": 5.0},
+      {"exact": "5", "decimal": 5.0}
+    ],
+    "final_energy": {"exact": "5", "decimal": 5.0},
+    "total_gain": {"exact": "5/4", "decimal": 1.25}
+  },
+  "optimal": {
+    "sequences": [["A+", "A-"], ["A-", "A+"]],
+    "final_energy": {"exact": "5/2", "decimal": 2.5},
+    "total_gain": {"exact": "15/4", "decimal": 3.75},
+    "final_energy_gap_vs_greedy": {"exact": "5/2", "decimal": 2.5}
+  },
+  "checks": {
+    "all_task_certificates_contain_true_box": true,
+    "all_transitions_nonincreasing_energy": true,
+    "a_plus_alone_has_zero_immediate_gain": true,
+    "a_minus_alone_has_zero_immediate_gain": true,
+    "b_plus_has_positive_immediate_gain": true,
+    "paired_a_queries_strictly_beat_greedy": true,
+    "expected_optimal_energy": true,
+    "expected_greedy_energy": true,
+    "expected_gap": true
+  },
+  "enumerated_sequences": [
+    {"sequence": [], "energy_history": [{"exact": "25/4", "decimal": 6.25}], "final_energy": {"exact": "25/4", "decimal": 6.25}, "total_gain": {"exact": "0", "decimal": 0.0}},
+    {"sequence": ["A+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}], "final_energy": {"exact": "25/4", "decimal": 6.25}, "total_gain": {"exact": "0", "decimal": 0.0}},
+    {"sequence": ["A-"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}], "final_energy": {"exact": "25/4", "decimal": 6.25}, "total_gain": {"exact": "0", "decimal": 0.0}},
+    {"sequence": ["B+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "5", "decimal": 5.0}], "final_energy": {"exact": "5", "decimal": 5.0}, "total_gain": {"exact": "5/4", "decimal": 1.25}},
+    {"sequence": ["A+", "A-"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}, {"exact": "5/2", "decimal": 2.5}], "final_energy": {"exact": "5/2", "decimal": 2.5}, "total_gain": {"exact": "15/4", "decimal": 3.75}},
+    {"sequence": ["A+", "B+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}, {"exact": "5", "decimal": 5.0}], "final_energy": {"exact": "5", "decimal": 5.0}, "total_gain": {"exact": "5/4", "decimal": 1.25}},
+    {"sequence": ["A-", "A+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}, {"exact": "5/2", "decimal": 2.5}], "final_energy": {"exact": "5/2", "decimal": 2.5}, "total_gain": {"exact": "15/4", "decimal": 3.75}},
+    {"sequence": ["A-", "B+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "25/4", "decimal": 6.25}, {"exact": "5", "decimal": 5.0}], "final_energy": {"exact": "5", "decimal": 5.0}, "total_gain": {"exact": "5/4", "decimal": 1.25}},
+    {"sequence": ["B+", "A+"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "5", "decimal": 5.0}, {"exact": "5", "decimal": 5.0}], "final_energy": {"exact": "5", "decimal": 5.0}, "total_gain": {"exact": "5/4", "decimal": 1.25}},
+    {"sequence": ["B+", "A-"], "energy_history": [{"exact": "25/4", "decimal": 6.25}, {"exact": "5", "decimal": 5.0}, {"exact": "5", "decimal": 5.0}], "final_energy": {"exact": "5", "decimal": 5.0}, "total_gain": {"exact": "5/4", "decimal": 1.25}}
+  ],
+  "source_blob_sha": "9c6d92e25e79768ae0910e04ff2806fdd0ee3b43"
+}
