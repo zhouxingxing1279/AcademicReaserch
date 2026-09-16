@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**主方案已确定（2026-09-15）：[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。[控制接口与有限调度环境规范](docs/learning/04_control_interface_and_finite_scheduler.md) 已于 2026-09-16 完成：方向支持证书已接到 MPC 实际读取的标量误差界，且精确小实例证明一步贪心可严格次优。当前唯一下一任务是 C1：核查 15 模式间歇测量误差递推与控制基础的兼容性；在此之前不训练 Double DQN，也不宣称完整闭环安全。**
+**主方案已确定（2026-09-15）：[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。[04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 与 [05 C1 间歇测量误差接口](docs/learning/05_intermittent_error_interface.md) 已完成。C1 证明固定二次 metric 不能逐 tick 严格收缩，但构造了覆盖 15 模式/17 条边的 mode-dependent 二次 metric，并得到统一鲁棒标量递推。当前唯一下一任务是 C2：把 mode-dependent 估计集合接入 set-membership 与 MPC nestedness/constraint tightening；C2 前不训练 Double DQN，也不宣称完整闭环安全。**
 
 ## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
 
@@ -8,7 +8,7 @@
 
 主问题：在相同物理信息、独立验证器和在线总计算预算下，学习调度能否比强非学习调度更有效地降低控制器实际使用的可靠估计误差界，同时保持证书正确性与既定鲁棒控制接口？
 
-用户随后授权的 [方向选择机制核查](docs/learning/01_direction_selection_probe.md) 已完成：八个精确几何实例显示相关方向可减少冗余，但单目标准确支持时，直接查询约束法向的非学习规则已最优。[04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 进一步把候选库限制为观测误差度量分解得到的成对方向，并给出两步预算下的严格序列价值见证：一步贪心最终证书为 5，精确最优为 5/2。该结果只证明序列规划必要性，不证明 Double DQN 优于有限前瞻。
+用户随后授权的 [方向选择机制核查](docs/learning/01_direction_selection_probe.md) 已完成：八个精确几何实例显示相关方向可减少冗余，但单目标准确支持时，直接查询约束法向的非学习规则已最优。[04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 进一步把候选库限制为观测误差度量分解得到的成对方向，并给出两步预算下的严格序列价值见证：一步贪心最终证书为 5，精确最优为 5/2。随后 [05 C1](docs/learning/05_intermittent_error_interface.md) 给出 mode-dependent metric：齐次收缩系数 19/20，Young 扩展后的统一鲁棒系数 99/100。以上仍只建立理论接口，不证明 Double DQN 优于有限前瞻。
 
 此前框架的基础任务是 F1：核查并选定控制基础合同。暂停逐组增益搜索、限幅不变集分支扩展、网络训练及新的控制实现。以下保留历史理论进展，其“下一步”建议以总框架为准。
 
@@ -106,6 +106,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 执行 C1：以现有 15 模式、17 条边和最大 15 tick 成功包间隔为输入，构造或否证 mode-dependent / lifted 的可靠标量误差递推，并检查它是否满足 MPC 未来传播所需的单调接口。C1 未通过前不训练 RL、不继续扩展控制器分支；若主参考与当前间歇测量合同不相容，先形成明确阻断证据，再评估间歇测量专用 output-feedback MPC。
+按 [05 C1](docs/learning/05_intermittent_error_interface.md) 执行 C2：正式实例化六维 mode-dependent 误差集合，计算统一扰动增益，并证明 future-mode uncertainty 下的集合 nestedness 与 MPC constraint tightening 接口。优先比较 future-mode union envelope 与 mode-conditioned tube；C2 未通过前不训练 RL，也不继续扩展新的控制器分支。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
