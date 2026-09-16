@@ -146,3 +146,13 @@ python verification/check_mode_nestedness.py --output /tmp/mode_nestedness.json
 ```
 
 标准库 Fraction；路径须不存在。核查15个六维度量、17条模式边、2176个盒顶点与442个模式移位关系，并验证统一 Young 椭球收紧在第3步违反原速度区间宽度必要条件。`status=pass` 表示代数和否证核查通过，`mpc_ellipsoid_only_gate.status=blocked` 表示该控制接口不通过；不等同于物理系统不可控。来源哈希及精确分数见 `results/theory_mode_nestedness_20260916/exact_checks.json`，解析证明及 C2-R 任务见 `docs/learning/06_mode_dependent_nestedness.md`。
+
+
+## C2-R：模式条件半径与方向集合对照（2026-09-16）
+
+```bash
+python -m unittest discover -s verification -p test_mode_radius.py -v
+python verification/check_mode_radius.py --output /tmp/mode_radius.json
+```
+
+使用 Fraction 与整数平方根向外舍入，核查模式条件半径、442项移位关系，以及全允许路径生成元坐标支持的312项后向方向复核。结果将 `radius_control_gate=blocked` 与 `geometry_coordinate_width_gate=pass_finite_horizon_only` 分开报告。原初始盒下的25步坐标宽度通过不代表 MPC、终端、任意滚动窗口、实时性或完整闭环通过。精确值、峰值路径及哈希见 `results/theory_mode_radius_20260916/exact_checks.json`，论证见 `docs/learning/07_mode_radius_and_geometry.md`。
