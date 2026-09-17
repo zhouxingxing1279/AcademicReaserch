@@ -177,3 +177,14 @@ python verification/check_constrained_zonotope.py --output /tmp/cz_certificates.
 ```
 
 输出路径须不存在。SciPy 仅提议 LP 对偶乘子，Fraction 复算可靠支持上界；三项解析回归覆盖非零条带、中心变换、任意乘子和删除等式反例。两条指定观测记录另生成36项证书，见 results/constrained_zonotope_20260916/certificates.json 与 docs/learning/08_constrained_zonotope_interface.md。physical_domain_gate 若为 blocked，则不得解释为完整25步物理外包证书。此比较不证明 MPC、固定复杂度、实时性、任意未来观测或学习优势。
+
+
+## C2-G/T：固定模板CZ与滚动夹逼（2026-09-17）
+
+```bash
+python -m unittest discover -s verification -p test_cz_template.py -v
+python verification/check_cz_template.py --output /tmp/cz_template_checks.json
+python verification/check_template_reference.py --template-result /tmp/cz_template_checks.json --output /tmp/cz_reference.json
+```
+
+输出文件须不存在。六个解析回归、60次移位更新、28,548项有理支持/舍入核查、27,000项移位方向界比较与1,586个成员见证。发布表示12/6，临时测量最多16/10；位长与运行时间不因此固定。模板精度未通过，tick9第25层发布坐标界不能认证原域，60步末端后验发布速度半宽也超3；不压缩离线参考明显更紧，但不是同预算性能对照。结果见 results/cz_template_20260917，条件证明和范围见 docs/learning/10_fixed_template_cz.md。

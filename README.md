@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [09 跨时刻可达集包含](docs/learning/09_shifted_reachable_inclusion.md) 证明：在绝对状态坐标、旧解的移位控制尾部和嵌套扰动集合下，新仿射可达集包含于旧预测对应层；非零中心、位置成功/缺失的25步有理核查通过，同时反证重新优化控制、扩大扰动或忽略中心位移不能沿用该结论。动力学层受限合同已通过，完整递归可行性仍被控制侧 tube、固定模板控制接口与终端证书阻断。此前 [08 CZ 试验](docs/learning/08_constrained_zonotope_interface.md) 的预测、测量求交和有理支持证书继续有效。**
+**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [10 固定模板 CZ](docs/learning/10_fixed_template_cz.md) 在09移位包含基础上，完成固定维度重建与连续滚动夹逼：发布表示恒为12生成元/6等式。但试验方向精度未通过，60步末端发布速度半宽4.121/3.496 m/s，同记录不压缩CZ上界为0.827/0.705 m/s。当前转向有限传播方向的充分性；不进入MPC实验或RL训练，不宣称完整递归可行或实时达标。**
 
 ## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
 
