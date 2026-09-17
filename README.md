@@ -106,6 +106,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [09 C2-G/S](docs/learning/09_shifted_reachable_inclusion.md) 继续控制读取接口：从状态/输入约束与候选 ancillary feedback 导出固定方向矩阵 $H$，检查全 horizon 模板收紧非空性，并设计 CZ→模板的有限复杂度/超时返回规则。跨时刻仿射可达集包含已经闭合，但不是完整递归可行性证书；在控制侧 tube、末端追加律和终端鲁棒不变集完成前，不进入 RL 训练。
+按 [11 测量年龄方向运输](docs/learning/11_measurement_age_transport.md) 继续：固定72方向已得到全允许丢包历史的后验宽度上界，并完成600步滚动核查；当前25步公共开环预测存在独立于压缩的外包反例。下一步构造保留状态—估计误差相关性的联合输出反馈 tube，检查模式路径、状态/输入收紧及终端追加合同。不能把后验有界当作 MPC 递归可行性；控制侧闭合前不进入 RL 训练。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
