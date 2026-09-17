@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [08 CZ 试验](docs/learning/08_constrained_zonotope_interface.md) 完成约束 zonotope 的预测、测量求交和有理支持证书。两条25步观测记录中，36项坐标比较有9项严格收紧；正常位置包下末步速度半宽上界为0.661587/0.593348 m/s。保留 CZ 为候选，下一步解决有限复杂度与旧预测包含；尚未证明完整闭环、实时性或学习优势。此前 [07 C2-R](docs/learning/07_mode_radius_and_geometry.md) 的全路径误差比较仍单独有效。**
+**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [09 跨时刻可达集包含](docs/learning/09_shifted_reachable_inclusion.md) 证明：在绝对状态坐标、旧解的移位控制尾部和嵌套扰动集合下，新仿射可达集包含于旧预测对应层；非零中心、位置成功/缺失的25步有理核查通过，同时反证重新优化控制、扩大扰动或忽略中心位移不能沿用该结论。动力学层受限合同已通过，完整递归可行性仍被控制侧 tube、固定模板控制接口与终端证书阻断。此前 [08 CZ 试验](docs/learning/08_constrained_zonotope_interface.md) 的预测、测量求交和有理支持证书继续有效。**
 
 ## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
 
@@ -106,6 +106,6 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-按 [07 C2-R](docs/learning/07_mode_radius_and_geometry.md) 执行 C2-G：将方向几何保留到在线预测/更新，明确实际中心转换、模式合并与约简后的移位包含，以及 MPC 实际读取的支持/注入界。25步生成元结果是离线有限时域对照，不是实时实现或递归可行性证书。停止把单一误差能量作为唯一收紧接口；先验证新接口，再决定候选任务与奖励是否需要调整。
+按 [09 C2-G/S](docs/learning/09_shifted_reachable_inclusion.md) 继续控制读取接口：从状态/输入约束与候选 ancillary feedback 导出固定方向矩阵 $H$，检查全 horizon 模板收紧非空性，并设计 CZ→模板的有限复杂度/超时返回规则。跨时刻仿射可达集包含已经闭合，但不是完整递归可行性证书；在控制侧 tube、末端追加律和终端鲁棒不变集完成前，不进入 RL 训练。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。

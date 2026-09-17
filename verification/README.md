@@ -2,6 +2,17 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## 跨时刻可达集包含
+
+[check_shifted_reachable_inclusion.py](check_shifted_reachable_inclusion.py) 核对 [学习 09](../docs/learning/09_shifted_reachable_inclusion.md) 的绝对集合中心位移、旧控制尾部平移、扰动集合嵌套与缺测恒等更新，并保存改变控制、扩大扰动和忽略中心位移的负对照。
+
+```bash
+python -m unittest discover -s verification -p test_shifted_reachable_inclusion.py -v
+python verification/check_shifted_reachable_inclusion.py --output /tmp/shifted_reachable.json
+```
+
+输出路径须不存在。该核查只通过声明的六维仿射合同；结果中的完整 MPC 递归可行性门保持 blocked，直到控制侧 tube 与终端证书完成。
+
 ## 竖直硬约束的精确可达支持
 
 [check_vertical_hard_constraints.py](check_vertical_hard_constraints.py) 核对 [09](../docs/theory/09_vertical_input_certificate.md) 的完整生成元传播、固定序列第 30 步首次输入支持越限及达到该值的 39 个原始参数；另核对任意实际共同输入从误差方程消去。
