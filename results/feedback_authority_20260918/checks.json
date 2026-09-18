@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "status": "old_box_not_robustly_viable_from_center_for_any_policy",
+    "disturbance": "13794349/3200000",
+    "angular_acceleration_limit": "4",
+    "first_position_failure": 209,
+    "p208": "4992725439/1000000000",
+    "p209": "5013796793/1000000000",
+    "necessary_D_at_356": "2657458367/631900000",
+    "samples": [
+      {
+        "tick": 0,
+        "position_lower": "0",
+        "velocity_lower": "0"
+      },
+      {
+        "tick": 24,
+        "position_lower": "4091907621/10000000000",
+        "velocity_lower": "143377827/100000000"
+      },
+      {
+        "tick": 208,
+        "position_lower": "4992725439/1000000000",
+        "velocity_lower": "10535677/10000000"
+      },
+      {
+        "tick": 209,
+        "position_lower": "5013796793/1000000000",
+        "velocity_lower": "168238781/160000000"
+      },
+      {
+        "tick": 356,
+        "position_lower": "6127823587/800000000",
+        "velocity_lower": "29856821/40000000"
+      }
+    ],
+    "quantifiers": "fixed +Dx defeats every policy that respects the other constraints; perfect information does not help",
+    "scope": "independent global affine box, not physical nonlinear impossibility"
+  },
+  "old_horizontal_remainder": "13794349/3200000",
+  "new_max_horizontal_remainder": "6731149/3200000",
+  "removed_independent_term": "8829/4000",
+  "uniform_posterior_bounds": {
+    "max_acceleration": [
+      "6966589/3200000",
+      "572143/160000"
+    ],
+    "max_velocity_halfwidth": [
+      "4560800351/4000000000",
+      "10240359539/6000000000"
+    ],
+    "max_position_halfwidth": [
+      "1982556417/8000000000",
+      "417235099/1200000000"
+    ],
+    "gap_age_cases": 45
+  },
+  "variable_input_check": {
+    "ticks": 120,
+    "shift_rows": 216000,
+    "posterior_memberships": 121,
+    "thrust_values": [
+      "961/100",
+      "1001/100"
+    ],
+    "peak_velocity_halfwidth": [
+      "10371900797/10000000000",
+      "29774976667/20000000000"
+    ],
+    "posterior_hash": "e1b8e87b7d7e6b95f869d6caa979e1187338706708d62f73bddb2ecd399a6530",
+    "scope": "known varying input path, affine witness only; no nonlinear safety or feedback certificate"
+  },
+  "mpc_gate": "old global box blocked for all policies; new model requires joint feedback and terminal proof",
+  "source_sha256": {
+    "verification/check_feedback_authority.py": "0956275196741004f03a7d8da1c670857986c1780c826ceb8e658774f62cf26a",
+    "verification/check_transport_template.py": "38029ab023a4e31bf08d7bf74e9a291ed84becbe3a80aaea4cced5a4d83e0975",
+    "verification/check_cz_template.py": "c14b6db2a586f9a02e36c89e14c00442aa1c7aae84d37ac3cfc5b9f722363015",
+    "verification/check_constrained_zonotope.py": "7ef8d12511f20b49f0ae12776c1eb64f0842fd8721eae1f53eda481f628d63d4",
+    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753"
+  }
+}
