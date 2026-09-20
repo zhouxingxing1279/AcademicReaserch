@@ -1,0 +1,31 @@
+{
+  "status": "exact_identification_contract_examples_only",
+  "marginal_existential": [
+    "1",
+    "3"
+  ],
+  "incorrect_universal": [
+    "2",
+    "3/2"
+  ],
+  "incorrect_center_parameter": "5/3",
+  "true_parameter": "1",
+  "safe_center_strip": [
+    "0",
+    "10/3"
+  ],
+  "joint_relation_parameter_set": [
+    "3/2",
+    "2"
+  ],
+  "second_record_intersection": [
+    "1",
+    "3/2"
+  ],
+  "feature_version": {
+    "old": "psi=x, theta=1",
+    "new": "psi=2x, theta=1/2",
+    "reuse_old_parameter_cut_without_transport": "invalid"
+  },
+  "source_sha256": "003cdfad8a7d3c81834e26cb87d8d855f8e5e715065a3a7ae3051414670ace28"
+}
