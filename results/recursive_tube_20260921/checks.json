@@ -1,0 +1,66 @@
+{
+  "terminal": {
+    "radii": [
+      "2/5",
+      "4/5"
+    ],
+    "image_radii": [
+      "7/20",
+      "3/4"
+    ],
+    "state_bound": "17/10",
+    "input_bound": "13/20",
+    "nominal_image_radius": "1/4"
+  },
+  "initial": {
+    "feasible": true,
+    "rows": [
+      {
+        "state_bound": "3/2",
+        "input_bound": "1/4"
+      },
+      {
+        "state_bound": "27/20",
+        "input_bound": "9/20"
+      },
+      {
+        "state_bound": "11/10",
+        "input_bound": "33/80"
+      },
+      {
+        "state_bound": "71/80",
+        "input_bound": "7/20"
+      },
+      {
+        "state_bound": "59/80"
+      }
+    ],
+    "terminal_e": "11/32",
+    "terminal_d": "9/16",
+    "z": [
+      "1/2",
+      "1/4",
+      "1/8",
+      "1/16",
+      "1/32"
+    ],
+    "v": [
+      "-1/4",
+      "-1/8",
+      "-1/16",
+      "-1/32"
+    ]
+  },
+  "replay": {
+    "steps": 1024,
+    "trajectories": 16,
+    "steps_per_trajectory": 64,
+    "violations": 0,
+    "max_abs_x": "3/2",
+    "max_abs_u": "9/20",
+    "max_terminal_e": "103/320",
+    "max_terminal_d": "161/320",
+    "scope": "feasible_shifted_candidate_only_no_MPC_optimization"
+  },
+  "source_sha256": "86e749e975723d0000e8cd31f392ec6e4c51e10ab6832d12df482a2c17e9bf29"
+}
