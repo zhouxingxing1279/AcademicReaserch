@@ -1,0 +1,98 @@
+{
+  "status": "exact_joint_error_geometry_only",
+  "first_state_joint": "11/10",
+  "first_state_separated": "13/10",
+  "first_input_radius": "13/40",
+  "next_state_exact": "3/2",
+  "next_state_current_only": "5/2",
+  "conditioned_e_radius": "1/5",
+  "conditioned_d_radius": "0",
+  "protected_equalities": 14,
+  "horizon": [
+    {
+      "kind": "state",
+      "step": 0,
+      "exact": "3",
+      "protected": "3"
+    },
+    {
+      "kind": "state",
+      "step": 1,
+      "exact": "3/2",
+      "protected": "3/2"
+    },
+    {
+      "kind": "state",
+      "step": 2,
+      "exact": "5/4",
+      "protected": "5/4"
+    },
+    {
+      "kind": "state",
+      "step": 3,
+      "exact": "7/8",
+      "protected": "7/8"
+    },
+    {
+      "kind": "state",
+      "step": 4,
+      "exact": "9/16",
+      "protected": "9/16"
+    },
+    {
+      "kind": "state",
+      "step": 5,
+      "exact": "11/32",
+      "protected": "11/32"
+    },
+    {
+      "kind": "state",
+      "step": 6,
+      "exact": "13/64",
+      "protected": "13/64"
+    },
+    {
+      "kind": "input",
+      "step": 0,
+      "exact": "3/2",
+      "protected": "3/2"
+    },
+    {
+      "kind": "input",
+      "step": 1,
+      "exact": "3/4",
+      "protected": "3/4"
+    },
+    {
+      "kind": "input",
+      "step": 2,
+      "exact": "3/8",
+      "protected": "3/8"
+    },
+    {
+      "kind": "input",
+      "step": 3,
+      "exact": "5/16",
+      "protected": "5/16"
+    },
+    {
+      "kind": "input",
+      "step": 4,
+      "exact": "7/32",
+      "protected": "7/32"
+    },
+    {
+      "kind": "input",
+      "step": 5,
+      "exact": "9/64",
+      "protected": "9/64"
+    },
+    {
+      "kind": "input",
+      "step": 6,
+      "exact": "11/128",
+      "protected": "11/128"
+    }
+  ],
+  "source_sha256": "d01a4acbf98a5ef0824dd4e9e3ed065987612d1b6da80093a4472139218cf9ee"
+}
