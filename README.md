@@ -106,7 +106,9 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-最新结果见 [16 方向保护压缩的线性递归可行性基准](docs/learning/16_recursive_feasibility_direction_template.md)：固定模型、每步测量、精确支持方向更新与终端条件下的递归可行性证明；含非空标量终端证书及 1024 步可行移位候选重放。尚无四旋翼/缺测保证，尚未实施高维压缩或 MPC 目标优化。
+优先读 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
+
+精确支持基准见 [16 方向保护压缩的线性递归可行性基准](docs/learning/16_recursive_feasibility_direction_template.md)：固定模型、每步测量、精确支持方向更新与终端条件下的递归可行性证明；含非空标量终端证书及 1024 步可行移位候选重放。尚无四旋翼/缺测保证，尚未实施高维压缩或 MPC 目标优化。
 
 按最新研究决策，暂停学习算法与在线参数辨识。当前主线见 [15 CZ 集员滤波与输出反馈 Tube MPC](docs/learning/15_cz_output_feedback_tube.md)：联合误差传播、测量条件化和整个预测时域的控制方向保护。该章完成线性接口定理及精确反例；跨时刻压缩兼容与终端追加的每步测量线性基准见16，四旋翼闭环仍未完成。下述 13–14 作为历史研究与基础工具保留。
 
