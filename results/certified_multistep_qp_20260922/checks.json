@@ -1,0 +1,3468 @@
+{
+  "scope": "Fixed-posterior four-step MPC snapshots; not a rolling partial-observation experiment",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "source_sha256": {
+    "check_certified_multistep_qp.py": "594916d60f4d1ec387cd205679c64398442181f4991ac9b50c8a408f50687291",
+    "check_multidim_tube_qp.py": "a208694c47b84df109789cb3331f110e3a99b6639d9f18ae169c59b3e7575650",
+    "check_compression_performance.py": "c56c0085c2e26cd617d4ee2271b18eebf55351e29b056c6a11f77d31bc698ea1",
+    "check_constrained_zonotope.py": "7ef8d12511f20b49f0ae12776c1eb64f0842fd8721eae1f53eda481f628d63d4"
+  },
+  "runs": [
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654487451875868,
+      "shift_cost_slack": 6.191965819264e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "10261902157753127819476786164630825628976594600563/11408918754554362007305110103016389189062500000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "399999/1000000"
+        ],
+        [
+          "-5118119/50000000",
+          "438701/5000000"
+        ],
+        [
+          "-110743/20000000",
+          "780177/100000000"
+        ],
+        [
+          "-24873/100000000",
+          "63839/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.02042171600032816,
+      "wall_seconds": 0.07260936700004095,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 8.659888510812413,
+          "lower_value": 8.65988761134925,
+          "certified_gap": 8.994631637337804e-07,
+          "current_optimizer_gap": 8.994631637337804e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 10,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654495546953978,
+      "shift_cost_slack": 6.18678580792e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "418865261708754738953109428455872516063061201111/4656933562352515044167133966036178241250000000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "3999999/10000000"
+        ],
+        [
+          "-2047253/20000000",
+          "1096743/12500000"
+        ],
+        [
+          "-553677/100000000",
+          "780183/100000000"
+        ],
+        [
+          "-12459/50000000",
+          "15959/25000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.018185276999702182,
+      "wall_seconds": 0.10361003199977858,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5144148252
+        },
+        {
+          "queries": 8,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 24.81782716792
+        },
+        {
+          "queries": 12,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 24.6499355884
+        },
+        {
+          "queries": 16,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 93.22417694268
+        },
+        {
+          "queries": 20,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 1.3876710886124176e-28,
+          "current_support_gap": 147.79967515300027
+        },
+        {
+          "queries": 24,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 87.12672643329412
+        },
+        {
+          "queries": 28,
+          "primal_value": 9.425204902892308,
+          "lower_value": 0.0,
+          "certified_gap": 9.425204902892308,
+          "current_optimizer_gap": 1.2700510952438846e-17,
+          "current_support_gap": 74.25205204268957
+        },
+        {
+          "queries": 32,
+          "primal_value": 8.67459820065139,
+          "lower_value": 5.903374015030878,
+          "certified_gap": 2.7712241856205124,
+          "current_optimizer_gap": 8.993192778460862e-07,
+          "current_support_gap": 2.7712232863012347
+        },
+        {
+          "queries": 36,
+          "primal_value": 8.659887701304601,
+          "lower_value": 8.659887611360167,
+          "certified_gap": 8.994443577527851e-08,
+          "current_optimizer_gap": 8.994443577527851e-08,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 16,
+      "available_directions": 36,
+      "qp_calls": 5,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765449554695527,
+      "shift_cost_slack": 6.19572850904e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "186731610717958483032824229707234998078471041347/2076086941426425095833067533846540503750000000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "3999999/10000000"
+        ],
+        [
+          "-639767/6250000",
+          "2193489/25000000"
+        ],
+        [
+          "-69209/12500000",
+          "48761/6250000"
+        ],
+        [
+          "-24917/100000000",
+          "6383/10000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ]
+      ],
+      "setup_seconds": 0.017440509000152815,
+      "wall_seconds": 0.05926881300001696,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 6.36274805739791e-30,
+          "current_support_gap": 73.60493942040003
+        },
+        {
+          "queries": 8,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 1.0928049926930092,
+          "current_support_gap": 12.808234338176321
+        },
+        {
+          "queries": 12,
+          "primal_value": 8.663549099110218,
+          "lower_value": 8.412653668344989,
+          "certified_gap": 0.2508954307652312,
+          "current_optimizer_gap": 8.911455994313829e-07,
+          "current_support_gap": 0.25089453961963176
+        },
+        {
+          "queries": 16,
+          "primal_value": 8.659887701304473,
+          "lower_value": 8.65988761136045,
+          "certified_gap": 8.994402257049027e-08,
+          "current_optimizer_gap": 8.994402257049027e-08,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654487451897363,
+      "shift_cost_slack": 6.194316339056e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "1853446089933552823668999407620792012949983114571/2060619649039325842728272362962634668750000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-2/5"
+        ],
+        [
+          "-8774019/100000000",
+          "-2047251/20000000"
+        ],
+        [
+          "-156037/20000000",
+          "-553671/100000000"
+        ],
+        [
+          "-6383/10000000",
+          "-24913/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.019231621000017185,
+      "wall_seconds": 0.0730403320003461,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 8.659888510810264,
+          "lower_value": 8.65988761134971,
+          "certified_gap": 8.994605534299556e-07,
+          "current_optimizer_gap": 8.994605534299556e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 20,
+      "available_directions": 36,
+      "qp_calls": 6,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765449554695357,
+      "shift_cost_slack": 6.19665540656e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "10791838711823460602870576565046342580761276409/119983335586926589450071874734840847968750000000000000",
+      "final_plan": [
+        [
+          "-3999999/10000000",
+          "-2/5"
+        ],
+        [
+          "-4386971/50000000",
+          "-10236271/100000000"
+        ],
+        [
+          "-24381/3125000",
+          "-553669/100000000"
+        ],
+        [
+          "-3989/6250000",
+          "-6231/25000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ]
+      ],
+      "setup_seconds": 0.017010516000027565,
+      "wall_seconds": 0.06818010500001037,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.4677374388
+        },
+        {
+          "queries": 8,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 8.701272464812851e-30,
+          "current_support_gap": 147.05797558676005
+        },
+        {
+          "queries": 12,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 96.1978447148
+        },
+        {
+          "queries": 16,
+          "primal_value": 8.665700228155073,
+          "lower_value": 8.51626471978297,
+          "certified_gap": 0.14943550837210237,
+          "current_optimizer_gap": 8.044521023253917e-07,
+          "current_support_gap": 0.14943470392000005
+        },
+        {
+          "queries": 20,
+          "primal_value": 8.659887701304642,
+          "lower_value": 8.659887611360164,
+          "certified_gap": 8.994447986491335e-08,
+          "current_optimizer_gap": 8.994447986491335e-08,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 16,
+      "available_directions": 36,
+      "qp_calls": 5,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654495546955584,
+      "shift_cost_slack": 6.196047478e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "367985213924233372905617756923262098437641173773/4091267783789323403869586632636839802450000000000000000",
+      "final_plan": [
+        [
+          "-3999999/10000000",
+          "-2/5"
+        ],
+        [
+          "-8773953/100000000",
+          "-2559067/25000000"
+        ],
+        [
+          "-780179/100000000",
+          "-22147/4000000"
+        ],
+        [
+          "-63829/100000000",
+          "-24919/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ]
+      ],
+      "setup_seconds": 0.018151949000184686,
+      "wall_seconds": 0.06151976299997841,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 71.153183518
+        },
+        {
+          "queries": 8,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 1.0928049926930092,
+          "current_support_gap": 12.81706862212957
+        },
+        {
+          "queries": 12,
+          "primal_value": 8.663549099110218,
+          "lower_value": 8.42046828070054,
+          "certified_gap": 0.2430808184096792,
+          "current_optimizer_gap": 8.911455994313829e-07,
+          "current_support_gap": 0.2430799272640798
+        },
+        {
+          "queries": 16,
+          "primal_value": 8.659887701304442,
+          "lower_value": 8.659887611360388,
+          "certified_gap": 8.994405484341244e-08,
+          "current_optimizer_gap": 8.994405484341244e-08,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.2835517347710519,
+      "shift_cost_slack": 1.872471447658432e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "211717517935732975549453843181798074883/36595482781712636600104218750000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-13252311/50000000"
+        ],
+        [
+          "-2890279/12500000",
+          "1921/50000"
+        ],
+        [
+          "-762821/50000000",
+          "662429/100000000"
+        ],
+        [
+          "-94501/100000000",
+          "72531/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.017152935000012803,
+      "wall_seconds": 0.0722623849997035,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 9.907594173278948,
+          "lower_value": 9.907588387933275,
+          "certified_gap": 5.785345672267827e-06,
+          "current_optimizer_gap": 5.785345672267827e-06,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 10,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.2835575201051379,
+      "shift_cost_slack": 1.872681148226432e-09,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "951365556523114571339250489403/109717253751344627148606953125000000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "-13252311/50000000"
+        ],
+        [
+          "-23122161/100000000",
+          "3841981/100000000"
+        ],
+        [
+          "-305127/20000000",
+          "331213/50000000"
+        ],
+        [
+          "-47251/50000000",
+          "72529/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.018836667999948986,
+      "wall_seconds": 0.1425540280001769,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 10.19114590805,
+          "lower_value": 0.0,
+          "certified_gap": 10.19114590805,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 33.44493882064706
+        },
+        {
+          "queries": 4,
+          "primal_value": 10.19114590805,
+          "lower_value": 0.0,
+          "certified_gap": 10.19114590805,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 33.44237899204706
+        },
+        {
+          "queries": 8,
+          "primal_value": 10.04460145981241,
+          "lower_value": 0.0,
+          "certified_gap": 10.04460145981241,
+          "current_optimizer_gap": 5.551774820000002e-06,
+          "current_support_gap": 40.13307183143993
+        },
+        {
+          "queries": 12,
+          "primal_value": 10.04460145981241,
+          "lower_value": 0.0,
+          "certified_gap": 10.04460145981241,
+          "current_optimizer_gap": 5.55177482e-06,
+          "current_support_gap": 41.13890815685996
+        },
+        {
+          "queries": 16,
+          "primal_value": 9.977986759955865,
+          "lower_value": 8.967546180634796,
+          "certified_gap": 1.0104405793210685,
+          "current_optimizer_gap": 2.4393085654930813e-06,
+          "current_support_gap": 1.010438140012503
+        },
+        {
+          "queries": 20,
+          "primal_value": 9.955724646684416,
+          "lower_value": 8.967546180634796,
+          "certified_gap": 0.988178466049619,
+          "current_optimizer_gap": 1.2089313028368826e-06,
+          "current_support_gap": 3.0368876366250794
+        },
+        {
+          "queries": 24,
+          "primal_value": 9.955723551696014,
+          "lower_value": 8.967546180634796,
+          "certified_gap": 0.9881773710612167,
+          "current_optimizer_gap": 1.137892434103603e-07,
+          "current_support_gap": 3.0361793783261763
+        },
+        {
+          "queries": 28,
+          "primal_value": 9.955723450518644,
+          "lower_value": 8.967546180634796,
+          "certified_gap": 0.988177269883847,
+          "current_optimizer_gap": 1.2611387359658941e-08,
+          "current_support_gap": 3.0360623816010195
+        },
+        {
+          "queries": 32,
+          "primal_value": 9.907663164374855,
+          "lower_value": 9.785938815982794,
+          "certified_gap": 0.12172434839205991,
+          "current_optimizer_gap": 2.6589633325551873e-10,
+          "current_support_gap": 0.12172434812616358
+        },
+        {
+          "queries": 36,
+          "primal_value": 9.907588387944863,
+          "lower_value": 9.907588387944854,
+          "certified_gap": 8.671066072062119e-15,
+          "current_optimizer_gap": 8.671066072062119e-15,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 20,
+      "available_directions": 36,
+      "qp_calls": 6,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.2835574622498179,
+      "shift_cost_slack": 1.866568040223616e-09,
+      "minimum_robust_margin": 1e-08,
+      "certificate_gap_exact": "941288677817168496304218272936759/16269688433641975514765625000000000000000",
+      "final_plan": [
+        [
+          "-39999999/100000000",
+          "-26504621/100000000"
+        ],
+        [
+          "-5780539/25000000",
+          "1920981/50000000"
+        ],
+        [
+          "-1525657/100000000",
+          "331207/50000000"
+        ],
+        [
+          "-11811/12500000",
+          "72563/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "0"
+        ]
+      ],
+      "setup_seconds": 0.0188185209999574,
+      "wall_seconds": 0.07241194500011261,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 10.19114590805,
+          "lower_value": 0.0,
+          "certified_gap": 10.19114590805,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 33.44493882064706
+        },
+        {
+          "queries": 4,
+          "primal_value": 10.04460145981241,
+          "lower_value": 0.0,
+          "certified_gap": 10.04460145981241,
+          "current_optimizer_gap": 5.5517748200000005e-06,
+          "current_support_gap": 14.74053862089191
+        },
+        {
+          "queries": 8,
+          "primal_value": 10.04460145981241,
+          "lower_value": 3.9820693851811355,
+          "certified_gap": 6.0625320746312745,
+          "current_optimizer_gap": 0.1789099019367048,
+          "current_support_gap": 5.88362217269457
+        },
+        {
+          "queries": 12,
+          "primal_value": 10.04460145981241,
+          "lower_value": 9.40876119394184,
+          "certified_gap": 0.6358402658705694,
+          "current_optimizer_gap": 0.2601487775310365,
+          "current_support_gap": 0.37569148833953286
+        },
+        {
+          "queries": 16,
+          "primal_value": 9.953253291301644,
+          "lower_value": 9.65370797488172,
+          "certified_gap": 0.2995453164199241,
+          "current_optimizer_gap": 2.1165452361348393e-06,
+          "current_support_gap": 0.29954319987468797
+        },
+        {
+          "queries": 20,
+          "primal_value": 9.907588445800181,
+          "lower_value": 9.907588387944822,
+          "certified_gap": 5.785535977878961e-08,
+          "current_optimizer_gap": 5.785535977878961e-08,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654487451875868,
+      "shift_cost_slack": 6.191965819264e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "10261902157753127819476786164630825628976594600563/11408918754554362007305110103016389189062500000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "399999/1000000"
+        ],
+        [
+          "-5118119/50000000",
+          "438701/5000000"
+        ],
+        [
+          "-110743/20000000",
+          "780177/100000000"
+        ],
+        [
+          "-24873/100000000",
+          "63839/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.01774525899963919,
+      "wall_seconds": 0.0690832870000122,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 8.659888510812413,
+          "lower_value": 8.65988761134925,
+          "certified_gap": 8.994631637337804e-07,
+          "current_optimizer_gap": 8.994631637337804e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765448745189762,
+      "shift_cost_slack": 6.195063937984e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "416624060101443675697979312863899426096459603/463193128657783498395000600201064062500000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "399999/1000000"
+        ],
+        [
+          "-2047251/20000000",
+          "4387009/50000000"
+        ],
+        [
+          "-55367/10000000",
+          "780187/100000000"
+        ],
+        [
+          "-6229/25000000",
+          "15957/25000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.017192664000049263,
+      "wall_seconds": 0.023881067999809602,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 8.659888510810237,
+          "lower_value": 8.659887611349442,
+          "certified_gap": 8.994607957780263e-07,
+          "current_optimizer_gap": 8.994607957780263e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765448745189762,
+      "shift_cost_slack": 6.195063937984e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "416624060101443675697979312863899426096459603/463193128657783498395000600201064062500000000000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "399999/1000000"
+        ],
+        [
+          "-2047251/20000000",
+          "4387009/50000000"
+        ],
+        [
+          "-55367/10000000",
+          "780187/100000000"
+        ],
+        [
+          "-6229/25000000",
+          "15957/25000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.016920813000069757,
+      "wall_seconds": 0.022729680000338703,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 8.659888510810237,
+          "lower_value": 8.659887611349442,
+          "certified_gap": 8.994607957780263e-07,
+          "current_optimizer_gap": 8.994607957780263e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.7654487451897363,
+      "shift_cost_slack": 6.194316339056e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "1853446089933552823668999407620792012949983114571/2060619649039325842728272362962634668750000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-2/5"
+        ],
+        [
+          "-8774019/100000000",
+          "-2047251/20000000"
+        ],
+        [
+          "-156037/20000000",
+          "-553671/100000000"
+        ],
+        [
+          "-6383/10000000",
+          "-24913/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.018034664999959205,
+      "wall_seconds": 0.07213556699980472,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 8.659888510810264,
+          "lower_value": 8.65988761134971,
+          "certified_gap": 8.994605534299556e-07,
+          "current_optimizer_gap": 8.994605534299556e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765448745189762,
+      "shift_cost_slack": 6.195063937984e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "416624060101443675697979312863899426096459603/463193128657783498395000600201064062500000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-2/5"
+        ],
+        [
+          "-4387009/50000000",
+          "-2047251/20000000"
+        ],
+        [
+          "-780187/100000000",
+          "-55367/10000000"
+        ],
+        [
+          "-15957/25000000",
+          "-6229/25000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.017068931999801862,
+      "wall_seconds": 0.023664127999836637,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 8.659888510810237,
+          "lower_value": 8.659887611349442,
+          "certified_gap": 8.994607957780263e-07,
+          "current_optimizer_gap": 8.994607957780263e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "2/5",
+        "4/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.765448745189762,
+      "shift_cost_slack": 6.195063937984e-10,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "416624060101443675697979312863899426096459603/463193128657783498395000600201064062500000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-2/5"
+        ],
+        [
+          "-4387009/50000000",
+          "-2047251/20000000"
+        ],
+        [
+          "-780187/100000000",
+          "-55367/10000000"
+        ],
+        [
+          "-15957/25000000",
+          "-6229/25000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.018520642000112275,
+      "wall_seconds": 0.024670300999787287,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 8.659888510810237,
+          "lower_value": 8.659887611349442,
+          "certified_gap": 8.994607957780263e-07,
+          "current_optimizer_gap": 8.994607957780263e-07,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.2835517347710519,
+      "shift_cost_slack": 1.872471447658432e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "211717517935732975549453843181798074883/36595482781712636600104218750000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-13252311/50000000"
+        ],
+        [
+          "-2890279/12500000",
+          "1921/50000"
+        ],
+        [
+          "-762821/50000000",
+          "662429/100000000"
+        ],
+        [
+          "-94501/100000000",
+          "72531/100000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.018007094000040524,
+      "wall_seconds": 0.07078762999981336,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 9.907594173278948,
+          "lower_value": 9.907588387933275,
+          "certified_gap": 5.785345672267827e-06,
+          "current_optimizer_gap": 5.785345672267827e-06,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.28355173477038303,
+      "shift_cost_slack": 1.874213813024512e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "109430895001285046531381312562270434473/18915170650388016429935078125000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-13252311/50000000"
+        ],
+        [
+          "-23122229/100000000",
+          "3841999/100000000"
+        ],
+        [
+          "-762811/50000000",
+          "662429/100000000"
+        ],
+        [
+          "-2363/2500000",
+          "72527/100000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.0167733460002637,
+      "wall_seconds": 0.023211430000174005,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.907594173279618,
+          "lower_value": 9.907588387928957,
+          "certified_gap": 5.785350659738311e-06,
+          "current_optimizer_gap": 5.785350659738311e-06,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "box",
+      "initial_z": [
+        "3/4",
+        "11/20"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 0.28355173477038303,
+      "shift_cost_slack": 1.874213813024512e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "109430895001285046531381312562270434473/18915170650388016429935078125000000000000000",
+      "final_plan": [
+        [
+          "-399999/1000000",
+          "-13252311/50000000"
+        ],
+        [
+          "-23122229/100000000",
+          "3841999/100000000"
+        ],
+        [
+          "-762811/50000000",
+          "662429/100000000"
+        ],
+        [
+          "-2363/2500000",
+          "72527/100000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.019078644999808603,
+      "wall_seconds": 0.025467277000188915,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.907594173279618,
+          "lower_value": 9.907588387928957,
+          "certified_gap": 5.785350659738311e-06,
+          "current_optimizer_gap": 5.785350659738311e-06,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 0,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": false,
+      "stop_reason": "query_budget_exhausted",
+      "objective_improvement": 0.0,
+      "shift_cost_slack": 4.341272e-05,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "1178167157/125000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "1/5"
+        ],
+        [
+          "-2/25",
+          "7/50"
+        ],
+        [
+          "1/250",
+          "29/500"
+        ],
+        [
+          "8/625",
+          "83/5000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.018019782999999734,
+      "wall_seconds": 0.022926159000235202,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 4,
+      "support_lp_calls": 4,
+      "available_directions": 36,
+      "qp_calls": 2,
+      "tolerance": 0.0001,
+      "tolerance_met": false,
+      "stop_reason": "query_budget_exhausted",
+      "objective_improvement": 0.0,
+      "shift_cost_slack": 4.341272e-05,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "1178167157/125000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "1/5"
+        ],
+        [
+          "-2/25",
+          "7/50"
+        ],
+        [
+          "1/250",
+          "29/500"
+        ],
+        [
+          "8/625",
+          "83/5000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "1120/281"
+        ]
+      ],
+      "setup_seconds": 0.017150491999927908,
+      "wall_seconds": 0.03216431199962244,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 6.36274805739791e-30,
+          "current_support_gap": 73.60493942040003
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "regulation",
+      "initial_bounds": "caps_only",
+      "initial_z": [
+        "4/5",
+        "-2/5"
+      ],
+      "query_budget": 8,
+      "support_lp_calls": 8,
+      "available_directions": 36,
+      "qp_calls": 3,
+      "tolerance": 0.0001,
+      "tolerance_met": false,
+      "stop_reason": "query_budget_exhausted",
+      "objective_improvement": 0.0,
+      "shift_cost_slack": 4.341272e-05,
+      "minimum_robust_margin": 0.0,
+      "certificate_gap_exact": "1178167157/125000000",
+      "final_plan": [
+        [
+          "-2/5",
+          "1/5"
+        ],
+        [
+          "-2/25",
+          "7/50"
+        ],
+        [
+          "1/250",
+          "29/500"
+        ],
+        [
+          "8/625",
+          "83/5000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ]
+      ],
+      "setup_seconds": 0.017044975999851886,
+      "wall_seconds": 0.041520751000007294,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 0.0,
+          "current_support_gap": 25.5270027132
+        },
+        {
+          "queries": 4,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 6.36274805739791e-30,
+          "current_support_gap": 73.60493942040003
+        },
+        {
+          "queries": 8,
+          "primal_value": 9.425337256,
+          "lower_value": 0.0,
+          "certified_gap": 9.425337256,
+          "current_optimizer_gap": 1.0928049926930092,
+          "current_support_gap": 12.808234338176321
+        }
+      ]
+    },
+    {
+      "mode": "all_at_once",
+      "scenario": "active_maneuver",
+      "initial_bounds": "box",
+      "initial_z": [
+        "1/5",
+        "1/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 36,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 20.1231263810486,
+      "shift_cost_slack": 3.51579191392e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "3201630831368917775211775583555690144458409389/126553099308158546741969701538813375000000000000000",
+      "final_plan": [
+        [
+          "225999/1000000",
+          "-1096743/10000000"
+        ],
+        [
+          "-31336179/100000000",
+          "1757971/25000000"
+        ],
+        [
+          "-1018101/50000000",
+          "255847/25000000"
+        ],
+        [
+          "-123707/100000000",
+          "1331/1250000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ],
+        [
+          "1",
+          "240/161"
+        ],
+        [
+          "1",
+          "154/89"
+        ],
+        [
+          "1",
+          "1120/281"
+        ],
+        [
+          "1",
+          "22/3"
+        ]
+      ],
+      "setup_seconds": 0.01943214600032661,
+      "wall_seconds": 0.06973832199992103,
+      "records": [
+        {
+          "queries": 36,
+          "primal_value": 5.819407344551401,
+          "lower_value": 5.819382045836088,
+          "certified_gap": 2.529871531295257e-05,
+          "current_optimizer_gap": 2.529871531295257e-05,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "fixed_order",
+      "scenario": "active_maneuver",
+      "initial_bounds": "box",
+      "initial_z": [
+        "1/5",
+        "1/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 32,
+      "available_directions": 36,
+      "qp_calls": 9,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 20.123126381048596,
+      "shift_cost_slack": 3.5158417055024e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "111214404052040663134028072310206099579978140939/4396049524972475111504540904180543750000000000000000",
+      "final_plan": [
+        [
+          "225999/1000000",
+          "-1096743/10000000"
+        ],
+        [
+          "-31336179/100000000",
+          "3515941/50000000"
+        ],
+        [
+          "-10181/500000",
+          "1023389/100000000"
+        ],
+        [
+          "-123707/100000000",
+          "53241/50000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ],
+        [
+          "-1",
+          "-240/161"
+        ],
+        [
+          "-1",
+          "-67/47"
+        ],
+        [
+          "-1",
+          "-19/25"
+        ],
+        [
+          "-1",
+          "-27/40"
+        ],
+        [
+          "-1",
+          "-1/4"
+        ],
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "-1",
+          "3/22"
+        ],
+        [
+          "-1",
+          "281/1120"
+        ],
+        [
+          "-1",
+          "89/154"
+        ],
+        [
+          "-1",
+          "161/240"
+        ],
+        [
+          "-1",
+          "47/67"
+        ],
+        [
+          "-1",
+          "25/19"
+        ],
+        [
+          "-1",
+          "40/27"
+        ],
+        [
+          "-1",
+          "4"
+        ],
+        [
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-4"
+        ],
+        [
+          "1",
+          "-40/27"
+        ],
+        [
+          "1",
+          "-25/19"
+        ],
+        [
+          "1",
+          "-47/67"
+        ],
+        [
+          "1",
+          "-161/240"
+        ],
+        [
+          "1",
+          "-89/154"
+        ],
+        [
+          "1",
+          "-281/1120"
+        ],
+        [
+          "1",
+          "-3/22"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "27/40"
+        ],
+        [
+          "1",
+          "19/25"
+        ],
+        [
+          "1",
+          "67/47"
+        ]
+      ],
+      "setup_seconds": 0.017742403999818634,
+      "wall_seconds": 0.09745297299969025,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 6.874822554069568,
+          "lower_value": 3.5412429534689953,
+          "certified_gap": 3.333579600600573,
+          "current_optimizer_gap": 3.333546265281544e-05,
+          "current_support_gap": 3.33354626513792
+        },
+        {
+          "queries": 4,
+          "primal_value": 6.874792552292036,
+          "lower_value": 5.008012782127382,
+          "certified_gap": 1.8667797701646547,
+          "current_optimizer_gap": 3.333580104354446e-06,
+          "current_support_gap": 1.8667764365845503
+        },
+        {
+          "queries": 8,
+          "primal_value": 6.874789552229328,
+          "lower_value": 5.008013675818923,
+          "certified_gap": 1.8667758764104054,
+          "current_optimizer_gap": 3.335141035141442e-07,
+          "current_support_gap": 1.866775542896302
+        },
+        {
+          "queries": 12,
+          "primal_value": 6.874789218721773,
+          "lower_value": 5.008015968343593,
+          "certified_gap": 1.8667732503781798,
+          "current_optimizer_gap": 3.3191092094045156e-12,
+          "current_support_gap": 1.8667732503748606
+        },
+        {
+          "queries": 16,
+          "primal_value": 6.8747892187204,
+          "lower_value": 5.008015968343593,
+          "certified_gap": 1.8667732503768064,
+          "current_optimizer_gap": 1.9276430024650457e-12,
+          "current_support_gap": 1.86677342750976
+        },
+        {
+          "queries": 20,
+          "primal_value": 6.874789218719682,
+          "lower_value": 5.541379645231368,
+          "certified_gap": 1.333409573488314,
+          "current_optimizer_gap": 1.2100923134632582e-12,
+          "current_support_gap": 1.3334095734871039
+        },
+        {
+          "queries": 24,
+          "primal_value": 6.874789218719331,
+          "lower_value": 5.541379645231368,
+          "certified_gap": 1.333409573487963,
+          "current_optimizer_gap": 8.590661387976774e-13,
+          "current_support_gap": 1.33340958735104
+        },
+        {
+          "queries": 28,
+          "primal_value": 6.87478921871882,
+          "lower_value": 5.54137968155111,
+          "certified_gap": 1.3334095371677104,
+          "current_optimizer_gap": 3.503606258159782e-13,
+          "current_support_gap": 1.33340953716736
+        },
+        {
+          "queries": 32,
+          "primal_value": 5.819407344551404,
+          "lower_value": 5.819382045836405,
+          "certified_gap": 2.5298714998607075e-05,
+          "current_optimizer_gap": 2.5298714998607075e-05,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "active_maneuver",
+      "initial_bounds": "box",
+      "initial_z": [
+        "1/5",
+        "1/5"
+      ],
+      "query_budget": 36,
+      "support_lp_calls": 4,
+      "available_directions": 36,
+      "qp_calls": 2,
+      "tolerance": 0.0001,
+      "tolerance_met": true,
+      "stop_reason": "certified_tolerance",
+      "objective_improvement": 20.123126381048596,
+      "shift_cost_slack": 3.5158417055024e-09,
+      "minimum_robust_margin": 1e-06,
+      "certificate_gap_exact": "111214404052040663134028072310206099579978140939/4396049524972475111504540904180543750000000000000000",
+      "final_plan": [
+        [
+          "225999/1000000",
+          "-1096743/10000000"
+        ],
+        [
+          "-31336179/100000000",
+          "3515941/50000000"
+        ],
+        [
+          "-10181/500000",
+          "1023389/100000000"
+        ],
+        [
+          "-123707/100000000",
+          "53241/50000000"
+        ]
+      ],
+      "query_order": [
+        [
+          "1",
+          "1/4"
+        ],
+        [
+          "-1",
+          "-22/3"
+        ],
+        [
+          "-1",
+          "-1120/281"
+        ],
+        [
+          "-1",
+          "-154/89"
+        ]
+      ],
+      "setup_seconds": 0.017882280999856448,
+      "wall_seconds": 0.033846023000023706,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 6.874822554069568,
+          "lower_value": 3.5412429534689953,
+          "certified_gap": 3.333579600600573,
+          "current_optimizer_gap": 3.333546265281544e-05,
+          "current_support_gap": 3.33354626513792
+        },
+        {
+          "queries": 4,
+          "primal_value": 5.819407344551404,
+          "lower_value": 5.819382045836405,
+          "certified_gap": 2.5298714998607075e-05,
+          "current_optimizer_gap": 2.5298714998607075e-05,
+          "current_support_gap": 0.0
+        }
+      ]
+    },
+    {
+      "mode": "priority",
+      "scenario": "active_maneuver",
+      "initial_bounds": "box",
+      "initial_z": [
+        "1/5",
+        "1/5"
+      ],
+      "query_budget": 0,
+      "support_lp_calls": 0,
+      "available_directions": 36,
+      "qp_calls": 1,
+      "tolerance": 0.0001,
+      "tolerance_met": false,
+      "stop_reason": "query_budget_exhausted",
+      "objective_improvement": 19.067711171530433,
+      "shift_cost_slack": 2.9466361438688e-09,
+      "minimum_robust_margin": 0.036001,
+      "certificate_gap_exact": "11016868282990464720200577550299115908703026372319259/3304816324471652314410024805269646875000000000000000",
+      "final_plan": [
+        [
+          "189999/1000000",
+          "-1096743/10000000"
+        ],
+        [
+          "-7175999/25000000",
+          "6373837/100000000"
+        ],
+        [
+          "-1866323/100000000",
+          "233197/25000000"
+        ],
+        [
+          "-113477/100000000",
+          "19447/20000000"
+        ]
+      ],
+      "query_order": [],
+      "setup_seconds": 0.018137396999918565,
+      "wall_seconds": 0.02419794500019634,
+      "records": [
+        {
+          "queries": 0,
+          "primal_value": 6.874822554069568,
+          "lower_value": 3.5412429534689953,
+          "certified_gap": 3.333579600600573,
+          "current_optimizer_gap": 3.333546265281544e-05,
+          "current_support_gap": 3.33354626513792
+        }
+      ]
+    }
+  ]
+}
