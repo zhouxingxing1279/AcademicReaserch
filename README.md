@@ -1,12 +1,12 @@
 # AcademicReaserch
 
-**主方案仍为[强化学习调度集合验证的输出反馈 MPC](docs/learning/03_selected_plan.md)。最新 [10 固定模板 CZ](docs/learning/10_fixed_template_cz.md) 在09移位包含基础上，完成固定维度重建与连续滚动夹逼：发布表示恒为12生成元/6等式。但试验方向精度未通过，60步末端发布速度半宽4.121/3.496 m/s，同记录不压缩CZ上界为0.827/0.705 m/s。当前转向有限传播方向的充分性；不进入MPC实验或RL训练，不宣称完整递归可行或实时达标。**
+**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[18 多维 CZ、QP 与终端下降](docs/learning/18_multidim_cz_qp_and_descent.md)。已实现两状态耦合系统、四维联合误差、数值 QP 提案与有理数安全验收；给出候选保护压缩下的名义收敛及真实状态最终界。固定规模模板通过闭环验证，但完整查询版本没有速度优势，尚未证明控制性能优势或四旋翼适用性。**
 
-## 当前研究：有限计算预算下强化学习辅助的集员输出反馈 MPC
+## 当前研究与历史边界
 
-**当前入口：[研究总框架](docs/research_framework.md)。先固定研究主问题、模块接口和证明依赖，再推进具体算法。**
+当前理论链条为 [15 联合误差与控制方向](docs/learning/15_cz_output_feedback_tube.md) → [16 递归可行性](docs/learning/16_recursive_feasibility_direction_template.md) → [17 近似支持与候选证书](docs/learning/17_certified_caps_for_inexact_support.md) → [18 多维优化与下降验证](docs/learning/18_multidim_cz_qp_and_descent.md)。候选贡献是控制证书保护的集合压缩，不把 SMF、CZ 与 Tube MPC 的组合宣称为新方法；首次性仍待近邻全文排重。
 
-主问题：在相同物理信息、独立验证器和在线总计算预算下，学习调度能否比强非学习调度更有效地降低控制器实际使用的可靠估计误差界，同时保持证书正确性与既定鲁棒控制接口？
+以下学习框架、物理模型障碍与旧实验是历史记录；其“暂停控制实现”等阶段指令不再约束当前两状态线性基准，但旧四旋翼合同的未解决问题依然存在。[研究总框架](docs/research_framework.md) 保留供追溯。
 
 用户随后授权的 [方向选择机制核查](docs/learning/01_direction_selection_probe.md) 已完成：八个精确几何实例显示相关方向可减少冗余，但单目标准确支持时，直接查询约束法向的非学习规则已最优。[04 控制接口](docs/learning/04_control_interface_and_finite_scheduler.md) 进一步把候选库限制为观测误差度量分解得到的成对方向，并给出两步预算下的严格序列价值见证：一步贪心最终证书为 5，精确最优为 5/2。随后 [05 C1](docs/learning/05_intermittent_error_interface.md) 给出 mode-dependent metric：齐次收缩系数 19/20，Young 扩展后的统一鲁棒系数 99/100。以上仍只建立理论接口，不证明 Double DQN 优于有限前瞻。
 
@@ -106,9 +106,11 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-优先读 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
+优先读 [18 多维优化与终端下降](docs/learning/18_multidim_cz_qp_and_descent.md)。下一步需要约束持续活跃的强对照、部分观测与四旋翼外环合同，不能从当前小型调节实验推断高维优势。
 
-精确支持基准见 [16 方向保护压缩的线性递归可行性基准](docs/learning/16_recursive_feasibility_direction_template.md)：固定模型、每步测量、精确支持方向更新与终端条件下的递归可行性证明；含非空标量终端证书及 1024 步可行移位候选重放。尚无四旋翼/缺测保证，尚未实施高维压缩或 MPC 目标优化。
+前置结果 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
+
+精确支持基准见 [16 方向保护压缩的线性递归可行性基准](docs/learning/16_recursive_feasibility_direction_template.md)：固定模型、每步测量、精确支持方向更新与终端条件下的递归可行性证明；含非空标量终端证书及 1024 步可行移位候选重放。尚无四旋翼/缺测保证，当时尚未实施多维压缩或 MPC 目标优化；两状态实现现见18，高维与四旋翼仍未完成。
 
 按最新研究决策，暂停学习算法与在线参数辨识。当前主线见 [15 CZ 集员滤波与输出反馈 Tube MPC](docs/learning/15_cz_output_feedback_tube.md)：联合误差传播、测量条件化和整个预测时域的控制方向保护。该章完成线性接口定理及精确反例；跨时刻压缩兼容与终端追加的每步测量线性基准见16，四旋翼闭环仍未完成。下述 13–14 作为历史研究与基础工具保留。
 
