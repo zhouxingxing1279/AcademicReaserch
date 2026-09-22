@@ -1,10 +1,10 @@
 # AcademicReaserch
 
-**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[18 多维 CZ、QP 与终端下降](docs/learning/18_multidim_cz_qp_and_descent.md)。已实现两状态耦合系统、四维联合误差、数值 QP 提案与有理数安全验收；给出候选保护压缩下的名义收敛及真实状态最终界。固定规模模板通过闭环验证，但完整查询版本没有速度优势，尚未证明控制性能优势或四旋翼适用性。**
+**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[19 压缩性能损失与查询停止证书](docs/learning/19_compression_performance_certificate.md)。在18章多维可行性与名义下降基础上，新增同一后验下的名义代价损失界、可计算对偶证书，以及部分观测／活跃约束的精确见证：普通盒会丢失可行候选；候选保护能保住安全，但不自动消除性能损失。216个有理数算例通过；尚未证明闭环累计性能优势或四旋翼适用性。**
 
 ## 当前研究与历史边界
 
-当前理论链条为 [15 联合误差与控制方向](docs/learning/15_cz_output_feedback_tube.md) → [16 递归可行性](docs/learning/16_recursive_feasibility_direction_template.md) → [17 近似支持与候选证书](docs/learning/17_certified_caps_for_inexact_support.md) → [18 多维优化与下降验证](docs/learning/18_multidim_cz_qp_and_descent.md)。候选贡献是控制证书保护的集合压缩，不把 SMF、CZ 与 Tube MPC 的组合宣称为新方法；首次性仍待近邻全文排重。
+当前理论链条为 [15 联合误差与控制方向](docs/learning/15_cz_output_feedback_tube.md) → [16 递归可行性](docs/learning/16_recursive_feasibility_direction_template.md) → [17 近似支持与候选证书](docs/learning/17_certified_caps_for_inexact_support.md) → [18 多维优化与下降验证](docs/learning/18_multidim_cz_qp_and_descent.md) → [19 同时刻性能损失证书](docs/learning/19_compression_performance_certificate.md)。候选贡献是控制证书保护的集合压缩，不把 SMF、CZ 与 Tube MPC 的组合宣称为新方法；首次性仍待近邻全文排重。
 
 以下学习框架、物理模型障碍与旧实验是历史记录；其“暂停控制实现”等阶段指令不再约束当前两状态线性基准，但旧四旋翼合同的未解决问题依然存在。[研究总框架](docs/research_framework.md) 保留供追溯。
 
@@ -106,7 +106,7 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-优先读 [18 多维优化与终端下降](docs/learning/18_multidim_cz_qp_and_descent.md)。下一步需要约束持续活跃的强对照、部分观测与四旋翼外环合同，不能从当前小型调节实验推断高维优势。
+优先读 [19 压缩性能损失与查询停止证书](docs/learning/19_compression_performance_certificate.md)。下一步把可靠对偶目标下界接入18章多步求解器，在约束持续活跃的任务下比较实际查询预算与认证名义次优性；部分观测的一阶段见证不能替代四旋翼闭环验证。
 
 前置结果 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
 
