@@ -1,0 +1,27 @@
+{
+  "scope": "6-state hover LQR ancillary-controller consistency audit",
+  "closed_loop_spectral_radius": 0.9778088237066861,
+  "finite_sum_terms": 1000,
+  "consistent_global_lti": {
+    "dx": 4.3107340625,
+    "dz": 3.57589375,
+    "state_support_outer": [3.72647183, 0.12467468, 4.37809769, 0.47712122, 0.70752020, 1.71060689],
+    "state_margin": [1.27352817, 1.37532532, -1.37809769, 2.52287878, -0.25752020, 0.28939311],
+    "input_support_outer": [4.48857812, 0.16243837],
+    "input_margin": [0.41642188, -0.08243837],
+    "all_state_margins_positive": false,
+    "all_input_margins_positive": false
+  },
+  "optimistic_mismatched": {
+    "dx": 2.1034840625,
+    "dz": 3.57589375,
+    "state_support_outer": [1.81838499, 0.12467468, 2.13635511, 0.47712122, 0.34524456, 0.83471499],
+    "state_margin": [3.18161501, 1.37532532, 0.86364489, 2.52287878, 0.10475544, 1.16528501],
+    "input_support_outer": [4.48857812, 0.07926412],
+    "input_margin": [0.41642188, 0.00073588],
+    "all_state_margins_positive": true,
+    "all_input_margins_positive": true,
+    "status": "not a valid certificate: reduced horizontal residual assumes -T*phi is retained, whereas the LTI model uses -g*phi"
+  },
+  "conclusion": "A standard hover LQR is stabilizing, but the globally consistent independent-box LTI abstraction makes its mRPI outer support violate vx, phi, and tau limits. The tempting feasible result obtained with the reduced residual is a model-contract mismatch, not evidence of a valid ancillary controller."
+}
