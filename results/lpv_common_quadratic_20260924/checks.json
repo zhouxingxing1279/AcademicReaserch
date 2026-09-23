@@ -1,0 +1,18 @@
+{
+  "status": "verified_common_quadratic_certificate_for_nominal_LPV_family_only",
+  "model": "e+ = A(T)e+B tau, tau=K e, T in [4.905,14.715], vx+=vx-dt*T*phi",
+  "K": [[0.1425749515, 0.2006738212, -1.1714620252, -0.2286054551]],
+  "P": [[0.074753239,0.053671859,-0.096346099,-0.005511332],[0.053671859,0.099182069,-0.203617926,-0.014759493],[-0.096346099,-0.203617926,0.819244229,0.056456306],[-0.005511332,-0.014759493,0.056456306,0.006820464]],
+  "min_eig_P": 0.002844724644,
+  "max_eig_P": 0.890784497301,
+  "condition_number_P": 313.1355786122,
+  "endpoint_checks": [
+    {"T":4.905,"min_eig_P_minus_MtPM":0.0006188232256,"max_eig_P_minus_MtPM":0.0891858490146,"lambda2_P_metric":0.9928285647545},
+    {"T":14.715,"min_eig_P_minus_MtPM":0.0006188357202,"max_eig_P_minus_MtPM":0.0084317628393,"lambda2_P_metric":0.9991271755919}
+  ],
+  "worst_lambda2_P_metric": 0.9991271755919,
+  "worst_lambda_P_metric": 0.9995634925266,
+  "dense_grid_1001_min_decay_eig": 0.0006188232256,
+  "proof": "M(T) is affine. For fixed x, x^T M(T)^T P M(T)x is convex in scalar T because its quadratic coefficient is nonnegative. Endpoint strict inequalities therefore imply the inequality for every T in the interval.",
+  "scope": ["strict common-quadratic stability is certified for the disturbance-free LPV closed-loop family", "not an RCI/tube or hard-constraint certificate", "nonlinear remainder and aerodynamic disturbance remain to be added"]
+}
