@@ -1,0 +1,14 @@
+{
+  "status": "shift_nested_phi_scheduling_tube_audit_not_full_mpc_proof",
+  "seed": 20260924,
+  "horizon": 8,
+  "ticks": 26,
+  "shift_interval_comparisons": 200,
+  "violations": 0,
+  "max_violation": 0.0,
+  "strict_endpoint_reductions": 200,
+  "mean_endpoint_reduction": 0.000274400000000001,
+  "max_endpoint_reduction": 0.0005600000000000015,
+  "runtime": {"python": "3.13", "scipy_support_solver": "HiGHS"},
+  "note": "Executed against the same six-state affine CZ update and deterministic truth-consistent measurement rule used by the rolling recenter experiment. Numerical support audit corroborates, but does not replace, the set-inclusion proof."
+}
