@@ -34,46 +34,57 @@ h_{X^+}(p)-p^\top z^+\le h_{X^-}(p)-p^\top z^-.
 
 ## 2026-09-23 — 六状态 ancillary LQR/RPI：发现模型合同假阳性
 
+固定 hover LTI 上 LQR 得 `rho(A+BK)=0.9778088237`。语义一致的全域扰动 `dx=4.3107340625` 下，mRPI 在 `vx/phi/tau` 三个硬约束方向失败；若错误使用保留 `-T*phi` 才成立的 reduced residual，则所有 margin 看似转正，形成危险假阳性。因此下一步转向 `deltaT*phi` correlation-preserving joint tube。详见第25章。
+
+---
+
+## 2026-09-24 — 单乘积相关性：McCormick 已 support-exact，CZ-vs-McCormick 候选被否定
+
 ### 研究问题
 
-按第24章要求，先尝试合成不依赖学习的六状态 ancillary feedback，再让真实 `K^T q_u` 决定 recenter 候选是否有控制意义。
+验证第25章提出的 independent box / McCormick / CZ-joint 三路比较是否真的存在第三层几何优势。
+
+### 理论结果
+
+对 `d=deltaT in [-a,a]`, `phi in [-b,b]`, `q=d*phi` 与线性方向 `c=(cd,cphi,cq)`，exact support 在四个源域角点取得。独立 q-box 的 support 为
+
+\[
+h_{box}=|c_d|a+|c_\phi|b+|c_q|ab.
+\]
+
+若三项均非零，则独立最优符号兼容当且仅当 `sign(cq)=sign(cd*cphi)`。不兼容时精确 gap 为
+
+\[
+h_{box}-h_{exact}=2\min(|c_d|a,|c_\phi|b,|c_q|ab).
+\]
+
+McCormick 四面体/多面体正是单 bilinear graph 在 rectangle 上的 convex hull；线性 support 对集合与 convex hull 相同，所以 `h_McCormick=h_exact`。普通 CZ 可表示同一个 bounded polytope，但不能仅靠表示变化进一步减小 support。
+
+### 代码验证
+
+新增 `verification/check_bilinear_correlation_hull.py`，seed=20260924，10,000 个随机方向：
+
+- McCormick vs exact 最大误差 `3.55e-15`；
+- 解析 gap 公式最大误差 `3.55e-15`；
+- 5002/10000 方向 independent box 严格更松；
+- 平均 gap `0.3100087410`，本批最大 `3.1570853516`。
+
+对物理映射 `y=[deltaT, -g*phi-deltaT*phi]`：纯 horizontal direction `(0,1)` 的 exact 与 independent 都为 `6.62175`，gap=0，直接否定“保留乘积相关性必然缩小 vx tightening”。mixed direction `(-1,1)` 则 exact=7.11225、independent=11.52675，gap=4.4145；相反 `(1,1)` gap 又为0。
 
 ### 文献核对
 
-新增核对 Mayne–Seron–Raković (Automatica 2005) bounded-disturbance robust MPC，以及 Raković–Kerrigan–Kouramas–Mayne (TAC 2005) mRPI outer approximation。它们确认“稳定 K + RPI/tube tightening”是经典基线，不是创新；有限 reachable sum 不能未经尾项处理就当 RPI。
-
-### 代码实验
-
-新增 `verification/check_ancillary_lqr_rpi.py`。按 `planar_baseline.json` 的 Q/R 标度在 hover LTI 上求 DARE/LQR，得到 `rho(A+BK)=0.9778088237`。对 mRPI 计算 1000 项 Minkowski sum，并使用离散 Lyapunov P-范数对无限尾项做外包。
-
-**语义一致的全域 LTI 合同**必须保留旧水平独立扰动 `dx=4.3107340625`。结果：
-
-- `vx` support 4.37810 > 3，margin = -1.37810；
-- `phi` support 0.70752 > 0.45，margin = -0.25752；
-- `tau` support 0.16244 > 0.08，margin = -0.08244。
-
-因此该 LQR/RPI 不满足硬约束。
-
-随后主动测试一个危险错误：把第12章保留 `-T*phi` 后的较小 residual `dx=2.1034840625` 塞回固定 `-g*phi` LTI。数值上所有 state/input margin 居然都变正，其中 `tau` support=0.079264，仅比0.08小约7.36e-4。这是一个非常容易误判为成功的**假阳性**。
-
-但它不是合法证书：较小 residual 的前提正是中心动力学保留 `-T*phi`；固定 hover A 则必须把 `-(T-g)phi` 放回不确定项。详见第25章与 `results/ancillary_lqr_rpi_20260923/checks.json`。
+新增 McCormick (1976)、Müller–Serrano–Gleixner (SIAM J. Optim., stronger bilinear separation over nonrectangular projections)、Kochdumper–Althoff (Acta Informatica 2023, constrained polynomial zonotopes)。文献边界明确：box 单乘积 convexification 与 polynomial set representation 都已有成熟理论。
 
 ### 被否定/收缩
 
-- 否定：通过调 LQR 权重即可在旧独立盒 LTI 上闭合六状态 terminal tube。第12章已有任意策略长期否证，本轮又给出标准 LQR/RPI 的直接硬约束失败。
-- 否定：可以把 reduced residual 与 fixed hover LTI 组合。这会制造数值假阳性。
-- 暂停：finite-control-normal recenter gate。在合法完整 ancillary controller 出现前不再扩展。
+- 否定：“CZ joint representation 比 McCormick box hull 更紧”作为创新。对当前单乘积线性 support 不成立。
+- 否定：“保留 deltaT*phi 相关性会自动降低 vx tightening”。纯 vx 一步 support 没有收益。
+- 降级：constrained polynomial zonotope 作为创新。已有 quadratic-map 闭包理论，只能作为实现工具。
 
-### 新的高优先候选
+### 保留候选
 
-提升 `correlation-preserving joint tube`：显式保留 `q=(T-g)phi` 或 `T phi` 的输入—状态相关性，比较 independent box / McCormick polytope / CZ joint latent representation。目标不是“CZ更紧”的口号，而是证明在同一源域上
+转向 **SMF-conditioned bilinear support**：只有当 SMF/历史约束能把 bilinear variables 的联合可行域从 rectangle 收缩成非矩形 `P_k` 时，才可能比 box McCormick 进一步降低 support。Müller 等的二维投影结果正是强近邻。
 
-\[
-R_{joint}\subseteq R_{corr-outer}\subseteq R_{independent-box}
-\]
+### 下一轮最关键模型审计
 
-并在真实 state/input normals 上得到严格 support 改善，同时维持固定复杂度和 recursive-feasibility 接口。
-
-### 下一轮
-
-构造最小 `deltaT-phi-vx` 联合一步/多步模型，实际代码比较独立盒、McCormick 与 CZ/联合潜变量外包；必须同时找严格包含正例和“相关性方法并不更紧”的边界/反例。只有这一层成立，才推进六状态 terminal/tube 合成。
+`deltaT` 是控制决策，不是普通被估状态。下一轮必须先判断 SMF posterior 是否真的能合法地产生 `(deltaT,phi)` 联合域；若不能，就不能把 posterior correlation 强行用于 future control decision。应改写成 decision-dependent/scheduling tube：给定候选 `deltaT_i` 后只传播 `phi` uncertainty，或使用 admissible control sequence 的 robust bilinear envelope。只有模型语义先闭合，才进入多步 Tube MPC。
