@@ -1,10 +1,10 @@
 # AcademicReaserch
 
-**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[20 实际 CZ 查询与四步 MPC 性能证书](docs/learning/20_certified_multistep_queries.md)。已接入真实支持 LP、8变量 QP 和可靠目标下界；强盒基线让普通调节快照零查询达标，而活跃约束机动中优先查询4次、固定顺序32次、完整查询36次均认证名义次优性小于1e-4。该结果限于固定后验快照，尚无滚动部分观测、四旋翼或普遍调度优势保证。**
+**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[21 任意多等式 CZ 的认证支持查询](docs/learning/21_generic_cz_support_certificate.md)。已把第20章的单等式原始点重建推广为一般历史 CZ 的 primal/dual 认证接口：数值 LP 只提议，Fraction 精确核验成员点与支持上界。固定种子 600 个多等式有理数 CZ 全部通过上下界审计，但这只是静态压力测试；下一步必须进入连续滚动后验，验证总计算成本和跨时刻证书语义。**
 
 ## 当前研究与历史边界
 
-当前理论链条为 [15 联合误差与控制方向](docs/learning/15_cz_output_feedback_tube.md) → [16 递归可行性](docs/learning/16_recursive_feasibility_direction_template.md) → [17 近似支持与候选证书](docs/learning/17_certified_caps_for_inexact_support.md) → [18 多维优化与下降验证](docs/learning/18_multidim_cz_qp_and_descent.md) → [19 同时刻性能损失证书](docs/learning/19_compression_performance_certificate.md) → [20 实际多步查询证书](docs/learning/20_certified_multistep_queries.md)。候选贡献是控制证书保护的集合压缩，不把 SMF、CZ 与 Tube MPC 的组合宣称为新方法；首次性仍待近邻全文排重。
+当前理论链条为 [15 联合误差与控制方向](docs/learning/15_cz_output_feedback_tube.md) → [16 递归可行性](docs/learning/16_recursive_feasibility_direction_template.md) → [17 近似支持与候选证书](docs/learning/17_certified_caps_for_inexact_support.md) → [18 多维优化与下降验证](docs/learning/18_multidim_cz_qp_and_descent.md) → [19 同时刻性能损失证书](docs/learning/19_compression_performance_certificate.md) → [20 实际多步查询证书](docs/learning/20_certified_multistep_queries.md) → [21 通用多等式 CZ 认证查询](docs/learning/21_generic_cz_support_certificate.md)。候选贡献是可行性与性能双证书驱动的控制相关集合计算，不把 SMF、CZ 与 Tube MPC 的组合宣称为新方法；首次性仍待近邻全文排重。
 
 以下学习框架、物理模型障碍与旧实验是历史记录；其“暂停控制实现”等阶段指令不再约束当前两状态线性基准，但旧四旋翼合同的未解决问题依然存在。[研究总框架](docs/research_framework.md) 保留供追溯。
 
@@ -106,7 +106,7 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-优先读 [20 实际 CZ 查询与四步 MPC 性能证书](docs/learning/20_certified_multistep_queries.md)。下一步推广历史 CZ 的认证成员点重建，保留廉价盒基线，在连续滚动且约束活跃的任务中评估总计算成本；当前固定后验快照不能替代四旋翼闭环验证。
+优先读 [21 任意多等式 CZ 的认证支持查询](docs/learning/21_generic_cz_support_certificate.md)。下一步把通用认证器接入 `check_constrained_zonotope.py` 的连续 `predict/observe` 历史 CZ，在约束活跃的滚动任务中比较 0-query / full-query / fixed-order / certificate-priority；必须同时统计支持 LP、QP 与总墙钟时间，并主动寻找“LP 更少但总时间更差”的反例。
 
 前置结果 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
 
