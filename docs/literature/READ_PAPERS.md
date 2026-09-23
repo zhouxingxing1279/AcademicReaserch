@@ -47,12 +47,22 @@
 - 方法/关系：adaptive observer 的 state/model/initial-condition estimates 联动 tightening、terminal ingredients 和 tube geometry；作者建立 recursive feasibility 与 robust exponential stability。与本项目 recenter/update gate 高度相邻，必须全文排重。
 
 ## Ping — Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems
-- 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850
-- 稳定链接：https://doi.org/10.1155/2015/875850
-- 研究问题：quasi-LPV 受约束系统中，zonotopic set-membership estimation 刷新后如何维持 dynamic output-feedback robust MPC。
-- 方法概要：在线刷新 zonotopic estimation-error set，并专门设置下一采样时刻的辅助可行性判据；若该判据不通过，则继承上一时刻 controller parameters，而不是无条件采用新估计集合对应的控制更新。
-- 关键结论：论文明确指出，直接使用 true-state bounds 处理不确定性时主优化问题的 recursive feasibility 可能丢失，并给出辅助优化/继承机制来维持下一时刻可行性。
-- 与本项目关系：这是“估计集合更新必须经过 recursive-feasibility gate”非常直接的旧近邻，进一步否定把 gate 本身当作创新。
-- 可借鉴点：更新失败时 fallback 到旧控制器/旧证书，与本项目 anytime certificate 不足时拒绝 recenter 的语义接近。
-- 局限：其几何、controller parameterization 与当前 constrained-zonotope finite-support certificate 不同；尚未证明两者计算结构等价。
-- 本项目状态：新增为高优先级递归可行性近邻；后续创新只能落在更窄的 finite-control-normal certified computation / cost advantage 上。
+- 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850；DOI：https://doi.org/10.1155/2015/875850
+- 方法/关系：zonotopic estimation-error set 刷新后用辅助 feasibility condition 决定是否采用更新；失败时继承旧 controller parameters。“更新前 feasibility gate”不是创新。
+
+## Mayne, Seron, Raković — Robust model predictive control of constrained linear systems with bounded disturbances
+- 年份/出处：2005, *Automatica*, 41(2):219–224；DOI：https://doi.org/10.1016/j.automatica.2004.08.019
+- 研究问题：离散线性系统受持续有界加性扰动且有状态/输入硬约束时的 robust MPC。
+- 方法/关键结论：以 disturbance-invariant / tube 思想构造 robust constrained MPC，使闭环状态收敛到 disturbance-invariant neighborhood；是经典 bounded-disturbance tube/RMPC 基线。
+- 与本项目关系：第25章 LQR + RPI 检查属于这一经典框架的基础实例，不能把“稳定 K + RPI tightening”作为创新。
+- 局限：加性 LTI disturbance contract 不保留本项目 `T*phi` 输入—状态相关性；直接套用会要求把相关项独立盒化。
+- 本项目状态：作为 ancillary-controller 与 terminal-set 合成的经典基线。
+
+## Raković, Kerrigan, Kouramas, Mayne — Invariant approximations of the minimal robust positively invariant set
+- 年份/出处：2005, *IEEE Transactions on Automatic Control*, 50(3):406–410；DOI：https://doi.org/10.1109/TAC.2005.843854
+- 研究问题：稳定离散 LTI 系统受有界持续扰动时，如何计算 mRPI 的可控精度外逼近。
+- 方法/关键结论：给出 robust positively invariant outer approximation 及可预先指定逼近精度的条件。
+- 与本项目关系：第25章有限 Minkowski 和 + 尾项外包属于同一 mRPI 计算问题；后续合法 tube 需要以此类方法作为基线。
+- 可借鉴点：有限和本身是 mRPI 的内侧截断，不能直接当安全 tube；必须处理无限尾项。
+- 局限：仍是 additive LTI setting，不能解决 `deltaT*phi` 的 joint correlation。
+- 本项目状态：已用于约束第25章的证书语义；下一步比较 correlation-preserving joint tube 时继续作为 independent-additive baseline。
