@@ -1,0 +1,18 @@
+{
+  "status": "rolling_control_normal_ledger_audit_not_full_mpc_proof",
+  "horizon": 8,
+  "ticks": 26,
+  "terminal_ledger_shift_violations": 0,
+  "support_gap_vs_minimal_coordinate_box": {
+    "+terminal_4_1": {"queries": 234, "strict_box_gap": 0, "mean_gap": 1.4826696375870146e-19, "max_gap": 3.469446951953614e-18},
+    "-terminal_4_1": {"queries": 234, "strict_box_gap": 0, "mean_gap": 1.2602691919489625e-19, "max_gap": 6.938893903907228e-18},
+    "+diagnostic_4_-1": {"queries": 234, "strict_box_gap": 233, "mean_gap": 0.00861337027692226, "max_gap": 0.011000000000000003},
+    "-diagnostic_4_-1": {"queries": 234, "strict_box_gap": 233, "mean_gap": 0.007495897435897435, "max_gap": 0.009880000000000002}
+  },
+  "conclusion": "For the currently certified attitude terminal normals +/-[4,1], the minimal coordinate box is support-exact on this rolling benchmark; a separate support ledger gives no tightening benefit here. Correlation is visible on diagnostic +/-[4,-1], which is not a currently certified MPC normal.",
+  "limitations": [
+    "current config has K=null, so no certified input-feedback mixed normals exist",
+    "fixed affine outer model; no terminal append or closed-loop MPC",
+    "floating HiGHS audit"
+  ]
+}
