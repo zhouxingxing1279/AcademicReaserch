@@ -22,59 +22,40 @@ h_{X^+}(p)-p^\top z^+\le h_{X^-}(p)-p^\top z^-.
 
 ## 2026-09-23 — 六状态 rolling CZ 与 posterior-member recenter LP
 
+第 23 章把一维反例推进到六状态 rolling CZ。62 个压力方向中，coordinate-midpoint recenter 在 26 次 measurement update 的 19 个 tick 出现 251 个 mixed-direction violations，最大 support 增长约 `1.78694e-3`；posterior-member budget LP 将数值违反降为 0。但这些 mixed directions 当时并非真实 MPC normals，因此只证明几何现象，不证明 recursive-feasibility failure。
+
+---
+
+## 2026-09-23 — 真实已认证 control normals 门：第 23 章候选被降级
+
 ### 研究问题
 
-把第 22 章从 1D 推到现有六状态平面四旋翼 affine outer model。重点检查：coordinate-wise posterior midpoint 是否足以保护高维控制方向；若不足，是否能把安全 center selection 写成小型 LP。
+检查第 23 章是否把“随机 mixed-direction 几何反例”过早解释成了“本项目 MPC shifted candidate 会失败”。只允许使用仓库已经有严格来源的 control normals，不人为挑选一个方便制造反例的六状态反馈增益。
+
+### 使用的真实法向
+
+- 六状态 state/domain box 的 12 个 signed coordinate normals；
+- `theory/05` 已证明有限姿态终端多面体的 4 个 faces：`±(1,0)`、`±(4,1)`；
+- 同一证书反馈 `K_a=[8/25,4/25]` 对 torque tightening 诱导的 `±K_a`。
+
+共 18 个方向。完整 `planar_baseline.json` 仍有 `K=null`、`terminal_certificate=null`，所以不存在可诚实使用的 translational feedback/input normals。
+
+### 代码实验
+
+新增 `verification/check_control_normals_recenter.py`，复用第 23 章相同的六状态 affine outer model、truth、测量时序和非零 truth-consistent measurement rule。
+
+实际运行结果：26 次 updates、18 个真实已认证方向，`violation_ticks=0`、`direction_violations=0`，最大 growth 仅 `3.33e-16` 数值舍入量。归档于 `results/control_normals_recenter_20260923/checks.json`。
 
 ### 新文献边界
 
-- Andrade, Normey-Rico, Raffo, IEEE Access 2024：已经直接提出 constrained-zonotope-based Tube MPC，并在 24-state tiltrotor UAV + suspended load HIL 场景验证。因此“CZ + Tube MPC + UAV”不是创新。
-- Dey, Bhasin, arXiv 2026 `2605.23661`：Output Feedback MPC with Adaptive Tubes。adaptive observer 的 state/model/initial-condition point estimates 与集合共同更新，并在线改变 tightening、terminal ingredients 与 tube geometry；作者建立 recursive feasibility 与 robust exponential stability。因此“output feedback + evolving estimate + adaptive tube”也不是足够窄的创新。
+Ping (2015), *Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems* 明确指出 estimation-error set 刷新后主 MPC 下一时刻可行性可能丢失，并使用辅助 feasibility condition；失败时继承旧 controller parameters。结合 Köhler et al. 的 monotonic/non-increasing RAMPC 条件与 Dey/Bhasin 2026 adaptive tubes，说明“估计集合更新前加 recursive-feasibility gate”本身也不是创新。
 
-### 新理论接口
+### 被否定/收缩
 
-新 posterior 写成
-\[
-X^+=\{c+G\xi:A\xi=b,\|\xi\|_\infty\le1\}.
-\]
-旧方向误差预算 \(\beta_j=h_{X^-}(p_j)-p_j^\top z^-\)。若强制新 center 是 posterior member，\(z^+=c+G\xi_c\)，则保护方向只需线性约束
-\[
-p_j^\top G\xi_c\ge h_{X^+}(p_j)-\beta_j-p_j^\top c.
-\]
-连同 \(A\xi_c=b, |\xi_c|\le1\)，并最小化相对普通 point estimate 的 \(\ell_\infty\) 偏差，得到一个 LP。
-
-该结果的价值在于：support query 与 center selection 分离；前者可沿第 21 章认证，后者只在 posterior latent coordinates 中求解。
-
-### 代码验证
-
-新增 `verification/check_rolling_recenter_budget.py`，复用 `check_constrained_zonotope.py` 的六状态 affine physical outer model。使用非零、真值一致 measurement sequence；62 个 protected directions = 12 signed coordinate + seed=20260923 的 50 个 mixed unit directions。
-
-数值压力结果：
-
-- 26 个 measurement updates；
-- unrestricted coordinate-midpoint recenter 有 19 个 tick 出现 mixed-direction tube 增长；
-- 共 251 个 direction-update violations；
-- 最大 support 增长 `1.7869429222420186e-3`；
-- budget-center LP 在 19 个 tick 必须调整 midpoint target；
-- 最大 center \(\ell_\infty\) 调整 `1.5133355513984384e-3`；
-- 对全部 62 directions 重新检查后，数值容差 `1e-7` 下 0 violations。
-
-结果归档 `results/rolling_recenter_budget_20260923/checks.json`。
-
-### 重要限制
-
-本轮 support LP 与 center LP 仍为浮点 HiGHS。实验已实际复现同一方程和固定种子，但不是精确算术证明。第 21 章的 support certification 尚需与 center LP 的可行性 certificate 合并。
-
-更重要的是，本轮只比较**同一 tick measurement update 前后**，刻意排除了 dynamics/process propagation。因此它证明/反驳的是 recenter geometry，不是完整 MPC recursive feasibility。
-
-### 被否定的候选
-
-“coordinate midpoint 是高维 CZ 的安全默认 center”被否定。它可以保护坐标投影，但不能保护 mixed control directions。
-
-### 保留候选
-
-保留更窄的：**control-normal-aware posterior-member recenter LP + anytime certified support budget**。若真实 MPC 只需要有限 state/input/terminal normals，则无需每次完整重建 tube geometry。
+- 否定：“第 23 章已证明 unrestricted recenter 会破坏本项目 Tube MPC recursive feasibility。”
+- 保留但降级：“finite control-normal certified update gate”仅是候选；必须等完整六状态控制器产生真实 `K^T q_u` 与 terminal normals 后再检验。
+- 否定研究捷径：不能为了制造 recenter failure 而先挑一个未认证的 K。
 
 ### 下一轮
 
-`planar_baseline.json` 的 `K` 和 terminal certificate 仍为空，不能伪造完整控制器。下一轮应从仓库已有姿态/terminal 证书中提取真实 state normals、candidate-feedback input normals 与 terminal normals，构造一个真正的 shifted-candidate inequality failure；然后检查 budget center 是否保留旧 candidate。只有完成这一步，方向预算才能进入 recursive-feasibility proof。
+优先回到控制基础：从 04/05/08/09 的有限时域、姿态 RPI、硬输入约束结果出发，尝试合成一个满足硬约束的六状态 ancillary feedback/terminal family。只有它通过独立证书后，才重新测试 recenter 候选。如果真实 normals 仍不触发问题，应主动放弃 center-budget 作为主要创新，转向 CZ 压缩/外包对真实 tightening 保守性的可证明改进。
