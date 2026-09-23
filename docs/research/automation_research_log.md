@@ -28,34 +28,52 @@ h_{X^+}(p)-p^\top z^+\le h_{X^-}(p)-p^\top z^-.
 
 ## 2026-09-23 — 真实已认证 control normals 门：第 23 章候选被降级
 
+使用 state/domain box、姿态 terminal faces 与已认证姿态反馈诱导的共18个真实法向重跑 rolling posterior：26次 updates 中 `violation_ticks=0`、`direction_violations=0`。因此否定“第23章已证明 unrestricted recenter 会破坏本项目 Tube MPC recursive feasibility”。Ping (2015) 又说明 estimation-set update 前的 feasibility gate 已有直接近邻。下一步必须先独立合成完整六状态 ancillary controller。
+
+---
+
+## 2026-09-23 — 六状态 ancillary LQR/RPI：发现模型合同假阳性
+
 ### 研究问题
 
-检查第 23 章是否把“随机 mixed-direction 几何反例”过早解释成了“本项目 MPC shifted candidate 会失败”。只允许使用仓库已经有严格来源的 control normals，不人为挑选一个方便制造反例的六状态反馈增益。
+按第24章要求，先尝试合成不依赖学习的六状态 ancillary feedback，再让真实 `K^T q_u` 决定 recenter 候选是否有控制意义。
 
-### 使用的真实法向
+### 文献核对
 
-- 六状态 state/domain box 的 12 个 signed coordinate normals；
-- `theory/05` 已证明有限姿态终端多面体的 4 个 faces：`±(1,0)`、`±(4,1)`；
-- 同一证书反馈 `K_a=[8/25,4/25]` 对 torque tightening 诱导的 `±K_a`。
-
-共 18 个方向。完整 `planar_baseline.json` 仍有 `K=null`、`terminal_certificate=null`，所以不存在可诚实使用的 translational feedback/input normals。
+新增核对 Mayne–Seron–Raković (Automatica 2005) bounded-disturbance robust MPC，以及 Raković–Kerrigan–Kouramas–Mayne (TAC 2005) mRPI outer approximation。它们确认“稳定 K + RPI/tube tightening”是经典基线，不是创新；有限 reachable sum 不能未经尾项处理就当 RPI。
 
 ### 代码实验
 
-新增 `verification/check_control_normals_recenter.py`，复用第 23 章相同的六状态 affine outer model、truth、测量时序和非零 truth-consistent measurement rule。
+新增 `verification/check_ancillary_lqr_rpi.py`。按 `planar_baseline.json` 的 Q/R 标度在 hover LTI 上求 DARE/LQR，得到 `rho(A+BK)=0.9778088237`。对 mRPI 计算 1000 项 Minkowski sum，并使用离散 Lyapunov P-范数对无限尾项做外包。
 
-实际运行结果：26 次 updates、18 个真实已认证方向，`violation_ticks=0`、`direction_violations=0`，最大 growth 仅 `3.33e-16` 数值舍入量。归档于 `results/control_normals_recenter_20260923/checks.json`。
+**语义一致的全域 LTI 合同**必须保留旧水平独立扰动 `dx=4.3107340625`。结果：
 
-### 新文献边界
+- `vx` support 4.37810 > 3，margin = -1.37810；
+- `phi` support 0.70752 > 0.45，margin = -0.25752；
+- `tau` support 0.16244 > 0.08，margin = -0.08244。
 
-Ping (2015), *Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems* 明确指出 estimation-error set 刷新后主 MPC 下一时刻可行性可能丢失，并使用辅助 feasibility condition；失败时继承旧 controller parameters。结合 Köhler et al. 的 monotonic/non-increasing RAMPC 条件与 Dey/Bhasin 2026 adaptive tubes，说明“估计集合更新前加 recursive-feasibility gate”本身也不是创新。
+因此该 LQR/RPI 不满足硬约束。
+
+随后主动测试一个危险错误：把第12章保留 `-T*phi` 后的较小 residual `dx=2.1034840625` 塞回固定 `-g*phi` LTI。数值上所有 state/input margin 居然都变正，其中 `tau` support=0.079264，仅比0.08小约7.36e-4。这是一个非常容易误判为成功的**假阳性**。
+
+但它不是合法证书：较小 residual 的前提正是中心动力学保留 `-T*phi`；固定 hover A 则必须把 `-(T-g)phi` 放回不确定项。详见第25章与 `results/ancillary_lqr_rpi_20260923/checks.json`。
 
 ### 被否定/收缩
 
-- 否定：“第 23 章已证明 unrestricted recenter 会破坏本项目 Tube MPC recursive feasibility。”
-- 保留但降级：“finite control-normal certified update gate”仅是候选；必须等完整六状态控制器产生真实 `K^T q_u` 与 terminal normals 后再检验。
-- 否定研究捷径：不能为了制造 recenter failure 而先挑一个未认证的 K。
+- 否定：通过调 LQR 权重即可在旧独立盒 LTI 上闭合六状态 terminal tube。第12章已有任意策略长期否证，本轮又给出标准 LQR/RPI 的直接硬约束失败。
+- 否定：可以把 reduced residual 与 fixed hover LTI 组合。这会制造数值假阳性。
+- 暂停：finite-control-normal recenter gate。在合法完整 ancillary controller 出现前不再扩展。
+
+### 新的高优先候选
+
+提升 `correlation-preserving joint tube`：显式保留 `q=(T-g)phi` 或 `T phi` 的输入—状态相关性，比较 independent box / McCormick polytope / CZ joint latent representation。目标不是“CZ更紧”的口号，而是证明在同一源域上
+
+\[
+R_{joint}\subseteq R_{corr-outer}\subseteq R_{independent-box}
+\]
+
+并在真实 state/input normals 上得到严格 support 改善，同时维持固定复杂度和 recursive-feasibility 接口。
 
 ### 下一轮
 
-优先回到控制基础：从 04/05/08/09 的有限时域、姿态 RPI、硬输入约束结果出发，尝试合成一个满足硬约束的六状态 ancillary feedback/terminal family。只有它通过独立证书后，才重新测试 recenter 候选。如果真实 normals 仍不触发问题，应主动放弃 center-budget 作为主要创新，转向 CZ 压缩/外包对真实 tightening 保守性的可证明改进。
+构造最小 `deltaT-phi-vx` 联合一步/多步模型，实际代码比较独立盒、McCormick 与 CZ/联合潜变量外包；必须同时找严格包含正例和“相关性方法并不更紧”的边界/反例。只有这一层成立，才推进六状态 terminal/tube 合成。
