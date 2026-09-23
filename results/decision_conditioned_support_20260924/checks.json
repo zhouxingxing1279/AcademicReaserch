@@ -1,0 +1,18 @@
+{
+  "scope": "decision-conditioned robust support for thrust decision d and SMF attitude interval",
+  "seed": 20260924,
+  "cases": 10000,
+  "bounds": {"abs_deltaT": 4.905, "abs_phi_global": 0.45, "g": 9.81},
+  "max_formula_vs_endpoint_error": 3.552713678800501e-15,
+  "strict_improvement_cases": 10000,
+  "mean_support_reduction_vs_global_phi_box": 2.387627622267139,
+  "max_support_reduction_vs_global_phi_box": 43.55940182692278,
+  "min_support_reduction_vs_global_phi_box": 6.678610953381181e-05,
+  "mean_posterior_width_ratio": 0.33191932290003123,
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"},
+  "limitations": [
+    "single-stage support audit with a scalar attitude interval",
+    "future attitude interval is treated as certified and independent of the thrust decision under the current separated attitude/thrust model",
+    "does not establish recursive feasibility or terminal invariance"
+  ]
+}
