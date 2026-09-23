@@ -52,41 +52,52 @@
 
 ## Mayne, Seron, Raković — Robust model predictive control of constrained linear systems with bounded disturbances
 - 年份/出处：2005, *Automatica*, 41(2):219–224；DOI：https://doi.org/10.1016/j.automatica.2004.08.019
-- 研究问题：离散线性系统受持续有界加性扰动且有状态/输入硬约束时的 robust MPC。
-- 方法/关键结论：以 disturbance-invariant / tube 思想构造 robust constrained MPC，使闭环状态收敛到 disturbance-invariant neighborhood；是经典 bounded-disturbance tube/RMPC 基线。
-- 与本项目关系：第25章 LQR + RPI 检查属于这一经典框架的基础实例，不能把“稳定 K + RPI tightening”作为创新。
-- 局限：加性 LTI disturbance contract 不保留本项目 `T*phi` 输入—状态相关性；直接套用会要求把相关项独立盒化。
-- 本项目状态：作为 ancillary-controller 与 terminal-set 合成的经典基线。
+- 方法/关系：经典 bounded-disturbance robust/tube MPC 基线；当前 LQR+RPI 不能作为创新。
 
 ## Raković, Kerrigan, Kouramas, Mayne — Invariant approximations of the minimal robust positively invariant set
 - 年份/出处：2005, *IEEE Transactions on Automatic Control*, 50(3):406–410；DOI：https://doi.org/10.1109/TAC.2005.843854
-- 研究问题：稳定离散 LTI 系统受有界持续扰动时，如何计算 mRPI 的可控精度外逼近。
-- 方法/关键结论：给出 robust positively invariant outer approximation 及可预先指定逼近精度的条件。
-- 与本项目关系：第25章有限 Minkowski 和 + 尾项外包属于同一 mRPI 计算问题；后续合法 tube 需要以此类方法作为基线。
-- 可借鉴点：有限和本身是 mRPI 的内侧截断，不能直接当安全 tube；必须处理无限尾项。
-- 局限：仍是 additive LTI setting，不能解决 `deltaT*phi` 的 joint correlation。
-- 本项目状态：已用于约束第25章的证书语义；下一步比较 correlation-preserving joint tube 时继续作为 independent-additive baseline。
+- 方法/关系：mRPI 可控精度外逼近；有限 Minkowski 和必须补无限尾项才能作安全 tube。
 
 ## McCormick — Computability of global solutions to factorable nonconvex programs: Part I — Convex underestimating problems
 - 年份/出处：1976, *Mathematical Programming*, 10:147–175；DOI：https://doi.org/10.1007/BF01580665
-- 研究问题：factorable nonconvex programs 的可计算凸下估计/松弛。
-- 方法/关键结论：建立后来称为 McCormick relaxation 的乘积/复合函数凸凹包络框架；单个 bilinear term 在矩形域上的四个线性不等式是基础工具。
-- 与本项目关系：第26章 `q=deltaT*phi` 的 box-domain convex hull 基线。对线性 support query，不能声称普通 CZ 比该 convex hull 更紧。
-- 局限：静态 box relaxation 不利用 SMF posterior 的非矩形相关域，也不解决多时刻共享变量结构。
-- 本项目状态：已作为 correlation-preserving joint tube 的最强单乘积 box 凸基线。
+- 方法/关系：单 bilinear term 的经典 convexification 基础；box-domain 线性 support 下普通 CZ 不会比 exact convex hull 更紧。
 
 ## Müller, Serrano, Gleixner — Using Two-Dimensional Projections for Stronger Separation and Propagation of Bilinear Terms
 - 年份/出处：2020, *SIAM Journal on Optimization*；DOI：https://doi.org/10.1137/19M1249825
-- 研究问题：当 bilinear variables 的真实可行域是 box 的严格非矩形子集时，标准 box McCormick 可能过松，如何利用二维投影产生更强有效不等式。
-- 方法/关键结论：通过变量二维投影和 LP-based bound tightening 构造 stronger separation/propagation；明确额外域结构是超越基础 McCormick 的信息来源。
-- 与本项目关系：直接支持下一步把 SMF posterior 投影作为 `deltaT/phi` 或 scheduling-state 联合域，而不是比较“CZ vs McCormick”名称。
-- 局限：是全局优化/凸化方法，不给 Tube MPC 递归可行性或 SMF 接口。
-- 本项目状态：作为 posterior-conditioned bilinear hull 的关键近邻。
+- 方法/关系：非矩形二维可行域可产生比 box McCormick 更强的 separation；支持利用真实 posterior/scheduling 域，但不提供 Tube MPC 递归可行性。
 
 ## Kochdumper, Althoff — Constrained polynomial zonotopes
 - 年份/出处：2023, *Acta Informatica*, 60:279–316；DOI：https://doi.org/10.1007/s00236-023-00437-5
-- 研究问题：如何用统一非凸集合表示支持线性、交、并、凸包以及 quadratic/higher-order maps。
-- 方法/关键结论：constrained polynomial zonotope 对 quadratic/higher-order maps 等运算封闭，并给出多种集合表示转换和复杂度约减。
-- 与本项目关系：说明“用 polynomial/CZ 类表示精确保留乘积”已有强基础，不能作为创新；若使用，应服务于 SMF-conditioned control support certificate。
-- 局限：不直接解决 MPC protected normals、recursive feasibility 或在线 support-query budget。
-- 本项目状态：候选实现工具/文献边界，不作为独立贡献。
+- 方法/关系：支持 quadratic/higher-order maps；“用 polynomial zonotope 表示乘积”已有成熟理论，只能作为实现工具。
+
+## Bujarbaruah, Nair, Borrelli — A Semi-Definite Programming Approach to Robust Adaptive MPC under State Dependent Uncertainty
+- 年份/出处：2020, European Control Conference；预印本：arXiv:1910.04378
+- 研究问题：未知加性且 state-dependent、全局 Lipschitz 的不确定性如何在线学习并保持硬约束鲁棒满足。
+- 方法/关键结论：用 set-membership 方法和 quadratic-constraint envelopes 随数据细化 uncertainty graph；在线通过凸优化对当前 envelope 中所有不确定性保证约束满足。
+- 与本项目关系：说明“SMF 信息进入 state/scheduling-dependent robustification”已有直接先例。我们的贡献若存在，必须更具体到 CZ-SMF 的未来 support certificate、四旋翼输入相关项和递归可行性接口。
+- 局限：不是当前 CZ support-query/finite-normal 结构，也不直接处理 `deltaT*phi` 的控制决策语义。
+- 本项目状态：新增为 state-dependent uncertainty 强基线。
+
+## Hanema et al. — Stabilizing non-linear model predictive control using linear parameter-varying embeddings and tubes
+- 年份/出处：2021, *IET Control Theory & Applications*；DOI：https://doi.org/10.1049/cth2.12131
+- 研究问题：利用 nonlinear system 的 LPV embedding 构造可稳定的 MPC，同时处理未来 scheduling parameter 未知。
+- 方法/关键结论：限制 state evolution 于时变集合，并利用 scheduling-state 关系构造对应 future scheduling tube；相较静态 scheduling bounds 得到更紧未来 bounds，并建立 recursive feasibility/stability。
+- 与本项目关系：直接限制“利用 state set 推出未来 scheduling tube”这一创新声明；下一步必须强调 SMF-certified support 与输入相关四旋翼结构的差异。
+- 局限：不是 set-membership output-feedback CZ 接口。
+- 本项目状态：作为第27章 scheduling-tube 最近邻。
+
+## Abbas — Linear parameter-varying model predictive control for nonlinear systems using general polytopic tubes
+- 年份/出处：2024, *Automatica*, 160:111432；DOI：https://doi.org/10.1016/j.automatica.2023.111432
+- 研究问题：LPV embedding 中未来 scheduling trajectory 不确定导致保守性，如何利用 anticipated scheduling bounds 构造更灵活 tube。
+- 方法/关键结论：使用未来 scheduling-parameter uncertainty bounds 构造 anticipated scheduling tubes，并在线合成 general polytopic invariant state tubes；目标就是降低仅用粗全域/rate bounds 的保守性。
+- 与本项目关系：说明“更紧未来 scheduling interval 降低 tube conservatism”不是新机制；本项目必须在 SMF 如何认证这些 bounds 及其跨时刻嵌套上形成新结论。
+- 局限：不直接提供 CZ-SMF measurement posterior 或 anytime support certificates。
+- 本项目状态：强近邻，后续必须对照。
+
+## Fleming, Hawari — Robust Tube MPC Using Gain-Scheduled Policies for a Class of LPV Systems
+- 年份/出处：2024, *IEEE Control Systems Letters*, 8:1589–1594；DOI：https://doi.org/10.1109/LCSYS.2024.3412652
+- 研究问题：LPV-A 系统中如何用 gain-scheduled policy 降低固定 feedback perturbation policy 的保守性。
+- 方法/关键结论：控制策略对 scheduling parameter 仿射，state/input 用在线参数化 polyhedral tubes 约束；可利用 parameter rate bounds，证明 recursive feasibility 和 exponential stability。
+- 与本项目关系：decision/scheduling-dependent tube 已有成熟理论；第27章 exact epigraph 是方法组件而非独立创新。
+- 局限：论文限制于 LPV-A class，当前四旋翼 thrust-attitude coupling 的输入相关结构不同，仍需单独建立合法模型和 shift proof。
+- 本项目状态：作为 decision-conditioned tube 强基线。
