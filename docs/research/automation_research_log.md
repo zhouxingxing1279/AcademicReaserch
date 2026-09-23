@@ -33,30 +33,31 @@
 
 ---
 ## 2026-09-24 — Naive fixed-complexity reduction 的 shift-support reversal 反例
+第29章构造 `A=alpha B` 且只改变 generator 表示的反例。10,000 nested pairs 中 326 对在 terminal mixed normal `(4,1)` 上发生 independent reduction support reversal；coordinate normals 0 reversal。证明 outer inclusion 本身不足以支撑 shifted-candidate proof。
+
+---
+## 2026-09-24 — Rolling control-normal ledger 现实检查：当前真实 terminal normal 无 tightening 收益
 
 ### 研究问题
-第28章留下的问题是：`A subset B` 时，独立执行 fixed-order outer reduction 是否会破坏 MPC control normals 上的 support ordering。本轮直接构造反例，而不是继续停留在“可能”。
-
-### 反例构造
-取二维 zonotope `B=Z(0,G)`，令 `A=alpha B`，`alpha in [0.65,0.98]`。A 的表示把第一根 generator 精确拆成 s=2..6 根 `alpha*g/s`；这个 split 不改变集合，因此集合层面严格有 `A subset B`。对 A/B 独立执行 generator-box outer reduction：按 `||g||_1-||g||_inf` 选择保留 generator，其余 boxify。
+第29章的一般二维反例是否真的发生在当前六状态 rolling CZ 的真实控制法向？若廉价 monotone coordinate box 在真实 normals 上已经 support-exact，则 support ledger 虽安全但没有降低保守性的价值。
 
 ### 代码验证
-新增 `verification/check_reduction_shift_monotonicity.py`。固定 seed `20260924`，10,000 个 nested pairs。检查 coordinate normals 与仓库姿态 terminal mixed normal `p=(4,1)`。
+新增 `verification/check_rolling_control_normal_ledger.py`，复用六状态 affine outer model、truth-consistent measurement、26 ticks、horizon=8。对每个 tick/horizon 查询 exact CZ 与最小 coordinate box，共每方向 234 次。
 
-结果：326/10,000 pairs 在 `+/- (4,1)` 上发生 reduction support reversal；coordinate normals 0 reversal，符合 boxification 保留坐标 support 的预期。最坏样例 exact support 从 `10.249386` 收缩到 `9.802623`，但 reduction 后反而从 `10.249386` 增至 `14.634527`，reversal gap `4.385141`。结果归档 `results/reduction_shift_monotonicity_20260924/checks.json`。
+当前有来源的姿态 terminal normals `+/- (4,1)`：两方向均 `0/234` strict box gap，最大差分别约 `3.47e-18`、`6.94e-18`，即数值精度内 support-exact；其 exact support ledger 的 shifted nesting violations 为 0。
 
-### 理论结论
-单次 outer inclusion `X subset R(X)` 不足以支持 recursive-feasibility shift proof。必须额外证明至少对有限 MPC normals `p_j`：`h_R(A)(p_j) <= h_R(B)(p_j)`。
+作为负对照，非控制诊断方向 `+(4,-1)` 有 `233/234` strict gaps，mean `8.613e-3`、max `1.10e-2`；`-(4,-1)` 同样 `233/234`，mean `7.496e-3`、max `9.88e-3`。因此 rolling posterior 的确存在 phi-omega correlation，只是当前已认证 terminal normal 没有消费这部分相关性。
 
-### 修复候选
-1. **control-normal cap intersection**：先 outer-reduce，再与旧 horizon 已认证 halfspace caps 相交。因为 exact A 已包含于旧 caps，该交仍外包 A，同时强制 finite-normal support non-expansion。缺点是 constraint count 增长，后续若再 naive reduce 会重新破坏证书。
-2. **shared H-template / certified support ledger**：固定真实 state/input/terminal normals，只维护其 certified supports。`A subset B` 自动给 componentwise support monotonicity，facet complexity 固定。它不能单独替代用于 propagation/measurement intersection 的 CZ，因此更合理的是 CZ-SMF + reduced propagation set + 独立 control-normal ledger 的双层接口。
+### 被否定/降级的结论
+- “第29章 mixed-normal reversal 已经证明当前四旋翼 MPC 需要 support ledger”：否定。随机/构造法向不能代替真实 controller normals。
+- “control-normal ledger 当前能降低 terminal tightening”：否定；当前 `+/- (4,1)` 上 coordinate box 已经 exact。
+- support ledger 的 shift-safety 接口仍成立，但降级为基础组件，不再作为当前主创新。
 
-### 新增文献边界
-核对 Girard 2005 zonotope reachability/order reduction、Raghuraman & Koeln 2022 Automatica CZ set operations/order reductions，以及 2026 ACC 最新 *Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control*。后者做不改变集合的 redundancy removal，天然不破坏 nesting，但不能保证长期传播始终满足固定复杂度预算。因此普通 reduction 与 exact redundancy pruning 均不能直接构成本项目创新。
+### 文献更新
+重新核对 2026 ACC Robbins–Siefert–Pangborn 的 exact CZ representation complexity reduction：其方法删除表示冗余但保持集合完全不变，因此天然保持 support/nesting，应先于任何 approximate reduction 使用；但不能保证长期固定预算。该边界已补充进 `READ_PAPERS.md`。
 
 ### 候选创新状态
-主候选更新为 **certificate-preserving fixed-complexity reduction + control-normal support ledger**。创新必须同时证明 outer inclusion、有界复杂度、真实 MPC normals 上 shift compatibility，并在 worst-case tube 基线上产生严格 tightening 改善。首次性仍未确认。
+`certificate-preserving fixed-complexity reduction` 仅条件保留。要恢复为主候选，必须先得到真实 ancillary feedback `K` 和 terminal family，再证明其 state/input/terminal normals 上 exact CZ 相比 monotone box/ellipsoid 有持续严格 support gap。
 
 ### 下一轮关键任务
-把 naive reduction 和 cap/ledger 修复真正接入第28章六状态 rolling CZ。若真实 rolling posterior 上 mixed control normals 从不触发 reversal，或 repair 的 constraint growth/LP 成本抵消 tightening 收益，则降级该方向；否则开始构造 shifted-candidate recursive-feasibility lemma，并补 terminal append。
+停止制造任意 mixed normals。当前 config 仍明确 `K=null`、`terminal_certificate=null`。下一轮应回到语义一致的 ancillary/terminal synthesis：自动生成真实 `P_MPC={state normals, K^T q_u, terminal normals}`，随后才比较 exact CZ、coordinate box、ellipsoid 和 fixed-order CZ。若真实 normals 仍无 tightening gap，应主动放弃 reduction-ledger 主线。
