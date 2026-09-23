@@ -1,0 +1,20 @@
+{
+  "scope": "generic rational CZ support-certificate reconstruction stress test",
+  "seed": 20260923,
+  "cases": 600,
+  "reconstructed_members": 600,
+  "numerically_audited_brackets": 600,
+  "zero_width_certificates": 600,
+  "max_certified_gap": "0",
+  "versions": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "limitations": [
+    "random rational full-row-rank equality systems, not adversarial ill-conditioned instances",
+    "success of reconstruction is validated, not guaranteed for arbitrary floating proposals",
+    "numerical LP optimum is used only as an audit oracle"
+  ],
+  "source_sha256": "899e5b985095306602ea5ff74a00e861091008811716275a68fe928248b27b68"
+}
