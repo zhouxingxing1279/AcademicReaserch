@@ -1,0 +1,25 @@
+{
+  "scope": "single bilinear graph q=dT*phi over symmetric thrust-attitude box",
+  "bounds": {"abs_deltaT": 4.905, "abs_phi": 0.45, "g": 9.81},
+  "seed": 20260924,
+  "random_directions": 10000,
+  "max_abs_mccormick_vs_exact_support_error": 3.552713678800501e-15,
+  "max_abs_analytic_gap_formula_error": 3.552713678800501e-15,
+  "directions_with_strict_independent_box_gap": 5002,
+  "mean_independent_box_support_gap": 0.31000874102010634,
+  "max_independent_box_support_gap": 3.157085351571168,
+  "physical_output_direction_examples": {
+    "1,1": {"exact": 11.52675, "independent": 11.52675, "gap": 0.0},
+    "-1,1": {"exact": 7.11225, "independent": 11.52675, "gap": 4.4145},
+    "1,-1": {"exact": 11.52675, "independent": 11.52675, "gap": 0.0},
+    "-1,-1": {"exact": 7.11225, "independent": 11.52675, "gap": 4.4145},
+    "0,1": {"exact": 6.62175, "independent": 6.62175, "gap": 0.0}
+  },
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"},
+  "interpretation": [
+    "For one bilinear term on a rectangle, McCormick is support-exact because it is the convex hull of the bilinear graph.",
+    "The independent q-box is strict only in sign-incompatible joint directions.",
+    "Pure horizontal output direction has zero gap, so correlation preservation alone does not reduce the one-step vx support in this minimal model.",
+    "Further gain must exploit nonrectangular SMF domains, shared products across stages, or other structure."
+  ]
+}
