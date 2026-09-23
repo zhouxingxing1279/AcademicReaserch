@@ -110,10 +110,12 @@
 - 局限：没有给出本项目所需的 rolling SMF shift-support ledger。
 - 本项目状态：作为 fixed-complexity CZ 强基线。
 
-## Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control
-- 年份/出处：2026, American Control Conference (ACC 2026)，IEEE Xplore 2026-08-13 收录。
-- 研究问题：识别 zonotope/CZ 表示中的冗余，在**不改变集合**的前提下降低 representation complexity。
-- 方法/关键结论：刻画 irredundant zonotopic representations 与若干 redundancy 来源，提出冗余检测/删除算法，并在 robust controllable sets 等例子上验证。
-- 与本项目关系：exact redundancy removal 不改变集合，因此天然保留 exact-CZ shift nesting，适合作为压缩流水线第一阶段；但它不能保证反复传播后总能满足固定复杂度预算，仍需要 outer reduction。
-- 局限：解决 representation redundancy，而非 approximation-induced support reversal；不能替代第29章要研究的 certificate-preserving outer reduction。
-- 本项目状态：新增为 2026 最新近邻，后续实现应先 exact-prune 再考虑 approximate reduction。
+## Robbins, Siefert, Pangborn — Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control
+- 年份/出处：2026, *American Control Conference (ACC 2026)*；IEEE Xplore 收录日期 2026-08-13。
+- 稳定链接：https://ieeexplore.ieee.org/document/11615961
+- 研究问题：反复集合运算会使 zonotope/CZ representation complexity 增长；哪些 generators/constraints 是表示冗余，能否在保持集合完全不变时删除？
+- 方法/关键结论：形式化 irredundant zonotopic representation 与多类 redundancy，给出检测/删除算法；数值例包含 robust controllable sets 和 ReLU domain partitioning。其 reduction 是 exact representation reduction，不是 approximate outer enclosure。
+- 与本项目关系：该方法不改变集合，所以 exact-CZ 的 shift nesting 和所有 support 都自动保持；它应成为压缩流水线第一阶段，先 exact-prune，再讨论 approximate fixed-budget reduction。
+- 可借鉴点：把“表示复杂度”与“集合几何近似误差”明确分离，避免把可精确删除的冗余误算成必须牺牲 tightness 的 fixed-order 问题。
+- 局限：exact pruning 不能保证长期 propagation/update 后一定达到预设固定 generator/equality budget；也没有解决 independent approximate reductions 导致的 control-normal support reversal。
+- 本项目状态：已采用为设计原则；不把 exact redundancy removal 声称为本项目创新。
