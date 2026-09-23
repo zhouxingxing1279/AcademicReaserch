@@ -1,0 +1,27 @@
+{
+  "scope": "recentered posterior containment proof-obligation check",
+  "seed": 20260923,
+  "cases": 10000,
+  "exact_counterexample": {
+    "old_set": ["-1", "1"],
+    "new_set": ["-9/10", "9/10"],
+    "old_center": "0",
+    "new_center": "9/10",
+    "old_error_set": ["-1", "1"],
+    "new_error_set": ["-9/5", "0"],
+    "posterior_nested": true,
+    "recentered_error_nested": false,
+    "support_budget_ok": false
+  },
+  "seeded_interval_stress": {
+    "arbitrary_posterior_center_containment_failures": 1150,
+    "failure_fraction": 0.115,
+    "support_budget_equivalence_matches": 10000,
+    "midpoint_center_failures_for_nested_intervals": 0
+  },
+  "interpretation": [
+    "posterior shrinkage alone does not preserve a tube error set after arbitrary recentering",
+    "the exact direction-wise support budget detects every one-dimensional containment outcome in the seeded stress test",
+    "midpoint recentering is safe for nested one-dimensional intervals only; no higher-dimensional CZ claim is inferred"
+  ]
+}
