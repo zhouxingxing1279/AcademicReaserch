@@ -1,0 +1,20 @@
+{
+  "status": "negative_result_existing_certified_normals_do_not_exhibit_recenter_failure",
+  "ticks": 26,
+  "directions": 18,
+  "violation_ticks": 0,
+  "direction_violations": 0,
+  "max_growth": 3.3306690738754696e-16,
+  "normals": [
+    "12 signed state-box normals",
+    "4 finite attitude terminal normals",
+    "2 attitude torque-feedback normals"
+  ],
+  "key_limitation": "planar_baseline.json still has K=null and terminal_certificate=null; no certified translational feedback/input normals exist yet",
+  "interpretation": "chapter-23 random mixed-direction counterexamples are geometric stress tests, not yet a demonstrated MPC recursive-feasibility failure",
+  "runtime": {
+    "python_experiment_seed": "deterministic measurement rule from chapter 23",
+    "measurement_rule": "0.3*halfwidth*(-1)^(tick+measurement_index)",
+    "solver": "scipy.optimize.linprog HiGHS"
+  }
+}
