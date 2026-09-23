@@ -66,3 +66,27 @@
 - 可借鉴点：有限和本身是 mRPI 的内侧截断，不能直接当安全 tube；必须处理无限尾项。
 - 局限：仍是 additive LTI setting，不能解决 `deltaT*phi` 的 joint correlation。
 - 本项目状态：已用于约束第25章的证书语义；下一步比较 correlation-preserving joint tube 时继续作为 independent-additive baseline。
+
+## McCormick — Computability of global solutions to factorable nonconvex programs: Part I — Convex underestimating problems
+- 年份/出处：1976, *Mathematical Programming*, 10:147–175；DOI：https://doi.org/10.1007/BF01580665
+- 研究问题：factorable nonconvex programs 的可计算凸下估计/松弛。
+- 方法/关键结论：建立后来称为 McCormick relaxation 的乘积/复合函数凸凹包络框架；单个 bilinear term 在矩形域上的四个线性不等式是基础工具。
+- 与本项目关系：第26章 `q=deltaT*phi` 的 box-domain convex hull 基线。对线性 support query，不能声称普通 CZ 比该 convex hull 更紧。
+- 局限：静态 box relaxation 不利用 SMF posterior 的非矩形相关域，也不解决多时刻共享变量结构。
+- 本项目状态：已作为 correlation-preserving joint tube 的最强单乘积 box 凸基线。
+
+## Müller, Serrano, Gleixner — Using Two-Dimensional Projections for Stronger Separation and Propagation of Bilinear Terms
+- 年份/出处：2020, *SIAM Journal on Optimization*；DOI：https://doi.org/10.1137/19M1249825
+- 研究问题：当 bilinear variables 的真实可行域是 box 的严格非矩形子集时，标准 box McCormick 可能过松，如何利用二维投影产生更强有效不等式。
+- 方法/关键结论：通过变量二维投影和 LP-based bound tightening 构造 stronger separation/propagation；明确额外域结构是超越基础 McCormick 的信息来源。
+- 与本项目关系：直接支持下一步把 SMF posterior 投影作为 `deltaT/phi` 或 scheduling-state 联合域，而不是比较“CZ vs McCormick”名称。
+- 局限：是全局优化/凸化方法，不给 Tube MPC 递归可行性或 SMF 接口。
+- 本项目状态：作为 posterior-conditioned bilinear hull 的关键近邻。
+
+## Kochdumper, Althoff — Constrained polynomial zonotopes
+- 年份/出处：2023, *Acta Informatica*, 60:279–316；DOI：https://doi.org/10.1007/s00236-023-00437-5
+- 研究问题：如何用统一非凸集合表示支持线性、交、并、凸包以及 quadratic/higher-order maps。
+- 方法/关键结论：constrained polynomial zonotope 对 quadratic/higher-order maps 等运算封闭，并给出多种集合表示转换和复杂度约减。
+- 与本项目关系：说明“用 polynomial/CZ 类表示精确保留乘积”已有强基础，不能作为创新；若使用，应服务于 SMF-conditioned control support certificate。
+- 局限：不直接解决 MPC protected normals、recursive feasibility 或在线 support-query budget。
+- 本项目状态：候选实现工具/文献边界，不作为独立贡献。
