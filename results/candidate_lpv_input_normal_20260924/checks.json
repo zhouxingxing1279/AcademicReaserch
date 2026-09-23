@@ -1,0 +1,32 @@
+{
+  "status": "candidate_only_not_ancillary_or_terminal_certificate",
+  "seed": 20260924,
+  "horizon": 8,
+  "ticks": 26,
+  "model": "horizontal-attitude LPV family with known thrust retained: vx+=vx-dt*T*phi; tau is the only ancillary input",
+  "K_horizontal_attitude": [[0.14257495145600113, 0.2006738212090799, -1.1714620251650414, -0.22860545513750966]],
+  "input_normal_six_state": [0.14257495145600113, 0.0, 0.2006738212090799, 0.0, -1.1714620251650414, -0.22860545513750966],
+  "vertex_frozen_stability": [
+    {"T": 4.905, "spectral_radius": 0.9915812083490388},
+    {"T": 9.81, "spectral_radius": 0.9778088237066863},
+    {"T": 14.715, "spectral_radius": 0.9781403290290114}
+  ],
+  "endpoint_switching_search": {
+    "max_length": 12,
+    "worst_normalized_product_radius": 0.9915812083490396,
+    "records": [0.9915812083490388,0.9915812083490391,0.9915812083490395,0.9915812083490396,0.9915812083490394,0.9915812083490396,0.9915812083490395,0.9915812083490395,0.9915812083490395,0.9915812083490395,0.9915812083490395,0.9915812083490395],
+    "interpretation": "finite endpoint-product search is falsification evidence only, not an arbitrary-switching proof"
+  },
+  "rolling_CZ_vs_coordinate_box_on_candidate_input_normal": {
+    "queries": 468,
+    "strict_gaps": 331,
+    "mean_gap": 3.198254076382253e-05,
+    "max_gap": 0.00018127720226590593
+  },
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"},
+  "limitations": [
+    "K is a hover DARE candidate; no common Lyapunov/contractive terminal certificate is claimed",
+    "rolling CZ still uses the repository fixed affine outer model; this audit only asks whether the generated normal consumes posterior correlation",
+    "no additive-disturbance RPI or hard-input tube certificate is claimed"
+  ]
+}
