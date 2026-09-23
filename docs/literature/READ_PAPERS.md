@@ -93,3 +93,27 @@
 ## Fleming, Hawari — Robust Tube MPC Using Gain-Scheduled Policies for a Class of LPV Systems
 - 年份/出处：2024, *IEEE Control Systems Letters*, 8:1589–1594；DOI：https://doi.org/10.1109/LCSYS.2024.3412652
 - 方法/关系：gain-scheduled policy、parameter-rate bounds、online polyhedral tubes，证明 recursive feasibility/exponential stability；decision/scheduling-dependent tube 已有成熟理论。
+
+## Girard — Reachability of Uncertain Linear Systems Using Zonotopes
+- 年份/出处：2005, HSCC, LNCS 3414:291–305；DOI：https://doi.org/10.1007/978-3-540-31954-2_19
+- 研究问题：用 zonotope 可扩展地计算不确定线性系统 reachable sets，并控制表示复杂度。
+- 方法/关键结论：zonotope 传播配合 generator/order reduction；经典 generator-box 外包模式保证单次 outer enclosure，但其目标不是跨两个嵌套集合保持 reduction operator 的 monotonicity。
+- 与本项目关系：第29章使用同类 generator-box reduction 构造 shift-support reversal；普通 order reduction 本身不能作为创新。
+- 局限：不处理 SMF measurement posterior 与 MPC shifted-candidate support compatibility。
+- 本项目状态：作为 naive fixed-order reduction 基线。
+
+## Raghuraman, Koeln — Set operations and order reductions for constrained zonotopes
+- 年份/出处：2022, *Automatica*, 139:110204；DOI：https://doi.org/10.1016/j.automatica.2022.110204；预印本：https://arxiv.org/abs/2009.06039
+- 研究问题：提高 zonotope/CZ 在控制集合运算中的实用性，并提供复杂度约减方法。
+- 方法概要：扩展 halfspace intersection、convex hull、RPI、Pontryagin difference 等 CZ 运算，并研究 zonotope/CZ order reduction。
+- 与本项目关系：说明“CZ order reduction”已有系统理论；本项目若有贡献必须落在 reduction error 与 recursive-feasibility control normals 的联动证书，而不是提出一般 reduction。
+- 局限：没有给出本项目所需的 rolling SMF shift-support ledger。
+- 本项目状态：作为 fixed-complexity CZ 强基线。
+
+## Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control
+- 年份/出处：2026, American Control Conference (ACC 2026)，IEEE Xplore 2026-08-13 收录。
+- 研究问题：识别 zonotope/CZ 表示中的冗余，在**不改变集合**的前提下降低 representation complexity。
+- 方法/关键结论：刻画 irredundant zonotopic representations 与若干 redundancy 来源，提出冗余检测/删除算法，并在 robust controllable sets 等例子上验证。
+- 与本项目关系：exact redundancy removal 不改变集合，因此天然保留 exact-CZ shift nesting，适合作为压缩流水线第一阶段；但它不能保证反复传播后总能满足固定复杂度预算，仍需要 outer reduction。
+- 局限：解决 representation redundancy，而非 approximation-induced support reversal；不能替代第29章要研究的 certificate-preserving outer reduction。
+- 本项目状态：新增为 2026 最新近邻，后续实现应先 exact-prune 再考虑 approximate reduction。
