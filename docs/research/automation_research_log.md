@@ -36,28 +36,40 @@
 第29章构造 `A=alpha B` 且只改变 generator 表示的反例。10,000 nested pairs 中 326 对在 terminal mixed normal `(4,1)` 上发生 independent reduction support reversal；coordinate normals 0 reversal。证明 outer inclusion 本身不足以支撑 shifted-candidate proof。
 
 ---
-## 2026-09-24 — Rolling control-normal ledger 现实检查：当前真实 terminal normal 无 tightening 收益
+## 2026-09-24 — Rolling control-normal ledger 现实检查
+当前姿态 terminal normals `+/- (4,1)` 上 coordinate box 对 rolling CZ support-exact；诊断 `+/- (4,-1)` 有明显 gap。因此 support-ledger/reduction 主线降级，等待真实 ancillary feedback 自动产生输入法向。详见第30章。
+
+---
+## 2026-09-24 — 保留推力语义的 LPV ancillary 候选：真实输入法向出现 CZ gap
 
 ### 研究问题
-第29章的一般二维反例是否真的发生在当前六状态 rolling CZ 的真实控制法向？若廉价 monotone coordinate box 在真实 normals 上已经 support-exact，则 support ledger 虽安全但没有降低保守性的价值。
+第30章因 `K=null` 无法判断 CZ posterior correlation 是否会在真实输入约束中产生 tightening 收益。本轮不再人为挑 mixed normal，而在第12/25章语义一致的 `A(T)` 家族上用 hover DARE 生成一个 ancillary 候选，再检查由 `|tau|<=0.08` 自动产生的 `K` 法向。
+
+### 理论/模型
+使用 `e=[px,vx,phi,omega]` 与 `vx+=vx-h*T*phi`，保留已知/决策推力 T；不把 `(T-g)phi` 错误独立盒化。得到候选
+
+`K=[0.1425749515, 0.2006738212, -1.1714620252, -0.2286054551]`。
+
+冻结 `T={4.905,9.81,14.715}` 的谱半径分别为 `0.9915812083, 0.9778088237, 0.9781403290`。端点矩阵全部长度1–12 switching products 的最大归一化谱半径 `0.99158120835`。这只是 falsification search，不是任意 switching 稳定证明；config 的 `K` 保持 null。
 
 ### 代码验证
-新增 `verification/check_rolling_control_normal_ledger.py`，复用六状态 affine outer model、truth-consistent measurement、26 ticks、horizon=8。对每个 tick/horizon 查询 exact CZ 与最小 coordinate box，共每方向 234 次。
+新增 `verification/check_candidate_lpv_input_normal.py`。将候选 K 嵌入六状态真实 torque input normal，在第30章相同 rolling CZ（26 ticks, horizon=8）上比较 exact CZ 与 minimal coordinate box。正负方向共 468 queries：331 次 strict gap，mean `3.1982541e-5`，max `1.8127720e-4`。
 
-当前有来源的姿态 terminal normals `+/- (4,1)`：两方向均 `0/234` strict box gap，最大差分别约 `3.47e-18`、`6.94e-18`，即数值精度内 support-exact；其 exact support ledger 的 shifted nesting violations 为 0。
+这首次表明由**真实反馈候选 + 真实 torque constraint**产生的 normal 会消费 CZ posterior correlation；但 gap 很小，且 K 尚无 common Lyapunov/RCI/terminal certificate，因此不能声称可行域已改善。
 
-作为负对照，非控制诊断方向 `+(4,-1)` 有 `233/234` strict gaps，mean `8.613e-3`、max `1.10e-2`；`-(4,-1)` 同样 `233/234`，mean `7.496e-3`、max `9.88e-3`。因此 rolling posterior 的确存在 phi-omega correlation，只是当前已认证 terminal normal 没有消费这部分相关性。
-
-### 被否定/降级的结论
-- “第29章 mixed-normal reversal 已经证明当前四旋翼 MPC 需要 support ledger”：否定。随机/构造法向不能代替真实 controller normals。
-- “control-normal ledger 当前能降低 terminal tightening”：否定；当前 `+/- (4,1)` 上 coordinate box 已经 exact。
-- support ledger 的 shift-safety 接口仍成立，但降级为基础组件，不再作为当前主创新。
+运行环境：Python 3.13.5, NumPy 2.3.5, SciPy 1.17.0。结果归档 `results/candidate_lpv_input_normal_20260924/checks.json`。
 
 ### 文献更新
-重新核对 2026 ACC Robbins–Siefert–Pangborn 的 exact CZ representation complexity reduction：其方法删除表示冗余但保持集合完全不变，因此天然保持 support/nesting，应先于任何 approximate reduction 使用；但不能保证长期固定预算。该边界已补充进 `READ_PAPERS.md`。
+新增 Hanema–Lazar–Tóth, Automatica 2017：LPV tube MPC 的 periodically contractive terminal set/cost；新增 Ping–Yao–Ding–Li, IEEE TCYB 2022：LPV output-feedback tube RMPC、nested RPI/RCI sets 与 scaled terminal sets。由此确认“LPV terminal family”和“nested LPV output-feedback tube”都不是创新。
 
-### 候选创新状态
-`certificate-preserving fixed-complexity reduction` 仅条件保留。要恢复为主候选，必须先得到真实 ancillary feedback `K` 和 terminal family，再证明其 state/input/terminal normals 上 exact CZ 相比 monotone box/ellipsoid 有持续严格 support gap。
+### 被否定/限制
+- frozen vertices Schur 不推出 arbitrary switching stability；
+- 有限 switching product 搜索通过不能替代 common Lyapunov/contractive-set proof；
+- input-normal support gap 不能替代 additive-remainder RPI 与 `|tau|<=0.08` 硬约束证书；
+- 不修改 `planar_baseline.json` 的 `K=null`。
 
-### 下一轮关键任务
-停止制造任意 mixed normals。当前 config 仍明确 `K=null`、`terminal_certificate=null`。下一轮应回到语义一致的 ancillary/terminal synthesis：自动生成真实 `P_MPC={state normals, K^T q_u, terminal normals}`，随后才比较 exact CZ、coordinate box、ellipsoid 和 fixed-order CZ。若真实 normals 仍无 tightening gap，应主动放弃 reduction-ledger 主线。
+### 保留候选
+`CZ-SMF posterior correlation -> certified tightening on real ancillary input normals` 恢复为条件候选。要成为贡献，必须证明该 gap 在合法 ancillary/terminal controller 下持续存在并转化为 nominal input margin / feasible-set 的严格改善，而不是只展示几何差异。
+
+### 下一轮关键证明义务
+对 `A(T)+BK, T in [4.905,14.715]` 搜索严格 common quadratic 或 periodically contractive certificate；若成功，再加入语义一致的 `r_x(T)` remainder 做 robust control invariant tube 和 torque margin 审计。若硬输入约束仍失败，则当前 K 只能保留为诊断法向，不能进入控制器。
