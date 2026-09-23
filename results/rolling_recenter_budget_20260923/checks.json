@@ -1,0 +1,22 @@
+{
+  "status": "rolling_cz_recenter_numerical_falsification_not_controller",
+  "seed": 20260923,
+  "ticks": 26,
+  "protected_directions": 62,
+  "unrestricted_violation_ticks": 19,
+  "unrestricted_direction_violations": 251,
+  "max_unrestricted_support_growth": 0.0017869429222420186,
+  "budget_center_adjusted_ticks": 19,
+  "max_budget_center_adjustment_linf": 0.0015133355513984384,
+  "budget_center_direction_violations": 0,
+  "truth_initial_error_coordinates": [0.015, -0.012, 0.04, -0.03, 0.003, -0.006],
+  "measurement_noise_rule": "0.3*halfwidth*(-1)^(tick+measurement_index)",
+  "model": "six-state affine physical outer model from configs/planar_baseline.json and verification/check_constrained_zonotope.py",
+  "protected_direction_construction": "12 signed coordinate directions plus 50 seeded unit-normalized Gaussian mixed directions",
+  "limitations": [
+    "support and center LPs use floating SciPy/HiGHS; this run is numerical evidence, not an exact certificate",
+    "the experiment checks same-tick measurement-update/recenter containment, not the complete MPC shifted-candidate proof",
+    "the budget-constrained center is required to be a member of the posterior CZ through its latent coordinates",
+    "the reported summary was independently reproduced in the research runtime with the same equations and seed; the committed script is the reproducible repository implementation"
+  ]
+}
