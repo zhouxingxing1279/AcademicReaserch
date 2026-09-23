@@ -1,0 +1,38 @@
+{
+  "seed": 20260924,
+  "pairs": 10000,
+  "construction": "A = alpha B exactly; first generator split only in A representation",
+  "reversal_pair_count": 326,
+  "reversal_pair_rate": 0.0326,
+  "reversal_counts_by_normal": {
+    "+e1": 0,
+    "-e1": 0,
+    "+e2": 0,
+    "-e2": 0,
+    "+terminal_4_1": 326,
+    "-terminal_4_1": 326
+  },
+  "max_gap_by_normal": {
+    "+e1": 0.0,
+    "-e1": 0.0,
+    "+e2": 0.0,
+    "-e2": 0.0,
+    "+terminal_4_1": 4.3851410943778735,
+    "-terminal_4_1": 4.3851410943778735
+  },
+  "worst_counterexample": {
+    "trial": 1162,
+    "normal": "+terminal_4_1",
+    "p": [4.0, 1.0],
+    "gap": 4.3851410943778735,
+    "alpha": 0.9564107538309929,
+    "split": 5,
+    "h_A": 9.80262299734472,
+    "h_B": 10.249386007088892,
+    "h_RA": 14.634527101466768,
+    "h_RB": 10.249386007088894,
+    "keep_A": 6,
+    "keep_B": 0
+  },
+  "interpretation": "Independent generator-box outer reductions need not preserve support ordering on nested sets. Coordinate supports are preserved by this boxification and act as a negative control; mixed terminal normal [4,1] can reverse."
+}
