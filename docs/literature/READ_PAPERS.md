@@ -65,3 +65,52 @@
 - 可借鉴点：未来比较应至少包含 ellipsoidal set-membership MPC，而不只比较普通 MPC 与 CZ 方法。
 - 局限：LMI 保守近似和当前方向支持证书接口不同；不能直接回答控制相关 CZ 压缩是否值得。
 - 本项目状态：列入后续方法对比基线。
+
+## Köhler, Kötting, Soloperto, Allgöwer, Müller — A robust adaptive model predictive control framework for nonlinear uncertain systems
+
+- 年份/出处：2021, *International Journal of Robust and Nonlinear Control*
+- DOI：https://doi.org/10.1002/rnc.5147
+- 预印本：https://arxiv.org/abs/1911.02899
+- 研究问题：非线性系统存在参数不确定性和加性扰动时，如何把 set-membership 参数估计安全地接入 tube-based RAMPC。
+- 方法概要：抽象出 parameter-estimator 与 tube/set-based MPC 需要满足的 monotonicity/non-increasing 条件，再给出基于 incremental Lyapunov function 的构造。
+- 关键结论：在其条件下保证 robust recursive feasibility 与 constraint satisfaction，并给出相对不适应 robust MPC 更低保守性的构造；附加 point estimate 进入目标时可得有限增益稳定性质。
+- 与本项目关系：直接压低“估计集合缩小保证递归可行”的创新空间；本项目必须处理 state-estimation CZ、nominal-center 漂移和控制方向证书的更具体接口。
+- 可借鉴点：任何在线集合更新必须明确 monotonicity 条件，不能只凭数值体积下降。
+- 局限：主要是参数不确定性 RAMPC，不等同于本项目的输出反馈状态后验 CZ。
+- 本项目状态：作为递归可行性近邻理论基线。
+
+## Lu, Cannon, Koksal-Rivet — Robust adaptive model predictive control: Performance and parameter estimation
+
+- 年份/出处：2021, *International Journal of Robust and Nonlinear Control*
+- DOI：https://doi.org/10.1002/rnc.5175
+- 研究问题：线性不确定模型下，如何同时进行在线参数集合收缩、robust tube MPC、性能优化和参数收敛分析。
+- 方法概要：set-membership 更新模型参数集合，用固定复杂度多面体包络参数/预测状态集合，并在 robust tube MPC 中使用 nominal cost。
+- 关键结论：给出 recursive feasibility 与 ISS；讨论 persistence of excitation、参数集合收敛、固定复杂度估计和扰动界不精确时的行为。
+- 与本项目关系：说明“固定复杂度集合 + 在线收缩 + Tube MPC + ISS”已有成熟结果；本项目不能仅靠换 CZ 声称理论创新。
+- 可借鉴点：后续若提出 CZ 压缩，必须比较固定复杂度包络的计算量与保守性，并保留递归包含。
+- 局限：参数集合而非输出反馈状态 CZ；没有本项目的按控制方向 anytime support certificate。
+- 本项目状态：作为 fixed-complexity adaptive robust MPC 基线。
+
+## Peschke, Mönnigmann — Robust adaptive tube tracking model predictive control for piece-wise constant reference signals
+
+- 年份/出处：2023, *International Journal of Robust and Nonlinear Control*
+- DOI：https://doi.org/10.1002/rnc.6814
+- 研究问题：参数不确定和加性扰动下，参考与 nominal model 都可能在线改变时，如何保持 tracking MPC 的约束满足与递归可行性。
+- 方法概要：set-membership 缩小 uncertainty set，point estimate 更新 nominal model，并构造适应 changing target/uncertainty 的 tube 与 terminal ingredients。
+- 关键结论：论文明确指出 tube 围绕 nominal trajectory 时，nominal model 改变会让 recursive-feasibility proof 困难；相应算法显式处理 nominal/target 更新。
+- 与本项目关系：直接支持第 22 章的研究动机，同时说明“中心/nominal 漂移是问题”本身不是新发现。
+- 可借鉴点：需要把 nominal update 纳入 feasibility certificate，而不能只证明 uncertainty set non-increasing。
+- 局限：其对象是参数/模型更新，不是 constrained-zonotope state posterior 的方向 support budget。
+- 本项目状态：作为 nominal-update 近邻边界文献。
+
+## Köhler et al. — Robust adaptive MPC using control contraction metrics
+
+- 年份/出处：2023, *Automatica*
+- DOI：https://doi.org/10.1016/j.automatica.2023.111169
+- 研究问题：如何对较一般的非线性不确定系统构造可计算的 robust adaptive tube MPC，同时允许在线模型更新。
+- 方法概要：用 control contraction metric 构造状态/输入依赖 tube dynamics，并使用 set-membership 参数更新；在线优化 nominal parameter 以避免部分既有 RAMPC 对 nominal update 的限制。
+- 关键结论：保证 recursive feasibility、constraint satisfaction 和收敛到目标邻域；文中用 planar quadrotor 数值例展示 homothetic tube 与在线适应。
+- 与本项目关系：这是四旋翼 + set-membership + adaptive tube MPC 的重要近邻，显著压低泛化的创新声明空间。
+- 可借鉴点：四旋翼验证不能只和普通 MPC 比；应把 state/input-dependent uncertainty bound 与 nominal-parameter update 作为强基线思想。
+- 局限：采用 CCM 与参数不确定性框架，不提供 CZ state-estimation posterior 的 anytime support/recenter certificate。
+- 本项目状态：列为四旋翼阶段必须详细全文排重和对比的近邻。
