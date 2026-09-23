@@ -24,7 +24,11 @@
 
 ## Köhler, Kötting, Soloperto, Allgöwer, Müller — A robust adaptive model predictive control framework for nonlinear uncertain systems
 - 年份/出处：2021, *International Journal of Robust and Nonlinear Control*；DOI：https://doi.org/10.1002/rnc.5147
-- 方法/关系：set-membership 参数更新的 monotonic/non-increasing 条件与 tube update 联合保证 robust recursive feasibility/constraint satisfaction；“集合缩小帮助递归可行”不是新结论。
+- 研究问题：递归模型/参数更新后，如何仍保证 robust recursive feasibility 与 constraint satisfaction。
+- 方法/关键结论：set-membership estimation 提供逐步更准确的参数不确定集合；论文明确推导 estimation algorithm 与 tube/set-based RAMPC 所需的 monotonicity / non-increasing 条件，并在 incremental-Lyapunov tube 中给出可实现条件。
+- 与本项目关系：第28章 exact CZ shift-nesting 属于同一“更新必须与旧预测兼容”的大理论边界；因此 nesting 本身不是创新。真正未闭合的是 fixed-complexity CZ reduction 是否保持这种兼容性。
+- 局限：处理参数不确定性 RAMPC，不是当前 output-feedback CZ state posterior 的固定复杂度压缩接口。
+- 本项目状态：作为 recursive-update monotonicity 的强基线。
 
 ## Lu, Cannon, Koksal-Rivet — Robust adaptive model predictive control: Performance and parameter estimation
 - 年份/出处：2021, *International Journal of Robust and Nonlinear Control*；DOI：https://doi.org/10.1002/rnc.5175
@@ -72,32 +76,20 @@
 
 ## Bujarbaruah, Nair, Borrelli — A Semi-Definite Programming Approach to Robust Adaptive MPC under State Dependent Uncertainty
 - 年份/出处：2020, European Control Conference；预印本：arXiv:1910.04378
-- 研究问题：未知加性且 state-dependent、全局 Lipschitz 的不确定性如何在线学习并保持硬约束鲁棒满足。
-- 方法/关键结论：用 set-membership 方法和 quadratic-constraint envelopes 随数据细化 uncertainty graph；在线通过凸优化对当前 envelope 中所有不确定性保证约束满足。
-- 与本项目关系：说明“SMF 信息进入 state/scheduling-dependent robustification”已有直接先例。我们的贡献若存在，必须更具体到 CZ-SMF 的未来 support certificate、四旋翼输入相关项和递归可行性接口。
-- 局限：不是当前 CZ support-query/finite-normal 结构，也不直接处理 `deltaT*phi` 的控制决策语义。
-- 本项目状态：新增为 state-dependent uncertainty 强基线。
+- 方法/关系：set-membership refinement + state-dependent uncertainty envelope + robust MPC；“SMF 信息进入 state-dependent robustification”已有先例。
 
 ## Hanema et al. — Stabilizing non-linear model predictive control using linear parameter-varying embeddings and tubes
 - 年份/出处：2021, *IET Control Theory & Applications*；DOI：https://doi.org/10.1049/cth2.12131
-- 研究问题：利用 nonlinear system 的 LPV embedding 构造可稳定的 MPC，同时处理未来 scheduling parameter 未知。
-- 方法/关键结论：限制 state evolution 于时变集合，并利用 scheduling-state 关系构造对应 future scheduling tube；相较静态 scheduling bounds 得到更紧未来 bounds，并建立 recursive feasibility/stability。
-- 与本项目关系：直接限制“利用 state set 推出未来 scheduling tube”这一创新声明；下一步必须强调 SMF-certified support 与输入相关四旋翼结构的差异。
-- 局限：不是 set-membership output-feedback CZ 接口。
-- 本项目状态：作为第27章 scheduling-tube 最近邻。
+- 研究问题：利用 nonlinear system 的 LPV embedding 构造可稳定 MPC，同时处理未来 scheduling parameter 未知。
+- 方法/关键结论：限制 state evolution 于时变集合，并利用 scheduling-state 关系构造 future scheduling tube；相较静态 bounds 得到更紧未来 bounds，并以该结构建立 recursive feasibility/stability。
+- 与本项目关系：第27–28章的未来 `phi` scheduling intervals 与 shift nesting 有直接近邻，因此“state set -> scheduling tube”不能作为创新。差异只能落在 CZ-SMF measurement posterior、certified finite-normal support 与 fixed-complexity reduction compatibility。
+- 局限：不是 set-membership output-feedback CZ 压缩问题。
+- 本项目状态：作为 scheduling-tube 强基线。
 
 ## Abbas — Linear parameter-varying model predictive control for nonlinear systems using general polytopic tubes
 - 年份/出处：2024, *Automatica*, 160:111432；DOI：https://doi.org/10.1016/j.automatica.2023.111432
-- 研究问题：LPV embedding 中未来 scheduling trajectory 不确定导致保守性，如何利用 anticipated scheduling bounds 构造更灵活 tube。
-- 方法/关键结论：使用未来 scheduling-parameter uncertainty bounds 构造 anticipated scheduling tubes，并在线合成 general polytopic invariant state tubes；目标就是降低仅用粗全域/rate bounds 的保守性。
-- 与本项目关系：说明“更紧未来 scheduling interval 降低 tube conservatism”不是新机制；本项目必须在 SMF 如何认证这些 bounds 及其跨时刻嵌套上形成新结论。
-- 局限：不直接提供 CZ-SMF measurement posterior 或 anytime support certificates。
-- 本项目状态：强近邻，后续必须对照。
+- 方法/关系：anticipated scheduling bounds + general polytopic tubes；“更紧未来 scheduling interval 降低保守性”不是新机制。
 
 ## Fleming, Hawari — Robust Tube MPC Using Gain-Scheduled Policies for a Class of LPV Systems
 - 年份/出处：2024, *IEEE Control Systems Letters*, 8:1589–1594；DOI：https://doi.org/10.1109/LCSYS.2024.3412652
-- 研究问题：LPV-A 系统中如何用 gain-scheduled policy 降低固定 feedback perturbation policy 的保守性。
-- 方法/关键结论：控制策略对 scheduling parameter 仿射，state/input 用在线参数化 polyhedral tubes 约束；可利用 parameter rate bounds，证明 recursive feasibility 和 exponential stability。
-- 与本项目关系：decision/scheduling-dependent tube 已有成熟理论；第27章 exact epigraph 是方法组件而非独立创新。
-- 局限：论文限制于 LPV-A class，当前四旋翼 thrust-attitude coupling 的输入相关结构不同，仍需单独建立合法模型和 shift proof。
-- 本项目状态：作为 decision-conditioned tube 强基线。
+- 方法/关系：gain-scheduled policy、parameter-rate bounds、online polyhedral tubes，证明 recursive feasibility/exponential stability；decision/scheduling-dependent tube 已有成熟理论。
