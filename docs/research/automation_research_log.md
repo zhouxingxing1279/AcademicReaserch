@@ -73,3 +73,14 @@
 
 ### 下一轮关键证明义务
 对 `A(T)+BK, T in [4.905,14.715]` 搜索严格 common quadratic 或 periodically contractive certificate；若成功，再加入语义一致的 `r_x(T)` remainder 做 robust control invariant tube 和 torque margin 审计。若硬输入约束仍失败，则当前 K 只能保留为诊断法向，不能进入控制器。
+
+---
+## 2026-09-24 — LPV ancillary 候选获得严格 common-quadratic 证书
+
+第31章的 K 不再只有 frozen/switching 数值证据。找到显式 `P>0`，其 `lambda_min(P)=0.002844724644`；两个 thrust 端点的 `lambda_min(P-M'PM)` 分别为 `6.188232256e-4` 与 `6.188357202e-4`。由于 `M(T)` 对标量 T 仿射，固定 x 时 `x'M(T)'PM(T)x` 关于 T 为凸二次函数，因此端点严格不等式推出整个 `T∈[4.905,14.715]` 上的 common-quadratic stability。统一 P-metric contraction factor 为 `0.9995634925266`。
+
+新增 `verification/check_lpv_common_quadratic_certificate.py` 与 `results/lpv_common_quadratic_20260924/checks.json`，1001 点 dense grid 仅作为实现交叉检查。该结果严格闭合无扰动 LPV ancillary 稳定性，但**不**闭合 additive remainder RCI、`|tau|<=0.08`、terminal append 或 recursive feasibility，因此 config 的 K 仍保持 null。
+
+文献边界：Hanema–Lazar–Tóth 2017 已覆盖 LPV tube terminal/periodic contraction；Sala 2019 覆盖离散 polytopic LPV decay-rate stability；Meijer–Dolk–Heemels 2024 研究 poly-quadratic certificate/nonexistence。common-P 本身只作为基础证书，不作为创新。
+
+下一轮必须加入语义一致的 aero + `sin(phi)-phi` remainder，优先审计真实 torque RCI margin。若 coarse P-ball 因 contraction 太弱而失败，改用 direction-aware zonotope/CZ finite-sum + certified tail，不能把 P-ball 失败误判为控制器不可行。详见第32章。
