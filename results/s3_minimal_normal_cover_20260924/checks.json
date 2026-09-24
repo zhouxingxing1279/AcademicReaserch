@@ -1,0 +1,25 @@
+{
+  "status": "numerical_minimum_set_cover_audit",
+  "S2_facets": 28,
+  "S3_facets": 52,
+  "S2_vertices": 98,
+  "S2_nonviable_vertices": 78,
+  "S2_viable_vertices": 20,
+  "new_S3_halfspaces": 38,
+  "minimum_new_halfspaces": 10,
+  "minimum_symmetric_pairs": 5,
+  "selected_facets": [
+    {"normal":["1","3/50","-2943/500000","-981/25000000"],"rhs":"39981236851/8000000000","bad_vertices_cut":22},
+    {"normal":["1","3/50","-8829/500000","-2943/25000000"],"rhs":"39979806553/8000000000","bad_vertices_cut":23},
+    {"normal":["-1","-3/50","2943/500000","981/25000000"],"rhs":"39981236851/8000000000","bad_vertices_cut":22},
+    {"normal":["-1","-3/50","8829/500000","2943/25000000"],"rhs":"39979806553/8000000000","bad_vertices_cut":23},
+    {"normal":["0","1","-2943/10000","-2943/500000"],"rhs":"2306309823/800000000","bad_vertices_cut":12},
+    {"normal":["0","-1","2943/10000","2943/500000"],"rhs":"2306309823/800000000","bad_vertices_cut":12},
+    {"normal":["0","1","-8829/10000","-8829/500000"],"rhs":"2299409469/800000000","bad_vertices_cut":18},
+    {"normal":["0","0","-1","-3/50"],"rhs":"1137/2500","bad_vertices_cut":11},
+    {"normal":["0","-1","8829/10000","8829/500000"],"rhs":"2299409469/800000000","bad_vertices_cut":18},
+    {"normal":["0","0","1","3/50"],"rhs":"1137/2500","bad_vertices_cut":11}
+  ],
+  "conclusion": "Within the audited S3\\S2 candidate pool, at least 10 halfspaces (5 symmetric pairs) are required to cut every S2 vertex that lacks an admissible endpoint-robust torque into S2.",
+  "limitation": "Vertex removal is necessary geometry triage only; it does not prove the augmented template is RCI or that 5 pairs are globally minimal outside the S3 candidate pool."
+}
