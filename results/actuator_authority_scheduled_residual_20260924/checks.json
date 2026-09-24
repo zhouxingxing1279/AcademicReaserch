@@ -1,0 +1,75 @@
+{
+  "scope": "controller-structure-independent low-thrust actuator-authority audit",
+  "model": "[px,vx,phi,omega], vx+=vx-dt*T*phi+dt*r_x, omega+=omega+(dt/J)*tau",
+  "T_low": 4.905,
+  "T_high": 14.715,
+  "hard_state_limits": [5.0, 3.0, 0.45, 2.0],
+  "hard_torque_limit": 0.08,
+  "residual_formula": "|r_x(T)| <= 1.880 + T*0.45^3/6 after retaining -T*phi in A(T)",
+  "cases": {
+    "single_global_bound": {
+      "disturbance_halfwidth": 2.1034840624999998,
+      "equilibrium_phi": 0.428844864933741,
+      "phi_headroom": 0.02115513506625899,
+      "maximum_horizontal_deceleration_at_phi_limit": 0.1037659375000004,
+      "first_horizon_under_tau_limit": {
+        "first_horizon": 381,
+        "first": {
+          "success": true,
+          "peak_torque_optimum": 0.07994631094934744,
+          "state_max_abs": [2.809942248704933, 0.7204943325849243, 0.45, 1.323529411764708],
+          "terminal_state": [2.809942248704933, -0.0, 0.428844864933741, -0.0],
+          "max_abs_control": 0.07994631094934744,
+          "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+        },
+        "previous": {
+          "success": true,
+          "peak_torque_optimum": 0.08039911777867666,
+          "state_max_abs": [2.7952633242152363, 0.7186357851427153, 0.45, 1.3235294117647054],
+          "terminal_state": [2.7952633242152363, -0.0, 0.428844864933741, -0.0],
+          "max_abs_control": 0.08039911777867666,
+          "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+        }
+      }
+    },
+    "thrust_conditioned_bound": {
+      "disturbance_halfwidth": 1.9544946875,
+      "equilibrium_phi": 0.39846986493374104,
+      "phi_headroom": 0.051530135066258975,
+      "maximum_horizontal_deceleration_at_phi_limit": 0.25275531250000016,
+      "first_horizon_under_tau_limit": {
+        "first_horizon": 160,
+        "first": {
+          "success": true,
+          "peak_torque_optimum": 0.07996782686085592,
+          "state_max_abs": [1.05907222708424, 0.6373307169873753, 0.45, 1.3235294117647054],
+          "terminal_state": [1.05907222708424, -0.0, 0.39846986493374104, -0.0],
+          "max_abs_control": 0.07996782686085592,
+          "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+        },
+        "previous": {
+          "success": true,
+          "peak_torque_optimum": 0.08104047746589876,
+          "state_max_abs": [1.0459980788998637, 0.6334711295339053, 0.45, 1.3235294117647067],
+          "terminal_state": [1.0459980788998637, -0.0, 0.39846986493374104, -0.0],
+          "max_abs_control": 0.08104047746589876,
+          "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "global_first_horizon_ticks": 381,
+    "scheduled_first_horizon_ticks": 160,
+    "global_first_horizon_seconds": 7.62,
+    "scheduled_first_horizon_seconds": 3.2,
+    "horizon_reduction_ticks": 221,
+    "relative_horizon_reduction": 0.5800524934383202
+  },
+  "interpretation": [
+    "A feasible trajectory exists even under the single global disturbance bound, so failure of a particular static ancillary gain is not an actuator-authority impossibility proof.",
+    "Using the same analytic residual formula conditioned on the known thrust value strictly enlarges the certified maneuver authority; this is a valid model-contract refinement, not a data-fitted shrinkage.",
+    "The LPs are numerical HiGHS results. They distinguish controller-structure failure from plant-level feasibility, but they are not rational/Farkas formal certificates."
+  ],
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"}
+}
