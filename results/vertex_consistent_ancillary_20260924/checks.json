@@ -1,0 +1,59 @@
+{
+  "status": "vertex_consistent_residual_audit_and_numerical_falsification_search",
+  "model": "4-state horizontal-attitude LPV family; T known and retained in both A(T) and d_x(T)",
+  "state_order": ["px", "vx", "phi", "omega"],
+  "state_limits": [5.0, 3.0, 0.45, 2.0],
+  "tau_limit": 0.08,
+  "residual_formula": "d_x(T)=1.880 + T*0.45^3/6",
+  "controller_independent_equilibrium_necessary_conditions": [
+    {"T": 4.905, "residual_bound": 1.9544946875, "required_phi_support": 0.39846986493374104, "fraction_of_phi_authority": 0.8854885887416467, "remaining_phi_margin": 0.05153013506625897},
+    {"T": 9.81, "residual_bound": 2.028989375, "required_phi_support": 0.20682868246687053, "fraction_of_phi_authority": 0.4596192943708234, "remaining_phi_margin": 0.24317131753312948},
+    {"T": 14.715, "residual_bound": 2.1034840625, "required_phi_support": 0.142948288311247, "fraction_of_phi_authority": 0.31766286291388224, "remaining_phi_margin": 0.307051711688753}
+  ],
+  "chapter34_semantic_correction": {
+    "balanced_candidate_K": [0.01360726, 0.41658618, -3.07723811, -0.52653095],
+    "low_thrust_T": 4.905,
+    "old_uniform_residual_phi_support": 0.451106,
+    "vertex_consistent_phi_support": 0.4191542827337358,
+    "vertex_consistent_vx_support": 3.6960855086454596,
+    "interpretation": "The old low-thrust phi rejection was caused by using the T=14.715 residual bound at T=4.905. After semantic correction phi passes 0.45, but vx still violates 3.0."
+  },
+  "latin_hypercube_search": {
+    "seed": 20260924,
+    "samples": 30000,
+    "search_terms": 220,
+    "gain_box": {
+      "K_px": [0.005, 1.2],
+      "K_vx": [0.01, 3.0],
+      "K_phi": [-6.0, -0.02],
+      "K_omega": [-3.0, -0.01]
+    },
+    "counts": {
+      "schur_all_vertices": 12666,
+      "torque_finite_pass": 1196,
+      "state_finite_pass": 320,
+      "combined_finite_pass": 0
+    },
+    "best_normalized_ratio_search": 1.0882423910779286,
+    "best_sample_K": [0.19272811, 0.71565484, -3.58018519, -0.99624019],
+    "best_sample_search_support": {
+      "spectral_radius_max": 0.994064179324879,
+      "state_support_max": [5.42883654, 2.49025568, 0.48970907, 0.68030494],
+      "torque_support_max": 0.08532434308235165
+    },
+    "interpretation": "No sampled gain passed all finite necessary conditions. This is numerical falsification evidence only, not a nonexistence proof."
+  },
+  "best_sample_long_audit": {
+    "terms": 2000,
+    "spectral_radius_max": 0.994064179324879,
+    "state_support_max": [7.4021162184412335, 3.317224975628245, 0.5536649013363114, 0.6874705231820814],
+    "torque_support_max": 0.08537732601887256,
+    "vertex_records": [
+      {"T": 4.905, "residual_bound": 1.9544946875, "spectral_radius": 0.990983544839439, "finite_state_support": [7.4021162184412335, 3.317224975628245, 0.5536649013363114, 0.6874705231820814], "finite_torque_support": 0.06508840455186024},
+      {"T": 9.81, "residual_bound": 2.028989375, "spectral_radius": 0.9936862203429698, "finite_state_support": [3.842109293136072, 2.1349389723577263, 0.29097444407196793, 0.6468298078455795], "finite_torque_support": 0.07481896313342945},
+      {"T": 14.715, "residual_bound": 2.1034840625, "spectral_radius": 0.994064179324879, "finite_state_support": [2.6554395846121075, 1.718959059735652, 0.2256252060813533, 0.6817150716580386], "finite_torque_support": 0.08537732601887256}
+    ]
+  },
+  "conclusion": "The vertex-wise residual correction removes one false low-thrust phi rejection but does not produce a valid static ancillary gain. The low-thrust constant-disturbance equilibrium independently consumes 88.55% of the allowed attitude range. A deterministic 30000-sample search found no static gain satisfying all finite necessary state/input checks; existence remains unresolved and needs certificate-based joint synthesis.",
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"}
+}
