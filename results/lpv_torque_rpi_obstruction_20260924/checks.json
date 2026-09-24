@@ -1,0 +1,28 @@
+{
+  "scope": "4-state semantic LPV ancillary torque reachable-set obstruction",
+  "state_order": ["px", "vx", "phi", "omega"],
+  "K": [0.1425749515, 0.2006738212, -1.1714620252, -0.2286054551],
+  "tau_limit": 0.08,
+  "disturbance_injection": "w=[0,h*r_x,0,0], |r_x|<=dx; fixed T is an admissible scheduling path",
+  "cases": {
+    "aero_only_lower_bound": {
+      "dx": 1.88,
+      "vertices": {
+        "4.905": {"support_after_terms": {"10": 0.026952528646828955, "25": 0.049440369147219894, "50": 0.05470981452267451, "69": 0.05488197064702937, "100": 0.05521479292057156, "1000": 0.05993985307526408}, "first_term_count_exceeding_tau_limit": null, "max_support_checked": 0.05993985307526408},
+        "9.81": {"support_after_terms": {"10": 0.027152777588750926, "25": 0.05390918404643976, "50": 0.06256364371695307, "69": 0.06666160098878975, "100": 0.06939849079968242, "1000": 0.07084272342286306}, "first_term_count_exceeding_tau_limit": null, "max_support_checked": 0.07084272342286306},
+        "14.715": {"support_after_terms": {"10": 0.02735281328979225, "25": 0.05815071298164784, "50": 0.071766035928544, "69": 0.0800303207752854, "100": 0.08183089163792813, "1000": 0.08248294717491378}, "first_term_count_exceeding_tau_limit": 69, "max_support_checked": 0.08248294717491378}
+      }
+    },
+    "semantic_full_residual": {
+      "dx": 2.1034840624999998,
+      "vertices": {
+        "4.905": {"support_after_terms": {"10": 0.030156497049297546, "25": 0.055317568375156244, "50": 0.061213416441902584, "69": 0.061406037539691, "100": 0.06177842389503196, "1000": 0.0670651732193669}, "first_term_count_exceeding_tau_limit": null, "max_support_checked": 0.0670651732193669},
+        "9.81": {"support_after_terms": {"10": 0.030380550484332306, "25": 0.060317611417056, "50": 0.07000086566518031, "69": 0.07458596556417733, "100": 0.07764820178653443, "1000": 0.07926411684259961}, "first_term_count_exceeding_tau_limit": null, "max_support_checked": 0.07926411684259961},
+        "14.715": {"support_after_terms": {"10": 0.030604365329583074, "25": 0.06506334998931279, "50": 0.08029718766196518, "69": 0.08954388524871028, "100": 0.09155849807475859, "1000": 0.09228806638854285}, "first_term_count_exceeding_tau_limit": 50, "max_support_checked": 0.09228806638854285}
+      }
+    }
+  },
+  "logic": "Any RPI set containing the origin must contain every finite disturbance reachable set. At T=14.715 the finite reachable support in direction K exceeds 0.08, so no RPI tube for this fixed K and stated disturbance contract can satisfy |K e|<=0.08. This is a lower-bound obstruction and needs no tail approximation.",
+  "conclusion": "Candidate K is rejected as a robust ancillary controller under the current global residual contract. Full residual crosses at 50 terms; even aero-only dx=1.880 crosses at 69 terms at T=14.715.",
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"}
+}
