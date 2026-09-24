@@ -69,3 +69,19 @@
 文献新增 Tahir–Jaimoukha 2012、Ben Sassi–Girard 2012 和 Wehbeh–Kerrigan 2025。前两者说明 controller/invariant co-design 已是成熟 baseline；后者强化“state/decision-dependent uncertainty 不应无条件替换为 uniform global set”的建模边界。
 
 下一轮唯一优先问题：停止扩大随机 K 搜索，建立 certificate-based joint state/input synthesis baseline。必须保留 vertex-consistent W(T)，将 px/vx/phi/omega/tau 硬约束直接纳入 common-quadratic 或 polyhedral invariant certificate；若不可行，只能声称该 certificate/controller class 不可行，不能升级为物理 actuator impossibility。
+
+
+---
+## 2026-09-24 — controller-independent actuator authority audit 与 scheduling-conditioned residual 基线
+
+第33–35章的 static-K 失败不能升级为 plant-level actuator impossibility。本轮移除固定反馈结构，在低推力 T=4.905 下直接求解硬状态/力矩约束内、恒定最坏 residual 到扰动平衡点的最小 peak-torque LP。
+
+使用单一全域 residual d=2.1034840625 时，首个数值满足 |tau|<=0.08 的 horizon 为 N=381（7.62 s），t*=0.07994631095；N=380 时 t*=0.08039911778。使用同一解析余项公式按已知 T 条件化后的 d(T_L)=1.9544946875 时，首个数值可行 horizon 降为 N=160（3.20 s），t*=0.07996782686；N=159 时 t*=0.08104047747。数值 horizon 降低 221 tick，约 58.0%。
+
+解析上，global box 在低推力下要求平衡角 phi*=0.4288448649，只剩 0.0211551351 rad 姿态余量；T-conditioned residual 给 phi*=0.3984698649，余量 0.0515301351 rad。对应 phi=0.45 时的水平制动权限从 0.1037659375 提升到 0.2527553125 m/s^2。
+
+该结果否定“现有 static-K 搜索失败说明执行器物理不可能”的过度解释；但 LP 使用 HiGHS 浮点解，因此 N=380/381、159/160 的最短性只作为可复现实验边界，不是有理数/Farkas 形式证明。新增第36章、验证脚本、3项单元测试和归档结果。
+
+文献边界：Kothare–Balakrishnan–Morari 1996 已覆盖 constraint-aware robust state-feedback synthesis；Lorenzen–Cannon–Allgöwer 2019 已把 online set-membership model update 与 robust prediction tubes 结合以降低保守性；Bujarbaruah–Nair–Borrelli 2020 已处理 state-dependent uncertainty。因此 scheduling-conditioned W(T) 是后续比较必须采用的强基线，不作为创新声明。
+
+下一轮唯一优先问题：在 vertex/scheduling-consistent W(T) 下构造并认证对全部允许 thrust scheduling 与 disturbance sequences 有效的 ancillary/RCI tube，同时通过 |px|<=5、|vx|<=3、|phi|<=0.45、|omega|<=2、|tau|<=0.08。该强控制基线通过以前，不恢复 CZ 几何收益讨论。
