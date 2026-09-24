@@ -1,0 +1,24 @@
+{
+  "seed": 20260924,
+  "h": 0.02,
+  "dx": 2.1034840625,
+  "limits": {"tau": 0.08, "vx": 3.0, "phi": 0.45},
+  "torque_only_candidate": {
+    "K": [0.00153696, 0.00744545, -0.09093386, -0.09567285],
+    "vertices": {
+      "4.905": {"rho": 0.9951252711908095, "tau_support_N1000": 0.007525553558175697, "vx_support_N1000": 9.75731919213685, "phi_support_N1000": 0.8058227862780276},
+      "9.81": {"rho": 0.9945031693566224, "tau_support_N1000": 0.009475922427191369, "vx_support_N1000": 6.515112263092096, "phi_support_N1000": 0.46531867899926455},
+      "14.715": {"rho": 0.9951252550699344, "tau_support_N1000": 0.012155213631291992, "vx_support_N1000": 6.4537513941449625, "phi_support_N1000": 0.41559125622698806}
+    }
+  },
+  "balanced_search_candidate": {
+    "K": [0.01360726, 0.41658618, -3.07723811, -0.52653095],
+    "vertices": {
+      "4.905": {"rho": 0.9993112116707614, "tau_support_N1000": 0.06327628784687168, "vx_support_N1000": 3.9778347880891456, "phi_support_N1000": 0.45110603732916554},
+      "9.81": {"rho": 0.9993299171527418, "tau_support_N1000": 0.06821899272559484, "vx_support_N1000": 2.1715025866847717, "phi_support_N1000": 0.22111587516004166},
+      "14.715": {"rho": 0.9993357123109446, "tau_support_N1000": 0.07256917119079712, "vx_support_N1000": 1.5222199632459041, "phi_support_N1000": 0.1468119696400597}
+    }
+  },
+  "versions": {"python": "3.13.5", "numpy": "2.3.5", "scipy": "1.17.0"},
+  "interpretation": "Torque-only feasible candidates exist numerically, so rejection of the previous K is not an actuator-authority impossibility. The torque-only candidate violates vx/phi bounds severely; the balanced candidate keeps torque below 0.08 but violates low-thrust vx/phi finite reachable lower bounds. No constrained-synthesis existence/nonexistence theorem is claimed."
+}
