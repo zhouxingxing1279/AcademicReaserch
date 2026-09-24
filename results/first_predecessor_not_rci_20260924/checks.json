@@ -1,0 +1,29 @@
+{
+  "claim": "X1 = X intersect robust Pre(X) is not robust control invariant.",
+  "exact_parameters": {
+    "h": {"fraction": "1/50", "float": 0.02},
+    "T_low": {"fraction": "981/200", "float": 4.905},
+    "dbar_low": {"fraction": "6254383/3200000", "float": 1.9544946875},
+    "V": {"fraction": "3/1", "float": 3.0},
+    "Omega": {"fraction": "2/1", "float": 2.0},
+    "Tau": {"fraction": "2/25", "float": 0.08}
+  },
+  "witness_state": {
+    "p": {"fraction": "5/1", "float": 5.0},
+    "v": {"fraction": "-3/1", "float": -3.0},
+    "phi": {"fraction": "-6254383/15696000", "float": -0.3984698649337411},
+    "omega": {"fraction": "2/1", "float": 2.0}
+  },
+  "chosen_disturbance": {"fraction": "-6254383/3200000", "float": -1.9544946875},
+  "successor_before_torque_effect": {
+    "p_plus": {"fraction": "247/50", "float": 4.94},
+    "v_plus": {"fraction": "-3/1", "float": -3.0},
+    "phi_plus": {"fraction": "-5626543/15696000", "float": -0.3584698649337411}
+  },
+  "next_X1_low_thrust_velocity_facet_lhs": {"fraction": "750981/250000", "float": 3.003924},
+  "facet_limit": {"fraction": "3/1", "float": 3.0},
+  "strict_violation": {"fraction": "981/250000", "float": 0.003924},
+  "closed_form_violation_h2_T_omega": {"fraction": "981/250000", "float": 0.003924},
+  "torque_independence": "Current tau changes only omega_plus. The violated X1 facet depends only on (v_plus,phi_plus), so no current torque can repair it.",
+  "conclusion": "The chapter-38 one-step predecessor normals are necessary but not closed under repeated predecessor; the second predecessor introduces a v-phi-omega mixed normal."
+}
