@@ -1,0 +1,18 @@
+{
+  "arithmetic": "exact rational",
+  "robust_predecessor_facets": [
+    "|p+h*v| <= P",
+    "|v-h*T_low*phi| + h*dbar(T_low) <= V",
+    "|v-h*T_high*phi| + h*dbar(T_high) <= V",
+    "|phi+h*omega| <= Phi",
+    "exists |tau|<=Tau: |omega+(h/J)*tau|<=Omega"
+  ],
+  "endpoint_argument": "For fixed (v,phi), the velocity robust-support expression is convex in scalar T, so its maximum on the thrust interval is attained at an endpoint.",
+  "counterexamples": {
+    "position": {"p_successor": "253/50", "violation": "3/50"},
+    "attitude": {"phi_successor": "49/100", "violation": "1/25"},
+    "velocity_low_thrust": {"dbar": "6254383/3200000", "v_successor": "493317583/160000000", "violation": "13317583/160000000"},
+    "velocity_high_thrust": {"dbar": "6731149/3200000", "v_successor": "507920749/160000000", "violation": "27920749/160000000"}
+  },
+  "conclusion": "The one-step robust predecessor of the hard box introduces p-v, v-phi and phi-omega mixed facets. A correlated template containing only p-v braking facets is not predecessor-closed for the current four-state chain."
+}
