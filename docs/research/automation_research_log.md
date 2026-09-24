@@ -77,15 +77,17 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 
 ---
 ## 2026-09-24 — thrust scheduling 信息合同闭合
+当前 benchmark 只蕴含 `T∈[4.905,14.715] N` 的逐点约束；任何 universal `rho<9.81 N/tick` 均被合法 endpoint alternation 否定，而 `rho=9.81` 不缩小下一 scheduling set。故 baseline 必须采用 measured-current / arbitrary-future-jump scheduling。详见第40章。
 
-本轮检查当前 frozen planar benchmark 是否真正支持非平凡 `|T_{k+1}-T_k|<=rho`。配置把 `T` 作为直接输入，仅有逐点 `T∈[4.905,14.715] N`；状态中没有 `T_act`。模型文档也明确要求若执行器动态重要必须显式增加实际推力状态并重推合同。
+---
+## 2026-09-24 — arbitrary-jump predecessor 精确端点化
 
-因此对所有 admissible input sequences 成立的最小 universal rate bound 精确为区间直径 `rho=14.715-4.905=9.810 N/tick`：相邻两步直接取两个端点即否定任何更小 rho。`h=0.02 s` 时数值换算为 `490.5 N/s`，但这不是物理 slew-rate 识别结果。取 rho=9.81 时，任意当前 T 的下一 scheduling set 仍是完整区间，所以与纯 pointwise contract 等价，不能提供 bounded-rate PD-RCI 的 transition-set reduction。
+本轮证明 frozen 横向 LPV 模型的一步 polyhedral robust predecessor 可无损地把连续 `T∈[T_L,T_U]` 替换为两个 endpoints。原因是 `A(T)` 与 residual 半径 `dbar(T)` 都对 T 仿射；对任一 target facet 消去 `|d|<=dbar(T)` 后，robust inequality 左端仍是 T 的仿射函数，区间最大值必在端点。由 polyhedron closure 归纳，repeated predecessor 每一层都可同样端点化；这不是 thrust grid。
 
-新增第40章、`verification/check_thrust_scheduling_contract.py` 和 `results/thrust_scheduling_contract_20260924/checks.json`。验证读取 frozen config 并使用 Decimal 精确十进制运算。
+同时用 Fraction 精确枚举 raw row pullbacks：深度1..6不同正向 normals 数为 `5,8,14,25,44,76`。该计数没有执行 torque existential projection、hard-set intersection 和 redundancy elimination，因此只作为 normal-growth 诊断，不能升级为 facet-complexity 定理。
 
-文献核查 Mulagaleti–Mejari–Bemporad, IEEE TAC 70(2):1259–1266, 2025, DOI `10.1109/TAC.2024.3454528`：其 PD-RCI 明确依赖实时 scheduling measurement 与 bounded parameter-variation set。该方法是未来若增加可信 actuator/rate model 时的直接 baseline，但其非平凡 rate assumption 当前不可直接复用。
+文献边界：Mulagaleti–Mejari–Bemporad 的 PD-RCI 已覆盖 bounded-rate parameter-dependent RCI；Mejari–Mulagaleti–Bemporad 已覆盖 fixed-orientation configuration-constrained LPV RCI；Abbas 2024 已使用 future scheduling uncertainty/tubes 构造 general polytopic invariant tubes。因此端点化和 fixed-normal LPV RCI 都只作为 baseline 技术，不宣称创新。
 
-结论：当前强 baseline 必须使用 measured-current / arbitrary-future-jump thrust scheduling。不能为了减小保守性事后加入 rho<9.81。
+新增第41章、`verification/check_endpoint_predecessor_reduction.py` 和 `results/endpoint_predecessor_reduction_20260924/checks.json`。
 
-下一轮唯一优先问题：证明或反驳 arbitrary-jump scheduling 下，有限深度 robust predecessor 对连续 `T_i∈[T_L,T_U]` 的 worst case 是否可精确归约到 endpoint sequences；若成立，计算 endpoint-sequence normal family 的增长和冗余，再进入 correlated-RCI certificate synthesis。
+下一轮唯一优先问题：对 endpoint-exact predecessor 真正执行 torque existential projection 与 redundancy elimination，计算 `S_n=X∩Pre(S_{n-1})` 前若干层，判断 facet family 稳定、持续增长或集合变空，并定位首先成为阻塞的 hard state/input constraint。
