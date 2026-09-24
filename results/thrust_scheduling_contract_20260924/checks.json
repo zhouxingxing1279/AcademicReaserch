@@ -1,0 +1,16 @@
+{
+  "config": "configs/planar_baseline.json",
+  "truth_semantics": "defined_discrete_euler",
+  "thrust_is_direct_input": true,
+  "actuator_state_present": false,
+  "T_min_N": "4.905",
+  "T_max_N": "14.715",
+  "dt_s": "0.02",
+  "endpoint_jump_N_per_tick": "9.810",
+  "smallest_universal_rho_N_per_tick": "9.810",
+  "equivalent_discrete_slope_N_per_s": "490.5",
+  "endpoint_alternation_is_admissible_under_pointwise_contract": true,
+  "nontrivial_rate_bound_rho_lt_span_is_certified": false,
+  "rho_equal_span_reduces_next_parameter_set": false,
+  "conclusion": "Current benchmark supports measured-but-arbitrarily-jumping thrust scheduling only. Any rho < 9.81 N/tick requires a new actuator/command-rate assumption and a re-derived model contract."
+}
