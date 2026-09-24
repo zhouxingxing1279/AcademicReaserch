@@ -1,0 +1,20 @@
+{
+  "status": "numerically_audited_redundancy_exact_projection",
+  "thrust_endpoints": [4.905, 14.715],
+  "tau_bound": 0.08,
+  "layers": [
+    {"depth": 1, "unique_candidates": 17, "nonredundant_facets": 16, "origin_feasible": true},
+    {"depth": 2, "unique_candidates": 31, "nonredundant_facets": 28, "origin_feasible": true},
+    {"depth": 3, "unique_candidates": 135, "nonredundant_facets": 52, "origin_feasible": true},
+    {"depth": 4, "unique_candidates": 1193, "nonredundant_facets": 102, "origin_feasible": true}
+  ],
+  "torque_bound_first_nonredundant_depth": 2,
+  "analytic_torque_facet": "abs(phi + 0.04*omega) <= 0.4516",
+  "depth5_unique_candidates_before_full_redundancy_audit": 6655,
+  "notes": [
+    "Endpoint robustification and scalar-torque Fourier-Motzkin projection are generated with exact rational arithmetic.",
+    "HiGHS floating LPs after row scaling classify redundancy; facet counts are numerical audits rather than exact-arithmetic irredundancy theorems.",
+    "Depth 5 full redundancy classification was intentionally not claimed because the per-facet LP audit exceeded the run budget.",
+    "No empty-set or finite-convergence claim is made."
+  ]
+}
