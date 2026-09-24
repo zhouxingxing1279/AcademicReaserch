@@ -1,0 +1,21 @@
+{
+  "status": "EXACT_AXIS_ALIGNED_RCI_OBSTRUCTION_PASSED",
+  "scope": "four-state lateral LPV abstraction; origin-centered Cartesian product state tube",
+  "dt": "1/50",
+  "hard_position_halfwidth": "5",
+  "hard_velocity_halfwidth": "3",
+  "position_corner_next": "253/50",
+  "position_violation": "3/50",
+  "invariance_forces_velocity_halfwidth": "0",
+  "low_thrust_residual_halfwidth": "6254383/3200000",
+  "velocity_after_one_tick_from_zero_under_positive_residual": "6254383/160000000",
+  "controller_independent_reason": "tau cannot alter v+ at the current tick in the chosen discrete model",
+  "conclusion": "No nonempty origin-centered axis-aligned Cartesian RCI box can be robustly invariant for the stated nonzero residual contract.",
+  "does_not_rule_out": [
+    "correlated polytope/CZ RCI sets",
+    "ellipsoidal RPI/RCI sets",
+    "parameter-dependent sets",
+    "non-box nonlinear invariant sets"
+  ],
+  "arithmetic": "exact rational"
+}
