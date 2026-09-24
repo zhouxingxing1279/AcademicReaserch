@@ -52,29 +52,34 @@
 在允许的固定高推力路径上，语义一致 residual 的 finite reachable torque support 于第50项超过 0.08；仅 aero bound 也于第69项超过。因此旧 K 不能作为当前 disturbance contract 的 robust ancillary controller。详见第33章。
 
 ---
-## 2026-09-24 — 约束感知 ancillary synthesis：否定“执行器不可能”过度解释
-固定 seed=20260924 的启发式搜索找到 torque-only 候选，但 state supports 失败；另一个 joint-normalized 候选仍在低推力 vx/phi 边界失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。详见第34章。
+## 2026-09-24 — 约束感知 ancillary synthesis
+static-K 启发式搜索没有闭合 joint state/input constraints；失败不能升级为 actuator impossibility。详见第34章。
 
 ---
-## 2026-09-24 — vertex-consistent residual 修正第34章低推力假阴性
-改为 `d_x(T)=1.880+T*0.45^3/6` 后，第34章 balanced candidate 的低推力 phi support 降到 0.419154<0.45，但 vx 仍为 3.69609>3。30,000 点 static-K 搜索无样本同时通过 finite state+torque necessary checks；这是 falsification evidence，不是不存在证明。详见第35章。
+## 2026-09-24 — vertex-consistent residual
+采用 `d_x(T)=1.880+T*0.45^3/6` 修正统一高推力 residual 的额外保守性；30,000 点 static-K 搜索仍无样本同时通过 finite state+torque necessary checks，但不是不存在证明。详见第35章。
 
 ---
-## 2026-09-24 — controller-independent actuator authority audit 与 scheduling-conditioned residual 基线
-移除固定反馈结构后，global residual 的首个数值 torque-feasible horizon 为 N=381；按已知 T 条件化同一解析 residual 后为 N=160，约降低58%。因此 static-K failure 不能升级为 actuator impossibility；但 horizon 最短性仅为 HiGHS 数值证据。详见第36章。
+## 2026-09-24 — controller-independent actuator authority audit
+移除固定反馈结构后，global residual 首个数值 torque-feasible horizon 为381；按已知T条件化后为160，约降低58%。详见第36章。
 
 ---
 ## 2026-09-24 — axis-aligned RCI box 结构性不可能
-对 `p+=p+h v`，任何有限 P、V>0 的 origin-centered Cartesian box 都包含 `(P,V)` 并一步越界；V=0 又被非零 residual 一步破坏。因此当前模型不存在非空 origin-centered axis-aligned Cartesian RCI box。该结论只否定 box certificate class。详见第37章。
+当前积分链不存在非空 origin-centered axis-aligned Cartesian RCI box；只否定 box certificate class。详见第37章。
 
 ---
-## 2026-09-24 — hard-box 一步 robust predecessor 给出精确 correlated normals
-第37章提出至少加入 p-v braking facets；本轮证明这仍不够。对当前 hard box 做一步 robust controlled-predecessor，精确得到 `|p+h v|<=5`、`|v-hT phi|+h dbar(T)<=3`、`|phi+h omega|<=0.45` 以及角速度的 admissible-torque 条件，因此 template 必须至少包含 p-v、v-phi、phi-omega 三类 mixed normals。
+## 2026-09-24 — hard-box 一步 robust predecessor 精确 correlated normals
+一次 predecessor 精确产生 p-v、v-phi、phi-omega mixed normals；连续 thrust 的一步 velocity robustification 可精确缩为两个 thrust endpoints。详见第38章。
 
-对固定 `(v,phi)`，速度 robust-support `|v-hT phi|+h(1.880+T*0.45^3/6)` 关于 T 为凸函数，所以整个连续 thrust interval 的最大值精确落在 T_low/T_high 两端，不需要网格采样。exact-rational corner witnesses：`p=5,v=3` 位置越界 3/50；`phi=.45,omega=2` 姿态越界 1/25；`v=3,phi=-.45` 在低/高推力正最坏 residual 下分别速度越界约 0.0832349/0.174505。
+---
+## 2026-09-24 — 第二次 predecessor 证明 pairwise normal family 不闭合
 
-文献核查 Gupta–Köroğlu–Falcone 2021（DOI 10.1002/rnc.5378）：论文正文确实处理 rationally parameter-dependent + additive disturbance、polytopic state/input constraints、predefined-complexity symmetric polytopic RCI，并不强制固定线性 feedback；因此 correlated fixed-complexity RCI 本身不是创新。本轮贡献只是为当前四旋翼降阶模型从 exact predecessor 推导非任意 shape prior。
+本轮没有直接优化第38章 fixed-complexity polytope，而是先检查其必要前提：一次 predecessor 的 pairwise normals 是否在 repeated predecessor 下闭合。exact-rational 反例取低推力 T=4.905、`d=-dbar(T)` 和状态 `p=5, v=-3, phi=-dbar(T)/T, omega=2`。该状态属于 hard box 且满足第一次 predecessor 边界，但一步后再次检查低推力 velocity predecessor facet 时，左侧精确为 `3 + h^2*T*omega = 3.003924`，严格违反量 `981/250000=0.003924`。
 
-新增第38章、`verification/check_hard_box_predecessor_facets.py` 与 exact-rational 归档结果。尚未证明该一次 predecessor 或固定 normals candidate 是 RCI。
+当前 torque 只影响 `omega+`，而已经违反的 facet 只依赖 `(v+,phi+)`，因此即使 torque 无界也不能修复。结论：`X1=X∩Pre(X)` 不是 RCI；第38章 `p-v/v-phi/phi-omega` pairwise family 是一次 predecessor 的必要结构，但不是 repeated-predecessor closed template。第二次回拉 `v-phi` facet 会出现 `v-phi-omega` deeper-chain normal。
 
-下一轮唯一优先问题：使用第38章导出的 p-v/v-phi/phi-omega normals 建立第一个 fixed-complexity correlated polytope candidate，并做真正 robust controlled-invariance feasibility certificate；对允许 T、d in W(T) 与全部 state/input constraints，检查 candidate extreme points 是否存在 admissible scheduling-dependent torque。若失败，区分 facet complexity 不足与 actuator authority，不恢复随机 K/CZ geometry 搜索。
+新增第39章、`verification/check_first_predecessor_not_rci.py` 和 exact-rational 归档 `results/first_predecessor_not_rci_20260924/checks.json`。
+
+文献边界新增 Mulagaleti–Mejari–Bemporad, IEEE TAC 2025, DOI `10.1109/TAC.2024.3454528`：其 PD-RCI 使用实时 scheduling measurement、configuration-constrained polytopes 和 parameter-dependent vertex control，并可利用 scheduling variation-rate bound 降低保守性。因此“RCI/tube 随已知 thrust 变化”已有直接近邻，不能作为创新点。
+
+下一轮唯一优先问题：先闭合 thrust scheduling 信息合同。在当前最弱“每步可测但可任意跳变”假设下研究 repeated-predecessor normal growth；只有仓库能给出物理可证明的 `|T_{k+1}-T_k|<=rho` 时才引入 bounded-rate PD-RCI。然后再决定 common RCI、PD-RCI 或 configuration-constrained tube baseline，不提前恢复 CZ geometry comparison。
