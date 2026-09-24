@@ -84,3 +84,14 @@
 文献边界：Hanema–Lazar–Tóth 2017 已覆盖 LPV tube terminal/periodic contraction；Sala 2019 覆盖离散 polytopic LPV decay-rate stability；Meijer–Dolk–Heemels 2024 研究 poly-quadratic certificate/nonexistence。common-P 本身只作为基础证书，不作为创新。
 
 下一轮必须加入语义一致的 aero + `sin(phi)-phi` remainder，优先审计真实 torque RCI margin。若 coarse P-ball 因 contraction 太弱而失败，改用 direction-aware zonotope/CZ finite-sum + certified tail，不能把 P-ball 失败误判为控制器不可行。详见第32章。
+
+---
+## 2026-09-24 — 高推力有限 reachable support 严格否定第31/32章 ancillary K
+
+本轮没有使用粗糙 common-P ball，而直接在语义一致 `A(T)` 模型上检查 finite disturbance reachable support。固定 `T=14.715` 是合法 scheduling path；任意包含原点的 RPI 必须包含该路径下所有有限 reachable sets，因此有限 N 的 `h_RN(K)>0.08` 已足以严格否定 torque tube，不需要无限尾项。
+
+完整 residual `|r_x|<=2.1034840625` 下，第50项即得到 `h_R50(K)=0.08029718766>0.08`，1000项有限和为 `0.09228806639`。更强的诊断是：即使删除全部 `sin(phi)-phi` remainder、只保留 `|aero_x|<=1.880`，第69项仍有 `0.08003032078>0.08`，1000项为 `0.08248294717`。因此失败不是 P-ball 保守性，也不是 Taylor remainder 单独造成；当前 aero contract 已足以淘汰该 hover-DARE K。
+
+新增 `verification/check_lpv_torque_rpi_obstruction.py`、`results/lpv_torque_rpi_obstruction_20260924/checks.json` 与第33章。第31章 rolling CZ 在该 K 法向上的 331/468 strict gaps 仍是几何事实，但因 K 无法通过 hard-input RPI 必要条件，不能再作为正式控制性能证据。`planar_baseline.json` 的 `K=null` 继续保持。
+
+下一轮转向约束感知 ancillary synthesis：优先搜索同时满足整个 thrust vertex family nominal stability 与高推力 finite-reachable torque support `<0.08` 的 K；若广泛搜索仍失败，再尝试形成 actuator-authority obstruction，而不是为了让控制器通过而缩小 disturbance contract。详见第33章。
