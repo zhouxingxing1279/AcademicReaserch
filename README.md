@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[21 任意多等式 CZ 的认证支持查询](docs/learning/21_generic_cz_support_certificate.md)。已把第20章的单等式原始点重建推广为一般历史 CZ 的 primal/dual 认证接口：数值 LP 只提议，Fraction 精确核验成员点与支持上界。固定种子 600 个多等式有理数 CZ 全部通过上下界审计，但这只是静态压力测试；下一步必须进入连续滚动后验，验证总计算成本和跨时刻证书语义。**
+**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[35 顶点一致 residual 与 ancillary 搜索](docs/learning/35_vertex_consistent_residual_and_ancillary_search.md)。第34章使用统一高推力 residual 审计所有 thrust 顶点虽然安全但额外保守；第35章改为语义一致的 `d_x(T)=1.880+T*0.45^3/6`，撤回一个低推力姿态假阴性，同时证明低推力常值扰动平衡点已占用约 88.55% 姿态权限。固定 seed 的 30,000 点 static-K 搜索没有样本同时通过 finite state/input 必要条件，但这不是不存在证明。下一步停止随机搜索，进入 certificate-based joint state/input synthesis。**
 
 ## 当前研究与历史边界
 
@@ -106,7 +106,7 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-优先读 [21 任意多等式 CZ 的认证支持查询](docs/learning/21_generic_cz_support_certificate.md)。下一步把通用认证器接入 `check_constrained_zonotope.py` 的连续 `predict/observe` 历史 CZ，在约束活跃的滚动任务中比较 0-query / full-query / fixed-order / certificate-priority；必须同时统计支持 LP、QP 与总墙钟时间，并主动寻找“LP 更少但总时间更差”的反例。
+优先读 [35 顶点一致 residual 与 ancillary 搜索](docs/learning/35_vertex_consistent_residual_and_ancillary_search.md)。下一步唯一优先任务是建立 certificate-based joint state/input synthesis baseline：保留 vertex-consistent `W(T)`，联合处理 `|px|<=5, |vx|<=3, |phi|<=0.45, |omega|<=2, |tau|<=0.08`，先得到可认证 ancillary/invariant pair，再恢复 CZ-SMF tightening 比较。
 
 前置结果 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
 
