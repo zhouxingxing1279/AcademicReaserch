@@ -54,3 +54,18 @@
 ---
 ## 2026-09-24 — 约束感知 ancillary synthesis：否定“执行器不可能”过度解释
 固定 seed=20260924 的启发式搜索找到 torque-only 候选 `K=[0.00153696,0.00744545,-0.09093386,-0.09567285]`，三个 frozen-thrust 顶点均 Schur，1000项 torque support 最大仅 0.01216，说明第33章不能升级为 actuator-authority impossibility。但该 K 在低推力下 `vx`/`phi` finite supports 达 9.7573/0.8058，严重违反 3/0.45 硬界。另一个 joint-normalized 搜索候选 torque support 仍低于0.08，但低推力 `vx=3.9778`, `phi=0.451106` 仍失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。新增 `verification/check_constraint_aware_ancillary_search.py` 与可复现结果；详见第34章。下一轮优先采用成熟 LMI/polyhedral RCI synthesis 得到可认证 baseline，再恢复 CZ-SMF tightening 比较。
+
+
+---
+## 2026-09-24 — vertex-consistent residual 修正第34章低推力假阴性
+
+本轮只解决一个阻塞点：第34章把高推力顶点的统一 residual `DX=2.1034840625` 用于所有 thrust 顶点。该做法安全，但在已知 scheduling 参数 T 的 LPV 语义下额外保守。改为
+`d_x(T)=1.880+T*0.45^3/6` 后，第34章 balanced candidate 在低推力的 finite phi support 从约 0.451106 降到 0.419154，实际低于 0.45；因此原“低推力 phi 失败”属于统一 worst-case residual 造成的假阴性，必须撤回。但同一候选低推力 `vx` finite support 仍为 3.69609>3，故候选总体仍被否定。
+
+新增一个 controller-independent 必要条件：固定 T 和持续常值最坏 residual 下，任何稳定闭环的 origin-containing RPI 都必须包含平衡点 `|phi_*|=d_x(T)/T`。低推力 T=4.905 时得到 0.3984699 rad，占 `|phi|<=0.45` 权限的 88.55%，只剩约 0.05153 rad；这是独立于 K 与集合外包算法的结构性瓶颈，但尚未达到不可能性。
+
+新增 `verification/check_vertex_consistent_ancillary_search.py`，seed=20260924、30,000 点 Latin-hypercube、220 项 finite reachable supports。12,666 个样本三个 frozen vertices 均 Schur；1,196 个通过 torque finite 必要界；320 个通过 state finite 必要界；**0 个同时通过 state+torque**。最接近样本延长到 2000 项后仍在 px/vx/phi/tau 多个方向失败。该结果是可复现实验 falsification evidence，不是 static K 不存在证明。
+
+文献新增 Tahir–Jaimoukha 2012、Ben Sassi–Girard 2012 和 Wehbeh–Kerrigan 2025。前两者说明 controller/invariant co-design 已是成熟 baseline；后者强化“state/decision-dependent uncertainty 不应无条件替换为 uniform global set”的建模边界。
+
+下一轮唯一优先问题：停止扩大随机 K 搜索，建立 certificate-based joint state/input synthesis baseline。必须保留 vertex-consistent W(T)，将 px/vx/phi/omega/tau 硬约束直接纳入 common-quadratic 或 polyhedral invariant certificate；若不可行，只能声称该 certificate/controller class 不可行，不能升级为物理 actuator impossibility。
