@@ -1,0 +1,15 @@
+{
+  "status": "exact_obstruction",
+  "witness_vertex": ["-5", "0", "-6254383/15696000", "2"],
+  "offending_facet_r": ["-1", "-1/25", "981/500000", "0"],
+  "offending_facet_q": "39993745617/8000000000",
+  "thrust_endpoint": "981/200",
+  "nominal_slack_coefficient": "5940463/4000000000",
+  "disturbance_support": "6254383/4000000000",
+  "support_minus_slack": "981/12500000",
+  "support_minus_slack_decimal": 0.00007848,
+  "critical_alpha": "6254383/5940463",
+  "critical_alpha_decimal": 1.052844365834835,
+  "torque_coefficient": "0",
+  "conclusion": "No homothetic contraction alpha*S2 with 0<alpha<=1 is robust control invariant."
+}
