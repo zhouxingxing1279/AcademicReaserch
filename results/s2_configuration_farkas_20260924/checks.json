@@ -1,0 +1,12 @@
+{
+  "status": "exact_farkas_infeasibility_certificate",
+  "reduced_variables": ["q3", "q6", "q13", "u26"],
+  "farkas_multipliers": ["5/11", "6/11", "2943/550000", "1"],
+  "combined_torque_coefficient": "2943/5500000",
+  "combined_rhs_before_torque_bound": "-6731149/80000000",
+  "torque_lower_bound": "u26 >= -2/25",
+  "final_contradiction_rhs": "-370024843/4400000000",
+  "final_contradiction_rhs_decimal": -0.08409655522727273,
+  "conclusion": "The S2-incidence configuration-constrained fixed-normal RCI LP is infeasible under |tau|<=0.08.",
+  "scope": "This excludes the configuration cone preserving the audited S2 vertex incidence; it does not exclude every possible combinatorial configuration using the same 28 normals."
+}
