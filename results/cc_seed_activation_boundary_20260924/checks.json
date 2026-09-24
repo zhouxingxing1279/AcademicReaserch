@@ -1,0 +1,9 @@
+{
+  "status": "structural_configuration_seed_audit",
+  "raw_halfspaces": 38,
+  "active_facets_at_inherited_seed": 30,
+  "redundant_rows_at_inherited_seed": 8,
+  "single_seed_free_38_offset_claim_valid": false,
+  "conclusion": "The inherited-offset realization has 38 raw rows but only 30 active facets. A vertex-affine CC map built from this seed is certified only inside its configuration cone; it cannot be used as a certificate for arbitrary independent offset changes that activate any of the 8 currently redundant rows.",
+  "next_requirement": "Choose and audit an entirely-simple seed configuration, construct its vertex maps and E q <= 0 cone, then solve the RCI LP only inside that cone. Crossing to a different facet/vertex incidence requires a different seed/cone."
+}
