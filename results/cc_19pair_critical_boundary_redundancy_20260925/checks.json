@@ -1,0 +1,12 @@
+{
+  "status": "exact_critical_boundary_redundancy",
+  "critical_rows": 4,
+  "all_exact_nonnegative_combinations": true,
+  "relations": [
+    {"target":[15,5],"terms":[[[0,19],"5000/981"],[[2,19],"5000/981"]],"exact_identity":true},
+    {"target":[17,5],"terms":[[[2,5],"1/2"],[[15,5],"1/2"],[[17,3],"5000/981"]],"exact_identity":true},
+    {"target":[60,4],"terms":[[[38,18],"5000/981"],[[42,18],"5000/981"]],"exact_identity":true},
+    {"target":[62,4],"terms":[[[40,4],"1/2"],[[60,4],"1/2"],[[62,2],"5000/981"]],"exact_identity":true}
+  ],
+  "conclusion":"The four chapter-50 critical rows are redundant consequences of other configuration inequalities; the 12 local determinant flips are not directly adjacent configuration cones."
+}
