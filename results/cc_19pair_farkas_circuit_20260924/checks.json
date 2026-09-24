@@ -1,0 +1,20 @@
+{
+  "status": "exact_positive_circuit_and_boundary_reduction",
+  "support_rows": 25,
+  "coefficient_rank_exact": 24,
+  "left_nullity": 1,
+  "all_farkas_multipliers_strictly_positive": true,
+  "weighted_lhs_zero_exact": true,
+  "weighted_rhs": "-3069803/88290",
+  "support_is_linear_circuit": true,
+  "configuration_rows_in_circuit": 4,
+  "critical_configuration_boundaries": [
+    {"vertex":15,"old_active_set":[0,6,11,19],"entering_facet":5,"nondegenerate_flip_candidates":[{"drop":6,"new_active_set":[0,5,11,19]},{"drop":11,"new_active_set":[0,5,6,19]},{"drop":19,"new_active_set":[0,5,6,11]}]},
+    {"vertex":17,"old_active_set":[0,6,19,33],"entering_facet":5,"nondegenerate_flip_candidates":[{"drop":6,"new_active_set":[0,5,19,33]},{"drop":19,"new_active_set":[0,5,6,33]},{"drop":33,"new_active_set":[0,5,6,19]}]},
+    {"vertex":60,"old_active_set":[1,7,10,18],"entering_facet":4,"nondegenerate_flip_candidates":[{"drop":7,"new_active_set":[1,4,10,18]},{"drop":10,"new_active_set":[1,4,7,18]},{"drop":18,"new_active_set":[1,4,7,10]}]},
+    {"vertex":62,"old_active_set":[1,7,18,32],"entering_facet":4,"nondegenerate_flip_candidates":[{"drop":7,"new_active_set":[1,4,18,32]},{"drop":18,"new_active_set":[1,4,7,32]},{"drop":32,"new_active_set":[1,4,7,18]}]}
+  ],
+  "nondegenerate_single_boundary_flip_candidates": 12,
+  "conclusion": "The chapter-49 witness is a support-minimal positive linear circuit. Every one of its 25 inequalities is essential to this specific Farkas contradiction. Hence any adjacent-cone search capable of invalidating this certificate must cross at least one of the four configuration inequalities appearing in the circuit; auditing unrelated configuration boundaries cannot remove this exact obstruction.",
+  "limitation": "Circuit minimality is exact for this Farkas witness, not a proof that other Farkas certificates cannot survive after a critical boundary crossing. The 12 active-set replacements are nondegenerate local flip candidates; a valid neighboring configuration cone must still be constructed and checked globally."
+}
