@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "method": "exact rational arithmetic (fractions.Fraction)",
+  "exact_parameters": {
+    "h": "1/50",
+    "T_L": "981/200",
+    "T_U": "2943/200",
+    "d0": "47/25",
+    "c": "243/16000"
+  },
+  "affine_pullback_midpoint_identity": true,
+  "affine_disturbance_radius_midpoint_identity": true,
+  "raw_positive_normal_counts_depth_1_to_6": [5, 8, 14, 25, 44, 76],
+  "interpretation": "For the frozen affine-in-T model, one-step polyhedral robust inequalities are affine in T after exact disturbance support elimination, hence interval maxima occur at T_L or T_U. The counts audit raw endpoint row pullbacks only.",
+  "limitation": "These counts are not the facet counts after hard-set intersection, existential torque projection, and redundancy elimination; they must not be used as an RCI complexity theorem."
+}
