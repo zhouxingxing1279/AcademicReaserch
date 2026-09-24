@@ -1,0 +1,18 @@
+{
+  "status": "numerical_single_configuration_cone_exclusion",
+  "S2_facets": 28,
+  "orientation_pairs": 19,
+  "raw_halfspaces": 38,
+  "seed_active_facets": 38,
+  "seed_vertices": 160,
+  "seed_entirely_simple_numerical": true,
+  "variables": 198,
+  "configuration_inequalities": 6080,
+  "configuration_plus_invariance_inequalities": 18240,
+  "total_inequalities_with_hard_state": 19520,
+  "pair_offset_equalities": 19,
+  "bounded_torque_0p08_feasible": false,
+  "unbounded_vertex_torque_feasible": false,
+  "conclusion": "An explicit 38-active-facet, 160-vertex entirely-simple seed configuration was found. The endpoint-exact CC-RCI LP is infeasible in this configuration cone, even when vertex torque bounds are removed.",
+  "limitation": "Seed geometry and LP infeasibility use floating-point NumPy/HiGHS. This excludes only this audited configuration cone; it neither proves exact infeasibility nor excludes other configuration cones of the same 19-pair orientation family."
+}
