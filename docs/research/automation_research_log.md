@@ -73,13 +73,19 @@ static-K 启发式搜索没有闭合 joint state/input constraints；失败不�
 
 ---
 ## 2026-09-24 — 第二次 predecessor 证明 pairwise normal family 不闭合
+exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise family 在第二次 predecessor 产生 `v-phi-omega` deeper-chain normal。当前 torque 无法修复该一步违反，因此是 template obstruction 而非 actuator saturation。详见第39章。
 
-本轮没有直接优化第38章 fixed-complexity polytope，而是先检查其必要前提：一次 predecessor 的 pairwise normals 是否在 repeated predecessor 下闭合。exact-rational 反例取低推力 T=4.905、`d=-dbar(T)` 和状态 `p=5, v=-3, phi=-dbar(T)/T, omega=2`。该状态属于 hard box 且满足第一次 predecessor 边界，但一步后再次检查低推力 velocity predecessor facet 时，左侧精确为 `3 + h^2*T*omega = 3.003924`，严格违反量 `981/250000=0.003924`。
+---
+## 2026-09-24 — thrust scheduling 信息合同闭合
 
-当前 torque 只影响 `omega+`，而已经违反的 facet 只依赖 `(v+,phi+)`，因此即使 torque 无界也不能修复。结论：`X1=X∩Pre(X)` 不是 RCI；第38章 `p-v/v-phi/phi-omega` pairwise family 是一次 predecessor 的必要结构，但不是 repeated-predecessor closed template。第二次回拉 `v-phi` facet 会出现 `v-phi-omega` deeper-chain normal。
+本轮检查当前 frozen planar benchmark 是否真正支持非平凡 `|T_{k+1}-T_k|<=rho`。配置把 `T` 作为直接输入，仅有逐点 `T∈[4.905,14.715] N`；状态中没有 `T_act`。模型文档也明确要求若执行器动态重要必须显式增加实际推力状态并重推合同。
 
-新增第39章、`verification/check_first_predecessor_not_rci.py` 和 exact-rational 归档 `results/first_predecessor_not_rci_20260924/checks.json`。
+因此对所有 admissible input sequences 成立的最小 universal rate bound 精确为区间直径 `rho=14.715-4.905=9.810 N/tick`：相邻两步直接取两个端点即否定任何更小 rho。`h=0.02 s` 时数值换算为 `490.5 N/s`，但这不是物理 slew-rate 识别结果。取 rho=9.81 时，任意当前 T 的下一 scheduling set 仍是完整区间，所以与纯 pointwise contract 等价，不能提供 bounded-rate PD-RCI 的 transition-set reduction。
 
-文献边界新增 Mulagaleti–Mejari–Bemporad, IEEE TAC 2025, DOI `10.1109/TAC.2024.3454528`：其 PD-RCI 使用实时 scheduling measurement、configuration-constrained polytopes 和 parameter-dependent vertex control，并可利用 scheduling variation-rate bound 降低保守性。因此“RCI/tube 随已知 thrust 变化”已有直接近邻，不能作为创新点。
+新增第40章、`verification/check_thrust_scheduling_contract.py` 和 `results/thrust_scheduling_contract_20260924/checks.json`。验证读取 frozen config 并使用 Decimal 精确十进制运算。
 
-下一轮唯一优先问题：先闭合 thrust scheduling 信息合同。在当前最弱“每步可测但可任意跳变”假设下研究 repeated-predecessor normal growth；只有仓库能给出物理可证明的 `|T_{k+1}-T_k|<=rho` 时才引入 bounded-rate PD-RCI。然后再决定 common RCI、PD-RCI 或 configuration-constrained tube baseline，不提前恢复 CZ geometry comparison。
+文献核查 Mulagaleti–Mejari–Bemporad, IEEE TAC 70(2):1259–1266, 2025, DOI `10.1109/TAC.2024.3454528`：其 PD-RCI 明确依赖实时 scheduling measurement 与 bounded parameter-variation set。该方法是未来若增加可信 actuator/rate model 时的直接 baseline，但其非平凡 rate assumption 当前不可直接复用。
+
+结论：当前强 baseline 必须使用 measured-current / arbitrary-future-jump thrust scheduling。不能为了减小保守性事后加入 rho<9.81。
+
+下一轮唯一优先问题：证明或反驳 arbitrary-jump scheduling 下，有限深度 robust predecessor 对连续 `T_i∈[T_L,T_U]` 的 worst case 是否可精确归约到 endpoint sequences；若成立，计算 endpoint-sequence normal family 的增长和冗余，再进入 correlated-RCI certificate synthesis。
