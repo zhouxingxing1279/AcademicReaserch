@@ -162,3 +162,21 @@
 - 与本项目关系：第35章的 vertex-consistent residual 修正属于同一建模原则：已知 scheduling parameter T 时，应保留 d_x(T) 的依赖关系，而不是无条件替换为 d_x(T_max)。
 - 局限：该工作不是 SMF/CZ output-feedback Tube MPC，也没有解决本项目的 recursive-feasibility shift certificate。
 - 本项目状态：作为“不得丢失 uncertainty dependence”的强建模基线。
+
+
+## Kothare, Balakrishnan, Morari — Robust constrained model predictive control using linear matrix inequalities
+- 年份/出处：1996, *Automatica*, 32(10):1361–1379；DOI：https://doi.org/10.1016/0005-1098(96)00063-5；公开技术报告：https://authors.library.caltech.edu/records/t7km1-0q967
+- 研究问题：模型不确定性下如何把 worst-case 性能、输入/输出约束和 state-feedback synthesis 统一进入 robust MPC。
+- 方法/关键结论：把 worst-case infinite-horizon objective 的上界以及 input/output constraints 转成 LMI convex optimization；可行 receding-horizon state-feedback 对所考虑的不确定 plant family 给出 robust stabilization。
+- 与本项目关系：第36章之后的 joint state/input ancillary synthesis 可以借用这类 constraint-aware synthesis 思路，但“把约束直接放进 K 的设计”本身不是创新。
+- 局限：该工作不是 CZ-SMF posterior、不是本项目的 thrust-scheduled residual W(T)，也不提供当前 output-feedback set-membership 接口。
+- 本项目状态：作为 certificate-based ancillary synthesis 的经典 baseline。
+
+
+## Lorenzen, Cannon, Allgöwer — Robust MPC with recursive model update
+- 年份/出处：2019, *Automatica*, 103:461–471；DOI：https://doi.org/10.1016/j.automatica.2019.02.023；accepted manuscript：https://ora.ox.ac.uk/objects/uuid%3A78236757-fb85-4510-8e17-d75177b667d8
+- 研究问题：在线 parameter/model update 后，如何在保持 robust constraints 与稳定性保证的同时减少 MPC 保守性。
+- 方法/关键结论：把 online set-membership system identification 与 homothetic prediction tubes 结合；论文将 robust constraint satisfaction 和 closed-loop stability 的要求分开处理，并给出 recursive model update 下的稳定/约束保证。
+- 与本项目关系：说明“在线更精确 uncertainty set 可减少保守性”已有成熟理论背景。第36章的 scheduling-conditioned residual 只能作为更强 baseline，不是创新点。
+- 局限：处理 parametric model uncertainty，不是当前 state-estimation CZ posterior，也不是四旋翼 thrust-conditioned nonlinear remainder。
+- 本项目状态：作为后续 SMF/CZ 保守性比较必须超过的 adaptive robust MPC baseline。
