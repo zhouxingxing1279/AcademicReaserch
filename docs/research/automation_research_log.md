@@ -53,35 +53,22 @@
 
 ---
 ## 2026-09-24 — 约束感知 ancillary synthesis：否定“执行器不可能”过度解释
-固定 seed=20260924 的启发式搜索找到 torque-only 候选 `K=[0.00153696,0.00744545,-0.09093386,-0.09567285]`，三个 frozen-thrust 顶点均 Schur，1000项 torque support 最大仅 0.01216，说明第33章不能升级为 actuator-authority impossibility。但该 K 在低推力下 `vx`/`phi` finite supports 达 9.7573/0.8058，严重违反 3/0.45 硬界。另一个 joint-normalized 搜索候选 torque support 仍低于0.08，但低推力 `vx=3.9778`, `phi=0.451106` 仍失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。新增 `verification/check_constraint_aware_ancillary_search.py` 与可复现结果；详见第34章。下一轮优先采用成熟 LMI/polyhedral RCI synthesis 得到可认证 baseline，再恢复 CZ-SMF tightening 比较。
-
+固定 seed=20260924 的启发式搜索找到 torque-only 候选 `K=[0.00153696,0.00744545,-0.09093386,-0.09567285]`，三个 frozen-thrust 顶点均 Schur，1000项 torque support 最大仅 0.01216，说明第33章不能升级为 actuator-authority impossibility。但该 K 在低推力下 `vx`/`phi` finite supports 达 9.7573/0.8058，严重违反 3/0.45 硬界。另一个 joint-normalized 搜索候选 torque support 仍低于0.08，但低推力 `vx=3.9778`, `phi=0.451106` 仍失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。详见第34章。
 
 ---
 ## 2026-09-24 — vertex-consistent residual 修正第34章低推力假阴性
-
-本轮只解决一个阻塞点：第34章把高推力顶点的统一 residual `DX=2.1034840625` 用于所有 thrust 顶点。该做法安全，但在已知 scheduling 参数 T 的 LPV 语义下额外保守。改为
-`d_x(T)=1.880+T*0.45^3/6` 后，第34章 balanced candidate 在低推力的 finite phi support 从约 0.451106 降到 0.419154，实际低于 0.45；因此原“低推力 phi 失败”属于统一 worst-case residual 造成的假阴性，必须撤回。但同一候选低推力 `vx` finite support 仍为 3.69609>3，故候选总体仍被否定。
-
-新增一个 controller-independent 必要条件：固定 T 和持续常值最坏 residual 下，任何稳定闭环的 origin-containing RPI 都必须包含平衡点 `|phi_*|=d_x(T)/T`。低推力 T=4.905 时得到 0.3984699 rad，占 `|phi|<=0.45` 权限的 88.55%，只剩约 0.05153 rad；这是独立于 K 与集合外包算法的结构性瓶颈，但尚未达到不可能性。
-
-新增 `verification/check_vertex_consistent_ancillary_search.py`，seed=20260924、30,000 点 Latin-hypercube、220 项 finite reachable supports。12,666 个样本三个 frozen vertices 均 Schur；1,196 个通过 torque finite 必要界；320 个通过 state finite 必要界；**0 个同时通过 state+torque**。最接近样本延长到 2000 项后仍在 px/vx/phi/tau 多个方向失败。该结果是可复现实验 falsification evidence，不是 static K 不存在证明。
-
-文献新增 Tahir–Jaimoukha 2012、Ben Sassi–Girard 2012 和 Wehbeh–Kerrigan 2025。前两者说明 controller/invariant co-design 已是成熟 baseline；后者强化“state/decision-dependent uncertainty 不应无条件替换为 uniform global set”的建模边界。
-
-下一轮唯一优先问题：停止扩大随机 K 搜索，建立 certificate-based joint state/input synthesis baseline。必须保留 vertex-consistent W(T)，将 px/vx/phi/omega/tau 硬约束直接纳入 common-quadratic 或 polyhedral invariant certificate；若不可行，只能声称该 certificate/controller class 不可行，不能升级为物理 actuator impossibility。
-
+改为 `d_x(T)=1.880+T*0.45^3/6` 后，第34章 balanced candidate 的低推力 phi support 降到 0.419154<0.45，但 vx 仍为 3.69609>3。30,000 点 static-K 搜索无样本同时通过 finite state+torque necessary checks；这是 falsification evidence，不是不存在证明。详见第35章。
 
 ---
 ## 2026-09-24 — controller-independent actuator authority audit 与 scheduling-conditioned residual 基线
+移除固定反馈结构后，global residual 的首个数值 torque-feasible horizon 为 N=381；按已知 T 条件化同一解析 residual 后为 N=160，约降低58%。因此 static-K failure 不能升级为 actuator impossibility；但 horizon 最短性仅为 HiGHS 数值证据。详见第36章。
 
-第33–35章的 static-K 失败不能升级为 plant-level actuator impossibility。本轮移除固定反馈结构，在低推力 T=4.905 下直接求解硬状态/力矩约束内、恒定最坏 residual 到扰动平衡点的最小 peak-torque LP。
+---
+## 2026-09-24 — axis-aligned RCI box 结构性不可能
+本轮为 certificate-based RCI synthesis 先筛选集合参数化。对 `p+=p+h v`，任何有限位置 halfwidth P 的 origin-centered Cartesian box 若速度 halfwidth V>0，都包含 `(p,v)=(P,V)`，其一步 `p+=P+hV>P`，与 RCI 矛盾；故 invariance 强制 V=0。当前 residual contract 又满足 `bar d(T)>0`，从 `(v,phi)=(0,0)` 选择允许的正 residual 即有 `v+=h d>0`，而 torque 当前 tick 无法改变 v+，所以 V=0 也不可能。由此严格证明：当前四状态横向模型不存在非空 origin-centered axis-aligned Cartesian RCI box。
 
-使用单一全域 residual d=2.1034840625 时，首个数值满足 |tau|<=0.08 的 horizon 为 N=381（7.62 s），t*=0.07994631095；N=380 时 t*=0.08039911778。使用同一解析余项公式按已知 T 条件化后的 d(T_L)=1.9544946875 时，首个数值可行 horizon 降为 N=160（3.20 s），t*=0.07996782686；N=159 时 t*=0.08104047747。数值 horizon 降低 221 tick，约 58.0%。
+该结论只否定 box certificate class，不否定 correlated polytope/CZ、ellipsoid、parameter-dependent set 或 actuator feasibility。hard-domain corner `(p,v)=(5,3)` 的 exact witness 是 `p+=253/50=5.06`，违反 `3/50`；低推力 residual exact 为 `6254383/3200000`，零状态一步 `v+=6254383/160000000>0`。新增第37章、标准库 exact-rational checker 与归档结果。
 
-解析上，global box 在低推力下要求平衡角 phi*=0.4288448649，只剩 0.0211551351 rad 姿态余量；T-conditioned residual 给 phi*=0.3984698649，余量 0.0515301351 rad。对应 phi=0.45 时的水平制动权限从 0.1037659375 提升到 0.2527553125 m/s^2。
+文献核查：Hanema–Lazar–Tóth 的 LPV heterogeneous tube MPC 明确把 tube parameterization 与 complexity/performance、recursive feasibility 联系；Gupta–Köroglu–Falcone 2021（DOI 10.1002/rnc.5378）直接计算 rationally parameter-dependent + additive disturbance 系统的 predefined-complexity polytopic RCI，且不要求固定 state-feedback。这些工作说明 correlated invariant geometry / controller-invariant co-design 本身不是创新点。
 
-该结果否定“现有 static-K 搜索失败说明执行器物理不可能”的过度解释；但 LP 使用 HiGHS 浮点解，因此 N=380/381、159/160 的最短性只作为可复现实验边界，不是有理数/Farkas 形式证明。新增第36章、验证脚本、3项单元测试和归档结果。
-
-文献边界：Kothare–Balakrishnan–Morari 1996 已覆盖 constraint-aware robust state-feedback synthesis；Lorenzen–Cannon–Allgöwer 2019 已把 online set-membership model update 与 robust prediction tubes 结合以降低保守性；Bujarbaruah–Nair–Borrelli 2020 已处理 state-dependent uncertainty。因此 scheduling-conditioned W(T) 是后续比较必须采用的强基线，不作为创新声明。
-
-下一轮唯一优先问题：在 vertex/scheduling-consistent W(T) 下构造并认证对全部允许 thrust scheduling 与 disturbance sequences 有效的 ancillary/RCI tube，同时通过 |px|<=5、|vx|<=3、|phi|<=0.45、|omega|<=2、|tau|<=0.08。该强控制基线通过以前，不恢复 CZ 几何收益讨论。
+下一轮唯一优先问题：选择最小 correlated polyhedral template（至少包含 p-v braking facets），在 scheduling-consistent W(T) 下建立可认证 controller/RCI co-design feasibility problem，并联合检查 px/vx/phi/omega/tau 硬约束。得到第一个可认证 correlated baseline 前，不恢复 CZ 几何收益讨论。
