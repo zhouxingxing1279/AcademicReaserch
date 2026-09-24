@@ -11,6 +11,6 @@
   "certificate_statement": "The 25 selected valid inequalities have positive rational multipliers whose weighted left-hand side is identically zero while the weighted right-hand side is -3069803/88290 < 0. Hence this audited configuration-cone robust-invariance system is infeasible by Farkas lemma, even with unbounded vertex torque.",
   "scope": "Exact for the chapter-48 audited configuration cone and its stated endpoint-robust/hard-state inequalities; it does not exclude other configuration cones of the same 19-pair orientation family.",
   "row_type_counts": {"configuration": 4, "endpoint_robust_invariance": 20, "hard_state": 1},
-  "thrust_endpoint_counts_within_invariance_rows": {"4.905": 14, "14.715": 6},
+  "thrust_endpoint_counts_within_invariance_rows": {"4.905": 16, "14.715": 4},
   "distinct_vertex_maps_used": 18
 }
