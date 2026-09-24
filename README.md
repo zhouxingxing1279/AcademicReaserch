@@ -1,6 +1,6 @@
 # AcademicReaserch
 
-**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[35 顶点一致 residual 与 ancillary 搜索](docs/learning/35_vertex_consistent_residual_and_ancillary_search.md)。第34章使用统一高推力 residual 审计所有 thrust 顶点虽然安全但额外保守；第35章改为语义一致的 `d_x(T)=1.880+T*0.45^3/6`，撤回一个低推力姿态假阴性，同时证明低推力常值扰动平衡点已占用约 88.55% 姿态权限。固定 seed 的 30,000 点 static-K 搜索没有样本同时通过 finite state/input 必要条件，但这不是不存在证明。下一步停止随机搜索，进入 certificate-based joint state/input synthesis。**
+**当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[36 执行器权限与 scheduling-conditioned residual 审计](docs/learning/36_actuator_authority_and_scheduled_residual.md)。第33–35章的 static-K 失败不能升级为执行器物理不可能：移除固定反馈结构后，在低推力、全部硬状态/力矩约束下，单一 global residual 的首个数值 torque-feasible horizon 为 381 tick，而按已知 thrust 条件化同一解析 residual 后降为 160 tick（约 58%）。这些 horizon 是 HiGHS 数值边界，不是形式化最短性证明。下一步只做 certificate-based ancillary/RCI synthesis，并以 scheduling-consistent W(T) 作为强基线；该基线闭合前不恢复 CZ 几何收益讨论。**
 
 ## 当前研究与历史边界
 
@@ -106,7 +106,7 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 
 ### 后续工作的第一条指令
 
-优先读 [35 顶点一致 residual 与 ancillary 搜索](docs/learning/35_vertex_consistent_residual_and_ancillary_search.md)。下一步唯一优先任务是建立 certificate-based joint state/input synthesis baseline：保留 vertex-consistent `W(T)`，联合处理 `|px|<=5, |vx|<=3, |phi|<=0.45, |omega|<=2, |tau|<=0.08`，先得到可认证 ancillary/invariant pair，再恢复 CZ-SMF tightening 比较。
+优先读 [36 执行器权限与 scheduling-conditioned residual 审计](docs/learning/36_actuator_authority_and_scheduled_residual.md)。下一步唯一优先任务是在 scheduling-consistent `W(T)` 下建立 certificate-based ancillary/RCI baseline：必须对全部允许 thrust scheduling 与 disturbance sequences 成立，并联合通过 `|px|<=5, |vx|<=3, |phi|<=0.45, |omega|<=2, |tau|<=0.08`。若固定 `K` 的可认证 controller/RCI class 不可行，只能否定该证书类；不能升级为物理 actuator impossibility。该基线闭合后再恢复 CZ-SMF tightening 比较。
 
 前置结果 [17 近似支持下的证书上界](docs/learning/17_certified_caps_for_inexact_support.md)：由旧可行计划构造方向上界，允许新的后验支持查询近似或缺失，保持线性每步测量基准的递归可行性。4096 步合成查询压力重放通过；仍需精确噪声支持及可靠上界算术，尚无高维计算优势或四旋翼保证。
 
