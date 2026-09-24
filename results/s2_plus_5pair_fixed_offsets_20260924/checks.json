@@ -1,0 +1,13 @@
+{
+  "status": "numerical_fixed_offset_augmented_template_audit",
+  "S2_facets": 28,
+  "selected_new_halfspaces": 10,
+  "raw_augmented_halfspaces": 38,
+  "nonredundant_augmented_facets": 30,
+  "augmented_vertices": 128,
+  "nonviable_augmented_vertices": 96,
+  "viable_augmented_vertices": 32,
+  "all_vertices_one_step_viable": false,
+  "conclusion": "At inherited S3 offsets, the chapter-45 five-pair augmentation is not RCI: after redundancy removal it has 30 facets and 128 vertices, of which 96 fail the endpoint-robust one-step admissible-torque test back into the same set.",
+  "limitation": "This only rejects the inherited-offset realization. It does not reject the same 19 normal pairs with independently optimized offsets or a different configuration incidence."
+}
