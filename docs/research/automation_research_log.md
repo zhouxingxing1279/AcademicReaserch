@@ -53,7 +53,7 @@
 
 ---
 ## 2026-09-24 — 约束感知 ancillary synthesis：否定“执行器不可能”过度解释
-固定 seed=20260924 的启发式搜索找到 torque-only 候选 `K=[0.00153696,0.00744545,-0.09093386,-0.09567285]`，三个 frozen-thrust 顶点均 Schur，1000项 torque support 最大仅 0.01216，说明第33章不能升级为 actuator-authority impossibility。但该 K 在低推力下 `vx`/`phi` finite supports 达 9.7573/0.8058，严重违反 3/0.45 硬界。另一个 joint-normalized 搜索候选 torque support 仍低于0.08，但低推力 `vx=3.9778`, `phi=0.451106` 仍失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。详见第34章。
+固定 seed=20260924 的启发式搜索找到 torque-only 候选，但 state supports 失败；另一个 joint-normalized 候选仍在低推力 vx/phi 边界失败。结论：真正问题是 joint state/input constrained synthesis；启发式搜索既不能证明存在，也不能证明不存在。详见第34章。
 
 ---
 ## 2026-09-24 — vertex-consistent residual 修正第34章低推力假阴性
@@ -65,10 +65,16 @@
 
 ---
 ## 2026-09-24 — axis-aligned RCI box 结构性不可能
-本轮为 certificate-based RCI synthesis 先筛选集合参数化。对 `p+=p+h v`，任何有限位置 halfwidth P 的 origin-centered Cartesian box 若速度 halfwidth V>0，都包含 `(p,v)=(P,V)`，其一步 `p+=P+hV>P`，与 RCI 矛盾；故 invariance 强制 V=0。当前 residual contract 又满足 `bar d(T)>0`，从 `(v,phi)=(0,0)` 选择允许的正 residual 即有 `v+=h d>0`，而 torque 当前 tick 无法改变 v+，所以 V=0 也不可能。由此严格证明：当前四状态横向模型不存在非空 origin-centered axis-aligned Cartesian RCI box。
+对 `p+=p+h v`，任何有限 P、V>0 的 origin-centered Cartesian box 都包含 `(P,V)` 并一步越界；V=0 又被非零 residual 一步破坏。因此当前模型不存在非空 origin-centered axis-aligned Cartesian RCI box。该结论只否定 box certificate class。详见第37章。
 
-该结论只否定 box certificate class，不否定 correlated polytope/CZ、ellipsoid、parameter-dependent set 或 actuator feasibility。hard-domain corner `(p,v)=(5,3)` 的 exact witness 是 `p+=253/50=5.06`，违反 `3/50`；低推力 residual exact 为 `6254383/3200000`，零状态一步 `v+=6254383/160000000>0`。新增第37章、标准库 exact-rational checker 与归档结果。
+---
+## 2026-09-24 — hard-box 一步 robust predecessor 给出精确 correlated normals
+第37章提出至少加入 p-v braking facets；本轮证明这仍不够。对当前 hard box 做一步 robust controlled-predecessor，精确得到 `|p+h v|<=5`、`|v-hT phi|+h dbar(T)<=3`、`|phi+h omega|<=0.45` 以及角速度的 admissible-torque 条件，因此 template 必须至少包含 p-v、v-phi、phi-omega 三类 mixed normals。
 
-文献核查：Hanema–Lazar–Tóth 的 LPV heterogeneous tube MPC 明确把 tube parameterization 与 complexity/performance、recursive feasibility 联系；Gupta–Köroglu–Falcone 2021（DOI 10.1002/rnc.5378）直接计算 rationally parameter-dependent + additive disturbance 系统的 predefined-complexity polytopic RCI，且不要求固定 state-feedback。这些工作说明 correlated invariant geometry / controller-invariant co-design 本身不是创新点。
+对固定 `(v,phi)`，速度 robust-support `|v-hT phi|+h(1.880+T*0.45^3/6)` 关于 T 为凸函数，所以整个连续 thrust interval 的最大值精确落在 T_low/T_high 两端，不需要网格采样。exact-rational corner witnesses：`p=5,v=3` 位置越界 3/50；`phi=.45,omega=2` 姿态越界 1/25；`v=3,phi=-.45` 在低/高推力正最坏 residual 下分别速度越界约 0.0832349/0.174505。
 
-下一轮唯一优先问题：选择最小 correlated polyhedral template（至少包含 p-v braking facets），在 scheduling-consistent W(T) 下建立可认证 controller/RCI co-design feasibility problem，并联合检查 px/vx/phi/omega/tau 硬约束。得到第一个可认证 correlated baseline 前，不恢复 CZ 几何收益讨论。
+文献核查 Gupta–Köroğlu–Falcone 2021（DOI 10.1002/rnc.5378）：论文正文确实处理 rationally parameter-dependent + additive disturbance、polytopic state/input constraints、predefined-complexity symmetric polytopic RCI，并不强制固定线性 feedback；因此 correlated fixed-complexity RCI 本身不是创新。本轮贡献只是为当前四旋翼降阶模型从 exact predecessor 推导非任意 shape prior。
+
+新增第38章、`verification/check_hard_box_predecessor_facets.py` 与 exact-rational 归档结果。尚未证明该一次 predecessor 或固定 normals candidate 是 RCI。
+
+下一轮唯一优先问题：使用第38章导出的 p-v/v-phi/phi-omega normals 建立第一个 fixed-complexity correlated polytope candidate，并做真正 robust controlled-invariance feasibility certificate；对允许 T、d in W(T) 与全部 state/input constraints，检查 candidate extreme points 是否存在 admissible scheduling-dependent torque。若失败，区分 facet complexity 不足与 actuator authority，不恢复随机 K/CZ geometry 搜索。
