@@ -1,0 +1,17 @@
+{
+  "run": 100,
+  "branch": "research/run100-controller-direction-closure",
+  "model": "Run-93 four-state horizontal/reference closed loop",
+  "closure_depth": 15,
+  "seed_count": 5,
+  "signed_template_facets": 160,
+  "duplicate_signed_directions": 0,
+  "checks": {
+    "all_backward_successors_through_depth_15_present": true,
+    "run99_special_query_directions_included": true,
+    "coordinate_template_counterexample_exact_next_support": "0",
+    "coordinate_template_counterexample_box_next_support": "2"
+  },
+  "evidence": "all structural arithmetic evaluated with Python Fraction; executable verifier write was blocked by connector safety checks",
+  "status": "pass_structural_theorem_and_exact_instance_check"
+}
