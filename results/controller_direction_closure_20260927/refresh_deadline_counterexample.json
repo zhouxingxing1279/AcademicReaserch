@@ -1,0 +1,17 @@
+{
+  "run": 103,
+  "claim": "Selective refresh preserves containment but cannot in general defer refreshing backward controller directions if the goal is to preserve tightening gained from the latest measurement through a future dropout.",
+  "counterexample": {
+    "prior": "[-1,1]^2",
+    "measurement_consistent_set": "{(t,-t): |t|<=1}",
+    "dynamics": "A=[[1,1],[0,1]]",
+    "controller_direction": "e1",
+    "required_predecessor_direction": "(1,1)",
+    "old_predecessor_cap": 2,
+    "new_exact_predecessor_support": 0,
+    "next_exact_support": 0,
+    "next_certificate_if_predecessor_not_refreshed": 2
+  },
+  "status": "proved by exact support calculation",
+  "consequence": "Run 102 selective refresh is a safety/nestedness theorem, not a precision-preservation theorem. Worst-case preservation of fresh measurement tightening across an unknown dropout gap requires refreshing every backward direction whose information may be consumed before the next guaranteed measurement, unless another representation retains the measurement correlation."
+}
