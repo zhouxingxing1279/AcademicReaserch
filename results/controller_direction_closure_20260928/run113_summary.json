@@ -1,0 +1,12 @@
+{
+  "run": 113,
+  "result": "Two consecutive position packets require 601 lifted latent variables and two independent measurement rows under the frozen linear model.",
+  "measurement_row_rank": 2,
+  "measurements": [0.01, 0.012],
+  "radius": 0.02,
+  "highs_supports": [2.255178033500655, 0.5576585762796658, 1.0274300197259265, 2.052049299325446, 0.5731665477357044, 1.0779702882454814],
+  "powell_max_gap": 2.730108561443956e-7,
+  "highs_batch_median_ms": 31.2850375,
+  "powell_batch_median_ms": 131.324332,
+  "conclusion": "Derivative-free Powell on the 2-D nonsmooth dual is rejected; use a finite-termination CPWL active-set or arrangement-walk solver next."
+}
