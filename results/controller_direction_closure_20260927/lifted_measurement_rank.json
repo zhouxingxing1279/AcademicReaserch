@@ -1,0 +1,22 @@
+{
+  "run": 112,
+  "core_question": "Can retained measurements from different filter times be stacked as k strips on the unchanged Run-109 generator vector?",
+  "result": "No. Exact sequential retention requires a common lifted latent vector containing process-noise variables introduced between measurements.",
+  "theorem": "For x1=F x0+Gw w0, the old measurement row in lifted coordinates is [H G0, 0], while the new measurement row is [H F G0, H Gw]. The k-strip dual applies to this common lifted box variable.",
+  "counterexample": "Scalar x1=x0+w0 with x0,w0 in [-1,1], exact y0=0,y1=1 is feasible in lifted coordinates (x0,w0)=(0,1), but incorrectly stacking both measurements on x0 alone gives x0=0 and x0=1 and falsely reports empty posterior.",
+  "reproducibility": {
+    "run109_reconstructible_constants": {
+      "h": 0.02,
+      "g": 9.81,
+      "K": [-0.1075,-0.1837,1.1637,0.3226],
+      "D0": 2.127089375,
+      "base_G": [0,0.02,0,0],
+      "generator_count": 600,
+      "strip": "|p_x-0.01|<=0.02",
+      "queries": ["+e_v","+e_psi","+K","-e_v","-e_psi","-K"]
+    }
+  },
+  "evidence_level": "analytic lifted-coordinate derivation plus exact scalar counterexample",
+  "conclusion": "Run-111's proposed k=2 timing must not be performed by inventing a second state-space row on the frozen one-strip G. Build the exact sequential lifted posterior first.",
+  "next_unique_priority": "Construct and persist the exact two-packet lifted posterior under the frozen Run-93 dynamics, then benchmark specialized k=2 support against HiGHS on that same posterior."
+}
