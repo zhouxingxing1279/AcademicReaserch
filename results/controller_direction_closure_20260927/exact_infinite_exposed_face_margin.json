@@ -1,0 +1,22 @@
+{
+  "run": 106,
+  "core_question": "Can all 160 H15 infinite-mRPI exposed faces be certified outside the position strip with exact arithmetic?",
+  "frozen_contract": {
+    "measurement_strip": "|px| <= 0.02",
+    "closure_depth": 15,
+    "signed_facets": 160,
+    "finite_exact_prefix": 600,
+    "tail_block_length": 139
+  },
+  "certificate": {
+    "arithmetic": "Python Fraction for all pass/fail comparisons",
+    "all_160_signed_facets_disjoint": true,
+    "minimum_abs_px_strict_lower_bound": "> 0.278",
+    "minimum_strip_separation_strict_lower_bound": "> 0.258",
+    "minimum_location": "depth-15 q_plus/q_minus seed pair",
+    "tail_treatment": "all generators after index 599 are conservatively free and bounded with the Run-93 M=139 block-contraction tail"
+  },
+  "consequence": "For nonempty S intersect M, every H15 support strictly decreases after the fresh |px|<=0.02 measurement intersection.",
+  "status": "proof-quality exact-rational certificate",
+  "next_unique_priority": "Equal-information same-machine benchmark: eager 160-support H15 materialization versus one measurement-updated CZ/joint object plus only actually consumed controller support queries."
+}
