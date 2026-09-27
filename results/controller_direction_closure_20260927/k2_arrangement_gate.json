@@ -1,0 +1,19 @@
+{
+  "run": 111,
+  "core_question": "Is exhaustive k=2 hyperplane-arrangement enumeration a viable exact specialized support solver under 20 ms?",
+  "theory": "For the convex piecewise-affine k=2 dual, an attained minimum has an arrangement-vertex minimizer after including lambda_1=0 and lambda_2=0 kink lines; exhaustive nonparallel pair intersections are therefore a correct but potentially expensive baseline.",
+  "verification": {
+    "small_deterministic_cases": 10,
+    "small_max_abs_error_vs_primal_HiGHS": 7.105427357601002e-15,
+    "synthetic_m600": {
+      "candidate_vertices": 180901,
+      "abs_error_vs_primal_HiGHS": 1.1368683772161603e-13,
+      "wall_times_ms": [423.657006, 433.963676, 391.519472],
+      "median_ms": 423.657006,
+      "passes_20ms": false
+    }
+  },
+  "reproducibility_warning": "Run 109 persisted aggregate supports and timings but not the 600-generator matrix, measurement map, or six query vectors. Therefore this run cannot honestly label its k=2 benchmark as the frozen Run-109 workload; the m=600 timing is a deterministic synthetic gate only.",
+  "evidence_level": "arrangement-vertex claim is analytic; equality and timings are numerical implementation evidence",
+  "conclusion": "Naive exhaustive 2D arrangement enumeration is numerically exact on checked cases but is not a viable 20 ms implementation. A subquadratic/active-set k=2 method or solver reuse is required before increasing retained measurement rank."
+}
