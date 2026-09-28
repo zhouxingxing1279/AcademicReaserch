@@ -72,3 +72,7 @@ Therefore neither online set shrinking nor terminal invariance is an innovation 
 - OPEN: proof-quality rational terminal support bounds and an executable persisted verifier; repeated closed-loop updates with changing centers/measurements; ISS/stability.
 
 Next unique priority: make this Run-119 C3 benchmark proof-quality and reproducible. Persist an executable verifier, replace the long-sum terminal checks by exact/rational tail upper bounds, and independently recompute the baseline/admission result. Only after that should the work move to repeated online reductions or stability.
+
+## Run 121–122 verification addendum
+
+Run 121 supplied the exact-rational terminal support verifier. Run 122 independently reconstructed the 601-latent posterior, all tightening supports and the 30-step OCP in `verification/check_run122_run119_reproduction.py`. Its persisted JSON reproduces the corrected Run-114 six supports, the nominal input range and exactly three older-packet deletion violations at stages 0, 1 and 29; newer-packet deletion has no violation above 1e-8. This closes the missing executable **numerical reproduction**, not the open cross-time recursive-feasibility or stability proof.
