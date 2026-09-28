@@ -25,19 +25,20 @@ alpha=ni(pw(F,M))
 assert alpha < 1
 
 # For S = sum_{i>=0} D0 F^i G [-1,1], certify support in q by
-# first M exact terms plus a geometric block tail.
+# first N exact terms plus a geometric tail in blocks of M terms.
+N=600
 def support_upper(q):
     x=G[:]; head=Q(0)
-    for _ in range(M):
+    for _ in range(N):
         head += abs(dot(q,x))
         x=mv(F,x)
-    # For block t>=1, |q^T F^(tM+j)G| <= ||q||_1 ||F^(tM)||_inf ||F^jG||_inf.
-    # ||F^(tM)||_inf <= alpha^t. Bound the within-block state sequence exactly.
-    y=G[:]; block=Q(0)
+    # For i=N+tM+j, commute F^(tM) past F^(N+j) and use
+    # ||F^(tM)||_inf <= alpha^t. The first tail block starts at F^N G.
+    y=x; block=Q(0)
     for _ in range(M):
         block += max(abs(v) for v in y)
         y=mv(F,y)
-    tail = sum(abs(v) for v in q) * block * alpha/(1-alpha)
+    tail = sum(abs(v) for v in q) * block/(1-alpha)
     return D0*(head+tail)
 
 dirs={
