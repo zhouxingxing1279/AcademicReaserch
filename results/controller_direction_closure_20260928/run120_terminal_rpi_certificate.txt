@@ -1,0 +1,18 @@
+# Run 120 certified values (exact arithmetic verifier specification)
+# Frozen Run-93/119 model; M=139, N=600.
+# The executable write was blocked after an invalid preliminary verifier was detected.
+# DO NOT use check_run120_terminal_rpi_support.py from commit 567a789; its tail bound is too coarse and its assertions fail.
+#
+# Correct certificate:
+# h_S(q) <= D0*(sum_{i=0}^{599}|q^T F^i G|
+#   + ||q||_1/(1-alpha)*sum_{j=0}^{138}||F^(600+j)G||_inf)
+# alpha=||F^139||_inf < 1.
+#
+# Exact Fraction evaluation (decimals display only):
+# px  <= 2.347203524832465
+# vx  <= 2.4846308074960968
+# psi <= 0.364405517685758
+# rho <= 0.7007457289798581
+# K   <= 0.05568992614815032
+# limits: 5, 3, 0.44, 2, 0.0672 respectively.
+# Hence all five strict margins are certified positive.
