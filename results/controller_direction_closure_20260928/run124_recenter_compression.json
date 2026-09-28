@@ -1,0 +1,62 @@
+{
+  "evidence_level": "conditional_proof_plus_numerical_stage_admission",
+  "model": "frozen Run-93/119 four-state linear abstraction",
+  "compression": {
+    "type": "certified-control-direction H-template outer approximation",
+    "source_latent_dimension": 602,
+    "template_state_dimension": 4,
+    "template_row_count": 300,
+    "outer_inclusion_certificate": "exact-rational weak-duality residual and recenter translation, rounded outward",
+    "outer_inclusion_by_support_halfspaces": true,
+    "maximum_template_minus_numerical_primal": 3.0911356807550305e-09,
+    "minimum_template_minus_numerical_primal": -4.6624104688142154e-08,
+    "maximum_certified_cap_minus_numerical_primal": 3.0911357362661818e-09,
+    "minimum_certified_cap_minus_numerical_primal": -4.6624104688142154e-08,
+    "minimum_translated_cap_outward_gap": 6.505213034913027e-19,
+    "maximum_translated_cap_outward_gap": 3.127763874039375e-16,
+    "minimum_cap": 0.007717012855437283,
+    "maximum_cap": 1.1515648424215905
+  },
+  "recenter": {
+    "posterior_member_direction": [
+      0.0140000116133264,
+      0.013999995886269778,
+      0.011943940505448468,
+      0.013999999384144065
+    ],
+    "posterior_member_violation": 0.0,
+    "strip_center_residual": 1.1613326399498303e-08,
+    "scale": 0.12264367365259067,
+    "initial_shift": [
+      0.0017170128554372824,
+      0.0017170109266132826,
+      0.0014648487414761807,
+      0.0017170113556054351
+    ],
+    "initial_shift_inf_norm": 0.0017170128554372824,
+    "maximum_nominal_state_correction_inf_norm": 0.07356526806567427,
+    "minimum_input_correction": -0.017581094432941147,
+    "maximum_input_correction": 0.01976516913380569
+  },
+  "stage_admission": {
+    "checked_margin_count": 300,
+    "maximum_constraint_excess": 0.0,
+    "direct_maximum_constraint_excess": 1.0408340855860843e-17,
+    "direct_minimum_robust_slack": -1.0408340855860843e-17,
+    "nominal_dynamics_residual_inf_norm": 1.9081958235744878e-17,
+    "terminal_nominal_correction_inf_norm": 0.0,
+    "admitted": true
+  },
+  "terminal_gate": {
+    "frozen_terminal_contract": "zero nominal terminal plus fixed Run-121 mRPI",
+    "closed_loop_determinant": 0.6999615978,
+    "consistent_translation_terminal_shift_inf_norm": 0.00259163450499398,
+    "only_consistent_zero_terminal_scale": 0.0,
+    "reason": "Exact translation covariance requires d_i=F^i d_0.  Because det(F) is nonzero, d_N=0 implies d_0=0.  The stage-admitted correction instead drives d_N to zero with free nominal inputs, so the Run-123 terminal-set inclusion is no longer inherited."
+  },
+  "overall_admission": {
+    "admitted": false,
+    "blocker": "terminal_mrpi_containment_after_nonzero_recenter"
+  },
+  "scope_warning": "The 300-row template proves outer containment and certified upper bounds only for the frozen candidate directions.  The positive recenter scale is not a recursive-feasibility certificate because terminal mRPI containment has not been established after the nonzero recenter."
+}
