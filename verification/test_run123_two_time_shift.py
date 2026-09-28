@@ -1,5 +1,8 @@
+import os
+from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 
 
@@ -49,12 +52,18 @@ class TwoTimeShiftTests(unittest.TestCase):
         self.assertIn("not", self.result["scope_warning"].lower())
 
     def test_script_is_directly_executable_from_repository_root(self):
-        completed = subprocess.run(
-            [sys.executable, "verification/check_run123_two_time_shift.py"],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
+        root = Path(__file__).resolve().parents[1]
+        environment = os.environ.copy()
+        environment["ACADEMIC_RESEARCH_NO_WRITE"] = "1"
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            completed = subprocess.run(
+                [sys.executable, str(root / "verification/check_run123_two_time_shift.py")],
+                cwd=temporary_directory,
+                env=environment,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
         self.assertEqual(completed.returncode, 0, completed.stderr)
 
 

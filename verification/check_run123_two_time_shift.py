@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
+import os
 from pathlib import Path
 import sys
 
@@ -265,10 +266,11 @@ def verify_two_time_shift() -> dict[str, object]:
 
 def main() -> None:
     result = verify_two_time_shift()
-    output = Path(
-        "results/controller_direction_closure_20260928/run123_two_time_shift.json"
-    )
-    output.write_text(json.dumps(result, indent=2) + "\n")
+    if os.environ.get("ACADEMIC_RESEARCH_NO_WRITE") != "1":
+        output = Path(
+            "results/controller_direction_closure_20260928/run123_two_time_shift.json"
+        )
+        output.write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result, indent=2))
 
 

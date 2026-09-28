@@ -62,6 +62,20 @@
 - 年份/出处：2005, *IEEE Transactions on Automatic Control*, 50(3):406–410；DOI：https://doi.org/10.1109/TAC.2005.843854
 - 方法/关系：mRPI 可控精度外逼近；有限 Minkowski 和必须补无限尾项才能作安全 tube。
 
+## Kouramas, Raković, Kerrigan, Allwright, Mayne — On the Minimal Robust Positively Invariant Set for Linear Difference Inclusions
+- 年份/出处：2005, CDC-ECC；公开全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc05/pdffiles/papers/1964.pdf
+- 本轮精读：Sections II–V，Assumption 1、Theorems 2–4、公式 (16)–(25)。
+- 方法/关键结论：若扰动是含原点内点的 C-set 且无扰动系统绝对渐近稳定，则可由有限 reachable sums 和缩放构造包含 mRPI 的 RPI 外近似，并控制 Hausdorff 误差。
+- 与本项目关系：该结果的方向是外近似，不能证明重定心候选位于原 mRPI 内；当前四维合同的 `W=D0 G[-1,1]` 为秩一线段，也不满足其 C-set 假设。不能无条件套用缩放公式。
+- 本项目状态：终端集合替代方案的条件性基线，不是当前包含证书。
+
+## Sadraddini, Tedrake — Linear Encodings for Polytope Containment Problems
+- 年份/出处：2019；arXiv:1903.05214；全文：https://arxiv.org/pdf/1903.05214
+- 本轮精读：Section III Theorems 1–2、Section IV-A Theorem 3 与反例、Table I。
+- 方法/关键结论：为 AH-polytope-in-AH-polytope 给出线性充分包含编码；zonotope 特例使用生成元的仿射系数映射。一般编码不保证必要性，论文明确给出真包含但 zonotope 证书失败的反例。
+- 与本项目关系：可把 CZ 终端误差集可靠地证入有限 mRPI 内近似；可行即证明，不可行不能当作不包含反例。适合作为计算证书，不是本项目创新。
+- 本项目状态：Run 125 终端包含的主要算法基线。
+
 ## McCormick — Computability of global solutions to factorable nonconvex programs: Part I — Convex underestimating problems
 - 年份/出处：1976, *Mathematical Programming*, 10:147–175；DOI：https://doi.org/10.1007/BF01580665
 - 方法/关系：单 bilinear term 的经典 convexification 基础；box-domain 线性 support 下普通 CZ 不会比 exact convex hull 更紧。
