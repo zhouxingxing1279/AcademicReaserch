@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "claim": "full_nominal_thrust_domain_precludes_any_nonempty_compact_vertical_ancillary_rci",
+  "vertical_residual": {
+    "c": "1043/500",
+    "alpha": "81/800"
+  },
+  "actual_thrust_interval": [
+    "981/200",
+    "2943/200"
+  ],
+  "full_range_nominal_candidate": [
+    "981/200",
+    "2943/200"
+  ],
+  "necessary_nominal_thrust_interval": [
+    "1198021/160000",
+    "1782257/160000"
+  ],
+  "boundary_correction_reserves": [
+    "413221/160000",
+    "572143/160000"
+  ],
+  "full_range_nominal_candidate_admissible": false,
+  "separate_nominal_thrust_bounds_configured": false,
+  "hover_nominal_thrust_admissible": true,
+  "endpoint_obstruction_witnesses": [
+    {
+      "nominal_thrust": "981/200",
+      "tracking_boundary": "maximum_e_vz",
+      "residual": "413221/160000",
+      "allowed_correction_sign": "delta_T_nonnegative",
+      "least_outward_increment_divided_by_h": "413221/160000",
+      "strict_outward_drift": true
+    },
+    {
+      "nominal_thrust": "2943/200",
+      "tracking_boundary": "minimum_e_vz",
+      "residual": "-572143/160000",
+      "allowed_correction_sign": "delta_T_nonpositive",
+      "greatest_outward_increment_divided_by_h": "-572143/160000",
+      "strict_outward_drift": true
+    }
+  ],
+  "evidence_level": "exact_necessary_condition_and_endpoint_nonexistence_proof",
+  "limitations": [
+    "the necessary interval is not an ancillary-RCI existence certificate",
+    "the proof uses only the frozen vertical outer-residual contract",
+    "estimator geometry, horizontal coupling, torque, terminal ingredients, and recursive feasibility remain open"
+  ],
+  "source_sha256": {
+    "verification/check_nominal_thrust_reserve.py": "6f16f7fdd5cd16eea90a4bc90be2f67bc8a8b1c30b634ea361072b1bda255987",
+    "verification/test_nominal_thrust_reserve.py": "5446a9de6ea461529fefb9fdd680e0e631b5d3db22eb48b4589934bf14b64850",
+    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+    "docs/learning/74_nominal_thrust_reserve_gate.md": "ab214bd798c4c53385544e113a47c799f08bea589df4dd0005dfef9569dd16e8"
+  }
+}

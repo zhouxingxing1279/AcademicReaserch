@@ -136,3 +136,8 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 ## 2026-09-29 — time-uniform 模式椭球存在但控制接口严格失败
 
 精读 graph invariant multi-set 与 intermittent-data equalized-recovery tube 近邻。对冻结六维 actual-input 误差 inclusion，15 模态 Bellman 映射为 contraction，唯一固定点给出 scalar/common-metric 类最小不变椭球多集；有向有理数证书通过17条边。但全部模式的速度支持下界均超过3 m/s、角度支持均超过0.45 rad，任何中心下的硬状态 tightening 都为空，且不能自洽闭合 residual 物理域。停止共同椭球支线；下一步仅构造 geometry-preserving reachable-sum 外不变多集及 certified tail。详见 `run135_research_log.md` 与第72章。
+
+---
+## 2026-10-01 — 联合 ancillary RCI 前的名义推力预留门槛
+
+精读 coupled output-feedback RPI，重读 online estimation-bound MPC、qLPV RCI 与 decision-dependent GSIP。联合误差 RCI 方法学已有强近邻，不作创新声明。当前配置无独立 nominal input bounds；精确证明 nominal thrust 若允许完整 actual interval，则持续端点计划使垂向速度误差严格单调漂移，任何有限 mode-indexed compact ancillary family 都不存在。必要 nominal thrust 区间为 `[7.48763125,11.13910625] N`，hover 通过但 RCI 存在性仍未证明。新增 exact verifier；下一步先冻结 nominal thrust/torque allocation，再做 augmented `(eta,d)` RCI。详见 `run137_research_log.md` 与第74章。

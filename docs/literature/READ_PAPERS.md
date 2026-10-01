@@ -91,6 +91,13 @@
 - Run 131 精读：III-C、IV-B，Assumption 7、Theorem 4 及证明。
 - 方法/关键结论：当前/未来有效 estimation-error bounds 与 observer/nominal mismatch 共同进入 homothetic tube；augmented terminal ingredients 封闭旧解移位和递归可行性；含 10-state quadrotor 数值例。
 - 与本项目关系：在线 estimator information 用于 finite-horizon tightening、保守 terminal envelope 负责尾端的分工已有强近邻。
+- Run 137 新增重读：pp. 9--10 的 Assumption 7、Theorem 4 与 shift proof。其 estimation bound `e` 和 tracking bound `s` 已联合进入 constraints/terminal；本项目不能把 12 维联合误差图本身当作创新，差异必须来自间歇 CZ 几何在同预算下的可认证收益。
+
+## Lorenzetti, Pavone — A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme
+- 年份/出处：2020, ECC；全文：https://arxiv.org/abs/1911.07360
+- Run 137 精读：Sections IV-B、IV-E--IV-G，式 (8)、(12)--(15)、Propositions 1--2。
+- 方法/关键结论：以 `estimation error + estimate-to-nominal control error` 为增广状态，计算一个 coupled RPI；其线性像同时收紧 performance/state 与 input constraints，并结合 nominal terminal MPC 给出 robust constraint satisfaction。
+- 与本项目关系：这是 augmented `(eta,d)` ancillary RPI 的直接强基线。“联合估计和控制误差”不是创新；本项目首先必须冻结 nominal/correction input allocation，再比较 15-mode CZ/zonotope 几何是否能在同预算下比 constant-cross-section RPI 更紧。
 
 ## Ping — Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems
 - 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850；DOI：https://doi.org/10.1155/2015/875850
@@ -294,6 +301,7 @@
 - 局限：该工作不是 SMF/CZ output-feedback Tube MPC，也没有解决本项目的 recursive-feasibility shift certificate。
 - 本项目状态：作为“不得丢失 uncertainty dependence”的强建模基线。
 - Run 134 精读：Sections II、V 及 planar quadrotor 案例。其 uncertainty set 可显式依赖 state/control，支持保留实际推力与余项的共同图；但方法针对有限时域 robust optimal control，没有给出间歇 output-feedback RCI 或 old-plan shift certificate。
+- Run 137 新增重读：Sections II--IV、Theorems 1--2 与 Section V。再次确认 `T=bar T+delta T` 决定 `d_z(T)` 的图可用 GSIP 表达；但 local-reduction 求解结果不能替代 compact invariant-set 与 recursive-shift 证明。
 
 ## Mulagaleti, Bemporad — Learning Quasi-LPV Models and Robust Control Invariant Sets with Reduced Conservativeness
 - 年份/出处：2025, *IEEE Control Systems Letters*；DOI：https://doi.org/10.1109/LCSYS.2025.3569637；全文：https://arxiv.org/abs/2505.07287
@@ -301,6 +309,7 @@
 - 方法/关键结论：对 self-scheduling quasi-LPV 模型构造 configuration-constrained polytopic RCI；在候选 RCI 内求 scheduling 下界以缩小 multiplicative uncertainty hull，并允许 vertex controls。文中 Remark 1 提示可扩展到 `p(x,u)`，正文证书主要按 `p(z)` 展开。
 - 与本项目关系：非轴对齐 polytope、configuration constraints、vertex control 和利用 self-scheduling correlation 均已有直接近邻；不能作为创新。本项目额外义务是 intermittent-SMF estimation error、nominal/correction input allocation 与实际 thrust 同时决定 dynamics/residual 的联合图。
 - 本项目状态：最强 qLPV ancillary RCI baseline；待完整合同后再做同条件数值比较。
+- Run 137 新增重读：Section 2.2.2 Proposition 2、Section 3.1 与 Corollary 1。configuration-constrained RCI 已把 vertex controls、state-dependent scheduling 下界和 hard input constraints放入证书；当前先缺的不是集合类，而是 nominal input reserve。
 
 ## Wehbeh, Kerrigan, Scaccia — Generalized Semi-Infinite Programming for Robust Optimal Control with Decision-Dependent Uncertainty
 - 年份/出处：2026 preprint，arXiv:2609.01538v1，2026-09-01；全文：https://arxiv.org/abs/2609.01538

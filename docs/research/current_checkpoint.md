@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-01，Run 136）
+# 研究短检查点（2026-10-01，Run 137）
 
-主命题：先闭合传统 SMF/输出反馈 tube MPC，学习暂停。2026-10-01 核对远端 `main` 1c49659；Run127--136 仍为本地研究链，本轮基线 Run135 `7ff1100`。
+主命题：先闭合传统 SMF/输出反馈 tube MPC，学习暂停。远端 `main` 为 `1c49659`；Run136 远端 `3c3944f` 与本地 `6e389c1` tree `8bc8945` 一致。
 
-Run136 精读 Athanasopoulos 等 2017 的 reachable multi-set/外包/T-product lift，并重读 Kouramas 等 2005 的 finite-sum scaling；两者的缩放定理要求 full-dimensional C-set disturbance，不能直接用于逐拍秩亏扰动。现按 5/10/15 tick 成功返回周期精确提升：mode 0 用最小分量外包盒，年龄 1--14 保留 signed generators。精确有理数证书通过 3/3 周期和 17/17 原图边；最坏 mode14 支持 `[0.6081,0.4446,2.7543,2.0529,0.005,0.01]`，全部低于状态域半宽，估计误差 tightening 非空。逐拍 boxing 会把 15-tick x 速度 gain 从真实 `1/2` 伪造为 `23/10>1`，禁止再据其发散否证。证据仍条件于冻结 actual-input inclusion；未证明 center/tracking/input 联合域闭合。
+Run137 精读 Lorenzetti--Pavone coupled-error RPI，重读 Köhler terminal shift、Mulagaleti--Bemporad qLPV RCI 与 Wehbeh--Kerrigan GSIP。联合 `(e,eta)` RCI 已被覆盖，不作创新声明。配置仅有 actual thrust `[4.905,14.715] N`，无独立 nominal bounds。由 `e_vz+=e_vz+h(deltaT+r_z)`、`d_z(T)=2.086+0.10125T` 精确证明：非空紧致 vertical RCI 的固定 nominal thrust 必须属于 `[7.48763125,11.13910625] N`；持续 endpoint plan 有严格正/负漂移，有限 mode family 也无法修复。hover `9.81 N` 通过；必要区间不证明 RCI 存在。
 
-2026-10-01 独立重跑 3/3 周期、17/17 边及 120/120 全仓测试通过。下一唯一问题：把 15-mode zonotope exact support 接入实际推力相关联合 `(e,eta)` ancillary 图，构造或否定满足 state/input/residual 合同的非空 mode-indexed RCI；通过后才进入 terminal/shift。
+新增 exact-rational verifier 与2项测试；全仓122/122通过。下一唯一问题：冻结独立 nominal thrust/torque allocation，再构造或反驳消费 Run136 zonotope support 的 mode-indexed augmented `(eta,d)` RCI；未冻结前禁止启动高维求解器。
