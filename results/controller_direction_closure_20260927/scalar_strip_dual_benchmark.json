@@ -1,0 +1,10 @@
+{
+  "run": 109,
+  "core_question": "Does the Run-108 scalar strip dual remove the Run-107 20 ms support-query bottleneck?",
+  "frozen_case": {"generators":600,"measurement":"|p_x-0.01| <= 0.02","signed_queries":["+v_x","+psi","+K^T","-v_x","-psi","-K^T"]},
+  "support_check": {"scalar":[2.3251202419403616,0.32066691175746,0.054764794481768284,2.333262096005961,0.3188526326858422,0.05482885305034337],"max_abs_difference_vs_HiGHS":8.784728500188521e-10,"acceptance_tolerance":1e-8},
+  "timing_ms":{"scalar_dual_6_queries":{"repetitions":1000,"median":0.24291,"p95":0.374737},"HiGHS_6_queries":{"repetitions":30,"median":21.937518,"p95":25.212021}},
+  "evidence_level":"implementation benchmark; timings are environment-specific, support equality is numerical to 1e-8",
+  "conclusion":"For this frozen one-strip case, the specialized one-dimensional dual is far below 20 ms and removes the generic-LP implementation bottleneck.",
+  "next_unique_priority":"derive and verify the k-strip dual and identify the largest retained independent measurement dimension compatible with the 20 ms budget"
+}

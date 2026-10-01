@@ -169,6 +169,16 @@ python verification/check_mode_radius.py --output /tmp/mode_radius.json
 使用 Fraction 与整数平方根向外舍入，核查模式条件半径、442项移位关系，以及全允许路径生成元坐标支持的312项后向方向复核。结果将 `radius_control_gate=blocked` 与 `geometry_coordinate_width_gate=pass_finite_horizon_only` 分开报告。原初始盒下的25步坐标宽度通过不代表 MPC、终端、任意滚动窗口、实时性或完整闭环通过。精确值、峰值路径及哈希见 `results/theory_mode_radius_20260916/exact_checks.json`，论证见 `docs/learning/07_mode_radius_and_geometry.md`。
 
 
+## C2-I：time-uniform 模式椭球固定点（2026-09-29）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_mode_invariant_radius.py -v
+PYTHONPATH=verification python verification/check_mode_invariant_radius.py --output /tmp/mode_invariant_radius.json
+```
+
+使用 Fraction 和 `10^-12` 有向平方根外包，求 15 模态 Bellman contraction 的上下固定点包，并独立核查 17 条边的上界不变性。结果证明冻结线性 inclusion 存在 time-uniform scalar/common-metric 椭球多集，同时由下界证明每个模式的速度和角度支持均超过原状态区间半宽，所以 `control_gate=blocked_by_scalar_metric_geometry`。这不证明全局非线性真值包含，也不否定 geometry-preserving SMF 多集。结果见 `results/theory_mode_invariant_radius_20260929/exact_checks.json`，证明范围见 `docs/learning/72_time_uniform_estimator_multiset.md`。
+
+
 ## C2-G/CZ：约束 zonotope 有界试验（2026-09-16）
 
 ```bash

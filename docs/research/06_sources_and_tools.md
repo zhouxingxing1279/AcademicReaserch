@@ -3,13 +3,18 @@
 > 2026-09-10 执行顺序更新：按用户要求，先证明域内保持及可比较优势，再实现。本文原有实验路线作为历史记录保留，当前设计与准入条件以 [理论设计](../theory/01_proof_first_design.md) 和 [审查与路线](../theory/02_review_and_gates.md) 为准。
 
 
-检索截止：2026-09-08。本文区分来源中的已有工作、本方案的推断与尚待验证的候选贡献。链接指向原论文、出版社、作者机构或官方代码；摘要级证据不能证明论文“没有做过”某一机制。
+首次汇总：2026-09-08；最近定向更新：2026-09-28。本文区分来源中的已有工作、本方案的推断与尚待验证的候选贡献。链接指向原论文、出版社、作者机构或官方代码；摘要级证据不能证明论文“没有做过”某一机制。
 
 ## 1. 最接近工作及实际影响
 
 | 来源 | 已核查内容与阅读层级 | 对本方向的约束与下一步 |
 |---|---|---|
-| [Köhler, Müller, Allgöwer：Robust output feedback model predictive control using online estimation bounds，2021 预印本](https://arxiv.org/abs/2105.03427)；[原文 PDF](https://arxiv.org/pdf/2105.03427) | 核查原文方法与数值例：在线估计界、集员/MHE 思路、非线性输出反馈 MPC，包含四旋翼例子 | “SMF＋MPC＋四旋翼”已经存在；学习目标须提供独立于控制架构拼接的贡献。其可检测性和可稳定性条件不能自动转移到本网络 |
+| [Köhler, Müller, Allgöwer：Robust output feedback model predictive control using online estimation bounds，2021 预印本](https://arxiv.org/abs/2105.03427)；[作者全文](https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf) | Run 127 定向精读 pp. 5--6 的 Theorem 2/(15)--(17) 与 pp. 9--10 的 Assumption 7、Theorem 4、递归可行性证明；此前已核查方法和四旋翼数值例 | “SMF＋MPC＋四旋翼”已有；旧解移位最后一步显式依赖 terminal ingredients，阶段方向通过不能替代终端包含。其可检测性、稳定性条件不能自动转移到本网络 |
+| [Mayne, Seron, Raković：Robust MPC of constrained linear systems with bounded disturbances，Automatica 2005](https://doi.org/10.1016/j.automatica.2004.08.019) | Run 127 核对 DOI/摘要及 Raković 公开讲义中的 rigid-tube 局部动力学和 RPI 条件；本轮未取得原论文全文 | 固定反馈误差集合须满足 `(A+BK)S \oplus W subseteq S`；本仓库只使用已独立有理数核验的 mRPI，不由摘要补造定理细节 |
+| [Dey, Bhasin：Output Feedback MPC with Adaptive Tubes，2026](https://arxiv.org/abs/2605.23661)；[原文 PDF](https://arxiv.org/pdf/2605.23661) | Run 123 精读 Section IV、Algorithm 1、Theorem 2 与 Appendix IV (51)–(55)：状态/参数/初值估计集合在线更新，tube、收紧和终端随之变化，以备份集合与旧解移位保证递归可行 | “输出反馈＋evolving set＋adaptive tube＋递归可行”已被覆盖。本项目只能研究其未直接给出的控制方向按需证书、固定复杂度压缩及非零重定心准入，并须以完整 tube 更新为强基线 |
+| [Scott 等：Constrained zonotopes，Automatica 2016](https://doi.org/10.1016/j.automatica.2016.02.036)；[作者全文](https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf) | Run 124 精读 Sections 3.1、4、5；Run 126 重读 Sections 3.1、4.1–4.3、Appendix Algorithm 1 与 (A.9)–(A.10)，并复现满足 `|T^-1V|<=1` 的 lift-then-reduce 基线 | 普通 CZ 安全外包降阶不是创新；Run 127 以有理数支持分离严格否定冻结 539-generator 实现的 terminal mRPI 包含，阶段 538--539 临界带不能作为完整控制准入 |
+| [Raghuraman, Koeln：Set operations and order reductions for constrained zonotopes，2022](https://doi.org/10.1016/j.automatica.2022.110204)；[全文](https://arxiv.org/pdf/2009.06039) | Run 124 精读 Section 5；其 order reduction 产生低复杂度 inner approximations | 内近似不能用于可靠状态后验压缩；引用“CZ order reduction”时必须标清包含方向 |
+| Robbins 等：*Online Constraint Tightening for MPC using Constrained Zonotope Reachability Analysis and Zonotope Over-Approximations*, ACC 2026，[机构记录](https://pure.psu.edu/en/publications/online-constraint-tightening-for-mpc-using-constrained-zonotope-r/)，[IEEE](https://ieeexplore.ieee.org/document/11616451) | Run 126 确认摘要、8 页书目信息及 Sections II–V 目录；IEEE 在 Introduction 后要求机构/会员访问，正文仍未取得 | 是固定复杂度在线收紧的强基线；不能从摘要猜公式/复杂度或断言其未覆盖控制方向准入，首次性保持未知 |
 | [KNODE-MPC，2021 预印本](https://arxiv.org/abs/2109.04821) | 原始摘要/论文页面：知识驱动神经 ODE、四旋翼 MPC 与实验 | “物理模型＋残差网络＋MPC”不是创新。需要同等模型容量与物理基线 |
 | [Ren 等：KNODEOB-MPC，2026，DOI 10.1002/rnc.70444](https://onlinelibrary.wiley.com/doi/10.1002/rnc.70444) | 出版社摘要：知识驱动神经 ODE、在线观测器、多扰动四旋翼跟踪 | “再加观测器”也已有直接近邻。未逐页核查全部证明，不能据摘要断言其没有某项保证 |
 | [Pan 等：Zonotopic set-membership state estimation for nonlinear systems based on deep Koopman operator，Neurocomputing 618，129004，2025](https://scholar.xjtlu.edu.cn/en/publications/zonotopic-set-membership-state-estimation-for-nonlinear-systems-b/)；[DOI](https://doi.org/10.1016/j.neucom.2024.129004) | 作者机构记录与摘要；全文尚需获取 | 深度学习与 zonotope 集员状态估计已有直接结合；本方案保留物理状态不构成单独创新，必须比较后验训练机制 |

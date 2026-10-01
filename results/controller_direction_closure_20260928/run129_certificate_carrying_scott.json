@@ -1,0 +1,88 @@
+{
+  "contract": {
+    "state_dimension": 4,
+    "target_generators": 602,
+    "equality_constraints": 3,
+    "interpretation": "frozen binary64 coefficients as exact rationals"
+  },
+  "first_elimination": {
+    "source_generators": 605,
+    "target_generators": 604,
+    "certificate_feasible": false,
+    "violating_rows": [
+      4,
+      27,
+      78,
+      601
+    ],
+    "minimum_exact_dual_margin": 1.2868653032072075e-08,
+    "lineage_reconstruction_residual": 6.938893903907228e-18,
+    "all_exact_dual_witnesses_feasible": true,
+    "rows": [
+      {
+        "row": 4,
+        "raw_budget": 1.0000000650085386,
+        "adjusted_primal_budget": 1.0000000650085386,
+        "exact_dual_margin": 6.500853855229138e-08,
+        "exact_dual_margin_fraction": "146386215/2251799813685248",
+        "exact_equality_residual": "0/1",
+        "exact_box_excess": "0/1",
+        "exact_dual_feasible": true,
+        "repair_basis": [
+          52,
+          5,
+          600
+        ]
+      },
+      {
+        "row": 27,
+        "raw_budget": 1.0000000437770518,
+        "adjusted_primal_budget": 1.0000000437770518,
+        "exact_dual_margin": 4.377705176139557e-08,
+        "exact_dual_margin_fraction": "98577157/2251799813685248",
+        "exact_equality_residual": "0/1",
+        "exact_box_excess": "0/1",
+        "exact_dual_feasible": true,
+        "repair_basis": [
+          604,
+          3,
+          4
+        ]
+      },
+      {
+        "row": 78,
+        "raw_budget": 1.0000000787984658,
+        "adjusted_primal_budget": 1.0000000787984658,
+        "exact_dual_margin": 7.879846575242766e-08,
+        "exact_dual_margin_fraction": "354876741/4503599627370496",
+        "exact_equality_residual": "0/1",
+        "exact_box_excess": "0/1",
+        "exact_dual_feasible": true,
+        "repair_basis": [
+          4,
+          5,
+          108
+        ]
+      },
+      {
+        "row": 601,
+        "raw_budget": 1.000000012868653,
+        "adjusted_primal_budget": 1.000000012868653,
+        "exact_dual_margin": 1.2868653032072075e-08,
+        "exact_dual_margin_fraction": "57955261/4503599627370496",
+        "exact_equality_residual": "0/1",
+        "exact_box_excess": "0/1",
+        "exact_dual_feasible": true,
+        "repair_basis": [
+          604,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  "evidence_level": {
+    "proved": "The equality-adjusted carried row-l1 certificate is infeasible after the first frozen Scott elimination.",
+    "not_proved": "The 604-generator constrained zonotope is outside S_602."
+  }
+}

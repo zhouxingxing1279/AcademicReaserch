@@ -2,9 +2,32 @@
 
 > 本文件记录为当前 SMF + Tube MPC / constrained-zonotope 主线实际核对过的文献。“已阅读”指至少核对原文/正式摘要中的模型、方法与和本项目直接相关的定理或集合运算；不等同于作者已完成逐页人工精读。新增条目前先查重。
 
+## Athanasopoulos, Smpoukis, Jungers — Invariance in Constrained Switching Systems
+- 年份/全文：2017；[arXiv:1702.00598](https://arxiv.org/abs/1702.00598)。
+- Run 135 精读：pp. 2--6，Assumptions 1--4、Definitions 1--3、Proposition 1、Theorems 1--3。
+- Run 136 新增精读：Sections 2.1--3.2、6，重点 forward reachable recursion (7)--(16)、Theorem 2 的缩放外包及 T-product lift。确认外包定理要求每个标签扰动为 full-dimensional C-set；本项目逐拍秩亏 disturbance image 不可直接套用。
+- 方法/关键结论：以图节点索引 invariant multi-set；逐边 one-step reachable inclusion 与不变性等价；在稳定、强连通和 C-set disturbance 假设下，forward reachable multi-set 收敛到 minimal invariant multi-set，并可构造有限外逼近；约束内还可后向求 maximal admissible multi-set。
+- 与本项目关系：15-mode estimator-error invariant family 和 reachable-sum 外逼近已有直接理论，不能作为创新。当前部分边扰动低维，不满足其 C-set 内点假设；Run 135 的 scalar Bellman contraction 独立证明，下一轮几何外逼近不能无条件照搬其定理。
+
 ## Scott, Raimondo, Marseglia, Braatz — Constrained zonotopes: A new tool for set-based estimation and fault detection
 - 年份/出处：2016, *Automatica*, 69:126–136；DOI：https://doi.org/10.1016/j.automatica.2016.02.036
 - 方法/关系：CZ 定义、精确集合运算与复杂度约减；是本项目 CZ 基础，因此“CZ 保留相关性”不是创新。
+- Run 126 新增核查：重读 Sections 3.1、4.1–4.3、Appendix Algorithm 1 与 (A.9)–(A.10)，并在冻结 Run-123 后验复现 lift-then-reduce 外包及控制准入临界复杂度。该复现是强基线，不是新算法。
+- Run 129 新增核查：逐式重读 Appendix (A.9)–(A.10) 的基生成元放大、残余坐标逆缩放与删除顺序。论文维护几何外包，不维护到给定终端内集的包含映射；本轮携带谱系只是实现审计，不能宣称替代或改进 Scott 方法。
+
+## Kopetzki, Schürmann, Althoff — Methods for Order Reduction of Zonotopes
+- 年份/出处：2017, CDC, 5626–5633；DOI：https://doi.org/10.1109/CDC.2017.8264508；作者全文：https://mediatum.ub.tum.de/doc/1442501/1442501.pdf
+- Run 129 精读：Introduction、Section II 的 box/transformation methods、Section III 的 PCA/clustering/constrained optimization、Section IV 的约束与评价。
+- 方法/关键结论：系统比较 zonotope 外包约减，以体积或几何误差评价；可通过变换、聚类或优化构造较紧外包。
+- 与本项目关系：它是普通几何 order reduction 的强基线，但不处理 CZ equality slice，也不保证压缩集仍落在指定 terminal inner set 内。几何更紧不能替代终端包含证书。
+- 本项目状态：Run 129 排重基线；不把几何约减本身当作创新。
+- Run 130 新增核查：精读 Section III-D。该节直接优化 reduced generator matrix `C`，用 `sum_j |C^{-1}G|_{ij} <= 1` 保证原 zonotope 被包含，并用 determinant/volume 目标和 `fmincon` interior-point 求解。因此“非-Scott + 包含硬约束的 outer reduction”已有直接近邻。
+
+## Robbins, Glunt, Thompson, Pangborn — Online Constraint Tightening for MPC using Constrained Zonotope Reachability Analysis and Zonotope Over-Approximations
+- 年份/出处：2026, ACC 2026, pp. 585–592；IEEE：https://ieeexplore.ieee.org/document/11616451；机构记录：https://pure.psu.edu/en/publications/online-constraint-tightening-for-mpc-using-constrained-zonotope-r/
+- Run 126 核查层级：取得正式摘要、书目信息和章节目录；正文在 Introduction 后要求机构/会员访问，未完成全文精读。
+- 已知覆盖：摘要明确包含 nonlinear error reachability、在线 MPC tightening、无需优化的 CZ-to-zonotope 外包和 LTV 数值例。
+- 边界：不能据摘要推断具体外包公式、复杂度、终端/递归可行性或是否保护控制方向；首次性保持未知。
 
 ## Le, Stoica, Dumur, Alamo, Camacho — Robust Tube-Based Constrained Predictive Control via Zonotopic Set-Membership Estimation
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6161131
@@ -49,10 +72,57 @@
 ## Dey, Bhasin — Output Feedback MPC with Adaptive Tubes
 - 年份/出处：2026, arXiv:2605.23661
 - 方法/关系：adaptive observer 的 state/model/initial-condition estimates 联动 tightening、terminal ingredients 和 tube geometry；作者建立 recursive feasibility 与 robust exponential stability。与本项目 recenter/update gate 高度相邻，必须全文排重。
+- Run 131 新增核查：精读 IV-C--IV-F、Criterion 1、Algorithm 1、Theorem 2 与 Appendix IV。terminal set 可随 estimates 更新，但必须通过 consecutive compatibility criterion；失败时保持旧 point estimate/回退集合，backup setup 与旧解移位封闭递归可行。故 adaptive terminal、更新准入与 fallback 不能作为本项目创新。
+
+## Dey, Dhar, Bhasin — Adaptive Output Feedback Model Predictive Control
+- 年份/出处：2022, arXiv:2209.08908；全文：https://arxiv.org/abs/2209.08908
+- Run 131 精读：IV-A、IV-D--IV-F、Algorithm 1 与 recursive-feasibility proof。
+- 方法/关键结论：固定 estimation-error RPI set 加到 estimated-state homothetic tube，形成包含 true state 的 `homothetic and invariant` two-tube；terminal set 与 shifted candidate 保证 recursive feasibility。
+- 与本项目关系：两层 output-feedback tube 在 2022 年已有直接先例；本项目差异只能落在 intermittent CZ-SMF、固定 support-query budget 与 mode-indexed backup family 的联合接口。
+
+## Dey, Bhasin — Adaptive Output Feedback MPC With Guaranteed Stability and Robustness
+- 年份/出处：2025, *IEEE Transactions on Automatic Control*, 70(12):8345--8352；DOI：https://doi.org/10.1109/TAC.2025.3584302；预印本：https://arxiv.org/abs/2502.04048
+- Run 131 精读：IV-A--IV-D、Assumption 4、Theorem 1--2。
+- 方法/关键结论：时间相关 estimation-error sets 与 state-estimate homothetic tube 构成 two-tier tube；fixed terminal set/feedback 封闭 shift，保证 recursive feasibility 和 robust exponential stability。
+- 与本项目关系：“在线估计信息 + 独立 terminal 骨架”的宽泛结构已覆盖，不能改名为新架构。
+
+## Köhler, Müller, Allgöwer — Robust output feedback model predictive control using online estimation bounds
+- 年份/出处：2021, arXiv:2105.03427；全文：https://arxiv.org/abs/2105.03427
+- Run 131 精读：III-C、IV-B，Assumption 7、Theorem 4 及证明。
+- 方法/关键结论：当前/未来有效 estimation-error bounds 与 observer/nominal mismatch 共同进入 homothetic tube；augmented terminal ingredients 封闭旧解移位和递归可行性；含 10-state quadrotor 数值例。
+- 与本项目关系：在线 estimator information 用于 finite-horizon tightening、保守 terminal envelope 负责尾端的分工已有强近邻。
 
 ## Ping — Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems
 - 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850；DOI：https://doi.org/10.1155/2015/875850
 - 方法/关系：zonotopic estimation-error set 刷新后用辅助 feasibility condition 决定是否采用更新；失败时继承旧 controller parameters。“更新前 feasibility gate”不是创新。
+- Run 131 新增核查：精读 4.2--4.4、Algorithm 8、Theorem 9；确认其含 zonotope order limit、在线 set refresh、一步 feasibility gate 及失败时继承旧 controller parameters。不能把 `SMF update + gate + fallback` 作为新机制。
+
+## Hassaan, Pati, Shen, Yong — Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data
+- 年份/出处：2021, *IFAC-PapersOnLine*, 54(5):103--108；DOI：https://doi.org/10.1016/j.ifacol.2021.08.482；作者全文：https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf
+- Run 132 精读：Sections 2.2、3.1--3.2，Assumptions 1--3、Theorems 5--7。
+- 方法/关键结论：以周期有限长度语言描述间歇时延/缺测，构造 time-varying estimator/control tubes；一个对全部周期相位有效的 common nominal terminal set 与 feedback gain 足以用旧解移位证明 recursive feasibility，并得到 robust exponential stability。
+- 与本项目关系：直接覆盖 `finite dropout language + time-varying tube + terminal shift`。mode-indexed terminal family 不是默认必要条件；本项目必须先复现其 worst-phase common-terminal baseline，再证明 indexing 的严格收益。
+- 局限：误差集合采用 hyperbox，系统为线性/时变而非本项目完整六自由度非线性四旋翼；没有固定预算 CZ support-query 接口。
+- Run 133 新增核查：重读 Section 3.1.2、Lemma 4、Assumptions 1--2 与 Theorem 6。确认 tracking controller/control-error tube 先吸收过程噪声与 estimation error；common `K_f,X_f` 随后作用于已经收紧的 nominal system。二者不是同一个 joint controller/RPI synthesis 问题。
+- Run 135 新增核查：重读 Definition 1、system/timing 与 Section 3.1.1。其 estimator 采用 finite/periodic equalized-recovery error tubes，未来 delay pattern 未知时对全部允许模式取 worst case；并不要求一个 time-uniform invariant estimation-error family。故本轮统一固定点只是更强、更保守的 backup 基线。
+
+## Rutledge, Yong, Ozay — Finite horizon constrained control and bounded-error estimation in the presence of missing data
+- 年份/出处：2020, *Nonlinear Analysis: Hybrid Systems*, 36:100854；DOI：https://doi.org/10.1016/j.nahs.2020.100854；作者全文：https://www.kwesirutledge.info/static/pdf/nahs2020.pdf
+- Run 132 精读：Sections 3--4、Definition 2、equalized-recovery formulation 与 synthesis。
+- 方法/关键结论：missing-data language 可表达连续丢包上界；prefix-based affine feedback 在 bounded process/measurement noise 与 state/input constraints 下保证 finite-horizon equalized recovery。Remark 3 明确指出可适配 zonotope 等 set template。
+- 与本项目关系：bounded-dropout language、按前缀/模式合成反馈及 set-valued bounds 均已有近邻；有限时域结果本身不闭合 receding-horizon terminal proof。
+
+## Hassaan, Shen, Yong — Path-Dependent Controller and Estimator Synthesis with Robustness to Delayed and Missing Data
+- 年份/出处：2021, HSCC；DOI：https://doi.org/10.1145/3447928.3456655；作者全文：https://qiangs.github.io/Papers/Conf_HSCC2021Hassaan.pdf
+- Run 132 精读：Sections 2--5，fixed-length/reduced event language、path-dependent controller/estimator synthesis 与 examples。
+- 方法/关键结论：为 time-varying affine systems 合成 path-dependent finite-horizon controller/estimator；通过 reduced event language 处理相同可观察历史的因果冲突，并以 polytopic intermediate bounds 改善只按 worst-case word 的设计。
+- 与本项目关系：按 dropout mode/path 索引 controller、estimator 或 error bound 不是创新；15-mode indexing 只能作为实现结构。
+
+## Wildhagen, Pezzutto, Schenato, Allgöwer — Self-triggered MPC robust to bounded packet loss via a min-max approach
+- 年份/出处：2022, CDC extended version；arXiv：https://arxiv.org/abs/2204.00339
+- Run 132 精读：problem formulation、min-max MPC、terminal control law、recursive feasibility/constraint/convergence argument。
+- 方法/关键结论：在连续 packet loss 数有界时使用 min-max self-triggered MPC 与尾端控制律，对所有允许 loss realization 保证 recursive feasibility、constraint satisfaction 和 convergence。
+- 与本项目关系：从网络化 MPC 方向再次覆盖 `bounded packet loss + terminal/shift proof`；但不是 SMF output feedback，也不消费 CZ posterior correlation。
 
 ## Mayne, Seron, Raković — Robust model predictive control of constrained linear systems with bounded disturbances
 - 年份/出处：2005, *Automatica*, 41(2):219–224；DOI：https://doi.org/10.1016/j.automatica.2004.08.019
@@ -61,6 +131,51 @@
 ## Raković, Kerrigan, Kouramas, Mayne — Invariant approximations of the minimal robust positively invariant set
 - 年份/出处：2005, *IEEE Transactions on Automatic Control*, 50(3):406–410；DOI：https://doi.org/10.1109/TAC.2005.843854
 - 方法/关系：mRPI 可控精度外逼近；有限 Minkowski 和必须补无限尾项才能作安全 tube。
+
+## Kouramas, Raković, Kerrigan, Allwright, Mayne — On the Minimal Robust Positively Invariant Set for Linear Difference Inclusions
+- 年份/出处：2005, CDC-ECC；公开全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc05/pdffiles/papers/1964.pdf
+- 本轮精读：Sections II–V，Assumption 1、Theorems 2–4、公式 (16)–(25)。
+- Run 136 新增重读：Theorems 1--4 与公式 (11)--(23)，核对 finite reachable sum、`R_s subseteq alpha W` 和 `(1-alpha)^-1 D_s` 的逻辑。当前标签相关秩亏扰动不满足公共 full-dimensional `W` 假设，故仅作为理论边界，不作为本轮证书。
+- 方法/关键结论：若扰动是含原点内点的 C-set 且无扰动系统绝对渐近稳定，则可由有限 reachable sums 和缩放构造包含 mRPI 的 RPI 外近似，并控制 Hausdorff 误差。
+- 与本项目关系：该结果的方向是外近似，不能证明重定心候选位于原 mRPI 内；当前四维合同的 `W=D0 G[-1,1]` 为秩一线段，也不满足其 C-set 假设。不能无条件套用缩放公式。
+- 本项目状态：终端集合替代方案的条件性基线，不是当前包含证书。
+
+## Sadraddini, Tedrake — Linear Encodings for Polytope Containment Problems
+- 年份/出处：CDC 2019；DOI：https://doi.org/10.1109/CDC40024.2019.9029363；arXiv:1903.05214；全文：https://groups.csail.mit.edu/robotics-center/public_papers/Sadraddini19.pdf
+- Run 128 重读：Section III Theorem 1 与 (11)–(17)、Theorem 2，Section IV-A Theorem 3 与反例、Table I。
+- 方法/关键结论：为 AH-polytope-in-AH-polytope 给出线性充分包含编码；zonotope 特例使用生成元的仿射系数映射。一般编码不保证必要性，论文明确给出真包含但 zonotope 证书失败的反例。
+- 与本项目关系：可把 CZ 终端误差集可靠地证入有限 mRPI 内近似；可行即证明，不可行不能当作不包含反例。Theorem 1 要求 primitive inbody 满维，CZ equality slice 必须先在 affine hull 内参数化。当前 539–605 / 602-generator 实例的通用编码达到约 160–180 万变量，不适合作为在线 fixed-budget admission。
+- 本项目状态：Run 125 的终端包含基线；Run 128 将其降级为离线充分审计工具，不作为在线算法。
+- Run 129 新增核查：Theorem 3 的行 `l1` 生成元映射可与 CZ 等式自由度组合为逐行小 LP；这是已知充分证书的结构化特化。首个 Scott 消元的 4 个超限行均有精确对偶下界大于 1，因此该特化首步失败；失败不否定真实集合包含。
+- Run 130 新增核查：阅读 17 页 expanded arXiv 版本，重点 Section V-B、Proposition 6 与式 (30)。作者已经把 reduced generator matrix 与 containment maps 联合优化，用双向包含近似 Hausdorff distance；双线性等式使问题非凸，使用 projected sequential LP/交替求解并依赖初始化。把 terminal containment witness 当作 reduction 硬约束不是空白机制。
+
+## Diaconescu et al. — Zonotope-Based Elastic Tube Model Predictive Control
+- 年份/出处：2026, arXiv:2509.19824v2（2026-05-17 修订）；全文：https://arxiv.org/abs/2509.19824
+- Run 129 精读：Sections 3.1、3.4 的包含 Lemma/Proposition/Corollary 与预计算 inclusion matrix。
+- 方法/关键结论：在 zonotopic elastic tube MPC 中以仿射生成元映射和逐行范数约束编码包含，并预计算固定 inclusion matrix 以减少在线辅助变量。
+- 与本项目关系：“携带或预计算包含矩阵”已有明确近邻，不能作为创新。其对象是缩放 zonotope，不是 Scott CZ 消元中的 equality-adjusted terminal witness。
+- 本项目状态：certificate-carrying containment 的强近邻与首次性约束。
+
+## Hellwig, Schäfer, Qian, Platzer, Althoff — From Zonotopes to Proof Certificates: A Formal Pipeline for Safe Control Envelopes
+- 年份/出处：iFM 2025，LNCS 16194（卷出版 2026）；DOI：https://doi.org/10.1007/978-3-032-10794-7_13
+- Run 128 精读：pp. 10–11，containment witness、残差裕量及 Theorem 3.5。
+- 方法/关键结论：把 zonotope containment 的浮点优化 witness 转成可由形式系统检查的证书；可用精确有理数，或在 `||HΓ-G||` 残差和右逆范数约束下预留严格裕量。
+- 与本项目关系：终端包含不能只保存 solver success；必须归档映射 witness，并独立检查等式、box 行预算和数值裕量。
+- 局限：处理 zonotope witness，不直接消除 CZ equality，也不解决当前百万变量在线规模。
+- 本项目状态：可靠证书实现规范。
+
+## Kulmburg, Schäfer, Althoff — Approximability of the Containment Problem for Zonotopes and Ellipsotopes
+- 年份/出处：2025，*IEEE Transactions on Automatic Control*, 70(12):8104–8119；DOI：https://doi.org/10.1109/TAC.2025.3583624
+- Run 128 阅读：期刊元数据、摘要和 arXiv 记录；全文获取失败，未核查定理编号或证明。
+- 方法/关系：摘要显示其分析 zonotope/ellipsotope containment 松弛的近似质量。不能凭摘要把它当作无损、低复杂度 CZ-in-zonotope 判据。
+- 本项目状态：最近邻线索，首次性保持未知，待取得全文。
+
+## Froese et al. — Parameterized Hardness of Zonotope Containment and Neural Network Verification
+- 年份/出处：2025 preprint；全文：https://arxiv.org/pdf/2509.22849
+- Run 128 精读：Section 3.1、Theorem 3.1 及一般复杂度结论。
+- 方法/关键结论：固定物理维数 `d` 时，可枚举 `O(n^(d-1))` 个顶点判定 zonotope containment；一般问题具有困难性。
+- 与本项目关系：解释为何不应预设高生成元一般包含有便宜完整证书。该结果针对 zonotope，不直接覆盖有 equality 的 CZ。
+- 本项目状态：复杂度背景，不是当前在线实现方案。
 
 ## McCormick — Computability of global solutions to factorable nonconvex programs: Part I — Convex underestimating problems
 - 年份/出处：1976, *Mathematical Programming*, 10:147–175；DOI：https://doi.org/10.1007/BF01580665
@@ -109,6 +224,7 @@
 - 与本项目关系：说明“CZ order reduction”已有系统理论；本项目若有贡献必须落在 reduction error 与 recursive-feasibility control normals 的联动证书，而不是提出一般 reduction。
 - 局限：没有给出本项目所需的 rolling SMF shift-support ledger。
 - 本项目状态：作为 fixed-complexity CZ 强基线。
+- Run 130 新增核查：精读 Section 5。其 zonotope/CZ order reduction 直接采用 Sadraddini--Tedrake containment encoding；CZ 经 nullspace/AH-polytope 表示构造 LP，可删一个 generator/constraint 后再缩放。该节做 inner approximation，不能作为 reliable SMF posterior 的 outer enclosure，但已排除“CZ reduction + containment constraint”本身的首次性。
 
 ## Robbins, Siefert, Pangborn — Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control
 - 年份/出处：2026, *American Control Conference (ACC 2026)*；IEEE Xplore 收录日期 2026-08-13。
@@ -137,6 +253,7 @@
 - 可借鉴点：其 nested RPI/RCI lookup 与 scaled terminal 是当前语义一致 ancillary synthesis 的直接比较基线。
 - 局限：不是 constrained-zonotope posterior 的 control-normal support certification问题。
 - 本项目状态：列为后续 LPV output-feedback 基线。
+- Run 131 核查层级：本轮仅取得正式摘要；摘要支持 nested RPI/RCI lookup、在线 tightening 与 scaled terminal 的定位，但未据此引用定理编号或证明细节。
 
 
 ## Tahir, Jaimoukha — Robust Positively Invariant Sets for Linear Systems subject to model-uncertainty and disturbances
@@ -146,6 +263,20 @@
 - 与本项目关系：第34–35章的“约束感知 ancillary synthesis”已有直接方法学基础，因此 controller/invariant co-design 只能作为 baseline 工具，不能作为创新。
 - 局限：其 uncertainty class 与当前 thrust-scheduled、state-dependent nonlinear remainder 不完全相同；不能直接替代本项目的 vertex-consistent residual contract。
 - 本项目状态：列为下一阶段 joint state/input synthesis 的 baseline。
+- Run 133 精读：Sections 2--3、Definition 3、Theorem 5、Remarks 6--9。其 joint feedback/hyperrectangle synthesis 针对 norm-bounded model uncertainty 与 additive box disturbance；一般条件是充分的，无结构 norm-bounded uncertainty 特例可达精确性。该描述不直接保持本项目同一 `T` 决定 `(A(T),W(T))` 的 correlated graph；独立外包不能用于否定 vertex-consistent certificate。
+
+## Tahir — Efficient computation of Robust Positively Invariant sets with linear state-feedback gain as a variable of optimization
+- 年份/出处：2010, ICEEE；DOI：https://doi.org/10.1109/ICEEE.2010.5608613
+- Run 133 精读：Sections II--IV，式 (1)--(25)，Remarks 3--12。
+- 方法/关键结论：对 LTI + additive box disturbance 同时优化 linear feedback 与 RPI set；固定形状椭球采用 S-procedure 得到充分 SDP，origin-centered axis-aligned box 采用 Farkas 条件，并可加入 state/input constraints；固定 K 时部分问题退化为 LP。
+- 与本项目关系：这是 ancillary/tracking disturbance-RPI 层的直接 baseline，不是 Hassaan nominal terminal `K_f,X_f`。box 类已由第37章严格排除；ellipsoid 类仍需适配 arbitrary-jump thrust LPV 和 paired residual。
+- 本项目状态：准入为方法基线，不直接实现现有公式。
+
+## Tahir, Jaimoukha — Robust feedback MPC of constrained uncertain systems
+- 年份/出处：2013, *Journal of Process Control*, 23(2):151--163；DOI：https://doi.org/10.1016/j.jprocont.2012.08.003
+- Run 133 阅读层级：仅正式摘要，未取得可核验全文。
+- 摘要层面关系：区分把状态导入 invariant terminal set 的 outer MPC controller 与保持 RPI 的 inner controller，支持本轮双层语义纠正。
+- 限制：未核查正文、定理或算法，不据此声明其 uncertainty class 覆盖本项目。
 
 ## Ben Sassi, Girard — Controller synthesis for robust invariance of polynomial dynamical systems using linear programming
 - 年份/出处：2012, *Systems & Control Letters*, 61(4):506–512；DOI：https://doi.org/10.1016/j.sysconle.2012.01.004；预印本：https://arxiv.org/abs/1107.1580
@@ -162,6 +293,29 @@
 - 与本项目关系：第35章的 vertex-consistent residual 修正属于同一建模原则：已知 scheduling parameter T 时，应保留 d_x(T) 的依赖关系，而不是无条件替换为 d_x(T_max)。
 - 局限：该工作不是 SMF/CZ output-feedback Tube MPC，也没有解决本项目的 recursive-feasibility shift certificate。
 - 本项目状态：作为“不得丢失 uncertainty dependence”的强建模基线。
+- Run 134 精读：Sections II、V 及 planar quadrotor 案例。其 uncertainty set 可显式依赖 state/control，支持保留实际推力与余项的共同图；但方法针对有限时域 robust optimal control，没有给出间歇 output-feedback RCI 或 old-plan shift certificate。
+
+## Mulagaleti, Bemporad — Learning Quasi-LPV Models and Robust Control Invariant Sets with Reduced Conservativeness
+- 年份/出处：2025, *IEEE Control Systems Letters*；DOI：https://doi.org/10.1109/LCSYS.2025.3569637；全文：https://arxiv.org/abs/2505.07287
+- Run 134 精读：Introduction、Section 2.1、Propositions 1--2、Section 3.1、Proposition 3 与 Corollary 1。
+- 方法/关键结论：对 self-scheduling quasi-LPV 模型构造 configuration-constrained polytopic RCI；在候选 RCI 内求 scheduling 下界以缩小 multiplicative uncertainty hull，并允许 vertex controls。文中 Remark 1 提示可扩展到 `p(x,u)`，正文证书主要按 `p(z)` 展开。
+- 与本项目关系：非轴对齐 polytope、configuration constraints、vertex control 和利用 self-scheduling correlation 均已有直接近邻；不能作为创新。本项目额外义务是 intermittent-SMF estimation error、nominal/correction input allocation 与实际 thrust 同时决定 dynamics/residual 的联合图。
+- 本项目状态：最强 qLPV ancillary RCI baseline；待完整合同后再做同条件数值比较。
+
+## Wehbeh, Kerrigan, Scaccia — Generalized Semi-Infinite Programming for Robust Optimal Control with Decision-Dependent Uncertainty
+- 年份/出处：2026 preprint，arXiv:2609.01538v1，2026-09-01；全文：https://arxiv.org/abs/2609.01538
+- Run 134 精读：Introduction、Sections II--IV、Theorems 1--3、Algorithm 1、Sections V--VI。
+- 方法/关键结论：将满足正则条件的 GSIP 变换为 existence-constrained SIP，用 adaptive discretization 与 worst-case separation oracle求解；把状态轨迹并入不确定变量，可处理 state/control-dependent uncertainty。收敛定理要求有限 master/oracle 子问题全局求解。
+- 验证边界：数值例使用多起点局部 NLP；论文明确因此不满足理论中的全局子问题条件。Monte Carlo 不能替代 oracle nonpositive 的稳健证书。
+- 与本项目关系：可为实际 thrust、误差、名义状态与 residual 的联合图提供语义/求解基线，但不直接给出 invariant tube、间歇 output feedback 或 recursive-feasibility shift theorem。
+- 本项目状态：强 decision-dependent uncertainty baseline；不能把一次局部 solver success 当作 RCI 证明。
+
+## Hanema, Lazar, Tóth — Heterogeneously Parameterized Tube Model Predictive Control for LPV Systems
+- 年份/出处：2020, *Automatica*；全文：https://arxiv.org/abs/1910.08449
+- Run 134 重读：Introduction 与 LPV problem setting。
+- 方法/关键结论：对当前可测、未来未知的外生 scheduling signal构造 heterogeneously parameterized tubes，并证明 LPV tube MPC 的递归可行性/稳定性性质。
+- 与本项目关系：是 arbitrary-future scheduling 的强 baseline；但 `delta T=kappa(e-eta,...)` 时实际 thrust 是 feedback-dependent，不能直接套用其外生 scheduling 假设。
+- 本项目状态：保留为外生 LPV 对照，不作为当前六状态 ancillary 合同的直接证书。
 
 
 ## Kothare, Balakrishnan, Morari — Robust constrained model predictive control using linear matrix inequalities
@@ -171,6 +325,7 @@
 - 与本项目关系：第36章之后的 joint state/input ancillary synthesis 可以借用这类 constraint-aware synthesis 思路，但“把约束直接放进 K 的设计”本身不是创新。
 - 局限：该工作不是 CZ-SMF posterior、不是本项目的 thrust-scheduled residual W(T)，也不提供当前 output-feedback set-membership 接口。
 - 本项目状态：作为 certificate-based ancillary synthesis 的经典 baseline。
+- Run 133 阅读层级：仅核对 Caltech 正式页面与摘要；未取得可稳定阅读的全文，故不引用定理编号，也不声称其 LMI 直接覆盖 correlated `(A(T),W(T))` 与 intermittent output feedback。
 
 
 ## Lorenzen, Cannon, Allgöwer — Robust MPC with recursive model update

@@ -1,0 +1,17 @@
+{
+  "run": 104,
+  "core_question": "Which H15 directions can a fresh horizontal position strip strictly tighten?",
+  "theorem": "For compact convex X and closed measurement set M with nonempty intersection, h_{X intersect M}(q)=h_X(q) iff the q-exposed face of X intersects M.",
+  "frozen_instance": {
+    "set": "Run-93 1390-term finite mRPI zonotope",
+    "measurement_strip": "|px| <= 0.02",
+    "template": "Run-100 five-seed signed H15, 160 facets"
+  },
+  "numerical_classification": {
+    "facets_whose_finite-zonotope_q-exposed_vertex_is_outside_strip": 160,
+    "total_facets": 160,
+    "minimum_absolute_exposed_vertex_px": 0.2780695509573509
+  },
+  "status": "theorem proved analytically; 160/160 is numerical evidence for the finite 1390-term zonotope only, not an infinite-tail proof",
+  "consequence": "For the frozen finite approximation, a fresh position measurement can improve every H15 directional support; therefore no nontrivial direction can be removed from eager refresh merely because its vector is not a position coordinate."
+}

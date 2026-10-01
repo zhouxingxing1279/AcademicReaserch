@@ -1,0 +1,9 @@
+{
+  "run": 101,
+  "dropout_contract_ticks": 15,
+  "depths": [1,3,5,10,15],
+  "signed_facets": [20,40,60,110,160],
+  "theorem_admissible_full_gap": [false,false,false,false,true],
+  "minimum_admissible_L": 15,
+  "timing_claim": "not measured; production benchmark required"
+}

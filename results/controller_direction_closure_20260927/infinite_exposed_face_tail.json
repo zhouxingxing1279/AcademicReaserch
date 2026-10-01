@@ -1,0 +1,16 @@
+{
+  "run": 105,
+  "core_question": "Can the Run-93 certified infinite mRPI tail move an H15 q-exposed face back into the position measurement strip?",
+  "frozen_contract": {
+    "N": 1390,
+    "M": 139,
+    "measurement_strip": "|px| <= 0.02",
+    "template_facets": 160
+  },
+  "theorem": "For S=S_N+T_N, every q-exposed point x=x_N+x_T satisfies |e_px^T x_T| <= r_px(N). With alpha=||F^M||_inf<1, r_px(N) <= D0*sum_{j=0}^{M-1}|e_px^T F^(N+j)G|/(1-alpha).",
+  "exact_rational_tail_bound_display": 1.3125250960607755e-15,
+  "run104_finite_min_abs_exposed_px": 0.2780695509573509,
+  "run104_observed_strip_separation": 0.2580695509573509,
+  "status": "Tail lemma and tail bound are proof-quality; 160/160 infinite-face disjointness remains conditional on exact/interval certification of Run-104 finite exposed-face margins.",
+  "next_unique_priority": "Exact or outward-rounded interval certification of all 160 finite H15 exposed-face px margins, especially q_plus/q_minus seeds."
+}

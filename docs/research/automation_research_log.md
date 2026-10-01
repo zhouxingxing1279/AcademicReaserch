@@ -91,3 +91,48 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 新增第41章、`verification/check_endpoint_predecessor_reduction.py` 和 `results/endpoint_predecessor_reduction_20260924/checks.json`。
 
 下一轮唯一优先问题：对 endpoint-exact predecessor 真正执行 torque existential projection 与 redundancy elimination，计算 `S_n=X∩Pre(S_{n-1})` 前若干层，判断 facet family 稳定、持续增长或集合变空，并定位首先成为阻塞的 hard state/input constraint。
+
+---
+## 2026-09-29 — 539-generator Scott CZ 的终端 mRPI 反例
+
+证明冻结模型中终端包含与当前压缩集包含等价；以 exact-rational CZ witness 和 900 项+block-tail mRPI 上界得到严格支持差 `9.1323e-8`。因此 Run 126 的 539-generator CZ 虽通过 300 个阶段方向，仍不能进入 terminal/recursive-feasibility 证明链。详见 `run127_research_log.md`。
+
+---
+## 2026-09-29 — 通用 AH/CZ 终端证书的在线预算止损
+
+重读 Sadraddini–Tedrake 的 AH/zonotope 包含充分证书并精读 Hellwig 等的可靠 witness 条件。正确处理 CZ equality 后，当前 539–605 对 `S_602` 的通用证书约需 162–182 万变量；忽略 equality 的保守 zonotope 证书仍需 65–73 万变量。605 后验已由 measurement-intersection 构造直接包含，通用 LP 不可行又不能否定 540–604，故不实现无解释力的大 LP 扫描。下一步改为随 Scott 消去维护稀疏包含 witness 的 certificate-carrying reduction。详见 `run128_research_log.md`。
+
+---
+## 2026-09-29 — 携证 Scott 消元首步失败
+
+沿 605→604 的冻结 Scott 首次消元同步传播到 `S_602` 的系数映射，并利用 CZ 三条等式逐行优化行 `l1` 预算。4 个超限行均无法由等式修正；对偶 proposal 经三个零目标变量的精确有理数重解后，等式残差与盒超限严格为零，最小对偶间隔仍为 `1.2869e-8`。因此该携证充分规则首步即失败，但不推出 604-CZ 真实不包含。按停止规则关闭当前普通 Scott 扫描，下一步只审计 witness-constrained 非-Scott 单步替换。详见 `run129_research_log.md`。
+
+---
+## 2026-09-29 — 终端 witness 约束降阶的文献否决
+
+精读 Sadraddini--Tedrake Section V-B/Proposition 6、Kopetzki Section III-D 和 Raghuraman--Koeln Section 5 后确认，containment-constrained zonotope/CZ reduction 已有直接近邻；当前 sandwich 只是既有模块组合。更关键的是 `R_red=S_602` 可形式上删除3列却丢弃全部 measurement 信息，现有300个控制查询全部变松，故“删至少一列”成功标准失效。直接604-generator map 参数化在完整CZ约束前已至少729,028条目。本轮不实现并关闭 post-hoc reduction；下一步转向 finite-horizon posterior tightening + backup/adaptive terminal tube 的完整架构审计。详见 `run130_research_log.md`。
+
+---
+## 2026-09-29 — 两层 output-feedback tube 架构排重
+
+全文定向精读 Dey--Dhar--Bhasin 2022、Dey--Bhasin 2025/2026、Köhler 2021 与 Ping 2015。two-tube/two-tier 架构、在线 estimation bounds、terminal shift proof、adaptive terminal compatibility/backup，以及 zonotopic update feasibility gate/fallback 均已有直接近邻；广义“posterior finite-horizon tightening + backup terminal tube”创新/实现准入不通过。下一步只研究更窄的必要骨架：在15-mode bounded-dropout automaton和同一执行器/扰动合同下构造或反驳 mode-indexed backup terminal family，并逐边验证 robust invariance 与 input tightening。详见 `run131_research_log.md`。
+
+---
+## 2026-09-29 — 间歇数据 terminal baseline 纠偏
+
+精读 Hassaan 等 IFAC 2021/HSCC 2021、Rutledge 等 2020、Wildhagen 等 2022。有限 missing-data language、path-dependent controller/estimator、时变 tube 和 packet-loss terminal/shift proof 已有直接近邻；尤其 Hassaan 2021 用一个对全部周期相位有效的 common `K_f,X_f` 即可证明递归可行，故 15-mode terminal family 不是默认必要骨架。当前六状态配置又缺少合法 `K` 和 terminal certificate，旧候选已被 residual/torque 合同否定。本轮不写代码；下一步先用 certificate-based joint synthesis 实例化或反驳 common-terminal baseline，只有它为空或实质过保守时才准入 mode-indexed family。详见 `run132_research_log.md`。
+
+---
+## 2026-09-29 — ancillary 与 nominal terminal 两层证书分离
+
+全文精读 Tahir 2010、Tahir--Jaimoukha 2012，并重读 Hassaan 2021 的 tracking tube、terminal assumptions 与 shift proof。确认 Tahir 类 joint feedback/RPI synthesis 对应 disturbance-tracking ancillary 层；Hassaan common `K_f,X_f` 则作用于由该 tube 收紧后的 nominal system。当前证明义务次序据此修正。Tahir 的轴对齐 box 类已被第37章精确排除；固定形状椭球及 norm-bounded uncertainty 公式又未直接保持同一推力决定的 `(A(T),W(T))` 配对，完整六状态 estimator/recenter disturbance 合同也未冻结。因此本轮不实现语义错误的 SDP。下一步先闭合六状态 ancillary error contract 与非轴对齐 correlated-LPV RPI/RCI certificate，再恢复 common nominal terminal synthesis。详见 `run133_research_log.md`。
+
+---
+## 2026-09-29 — 实际推力使 ancillary 合同成为控制相关调度
+
+全文精读 qLPV polytopic RCI 与 2025/2026 decision-dependent uncertainty GSIP 近邻，并重读外生 LPV tube baseline。推导六状态 tracking error 后确认：推力修正 `delta T` 同时进入横/竖误差、`delta T*z_phi` 和 `d_x(T),d_z(T)`，实际 `T` 不能再当外生 scheduling。若禁止 `delta T`，垂向非零 residual 使任何非空紧致全状态 RPI 在最大 `e_vz` 点一步越界；该结论与集合形状和反馈增益无关。因此不实现旧 paired-endpoint RPI。下一步先从 rolling SMF 得到/否定 15-mode time-uniform estimator-error family `E_eta^j`，再实例化联合图 RCI。详见 `run134_research_log.md` 与第71章。
+
+---
+## 2026-09-29 — time-uniform 模式椭球存在但控制接口严格失败
+
+精读 graph invariant multi-set 与 intermittent-data equalized-recovery tube 近邻。对冻结六维 actual-input 误差 inclusion，15 模态 Bellman 映射为 contraction，唯一固定点给出 scalar/common-metric 类最小不变椭球多集；有向有理数证书通过17条边。但全部模式的速度支持下界均超过3 m/s、角度支持均超过0.45 rad，任何中心下的硬状态 tightening 都为空，且不能自洽闭合 residual 物理域。停止共同椭球支线；下一步仅构造 geometry-preserving reachable-sum 外不变多集及 certified tail。详见 `run135_research_log.md` 与第72章。

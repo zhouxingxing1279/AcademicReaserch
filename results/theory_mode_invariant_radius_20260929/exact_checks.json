@@ -1,0 +1,437 @@
+{
+  "status": "pass",
+  "claim": "frozen_linear_inclusion_has_time_uniform_mode_ellipsoid",
+  "control_gate": "blocked_by_scalar_metric_geometry",
+  "mode_count": 15,
+  "edge_count": 17,
+  "iterations": 2048,
+  "contraction_interval": [
+    "12183492931/12500000000",
+    "974679434481/1000000000000"
+  ],
+  "upper_residual": "0",
+  "upper_tail": "0",
+  "modes": [
+    {
+      "mode": 0,
+      "radius": [
+        "3682678619419/500000000000",
+        "9206696549/1250000000"
+      ],
+      "velocity_support": [
+        "3682678619419/500000000000",
+        "9206696549/1250000000"
+      ],
+      "angle_support": [
+        "3682678619419/500000000000",
+        "9206696549/1250000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 1,
+      "radius": [
+        "3645712365367/500000000000",
+        "911428091387/125000000000"
+      ],
+      "velocity_support": [
+        "748084392959/100000000000",
+        "7480843929969/1000000000000"
+      ],
+      "angle_support": [
+        "3645712365367/500000000000",
+        "911428091387/125000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 2,
+      "radius": [
+        "144448047499/20000000000",
+        "451400148457/62500000000"
+      ],
+      "velocity_support": [
+        "3801264407867/500000000000",
+        "7602528816123/1000000000000"
+      ],
+      "angle_support": [
+        "144448047499/20000000000",
+        "451400148457/62500000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 3,
+      "radius": [
+        "7161150690917/1000000000000",
+        "7161150691279/1000000000000"
+      ],
+      "velocity_support": [
+        "7733879563051/1000000000000",
+        "154677591269/20000000000"
+      ],
+      "angle_support": [
+        "7161150690917/1000000000000",
+        "7161150691279/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 4,
+      "radius": [
+        "7109593807869/1000000000000",
+        "7109593808231/1000000000000"
+      ],
+      "velocity_support": [
+        "1575533253821/200000000000",
+        "3938833134757/500000000000"
+      ],
+      "angle_support": [
+        "7109593807869/1000000000000",
+        "7109593808231/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 5,
+      "radius": [
+        "1767214918089/250000000000",
+        "3534429836359/500000000000"
+      ],
+      "velocity_support": [
+        "8036007753749/1000000000000",
+        "8036007754169/1000000000000"
+      ],
+      "angle_support": [
+        "1767214918089/250000000000",
+        "3534429836359/500000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 6,
+      "radius": [
+        "7039471842951/1000000000000",
+        "7039471843313/1000000000000"
+      ],
+      "velocity_support": [
+        "1026311684349/125000000000",
+        "8210493475223/1000000000000"
+      ],
+      "angle_support": [
+        "7039471842951/1000000000000",
+        "7039471843313/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 7,
+      "radius": [
+        "7021524646979/1000000000000",
+        "7021524647341/1000000000000"
+      ],
+      "velocity_support": [
+        "4201156020661/500000000000",
+        "8402312041763/1000000000000"
+      ],
+      "angle_support": [
+        "7021524646979/1000000000000",
+        "7021524647341/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 8,
+      "radius": [
+        "7014819479161/1000000000000",
+        "7014819479523/1000000000000"
+      ],
+      "velocity_support": [
+        "1076544759349/125000000000",
+        "2153089518811/250000000000"
+      ],
+      "angle_support": [
+        "7014819479161/1000000000000",
+        "7014819479523/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 9,
+      "radius": [
+        "7018963337909/1000000000000",
+        "7018963338271/1000000000000"
+      ],
+      "velocity_support": [
+        "8841312683323/1000000000000",
+        "8841312683787/1000000000000"
+      ],
+      "angle_support": [
+        "7018963337909/1000000000000",
+        "7018963338271/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 10,
+      "radius": [
+        "1406687554041/200000000000",
+        "7033437770567/1000000000000"
+      ],
+      "velocity_support": [
+        "2272425382087/250000000000",
+        "1136212691103/125000000000"
+      ],
+      "angle_support": [
+        "1406687554041/200000000000",
+        "7033437770567/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 11,
+      "radius": [
+        "705764653463/100000000000",
+        "441102908437/62500000000"
+      ],
+      "velocity_support": [
+        "9357936090529/1000000000000",
+        "9357936091017/1000000000000"
+      ],
+      "angle_support": [
+        "705764653463/100000000000",
+        "441102908437/62500000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 12,
+      "radius": [
+        "7090948490927/1000000000000",
+        "7090948491289/1000000000000"
+      ],
+      "velocity_support": [
+        "9646342969303/1000000000000",
+        "2411585742451/250000000000"
+      ],
+      "angle_support": [
+        "7090948490927/1000000000000",
+        "7090948491289/1000000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 13,
+      "radius": [
+        "3566340175969/500000000000",
+        "71326803523/10000000000"
+      ],
+      "velocity_support": [
+        "9955184823503/1000000000000",
+        "622199051501/62500000000"
+      ],
+      "angle_support": [
+        "3566340175969/500000000000",
+        "71326803523/10000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    },
+    {
+      "mode": 14,
+      "radius": [
+        "3591086237829/500000000000",
+        "359108623801/50000000000"
+      ],
+      "velocity_support": [
+        "10284675493963/1000000000000",
+        "10284675494489/1000000000000"
+      ],
+      "angle_support": [
+        "3591086237829/500000000000",
+        "359108623801/50000000000"
+      ],
+      "velocity_limit": "3",
+      "angle_limit": "9/20",
+      "velocity_strictly_infeasible": true,
+      "angle_strictly_infeasible": true
+    }
+  ],
+  "edge_invariance_checks": [
+    {
+      "from": 0,
+      "to": 1,
+      "lhs": "911428091387/125000000000",
+      "rhs": "911428091387/125000000000",
+      "pass": true
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "lhs": "451400148457/62500000000",
+      "rhs": "451400148457/62500000000",
+      "pass": true
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "lhs": "7161150691279/1000000000000",
+      "rhs": "7161150691279/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "lhs": "7109593808231/1000000000000",
+      "rhs": "7109593808231/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "lhs": "3534429836359/500000000000",
+      "rhs": "3534429836359/500000000000",
+      "pass": true
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "lhs": "7039471843313/1000000000000",
+      "rhs": "7039471843313/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "lhs": "7021524647341/1000000000000",
+      "rhs": "7021524647341/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "lhs": "7014819479523/1000000000000",
+      "rhs": "7014819479523/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "lhs": "7018963338271/1000000000000",
+      "rhs": "7018963338271/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "lhs": "7033437770567/1000000000000",
+      "rhs": "7033437770567/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "lhs": "441102908437/62500000000",
+      "rhs": "441102908437/62500000000",
+      "pass": true
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "lhs": "7090948491289/1000000000000",
+      "rhs": "7090948491289/1000000000000",
+      "pass": true
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "lhs": "71326803523/10000000000",
+      "rhs": "71326803523/10000000000",
+      "pass": true
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "lhs": "359108623801/50000000000",
+      "rhs": "359108623801/50000000000",
+      "pass": true
+    },
+    {
+      "from": 4,
+      "to": 0,
+      "lhs": "1823654076081/250000000000",
+      "rhs": "9206696549/1250000000",
+      "pass": true
+    },
+    {
+      "from": 9,
+      "to": 0,
+      "lhs": "1801570162279/250000000000",
+      "rhs": "9206696549/1250000000",
+      "pass": true
+    },
+    {
+      "from": 14,
+      "to": 0,
+      "lhs": "9206696549/1250000000",
+      "rhs": "9206696549/1250000000",
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "conditional on the Run131--134 frozen linearized actual-input observer contract",
+    "certifies a common scalar ellipsoidal outer multi-set, not the minimal set-valued multi-set",
+    "large supports reject this certificate class for hard-constraint tightening, not SMF itself",
+    "no ancillary RCI, terminal set, recursive-feasibility, or closed-loop claim"
+  ],
+  "source_sha256": {
+    "verification/check_mode_invariant_radius.py": "34a1086cc08b40018f4f3e0a9dc6ef805ca0d9f82747f33a9cfcb919bd7a0e8f",
+    "verification/test_mode_invariant_radius.py": "a45d30c58ad7c0d6746ff6542b436f59c6fd9b4843d01e799ffded6dfcc8d140",
+    "verification/check_mode_radius.py": "b3d58ab6928f55c5771e411af9e5e25ae09a9c2486013651c135db7dd0ebb842",
+    "verification/check_mode_nestedness.py": "37f63d5b629985147240a28bd016c35aaf0791e3889e36220126801c92f7f82b",
+    "verification/check_intermittent_metric.py": "f0db42dca406ab75ed27d95bfab3ad53fde948973a28e07f82edc625063041d4",
+    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
+    "docs/learning/72_time_uniform_estimator_multiset.md": "d1204c884d6c753a734dcf1dc589947f11b2a2d3b8d899657a044a8ad1685798"
+  }
+}
