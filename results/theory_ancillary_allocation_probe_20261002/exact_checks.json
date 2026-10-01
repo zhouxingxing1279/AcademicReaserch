@@ -1,0 +1,82 @@
+{
+  "status": "pass",
+  "claim": "explicit_boundary_tight_input_allocation_probe_is_algebraically_consistent",
+  "actual_input_lower": [
+    "981/200",
+    "-2/25"
+  ],
+  "actual_input_upper": [
+    "2943/200",
+    "2/25"
+  ],
+  "nominal_input_lower": [
+    "1356943/160000",
+    "0"
+  ],
+  "nominal_input_upper": [
+    "1782257/160000",
+    "0"
+  ],
+  "correction_input_lower": [
+    "-572143/160000",
+    "-2/25"
+  ],
+  "correction_input_upper": [
+    "572143/160000",
+    "2/25"
+  ],
+  "minkowski_sum_lower": [
+    "981/200",
+    "-2/25"
+  ],
+  "minkowski_sum_upper": [
+    "2943/200",
+    "2/25"
+  ],
+  "minkowski_sum_within_actual_input_box": true,
+  "thrust": {
+    "widest_symmetric_hover_probe": true,
+    "nominal_radius": "212657/160000",
+    "correction_radius": "572143/160000",
+    "positive_boundary_balance": {
+      "nominal_thrust": "1356943/160000",
+      "correction_thrust": "-376920383/140960000",
+      "actual_thrust": "1023183/176200",
+      "residual": "376920383/140960000",
+      "net_vz_increment_divided_by_h": "0"
+    },
+    "negative_boundary_balance": {
+      "nominal_thrust": "1782257/160000",
+      "correction_thrust": "572143/160000",
+      "actual_thrust": "2943/200",
+      "residual": "-572143/160000",
+      "net_vz_increment_divided_by_h": "0"
+    },
+    "robust_authority_margin": "0"
+  },
+  "torque": {
+    "nominal_interval": [
+      "0",
+      "0"
+    ],
+    "correction_interval": [
+      "-2/25",
+      "2/25"
+    ],
+    "nominal_has_nonempty_interior": false
+  },
+  "usable_as_final_nominal_input_domain": false,
+  "evidence_level": "exact_input_budget_contract_not_an_rci_certificate",
+  "limitations": [
+    "boundary balance is an amplitude witness, not a causal disturbance-cancellation policy",
+    "zero thrust-authority margin makes the probe unsuitable as a final robust MPC allocation",
+    "singleton nominal torque cannot represent maneuvering nominal dynamics",
+    "no augmented error RCI, state-domain closure, terminal set, or recursive feasibility is proved"
+  ],
+  "source_sha256": {
+    "verification/check_ancillary_allocation_probe.py": "92b8136209b58a78fa8e1ba0c06d6a38311d2706b318a549f7768150521f491a",
+    "verification/test_ancillary_allocation_probe.py": "37e62cb37cf70fa4d4bc50840953ee8049343a81a29c784404c745515c18b645",
+    "configs/planar_baseline.json": "e4e9acd8163ae842bef69f04f9e3ac46ffebe87d984b15f12809e9acf6832063",
+    "docs/learning/75_ancillary_input_allocation_probe.md": "3d4a8ff4f1f494649a0cef7144a66c09edea81945b6c8292602091ff586a07ee"
+  }
+}

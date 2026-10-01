@@ -18,7 +18,7 @@ class NominalThrustReserveChecks(unittest.TestCase):
         self.assertEqual(result['necessary_nominal_thrust_interval'],
                          [F(1198021, 160000), F(1782257, 160000)])
         self.assertFalse(result['full_range_nominal_candidate_admissible'])
-        self.assertFalse(result['separate_nominal_thrust_bounds_configured'])
+        self.assertTrue(result['separate_nominal_thrust_bounds_configured'])
         self.assertTrue(result['hover_nominal_thrust_admissible'])
         self.assertTrue(all(witness['strict_outward_drift']
                             for witness in result['endpoint_obstruction_witnesses']))

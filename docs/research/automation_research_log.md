@@ -141,3 +141,7 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 ## 2026-10-01 — 联合 ancillary RCI 前的名义推力预留门槛
 
 精读 coupled output-feedback RPI，重读 online estimation-bound MPC、qLPV RCI 与 decision-dependent GSIP。联合误差 RCI 方法学已有强近邻，不作创新声明。当前配置无独立 nominal input bounds；精确证明 nominal thrust 若允许完整 actual interval，则持续端点计划使垂向速度误差严格单调漂移，任何有限 mode-indexed compact ancillary family 都不存在。必要 nominal thrust 区间为 `[7.48763125,11.13910625] N`，hover 通过但 RCI 存在性仍未证明。新增 exact verifier；下一步先冻结 nominal thrust/torque allocation，再做 augmented `(eta,d)` RCI。详见 `run137_research_log.md` 与第74章。
+
+### 2026-10-02 Run 138
+
+重读 Lorenzetti--Pavone coupled RPI 的 input projection 与 Köhler nonlinear joint tightening/terminal proof。冻结一个显式、最有利的 ancillary-RCI existence probe：nominal thrust `[8.48089375,11.13910625]`、correction `+-3.57589375`，nominal torque `{0}`、correction torque `[-0.08,0.08]`。精确验证 Minkowski 输入合同，但推力上边界余量为0且 nominal torque 无内点，因此不升级为最终 MPC allocation。本轮不启动高维 solver；下一步在共享噪声与 actual-thrust residual graph 下构造或严格否定 augmented RCI。详见 `run138_research_log.md` 与第75章。

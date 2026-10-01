@@ -22,7 +22,7 @@
     "572143/160000"
   ],
   "full_range_nominal_candidate_admissible": false,
-  "separate_nominal_thrust_bounds_configured": false,
+  "separate_nominal_thrust_bounds_configured": true,
   "hover_nominal_thrust_admissible": true,
   "endpoint_obstruction_witnesses": [
     {
@@ -50,8 +50,8 @@
   ],
   "source_sha256": {
     "verification/check_nominal_thrust_reserve.py": "6f16f7fdd5cd16eea90a4bc90be2f67bc8a8b1c30b634ea361072b1bda255987",
-    "verification/test_nominal_thrust_reserve.py": "5446a9de6ea461529fefb9fdd680e0e631b5d3db22eb48b4589934bf14b64850",
-    "configs/planar_baseline.json": "d7ecd17199b9976f3b1083e63a3b5957dfb9f34cc83841bf228f17b145b6e753",
-    "docs/learning/74_nominal_thrust_reserve_gate.md": "ab214bd798c4c53385544e113a47c799f08bea589df4dd0005dfef9569dd16e8"
+    "verification/test_nominal_thrust_reserve.py": "f3e9a1e9701b9a77735890af21d28ebbcfe548f551cd6bc63a5a6bf14c1e4834",
+    "configs/planar_baseline.json": "e4e9acd8163ae842bef69f04f9e3ac46ffebe87d984b15f12809e9acf6832063",
+    "docs/learning/74_nominal_thrust_reserve_gate.md": "c5d837c013c4234040f0e50f6caa4c53e55addd65efa5846c57b7c49f36a599d"
   }
 }

@@ -2,7 +2,7 @@
 
 日期：2026-10-01。承接第 71 章的 control-dependent ancillary contract 与第 73 章的 15-mode estimator-error zonotope multi-set。
 
-**结论：当前配置只声明实际推力硬区间，没有单独名义推力区间。若 nominal MPC 直接复用完整 `[4.905,14.715]` N，则任何非空紧致 vertical ancillary RCI（包括有限 mode-indexed family）都不存在。对当前 residual，名义推力的必要预留区间为 `[7.48763125,11.13910625]` N。该区间只是一项必要条件，不是 RCI 存在证书。**
+**Run 137 结论：当时配置只声明实际推力硬区间，没有单独名义推力区间。若 nominal MPC 直接复用完整 `[4.905,14.715]` N，则任何非空紧致 vertical ancillary RCI（包括有限 mode-indexed family）都不存在。对当前 residual，名义推力的必要预留区间为 `[7.48763125,11.13910625]` N。该区间只是一项必要条件，不是 RCI 存在证书。Run 138 已按第 75 章加入显式 existence-probe 分配；本章保留 Run 137 的历史门槛。**
 
 ## 1. 冻结垂向合同
 
@@ -84,10 +84,10 @@ hover 值 `9.81 N` 严格位于其中，所以该必要条件没有否定 hover-
 ## 4. 证据等级与控制接口
 
 - **已证明：**完整 nominal thrust range 中包含两条严格 endpoint nonexistence witness；式 (74.2) 是任何固定 `bar T` 紧致 vertical RCI 的必要条件。
-- **配置事实：**`planar_baseline.json` 只有 actual `input_lower/input_upper`，没有独立 `nominal_input_lower/upper`；`K` 与 terminal certificate 仍为空。
+- **Run 137 时的配置事实：**当时 `planar_baseline.json` 只有 actual `input_lower/input_upper`；Run 138 已由第 75 章增加独立 nominal/correction existence-probe bounds。`K` 与 terminal certificate 仍为空。
 - **未证明：**式 (74.2) 内存在联合 `(e,eta)` RCI；horizontal bilinear coupling、torque reserve、state/residual source-domain closure、terminal 与 shift 均未闭合。
 
-下一步必须先冻结 nominal input allocation。建议把 nominal thrust 初始 baseline 限制在 hover 附近、并把实际输入余量完整留给 ancillary；只有该配置通过 exact reserve gate 后，才实现 Lorenzetti--Pavone 风格的 augmented-error RCI 强基线，并将 Run 136 的 mode zonotope 作为 estimator-error 输入，而不是把它独立 boxing。
+Run 138 已完成首个 boundary-tight existence-probe allocation；其 nominal torque 是单点且 thrust authority margin 为零，不能作为最终 MPC 域。后续先在该最有利预算下构造或否定 Lorenzetti--Pavone 风格的 augmented-error RCI，再由认证 correction support 反推具有严格内点的 nominal input tightening。
 
 复现：
 

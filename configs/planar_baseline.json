@@ -157,6 +157,23 @@
   },
   "mpc": {
     "horizon": 25,
+    "nominal_input_lower": [
+      8.48089375,
+      0
+    ],
+    "nominal_input_upper": [
+      11.13910625,
+      0
+    ],
+    "ancillary_correction_lower": [
+      -3.57589375,
+      -0.08
+    ],
+    "ancillary_correction_upper": [
+      3.57589375,
+      0.08
+    ],
+    "input_allocation_semantics": "boundary-tight existence probe only; not a final nominal MPC input domain",
     "state_cost_scale": [
       5,
       3,
@@ -201,6 +218,7 @@
   "notes": [
     "External process noise zero isolates the first benchmark; nonzero process noise needs a new frozen bound.",
     "Domain limits initially also serve as task constraints; certification of observer evaluation outside them requires extension.",
+    "The explicit nominal/correction input split is a boundary-tight ancillary-RCI existence probe: nominal torque is fixed at zero and thrust has zero certified authority slack, so it is not a final maneuvering MPC allocation.",
     "Null gains and terminal certificate are required future synthesis outputs; this config cannot run a guaranteed controller."
   ]
 }
