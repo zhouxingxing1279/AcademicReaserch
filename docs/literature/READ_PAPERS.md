@@ -100,6 +100,14 @@
 - 方法/关键结论：以 `estimation error + estimate-to-nominal control error` 为增广状态，计算一个 coupled RPI；其线性像同时收紧 performance/state 与 input constraints，并结合 nominal terminal MPC 给出 robust constraint satisfaction。
 - 与本项目关系：这是 augmented `(eta,d)` ancillary RPI 的直接强基线。“联合估计和控制误差”不是创新；本项目首先必须冻结 nominal/correction input allocation，再比较 15-mode CZ/zonotope 几何是否能在同预算下比 constant-cross-section RPI 更紧。
 - Run 138 新增重读：Sections IV-A--B、IV-E--F，尤其 `u=bar u+K(hat x-bar x)`、coupled error 式 (12)、input tightening 式 (13) 与 Proposition 1。最终 nominal input set 由 coupled RPI 的 correction 投影通过 Pontryagin difference 得到；固定输入切分只可用于前置 existence probe。
+- Run 139 新增重读：Sections IV-B、IV-E--G，式 (8)、(12)--(15)、Propositions 1--2。其 RPI 对象是在固定可实现反馈 `K(hat x-bar x)` 后形成的 autonomous augmented-error system；因此 fixed-policy RPI 与逐状态存在控制的 RCI 量词不可混用，且控制只读取 estimate-to-nominal error，不读取真实 estimation error。
+
+## Mejari, Mulagaleti, Bemporad — Data-Driven Synthesis of Configuration-Constrained Robust Invariant Sets for Linear Parameter-Varying Systems
+- 年份/出处：2023, *IEEE Control Systems Letters*, 7:3818--3823；DOI：https://doi.org/10.1109/LCSYS.2023.3346128；全文：https://arxiv.org/abs/2309.06998
+- Run 139 精读：Section III-C、Lemma 3、Problem 1、Section IV。
+- 方法/关键结论：RCI 的量词明确要求对每个状态与给定 scheduling parameter 存在 admissible input，使后继对全部 disturbance/model realization 留在集合；configuration-constrained polytope 的 vertex inputs 通过凸插值定义 invariance-inducing controller。
+- 与本项目关系：若采用 controlled-RCI 语义，controller parameterization 与 `exists control` 的位置必须显式冻结。本文允许 controller 使用完整 state；本项目的 augmented state 含不可观测 `eta=x-hat x`，所以还必须收紧为对 observation fiber 共用同一控制的 partial-information RCI。
+- 本项目状态：RCI 量词与 vertex-policy 的强基线；不把 configuration-constrained set 或 controller/set co-design 声称为创新。
 
 ## Ping — Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems
 - 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850；DOI：https://doi.org/10.1155/2015/875850
@@ -304,6 +312,7 @@
 - 本项目状态：作为“不得丢失 uncertainty dependence”的强建模基线。
 - Run 134 精读：Sections II、V 及 planar quadrotor 案例。其 uncertainty set 可显式依赖 state/control，支持保留实际推力与余项的共同图；但方法针对有限时域 robust optimal control，没有给出间歇 output-feedback RCI 或 old-plan shift certificate。
 - Run 137 新增重读：Sections II--IV、Theorems 1--2 与 Section V。再次确认 `T=bar T+delta T` 决定 `d_z(T)` 的图可用 GSIP 表达；但 local-reduction 求解结果不能替代 compact invariant-set 与 recursive-shift 证明。
+- Run 139 新增精读：Sections II--IV、Theorems 1--2。robust constraints 只对与同一 state/control decision 相容的 uncertainty set 量化；这要求 joint `(eta,d)` graph 保留同一 actual thrust 与 residual primitive，不能把 dynamics endpoint、residual width 和两个 error coordinates 独立笛卡尔化。
 
 ## Mulagaleti, Bemporad — Learning Quasi-LPV Models and Robust Control Invariant Sets with Reduced Conservativeness
 - 年份/出处：2025, *IEEE Control Systems Letters*；DOI：https://doi.org/10.1109/LCSYS.2025.3569637；全文：https://arxiv.org/abs/2505.07287

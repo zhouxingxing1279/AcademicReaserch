@@ -145,3 +145,7 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 ### 2026-10-02 Run 138
 
 重读 Lorenzetti--Pavone coupled RPI 的 input projection 与 Köhler nonlinear joint tightening/terminal proof。冻结一个显式、最有利的 ancillary-RCI existence probe：nominal thrust `[8.48089375,11.13910625]`、correction `+-3.57589375`，nominal torque `{0}`、correction torque `[-0.08,0.08]`。精确验证 Minkowski 输入合同，但推力上边界余量为0且 nominal torque 无内点，因此不升级为最终 MPC allocation。本轮不启动高维 solver；下一步在共享噪声与 actual-thrust residual graph 下构造或严格否定 augmented RCI。详见 `run138_research_log.md` 与第75章。
+
+### 2026-10-02 Run 139
+
+重读 Lorenzetti--Pavone fixed-policy augmented RPI，精读 Mejari--Mulagaleti--Bemporad RCI 量词与 Wehbeh--Kerrigan decision-dependent uncertainty。确认当前 augmented `(eta,d)` 问题缺少 partial-information quantifier、causal policy、nominal state domain、17-edge input timing、actual-thrust shared primitive graph 和 nonempty initialization slice；普通 full-state RCI 会允许控制读取隐藏 `eta`。新增 contract gate 与6项测试，当前配置返回 `blocked`；该结论只证明问题未实例化，不证明 RCI 不存在。并修复 Run138 配置变更造成的两个旧 envelope 陈旧 hash，重建确认几何未变；全仓170/170通过。下一步先冻结17条 edge 的 exact joint update 与 causal policy class，再启动 synthesis。详见 `run139_research_log.md` 与第76章。

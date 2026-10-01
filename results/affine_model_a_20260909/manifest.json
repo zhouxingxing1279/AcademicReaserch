@@ -9,6 +9,6 @@
   "artifact_sha256": {
     "envelope_leaves.npz": "279b096eb6e468584b777d8703ac72ec36c5b4b1990e598c532d85cb1e532b04",
     "model.json": "b0d9ae4526fe5f76f7df009053c32e3fc8651744545b05bf6519917414122446",
-    "envelope.json": "a29a29315e6a54cc68605349ce5548faa8b991d1fee3b263bd6b6f38ce14c78f"
+    "envelope.json": "5d1ac612b5bf82115e6fee8825e2238588a33cfa1c45579f36217d50c45eee1a"
   }
 }

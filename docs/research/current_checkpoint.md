@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-02，Run 138）
+# 研究短检查点（2026-10-02，Run 139）
 
-主线仍是传统 SMF/输出反馈 Tube MPC，学习暂停。起点 Run137 本地 `e3ae26d` 与远端 `310a2a0` tree `ee0fd07` 一致；远端 `main=1c49659`。
+主线为传统 SMF/输出反馈 Tube MPC，学习暂停。Run138 本地 `595523e` 与远端 `c7daacd` tree `10b21cd` 一致；远端 `main=1c49659`。
 
-本轮重读 Lorenzetti--Pavone coupled RPI/input tightening 与 Köhler nonlinear joint tightening/terminal shift。最终 nominal input 应由认证 correction support 导出；固定切分不具创新性。现冻结最有利 RCI existence probe：actual thrust `[4.905,14.715]`，nominal `[8.48089375,11.13910625]`，correction `+-3.57589375`；两者 Minkowski 和精确等于 actual box。上侧 vertical boundary balance 用尽 correction，严格余量为0。力矩取 nominal `{0}`、correction `[-0.08,0.08]`，故该探针不能作为最终机动 MPC 域。
+本轮重读 Lorenzetti--Pavone augmented-error RPI，精读 Mejari--Mulagaleti--Bemporad RCI 与 Wehbeh--Kerrigan decision-dependent uncertainty。当前“15-mode augmented `(eta,d)` RCI”尚未实例化：`eta=x-hat x` 隐藏，控制只能读 `d=hat x-z` 等可见量；普通 `forall(eta,d) exists u(eta,d)` 会产生非因果证书。配置还缺 quantifier、policy、nominal domain、17-edge timing、actual-thrust shared primitive 与 `S0 x {0}` 初始化。
 
-新增 exact verifier/3项测试；证据仅为输入预算合同，不是 causal policy、RCI、terminal 或递归可行性。下一唯一问题：保持 Run136 共享生成元和 actual-thrust residual graph，构造或严格否定15-mode augmented `(eta,d)` RCI；若存在，用真实 correction support 恢复严格内点 nominal input set。
+新增只读 contract gate/6项测试；当前配置返回 `blocked`，不是 RCI 不存在证明。另修复 Run138 改配置后两个旧 envelope 的陈旧 hash；重建确认几何/leaves 未变。全仓170/170测试通过。下一唯一问题：冻结最小 hover-neighborhood partial-information contract，给出17条 edge 的 exact `(eta,d)` 更新、共享 primitive 和 causal policy class；gate 变为 `ready` 后才启动 synthesis。

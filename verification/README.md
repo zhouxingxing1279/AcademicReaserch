@@ -198,3 +198,13 @@ python verification/check_template_reference.py --template-result /tmp/cz_templa
 ```
 
 输出文件须不存在。六个解析回归、60次移位更新、28,548项有理支持/舍入核查、27,000项移位方向界比较与1,586个成员见证。发布表示12/6，临时测量最多16/10；位长与运行时间不因此固定。模板精度未通过，tick9第25层发布坐标界不能认证原域，60步末端后验发布速度半宽也超3；不压缩离线参考明显更紧，但不是同预算性能对照。结果见 results/cz_template_20260917，条件证明和范围见 docs/learning/10_fixed_template_cz.md。
+
+
+## C3-GATE：partial-information augmented RCI 合同（2026-10-02）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_augmented_rci_contract.py -v
+PYTHONPATH=verification python verification/check_augmented_rci_contract.py --output /tmp/augmented_rci_contract.json
+```
+
+该检查器不求 RCI。它只确认量词、causal observation policy、nominal state domain、15-mode/17-edge input timing、actual-thrust shared primitive graph 与 nonempty initialization slice 是否已冻结。当前配置应返回 `status=blocked` 和六项 missing obligations；这表示问题尚未实例化，不是不变集不存在。推导和证据边界见 `docs/learning/76_partial_information_augmented_rci_contract.md`。

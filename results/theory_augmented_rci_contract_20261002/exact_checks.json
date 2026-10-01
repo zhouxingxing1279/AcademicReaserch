@@ -1,0 +1,20 @@
+{
+  "status": "blocked",
+  "missing_obligations": [
+    "invariance_semantics_and_quantifier_order",
+    "causal_partial_information_policy",
+    "nominal_state_domain",
+    "dropout_mode_graph_and_input_timing",
+    "shared_actual_thrust_disturbance_graph",
+    "nonempty_initialization_slice"
+  ],
+  "invalid_obligations": [],
+  "solver_admissible": false,
+  "evidence_level": "problem_not_instantiated",
+  "source_sha256": {
+    "verification/check_augmented_rci_contract.py": "13343006a528268e74ce0ad03911adbd50625f39bbb9b827568b6708c2f9c8b3",
+    "verification/test_augmented_rci_contract.py": "8a0211bb516ae26c719631301f6d2cb3c265e2e9727cc3c91fd3c6debdb44a95",
+    "configs/planar_baseline.json": "e4e9acd8163ae842bef69f04f9e3ac46ffebe87d984b15f12809e9acf6832063",
+    "docs/research/run139_literature_gate.md": "60c67a0957f61f074d7e7ba3d8020c4df8c9813189bdf72a1a12f37f42a226b0"
+  }
+}
