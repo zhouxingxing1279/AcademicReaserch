@@ -160,3 +160,13 @@ Hempel 2011 fiber 量词，并精读 Kumar--Kothyari 2026 zonotope-LP output-fee
 mode 4/9 两条未知后继，且 residual 半宽由同一 actual thrust 计算。该结果仅排除三个关键
 模态“一步即空”，不是 RCI 或递归可行性。下一步执行全15模态的一次 joint descending
 predecessor sweep。详见 `run144_research_log.md` 与第81章。
+
+### 2026-10-02 Run 145
+
+重读 Rungger--Tabuada 2017 的 descending predecessor/停止证书、Houska 2023 的
+information ensemble 极端集合控制及 Hempel 2011 的 fiber 共享输入量词。一次下降层和
+多面体信息投影均是已有方法，本轮不作创新声明。对15个 packet mode 构造零修正、完整
+隐藏 fiber 的 exact observation 内投影；15/15 均为正面积，17/17 estimator edges 精确
+包含，且都保留 Run144 公共 observation box。证据仅为 first-sweep 四维正体积内集，不是
+最大投影、固定点或 RCI。下一步以本轮保留集合为 target 执行第二层，判断该受限 policy
+class 是否自映射。详见 `run145_research_log.md` 与第82章。

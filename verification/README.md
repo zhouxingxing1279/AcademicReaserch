@@ -247,3 +247,18 @@ success/miss 分叉共享同一个 `deltaT=0`，residual 半宽由同一 actual 
 该证书只排除三个关键模态的“一步即空”，不是15模态 RCI、固定点、全六状态、terminal
 或 recursive-feasibility 证书。归档见
 `results/theory_vertical_joint_predecessor_20261002/exact_checks.json`，证明见第 81 章。
+
+## C3-J2：竖直 joint 15模态首次下降层（2026-10-03）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_vertical_joint_first_sweep.py -v
+PYTHONPATH=verification python verification/check_vertical_joint_first_sweep.py --output /tmp/vertical_joint_first_sweep.json
+```
+
+checker 在全部15个 packet mode 上固定一个可执行的共享策略 `deltaT=0`，为完整隐藏
+`E_j` fiber 构造 exact-rational observation 内投影 `D_j^0`。15/15 个投影均严格正面积，
+17/17 条 estimator edge 的 target-facet support 均包含，mode 4/9 的未知 success/miss
+分叉在选择当前输入前合并。每个投影都包含 Run144 的公共 observation box；最小面积在
+mode 14，为 `899947970530621291/691200000000000000`。该结果只是一层保守内证书，不是
+最大 observation projection、固定点、RCI 或 MPC 递归可行性。归档见
+`results/theory_vertical_joint_first_sweep_20261002/exact_checks.json`，证明见第 82 章。

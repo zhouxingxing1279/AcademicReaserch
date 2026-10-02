@@ -385,6 +385,9 @@
 - 局限：其通用信息 ensemble 近似没有直接给出当前15模态 contract 的精确 candidate，
   也不替代 source-domain、input allocation、terminal/shift 的逐项证明。
 - 本项目状态：一般信息集合成的最强直接基线；Run 144 仅实现一个受限一步内证书。
+- Run 145 定向重读：Sections 4.2、6.1--6.5、Definition 4、式 (7)、(24)--(27)，
+  用于界定15模态首次下降层。extreme information-set control 与多面体信息集合成已有
+  一般方法；本轮逐模态零修正内投影只是一种受限实例。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
@@ -405,6 +408,9 @@
 - 方法/关键结论：从 `R_0=X, R_{i+1}=pre(R_i) intersect X` 的递减序列出发，区分一般不有限终止的 outer predecessor sequence、允许任意小约束放松的外 RCI 近似，以及用 disturbance inflation 获得的内 RCI 近似。
 - 与本项目关系：给出二维多面体 predecessor、投影和证据等级的直接基线；但其控制器观察完整迭代状态。本项目只能在可见 `d` 上用该迭代，隐藏 `eta` 必须先按 observation fiber 统一 robustify。
 - 本项目状态：Run 142 的 exact product-fiber predecessor 基线；迭代/投影不是创新。
+- Run 145 定向重读：pp.1--6、式 (4)--(10)、Theorems 1--2 与 Remark 1。普通
+  `R_1=X∩pre(X)` 只是 descending outer sequence 的一层，一般既非 RCI 也不能导出永久
+  安全反馈；因此本轮15/15非空只能作为继续第二层的门槛。
 
 ## Houska, Müller, Villanueva — Polyhedral Control Design: Theory and Methods
 - 年份/出处：2024, arXiv:2412.13082；全文：https://arxiv.org/pdf/2412.13082

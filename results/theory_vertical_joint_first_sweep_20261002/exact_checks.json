@@ -1,0 +1,1058 @@
+{
+  "status": "pass",
+  "claim": "all_fifteen_vertical_joint_first_sweep_modes_have_positive_volume_inner_certificates",
+  "candidate": "S_j = E_eta_vertical_j x {|e_pz|<=1, |e_vz|<=11/4}",
+  "inner_projection_class": "complete_eta_fiber_with_shared_zero_correction",
+  "common_observation_box_halfwidths": [
+    "1/5",
+    "1/4"
+  ],
+  "shared_correction_thrust": "0",
+  "nominal_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "actual_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "residual_halfwidth_at_actual_thrust_upper": "411370817/128000000",
+  "graph_edge_count": 17,
+  "nonempty_mode_count": 15,
+  "modes": {
+    "0": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "37857863/450000000",
+      "observation_projection_area": "115411461910160686772599/18432000000000000000000",
+      "observation_projection_facet_count": 6,
+      "observation_projection_facets": [
+        [
+          "-1800000000",
+          "-36000000",
+          "1726142137"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "94125081847"
+        ],
+        [
+          "50",
+          "0",
+          "49"
+        ],
+        [
+          "1800000000",
+          "36000000",
+          "1726142137"
+        ],
+        [
+          "0",
+          "57600000000",
+          "94125081847"
+        ],
+        [
+          "-50",
+          "0",
+          "49"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-49/50",
+          "37857863/36000000"
+        ],
+        [
+          "-296411370817/320000000000",
+          "-94125081847/57600000000"
+        ],
+        [
+          "49/50",
+          "-94125081847/57600000000"
+        ],
+        [
+          "49/50",
+          "-37857863/36000000"
+        ],
+        [
+          "296411370817/320000000000",
+          "94125081847/57600000000"
+        ],
+        [
+          "-49/50",
+          "94125081847/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 1,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "46343583/800",
+          "target_facet_count": 6
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "1": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "115040054436803/1200000000000000",
+      "observation_projection_area": "970388946206533744722991/165888000000000000000000",
+      "observation_projection_facet_count": 6,
+      "observation_projection_facets": [
+        [
+          "-3600000000",
+          "-72000000",
+          "3371419261"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "90005652247"
+        ],
+        [
+          "1800000000",
+          "0",
+          "1726142137"
+        ],
+        [
+          "3600000000",
+          "72000000",
+          "3371419261"
+        ],
+        [
+          "0",
+          "57600000000",
+          "90005652247"
+        ],
+        [
+          "-1800000000",
+          "0",
+          "1726142137"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1726142137/1800000000",
+          "80865013/72000000"
+        ],
+        [
+          "-2607129756553/2880000000000",
+          "-90005652247/57600000000"
+        ],
+        [
+          "1726142137/1800000000",
+          "-90005652247/57600000000"
+        ],
+        [
+          "1726142137/1800000000",
+          "-80865013/72000000"
+        ],
+        [
+          "2607129756553/2880000000000",
+          "90005652247/57600000000"
+        ],
+        [
+          "-1726142137/1800000000",
+          "90005652247/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 2,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/80000",
+          "target_facet_count": 8
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "2": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "164204239274899/1440000000000000",
+      "observation_projection_area": "902655722088771633327791/165888000000000000000000",
+      "observation_projection_facet_count": 6,
+      "observation_projection_facets": [
+        [
+          "-1200000000",
+          "-24000000",
+          "1095134987"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "85886222647"
+        ],
+        [
+          "3600000000",
+          "0",
+          "3371419261"
+        ],
+        [
+          "1200000000",
+          "24000000",
+          "1095134987"
+        ],
+        [
+          "0",
+          "57600000000",
+          "85886222647"
+        ],
+        [
+          "-3600000000",
+          "0",
+          "3371419261"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-3371419261/3600000000",
+          "860143/720000"
+        ],
+        [
+          "-2542437746153/2880000000000",
+          "-85886222647/57600000000"
+        ],
+        [
+          "3371419261/3600000000",
+          "-85886222647/57600000000"
+        ],
+        [
+          "3371419261/3600000000",
+          "-860143/720000"
+        ],
+        [
+          "2542437746153/2880000000000",
+          "85886222647/57600000000"
+        ],
+        [
+          "-3371419261/3600000000",
+          "85886222647/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 3,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/1600",
+          "target_facet_count": 10
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "3": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "62563409110817/450000000000000",
+      "observation_projection_area": "278569040413637373562597/55296000000000000000000",
+      "observation_projection_facet_count": 6,
+      "observation_projection_facets": [
+        [
+          "-1800000000",
+          "-36000000",
+          "1597120687"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "81766793047"
+        ],
+        [
+          "1200000000",
+          "0",
+          "1095134987"
+        ],
+        [
+          "1800000000",
+          "36000000",
+          "1597120687"
+        ],
+        [
+          "0",
+          "57600000000",
+          "81766793047"
+        ],
+        [
+          "-1200000000",
+          "0",
+          "1095134987"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1095134987/1200000000",
+          "91163587/72000000"
+        ],
+        [
+          "-824542102051/960000000000",
+          "-81766793047/57600000000"
+        ],
+        [
+          "1095134987/1200000000",
+          "-81766793047/57600000000"
+        ],
+        [
+          "1095134987/1200000000",
+          "-91163587/72000000"
+        ],
+        [
+          "824542102051/960000000000",
+          "81766793047/57600000000"
+        ],
+        [
+          "-1095134987/1200000000",
+          "81766793047/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 4,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/80000",
+          "target_facet_count": 12
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "4": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "41105550110953/240000000000000",
+      "observation_projection_area": "769746780065707480722991/165888000000000000000000",
+      "observation_projection_facet_count": 6,
+      "observation_projection_facets": [
+        [
+          "-7200000",
+          "-144000",
+          "6195857"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "77647363447"
+        ],
+        [
+          "1800000000",
+          "0",
+          "1597120687"
+        ],
+        [
+          "7200000",
+          "144000",
+          "6195857"
+        ],
+        [
+          "0",
+          "57600000000",
+          "77647363447"
+        ],
+        [
+          "-1800000000",
+          "0",
+          "1597120687"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1597120687/1800000000",
+          "48156437/36000000"
+        ],
+        [
+          "-2400695436553/2880000000000",
+          "-77647363447/57600000000"
+        ],
+        [
+          "1597120687/1800000000",
+          "-77647363447/57600000000"
+        ],
+        [
+          "1597120687/1800000000",
+          "-48156437/36000000"
+        ],
+        [
+          "2400695436553/2880000000000",
+          "77647363447/57600000000"
+        ],
+        [
+          "-1597120687/1800000000",
+          "77647363447/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 5,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/40000",
+          "target_facet_count": 14
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/1600",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "5": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "152042319755309/720000000000000",
+      "observation_projection_area": "73441326249584758711/17280000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-1200000000",
+          "-24000000",
+          "998822113"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "73527933847"
+        ],
+        [
+          "1200000000",
+          "24000000",
+          "998822113"
+        ],
+        [
+          "0",
+          "57600000000",
+          "73527933847"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-2470701005047/2880000000000",
+          "73527933847/57600000000"
+        ],
+        [
+          "-2323645137353/2880000000000",
+          "-73527933847/57600000000"
+        ],
+        [
+          "2470701005047/2880000000000",
+          "-73527933847/57600000000"
+        ],
+        [
+          "2323645137353/2880000000000",
+          "73527933847/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 6,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/6400",
+          "target_facet_count": 16
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "6": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "1865730756958613/7200000000000000",
+      "observation_projection_area": "200580505475187222077/51840000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-3600000000",
+          "-72000000",
+          "2889854891"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "69408504247"
+        ],
+        [
+          "3600000000",
+          "72000000",
+          "2889854891"
+        ],
+        [
+          "0",
+          "57600000000",
+          "69408504247"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-2381292417047/2880000000000",
+          "69408504247/57600000000"
+        ],
+        [
+          "-747491802851/960000000000",
+          "-69408504247/57600000000"
+        ],
+        [
+          "2381292417047/2880000000000",
+          "-69408504247/57600000000"
+        ],
+        [
+          "747491802851/960000000000",
+          "69408504247/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 7,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/3200",
+          "target_facet_count": 18
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "7": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "1893362758381/6000000000000",
+      "observation_projection_area": "45344799181869615733/12960000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-900000000",
+          "-18000000",
+          "694523539"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "65289074647"
+        ],
+        [
+          "900000000",
+          "18000000",
+          "694523539"
+        ],
+        [
+          "0",
+          "57600000000",
+          "65289074647"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-254196044383/320000000000",
+          "65289074647/57600000000"
+        ],
+        [
+          "-2157186250153/2880000000000",
+          "-65289074647/57600000000"
+        ],
+        [
+          "254196044383/320000000000",
+          "-65289074647/57600000000"
+        ],
+        [
+          "2157186250153/2880000000000",
+          "65289074647/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 8,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/1280",
+          "target_facet_count": 20
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "8": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "685570746340223/1800000000000000",
+      "observation_projection_area": "9043538271193782461/2880000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-200000000",
+          "-4000000",
+          "147843563"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "61169645047"
+        ],
+        [
+          "200000000",
+          "4000000",
+          "147843563"
+        ],
+        [
+          "0",
+          "57600000000",
+          "61169645047"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-2190116952247/2880000000000",
+          "61169645047/57600000000"
+        ],
+        [
+          "-2067777662153/2880000000000",
+          "-61169645047/57600000000"
+        ],
+        [
+          "2190116952247/2880000000000",
+          "-61169645047/57600000000"
+        ],
+        [
+          "2067777662153/2880000000000",
+          "61169645047/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 9,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/4000",
+          "target_facet_count": 22
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "9": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "327941991138173/720000000000000",
+      "observation_projection_area": "5794304732523046871/2073600000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-144000000",
+          "-2880000",
+          "101564993"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "57050215447"
+        ],
+        [
+          "144000000",
+          "2880000",
+          "101564993"
+        ],
+        [
+          "0",
+          "57600000000",
+          "57050215447"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-2088350075447/2880000000000",
+          "57050215447/57600000000"
+        ],
+        [
+          "-219361071617/320000000000",
+          "-57050215447/57600000000"
+        ],
+        [
+          "2088350075447/2880000000000",
+          "-57050215447/57600000000"
+        ],
+        [
+          "219361071617/320000000000",
+          "57050215447/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 10,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "973215243/20000",
+          "target_facet_count": 24
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "20053808847/1600",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "10": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "259092814442117/480000000000000",
+      "observation_projection_area": "127664621398102810963/51840000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-3600000000",
+          "-72000000",
+          "2411916229"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "52930785847"
+        ],
+        [
+          "3600000000",
+          "72000000",
+          "2411916229"
+        ],
+        [
+          "0",
+          "57600000000",
+          "52930785847"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-660821256349/960000000000",
+          "52930785847/57600000000"
+        ],
+        [
+          "-1876602197353/2880000000000",
+          "-52930785847/57600000000"
+        ],
+        [
+          "660821256349/960000000000",
+          "-52930785847/57600000000"
+        ],
+        [
+          "1876602197353/2880000000000",
+          "52930785847/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 11,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "46343583/400",
+          "target_facet_count": 26
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "11": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "142692063425719/225000000000000",
+      "observation_projection_area": "18544722418738014577/8640000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-600000000",
+          "-12000000",
+          "379926391"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "48811356247"
+        ],
+        [
+          "600000000",
+          "12000000",
+          "379926391"
+        ],
+        [
+          "0",
+          "57600000000",
+          "48811356247"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1872458033047/2880000000000",
+          "48811356247/57600000000"
+        ],
+        [
+          "-1774835320553/2880000000000",
+          "-48811356247/57600000000"
+        ],
+        [
+          "1872458033047/2880000000000",
+          "-48811356247/57600000000"
+        ],
+        [
+          "1774835320553/2880000000000",
+          "48811356247/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 12,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/3200",
+          "target_facet_count": 28
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "12": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "532162747886753/720000000000000",
+      "observation_projection_area": "11966549253989010859/6480000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-450000000",
+          "-9000000",
+          "267756397"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "44691926647"
+        ],
+        [
+          "450000000",
+          "9000000",
+          "267756397"
+        ],
+        [
+          "0",
+          "57600000000",
+          "44691926647"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1758332867447/2880000000000",
+          "44691926647/57600000000"
+        ],
+        [
+          "-556316338051/960000000000",
+          "-44691926647/57600000000"
+        ],
+        [
+          "1758332867447/2880000000000",
+          "-44691926647/57600000000"
+        ],
+        [
+          "556316338051/960000000000",
+          "44691926647/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 13,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "46343583/25600",
+          "target_facet_count": 30
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "13": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "1025963782146227/1200000000000000",
+      "observation_projection_area": "81120436332414894793/51840000000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-3600000000",
+          "-72000000",
+          "1999394719"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "40572497047"
+        ],
+        [
+          "3600000000",
+          "72000000",
+          "1999394719"
+        ],
+        [
+          "0",
+          "57600000000",
+          "40572497047"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-546696090749/960000000000",
+          "40572497047/57600000000"
+        ],
+        [
+          "-1558943278153/2880000000000",
+          "-40572497047/57600000000"
+        ],
+        [
+          "546696090749/960000000000",
+          "-40572497047/57600000000"
+        ],
+        [
+          "1558943278153/2880000000000",
+          "40572497047/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 14,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/12800",
+          "target_facet_count": 32
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "14": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "eta_projection_area": "1414311560032909/1440000000000000",
+      "observation_projection_area": "899947970530621291/691200000000000000",
+      "observation_projection_facet_count": 4,
+      "observation_projection_facets": [
+        [
+          "-48000000",
+          "-960000",
+          "24687853"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "36453067447"
+        ],
+        [
+          "48000000",
+          "960000",
+          "24687853"
+        ],
+        [
+          "0",
+          "57600000000",
+          "36453067447"
+        ]
+      ],
+      "observation_projection_vertices": [
+        [
+          "-1517724247447/2880000000000",
+          "36453067447/57600000000"
+        ],
+        [
+          "-1444818112553/2880000000000",
+          "-36453067447/57600000000"
+        ],
+        [
+          "1517724247447/2880000000000",
+          "-36453067447/57600000000"
+        ],
+        [
+          "1444818112553/2880000000000",
+          "36453067447/57600000000"
+        ]
+      ],
+      "contains_run144_common_observation_box": true,
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "471323459/320",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    }
+  },
+  "descending_sweep_iterations": 1,
+  "evidence_level": "exact_positive_volume_inner_certificates_for_all_fifteen_first_sweep_modes",
+  "is_maximal_observation_projection": false,
+  "is_rci_certificate": false,
+  "fixed_point_iteration_run": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "each observation polygon is a zero-policy complete-fiber inner projection, not the maximal first-sweep projection",
+    "one descending predecessor layer is not a controlled invariant set",
+    "no fixed-point iteration or finite-termination test is run",
+    "horizontal, attitude, torque, terminal, shift, and recursive MPC feasibility remain open",
+    "the frozen input allocation remains an existence probe without maneuvering interior"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_joint_first_sweep.py": "0427d6b278ea9183258c25356c881eeb2748f0892934fad6f67d373c7789165d",
+    "verification/test_vertical_joint_first_sweep.py": "74eaa6670ed675309744b0c9bd4f8f4f148366521c4e07fa72da57b884a2cf53",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/check_vertical_causal_predecessor.py": "8c30e59b124037b96ac6103fbaf59ff63a64a0da6ed2e5d4cd6a347fd0648f32",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "verification/check_mode_nestedness.py": "37f63d5b629985147240a28bd016c35aaf0791e3889e36220126801c92f7f82b",
+    "verification/check_mode_radius.py": "b3d58ab6928f55c5771e411af9e5e25ae09a9c2486013651c135db7dd0ebb842",
+    "verification/check_intermittent_metric.py": "f0db42dca406ab75ed27d95bfab3ad53fde948973a28e07f82edc625063041d4",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/82_vertical_joint_first_sweep.md": "c1411b3f16c0fb154bb69dceb42502eb4ea59d90fd67f7766178c41f225aa251",
+    "docs/literature/READ_PAPERS.md": "bf2f9bacba9f717ba79d1add4b663fe9aefb614602bef0d2304f039ce2558e17",
+    "docs/research/run145_literature_gate.md": "9e1a57abd15a0afb73593af42b0e4106d97a4135fe46fcd916fd5b58866982b2",
+    "docs/research/run145_research_log.md": "66ac9a646b5d7c6a2d9ea1e07bfafba7dbee441a41a5b2ed00a07a2e3a04a3a8"
+  }
+}
