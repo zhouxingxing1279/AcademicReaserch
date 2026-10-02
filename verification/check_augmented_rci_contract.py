@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from fractions import Fraction as F
 from pathlib import Path
 
 
@@ -22,6 +23,7 @@ OBLIGATIONS = [
     "dropout_mode_graph_and_input_timing",
     "shared_actual_thrust_disturbance_graph",
     "nonempty_initialization_slice",
+    "candidate_source_and_input_constraints",
 ]
 EXPECTED_QUANTIFIERS = [
     "forall_current_mode_and_observation",
@@ -37,6 +39,63 @@ HIDDEN_OR_FUTURE_INFORMATION = {
     "eta", "true_state", "residual", "primitive", "successor_edge",
     "future_measurement",
 }
+EXPECTED_POLICY_CLASS = "mode_indexed_observation_piecewise_affine_to_be_synthesized"
+EXPECTED_PRIMITIVE_VECTOR = {
+    "id": "xi_next_shared_once",
+    "order": ["rho_x", "rho_z", "n_px_next", "n_pz_next", "n_phi_next", "n_omega_next"],
+    "box_halfwidth": [1, 1, 1, 1, 1, 1],
+    "realizations": {
+        "r_x": "(47/25 + (243/16000) * actual_thrust) * rho_x",
+        "r_z": "(1043/500 + (81/800) * actual_thrust) * rho_z",
+        "n_px_next": "(1/50) * n_px_next",
+        "n_pz_next": "(1/50) * n_pz_next",
+        "n_phi_next": "(1/200) * n_phi_next",
+        "n_omega_next": "(1/100) * n_omega_next",
+    },
+}
+EXPECTED_EDGE_INCIDENCE = {
+    "miss": {"physical": [0, 1], "observer": [4, 5], "eta": [0, 1, 4, 5], "d": [4, 5]},
+    "success": {
+        "physical": [0, 1], "observer": [2, 3, 4, 5],
+        "eta": [0, 1, 2, 3, 4, 5], "d": [2, 3, 4, 5],
+    },
+}
+EXPECTED_CANDIDATE_CONSTRAINTS = {
+    "true_state_relation": "x = z + eta + d",
+    "true_state_must_remain_in_source_domain": True,
+    "actual_input_relation": "actual_input = nominal_input + correction",
+    "actual_input_must_remain_in_actuator_box": True,
+    "eta_projection_must_lie_in_run136_mode_set": True,
+}
+
+
+def _fraction(value):
+    return F(str(value))
+
+
+def _input_allocation_fits(config):
+    mpc = config.get("mpc", {})
+    domain = config.get("domain", {})
+    arrays = [
+        mpc.get("nominal_input_lower"), mpc.get("nominal_input_upper"),
+        mpc.get("ancillary_correction_lower"), mpc.get("ancillary_correction_upper"),
+        domain.get("input_lower"), domain.get("input_upper"),
+    ]
+    if not all(isinstance(row, list) and len(row) == 2 for row in arrays):
+        return False
+    try:
+        nl, nu, cl, cu, al, au = [list(map(_fraction, row)) for row in arrays]
+    except (ValueError, TypeError, ZeroDivisionError):
+        return False
+    boxes_are_ordered = all(
+        lower[i] <= upper[i]
+        for lower, upper in ((nl, nu), (cl, cu), (al, au))
+        for i in range(2)
+    )
+    return boxes_are_ordered and all(
+        al[i] <= nl[i] + cl[i] and nu[i] + cu[i] <= au[i]
+        for i in range(2)
+    )
 
 
 def _bounded_nominal_domain(domain, plant_domain):
@@ -112,9 +171,10 @@ def audit_contract(config, root=None):
         policy_class = policy.get("class")
         observes_set = set(observes) if isinstance(observes, list) else set()
         if not (
-            isinstance(policy_class, str) and policy_class
+            policy_class == EXPECTED_POLICY_CLASS
             and observes_set == REQUIRED_OBSERVATIONS
             and observes_set.isdisjoint(HIDDEN_OR_FUTURE_INFORMATION)
+            and policy.get("same_control_for_entire_observation_fiber") is True
         ):
             invalid.append(OBLIGATIONS[1])
 
@@ -137,15 +197,22 @@ def audit_contract(config, root=None):
     if not isinstance(disturbance, dict):
         missing.append(OBLIGATIONS[4])
     else:
-        eta_ids = disturbance.get("eta_primitive_ids")
-        d_ids = disturbance.get("d_primitive_ids")
-        eta_set = set(eta_ids) if isinstance(eta_ids, list) else set()
-        d_set = set(d_ids) if isinstance(d_ids, list) else set()
+        coupled_update = disturbance.get("coupled_update")
+        residual_halfwidth = disturbance.get("physical_residual_halfwidth")
         if not (
             disturbance.get("actual_thrust_depends_on_correction") is True
             and disturbance.get("residual_bound_depends_on_actual_thrust") is True
-            and eta_set == d_set
-            and {"rx", "rz"}.issubset(eta_set)
+            and disturbance.get("primitive_vector") == EXPECTED_PRIMITIVE_VECTOR
+            and disturbance.get("edge_primitive_indices") == EXPECTED_EDGE_INCIDENCE
+            and residual_halfwidth == {
+                "r_x": "47/25 + (243/16000) * actual_thrust",
+                "r_z": "1043/500 + (81/800) * actual_thrust",
+            }
+            and coupled_update == {
+                "tracking_error_update": "equation_71_1",
+                "estimation_error_update": "run136_edge_map",
+                "d_update": "tracking_error_next_minus_estimation_error_next",
+            }
         ):
             invalid.append(OBLIGATIONS[4])
 
@@ -153,6 +220,15 @@ def audit_contract(config, root=None):
         missing.append(OBLIGATIONS[5])
     elif not _valid_estimator_artifact(contract["initialization"], root):
         invalid.append(OBLIGATIONS[5])
+
+    constraints = contract.get("candidate_constraints")
+    if constraints is None:
+        missing.append(OBLIGATIONS[6])
+    elif not (
+        constraints == EXPECTED_CANDIDATE_CONSTRAINTS
+        and _input_allocation_fits(config)
+    ):
+        invalid.append(OBLIGATIONS[6])
 
     ready = not missing and not invalid
     return {
@@ -185,7 +261,7 @@ def main():
         "verification/check_augmented_rci_contract.py",
         "verification/test_augmented_rci_contract.py",
         "configs/planar_baseline.json",
-        "docs/research/run139_literature_gate.md",
+        "docs/research/run140_literature_gate.md",
     ]
     result["source_sha256"] = {
         name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()

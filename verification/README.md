@@ -207,4 +207,13 @@ PYTHONPATH=verification python -m unittest verification/test_augmented_rci_contr
 PYTHONPATH=verification python verification/check_augmented_rci_contract.py --output /tmp/augmented_rci_contract.json
 ```
 
-该检查器不求 RCI。它只确认量词、causal observation policy、nominal state domain、15-mode/17-edge input timing、actual-thrust shared primitive graph 与 nonempty initialization slice 是否已冻结。当前配置应返回 `status=blocked` 和六项 missing obligations；这表示问题尚未实例化，不是不变集不存在。推导和证据边界见 `docs/learning/76_partial_information_augmented_rci_contract.md`。
+该检查器不求 RCI。Run 140 已冻结量词、causal observation policy、hover nominal state domain、15-mode/17-edge input timing、actual-thrust shared primitive graph 与 nonempty initialization slice；当前配置应返回 `status=ready`，但 evidence level 仍明确为 `contract_ready_not_an_invariant_set_certificate`。语义缺口与最终合同分别见第 76、77 章。
+
+## C3-CONTRACT：hover partial-information 逐边代数（2026-10-02）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_hover_partial_information_contract.py -v
+PYTHONPATH=verification python verification/check_hover_partial_information_contract.py --output /tmp/hover_partial_information_contract.json
+```
+
+该检查器从同一个物理状态、observer 状态、nominal 状态以及同一 physical/measurement primitive realization 生成 successor，再分别形成 `eta+` 与 `d+`。它在 17 条模式边上检查 `eta++d+=e+`，并含 success/miss 手算回归；这不是 RCI、source-domain closure、terminal 或 recursive-feasibility 证书。

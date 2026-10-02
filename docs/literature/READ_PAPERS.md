@@ -355,3 +355,45 @@
 - 与本项目关系：说明“在线更精确 uncertainty set 可减少保守性”已有成熟理论背景。第36章的 scheduling-conditioned residual 只能作为更强 baseline，不是创新点。
 - 局限：处理 parametric model uncertainty，不是当前 state-estimation CZ posterior，也不是四旋翼 thrust-conditioned nonlinear remainder。
 - 本项目状态：作为后续 SMF/CZ 保守性比较必须超过的 adaptive robust MPC baseline。
+
+## Hempel, Kominek, Werner — Output-Feedback Controlled-Invariant Sets for Systems with Linear Parameter-Varying State Transition Matrix
+- 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
+- Run 140 精读：Sections II--III、Definitions 1--2、Theorem 1、式 (3)--(11)。Run 141
+  为 full-state/causal predecessor 比较重读 Section III-A--C、Definition 2、Theorem 1
+  及控制输入计算，确认同一 noisy output 的 observation fiber 必须共用一个输入。
+- 方法/关键结论：对每个 admissible noisy output 及当前已知 scheduling，选择一个只依赖输出/调度的输入，使与该输出一致的全部状态和所有过程/测量扰动满足多面体不变；给出 Farkas 验证及在线/显式 PWA 控制计算。
+- 与本项目关系：直接支持 observation-fiber 共用输入的量词；因此该量词不是创新。其 scheduling 外生且当前可测，本项目 actual thrust 由 correction 决定且下一 packet outcome 未知，不能直接套用其 LPV 顶点条件。
+- 本项目状态：partial-information RCI 的最强直接有限维基线。
+
+## Baras, Patel — Robust Control of Set-Valued Discrete-Time Dynamical Systems
+- 年份/出处：1998, *IEEE Transactions on Automatic Control*, 43(1):61--75；全文：https://terpconnect.umd.edu/~baras/publications/journals/1998_Baras_Robust_Control.pdf
+- Run 140 精读：Section IV-A--B、Lemma 4、Theorems 9--11、15--16。
+- 方法/关键结论：把 observation history 诱导的信息状态作为充分统计量，将 output-feedback robust game 转为 information-state feedback game，并给出有限/无限时动态规划必要与充分条件。
+- 与本项目关系：说明仅使用点估计偏差 `d` 的有限 policy class 一般是保守近似，不能宣称等价于所有 output-feedback controllers。
+- 本项目状态：一般信息状态概念基线；不直接数值实现其无限维动态规划。
+
+## Yang, Ozay — Efficient Safety Control Synthesis with Imperfect State Information
+- 年份/出处：2020, CDC, pp. 874--880；作者链接：https://web.eecs.umich.edu/~necmiye/pubs/YangO_cdc20.pdf
+- Run 140 阅读层级：仅核查摘要；正文抽取失败。
+- 摘要层面内容：把 estimated-state dynamics 上的 perfect-information safety game 用作一般 noisy-measurement partial-information game 的两个保守近似，并区分初态信息条件。
+- 本项目状态：支持保守性标注，不引用其定理作本轮证明。
+
+## Yang, Ozay — Safety Control Synthesis for Systems with Missing Measurements
+- 年份/出处：2021, *IFAC-PapersOnLine*, 54(5):97--102；DOI：https://doi.org/10.1016/j.ifacol.2021.08.481；作者链接：https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf
+- Run 140 阅读层级：核查摘要与问题陈述；正文抽取失败。
+- 摘要层面内容：用 automaton 描述 missing-measurement patterns，利用 causality 构造 product system，把 partial-information safety synthesis 化为 full-information game。
+- 与本项目关系：15-mode bounded-dropout product construction 已有近邻，不能作为创新；其有限安全游戏不直接处理当前连续六状态与 control-dependent residual。
+
+## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
+- 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
+- Run 140 阅读层级：核查摘要及 problem formulation，未精读证明。
+- 已知内容：从 noisy offline data 对 LTI state-feedback 与 observer-based output-feedback 同时综合 gain 和 ellipsoidal RPI。
+- 与本项目关系：是 2026 新近邻，但仍先冻结 observer-based closed loop；不覆盖 observation-fiber controlled RCI、bounded-dropout automaton 和 feedback-dependent residual graph。
+
+## Lucia, Ernesto, Castelan — Set-theoretic output feedback control: a bilinear programming approach
+- 年份/出处：2023, *Automatica*, 151:110861；DOI：https://doi.org/10.1016/j.automatica.2023.110861；作者预印本：https://users.encs.concordia.ca/~wlucia/files/STOutput2023.pdf
+- Run 141 精读：Sections 2--5、Definitions 2--3、Propositions 1--2、Algorithm 1、式 (7)--(31)。
+- 方法/关键结论：联合综合静态输出反馈增益、terminal RCI 与嵌套 robust one-step controllable sets；rank-deficient output 情形采用不依赖隐藏状态的离线切换，满状态带噪情形才可用当前测量选择更小集合。集合包含和输入约束由 extended Farkas lemma 转成双线性条件。
+- 与本项目关系：直接说明 output-feedback 与 full/noisy-state feedback 的信息权限及在线集合选择不同；因此读取隐藏 `eta` 的 vertex control 只能作乐观上界，不能作为当前 causal ancillary policy。
+- 局限：论文处理 LTI、静态输出增益和嵌套多面体，不含 15-mode missing-data graph、实际推力相关余项或 SMF zonotope fiber。
+- 本项目状态：作为 output-feedback set synthesis 的强方法基线；Run 141 只实例化因果性负对照，不复现其 bilinear synthesis。

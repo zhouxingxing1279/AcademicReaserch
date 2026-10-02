@@ -1,0 +1,131 @@
+{
+  "status": "pass",
+  "claim": "hover_partial_information_problem_contract_is_executable",
+  "edge_contract_checks": [
+    {
+      "from": 0,
+      "to": 1,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "label": "miss",
+      "pass": true
+    },
+    {
+      "from": 4,
+      "to": 0,
+      "label": "success",
+      "pass": true
+    },
+    {
+      "from": 9,
+      "to": 0,
+      "label": "success",
+      "pass": true
+    },
+    {
+      "from": 14,
+      "to": 0,
+      "label": "success",
+      "pass": true
+    }
+  ],
+  "run136_bridge": {
+    "transformation": "w_x = r_x + (gravity - actual_thrust) * true_phi",
+    "certified_halfwidth": {
+      "w_x": "13794349/3200000",
+      "w_z": "572143/160000"
+    },
+    "boundary_checks": "covered_by_unit_tests_at_thrust_and_phi_extrema"
+  },
+  "hover_is_strictly_interior": true,
+  "policy_class": "mode_indexed_observation_piecewise_affine_to_be_synthesized",
+  "evidence_level": "problem_contract_ready_not_an_invariant_set_certificate",
+  "limitations": [
+    "no policy coefficients or invariant set have been synthesized",
+    "the nominal box is an existence-probe domain, not a maneuvering MPC domain",
+    "exact split algebra does not prove source-domain closure or recursive feasibility"
+  ],
+  "source_sha256": {
+    "verification/check_hover_partial_information_contract.py": "f9d69e6d07bedb9b48ecd0502e4675cf2292d658829cb67b4f26e9c0e0cbe21e",
+    "verification/test_hover_partial_information_contract.py": "28a514da0468cc57ce5c47657f745c89bb43dae541e41097c0252ce62537d8b2",
+    "verification/check_augmented_rci_contract.py": "72b9086735ff57adca93167ee1030bfdee2f1f581aa84b4c91f0d5dff2498bd5",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/research/run140_literature_gate.md": "fa8fb9de22fcf1e3e293e53da6ee3ce8ff7ae129a1b71b98adc2af212b298f4f"
+  }
+}

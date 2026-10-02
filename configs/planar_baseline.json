@@ -206,7 +206,127 @@
     "deadline_s": 0.02,
     "terminal_certificate": null,
     "K": null,
-    "L_by_mode": null
+    "L_by_mode": null,
+    "ancillary_rci_contract": {
+      "scope": "hover-neighborhood existence probe; ready problem contract is not an invariant-set certificate",
+      "semantics": "partial_information_controlled_rci",
+      "quantifier_order": [
+        "forall_current_mode_and_observation",
+        "exists_causal_control",
+        "forall_hidden_estimation_errors_successor_edges_and_primitives"
+      ],
+      "policy": {
+        "class": "mode_indexed_observation_piecewise_affine_to_be_synthesized",
+        "observes": [
+          "d",
+          "mode",
+          "z",
+          "nominal_input"
+        ],
+        "same_control_for_entire_observation_fiber": true
+      },
+      "nominal_state_domain": {
+        "lower": [
+          -0.5,
+          1.5,
+          -0.25,
+          -0.25,
+          -0.05,
+          -0.25
+        ],
+        "upper": [
+          0.5,
+          2.5,
+          0.25,
+          0.25,
+          0.05,
+          0.25
+        ],
+        "semantics": "exact rational hover-centered probe box; not a final maneuver domain"
+      },
+      "mode_graph": {
+        "mode_count": 15,
+        "edges": [
+          [0, 1, "miss"],
+          [1, 2, "miss"],
+          [2, 3, "miss"],
+          [3, 4, "miss"],
+          [4, 5, "miss"],
+          [5, 6, "miss"],
+          [6, 7, "miss"],
+          [7, 8, "miss"],
+          [8, 9, "miss"],
+          [9, 10, "miss"],
+          [10, 11, "miss"],
+          [11, 12, "miss"],
+          [12, 13, "miss"],
+          [13, 14, "miss"],
+          [4, 0, "success"],
+          [9, 0, "success"],
+          [14, 0, "success"]
+        ],
+        "control_precedes_successor_edge": true
+      },
+      "disturbance_graph": {
+        "actual_thrust_depends_on_correction": true,
+        "residual_bound_depends_on_actual_thrust": true,
+        "primitive_vector": {
+          "id": "xi_next_shared_once",
+          "order": [
+          "rho_x",
+          "rho_z",
+          "n_px_next",
+          "n_pz_next",
+          "n_phi_next",
+          "n_omega_next"
+          ],
+          "box_halfwidth": [1, 1, 1, 1, 1, 1],
+          "realizations": {
+            "r_x": "(47/25 + (243/16000) * actual_thrust) * rho_x",
+            "r_z": "(1043/500 + (81/800) * actual_thrust) * rho_z",
+            "n_px_next": "(1/50) * n_px_next",
+            "n_pz_next": "(1/50) * n_pz_next",
+            "n_phi_next": "(1/200) * n_phi_next",
+            "n_omega_next": "(1/100) * n_omega_next"
+          }
+        },
+        "edge_primitive_indices": {
+          "miss": {
+            "physical": [0, 1],
+            "observer": [4, 5],
+            "eta": [0, 1, 4, 5],
+            "d": [4, 5]
+          },
+          "success": {
+            "physical": [0, 1],
+            "observer": [2, 3, 4, 5],
+            "eta": [0, 1, 2, 3, 4, 5],
+            "d": [2, 3, 4, 5]
+          }
+        },
+        "physical_residual_halfwidth": {
+          "r_x": "47/25 + (243/16000) * actual_thrust",
+          "r_z": "1043/500 + (81/800) * actual_thrust"
+        },
+        "coupled_update": {
+          "tracking_error_update": "equation_71_1",
+          "estimation_error_update": "run136_edge_map",
+          "d_update": "tracking_error_next_minus_estimation_error_next"
+        }
+      },
+      "initialization": {
+        "required_mode": 0,
+        "eta_set_artifact": "results/theory_cycle_lifted_zonotope_20260929/exact_checks.json",
+        "d_is_zero": true
+      },
+      "candidate_constraints": {
+        "true_state_relation": "x = z + eta + d",
+        "true_state_must_remain_in_source_domain": true,
+        "actual_input_relation": "actual_input = nominal_input + correction",
+        "actual_input_must_remain_in_actuator_box": true,
+        "eta_projection_must_lie_in_run136_mode_set": true
+      }
+    }
   },
   "evaluation": {
     "episode_seconds": 20,

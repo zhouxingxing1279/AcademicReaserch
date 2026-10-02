@@ -1,0 +1,169 @@
+{
+  "status": "pass",
+  "claim": "strict_actual_model_observation_fiber_predecessor_gap",
+  "mode": 4,
+  "unknown_successors": [
+    "miss_to_5",
+    "success_to_0"
+  ],
+  "q_support": "1004143/7200000",
+  "q_support_witness_eta": [
+    "612587961/4000000000",
+    "202879313/1800000000",
+    "301172253/160000000",
+    "48156437/36000000",
+    "-1/200",
+    "-1/100"
+  ],
+  "position_target_radius_on_success": "1148143/7200000",
+  "source_domain_ok": true,
+  "source_fiber_domain": {
+    "coordinate_supports": [
+      "612587961/4000000000",
+      "202879313/1800000000",
+      "301172253/160000000",
+      "48156437/36000000",
+      "1/200",
+      "1/100"
+    ],
+    "lower_slacks": [
+      "19387412039/4000000000",
+      "2497120687/1800000000",
+      "178827747/160000000",
+      "59843563/36000000",
+      "89/200",
+      "199/100"
+    ],
+    "upper_slacks": [
+      "19387412039/4000000000",
+      "2497120687/1800000000",
+      "178827747/160000000",
+      "59843563/36000000",
+      "89/200",
+      "199/100"
+    ],
+    "entire_fiber_inside": true
+  },
+  "edge_vertex_checks": [
+    {
+      "edge": "miss_to_5",
+      "q": "-1004143/7200000",
+      "noise": null,
+      "correction": "108143/32000",
+      "image_d_pz": "0",
+      "image_d_vz": "108143/1600000",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    },
+    {
+      "edge": "success_to_0",
+      "q": "-1004143/7200000",
+      "noise": "-1/50",
+      "correction": "108143/32000",
+      "image_d_pz": "-1148143/7200000",
+      "image_d_vz": "-13/20",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    },
+    {
+      "edge": "success_to_0",
+      "q": "-1004143/7200000",
+      "noise": "1/50",
+      "correction": "108143/32000",
+      "image_d_pz": "-860143/7200000",
+      "image_d_vz": "-47/100",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    },
+    {
+      "edge": "miss_to_5",
+      "q": "1004143/7200000",
+      "noise": null,
+      "correction": "-108143/32000",
+      "image_d_pz": "0",
+      "image_d_vz": "-108143/1600000",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    },
+    {
+      "edge": "success_to_0",
+      "q": "1004143/7200000",
+      "noise": "-1/50",
+      "correction": "-108143/32000",
+      "image_d_pz": "860143/7200000",
+      "image_d_vz": "47/100",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    },
+    {
+      "edge": "success_to_0",
+      "q": "1004143/7200000",
+      "noise": "1/50",
+      "correction": "-108143/32000",
+      "image_d_pz": "1148143/7200000",
+      "image_d_vz": "13/20",
+      "position_target_ok": true,
+      "velocity_target_ok": true,
+      "target_ok": true,
+      "input_ok": true
+    }
+  ],
+  "full_state_fiber_policy": {
+    "policy": "delta_T(q) = -(required_extreme_correction / q_support) * q",
+    "required_extreme_correction": "108143/32000",
+    "correction_authority": "572143/160000",
+    "correction_authority_ok": true,
+    "miss_image_velocity_radius": "108143/1600000",
+    "miss_target_radius": "7/100",
+    "miss_target_ok": true,
+    "success_image_velocity_radius": "13/20",
+    "success_target_radius": "13/20",
+    "success_target_ok": true,
+    "actual_thrusts_at_hidden_extremes": [
+      "205777/32000",
+      "422063/32000"
+    ],
+    "actuator_box_ok": true
+  },
+  "causal_observation_fiber": {
+    "same_observation": {
+      "mode": 4,
+      "d_pz": "0",
+      "d_vz": "0"
+    },
+    "positive_hidden_state_requires_delta_T_at_most": "-108143/32000",
+    "negative_hidden_state_requires_delta_T_at_least": "108143/32000",
+    "required_lower": "108143/32000",
+    "required_upper": "-108143/32000",
+    "common_control_exists": false
+  },
+  "strict_gap": {
+    "causal_minimum_success_velocity_radius": "1148143/1600000",
+    "full_state_minimum_with_input_saturation": "1292143/2000000",
+    "chosen_success_velocity_radius": "13/20"
+  },
+  "evidence_level": "exact_one_step_counterexample_not_an_rci_certificate",
+  "limitations": [
+    "does not construct a mode-indexed invariant set",
+    "does not prove causal vertical RCI infeasibility",
+    "does not cover the horizontal or attitude coordinates",
+    "the full-state policy is deliberately noncausal for the real controller"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_fiber_causality_gap.py": "a35712f1661cd44c1805e61c43ba3ec5ef6b64f18dca08c1b057039781e8bf9f",
+    "verification/test_vertical_fiber_causality_gap.py": "72935150dfd99b7b47431a89b500e6630fe1793feb687bd3c987cf4609a7d5a5",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/research/run141_literature_gate.md": "e78a9b92ea89d784fc0663fa3a0399f1a51b470b74e71e7b9b9c1adf0f1fdb10"
+  }
+}
