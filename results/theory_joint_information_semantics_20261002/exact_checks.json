@@ -1,0 +1,69 @@
+{
+  "status": "pass",
+  "claim": "run142_product_threshold_is_not_necessary_for_a_joint_information_target",
+  "miss_path_fiber": {
+    "conditional_q_halfwidth": "23312147/48000000",
+    "product_threshold": "57902137/162000000",
+    "strict_excess": "166210873/1296000000",
+    "same_observation_for_entire_fiber": true,
+    "threshold_is_reachable_on_initial_miss_path": false
+  },
+  "joint_target_counterexample": {
+    "q": "23312147/48000000",
+    "noise": "1/50",
+    "eta_source": [
+      "0",
+      "1600605281/3600000000",
+      "0",
+      "9237859/4500000",
+      "0",
+      "0"
+    ],
+    "eta_target": [
+      "0",
+      "-1/50",
+      "0",
+      "-64124993/288000000",
+      "0",
+      "0"
+    ],
+    "eta_position_next": "-1/50",
+    "eta_velocity_next": "-64124993/288000000",
+    "d_position_next": "24272147/48000000",
+    "d_velocity_next": "72816441/32000000",
+    "tracking_position_next": "23312147/48000000",
+    "tracking_velocity_next": "9237859/4500000",
+    "product_q_threshold": "57902137/162000000",
+    "product_d_velocity_limit": "61142137/36000000",
+    "tracking_position_limit": "1",
+    "tracking_velocity_limit": "11/4",
+    "q_product_threshold_violated": true,
+    "product_d_velocity_limit_violated": true,
+    "eta_target_in_mode0_box": true,
+    "tracking_target_in_source_domain": true,
+    "product_threshold_not_joint_necessary": true
+  },
+  "evidence_level": "exact_counterexample_to_product_threshold_as_joint_necessity",
+  "correct_joint_coordinates": [
+    "eta_pz",
+    "eta_vz",
+    "e_pz=eta_pz+d_pz",
+    "e_vz=eta_vz+d_vz"
+  ],
+  "limitations": [
+    "the witness corrects a necessary-condition error; it is not an invariant-set certificate",
+    "no four-dimensional joint predecessor or causal RCI is synthesized",
+    "horizontal and attitude coordinates are not analyzed beyond mode-zero containment",
+    "terminal ingredients and recursive MPC feasibility remain open"
+  ],
+  "source_sha256": {
+    "verification/check_joint_information_semantics.py": "f2b60337ece50984eb3936ab63a5a507ccc3d079f7395fd82d756bd57355e307",
+    "verification/test_joint_information_semantics.py": "911fe2803c6ae0eb53e101ce4c64a6b0cb0eb0a7b5730efd82634f2eca4ed91a",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "verification/check_vertical_causal_predecessor.py": "8c30e59b124037b96ac6103fbaf59ff63a64a0da6ed2e5d4cd6a347fd0648f32",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/80_joint_information_coordinate_correction.md": "7b08e862bbcb7d91fc286e1eb2b82a8022f5b30df6454cbb455fe62276f18a4a",
+    "docs/research/run143_literature_gate.md": "1d9284adc06294eb01b40a47514a75a51373e6a3747deb6bdc62b7e6a21bdf86",
+    "docs/research/run143_research_log.md": "3aa8a2195a81a39afc9c6dbeaa17e267be808a9811aaadd03d5c7747c2d0dfc9"
+  }
+}

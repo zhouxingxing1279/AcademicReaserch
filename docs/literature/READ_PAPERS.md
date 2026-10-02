@@ -366,6 +366,8 @@
 - 方法/关键结论：对每个 admissible noisy output 及当前已知 scheduling，选择一个只依赖输出/调度的输入，使与该输出一致的全部状态和所有过程/测量扰动满足多面体不变；给出 Farkas 验证及在线/显式 PWA 控制计算。
 - 与本项目关系：直接支持 observation-fiber 共用输入的量词；因此该量词不是创新。其 scheduling 外生且当前可测，本项目 actual thrust 由 correction 决定且下一 packet outcome 未知，不能直接套用其 LPV 顶点条件。
 - 本项目状态：partial-information RCI 的最强直接有限维基线。
+- Run 143 重读：Section III-A--C、Definition 2、Theorem 1、式 (3)--(10)，用于核对
+  joint `(eta,e)` 候选上仍必须按相同可见 `d=e-eta` fiber 共享输入；该量词不是本项目创新。
 
 ## Rungger, Tabuada — Computing Robust Controlled Invariant Sets of Linear Systems
 - 年份/出处：2017, *IEEE Transactions on Automatic Control*, 62(7):3665--3670；DOI：https://doi.org/10.1109/TAC.2017.2672859；全文：https://arxiv.org/pdf/1601.00416
@@ -387,6 +389,20 @@
 - 方法/关键结论：把 observation history 诱导的信息状态作为充分统计量，将 output-feedback robust game 转为 information-state feedback game，并给出有限/无限时动态规划必要与充分条件。
 - 与本项目关系：说明仅使用点估计偏差 `d` 的有限 policy class 一般是保守近似，不能宣称等价于所有 output-feedback controllers。
 - 本项目状态：一般信息状态概念基线；不直接数值实现其无限维动态规划。
+- Run 143 定向精读：Section IV-A 的 Information State Formulation、Lemma 4、Remarks
+  8--10、Theorems 9--11，复核可行状态/历史相关性必须保留，且一般信息状态是无限维。
+  这支持从 product `E_eta x D` 转向 joint set，但不能把 joint set 本身声明为创新。
+
+## Kjellqvist — Minimax Dual Control with Finite-Dimensional Information State
+- 年份/出处：2024, L4DC, *Proceedings of Machine Learning Research* 242:299--311；
+  全文：https://proceedings.mlr.press/v242/kjellqvist24a/kjellqvist24a.pdf
+- Run 143 精读：Sections 2.1--2.2、Assumption 2、Proposition 4、式 (11)--(18) 及结论。
+- 方法/关键结论：当每个测量逆像最多含固定有限个元素时，把 worst-case history 压成
+  有限维递归信息状态并写成 information-state dynamic program。
+- 与本项目关系：当前有界实值测量噪声产生连续无穷 observation fiber，不满足 Assumption
+  2；不能援引该文宣称当前 joint information set 有精确有限维递归。论文结论也明确把
+  实值传感噪声列为该有限逆像结果之外的情形。
+- 本项目状态：有限维压缩的反边界；任何固定复杂度 CZ/polytope 压缩仍需单独包含证明。
 
 ## Yang, Ozay — Efficient Safety Control Synthesis with Imperfect State Information
 - 年份/出处：2020, CDC, pp. 874--880；作者链接：https://web.eecs.umich.edu/~necmiye/pubs/YangO_cdc20.pdf
