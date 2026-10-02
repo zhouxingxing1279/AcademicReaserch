@@ -170,3 +170,14 @@ information ensemble 极端集合控制及 Hempel 2011 的 fiber 共享输入量
 包含，且都保留 Run144 公共 observation box。证据仅为 first-sweep 四维正体积内集，不是
 最大投影、固定点或 RCI。下一步以本轮保留集合为 target 执行第二层，判断该受限 policy
 class 是否自映射。详见 `run145_research_log.md` 与第82章。
+
+### 2026-10-03 Run 147
+
+先审计远端新增Run146并独立复现其second-sweep证书。排重发现Run146要求“压缩mode-14
+`q|d`且保留初始化miss-chain”的下一问题已被Run143精确否定，故停止重复支线。精读
+Houska 2023 information ensemble的控制不变性、极端集合与多面体tube，重读Hempel 2011
+fiber量词。本轮把初始化14条miss后的完整`E_14`经强制success映成共享原语的四行
+zonotope：106列、精确rank 3；完整`eta`和真实`e`投影满足当前竖直约束，虽然`d_v`支持
+严格超过Run146 product target约0.641398。它是必要correlated return seed，不是RCI。
+下一步统一核查5/10/15 tick三种return seed的mode-0相关模板。详见
+`run147_research_log.md`与第84章。

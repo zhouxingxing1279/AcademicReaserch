@@ -373,6 +373,9 @@
 - Run 146 精读：Section III-A--C、Definition 2、Theorem 1、式 (3)--(11)，复核第二层
   predecessor 中每个 `d` 对应的完整隐藏 `eta` 纤维及未知 packet successor 必须共享当前
   输入；给定候选的验证与控制计算已有直接近邻。
+- Run 147 重读同一章节：用于确认初始化 all-miss history 的完整 hidden `eta` fiber 不能
+  按真值拆分；zero correction 仅生成一个必须容纳的 return image，不是 output-feedback
+  controller synthesis。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023, arXiv:2307.04146；全文：https://arxiv.org/pdf/2307.04146
@@ -394,6 +397,10 @@
 - Run 146 定向重读：Sections 5.3、6.1--6.5、式 (38)、(43)，用于区分固定完整纤维模板
   与一般 information ensemble。完整纤维第二层若塌缩，只能淘汰该保守模板，不能否定
   保留条件纤维相关性的多面体信息集方法。
+- Run 147 精读全文 HTML Sections 4.4、6.2、6.4--6.5、Lemma 2、Definition 7、
+  Theorem 3 及证明。极端 information set、每集合共享控制和多面体 information tube 已有
+  一般方法；本轮 rank-three correlated return seed 只是当前 packet/observer 合同的一项
+  必要 reachable-set 实例证书，不作集合算法创新声明。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

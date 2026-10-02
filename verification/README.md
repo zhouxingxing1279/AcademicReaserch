@@ -262,3 +262,28 @@ checker 在全部15个 packet mode 上固定一个可执行的共享策略 `delt
 mode 14，为 `899947970530621291/691200000000000000`。该结果只是一层保守内证书，不是
 最大 observation projection、固定点、RCI 或 MPC 递归可行性。归档见
 `results/theory_vertical_joint_first_sweep_20261002/exact_checks.json`，证明见第 82 章。
+
+## C3-J3：完整纤维类的第二下降层（2026-10-03）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_vertical_joint_second_sweep.py -v
+PYTHONPATH=verification python verification/check_vertical_joint_second_sweep.py --output /tmp/vertical_joint_second_sweep.json
+```
+
+checker 以首次下降层为 target；mode 0--13 保持正面积，mode 14 在强制 success 上因
+`d_v` 半宽严格超过 product `D_0^0` 而塌缩。该结果只淘汰完整 `eta` fiber 与独立 `d`
+限幅的候选类，不否定 correlated joint information RCI。归档见
+`results/theory_vertical_joint_second_sweep_20261003/exact_checks.json`，证明见第 83 章。
+
+## C3-J4：初始化路径的 correlated return seed（2026-10-03）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_vertical_correlated_return_seed.py -v
+PYTHONPATH=verification python verification/check_vertical_correlated_return_seed.py --output /tmp/vertical_correlated_return_seed.json
+```
+
+checker 保留14条 miss 后强制 success 的共享 residual/measurement 原语，直接构造
+`(eta_p,eta_v,e_p,e_v)` return zonotope。其106列生成矩阵精确 rank 为3，完整 `eta` 和
+真实 `e` 投影满足当前竖直约束；虽然 `d_v` 支持超过 C3-J3 的 product target。该集合是
+初始化合同必须容纳的低维 reachable seed，不是 RCI、全六状态或递归可行性证书。归档见
+`results/theory_vertical_correlated_return_seed_20261003/exact_checks.json`，证明见第 84 章。
