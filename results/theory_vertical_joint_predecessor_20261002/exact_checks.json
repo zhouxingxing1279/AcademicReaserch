@@ -1,0 +1,126 @@
+{
+  "status": "pass",
+  "claim": "three_critical_vertical_joint_one_step_predecessors_have_positive_volume_inner_certificates",
+  "candidate": "S_j = E_eta_vertical_j x {|e_pz|<=1, |e_vz|<=11/4}",
+  "predecessor_semantics": "one correction per fixed d fiber, shared across hidden eta and all outgoing edges",
+  "observation_halfwidths": [
+    "1/5",
+    "1/4"
+  ],
+  "nominal_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "actual_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "residual_halfwidth_at_actual_thrust_upper": "411370817/128000000",
+  "run136_certified_residual_halfwidth": "572143/160000",
+  "critical_modes": {
+    "4": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_inner_box": 1,
+      "eta_projection_area": "41105550110953/240000000000000",
+      "joint_inner_dimension": 4,
+      "current_fiber_position_slack": "1237120687/1800000000",
+      "current_fiber_velocity_slack": "41843563/36000000",
+      "next_tracking_position_slack": "4719857/7200000",
+      "next_tracking_velocity_slack": "63247363447/57600000000",
+      "edges": [
+        {
+          "target": 5,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "139030749/40000",
+          "target_facet_count": 14
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "417092247/1600",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "9": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_inner_box": 1,
+      "eta_projection_area": "327941991138173/720000000000000",
+      "joint_inner_dimension": 4,
+      "current_fiber_position_slack": "107843563/200000000",
+      "current_fiber_velocity_slack": "57940691/72000000",
+      "next_tracking_position_slack": "72044993/144000000",
+      "next_tracking_velocity_slack": "42650215447/57600000000",
+      "edges": [
+        {
+          "target": 10,
+          "label": "miss",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "973215243/20000",
+          "target_facet_count": 24
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "20053808847/1600",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    },
+    "14": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_inner_box": 1,
+      "eta_projection_area": "1414311560032909/1440000000000000",
+      "joint_inner_dimension": 4,
+      "current_fiber_position_slack": "1279394719/3600000000",
+      "current_fiber_velocity_slack": "2012141/4500000",
+      "next_tracking_position_slack": "14847853/48000000",
+      "next_tracking_velocity_slack": "22053067447/57600000000",
+      "edges": [
+        {
+          "target": 0,
+          "label": "success",
+          "eta_target_contained": true,
+          "minimum_eta_facet_slack": "0",
+          "minimum_eta_residual_sensitive_facet_slack": "471323459/320",
+          "target_facet_count": 4
+        }
+      ],
+      "positive_volume_inner_certificate": true
+    }
+  },
+  "evidence_level": "exact_positive_volume_inner_certificate_for_three_critical_one_step_predecessors",
+  "is_rci_certificate": false,
+  "fixed_point_iteration_run": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the certificate is an inner subset of only three one-step predecessors",
+    "it does not prove that the full candidate is controlled invariant",
+    "the remaining modes and any descending fixed-point iteration are not checked",
+    "horizontal, attitude, terminal, shift, and recursive MPC feasibility remain open",
+    "the frozen input allocation remains an existence probe without maneuvering interior"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/test_vertical_joint_predecessor.py": "d4d6519c8209b9e01743dc32edac9e5490ad9b94a30329b0d97f2946692dda8d",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "verification/check_vertical_causal_predecessor.py": "8c30e59b124037b96ac6103fbaf59ff63a64a0da6ed2e5d4cd6a347fd0648f32",
+    "verification/check_mode_nestedness.py": "37f63d5b629985147240a28bd016c35aaf0791e3889e36220126801c92f7f82b",
+    "verification/check_mode_radius.py": "b3d58ab6928f55c5771e411af9e5e25ae09a9c2486013651c135db7dd0ebb842",
+    "verification/check_intermittent_metric.py": "f0db42dca406ab75ed27d95bfab3ad53fde948973a28e07f82edc625063041d4",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/81_vertical_joint_one_step_predecessor.md": "42a5e7f574759e290078a5d76f21a7a6c18af5838f2f388e4d478562066c2ce3",
+    "docs/literature/READ_PAPERS.md": "691a901cdd78dd3a7137d56eaec0e8ea8d4376af23268ff1eeac73a552e7b65e",
+    "docs/research/run144_literature_gate.md": "f9af50ea0076904bc1a3867144d79f2f19a659662ea6b13ab3d455817838f91b",
+    "docs/research/run144_research_log.md": "35591795cb3d6076e84b9b9f9079efd7ca871625190b1d20d0f07cf33eca35ef"
+  }
+}

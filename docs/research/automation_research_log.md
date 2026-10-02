@@ -149,3 +149,14 @@ exact-rational 反例证明 `X1=X∩Pre(X)` 不是 RCI；第38章 pairwise famil
 ### 2026-10-02 Run 139
 
 重读 Lorenzetti--Pavone fixed-policy augmented RPI，精读 Mejari--Mulagaleti--Bemporad RCI 量词与 Wehbeh--Kerrigan decision-dependent uncertainty。确认当前 augmented `(eta,d)` 问题缺少 partial-information quantifier、causal policy、nominal state domain、17-edge input timing、actual-thrust shared primitive graph 和 nonempty initialization slice；普通 full-state RCI 会允许控制读取隐藏 `eta`。新增 contract gate 与6项测试，当前配置返回 `blocked`；该结论只证明问题未实例化，不证明 RCI 不存在。并修复 Run138 配置变更造成的两个旧 envelope 陈旧 hash，重建确认几何未变；全仓170/170通过。下一步先冻结17条 edge 的 exact joint update 与 causal policy class，再启动 synthesis。详见 `run139_research_log.md` 与第76章。
+
+### 2026-10-02 Run 144
+
+精读 Houska 2023 的 invariant information ensemble 与 polytopic extreme-set control，重读
+Hempel 2011 fiber 量词，并精读 Kumar--Kothyari 2026 zonotope-LP output-feedback RCI。
+联合信息集及其多面体优化已有直接近邻，本轮只作当前 packet/shared-primitive 合同的一步
+实例化。对正确候选 `S_j=E_eta_vertical^j x B_e`，精确证明 modes 4、9、14 的 predecessor
+均包含 `|d_pz|<=1/5,|d_vz|<=1/4` 对应的四维正体积内集；统一 `deltaT=0` 同时服务
+mode 4/9 两条未知后继，且 residual 半宽由同一 actual thrust 计算。该结果仅排除三个关键
+模态“一步即空”，不是 RCI 或递归可行性。下一步执行全15模态的一次 joint descending
+predecessor sweep。详见 `run144_research_log.md` 与第81章。

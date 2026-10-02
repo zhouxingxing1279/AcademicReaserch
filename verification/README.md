@@ -232,3 +232,18 @@ Fourier--Motzkin projection。固定 `S_j=E_eta^j x D_j` 后，mode 14 强制 su
 初始化的多集。该结论不否定 joint `(eta,d)` information set、history-dependent policy、
 完整六状态 RCI、terminal 或 recursive feasibility。归档见
 `results/theory_vertical_causal_predecessor_20261002/exact_checks.json`，证明见第 79 章。
+
+## C3-J1：竖直 joint `(eta,e)` 关键一步 predecessor（2026-10-02）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_vertical_joint_predecessor.py -v
+PYTHONPATH=verification python verification/check_vertical_joint_predecessor.py --output /tmp/vertical_joint_predecessor.json
+```
+
+候选为 `S_j=E_eta_vertical^j x {|e_pz|<=1,|e_vz|<=11/4}`，不独立限制
+`d=e-eta`。检查器用 exact projected-zonotope facets 证明 modes 4、9、14 的一步
+predecessor 均包含 `|d_pz|<=1/5,|d_vz|<=1/4` 对应的四维正体积内集；mode 4/9 的
+success/miss 分叉共享同一个 `deltaT=0`，residual 半宽由同一 actual thrust 上端计算。
+该证书只排除三个关键模态的“一步即空”，不是15模态 RCI、固定点、全六状态、terminal
+或 recursive-feasibility 证书。归档见
+`results/theory_vertical_joint_predecessor_20261002/exact_checks.json`，证明见第 81 章。

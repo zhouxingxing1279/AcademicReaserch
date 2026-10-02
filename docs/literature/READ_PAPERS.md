@@ -368,6 +368,36 @@
 - 本项目状态：partial-information RCI 的最强直接有限维基线。
 - Run 143 重读：Section III-A--C、Definition 2、Theorem 1、式 (3)--(10)，用于核对
   joint `(eta,e)` 候选上仍必须按相同可见 `d=e-eta` fiber 共享输入；该量词不是本项目创新。
+- Run 144 重读：同一章节用于核对 mode 4/9 的未知 success/miss 分叉在当前时刻仍只能
+  使用同一个 fiber control；本轮的零输入内证书只是其量词的特例，不是新算法。
+
+## Houska — Intrinsic Separation Principles
+- 年份/出处：2023, arXiv:2307.04146；全文：https://arxiv.org/pdf/2307.04146
+- Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
+  Problems (24)、(27)、(29) 与 complexity discussion。
+- 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
+  configuration-constrained polytopes 和 extreme vertex polytopes 得到有限维凸近似，
+  每个 extreme information set 配置一个控制，(29) 可计算 invariant polytopic
+  information ensemble。
+- 与本项目关系：joint information set、extreme-fiber control、固定模板 polytope 与凸
+  优化均已有强近邻，不能作为创新。本项目只剩 packet graph、observer split、shared
+  primitive 和 actual-thrust-dependent residual 的可靠实例化及完整闭环证据链可研究。
+- 局限：其通用信息 ensemble 近似没有直接给出当前15模态 contract 的精确 candidate，
+  也不替代 source-domain、input allocation、terminal/shift 的逐项证明。
+- 本项目状态：一般信息集合成的最强直接基线；Run 144 仅实现一个受限一步内证书。
+
+## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
+- 年份/出处：2026, MTNS 2026；作者公开全文：
+  https://www.researchgate.net/publication/407040373_Set-Theoretic_Output_Feedback_Tracking_Control_via_Linear_Programming
+- Run 144 精读：Sections 2.3--3、Definition 4、Theorem 5、式 (14)--(29)。
+- 方法/关键结论：对 `x+=Ax+Bu+Ew, y=Cx` 与静态 `u=Ky+Lr`，用 zonotope containment
+  线性条件联合综合 output-feedback gain、state RCI 和 admissible reference set。
+- 与本项目关系：这是截至本轮检索到的2026直接 zonotopic output-feedback RCI 近邻，排除
+  “zonotope + LP 联合求 gain/RCI”的首次性；其 OFCI 定义也要求同一 output fiber 共用输入。
+- 局限：没有测量噪声、间歇包、observer 信息状态、mode graph 或 actual-input-dependent
+  residual；因此不能直接认证 `(eta,e)` joint information candidate。
+- 本项目状态：最新静态 output-feedback zonotope-LP 对照；不得把其 state RCI 结论移植为
+  当前 partial-information RCI。
 
 ## Rungger, Tabuada — Computing Robust Controlled Invariant Sets of Linear Systems
 - 年份/出处：2017, *IEEE Transactions on Automatic Control*, 62(7):3665--3670；DOI：https://doi.org/10.1109/TAC.2017.2672859；全文：https://arxiv.org/pdf/1601.00416
