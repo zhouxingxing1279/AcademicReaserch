@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Find a minimum subset of S3\S2 facets that removes all nonviable S2 vertices.
+r"""Find a minimum subset of S3\S2 facets that removes all nonviable S2 vertices.
 
 Fraction arithmetic builds predecessor inequalities. HiGHS is used for
 redundancy, vertex feasibility, and the final 0-1 set-cover MILP. The result is

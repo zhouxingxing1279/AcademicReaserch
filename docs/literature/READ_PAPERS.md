@@ -370,6 +370,9 @@
   joint `(eta,e)` 候选上仍必须按相同可见 `d=e-eta` fiber 共享输入；该量词不是本项目创新。
 - Run 144 重读：同一章节用于核对 mode 4/9 的未知 success/miss 分叉在当前时刻仍只能
   使用同一个 fiber control；本轮的零输入内证书只是其量词的特例，不是新算法。
+- Run 146 精读：Section III-A--C、Definition 2、Theorem 1、式 (3)--(11)，复核第二层
+  predecessor 中每个 `d` 对应的完整隐藏 `eta` 纤维及未知 packet successor 必须共享当前
+  输入；给定候选的验证与控制计算已有直接近邻。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023, arXiv:2307.04146；全文：https://arxiv.org/pdf/2307.04146
@@ -388,6 +391,9 @@
 - Run 145 定向重读：Sections 4.2、6.1--6.5、Definition 4、式 (7)、(24)--(27)，
   用于界定15模态首次下降层。extreme information-set control 与多面体信息集合成已有
   一般方法；本轮逐模态零修正内投影只是一种受限实例。
+- Run 146 定向重读：Sections 5.3、6.1--6.5、式 (38)、(43)，用于区分固定完整纤维模板
+  与一般 information ensemble。完整纤维第二层若塌缩，只能淘汰该保守模板，不能否定
+  保留条件纤维相关性的多面体信息集方法。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
@@ -411,6 +417,8 @@
 - Run 145 定向重读：pp.1--6、式 (4)--(10)、Theorems 1--2 与 Remark 1。普通
   `R_1=X∩pre(X)` 只是 descending outer sequence 的一层，一般既非 RCI 也不能导出永久
   安全反馈；因此本轮15/15非空只能作为继续第二层的门槛。
+- Run 146 重读：pp.1--6、式 (4)--(10)、Theorems 1--2，核对第二下降层仍只是有限
+  predecessor 序列；无论非空或部分塌缩，都不能越级声称 RCI 或一般输出反馈不可行。
 
 ## Houska, Müller, Villanueva — Polyhedral Control Design: Theory and Methods
 - 年份/出处：2024, arXiv:2412.13082；全文：https://arxiv.org/pdf/2412.13082

@@ -69,7 +69,7 @@ def run(horizon=8,ticks=26):
                 conclusion=('For the currently certified attitude terminal normals +/-[4,1], the minimal coordinate box is support-exact on this rolling benchmark; a separate support ledger gives no tightening benefit here. Correlation is visible on diagnostic +/-[4,-1], which is not a currently certified MPC normal.'),
                 limitations=['current config has K=null, so no certified input-feedback mixed normals exist',
                              'fixed affine outer model; no terminal append or closed-loop MPC',
-                             'floating HiGHS audit']))
+                             'floating HiGHS audit'])
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser(); ap.add_argument('--output',type=Path,required=True); ap.add_argument('--horizon',type=int,default=8); a=ap.parse_args()

@@ -1,0 +1,977 @@
+{
+  "status": "pass",
+  "claim": "mode14_complete_fiber_second_sweep_is_empty_by_exact_width_obstruction",
+  "candidate": "C_j^1 = E_eta_vertical_j x D_j^0 in (eta,d) coordinates",
+  "candidate_class": "complete_eta_fiber_with_shared_zero_correction",
+  "shared_correction_thrust": "0",
+  "graph_edge_count": 17,
+  "positive_volume_mode_count": 14,
+  "collapsed_modes": [
+    14
+  ],
+  "modes": {
+    "0": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "115411461910160686772599/18432000000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "53862840297880234229399/9216000000000000000000",
+      "second_sweep_observation_projection_facet_count": 6,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-3600000000",
+          "-144000000",
+          "3371419261"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "90005652247"
+        ],
+        [
+          "50",
+          "0",
+          "49"
+        ],
+        [
+          "3600000000",
+          "144000000",
+          "3371419261"
+        ],
+        [
+          "0",
+          "57600000000",
+          "90005652247"
+        ],
+        [
+          "-50",
+          "0",
+          "49"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-49/50",
+          "156580739/144000000"
+        ],
+        [
+          "-139840228017/160000000000",
+          "-90005652247/57600000000"
+        ],
+        [
+          "49/50",
+          "-90005652247/57600000000"
+        ],
+        [
+          "49/50",
+          "-156580739/144000000"
+        ],
+        [
+          "139840228017/160000000000",
+          "90005652247/57600000000"
+        ],
+        [
+          "-49/50",
+          "90005652247/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 1,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "1": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "970388946206533744722991/165888000000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "451107506153057713309391/82944000000000000000000",
+      "second_sweep_observation_projection_facet_count": 6,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-1200000000",
+          "-48000000",
+          "1095134987"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "85886222647"
+        ],
+        [
+          "1800000000",
+          "0",
+          "1726142137"
+        ],
+        [
+          "1200000000",
+          "48000000",
+          "1095134987"
+        ],
+        [
+          "0",
+          "57600000000",
+          "85886222647"
+        ],
+        [
+          "-1800000000",
+          "0",
+          "1726142137"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-1726142137/1800000000",
+          "166879313/144000000"
+        ],
+        [
+          "-1228275761753/1440000000000",
+          "-85886222647/57600000000"
+        ],
+        [
+          "1726142137/1800000000",
+          "-85886222647/57600000000"
+        ],
+        [
+          "1726142137/1800000000",
+          "-166879313/144000000"
+        ],
+        [
+          "1228275761753/1440000000000",
+          "85886222647/57600000000"
+        ],
+        [
+          "-1726142137/1800000000",
+          "85886222647/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 2,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "2": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "902655722088771633327791/165888000000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "417773882459227193291791/82944000000000000000000",
+      "second_sweep_observation_projection_facet_count": 6,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-1800000000",
+          "-72000000",
+          "1597120687"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "81766793047"
+        ],
+        [
+          "3600000000",
+          "0",
+          "3371419261"
+        ],
+        [
+          "1800000000",
+          "72000000",
+          "1597120687"
+        ],
+        [
+          "0",
+          "57600000000",
+          "81766793047"
+        ],
+        [
+          "-3600000000",
+          "0",
+          "3371419261"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-3371419261/3600000000",
+          "177177887/144000000"
+        ],
+        [
+          "-1195929756553/1440000000000",
+          "-81766793047/57600000000"
+        ],
+        [
+          "3371419261/3600000000",
+          "-81766793047/57600000000"
+        ],
+        [
+          "3371419261/3600000000",
+          "-177177887/144000000"
+        ],
+        [
+          "1195929756553/1440000000000",
+          "81766793047/57600000000"
+        ],
+        [
+          "-3371419261/3600000000",
+          "81766793047/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 3,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "3": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "278569040413637373562597/55296000000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "128288836600268894990597/27648000000000000000000",
+      "second_sweep_observation_projection_facet_count": 6,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-7200000",
+          "-288000",
+          "6195857"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "77647363447"
+        ],
+        [
+          "1200000000",
+          "0",
+          "1095134987"
+        ],
+        [
+          "7200000",
+          "288000",
+          "6195857"
+        ],
+        [
+          "0",
+          "57600000000",
+          "77647363447"
+        ],
+        [
+          "-1200000000",
+          "0",
+          "1095134987"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-1095134987/1200000000",
+          "187476461/144000000"
+        ],
+        [
+          "-387174678851/480000000000",
+          "-77647363447/57600000000"
+        ],
+        [
+          "1095134987/1200000000",
+          "-77647363447/57600000000"
+        ],
+        [
+          "1095134987/1200000000",
+          "-187476461/144000000"
+        ],
+        [
+          "387174678851/480000000000",
+          "77647363447/57600000000"
+        ],
+        [
+          "-1095134987/1200000000",
+          "77647363447/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 4,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "4": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "769746780065707480722991/165888000000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "49739615781322678711/17280000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-1200000000",
+          "-48000000",
+          "942182113"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "52791933847"
+        ],
+        [
+          "1200000000",
+          "48000000",
+          "942182113"
+        ],
+        [
+          "0",
+          "57600000000",
+          "52791933847"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-1183410469447/1440000000000",
+          "52791933847/57600000000"
+        ],
+        [
+          "-1077826601753/1440000000000",
+          "-52791933847/57600000000"
+        ],
+        [
+          "1183410469447/1440000000000",
+          "-52791933847/57600000000"
+        ],
+        [
+          "1077826601753/1440000000000",
+          "52791933847/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 5,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "1148143/7200000",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "5": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "73441326249584758711/17280000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "200580505475187222077/51840000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-3600000000",
+          "-144000000",
+          "2889854891"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "69408504247"
+        ],
+        [
+          "3600000000",
+          "144000000",
+          "2889854891"
+        ],
+        [
+          "0",
+          "57600000000",
+          "69408504247"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-136150051183/160000000000",
+          "69408504247/57600000000"
+        ],
+        [
+          "-1086533452153/1440000000000",
+          "-69408504247/57600000000"
+        ],
+        [
+          "136150051183/160000000000",
+          "-69408504247/57600000000"
+        ],
+        [
+          "1086533452153/1440000000000",
+          "69408504247/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 6,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "6": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "200580505475187222077/51840000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "45344799181869615733/12960000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-900000000",
+          "-36000000",
+          "694523539"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "65289074647"
+        ],
+        [
+          "900000000",
+          "36000000",
+          "694523539"
+        ],
+        [
+          "0",
+          "57600000000",
+          "65289074647"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-1176526737047/1440000000000",
+          "65289074647/57600000000"
+        ],
+        [
+          "-348649529251/480000000000",
+          "-65289074647/57600000000"
+        ],
+        [
+          "1176526737047/1440000000000",
+          "-65289074647/57600000000"
+        ],
+        [
+          "348649529251/480000000000",
+          "65289074647/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 7,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "7": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "45344799181869615733/12960000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "9043538271193782461/2880000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-200000000",
+          "-8000000",
+          "147843563"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "61169645047"
+        ],
+        [
+          "200000000",
+          "8000000",
+          "147843563"
+        ],
+        [
+          "0",
+          "57600000000",
+          "61169645047"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-1125643298647/1440000000000",
+          "61169645047/57600000000"
+        ],
+        [
+          "-1003304008553/1440000000000",
+          "-61169645047/57600000000"
+        ],
+        [
+          "1125643298647/1440000000000",
+          "-61169645047/57600000000"
+        ],
+        [
+          "1003304008553/1440000000000",
+          "61169645047/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 8,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "8": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "9043538271193782461/2880000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "5794304732523046871/2073600000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-144000000",
+          "-5760000",
+          "101564993"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "57050215447"
+        ],
+        [
+          "144000000",
+          "5760000",
+          "101564993"
+        ],
+        [
+          "0",
+          "57600000000",
+          "57050215447"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-357566715149/480000000000",
+          "57050215447/57600000000"
+        ],
+        [
+          "-958599714553/1440000000000",
+          "-57050215447/57600000000"
+        ],
+        [
+          "357566715149/480000000000",
+          "-57050215447/57600000000"
+        ],
+        [
+          "958599714553/1440000000000",
+          "57050215447/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 9,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "9": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "5794304732523046871/2073600000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "111387579346946906251/207360000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-14400000000",
+          "-576000000",
+          "8869801333"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "12558069247"
+        ],
+        [
+          "14400000000",
+          "576000000",
+          "8869801333"
+        ],
+        [
+          "0",
+          "57600000000",
+          "12558069247"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-899538202547/1440000000000",
+          "12558069247/57600000000"
+        ],
+        [
+          "-97158007117/160000000000",
+          "-12558069247/57600000000"
+        ],
+        [
+          "899538202547/1440000000000",
+          "-12558069247/57600000000"
+        ],
+        [
+          "97158007117/160000000000",
+          "12558069247/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 10,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        },
+        {
+          "target": 0,
+          "label": "success",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "45315007/144000000",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    },
+    "10": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "127664621398102810963/51840000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "18544722418738014577/8640000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-600000000",
+          "-24000000",
+          "379926391"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "48811356247"
+        ],
+        [
+          "600000000",
+          "24000000",
+          "379926391"
+        ],
+        [
+          "0",
+          "57600000000",
+          "48811356247"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-960634694647/1440000000000",
+          "48811356247/57600000000"
+        ],
+        [
+          "-863011982153/1440000000000",
+          "-48811356247/57600000000"
+        ],
+        [
+          "960634694647/1440000000000",
+          "-48811356247/57600000000"
+        ],
+        [
+          "863011982153/1440000000000",
+          "48811356247/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 11,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "11": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "18544722418738014577/8640000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "11966549253989010859/6480000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-450000000",
+          "-18000000",
+          "267756397"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "44691926647"
+        ],
+        [
+          "450000000",
+          "18000000",
+          "267756397"
+        ],
+        [
+          "0",
+          "57600000000",
+          "44691926647"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-300504132349/480000000000",
+          "44691926647/57600000000"
+        ],
+        [
+          "-812128543753/1440000000000",
+          "-44691926647/57600000000"
+        ],
+        [
+          "300504132349/480000000000",
+          "-44691926647/57600000000"
+        ],
+        [
+          "812128543753/1440000000000",
+          "44691926647/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 12,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "12": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "11966549253989010859/6480000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "81120436332414894793/51840000000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-3600000000",
+          "-144000000",
+          "1999394719"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "40572497047"
+        ],
+        [
+          "3600000000",
+          "144000000",
+          "1999394719"
+        ],
+        [
+          "0",
+          "57600000000",
+          "40572497047"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-840330384647/1440000000000",
+          "40572497047/57600000000"
+        ],
+        [
+          "-253061796851/480000000000",
+          "-40572497047/57600000000"
+        ],
+        [
+          "840330384647/1440000000000",
+          "-40572497047/57600000000"
+        ],
+        [
+          "253061796851/480000000000",
+          "40572497047/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 13,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "13": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "81120436332414894793/51840000000000000000",
+      "second_sweep_observation_projection_empty": false,
+      "second_sweep_observation_projection_area": "899947970530621291/691200000000000000",
+      "second_sweep_observation_projection_facet_count": 4,
+      "second_sweep_observation_projection_facets": [
+        [
+          "-48000000",
+          "-1920000",
+          "24687853"
+        ],
+        [
+          "0",
+          "-57600000000",
+          "36453067447"
+        ],
+        [
+          "48000000",
+          "1920000",
+          "24687853"
+        ],
+        [
+          "0",
+          "57600000000",
+          "36453067447"
+        ]
+      ],
+      "second_sweep_observation_projection_vertices": [
+        [
+          "-777088657447/1440000000000",
+          "36453067447/57600000000"
+        ],
+        [
+          "-704182522553/1440000000000",
+          "-36453067447/57600000000"
+        ],
+        [
+          "777088657447/1440000000000",
+          "-36453067447/57600000000"
+        ],
+        [
+          "704182522553/1440000000000",
+          "36453067447/57600000000"
+        ]
+      ],
+      "joint_inner_dimension": 4,
+      "edges": [
+        {
+          "target": 14,
+          "label": "miss",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "0",
+          "pulled_target_facet_count": 4
+        }
+      ]
+    },
+    "14": {
+      "shared_correction_thrust": "0",
+      "policy_values_on_observation_projection": 1,
+      "source_first_sweep_observation_area": "899947970530621291/691200000000000000",
+      "second_sweep_observation_projection_empty": true,
+      "second_sweep_observation_projection_area": "0",
+      "second_sweep_observation_projection_facet_count": 0,
+      "second_sweep_observation_projection_facets": [],
+      "second_sweep_observation_projection_vertices": [],
+      "joint_inner_dimension": 0,
+      "edges": [
+        {
+          "target": 0,
+          "label": "success",
+          "shared_correction_thrust": "0",
+          "innovation_halfwidth": "24272147/48000000",
+          "pulled_target_facet_count": 6
+        }
+      ]
+    }
+  },
+  "mode14_width_obstruction": {
+    "forced_edge": [
+      14,
+      0,
+      "success"
+    ],
+    "mode14_q_halfwidth": "23312147/48000000",
+    "measurement_noise_halfwidth": "1/50",
+    "success_innovation_halfwidth": "24272147/48000000",
+    "success_velocity_spread": "72816441/32000000",
+    "mode_zero_target_velocity_halfwidth": "94125081847/57600000000",
+    "strict_halfwidth_excess": "36944511953/57600000000",
+    "strict_width_obstruction": true,
+    "correction_only_translates_interval": true
+  },
+  "descending_sweep_iterations": 2,
+  "evidence_level": "exact_mode14_width_obstruction_for_complete_fiber_second_sweep",
+  "complete_fiber_candidate_class_rejected": true,
+  "general_joint_information_rci_rejected": false,
+  "is_rci_certificate": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the obstruction rejects C^1 with every d paired with the complete Run136 eta fiber",
+    "it does not reject conditional eta-given-d fibers or general information ensembles",
+    "the fourteen surviving mode projections do not form an invariant family",
+    "horizontal, attitude, torque, terminal, shift, and recursive MPC feasibility remain open"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_joint_second_sweep.py": "c5e57653250571a759b13c6a2002d275a6b53b6eb497fa2bdba7894b9a273985",
+    "verification/test_vertical_joint_second_sweep.py": "188e0626b2f94b1132361b029dedfa42b6535d394cb09ae83e60eefd37386fe1",
+    "verification/check_vertical_joint_first_sweep.py": "0427d6b278ea9183258c25356c881eeb2748f0892934fad6f67d373c7789165d",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/check_vertical_causal_predecessor.py": "8c30e59b124037b96ac6103fbaf59ff63a64a0da6ed2e5d4cd6a347fd0648f32",
+    "verification/check_rolling_control_normal_ledger.py": "48896da7ffa0ab44533ecf6b709781a5e6b74a375bd92e3071e906bbd7d7b203",
+    "verification/test_rolling_control_normal_ledger.py": "af3e701480017f03dee1274fda81f334a09d0d97b4c0d62808fe35d4dc44c05f",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "verification/check_mode_nestedness.py": "37f63d5b629985147240a28bd016c35aaf0791e3889e36220126801c92f7f82b",
+    "verification/check_mode_radius.py": "b3d58ab6928f55c5771e411af9e5e25ae09a9c2486013651c135db7dd0ebb842",
+    "verification/check_intermittent_metric.py": "f0db42dca406ab75ed27d95bfab3ad53fde948973a28e07f82edc625063041d4",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/83_vertical_joint_second_sweep.md": "fa3269d91259d28a3828262dbde29e639437b192e7e60c30b30e574411d660a5",
+    "docs/literature/READ_PAPERS.md": "278a1cde83b2cf534701d8c641e135a54a9618e4e86420ee3cda47b7594df189",
+    "docs/research/run146_literature_gate.md": "773ef8a540e7af38089cc3e5f01a67c23e305cbfe728d6c74815d67e4b12d221",
+    "docs/research/run146_research_log.md": "4c27ac2a69a00f383ad4bff391fa26b23977c298d936a72d06c41ecf8439fe7b"
+  }
+}
