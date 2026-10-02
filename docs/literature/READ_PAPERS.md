@@ -360,10 +360,26 @@
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
 - Run 140 精读：Sections II--III、Definitions 1--2、Theorem 1、式 (3)--(11)。Run 141
   为 full-state/causal predecessor 比较重读 Section III-A--C、Definition 2、Theorem 1
-  及控制输入计算，确认同一 noisy output 的 observation fiber 必须共用一个输入。
+  及控制输入计算，确认同一 noisy output 的 observation fiber 必须共用一个输入。Run 142
+  重读式 (3)--(10) 与 Section V：其 Farkas 条件验证给定 OFCI polytope 并在线求输入，
+  论文明确仍缺直接计算 OFCI polytope 的算法。
 - 方法/关键结论：对每个 admissible noisy output 及当前已知 scheduling，选择一个只依赖输出/调度的输入，使与该输出一致的全部状态和所有过程/测量扰动满足多面体不变；给出 Farkas 验证及在线/显式 PWA 控制计算。
 - 与本项目关系：直接支持 observation-fiber 共用输入的量词；因此该量词不是创新。其 scheduling 外生且当前可测，本项目 actual thrust 由 correction 决定且下一 packet outcome 未知，不能直接套用其 LPV 顶点条件。
 - 本项目状态：partial-information RCI 的最强直接有限维基线。
+
+## Rungger, Tabuada — Computing Robust Controlled Invariant Sets of Linear Systems
+- 年份/出处：2017, *IEEE Transactions on Automatic Control*, 62(7):3665--3670；DOI：https://doi.org/10.1109/TAC.2017.2672859；全文：https://arxiv.org/pdf/1601.00416
+- Run 142 精读：pp.1--7，式 (4)--(10)、Lemma 1、Theorem 1 及 Section 4 的 Pontryagin difference/projection 实例。
+- 方法/关键结论：从 `R_0=X, R_{i+1}=pre(R_i) intersect X` 的递减序列出发，区分一般不有限终止的 outer predecessor sequence、允许任意小约束放松的外 RCI 近似，以及用 disturbance inflation 获得的内 RCI 近似。
+- 与本项目关系：给出二维多面体 predecessor、投影和证据等级的直接基线；但其控制器观察完整迭代状态。本项目只能在可见 `d` 上用该迭代，隐藏 `eta` 必须先按 observation fiber 统一 robustify。
+- 本项目状态：Run 142 的 exact product-fiber predecessor 基线；迭代/投影不是创新。
+
+## Houska, Müller, Villanueva — Polyhedral Control Design: Theory and Methods
+- 年份/出处：2024, arXiv:2412.13082；全文：https://arxiv.org/pdf/2412.13082
+- Run 142 定向阅读：Sections 3.3--3.6、3.10，重点 pp.12--16 的 controllable/control-invariant/robust-control-tube 参数化与 pp.21--22 的 output-feedback 文献路由。
+- 方法/关键结论：系统整理 vertex control、polyhedral projection、固定复杂度 polytope/zonotope 和 robust control tube/RCI 的凸优化表示。
+- 与本项目关系：非轴对齐多面体、vertex input interpolation 和固定模板均已有成熟近邻；本项目若有贡献，必须来自可靠 SMF 信息接口、联合相关性及闭环 theorem，而不是集合参数化本身。
+- 本项目状态：多面体综合与复杂度比较的综述基线。
 
 ## Baras, Patel — Robust Control of Set-Valued Discrete-Time Dynamical Systems
 - 年份/出处：1998, *IEEE Transactions on Automatic Control*, 43(1):61--75；全文：https://terpconnect.umd.edu/~baras/publications/journals/1998_Baras_Robust_Control.pdf

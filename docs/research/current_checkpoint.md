@@ -1,9 +1,9 @@
-# 研究短检查点（2026-10-02，Run 141）
+# 研究短检查点（2026-10-02，Run 142）
 
-主线为传统 SMF/输出反馈 Tube MPC，学习暂停。起点 Run140 `9dad151`，远端 `main=1c49659`。Run140 已冻结 15-mode/17-edge、actual-thrust/shared-primitive、只观察 `(d,mode,z,bar u)` 的合同，但仍无 RCI。
+主线为传统 SMF/输出反馈 Tube MPC，学习暂停。基于 Run141 tree `cf2234c`；远端 `main=1c49659`。Run140 合同固定15模态/17边、shared primitive与只观察`(d,mode,z,bar u)`的因果输入。
 
-Run141 重读 Hempel 2011、Lucia 2023 和 Mejari 2023 的 output-fiber/full-state RCI；因果量词已有近邻，不作创新声明。
+Run142 精读 Hempel 2011 OFCI验证/输入计算、Rungger--Tabuada 2017 predecessor/RCI近似及Houska等2024多面体综述；迭代、投影和非轴对齐参数化均非创新。
 
-精确一步 negative control：mode 4 的 `q=eta_pz+h eta_vz` 支持为 `+/-1004143/7200000`。读取隐藏 `q` 的策略需极值 correction `108143/32000 N`，对 miss/success 六个顶点及输入盒可行；同一 observation fiber 的 causal 输入却须同时大于该正值并小于其负值，交集严格为空。整个 mode-4 zonotope 位于 hover 源域。证据仅为 one-step predecessor 分离，不是 RCI/一般不可行证明；全仓 189/189 通过。
+已精确否定候选类`S_j=E_eta^j x D_j`：mode14强制success下隐藏`q=eta_pz+h eta_vz`与测量噪声造成`d_vz+`半宽`72816441/32000000`，严格超过任意满足真值源域的mode0 `D_0`最大半宽`61142137/36000000`，超量`166210873/288000000`。推力只能平移区间；沿必经miss路径，满足初始化的非空product-fiber RCI不存在。该结论不否定joint `(eta,d)` information set。全仓197/197通过。
 
-下一唯一问题：实现非轴对齐 vertical mode-indexed observation-fiber predecessor/RCI synthesis，强制同一 fiber 与未知后继边共享控制，并用 Run141 作负对照；只报告认证候选或 policy/certificate-class 反证。
+下一唯一问题：构造竖直四维joint information set，判断mode14条件纤维能否把`q` support压到`57902137/162000000`以下；随后才做shared-input predecessor。

@@ -217,3 +217,18 @@ PYTHONPATH=verification python verification/check_hover_partial_information_cont
 ```
 
 该检查器从同一个物理状态、observer 状态、nominal 状态以及同一 physical/measurement primitive realization 生成 successor，再分别形成 `eta+` 与 `d+`。它在 17 条模式边上检查 `eta++d+=e+`，并含 success/miss 手算回归；这不是 RCI、source-domain closure、terminal 或 recursive-feasibility 证书。
+
+## C3-PF：竖直 causal product-fiber predecessor（2026-10-02）
+
+```bash
+PYTHONPATH=verification python -m unittest verification/test_vertical_causal_predecessor.py -v
+PYTHONPATH=verification python verification/check_vertical_causal_predecessor.py --output /tmp/vertical_causal_predecessor.json
+```
+
+检查器以 Fraction 实现二维半空间相交、冗余消除与单个共享输入变量的
+Fourier--Motzkin projection。固定 `S_j=E_eta^j x D_j` 后，mode 14 强制 success 的
+隐藏纤维速度半宽为 `72816441/32000000`，严格超过任何满足真值源域的 mode-0
+`D_0` 最大速度半宽 `61142137/36000000`，因此该 product-fiber RCI 类不存在非空、满足
+初始化的多集。该结论不否定 joint `(eta,d)` information set、history-dependent policy、
+完整六状态 RCI、terminal 或 recursive feasibility。归档见
+`results/theory_vertical_causal_predecessor_20261002/exact_checks.json`，证明见第 79 章。
