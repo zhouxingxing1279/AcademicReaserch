@@ -1,20 +1,18 @@
-# 研究短检查点（2026-10-03，Run 148）
+# 研究短检查点（2026-10-03，Run 149）
 
-主线为传统 SMF/输出反馈 Tube MPC，学习暂停。基于本地 Run147 `038cacc`；其 tree
-`a50ec72` 与远端 Run147 `18a2b61` 一致；远端 `main=1c49659`。合同固定15模态/17边、
-共享原语、初始化 `mode=0,d=e-eta=0`，控制只读取可见 `d`。
+主线为传统 SMF/输出反馈 Tube MPC，学习暂停。远端 `main=1c49659`；Run148 基线
+`390f035`，语义修正 `0f65ef3`。合同为15模态/17边、共享原语，控制只读可见
+`d=e-eta`。
 
-Run148重读 Houska 2023极端信息多面体/连续凸权重控制、Hempel 2011 OFCI fiber量词和
-Dey--Bhasin 2026 adaptive tube/递归可行性；统一核查固定零修正下5/10/15 tick首次success。
+Run148已纠正：`C0=conv(J4 union J9 union J14)`只是先行 correction 全零时的 rank-3
+reachable baseline；连续 perspective selector 允许分数混合，`C0`零中心不是一般必要
+target。
 
-三条完整return seed的源/返回生成元为`34/36,69/71,104/106`，均exact rank 3并满足
-竖直estimator与真值约束。最小凸模板`C0=conv(J4 union J9 union J14)`有exact
-perspective lift，rank仍为3，且恒有`d_v=(9/2)d_p`。其`eta`支持
-`(1/50,37857863/36000000)`恰触mode-0两坐标边界，严格estimator余量为0；`e`支持
-`(23312147/48000000,152955031/72000000)`仍有严格余量。生成元直接拼接会变成
-Minkowski和并违反约束。连续selector允许跨路径分数混合；`C0`只是固定零修正 reachable
-baseline，不是policy-independent必要target，也不是RCI/六状态/MPC保证。
+Run149重读 Houska 2023、Hempel 2011、Wehbeh等2026。精确证明：固定绝对余项集时，
+correction对miss/success只产生`Delta eta=0, Delta e=Delta d=(0,h Delta deltaT)`中心平移；
+scheduled `r_z(T)`则使一步共享联合生成元在`T=4.905->14.715 N`间增加
+`79461/4000000`，同时改变形状。Run136 global列等于上端点并覆盖全区间。
 
-Run148修正测试当前已转绿待全仓复核。下一唯一问题：先判断`C0`在固定零修正下是否自映射；
-若失败，不得外推一般策略不可行。一般causal predecessor必须显式带入可见`d`控制引起的
-中心平移；禁止无余量full-dimensional外包。
+证据仅为竖直一步exact interface split，不是RCI/六状态/MPC保证。下一唯一问题：用固定
+Run136 envelope，以`C0+c_0`对mode 4/9分叉和14->0 return做带可见中心的exact
+shared-input containment；失败只否定fixed-shape translation类。

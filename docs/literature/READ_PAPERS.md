@@ -330,6 +330,10 @@
 - 验证边界：数值例使用多起点局部 NLP；论文明确因此不满足理论中的全局子问题条件。Monte Carlo 不能替代 oracle nonpositive 的稳健证书。
 - 与本项目关系：可为实际 thrust、误差、名义状态与 residual 的联合图提供语义/求解基线，但不直接给出 invariant tube、间歇 output feedback 或 recursive-feasibility shift theorem。
 - 本项目状态：强 decision-dependent uncertainty baseline；不能把一次局部 solver success 当作 RCI 证明。
+- Run 149 重读 Introduction、Section II Assumption 1、Lemma 1、Theorem 1/Remark 1、
+  Section IV Assumption 2 与 Theorem 3。当前 `r_z(barT+deltaT)` 使 disturbance image 依赖
+  correction decision，属于 GSIP 语义；该文不提供 invariant information ensemble 或
+  recursive-feasibility 证明，本轮只用其判定 scheduled-residual 分支的问题类别。
 
 ## Hanema, Lazar, Tóth — Heterogeneously Parameterized Tube Model Predictive Control for LPV Systems
 - 年份/出处：2020, *Automatica*；全文：https://arxiv.org/abs/1910.08449
@@ -375,8 +379,8 @@
   predecessor 中每个 `d` 对应的完整隐藏 `eta` 纤维及未知 packet successor 必须共享当前
   输入；给定候选的验证与控制计算已有直接近邻。
 - Run 147 重读同一章节：用于确认初始化 all-miss history 的完整 hidden `eta` fiber 不能
-  按真值拆分；zero correction 仅生成一个必须容纳的 return image，不是 output-feedback
-  controller synthesis。
+  按真值拆分；zero correction 生成一个中心化 return image，不是 output-feedback controller
+  synthesis。Run 149 纠正：该中心位置不是任意 policy 必须容纳的 target。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023, arXiv:2307.04146；全文：https://arxiv.org/pdf/2307.04146
@@ -402,6 +406,11 @@
   Theorem 3 及证明。极端 information set、每集合共享控制和多面体 information tube 已有
   一般方法；本轮 rank-three correlated return seed 只是当前 packet/observer 合同的一项
   必要 reachable-set 实例证书，不作集合算法创新声明。
+- Run 149 重读 Sections 3.5、4.2--4.3、5.3--5.4，Definition 1、Theorem 1及证明、
+  式(18)--(20)，并复核 Sections 6.5--6.7。固定加性扰动集下，控制策略改变 tight
+  information tube 的 extrinsic translations 而不改变 intrinsic equivalence class；本项目
+  只有使用 Run136 global envelope 时才能直接采用这一 shape/center 分离，scheduled
+  `W(T)` 不满足其固定扰动集接口。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

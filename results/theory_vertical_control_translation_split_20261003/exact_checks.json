@@ -1,0 +1,113 @@
+{
+  "status": "pass",
+  "claim": "vertical_control_translation_is_separable_only_after_freezing_a_global_residual_envelope",
+  "coordinates": [
+    "eta_p",
+    "eta_v",
+    "e_p",
+    "e_v"
+  ],
+  "fixed_absolute_residual_translation_checks": {
+    "miss": {
+      "label": "miss",
+      "correction_difference": "572143/80000",
+      "eta_translation": [
+        "0",
+        "0"
+      ],
+      "visible_offset_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "tracking_error_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "expected_control_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "shape_unchanged_for_fixed_residual_set": true
+    },
+    "success": {
+      "label": "success",
+      "correction_difference": "572143/80000",
+      "eta_translation": [
+        "0",
+        "0"
+      ],
+      "visible_offset_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "tracking_error_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "expected_control_translation": [
+        "0",
+        "572143/4000000"
+      ],
+      "shape_unchanged_for_fixed_residual_set": true
+    }
+  },
+  "residual_envelopes": {
+    "actual_thrust_interval": [
+      "981/200",
+      "2943/200"
+    ],
+    "scheduled_width_at_lower": "413221/160000",
+    "scheduled_width_at_upper": "572143/160000",
+    "scheduled_generator_at_lower": [
+      "0",
+      "413221/8000000",
+      "0",
+      "413221/8000000"
+    ],
+    "scheduled_generator_at_upper": [
+      "0",
+      "572143/8000000",
+      "0",
+      "572143/8000000"
+    ],
+    "scheduled_generator_increase": [
+      "0",
+      "79461/4000000",
+      "0",
+      "79461/4000000"
+    ],
+    "scheduled_step_generator_increase": "79461/4000000",
+    "run136_vertical_step_generator": "572143/8000000",
+    "global_envelope_contains_all_scheduled_widths": true,
+    "run136_column_matches_global_upper_envelope": true,
+    "physical_residual_cancels_from_visible_offset_shape": true
+  },
+  "scheduled_joint_shape_changes_with_actual_thrust": true,
+  "evidence_level": "exact_vertical_control_translation_and_residual_shape_split",
+  "fixed_envelope_control_effect": "translation_only",
+  "scheduled_residual_control_effect": "translation_and_shape",
+  "fixed_W_intrinsic_shape_interface_available": true,
+  "scheduled_W_fixed_disturbance_theorem_directly_applicable": false,
+  "zero_center_target_is_policy_independent": false,
+  "run148_shape_valid_under_global_envelope_up_to_translation": true,
+  "is_rci_certificate": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the certificate covers only one-step vertical miss and success equations",
+    "the fixed-envelope route is sound but discards actual-thrust residual tightening",
+    "the scheduled route remains a decision-dependent robust containment problem",
+    "no invariant information ensemble, terminal set, shift, or MPC recursive feasibility is certified"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_control_translation_split.py": "c94c52d1317e5e9d0c40044338ad90420b485906b865115d521768f008ada600",
+    "verification/test_vertical_control_translation_split.py": "25743b5685bee32bfe3dd088564d0501283ead4eee2913dbaa9c6bc7c6873c0c",
+    "verification/check_vertical_multi_return_template.py": "3c7cf8833bbad8c1b4ea40c045a3837ac947f53a5133c6f616bd7e91feeaacf5",
+    "verification/check_hover_partial_information_contract.py": "f9d69e6d07bedb9b48ecd0502e4675cf2292d658829cb67b4f26e9c0e0cbe21e",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/86_vertical_control_translation_split.md": "1347f6601321861e0560a727265da557a7a542dd16861bdf509ce831eaa4d5a0",
+    "docs/literature/READ_PAPERS.md": "b561845b61cbb7fdc7912f64be30bef90b3af42410d2a2f8cd2241382b9472f8",
+    "docs/research/run149_literature_gate.md": "b61d5ec04b9d2d2bbd77c6ea3b4b6255ebdf90e51b524fdef0429bd0dfaad0ca",
+    "docs/research/run149_research_log.md": "b1e81ad5872ad612839b4d9f29a122c4b8f06dec44c9ea549cc3404f4e8ef21c"
+  }
+}

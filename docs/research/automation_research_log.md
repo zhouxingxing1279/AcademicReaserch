@@ -192,3 +192,14 @@ fiber量词和Dey--Bhasin 2026 adaptive tube收紧与递归可行性。对固定
 连续selector允许分数混合，且零中心return依赖全零correction；故本轮只认证fixed-policy
 baseline，不是policy-independent必要target或RCI。下一步先做零策略自映射核查，再决定
 是否准入带中心平移的causal predecessor。详见`run148_research_log.md`与第85章。
+
+### 2026-10-03 Run 149
+
+先修复Run148把零修正image称为一般必要target、把连续selector含混为路径排他的证据边界。
+随后重读Houska 2023固定扰动集下的intrinsic separation、Hempel 2011 OFCI量词，以及
+Wehbeh--Kerrigan--Scaccia 2026 decision-dependent uncertainty GSIP。精确有理数证书表明：
+固定Run136 global residual envelope时，correction对miss/success联合动力学都只产生中心
+平移；保留`r_z(barT+deltaT)`时，一步共享生成元在实际推力端点间严格增加
+`79461/4000000`，同时改变联合形状。故后续先研究`C0+c`固定shape translation类；scheduled
+分支必须作为decision-dependent robust containment单独认证。详见`run149_research_log.md`
+与第86章。

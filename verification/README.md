@@ -2,6 +2,17 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## Run 149：竖直控制平移／余项形状分离
+
+```bash
+cd verification
+PYTHONDONTWRITEBYTECODE=1 python -m unittest test_vertical_control_translation_split.py -v
+```
+
+该检查器逐式核对竖直 miss/success 更新，区分固定 global residual envelope 下的纯中心
+平移与 actual-thrust-dependent residual 下的联合形状变化，并绑定 Run136 的全局 residual
+生成元。它不是 RCI 或 MPC 递归可行性证书。
+
 ## 跨时刻可达集包含
 
 [check_shifted_reachable_inclusion.py](check_shifted_reachable_inclusion.py) 核对 [学习 09](../docs/learning/09_shifted_reachable_inclusion.md) 的绝对集合中心位移、旧控制尾部平移、扰动集合嵌套与缺测恒等更新，并保存改变控制、扩大扰动和忽略中心位移的负对照。
