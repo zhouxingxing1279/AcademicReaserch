@@ -73,6 +73,7 @@
 - 年份/出处：2026, arXiv:2605.23661
 - 方法/关系：adaptive observer 的 state/model/initial-condition estimates 联动 tightening、terminal ingredients 和 tube geometry；作者建立 recursive feasibility 与 robust exponential stability。与本项目 recenter/update gate 高度相邻，必须全文排重。
 - Run 131 新增核查：精读 IV-C--IV-F、Criterion 1、Algorithm 1、Theorem 2 与 Appendix IV。terminal set 可随 estimates 更新，但必须通过 consecutive compatibility criterion；失败时保持旧 point estimate/回退集合，backup setup 与旧解移位封闭递归可行。故 adaptive terminal、更新准入与 fallback 不能作为本项目创新。
+- Run 148 新增重读：Sections IV-A--F、Assumptions 2--4、Criterion 1、Theorem 2 与 Appendix IV。论文以 `X tilde_{t,i}` 外包 estimation error、Pontryagin difference 收紧 state-estimate constraints，再用 homothetic observer-state tube；其输出模型无 measurement noise，也不保留 bounded-dropout observation histories 内 `(eta,e)` 的路径相关联合像。因此它是在线收紧/terminal/recursive-feasibility 强基线，但不直接替代本轮三种 correlated return seed。
 
 ## Dey, Dhar, Bhasin — Adaptive Output Feedback Model Predictive Control
 - 年份/出处：2022, arXiv:2209.08908；全文：https://arxiv.org/abs/2209.08908

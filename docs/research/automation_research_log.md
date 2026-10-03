@@ -181,3 +181,14 @@ zonotope：106列、精确rank 3；完整`eta`和真实`e`投影满足当前竖�
 严格超过Run146 product target约0.641398。它是必要correlated return seed，不是RCI。
 下一步统一核查5/10/15 tick三种return seed的mode-0相关模板。详见
 `run147_research_log.md`与第84章。
+
+### 2026-10-03 Run 148
+
+重读Houska 2023 Sections 6.4--6.7的极端信息多面体/连续凸权重控制、Hempel 2011 OFCI
+fiber量词和Dey--Bhasin 2026 adaptive tube收紧与递归可行性。对固定零修正初始化
+5/10/15 tick三种success return构造共享原语exact联合像：三者rank均为3且满足竖直约束。最小凸容器
+`conv(J4 union J9 union J14)`有exact perspective lift，仍rank 3，但mode-0 estimator
+两坐标余量均为0；直接拼接生成元会错误形成Minkowski和并违反约束。后续语义复核确认
+连续selector允许分数混合，且零中心return依赖全零correction；故本轮只认证fixed-policy
+baseline，不是policy-independent必要target或RCI。下一步先做零策略自映射核查，再决定
+是否准入带中心平移的causal predecessor。详见`run148_research_log.md`与第85章。
