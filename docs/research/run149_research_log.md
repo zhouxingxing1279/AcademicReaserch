@@ -66,6 +66,10 @@ compileall -q verification tests`、全部
 Run148 三份旧 artifact 的单个文献表散列变化；去掉该散列字段后，新旧 JSON 无差异，故只
 重生成散列而没有改写历史数值结论。最终提交前再次运行同一完整回归和静态检查。
 
+一次从 `verification/` 子目录启动全量 discovery，因 Run122--129 的历史测试按仓库根目录
+导入 `verification` 包而产生20项派生失败；改用上述仓库根入口后全部通过。本轮新 checker
+另补了脚本入口与包入口双路径导入，定向两种入口均通过，未把错误启动方式计作数值失败。
+
 下一轮唯一问题：采用固定 Run136 global envelope，把第85章的中心化形状改写成
 `C0+c_0`，对 modes 4/9 的未知分叉和 mode14 return 做带可见中心变量的 exact shared-input
 containment。若该 fixed-shape translation 类失败，只否定该类，再判断 scheduled GSIP 的
