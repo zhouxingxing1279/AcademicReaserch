@@ -1,0 +1,45 @@
+{
+  "status": "pass",
+  "claim": "reachable_extreme_visible_fiber_fifteen_tick_obstruction",
+  "extreme_fiber": {
+    "visible_coordinate": "d_p=e_p-eta_p",
+    "visible_dp": "24272147/48000000",
+    "witness_in_generator_box": true,
+    "visible_equality_residual": "0",
+    "all_nonzero_visible_primitives_fixed_at_support_sign": true,
+    "remaining_free_primitives_have_zero_visible_coefficient": true
+  },
+  "initial_endpoint_direction_interval": {
+    "direction": "e_p+14h*e_v",
+    "center": "3817691441/3600000000",
+    "free_halfwidth": "4005001/200000000",
+    "lower": "3745601423/3600000000",
+    "upper": "3889781459/3600000000"
+  },
+  "fourteen_miss_balance": {
+    "miss_count": 14,
+    "positive_residual_shift": "52065013/400000000",
+    "maximum_negative_control_shift": "-52065013/400000000",
+    "residual_equals_h_times_control_authority": true,
+    "certified_endpoint_lower_bound": "3889781459/3600000000",
+    "position_limit": "1",
+    "strict_position_violation": "289781459/3600000000"
+  },
+  "allows_optimistic_full_state_causal_feedback": true,
+  "rules_out_current_fifteen_tick_contract": true,
+  "rules_out_other_seed_or_residual_contracts": false,
+  "is_recursive_feasibility_proof": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_extreme_visible_fiber_obstruction.py": "f56cc4977f5103da459a96f97f9ca9489c8aa7d36095fbc29d23e769c94bda90",
+    "verification/test_vertical_extreme_visible_fiber_obstruction.py": "524aa8bff922a12b53cb46c508fb8e0fc127ebbdfbfb8456c9c9542a06722983",
+    "verification/check_vertical_visible_fiber_width.py": "e93b976698ebc80e891896be84fa15ba66796f2b36fa974af8458a20196bb54a",
+    "verification/check_vertical_correlated_return_seed.py": "e61cb63a3b02fc00cfd4fc97991fd0f7920646ddeb0e9531ec925427e5badcca",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/101_vertical_extreme_visible_fiber_obstruction.md": "131352f9cfc2796cfaa7af50786d611085805989b70c951ebdebefbb9acbb913",
+    "docs/literature/READ_PAPERS.md": "5e0980afdb1d70c71bdfe909c1dc79b12b30bff38faf2cfe18c826d2b0e116b2",
+    "docs/research/run165_literature_gate.md": "73f1af0f6ee69f620ce2198ba07cce7b80b10ce8c818482f5b6cd97fecdb9d6c",
+    "docs/research/run165_research_log.md": "8f852b374f86caa02e4a18984ea1f5503a4e621ac9e0dc07fd9a696f34c20743"
+  }
+}

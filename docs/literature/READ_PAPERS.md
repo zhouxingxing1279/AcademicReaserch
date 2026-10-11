@@ -575,6 +575,9 @@
   `15->15` 在 mode 11 的位置失败已经足以阻断 final-success target constituent。
 - Run 160 重读 Sections 2--4、Assumption 1 与 product safety 量词。15-tick string 的第13个
   miss 已违反中间状态必要条件，即使最终 success 可重置 estimator，也不能恢复该条安全路径。
+- Run 165 重读全文 Sections 3--4、Definition 3、Propositions 2--5：控制器在缺测串开始前按可见
+  信息选择因果输入承诺，安全量词覆盖允许串的每个扰动实现和中间状态。本轮极端可见fiber是该
+  量词在冻结连续模型上的精确反例，不是string-automaton或product-game创新。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
