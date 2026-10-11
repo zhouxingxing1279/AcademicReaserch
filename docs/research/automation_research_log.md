@@ -224,3 +224,11 @@ extreme information-set 凸权重控制。精确证明：固定 global residual�
 fibers 无需逐点枚举；但逐边 target inclusion 和 fixed point 仍未建立。语义纠正 Run148 三个
 首次 return seeds 分属三个 `last_return` 标签，跨标签凸包只会退回更粗 mode-only 外包。
 下一步传播九条第二周期路径并按共同 target 标签分组。详见 `run155_research_log.md` 与第91章。
+
+### 2026-10-11 Run 156
+
+重读 Houska §6.5/Theorem 3 完整证明与 Yang--Ozay 的缺测 product safety 量词。固定 global
+residual 下精确传播九条第二周期零策略 histories；六条全程安全，但 `10->15` 在第14 miss、
+`15->10` 和 `15->15` 在第9 miss 首次使真实 `e_v` 半宽达到 `99649307/36000000`，严格超过
+`11/4` 达 `649307/36000000`。因此终止零/label-only 策略支线，不再计算其 target hull；该反例
+不否定 affine-in-`d` feedback。详见 `run156_research_log.md` 与第92章。

@@ -430,6 +430,9 @@
   information-set controls 的连续凸权重组合。固定线性边、凸扰动和同一仿射可见策略时，
   convexification-created fibers 由仿射像/凸包交换律自动覆盖；这是该一般方法的直接特化，
   不是新算法，且不能用于 control-dependent `W(T)` 或跨离散标签混合。
+- Run 156 重新精读 Section 6.5、Theorem 3 的完整证明，并复核 Section 4.2 Definitions
+  4--6。证明中的控制 `mu(X)` 由当前 information set 的凸权重组合 extreme controls；因此
+  零/label-only 策略失败不能外推为一般 information-ensemble feedback 失败。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
