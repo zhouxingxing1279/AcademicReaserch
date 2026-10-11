@@ -269,3 +269,15 @@ centered affine correction至多削减`3h²U`，故mode-11仍至少为`369867929
 第13 miss首次达到`934206607/900000000≈1.038007>1`。因此当前fixed residual、`J14` seed
 与correction盒的15-tick constituent即使在乐观信息权限下也不可行；停止继续调gain，转向
 seed/residual/input-authority trade-off审计。详见`run160_research_log.md`与第96章。
+
+### 2026-10-11 Run 161
+
+精读Lu--Cannon--Koksal-Rivet 2021的fixed-complexity set update、tube与recursive-feasibility
+章节，重读Köhler 2021和Dey--Bhasin的online-bound compatibility；Robbins 2026仍仅有正式摘要。
+把Run160的`k=14`下界精确分解为seed方向半直径`alpha`、future residual`beta`和correction
+authority`gamma`：`alpha*S+(beta-gamma)D<=1`，其中
+`S=3889781459/3600000000`、`D=52065013/400000000`。当前`g_r=hU`导致baseline residual
+与乐观输入削减相消；单因素至少需seed半直径缩小7.4498%、residual缩小61.8418%或authority
+增加61.8418%。一般后验须以正反两个support计算半直径；只有realized state width可由当前SMF
+直接改变；其余两项分别需要未来
+扰动保证或物理输入合同。详见`run161_research_log.md`与第97章。

@@ -28,6 +28,8 @@
 - Run 126 核查层级：取得正式摘要、书目信息和章节目录；正文在 Introduction 后要求机构/会员访问，未完成全文精读。
 - 已知覆盖：摘要明确包含 nonlinear error reachability、在线 MPC tightening、无需优化的 CZ-to-zonotope 外包和 LTV 数值例。
 - 边界：不能据摘要推断具体外包公式、复杂度、终端/递归可行性或是否保护控制方向；首次性保持未知。
+- Run 161 新增核查（2026-10-11）：IEEE 与 Penn State 页面确认 ACC 2026 页码585--592及正式摘要；
+  仍未取得正文。本轮只把它作为“online CZ reachability/tightening 已有”的排重线索，不引用算法或定理。
 
 ## Le, Stoica, Dumur, Alamo, Camacho — Robust Tube-Based Constrained Predictive Control via Zonotopic Set-Membership Estimation
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6161131
@@ -56,6 +58,10 @@
 ## Lu, Cannon, Koksal-Rivet — Robust adaptive model predictive control: Performance and parameter estimation
 - 年份/出处：2021, *International Journal of Robust and Nonlinear Control*；DOI：https://doi.org/10.1002/rnc.5175
 - 方法/关系：固定复杂度参数/预测集合 + robust tube MPC；证明 recursive feasibility 与 ISS，是 fixed-complexity 强基线。
+- Run 161 新增精读：开放全文 Sections 3.1--3.2、Lemma 1、Section 4.1 Proposition 1、
+  Section 5.2 Theorem 3。固定法向参数集合更新保持真参数包含和嵌套，预测 tube 对整个参数集与
+  disturbance robustify；递归可行性另由旧解移位与 terminal 条件证明。该结构支持“可靠在线集合
+  可降低保守性”，但其对象是常参数集合，不能把本项目 state posterior 直接当作 future residual。
 
 ## Peschke, Mönnigmann — Robust adaptive tube tracking model predictive control for piece-wise constant reference signals
 - 年份/出处：2023, *International Journal of Robust and Nonlinear Control*；DOI：https://doi.org/10.1002/rnc.6814
