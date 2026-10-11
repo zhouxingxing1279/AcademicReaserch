@@ -1,0 +1,81 @@
+{
+  "status": "pass",
+  "claim": "two_critical_zero_policy_velocity_excesses_have_exact_one_step_affine_rescues",
+  "critical_predecessors": {
+    "9": {
+      "failure_miss_count": 14,
+      "predecessor_age": 13,
+      "edge": [
+        13,
+        14,
+        "miss"
+      ],
+      "position_gain": "0",
+      "velocity_gain": "-114428600/45315007",
+      "visible_velocity_halfwidth": "45315007/32000000",
+      "input_support": "572143/160000",
+      "correction_limit": "572143/160000",
+      "robust_input_box_satisfied": true,
+      "zero_policy_successor_velocity_halfwidth": "99649307/36000000",
+      "successor_velocity_halfwidth": "8857197898290289/3262680504000000",
+      "velocity_margin": "115173487709711/3262680504000000",
+      "successor_true_velocity_box_satisfied": true
+    },
+    "14": {
+      "failure_miss_count": 9,
+      "predecessor_age": 8,
+      "edge": [
+        8,
+        9,
+        "miss"
+      ],
+      "position_gain": "0",
+      "velocity_gain": "-114428600/72816441",
+      "visible_velocity_halfwidth": "72816441/32000000",
+      "input_support": "572143/160000",
+      "correction_limit": "572143/160000",
+      "robust_input_box_satisfied": true,
+      "zero_policy_successor_velocity_halfwidth": "99649307/36000000",
+      "successor_velocity_halfwidth": "4732194266975069/1747594584000000",
+      "velocity_margin": "73690839024931/1747594584000000",
+      "successor_true_velocity_box_satisfied": true
+    }
+  },
+  "true_velocity_limit": "11/4",
+  "failure_miss_counts": {
+    "9": 14,
+    "14": 9
+  },
+  "rescue_source_ages": {
+    "9": 13,
+    "14": 8
+  },
+  "rescue_edges_are_deterministic_miss_edges": true,
+  "same_step_success_miss_branching_required": false,
+  "critical_zero_policy_excess_eliminated": true,
+  "evidence_level": "exact_one_step_affine_in_visible_velocity_rescue_witness",
+  "gain_optimality_claimed": false,
+  "target_inclusion_certified": false,
+  "shared_branch_successor_certified": false,
+  "is_rci_certificate": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the witnesses cover only the two predecessor sets immediately before Run156 failures",
+    "the gains saturate the frozen correction box and are not claimed optimal",
+    "the rescued sets are not proved contained in a recurrent target family",
+    "the later mode-9 shared success/miss decision is not synthesized",
+    "horizontal, attitude, terminal, and MPC shift feasibility remain open"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_affine_rescue.py": "db6cf7466a42aa3e6d7378be55bf25ed4cc85d738c39285fe2b6ee6eacc2e81c",
+    "verification/test_vertical_affine_rescue.py": "31b945e1a37dd08740e219250a215e32150f975200bb39ab625030aedade1fe2",
+    "verification/check_vertical_multi_return_template.py": "3c7cf8833bbad8c1b4ea40c045a3837ac947f53a5133c6f616bd7e91feeaacf5",
+    "verification/check_vertical_translated_template_obstruction.py": "5700f1680790f952a2f704ea8701576aa341ea1670aaca4f6b634c9f8c2b38c6",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/93_vertical_affine_rescue_witness.md": "e585b5fa5abbebdf1789334e1760a8cf9f660e7a5d83a531cd053cc1fafd59c2",
+    "docs/literature/READ_PAPERS.md": "0e7f203d4360ecaea67e700be803bb000446882653d3495f02b53faba874f6c8",
+    "docs/research/run157_literature_gate.md": "f6a61c2752685c74e833cc6d3269e9b5d496e237c51dc88631819b6a0d3f5a46",
+    "docs/research/run157_research_log.md": "8b51d9b1e8a9b08dc6888e6ab59550e1769f94b71f2432196db862418a46ccd5"
+  }
+}

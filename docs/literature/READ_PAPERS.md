@@ -365,6 +365,21 @@
 - 局限：处理 parametric model uncertainty，不是当前 state-estimation CZ posterior，也不是四旋翼 thrust-conditioned nonlinear remainder。
 - 本项目状态：作为后续 SMF/CZ 保守性比较必须超过的 adaptive robust MPC baseline。
 
+## Goulart, Kerrigan, Maciejowski — Optimization over State Feedback Policies for Robust Control with Constraints
+- 年份/出处：2006, *Automatica* 42(4):523--533；DOI：
+  https://doi.org/10.1016/j.automatica.2005.08.023；作者存档：
+  http://hdl.handle.net/10044/1/724
+- Run 157 精读：Introduction、Sections 2--4，重点核对 affine state-feedback 与 causal
+  affine disturbance-feedback 的等价参数化、polytopic uncertainty 下的凸约束接口。
+- 方法/关键结论：对有界加性扰动和多面体混合约束，有限时域 affine feedback 可改写为对
+  过去扰动的因果仿射策略，并转成 LP/QP/SOCP；这已覆盖“用仿射反馈改变 reachable-set
+  shape 并 robustify 输入/状态约束”的一般思想。
+- 与本项目关系：Run157 的 `delta T=K_v d_v` 只是该成熟参数化在两个已知 exact generator
+  fibers 上的一步实例；本项目的差异仅在 noisy-output information fiber、缺测自动机和共享
+  estimator/plant residual，不能据此声称新的仿射反馈算法。
+- 局限：论文是全状态/扰动反馈有限时域框架，不直接给出当前15模态信息集合的 recurrent
+  target inclusion，也不证明 SMF--MPC 递归可行性。
+
 ## Hempel, Kominek, Werner — Output-Feedback Controlled-Invariant Sets for Systems with Linear Parameter-Varying State Transition Matrix
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
 - Run 140 精读：Sections II--III、Definitions 1--2、Theorem 1、式 (3)--(11)。Run 141

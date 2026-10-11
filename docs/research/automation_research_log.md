@@ -232,3 +232,12 @@ residual 下精确传播九条第二周期零策略 histories；六条全程安�
 `15->10` 和 `15->15` 在第9 miss 首次使真实 `e_v` 半宽达到 `99649307/36000000`，严格超过
 `11/4` 达 `649307/36000000`。因此终止零/label-only 策略支线，不再计算其 target hull；该反例
 不否定 affine-in-`d` feedback。详见 `run156_research_log.md` 与第92章。
+
+### 2026-10-11 Run 157
+
+精读Goulart--Kerrigan--Maciejowski 2006 affine-feedback参数化，重读Hempel fiber共享输入与
+Houska information-set control。纠正Run156时序：失败miss的输入取于age13/8，两条当前边
+均无未知分叉。对`J_9` age13、`J_14` age8 exact fibers构造`deltaT=K_v d_v`有理数见证，
+robust input support恰饱和correction盒；下一`e_v`半宽约2.71470、2.70783，均严格低于
+2.75。故零策略局部反例可由affine可见反馈一步修复，但尚无target inclusion、后续mode-9
+共享分叉、RCI或递归可行性。详见`run157_research_log.md`与第93章。
