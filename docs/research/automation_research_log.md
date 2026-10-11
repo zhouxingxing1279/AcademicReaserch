@@ -281,3 +281,11 @@ authority`gamma`：`alpha*S+(beta-gamma)D<=1`，其中
 增加61.8418%。一般后验须以正反两个support计算半直径；只有realized state width可由当前SMF
 直接改变；其余两项分别需要未来
 扰动保证或物理输入合同。详见`run161_research_log.md`与第97章。
+
+### 2026-10-12 Run 162
+
+重读Dey--Bhasin adaptive update兼容条件、Lu等旧解移位及Lorenzen recursive model update。
+纠正Run161下一步：dropout string由环境选择，控制器不能在方向半直径gate失败后自行把15-tick
+合同降为5/10-tick。短计划只有在终端进入覆盖剩余miss语言的robust invariant backup时才安全；
+当前仓库无该证书，故不实现伪fallback。下一步只核查可认证通信调度，或在改变合同后构造仍覆盖
+15-tick语言的backup family。详见`run162_research_log.md`与第98章。
