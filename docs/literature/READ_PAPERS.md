@@ -153,6 +153,9 @@
 - Run 132 精读：problem formulation、min-max MPC、terminal control law、recursive feasibility/constraint/convergence argument。
 - 方法/关键结论：在连续 packet loss 数有界时使用 min-max self-triggered MPC 与尾端控制律，对所有允许 loss realization 保证 recursive feasibility、constraint satisfaction 和 convergence。
 - 与本项目关系：从网络化 MPC 方向再次覆盖 `bounded packet loss + terminal/shift proof`；但不是 SMF output feedback，也不消费 CZ posterior correlation。
+- Run 163 精读 Sections II-B--II-C、Assumption 1、Section III、Algorithm 1与terminal ingredients：
+  策略选择控制更新和采样间隔，可靠ACK只报告最近一次传输结果；连续丢包上界`P`仍是独立网络
+  假设，min-max MPC覆盖所有满足该假设的loss sequences。故自触发调度不能单独认证缩短dropout语言。
 
 ## Mayne, Seron, Raković — Robust model predictive control of constrained linear systems with bounded disturbances
 - 年份/出处：2005, *Automatica*, 41(2):219–224；DOI：https://doi.org/10.1016/j.automatica.2004.08.019

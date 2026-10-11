@@ -289,3 +289,12 @@ authority`gamma`：`alpha*S+(beta-gamma)D<=1`，其中
 合同降为5/10-tick。短计划只有在终端进入覆盖剩余miss语言的robust invariant backup时才安全；
 当前仓库无该证书，故不实现伪fallback。下一步只核查可认证通信调度，或在改变合同后构造仍覆盖
 15-tick语言的backup family。详见`run162_research_log.md`与第98章。
+
+### 2026-10-12 Run 163
+
+精读Wildhagen等2022的自触发通信、bounded-loss Assumption 1、min-max预测和terminal设计，重读
+Hassaan等2021的有限缺测语言。仓库审计确认`PacketSchedule`只消费并检查外生`drop`，不存在
+measurement request、重传、ACK、预约或冗余链路控制接口；既有scheduler只是support-query计算
+预算调度。因此把`max_missing=2`改成1只是换假设，不能由控制器证明最长return从15降到10 tick。
+通信支线停止；下一步保留15-tick语言，反推并审计满足Run161必要阈值的可初始化seed合同。详见
+`run163_research_log.md`与第99章。
