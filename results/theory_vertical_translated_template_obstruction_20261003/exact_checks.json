@@ -1,0 +1,162 @@
+{
+  "status": "pass",
+  "claim": "all_three_run148_translated_fixed_shape_returns_fail_an_exact_ep_width_necessity",
+  "coordinates": [
+    "eta_p",
+    "eta_v",
+    "e_p",
+    "e_v"
+  ],
+  "component_modes": [
+    4,
+    9,
+    14
+  ],
+  "mode_zero_shape": "conv(J_4 union J_9 union J_14)",
+  "mode_zero_component_generator_counts": [
+    36,
+    71,
+    106
+  ],
+  "fixed_global_residual_step_generator": "572143/8000000",
+  "correction_translation_per_unit_thrust": [
+    "0",
+    "0",
+    "0",
+    "1/50"
+  ],
+  "correction_changes_ep_support": false,
+  "set_translation_preserves_directional_width": true,
+  "return_edges": {
+    "4": {
+      "edge": [
+        4,
+        0,
+        "success"
+      ],
+      "outgoing_labels": [
+        "miss",
+        "success"
+      ],
+      "source_shape_component_generator_counts": [
+        40,
+        75,
+        110
+      ],
+      "success_image_component_generator_counts": [
+        42,
+        77,
+        112
+      ],
+      "target_ep_halfwidth": "23312147/48000000",
+      "success_ep_halfwidth": "51293581/72000000",
+      "strict_ep_halfwidth_excess": "32650721/144000000",
+      "strict_width_obstruction": true,
+      "translated_return_containment_possible": false,
+      "obstruction_holds_for_all_source_centers": true,
+      "obstruction_holds_for_all_target_centers": true,
+      "obstruction_holds_for_all_current_corrections": true,
+      "one_current_input_shared_across_success_and_miss": true,
+      "miss_shape_matches_next_mode_by_construction": true,
+      "success_edge_alone_is_infeasible": true,
+      "shared_input_branch_containment_possible": false
+    },
+    "9": {
+      "edge": [
+        9,
+        0,
+        "success"
+      ],
+      "outgoing_labels": [
+        "miss",
+        "success"
+      ],
+      "source_shape_component_generator_counts": [
+        45,
+        80,
+        115
+      ],
+      "success_image_component_generator_counts": [
+        47,
+        82,
+        117
+      ],
+      "target_ep_halfwidth": "23312147/48000000",
+      "success_ep_halfwidth": "14038717/14400000",
+      "strict_ep_halfwidth_excess": "70450729/144000000",
+      "strict_width_obstruction": true,
+      "translated_return_containment_possible": false,
+      "obstruction_holds_for_all_source_centers": true,
+      "obstruction_holds_for_all_target_centers": true,
+      "obstruction_holds_for_all_current_corrections": true,
+      "one_current_input_shared_across_success_and_miss": true,
+      "miss_shape_matches_next_mode_by_construction": true,
+      "success_edge_alone_is_infeasible": true,
+      "shared_input_branch_containment_possible": false
+    },
+    "14": {
+      "edge": [
+        14,
+        0,
+        "success"
+      ],
+      "outgoing_labels": [
+        "success"
+      ],
+      "source_shape_component_generator_counts": [
+        50,
+        85,
+        120
+      ],
+      "success_image_component_generator_counts": [
+        52,
+        87,
+        122
+      ],
+      "target_ep_halfwidth": "23312147/48000000",
+      "success_ep_halfwidth": "12222431/9600000",
+      "strict_ep_halfwidth_excess": "4725001/6000000",
+      "strict_width_obstruction": true,
+      "translated_return_containment_possible": false,
+      "obstruction_holds_for_all_source_centers": true,
+      "obstruction_holds_for_all_target_centers": true,
+      "obstruction_holds_for_all_current_corrections": true,
+      "one_current_input_shared_across_success_and_miss": false,
+      "miss_shape_matches_next_mode_by_construction": null,
+      "success_edge_alone_is_infeasible": true,
+      "shared_input_branch_containment_possible": null
+    }
+  },
+  "obstructed_return_modes": [
+    4,
+    9,
+    14
+  ],
+  "earliest_obstruction_mode": 4,
+  "evidence_level": "exact_ep_width_obstruction_for_run148_translated_fixed_shape_family",
+  "translated_fixed_shape_family_rejected": true,
+  "history_conditioned_information_ensemble_rejected": false,
+  "scheduled_decision_dependent_family_rejected": false,
+  "is_rci_certificate": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the obstruction covers only the vertical Run148 convex shape propagated with the fixed Run136 envelope",
+    "it rejects arbitrary translations and corrections because they cannot change e_p width",
+    "it does not reject mode- or history-conditioned intrinsic shapes",
+    "it does not reject decision-dependent residual graphs or general output-feedback information ensembles",
+    "horizontal, attitude, torque, terminal, shift, and recursive MPC feasibility remain open"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_translated_template_obstruction.py": "5700f1680790f952a2f704ea8701576aa341ea1670aaca4f6b634c9f8c2b38c6",
+    "verification/test_vertical_translated_template_obstruction.py": "7f71985a6b376325dc898149b11d475cf805af8401922cd4ea2b1cbacbdebb6c",
+    "verification/check_vertical_multi_return_template.py": "3c7cf8833bbad8c1b4ea40c045a3837ac947f53a5133c6f616bd7e91feeaacf5",
+    "verification/check_vertical_control_translation_split.py": "c94c52d1317e5e9d0c40044338ad90420b485906b865115d521768f008ada600",
+    "verification/check_vertical_correlated_return_seed.py": "e61cb63a3b02fc00cfd4fc97991fd0f7920646ddeb0e9531ec925427e5badcca",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/87_vertical_translated_template_obstruction.md": "625d98177ebe32944fcc8b08ebe4e5bcbb2a5ac214c0ff1da2807d0c3e5bbb60",
+    "docs/literature/READ_PAPERS.md": "f41331d81237c89de94346304050175a1c2656eae552549f323942e4f566fbe1",
+    "docs/research/run150_literature_gate.md": "361d37289f59a84ff063098108bd6173258b3c62acabb513da9eafc0633c1b39",
+    "docs/research/run150_research_log.md": "cb70707b3d227aacffeced6d63793dbe6e9289dce24e6ff7e75cb1a58cfb704b"
+  }
+}

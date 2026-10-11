@@ -1,18 +1,7 @@
-# 研究短检查点（2026-10-03，Run 149）
+# 研究短检查点（2026-10-11，Run152）
 
-主线为传统 SMF/输出反馈 Tube MPC，学习暂停。远端 `main=1c49659`；Run148 基线
-`390f035`，语义修正 `0f65ef3`。合同为15模态/17边、共享原语，控制只读可见
-`d=e-eta`。
+主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。本地 `main=1c49659`，Run151=`df10a61`；15模态/17边，控制只读可见 `d=e−eta`。Run150 只否定单一 translated fixed-shape 模板。
 
-Run148已纠正：`C0=conv(J4 union J9 union J14)`只是先行 correction 全零时的 rank-3
-reachable baseline；连续 perspective selector 允许分数混合，`C0`零中心不是一般必要
-target。
+Run152 重读 Baras--Patel 1998 §IV-A、Lemma4、Remarks8--10、Theorems9--11/Corollary4，并复核 Kjellqvist 2024 与 Houska 信息集合基线。当前 mode 已表示 current miss age；三条 success 均回到 mode0，因此同义 `return-age` 冗余。若要区分 Run148 的三种 return seed，最小离散记忆应明确为上一周期长度 `{5,10,15}`。不同 history shape 不同并不否定有限抽象，因为可取共同外包；安全充分性需要初始化覆盖、可见历史一致性、共享输入/原语逐边模拟、硬约束和终端闭合五项。当前仅建立此合同，不是 RCI、递归可行性或创新证明。
 
-Run149重读 Houska 2023、Hempel 2011、Wehbeh等2026。精确证明：固定绝对余项集时，
-correction对miss/success只产生`Delta eta=0, Delta e=Delta d=(0,h Delta deltaT)`中心平移；
-scheduled `r_z(T)`则使一步共享联合生成元在`T=4.905->14.715 N`间增加
-`79461/4000000`，同时改变形状。Run136 global列等于上端点并覆盖全区间。
-
-证据仅为竖直一步exact interface split，不是RCI/六状态/MPC保证。下一唯一问题：用固定
-Run136 envelope，以`C0+c_0`对mode 4/9分叉和14->0 return做带可见中心的exact
-shared-input containment；失败只否定fixed-shape translation类。
+下一唯一问题：扩展 `(mode,last_return)` 图，以三 return seed 为初始化像，检查固定 global residual 下共同外包能否逐边闭合；失败必须给出硬约束/共享输入的精确反证。

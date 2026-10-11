@@ -203,3 +203,15 @@ Wehbeh--Kerrigan--Scaccia 2026 decision-dependent uncertainty GSIP。精确有�
 `79461/4000000`，同时改变联合形状。故后续先研究`C0+c`固定shape translation类；scheduled
 分支必须作为decision-dependent robust containment单独认证。详见`run149_research_log.md`
 与第86章。
+
+### 2026-10-03 Run 150
+
+刷新远端并独立复验Run149后，重新精读Houska 2023关于fixed-`W` intrinsic separation、
+translation functions与extreme information controls的相关定理；复核Hempel fiber量词及
+Wehbeh等2026 GSIP边界。把Run148的`C0=conv(J4 union J9 union J14)`沿固定Run136
+envelope传播后，三条success return的`e_p`半宽均严格超过`C0`：mode 4/9/14超量分别为
+`32650721/144000000`、`70450729/144000000`、`4725001/6000000`。集合中心和current
+correction只平移，不能改变宽度；故最早在mode 4即否定translated fixed-shape family，
+但不否定history-conditioned ensemble或scheduled GSIP。下一步构造最小return-age/history-
+conditioned intrinsic shape family并检查有限周期fixed point。详见`run150_research_log.md`
+与第87章。

@@ -2,6 +2,22 @@
 
 本目录区分解析证明的精确算术核对和历史浮点检查，均不运行新的 MPC 闭环实验。
 
+## Run 150：translated fixed-shape return 宽度阻塞
+
+```bash
+PYTHONPATH=verification python -m unittest \
+  verification.test_vertical_translated_template_obstruction -v
+PYTHONPATH=verification python \
+  verification/check_vertical_translated_template_obstruction.py \
+  --output /tmp/vertical_translated_template_obstruction.json
+```
+
+检查器把 Run148 的 `C0=conv(J4 union J9 union J14)` 在 Run136 固定 global residual
+envelope 下逐 miss 传播，并对三条 success return 比较 translation-invariant 的 `e_p`
+方向宽度。三条边均有 exact strict excess，最早在 mode 4；因此只否定该 translated
+fixed-shape family，不否定 history-conditioned information ensembles、scheduled GSIP、
+一般 RCI 或 MPC 递归可行性。
+
 ## Run 149：竖直控制平移／余项形状分离
 
 ```bash

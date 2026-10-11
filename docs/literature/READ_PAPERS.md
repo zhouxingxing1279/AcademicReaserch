@@ -334,6 +334,10 @@
   Section IV Assumption 2 与 Theorem 3。当前 `r_z(barT+deltaT)` 使 disturbance image 依赖
   correction decision，属于 GSIP 语义；该文不提供 invariant information ensemble 或
   recursive-feasibility 证明，本轮只用其判定 scheduled-residual 分支的问题类别。
+- Run 150 核对2026-09-01 v1元数据并复核上述全文章节的准入边界。fixed-envelope
+  translated shape 已在 mode 4 出现与 current correction 无关的 `e_p` width obstruction；
+  因此本轮不启动 GSIP。该结果不否定历史 control-dependent shapes，只有先得到可闭合的
+  history-conditioned intrinsic family 后才评估 scheduled tightening。
 
 ## Hanema, Lazar, Tóth — Heterogeneously Parameterized Tube Model Predictive Control for LPV Systems
 - 年份/出处：2020, *Automatica*；全文：https://arxiv.org/abs/1910.08449
@@ -411,6 +415,11 @@
   information tube 的 extrinsic translations 而不改变 intrinsic equivalence class；本项目
   只有使用 Run136 global envelope 时才能直接采用这一 shape/center 分离，scheduled
   `W(T)` 不满足其固定扰动集接口。
+- Run 150 重新逐页精读 pp.14--17 的 Sections 4.1--4.3、Definitions 4--6、Theorem 1
+  及证明，pp.23--25 的式(18)--(19)/Theorem 2，pp.29--32 的 Definition 7、Theorem 3
+  及证明。确认 translation functions 和 extreme-information-set controls 已覆盖一般方法；
+  本轮只对 Run148 exact shape 给出实例级 width obstruction，不能宣称新算法或一般
+  information-ensemble 不可行。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
@@ -453,6 +462,9 @@
 - Run 143 定向精读：Section IV-A 的 Information State Formulation、Lemma 4、Remarks
   8--10、Theorems 9--11，复核可行状态/历史相关性必须保留，且一般信息状态是无限维。
   这支持从 product `E_eta x D` 转向 joint set，但不能把 joint set 本身声明为创新。
+- Run 152 重读 Section IV-A 的 Information State Formulation、Lemma 4 证明、Remarks
+  8--10、Theorems 9--11 与 Corollary 4。由完整历史信息状态压缩到有限标签，必须另证
+  初始化覆盖和递归模拟；`mode/age` 标签本身不是充分统计量证明。
 
 ## Kjellqvist — Minimax Dual Control with Finite-Dimensional Information State
 - 年份/出处：2024, L4DC, *Proceedings of Machine Learning Research* 242:299--311；
