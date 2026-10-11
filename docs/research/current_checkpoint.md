@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-11，Run159）
+# 研究短检查点（2026-10-11，Run160）
 
-主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。远端 `main=1c49659`、Run158=`400a505`；控制只读可见 `d=e−eta`。
+主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。远端 `main=1c49659`、Run159=`9d3e928`。
 
-Run159 重读 Goulart--Kerrigan 2007 robust affine output-feedback constraints、Yang--Ozay 2021 dropout-string safety 与 Houska information-set feedback。纠正 Run158 下一步：`(0,15)` 的 rescued returns 尚未走到 final success，不能直接合并。对 `J14` 经8 miss后的 age-8 exact set，三条后续 miss 的零输入 mode-11 位置support为 `3714127151/3600000000`；age8/9两次 bounded centered affine correction 最多削减 `3h²U`，故任意该类策略仍有 `h_ep>=369867929/360000000=1+9867929/360000000`，严格违反 `|e_p|<=1`。因此当前 fixed-global-residual、correction盒和seed下 `15->15` constituent不可行，安全 `(0,15)` target hull不能构造。证据仅为 exact path-level affine-class obstruction，不是一般output-feedback不可行、RCI或递归可行性。
+Run160 重读 Yang--Ozay 2021 dropout-string safety、Rungger--Tabuada 2017 RCI近似与 Goulart--Kerrigan 2007 robust output feedback；Rutledge--Yong--Ozay 2020仅核查摘要/引言。把Run159“更早介入”问题放宽为从`J14` mode0起每拍任意causal full-state bounded control。镜像初态/扰动轨迹及`|u_t^+-u_t^-|<=2U`给出`k` miss后位置半直径下界 `H_k^0-k(k-1)h²U/2`。第12 miss下界`398207933/400000000≈0.995520`，第13 miss首次为`934206607/900000000=1+34206607/900000000`，故当前fixed global residual、`J14` seed与correction盒下，任何因果策略都无法安全完成15-tick return。证据是完整路径必要反证，不是一般output-feedback/RCI/递归可行性结论。
 
-下一唯一问题：从 `J14` return seed（mode0）即开始联合综合整个15步周期，判断更早 affine correction 能否在不破坏硬约束下把 age-8 source 缩至本轮必要阈值。
+下一唯一问题：推导`k=14`安全所需的seed收缩、residual降低与correction authority精确trade-off，并核查哪项可由可靠在线集合信息在同扰动保证下实现。

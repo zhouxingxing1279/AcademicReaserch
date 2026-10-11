@@ -260,3 +260,12 @@ centered affine correction至多削减`3h²U`，故mode-11仍至少为`369867929
 这精确否定当前fixed-residual/seed/correction盒下的`15->15` affine constituent，阻断安全
 `(0,15)` target hull，但不否定更早介入或一般output feedback。详见`run159_research_log.md`
 与第95章。
+
+### 2026-10-11 Run 160
+
+重读Yang--Ozay 2021、Rungger--Tabuada 2017与Goulart--Kerrigan 2007相关正文；Rutledge等
+2020仅核查摘要/引言。把“从mode0更早反馈”放宽为任意causal full-state bounded policy，利用
+镜像轨迹证明`k` miss后位置半直径至少为`H_k^0-k(k-1)h²U/2`。第12 miss下界约0.995520，
+第13 miss首次达到`934206607/900000000≈1.038007>1`。因此当前fixed residual、`J14` seed
+与correction盒的15-tick constituent即使在乐观信息权限下也不可行；停止继续调gain，转向
+seed/residual/input-authority trade-off审计。详见`run160_research_log.md`与第96章。

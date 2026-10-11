@@ -129,6 +129,9 @@
 - Run 132 精读：Sections 3--4、Definition 2、equalized-recovery formulation 与 synthesis。
 - 方法/关键结论：missing-data language 可表达连续丢包上界；prefix-based affine feedback 在 bounded process/measurement noise 与 state/input constraints 下保证 finite-horizon equalized recovery。Remark 3 明确指出可适配 zonotope 等 set template。
 - 与本项目关系：bounded-dropout language、按前缀/模式合成反馈及 set-valued bounds 均已有近邻；有限时域结果本身不闭合 receding-horizon terminal proof。
+- Run 160 阅读层级：作者全文本轮抓取超时，仅复核摘要/引言中的 equalized-recovery 问题设定，
+  不引用其定理。该工作允许缺测期间使用不同中间界后恢复；当前合同要求每拍位置硬约束，故
+  本轮第13 miss反证不能借 equalized recovery 绕过。
 
 ## Hassaan, Shen, Yong — Path-Dependent Controller and Estimator Synthesis with Robustness to Delayed and Missing Data
 - 年份/出处：2021, HSCC；DOI：https://doi.org/10.1145/3447928.3456655；作者全文：https://qiangs.github.io/Papers/Conf_HSCC2021Hassaan.pdf
@@ -396,6 +399,9 @@
 - Run 159 定向重读：finite-horizon robust constraints、输入/状态约束与无限时保证条件。
   本轮支持函数下界只是其 affine output-feedback 约束思想在一条 dropout history 上的精确
   必要条件；不构成新的综合算法，也不提供 terminal/shift 结论。
+- Run 160 重读同一正文范围。通过把信息权限放宽到任意 full-state causal policy，本轮必要
+  下界比 affine output-feedback 可行域更乐观；其失败可否定当前 seed/输入盒，但仍不是一般
+  output-feedback 算法或无限时定理。
 
 ## Hempel, Kominek, Werner — Output-Feedback Controlled-Invariant Sets for Systems with Linear Parameter-Varying State Transition Matrix
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
@@ -492,6 +498,9 @@
   安全反馈；因此本轮15/15非空只能作为继续第二层的门槛。
 - Run 146 重读：pp.1--6、式 (4)--(10)、Theorems 1--2，核对第二下降层仍只是有限
   predecessor 序列；无论非空或部分塌缩，都不能越级声称 RCI 或一般输出反馈不可行。
+- Run 160 重读 Introduction、式(1)--(10)、Lemma 1 与 outer/inner RCI discussion。当前结论
+  来自一条允许字符串上策略无关的硬约束必要条件，而不是有限 predecessor 非空/塌缩；仍只
+  否定固定 seed/residual/input contract，不升级为一般 RCI 不存在。
 
 ## Houska, Müller, Villanueva — Polyhedral Control Design: Theory and Methods
 - 年份/出处：2024, arXiv:2412.13082；全文：https://arxiv.org/pdf/2412.13082
@@ -541,6 +550,8 @@
   连续联合信息集压成有限标签，也不允许以三个首次-return seed 代替真实初始化。
 - Run 159 重读同一正文范围，专门核查长 dropout string 上每个中间状态的 safety 义务；因此
   `15->15` 在 mode 11 的位置失败已经足以阻断 final-success target constituent。
+- Run 160 重读 Sections 2--4、Assumption 1 与 product safety 量词。15-tick string 的第13个
+  miss 已违反中间状态必要条件，即使最终 success 可重置 estimator，也不能恢复该条安全路径。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
