@@ -393,6 +393,9 @@
   packet-automaton 特化；本轮 exact branch witness 只是局部实例，不是其算法的新版本。
 - 局限：论文不含 bounded-dropout automaton、joint `(eta,e)` information set、共享 residual
   primitive 或 actual-thrust-dependent residual，因此不能替代当前 target-family 闭合证明。
+- Run 159 定向重读：finite-horizon robust constraints、输入/状态约束与无限时保证条件。
+  本轮支持函数下界只是其 affine output-feedback 约束思想在一条 dropout history 上的精确
+  必要条件；不构成新的综合算法，也不提供 terminal/shift 结论。
 
 ## Hempel, Kominek, Werner — Output-Feedback Controlled-Invariant Sets for Systems with Linear Parameter-Varying State Transition Matrix
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
@@ -462,6 +465,8 @@
 - Run 156 重新精读 Section 6.5、Theorem 3 的完整证明，并复核 Section 4.2 Definitions
   4--6。证明中的控制 `mu(X)` 由当前 information set 的凸权重组合 extreme controls；因此
   零/label-only 策略失败不能外推为一般 information-ensemble feedback 失败。
+- Run 159 重读 Sections 6.4--6.5、Theorem 3，确认一般 information-set feedback 已有完整
+  近邻；本轮只淘汰一个 fixed-residual、bounded centered-affine path，不能外推为一般方法失败。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
@@ -534,6 +539,8 @@
   automaton 在成功测量时压缩缺测串并规定因果开环输入承诺；产品不变集的安全结论仍量化全部
   允许 return string、扰动与中间状态。它支持 `(mode,last_return)` 的离散语言实现，但不把
   连续联合信息集压成有限标签，也不允许以三个首次-return seed 代替真实初始化。
+- Run 159 重读同一正文范围，专门核查长 dropout string 上每个中间状态的 safety 义务；因此
+  `15->15` 在 mode 11 的位置失败已经足以阻断 final-success target constituent。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412

@@ -1,0 +1,39 @@
+{
+  "status": "pass",
+  "claim": "fixed_j14_age_eight_source_violates_mode_eleven_position_under_two_bounded_affine_corrections",
+  "source_label": [
+    8,
+    15
+  ],
+  "checked_target_mode": 11,
+  "miss_count": 3,
+  "position_limit": "1",
+  "correction_limit": "572143/160000",
+  "zero_correction_position_halfwidth": "3714127151/3600000000",
+  "maximum_affine_support_reduction": "1716429/400000000",
+  "best_case_position_lower_bound": "369867929/360000000",
+  "strict_position_excess": "9867929/360000000",
+  "fixed_age_eight_source_affine_policy_class_infeasible": true,
+  "evidence_level": "exact_three_miss_position_support_lower_bound",
+  "age_eight_source_fixed_after_zero_prior_corrections": true,
+  "fixed_global_residual_assumed": true,
+  "centered_affine_policy_only": true,
+  "earlier_feedback_ruled_out": false,
+  "general_output_feedback_infeasibility": false,
+  "is_rci_certificate": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_affine_return_obstruction.py": "54b63b7c493cc54004dc70bf8860e6bc80096a4d2aad0a0d0d58ba8da0013ee4",
+    "verification/test_vertical_affine_return_obstruction.py": "656d0b92d47d5e88eab04d8fbf85b61037e5a9071a84ffb51e1442d7e0364d2d",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "verification/check_vertical_affine_rescue.py": "db6cf7466a42aa3e6d7378be55bf25ed4cc85d738c39285fe2b6ee6eacc2e81c",
+    "verification/check_vertical_multi_return_template.py": "3c7cf8833bbad8c1b4ea40c045a3837ac947f53a5133c6f616bd7e91feeaacf5",
+    "verification/check_vertical_translated_template_obstruction.py": "5700f1680790f952a2f704ea8701576aa341ea1670aaca4f6b634c9f8c2b38c6",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/95_vertical_affine_return_obstruction.md": "b8ae5d8d9ce826cac02314a3fcaa8c0bf4b9d79dc4889bbacbfacd31ae98c73d",
+    "docs/literature/READ_PAPERS.md": "95fc7cae58b93d75d3dbdf49970f822571539f807f1d85376bde1c8509770739",
+    "docs/research/run159_literature_gate.md": "0692ef02966a8fa9b60008b1b686fc6f3c989712edeb5dc6176d41fadb119b48",
+    "docs/research/run159_research_log.md": "7d140f110a377ffdb5ba0530c54d7406077c4f24baba58e32a6999772a7942fe"
+  }
+}

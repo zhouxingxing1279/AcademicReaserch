@@ -250,3 +250,13 @@ robust input support恰饱和correction盒；下一`e_v`半宽约2.71470、2.707
 success`；输入support恰饱和correction盒，两支共享`e_p≈0.973594,e_v≈2.719148`并满足硬
 约束，estimator targets继承既有full-envelope facet包含。证据仍非target闭合/RCI。详见
 `run158_research_log.md`与第94章。
+
+### 2026-10-11 Run 159
+
+重读Goulart--Kerrigan 2007、Yang--Ozay 2021与Houska相关正文。纠正Run158下一步：
+`(0,15)` 的rescued constituents尚未完成return，不能直接凸化。对`J14` age-8 exact set给出
+三条miss后的position支持下界：零输入support为`3714127151/3600000000`，两次bounded
+centered affine correction至多削减`3h²U`，故mode-11仍至少为`369867929/360000000>1`。
+这精确否定当前fixed-residual/seed/correction盒下的`15->15` affine constituent，阻断安全
+`(0,15)` target hull，但不否定更早介入或一般output feedback。详见`run159_research_log.md`
+与第95章。
