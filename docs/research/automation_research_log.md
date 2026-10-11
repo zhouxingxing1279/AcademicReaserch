@@ -215,3 +215,12 @@ correction只平移，不能改变宽度；故最早在mode 4即否定translated
 但不否定history-conditioned ensemble或scheduled GSIP。下一步构造最小return-age/history-
 conditioned intrinsic shape family并检查有限周期fixed point。详见`run150_research_log.md`
 与第87章。
+
+### 2026-10-11 Run 155
+
+重新精读 Hempel 2011 §III-A--C/Definition 2/Theorem 1，并复核 Houska §6.4--6.5 的
+extreme information-set 凸权重控制。精确证明：固定 global residual、线性边、凸扰动/约束
+及同一 source 标签的一张 affine-in-`d` 策略时，闭环边映射与同标签凸包严格交换，故新增
+fibers 无需逐点枚举；但逐边 target inclusion 和 fixed point 仍未建立。语义纠正 Run148 三个
+首次 return seeds 分属三个 `last_return` 标签，跨标签凸包只会退回更粗 mode-only 外包。
+下一步传播九条第二周期路径并按共同 target 标签分组。详见 `run155_research_log.md` 与第91章。

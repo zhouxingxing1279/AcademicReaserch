@@ -385,6 +385,9 @@
 - Run 147 重读同一章节：用于确认初始化 all-miss history 的完整 hidden `eta` fiber 不能
   按真值拆分；zero correction 生成一个中心化 return image，不是 output-feedback controller
   synthesis。Run 149 纠正：该中心位置不是任意 policy 必须容纳的 target。
+- Run 155 重新精读 Section III-A--C、Definition 2、Theorem 1、式 (3)--(14)。再次确认
+  同一 noisy-output fiber 的完整相容状态只能使用一个 output-dependent input，且输入约束与
+  鲁棒后继属于同一量词；仿射输入在凸 fiber 上的可行性仍依赖凸输入集。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023 预印本、2026 *Automatica* 183:112661；DOI：https://doi.org/10.1016/j.automatica.2025.112661；全文：https://arxiv.org/pdf/2307.04146
@@ -423,6 +426,10 @@
 - Run 154 定向精读 Sections 4.2--4.3、6.3--6.5、Definitions 5--7、Theorems 1/3 与证明。
   一步 ensemble inclusion 的量词先固定同一 policy，再外包全部后继信息集；逐层更换策略不
   产生一张可执行控制器。凸外包产生的新 information sets/fibers 也必须纳入下一步闭合。
+- Run 155 定向复核 Sections 6.4--6.5、Definition 7、Theorem 3 与证明中 extreme
+  information-set controls 的连续凸权重组合。固定线性边、凸扰动和同一仿射可见策略时，
+  convexification-created fibers 由仿射像/凸包交换律自动覆盖；这是该一般方法的直接特化，
+  不是新算法，且不能用于 control-dependent `W(T)` 或跨离散标签混合。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

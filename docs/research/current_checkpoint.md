@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-11，Run154）
+# 研究短检查点（2026-10-11，Run155）
 
-主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。本地 `main=1c49659`，Run153=`a95da0a`；15模态/17边，控制只读可见 `d=e−eta`。
+主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。远端 `main=1c49659`、Run153=`9ab357f`、Run154=`ee769f2`；15模态/17边，控制只读可见 `d=e−eta`。
 
-Run154 精读 Houska 2026 §4.2--4.3、§6.3--6.5、Definitions5--7、Theorems1/3。对预先固定的因果策略，含真实 `(0,init)` 初始集的前向历史外包算子单调，其 Kleene 闭包是该策略下的最小 reachable envelope。若每层重选策略，层层可行不对应一张可执行控制器，也无一般跨策略最小闭包。凸化会生成新 `d` fibers，必须对其共享输入、执行器盒和逐边后继重新闭合。`init` 15态只承担首次 return 前瞬态安全；terminal family 可在45个 recurrent states 上闭合，但须覆盖全部首次 return image。当前仅建立项目特化合同，不是 RCI/递归可行性或创新证明。
+Run155 重新精读 Hempel 2011 §III-A--C/Definition2/Theorem1，并复核 Houska §6.4--6.5/Theorem3。固定 global residual、线性边、凸扰动/约束及同一 source 标签的一张 affine-in-`d` 策略时，闭环边映射与同标签凸包严格交换；constituent-set 证书自动覆盖凸化新增 fibers，但仍须逐边证明 target 包含，且不适用于 `W(T)`、不一致分片策略或非凸约束。Run148 三首次 return seeds 分属 `(0,5)/(0,10)/(0,15)`，跨标签凸包会退化为 mode-only 外包，不能证明历史精化。证据仅为精确代数实施引理，不是 RCI/创新。唯一下一问题：冻结三 source 标签的零/仿射策略，精确传播九条第二周期路径，按共同 target `last_return` 分组三个凸包并核查全程硬约束与包含。
 
-下一唯一问题：冻结最小可审查类——竖直 affine-in-`d` correction 加 exact lifted convex hull——先证明新增 fibers 上输入可行与单步包含公式；通过后才实现从真实初始化开始的第一轮传播。
+下一唯一问题：在 fixed global residual 下，先为三个 recurrent source 标签冻结零策略，精确传播九条第二周期 return histories；按共同 target `last_return` 分组三个凸包，核查全部中间硬约束和 target 包含。若失败，给最早精确反例，再决定是否准入非零 affine-in-`d` 综合。
