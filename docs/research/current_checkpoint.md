@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-11，Run152）
+# 研究短检查点（2026-10-11，Run153）
 
-主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。本地 `main=1c49659`，Run151=`df10a61`；15模态/17边，控制只读可见 `d=e−eta`。Run150 只否定单一 translated fixed-shape 模板。
+主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。本地 `main=1c49659`，Run152=`07ac10f`；15模态/17边，控制只读可见 `d=e−eta`。Run150 只否定单一 translated fixed-shape 模板。
 
-Run152 重读 Baras--Patel 1998 §IV-A、Lemma4、Remarks8--10、Theorems9--11/Corollary4，并复核 Kjellqvist 2024 与 Houska 信息集合基线。当前 mode 已表示 current miss age；三条 success 均回到 mode0，因此同义 `return-age` 冗余。若要区分 Run148 的三种 return seed，最小离散记忆应明确为上一周期长度 `{5,10,15}`。不同 history shape 不同并不否定有限抽象，因为可取共同外包；安全充分性需要初始化覆盖、可见历史一致性、共享输入/原语逐边模拟、硬约束和终端闭合五项。当前仅建立此合同，不是 RCI、递归可行性或创新证明。
+Run153 精读 Yang--Ozay 2021 §4.1--4.4、Algorithm1、Propositions2--5。有限缺测自动机编码 return language、决策时刻和因果输入串，不自动压缩连续信息集合。Run152 的 `{5,10,15}` 初始化遗漏首次成功前历史：正确记忆为 `last_return in {init,5,10,15}`。提升图有60状态/68边，从 `(0,init)` 全部可达；15个 `init` 状态为瞬态，45个为循环层。Run148 三 seed 只是固定零修正的首次 return 像，可作必要样本，不能代替真实 `(0,init)` 初始集或覆盖多周期同标签历史。当前证据仅为离散语义/可达性，不是信息充分性、RCI或递归可行性。
 
-下一唯一问题：扩展 `(mode,last_return)` 图，以三 return seed 为初始化像，检查固定 global residual 下共同外包能否逐边闭合；失败必须给出硬约束/共享输入的精确反证。
+下一唯一问题：定义各 `(mode,last_return)` 的全部可见历史语言，并写出固定 global residual 下从 `(0,init)` 起始的 monotone common-outer-cover 算子及硬约束接口；语义确定后才实现一次迭代。

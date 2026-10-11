@@ -488,6 +488,10 @@
 - Run 140 阅读层级：核查摘要与问题陈述；正文抽取失败。
 - 摘要层面内容：用 automaton 描述 missing-measurement patterns，利用 causality 构造 product system，把 partial-information safety synthesis 化为 full-information game。
 - 与本项目关系：15-mode bounded-dropout product construction 已有近邻，不能作为创新；其有限安全游戏不直接处理当前连续六状态与 control-dependent residual。
+- Run 153 精读 Sections 4.1--4.4、Algorithm 1、Propositions 2--5 及式 (8)--(11)。string
+  automaton 在成功测量时压缩缺测串并规定因果开环输入承诺；产品不变集的安全结论仍量化全部
+  允许 return string、扰动与中间状态。它支持 `(mode,last_return)` 的离散语言实现，但不把
+  连续联合信息集压成有限标签，也不允许以三个首次-return seed 代替真实初始化。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
