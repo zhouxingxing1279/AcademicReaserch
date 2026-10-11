@@ -14,6 +14,17 @@
 - 方法/关系：CZ 定义、精确集合运算与复杂度约减；是本项目 CZ 基础，因此“CZ 保留相关性”不是创新。
 - Run 126 新增核查：重读 Sections 3.1、4.1–4.3、Appendix Algorithm 1 与 (A.9)–(A.10)，并在冻结 Run-123 后验复现 lift-then-reduce 外包及控制准入临界复杂度。该复现是强基线，不是新算法。
 - Run 129 新增核查：逐式重读 Appendix (A.9)–(A.10) 的基生成元放大、残余坐标逆缩放与删除顺序。论文维护几何外包，不维护到给定终端内集的包含映射；本轮携带谱系只是实现审计，不能宣称替代或改进 Scott 方法。
+- Run 164 定向重读全文 Sections 2.2、3.1--3.2 的 generalized intersection、线性像与集合表示。
+  CZ 可精确表示多面体和线性等式切片；固定观测值后的 fiber 是标准 generalized intersection，
+  因而本轮的 fiber support LP 是已知集合运算的实例，不作 CZ 算法创新声明。
+
+## Alamo, Bravo, Camacho — Guaranteed state estimation by zonotopes
+- 年份/出处：2005, *Automatica*, 41(6):1035--1043；DOI：https://doi.org/10.1016/j.automatica.2004.12.008
+- Run 164 阅读层级：核查正式摘要、问题设定和可访问正文片段；未取得可稳定逐页引用的完整作者稿。
+- 方法/关键结论：把先验预测与有界测量一致条带求交，并构造含真状态的一族 zonotope 外包；
+  测量更新的对象是给定实际观测后的 consistent-state set，而非把所有可能观测重新并成一个集合。
+- 与本项目关系：支持“先按可见观测形成 fiber、再查询控制方向 support”的信息时序；本轮不引用其
+  外包最优性定理，也不据此声称新 SMF 更新。
 
 ## Kopetzki, Schürmann, Althoff — Methods for Order Reduction of Zonotopes
 - 年份/出处：2017, CDC, 5626–5633；DOI：https://doi.org/10.1109/CDC.2017.8264508；作者全文：https://mediatum.ub.tum.de/doc/1442501/1442501.pdf

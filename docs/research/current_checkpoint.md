@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-12，Run163）
+# 研究短检查点（2026-10-12，Run164）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run162=`6730314`（tree=`bb4405c`）。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run163=`d99f456`（tree=`a4f30a8`）。
 
-Run163精读Wildhagen等自触发MPC的network/Assumption 1/min-max/terminal章节，重读Hassaan等有限缺测语言。仓库`PacketSchedule`只消费外生`drop`并检查第三次连续失败；无measurement request、重传、ACK、预约或冗余链路动作。support-query scheduler与物理通信无关。故当前不能认证把`{5,10,15}`收紧为`{5,10}`；改`max_missing`只是在换假设。证据为仓库接口和量词审计，不是网络硬件不可能性。通信支线停止，不实现调度器。
+Run164全文定向重读Scott等2016的CZ generalized intersection/线性像章节，复核Goulart--Kerrigan的信息集反馈；Alamo等2005只核查正式摘要和可访问正文片段。纠正Run161量词：成功测量后控制器可见`d=e-eta`，应对每个`J14(d)` fiber重规划，而非把不同观测合并。精确LP证明最坏fiber在`e_p+14h e_v`方向半宽为`16315003/75000000≈0.21753337<1`；原始/对偶严格相等。整体J14半宽`≈1.08049485`只阻塞所有观测共用一张计划的合同，不能作为条件化策略必要门槛。证据为冻结四状态合同的精确量词纠错，不是15步安全、终端闭合、递归可行或六自由度证明。
 
-下一唯一问题：保留15-tick语言，反推满足Run161方向半直径阈值的mode-0/J14 seed合同，并核查当前噪声界下合法measurement intersection能否可靠初始化；失败则给初始化不可能证书。
+下一唯一问题：参数化`J14(d_p)`，构造覆盖绝对中心、位置/速度/输入约束及success/miss后继的因果15-tick安全与终端包含证书；失败须给出可达fiber精确反例。
