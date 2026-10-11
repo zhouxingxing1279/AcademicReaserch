@@ -380,6 +380,20 @@
 - 局限：论文是全状态/扰动反馈有限时域框架，不直接给出当前15模态信息集合的 recurrent
   target inclusion，也不证明 SMF--MPC 递归可行性。
 
+## Goulart, Kerrigan — Output Feedback Receding Horizon Control of Constrained Systems
+- 年份/出处：2007, *International Journal of Control* 80(1):8--20；DOI：
+  https://doi.org/10.1080/00207170600892949；作者存档：
+  http://hdl.handle.net/10044/1/4386
+- Run 158 精读：problem formulation、finite-horizon affine output-feedback reformulation、
+  robust constraint conditions 与 invariant error outer-approximation 部分。
+- 方法/关键结论：固定线性 observer 下，带状态扰动和测量误差的 constraint-admissible affine
+  output-feedback 问题可等价凸化；永久约束保证还要求 observer error 的 invariant bound 与
+  receding-horizon terminal/shift 条件，不能由一步安全外推。
+- 与本项目关系：mode-9 同一当前输入覆盖 success/miss 是该 robust causal policy 量词的
+  packet-automaton 特化；本轮 exact branch witness 只是局部实例，不是其算法的新版本。
+- 局限：论文不含 bounded-dropout automaton、joint `(eta,e)` information set、共享 residual
+  primitive 或 actual-thrust-dependent residual，因此不能替代当前 target-family 闭合证明。
+
 ## Hempel, Kominek, Werner — Output-Feedback Controlled-Invariant Sets for Systems with Linear Parameter-Varying State Transition Matrix
 - 年份/出处：2011, CDC-ECC；DOI：https://doi.org/10.1109/CDC.2011.6160901；全文：https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1283.pdf
 - Run 140 精读：Sections II--III、Definitions 1--2、Theorem 1、式 (3)--(11)。Run 141

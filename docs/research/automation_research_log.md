@@ -241,3 +241,12 @@ Houska information-set control。纠正Run156时序：失败miss的输入取于a
 robust input support恰饱和correction盒；下一`e_v`半宽约2.71470、2.70783，均严格低于
 2.75。故零策略局部反例可由affine可见反馈一步修复，但尚无target inclusion、后续mode-9
 共享分叉、RCI或递归可行性。详见`run157_research_log.md`与第93章。
+
+### 2026-10-11 Run 158
+
+精读Goulart--Kerrigan 2007 affine output-feedback robust constraints，重读Hempel/Houska量词。
+纠正“先对单一constituent作共同外包”的平凡支线，转而检查Run157 rescued `(9,15)` 的真实
+未知分叉。精确见证`K_v=-114428600/70527869`用同一输入同时覆盖`9->10 miss`和`9->0
+success`；输入support恰饱和correction盒，两支共享`e_p≈0.973594,e_v≈2.719148`并满足硬
+约束，estimator targets继承既有full-envelope facet包含。证据仍非target闭合/RCI。详见
+`run158_research_log.md`与第94章。

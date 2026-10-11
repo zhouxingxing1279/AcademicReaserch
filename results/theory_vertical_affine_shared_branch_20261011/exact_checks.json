@@ -1,0 +1,51 @@
+{
+  "status": "pass",
+  "claim": "rescued_mode_nine_set_has_one_affine_policy_safe_for_success_and_miss",
+  "source_label": [
+    9,
+    15
+  ],
+  "position_gain": "0",
+  "velocity_gain": "-114428600/70527869",
+  "visible_velocity_halfwidth": "70527869/32000000",
+  "input_support": "572143/160000",
+  "correction_limit": "572143/160000",
+  "branch_policy_count": 1,
+  "branches": {
+    "miss": {
+      "target_mode": 10,
+      "tracking_position_halfwidth": "85072353058880561/87379729200000000",
+      "tracking_velocity_halfwidth": "4751967529055069/1747594584000000",
+      "tracking_hard_box_satisfied": true,
+      "estimator_target_contained": true,
+      "estimator_containment_inherited_from_full_mode_nine_envelope": true
+    },
+    "success": {
+      "target_mode": 0,
+      "tracking_position_halfwidth": "85072353058880561/87379729200000000",
+      "tracking_velocity_halfwidth": "4751967529055069/1747594584000000",
+      "tracking_hard_box_satisfied": true,
+      "estimator_target_contained": true,
+      "estimator_containment_inherited_from_full_mode_nine_envelope": true
+    }
+  },
+  "evidence_level": "exact_one_step_shared_success_miss_safety_witness_after_affine_rescue",
+  "shared_branch_state_input_safety_certified": true,
+  "recurrent_target_inclusion_certified": false,
+  "gain_optimality_claimed": false,
+  "is_rci_certificate": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_affine_shared_branch.py": "8b5a81b3bd75e9f96d92fd7c8fa9b12abded899d32a3bafb557531fe6ebae00c",
+    "verification/test_vertical_affine_shared_branch.py": "b04fd3363d9009603cea863ad779838d0c548c789b61c7a1106d2b1a59836f10",
+    "verification/check_vertical_affine_rescue.py": "db6cf7466a42aa3e6d7378be55bf25ed4cc85d738c39285fe2b6ee6eacc2e81c",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/check_vertical_multi_return_template.py": "3c7cf8833bbad8c1b4ea40c045a3837ac947f53a5133c6f616bd7e91feeaacf5",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/94_vertical_affine_shared_branch.md": "3d9b23841d395496c667622f0c87b2ea4f9936f71e1a70bca5981acb6552887c",
+    "docs/literature/READ_PAPERS.md": "ea9623b2c04d52389be88a884b5194c15129416a224f6d524d87c993594eed51",
+    "docs/research/run158_literature_gate.md": "aa418912cb039c19b349ea7e0ee0f830fabf6c774d9f9d9a120dd7443b93dde4",
+    "docs/research/run158_research_log.md": "174bd4f116010c46817e722e06d2d311abefbfd506cbbd616cdf4aae9ea33a49"
+  }
+}
