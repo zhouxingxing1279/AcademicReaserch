@@ -387,7 +387,7 @@
   synthesis。Run 149 纠正：该中心位置不是任意 policy 必须容纳的 target。
 
 ## Houska — Intrinsic Separation Principles
-- 年份/出处：2023, arXiv:2307.04146；全文：https://arxiv.org/pdf/2307.04146
+- 年份/出处：2023 预印本、2026 *Automatica* 183:112661；DOI：https://doi.org/10.1016/j.automatica.2025.112661；全文：https://arxiv.org/pdf/2307.04146
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -420,6 +420,9 @@
   及证明。确认 translation functions 和 extreme-information-set controls 已覆盖一般方法；
   本轮只对 Run148 exact shape 给出实例级 width obstruction，不能宣称新算法或一般
   information-ensemble 不可行。
+- Run 154 定向精读 Sections 4.2--4.3、6.3--6.5、Definitions 5--7、Theorems 1/3 与证明。
+  一步 ensemble inclusion 的量词先固定同一 policy，再外包全部后继信息集；逐层更换策略不
+  产生一张可执行控制器。凸外包产生的新 information sets/fibers 也必须纳入下一步闭合。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：
