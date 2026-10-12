@@ -601,6 +601,9 @@
   状态和允许扰动对应的非线性余项，Lemma 1给出tube-dependent解析外包。
 - 与本项目关系：是局部气动余项的最强方法基线。当前后验变小不够，必须认证整个15-tick未来
   tube并证明跨时刻闭合；本轮未复现其10状态控制器。
+- Run169重读§II-A、Theorem 1、式(8)、Lemma 1及证明：RFIT与nonlinearity bounder量化tube中
+  每个状态/扰动。故J14要求族中一个首步合法反例即可否定当前局部余项目标，无需用有限采样替代
+  全量词，也无需继续传播其余14步。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
