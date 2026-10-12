@@ -73,6 +73,10 @@
   Section 5.2 Theorem 3。固定法向参数集合更新保持真参数包含和嵌套，预测 tube 对整个参数集与
   disturbance robustify；递归可行性另由旧解移位与 terminal 条件证明。该结构支持“可靠在线集合
   可降低保守性”，但其对象是常参数集合，不能把本项目 state posterior 直接当作 future residual。
+- Run 166 重新精读开放全文 Sections 3.1--3.2、Lemma 1、Section 4.1 Proposition 1及证明，
+  并复核Section 6.1的同更新律比较。固定复杂度外包须同时保持真参数包含与跨时刻嵌套；旧解移位
+  和terminal条件另行承担递归可行性。因此本轮只能把可见state范围作为独立初始化合同，不能用其
+  替代future process residual或物理input authority。
 
 ## Peschke, Mönnigmann — Robust adaptive tube tracking model predictive control for piece-wise constant reference signals
 - 年份/出处：2023, *International Journal of Robust and Nonlinear Control*；DOI：https://doi.org/10.1002/rnc.6814

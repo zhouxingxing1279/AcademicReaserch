@@ -315,3 +315,12 @@ measurement request、重传、ACK、预约或冗余链路控制接口；既有s
 即使允许全状态因果反馈，14次miss的正端residual与最大负输入因`g_r=hU`精确相消，最终位置仍
 至少为`3889781459/3600000000>1`。故停止当前15-tick合同下的gain/terminal综合；下一步转向
 极端可见偏差、future residual与物理输入权限的中心范围三因素最小修约。详见第101章。
+
+### 2026-10-12 Run 166
+
+精读Lu--Cannon--Koksal-Rivet 2021的固定复杂度集合更新、鲁棒tube与recursive-feasibility证明。
+把Run165中心反例化为精确三因素界面：在覆盖安全阈值的支持LP仿射支上，
+`H(r)=16315003/75000000+(29/15)r`，且必要条件为`H(r)+beta D-gamma C<=1`。
+单项修约至少需要可见范围降至`0.404724`、future residual缩小61.84%，或correction authority
+增加61.84%。下一步只核查可见范围阈值是否能由合法measurement intersection可靠保证；不把
+状态后验收缩外推为未来扰动收缩。详见第102章。

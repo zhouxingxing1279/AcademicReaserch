@@ -1,0 +1,51 @@
+{
+  "status": "pass",
+  "claim": "exact_visible_center_residual_authority_tradeoff",
+  "conditional_initial_support": {
+    "visible_coordinate": "d_p=e_p-eta_p",
+    "endpoint_direction": "e_p+14h*e_v",
+    "formula": "b + lambda*r",
+    "visible_slope": "29/15",
+    "affine_intercept": "16315003/75000000",
+    "affine_branch_range": [
+      "0",
+      "20432147/48000000"
+    ],
+    "primal_attainment_on_affine_branch": true,
+    "dual_upper_bound_on_affine_branch": true
+  },
+  "three_factor_contract": {
+    "condition": "b + lambda*r + beta*D - gamma*C <= 1",
+    "visible_radius": "r",
+    "future_residual_scale": "beta",
+    "correction_authority_scale": "gamma",
+    "residual_budget": "52065013/400000000",
+    "correction_budget": "52065013/400000000"
+  },
+  "single_factor_thresholds": {
+    "visible_radius_max": "58684997/145000000",
+    "future_residual_scale_max": "16254878/42598647",
+    "correction_authority_scale_min": "68942416/42598647"
+  },
+  "boundary_checks": {
+    "current_contract_endpoint": "3889781459/3600000000",
+    "visible_only_endpoint": "1",
+    "residual_only_endpoint": "1",
+    "authority_only_endpoint": "1"
+  },
+  "is_necessary_for_current_four_state_path": true,
+  "is_recursive_feasibility_proof": false,
+  "is_full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_center_contract_tradeoff.py": "59d3d63c3c98bc211cee9726fb95f5e6565c9b740d31f555c2ac81e0e483639d",
+    "verification/test_vertical_center_contract_tradeoff.py": "ef873446ddd4c29a46bd64b20a855e283df30893931b7f21f1a151929265b9a2",
+    "verification/check_vertical_extreme_visible_fiber_obstruction.py": "f56cc4977f5103da459a96f97f9ca9489c8aa7d36095fbc29d23e769c94bda90",
+    "verification/check_vertical_correlated_return_seed.py": "e61cb63a3b02fc00cfd4fc97991fd0f7920646ddeb0e9531ec925427e5badcca",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/102_vertical_center_contract_tradeoff.md": "7c1b7244d42eee08afe587b3c1480268b504de91d21fd3591490ed9401480e64",
+    "docs/literature/READ_PAPERS.md": "b48149c1868b1629b0d13bed99627b8e7a961e1f7ee2d8cbd2807e5a1515bdf5",
+    "docs/research/run166_literature_gate.md": "afd8ed0c60d190ec0ccb725499b28e2391a5f168f4b0eaa5f2406daac7016eac",
+    "docs/research/run166_research_log.md": "764f274c48ea23bdb5848f6298619907bcf4f622d86b11eca90a96f9b824aa5f"
+  }
+}
