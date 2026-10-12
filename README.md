@@ -131,3 +131,13 @@ pytest -q verification/test_vertical_shared_factor_graph.py
 ```
 
 精确证书表明Run169点满足真实单步共享气动因子图，因此可靠的单步CZ/SPZ外包不能排除其像；这不证明该点可由初始集跨时刻到达。详见[106 单步共享气动因子图](docs/learning/106_vertical_shared_factor_graph.md)及归档`results/theory_vertical_shared_factor_graph_20261012/exact_checks.json`。
+
+## 跨时刻竖直速度排除证书（2026-10-12）
+
+```bash
+PYTHONPATH=verification python verification/check_vertical_cross_time_velocity_exclusion.py \
+  --output results/theory_vertical_cross_time_velocity_exclusion_20261012/exact_checks.json
+python -m unittest -q verification.test_vertical_cross_time_velocity_exclusion
+```
+
+从配置初始集出发的精确15步投影界排除了Run169竖直速度端点；仍需联合传播横向速度与姿态以核查全部可达气动支持。详见[107 跨时刻竖直速度投影](docs/learning/107_vertical_cross_time_velocity_exclusion.md)。

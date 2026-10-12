@@ -247,6 +247,12 @@
 - 方法/关键结论：用 dependent factors 与全局 identifier 保留同一不确定因子在多项式项中的重复依赖；identifier 合并可保持依赖关系，并给出 zonotope、polytope 与 Taylor model 等表示到 SPZ 的转换。
 - 与本项目关系：共享非线性因子表示是成熟 reachability 基线，不构成本项目创新；若一个输入点精确满足真实单步图，任何可靠 SPZ/CZ 图外包都必须保留其像。能否排除 Run169 点取决于从初始集出发的跨时刻联合可达集，而非单步换一种集合表示。
 
+## Jafarpour, Harapanahalli, Coogan — Interval Reachability of Nonlinear Dynamical Systems with Neural Network Controllers
+- 年份/出处：2023, L4DC, PMLR 211:12--25；全文：https://proceedings.mlr.press/v211/jafarpour23a/jafarpour23a.pdf
+- Run172 精读：§2 的可达集、decomposition function、inclusion function和嵌入系统；§5 Theorem 2 的区间可达外包。
+- 方法/关键结论：从初始区间和扰动区间出发，通过mixed-monotone嵌入系统计算包含真实非线性闭环可达集的超矩形，并以分割平衡紧度和计算量。
+- 与本项目关系：支持“必须从初始集跨时刻传播”的量词；本文针对连续时间NN闭环，不能直接替代本仓库离散Euler真值模型的证明。Run172只采用同一包含原则，给出项目特定的标量归纳界。
+
 ## Bujarbaruah, Nair, Borrelli — A Semi-Definite Programming Approach to Robust Adaptive MPC under State Dependent Uncertainty
 - 年份/出处：2020, European Control Conference；预印本：arXiv:1910.04378
 - 方法/关系：set-membership refinement + state-dependent uncertainty envelope + robust MPC；“SMF 信息进入 state-dependent robustification”已有先例。

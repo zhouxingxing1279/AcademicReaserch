@@ -1,0 +1,43 @@
+{
+  "status": "pass",
+  "claim": "run169_vertical_velocity_is_outside_the_15_step_domain_constrained_reachable_projection",
+  "elementary_bounds": {
+    "pitch_absolute_upper": "9/20",
+    "cosine_polynomial_lower": "4610288951/5120000000",
+    "cosine_floor_used": "9/10",
+    "cos_9_over_20_strictly_above_9_over_10": true,
+    "sqrt_argument_at_rz_7_over_2": "1229/100",
+    "sqrt_upper_used": "351/100",
+    "sqrt_1229_over_100_strictly_below_351_over_100": true
+  },
+  "vertical_acceleration": {
+    "relative_vertical_velocity_upper": "7/2",
+    "aerodynamic_lower_bound": "-7371/4000",
+    "lower_bound": "-28953/4000",
+    "valid_for_every_domain_state_input_and_wind": true
+  },
+  "cross_time_projection": {
+    "initial_vz_lower": "-1/10",
+    "euler_step": "1/50",
+    "steps": 15,
+    "vz_lower_after_15_steps": "-90859/40000",
+    "run169_vz": "-170955031/72000000",
+    "strict_separation": "7408831/72000000",
+    "run169_vz_excluded": true
+  },
+  "run169_velocity_witness_excluded_from_15_step_reachable_projection": true,
+  "full_nonlinear_reachable_set_computed": false,
+  "all_aerodynamic_threshold_violations_excluded": false,
+  "is_recursive_feasibility_proof": false,
+  "is_full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_cross_time_velocity_exclusion.py": "137e4ce20d2b59310058cb4aced55b863194d2d322138135f76576a0af110d8c",
+    "verification/test_vertical_cross_time_velocity_exclusion.py": "fbc70db941b537cfd64ac7d2fb2eff4c402ffd7631514abf38ea1e5f2fbd5f65",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/107_vertical_cross_time_velocity_exclusion.md": "fbe99e15f40089b15fc30f1c172fc298907cb598ab03ca64c8612c86c653fa8a",
+    "docs/literature/READ_PAPERS.md": "677a1343724ae5e66692cf5c4243ef8bc8e493456b18d1bbd9a23f17921cf9bd",
+    "docs/research/run172_literature_gate.md": "07a976af975eed5ff3aa9a3f82248c99b949793b0638677ce64eac20f507f9a5",
+    "docs/research/run172_research_log.md": "bacf86f76585232d30e4dff65ec451fd91f6ba2e7bc17fab53dc80f9a5cf9528"
+  }
+}
