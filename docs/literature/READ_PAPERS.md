@@ -171,6 +171,13 @@
 - Run175 重读 Problem 1、Section 3与Theorems 3.2/3.4：控制器/估计器是待合成的存在量，保证对全部固定长度缺测/时延语言实现equalized recovery；不能把所有允许控制输入当成对手扰动来否定回返。
 - 与本项目关系：按 dropout mode/path 索引 controller、estimator 或 error bound 不是创新；15-mode indexing 只能作为实现结构。
 
+## Ghaemi, Del Vecchio — Control for Safety Specifications of Systems with Imperfect Information on a Partial Order
+
+- 年份/出处：2014，IEEE Transactions on Automatic Control；作者全文：https://web.mit.edu/ddv/www/papers/RezaTACfinal.pdf
+- Run176 精读：§II 的information-state定义与Problems 1--2，§III Theorem 1及证明，§IV Theorem 4及证明。
+- 方法/关键结论：开环安全集采用`exists control / forall disturbances`；闭环控制映射以测量历史诱导的information state为输入，并对全部允许测量信号保持安全。极端输入判据依赖input/output order-preserving及连通性等结构假设。
+- 与本项目关系：支持受控回返的正确量词和information-state策略接口；当前非线性四旋翼plant尚未证明满足其order-preserving假设，不能直接用极端推力替代五步鲁棒前驱。
+
 ## Wildhagen, Pezzutto, Schenato, Allgöwer — Self-triggered MPC robust to bounded packet loss via a min-max approach
 - 年份/出处：2022, CDC extended version；arXiv：https://arxiv.org/abs/2204.00339
 - Run 132 精读：problem formulation、min-max MPC、terminal control law、recursive feasibility/constraint/convergence argument。

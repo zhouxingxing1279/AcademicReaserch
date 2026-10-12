@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-12，Run175）
+# 研究短检查点（2026-10-12，Run176）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run174=`ec21e9a`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run175=`719baec`。
 
-Run175纠正Run174量词：五步最大推力轨迹仍精确证明“测量本身不重置物理速度”，但推力是控制器选择，不是对手扰动，故不能据此否定存在因果策略实现受控回返。检查器现明确`measurement_only_reset_implication_rejected=true`、`controlled_return_to_initial_box_impossible=false`、`control_exists_quantifier_not_tested=true`。周期tube综合必须采用`exists policy, forall disturbances/dropout paths`。
+Run176排重：Run142已有共享观测fiber输入的精确product-fiber前驱；Run160已有固定J14下任意因果有界策略的十五步反证。二者均不覆盖配置初始posterior、真实非线性plant和五步回返，故重复冻结线性/PWA策略类不能推进主线。本轮不新增算法，证据等级为`literature_and_repository_deduplication_with_corrected_nonlinear_initial_posterior_proof_object`。
 
-下一唯一问题：冻结基于可见posterior/模式的因果推力策略类，构造5步return predecessor，并对每个观测fiber用同一策略覆盖全部风、噪声和success/miss后继。
+下一唯一问题：在竖直不变切片上，从配置初始posterior直接建立五步非线性information-state predecessor；策略只读允许的测量历史，并对全部风、噪声和success/miss后继鲁棒。
