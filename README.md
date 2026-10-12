@@ -141,3 +141,13 @@ python -m unittest -q verification.test_vertical_cross_time_velocity_exclusion
 ```
 
 从配置初始集出发的精确15步投影界排除了Run169竖直速度端点；仍需联合传播横向速度与姿态以核查全部可达气动支持。详见[107 跨时刻竖直速度投影](docs/learning/107_vertical_cross_time_velocity_exclusion.md)。
+
+## 首个15步窗口气动支持（2026-10-12）
+
+```bash
+PYTHONPATH=verification python verification/check_vertical_initial_window_aero_support.py \
+  --output results/theory_vertical_initial_window_aero_support_20261012/exact_checks.json
+python -m unittest -q verification.test_vertical_initial_window_aero_support
+```
+
+分层有理数外包认证配置初始集首个15步窗口的竖直气动核心支持不超过`1.23048791`，低于Run168门槛；该结论尚未覆盖测量reset后的重复周期。详见[108 首窗口气动支持](docs/learning/108_vertical_initial_window_aero_support.md)。

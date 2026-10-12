@@ -1,0 +1,42 @@
+{
+  "status": "pass",
+  "claim": "initial_fifteen_step_reachable_projection_certifies_vertical_aerodynamic_support_below_run168_target",
+  "pitch_projection": {
+    "absolute_upper_through_step_15": "22/125",
+    "angular_acceleration_absolute_upper": "4",
+    "covers_every_admissible_torque_history": true
+  },
+  "horizontal_velocity_projection": {
+    "global_relative_speed_bound_used_inside_aerodynamics": "7/2",
+    "global_sqrt_upper": "351/100",
+    "acceleration_absolute_upper": "222281/50000",
+    "velocity_absolute_upper_through_step_15": "716843/500000",
+    "relative_x_absolute_upper": "966843/500000"
+  },
+  "vertical_aerodynamic_support": {
+    "vertical_velocity_lower_from_run172": "-90859/40000",
+    "negative_relative_z_magnitude_upper": "110859/40000",
+    "vertical_sqrt_upper": "139/50",
+    "vertical_sqrt_bound_exact": true,
+    "upper": "15381098824149/12500000000000",
+    "run168_target": "89401829/65520000",
+    "strict_margin": "1371915844271969/10237500000000000",
+    "strictly_below_run168_target": true
+  },
+  "initial_fifteen_step_window_aero_support_certified": true,
+  "measurement_conditioned_reset_closure_proved": false,
+  "recursive_tube_invariance_proved": false,
+  "is_recursive_feasibility_proof": false,
+  "is_full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_initial_window_aero_support.py": "c9217fbf1cf4d8aa6ecb7793a0601e5991cb1847b26e7d352f16b071512168b3",
+    "verification/test_vertical_initial_window_aero_support.py": "657b1bdc0ea03091b0d097057c75eb16a29deefc53407486e4ba24faf517004c",
+    "verification/check_vertical_cross_time_velocity_exclusion.py": "137e4ce20d2b59310058cb4aced55b863194d2d322138135f76576a0af110d8c",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/108_vertical_initial_window_aero_support.md": "28108eb670d17ab23f2b053797fdc9d1152ebe55a3abbd553ab685a962edbe8a",
+    "docs/literature/READ_PAPERS.md": "9a2001729fffb1314a861f3c1e3ba5f54010dd798cb45656c0a47647e1872598",
+    "docs/research/run173_literature_gate.md": "ed69af8a2eed1e7e42d5cd922f820268f2925709711c527b39b713f7da1dc2e7",
+    "docs/research/run173_research_log.md": "87b725eecdb554773033b8d237ec691420a6324b33cac37f4ecb0ce33cafa399"
+  }
+}

@@ -252,6 +252,7 @@
 - Run172 精读：§2 的可达集、decomposition function、inclusion function和嵌入系统；§5 Theorem 2 的区间可达外包。
 - 方法/关键结论：从初始区间和扰动区间出发，通过mixed-monotone嵌入系统计算包含真实非线性闭环可达集的超矩形，并以分割平衡紧度和计算量。
 - 与本项目关系：支持“必须从初始集跨时刻传播”的量词；本文针对连续时间NN闭环，不能直接替代本仓库离散Euler真值模型的证明。Run172只采用同一包含原则，给出项目特定的标量归纳界。
+- Run173 新增精读：§5 Theorems 2--3与Remark 4、§6 Algorithm 1。每步对外包重分割并取并集可改善紧度，但所有子外包仍必须覆盖对应真实轨迹；本项目的分层解析盒是项目特定特例，不是新可达算法。
 
 ## Bujarbaruah, Nair, Borrelli — A Semi-Definite Programming Approach to Robust Adaptive MPC under State Dependent Uncertainty
 - 年份/出处：2020, European Control Conference；预印本：arXiv:1910.04378
