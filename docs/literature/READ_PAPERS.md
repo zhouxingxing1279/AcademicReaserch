@@ -17,6 +17,10 @@
 - Run 164 定向重读全文 Sections 2.2、3.1--3.2 的 generalized intersection、线性像与集合表示。
   CZ 可精确表示多面体和线性等式切片；固定观测值后的 fiber 是标准 generalized intersection，
   因而本轮的 fiber support LP 是已知集合运算的实例，不作 CZ 算法创新声明。
+- Run 167 精读 Section 2 Definition 2、Section 3.1 Proposition 1及证明、Section 5式(31)--(33)。
+  bounded-error posterior是预测集与**已实现观测**逆像的相交；精确相交或任何可靠外包都不能删除
+  与先验和噪声合同一致的极端观测。因此它能缩小单个观测后的fiber，却不能自动保证所有可能观测
+  的全局创新范围满足控制阈值。
 
 ## Alamo, Bravo, Camacho — Guaranteed state estimation by zonotopes
 - 年份/出处：2005, *Automatica*, 41(6):1035--1043；DOI：https://doi.org/10.1016/j.automatica.2004.12.008

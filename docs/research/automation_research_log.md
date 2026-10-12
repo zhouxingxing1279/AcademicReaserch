@@ -324,3 +324,11 @@ measurement request、重传、ACK、预约或冗余链路控制接口；既有s
 单项修约至少需要可见范围降至`0.404724`、future residual缩小61.84%，或correction authority
 增加61.84%。下一步只核查可见范围阈值是否能由合法measurement intersection可靠保证；不把
 状态后验收缩外推为未来扰动收缩。详见第102章。
+
+### 2026-10-12 Run 167
+
+精读Scott等2016的generalized intersection、Proposition 1及bounded-error估计递推，复核Alamo
+2005和Lu等的真值包含边界。当前14-miss强制return满足`d_p^+=q+n_p`；即使取合法零测量噪声，
+`q`支持`≈0.485670`仍严格超过Run166要求的`≈0.404724`。因此精确CZ相交也不能对所有允许真值
+保证该全局cap，measurement-only支线终止；当前噪声下源支持必须缩至现值的79.2152%。下一步
+转向future residual的物理分解，不再继续局部fiber或传感器调参。详见第103章。
