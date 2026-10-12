@@ -587,6 +587,21 @@
   信息选择因果输入承诺，安全量词覆盖允许串的每个扰动实现和中间状态。本轮极端可见fiber是该
   量词在冻结连续模型上的精确反例，不是string-automaton或product-game创新。
 
+## Do, Prodan — Tube MPC via flatness for multicopter trajectory tracking
+- 年份/出处：2024, European Control Conference；全文：https://hal.science/hal-04567082/document
+- Run168精读：Sections II-A、III-A--B，式(18)--(25)。
+- 方法/关键结论：将多旋翼跟踪误差化为带固定有界加性扰动`W`的系统，用mRPI集`Z`构造
+  nominal tube，并以`X⊖Z`、`V⊖KZ`收紧约束；设计要求扰动与增益使收紧后集合非空。
+- 与本项目关系：是固定全局余项包络的直接基线，但不从在线SMF信息集生成局部未来扰动界。
+
+## Hu, Bujarbaruah, Zhang, Borrelli — Real-Time Tube MPC Applied to a 10-State Quadrotor Model
+- 年份/出处：2018, American Control Conference；全文：https://borrelli.me.berkeley.edu/pdfpub/2018_15.pdf
+- Run168精读：Theorem 1、式(8)、Lemma 1及对应证明。
+- 方法/关键结论：用椭球tube与RFIT条件处理四旋翼非线性；`Omega_n(q,Q)`必须包含tube中每个
+  状态和允许扰动对应的非线性余项，Lemma 1给出tube-dependent解析外包。
+- 与本项目关系：是局部气动余项的最强方法基线。当前后验变小不够，必须认证整个15-tick未来
+  tube并证明跨时刻闭合；本轮未复现其10状态控制器。
+
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412
 - Run 140 阅读层级：核查摘要及 problem formulation，未精读证明。

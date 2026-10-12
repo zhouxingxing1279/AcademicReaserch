@@ -1,0 +1,44 @@
+{
+  "status": "pass",
+  "claim": "attitude_only_reduction_cannot_meet_run166_future_residual_scale",
+  "current_contract": {
+    "truth_semantics": "defined_discrete_euler",
+    "external_process_halfwidth_z": "0",
+    "aerodynamic_core": "1043/500",
+    "attitude_thrust_slope": "81/800",
+    "thrust_max": "2943/200",
+    "attitude_thrust_term_at_tmax": "238383/160000",
+    "total_halfwidth": "572143/160000"
+  },
+  "run166_target": {
+    "scale_max": "16254878/42598647",
+    "absolute_halfwidth_max": "89401829/65520000"
+  },
+  "attitude_only_obstruction": {
+    "best_case": "remove_entire_attitude_thrust_term",
+    "best_halfwidth": "1043/500",
+    "strict_excess": "47272891/65520000",
+    "best_scale": "333760/572143"
+  },
+  "necessary_aerodynamic_contract": {
+    "core_halfwidth_max_if_attitude_zero": "89401829/65520000",
+    "core_scale_max_if_attitude_zero": "89401829/136674720",
+    "core_reduction_min": "47272891/136674720",
+    "quantifier": "all_15_future_ticks_and_all_information_consistent_trajectories"
+  },
+  "attitude_only_route_impossible": true,
+  "local_aerodynamic_route_ruled_out": false,
+  "is_recursive_feasibility_proof": false,
+  "is_full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_future_residual_decomposition.py": "f7e3eaad81afeb5f2fad719e3a715e30217541a9c27bee38ea480d41f88bd071",
+    "verification/test_vertical_future_residual_decomposition.py": "8e36ee30515ae6a44381a2399d78485d8bba625120d70a0c20d812c9c29cecd6",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "src/smf_mpc/filter.py": "191de019c8cd453b265aea0b9f45d1774539728efaf54068f2fbc7a6fec48fed",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/104_vertical_future_residual_decomposition.md": "f112332e8472dc88e8dda22ad877913d914284b81c7f6ba2c2de028c065f7a04",
+    "docs/literature/READ_PAPERS.md": "6aa44d7b56e5932a0257a9fdc2394910e129a40f89e5f65fa6fd37a5e2745d11",
+    "docs/research/run168_literature_gate.md": "798b9bbd86e59fb20086ed57797a40c19aa698a08e415de6f1880b0560f38e91",
+    "docs/research/run168_research_log.md": "3811e83998241d6e721f1c751e6051f873c2e9065a797123c89c9e48a2989324"
+  }
+}
