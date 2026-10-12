@@ -604,6 +604,26 @@
 - Run169重读§II-A、Theorem 1、式(8)、Lemma 1及证明：RFIT与nonlinearity bounder量化tube中
   每个状态/扰动。故J14要求族中一个首步合法反例即可否定当前局部余项目标，无需用有限采样替代
   全量词，也无需继续传播其余14步。
+- Run170纠错：上一句的“J14要求族”只对独立残差外包成立；没有从benchmark初始集出发的
+  非线性轨迹证书时，不能把外包成员称作真实plant可达，也不能据此外推物理路线不可能。
+
+## Rego, Raffo, Terra, Scott — Reachability Analysis of Nonlinear Discrete-Time Systems Using Polyhedral Relaxations and Constrained Zonotopes
+- 年份/出处：CDC 2024；作者预印本2025，arXiv:2504.11663；DOI：https://doi.org/10.1109/CDC56724.2024.10886592；全文：https://arxiv.org/abs/2504.11663
+- Run170精读：§II Problem Statement and Preliminaries，式(1)--(8)；§III Definition 3、式(10)--(11)及乘法的McCormick包络。
+- 方法/关键结论：从`X0`与过程不确定集`W`递归外包非线性像；把factorable函数分解为共享
+  中间因子，在lifted space中相交各因子的多面体包络，再投影为CZ。包络复杂度线性增长，仍需
+  CZ降阶。该方法是保留非线性计算图依赖的直接基线，不是本项目创新。
+- 与本项目关系：Run169的独立逐边残差primitive丢失了状态--风--气动残差的物理图；应先按该
+  类方法构造联合外包，再接缺测SMF、控制收紧和递归可行性。本文不直接解决本项目的有界丢包
+  信息状态、因果控制选择或四旋翼硬约束闭环定理。
+
+## Robbins et al. — Online Constraint Tightening for MPC using Constrained Zonotope Reachability Analysis and Zonotope Over-Approximations
+- 年份/出处：2026 American Control Conference；IEEE Xplore document 11616451。
+- Run170阅读层级：仅核查IEEE摘要，全文未取得，首次性未知。
+- 摘要层面内容：用CZ及非线性polyhedral envelopes在线传播误差；以无需优化的CZ到zonotope
+  外包接Pontryagin差收紧，并在LTV MPC数值例上比较。
+- 与本项目关系：这是联合非线性误差传播与在线收紧的最强近邻线索；未读正文前不能声称缺测
+  SMF、跨时刻递归可行性或固定预算严格优势未被覆盖。
 
 ## Ning — Data-Driven Synthesis of Robust Positively Invariant Sets: From State Feedback to Output Feedback
 - 年份/出处：2026, arXiv:2608.23412；全文：https://arxiv.org/abs/2608.23412

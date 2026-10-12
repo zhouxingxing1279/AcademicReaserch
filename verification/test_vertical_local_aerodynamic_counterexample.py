@@ -14,13 +14,13 @@ def _subject():
 
 
 class VerticalLocalAerodynamicCounterexampleTest(unittest.TestCase):
-    def test_return_velocity_endpoints_are_jointly_reachable(self):
+    def test_return_velocity_endpoints_are_jointly_admitted_by_abstract_contract(self):
         result = _subject().local_aerodynamic_counterexample_certificate()
         seed = result["j14_return_velocity_seed"]
         self.assertEqual(seed["horizontal_halfwidth"], F(113619923, 40000000))
         self.assertEqual(seed["vertical_halfwidth"], F(152955031, 72000000))
         self.assertTrue(seed["source_generator_supports_disjoint"])
-        self.assertTrue(seed["opposite_vertical_and_horizontal_endpoints_jointly_reachable"])
+        self.assertTrue(seed["opposite_vertical_and_horizontal_endpoints_jointly_admitted"])
 
     def test_witness_respects_nominal_physical_and_wind_domains(self):
         result = _subject().local_aerodynamic_counterexample_certificate()
@@ -40,9 +40,12 @@ class VerticalLocalAerodynamicCounterexampleTest(unittest.TestCase):
         self.assertEqual(obstruction["strict_excess"], F(376792429915197451, 3144960000000000000))
         self.assertTrue(obstruction["strictly_exceeds_target"])
 
-    def test_counterexample_terminates_only_the_frozen_local_residual_route(self):
+    def test_counterexample_rejects_only_the_independent_residual_outer_contract(self):
         result = _subject().run()
-        self.assertTrue(result["frozen_j14_local_residual_route_impossible"])
+        self.assertTrue(result["abstract_independent_residual_contract_breaks_target"])
+        self.assertFalse(result["nonlinear_benchmark_trajectory_witness_proved"])
+        self.assertFalse(result["frozen_j14_local_residual_route_impossible"])
+        self.assertTrue(result["joint_physical_reachability_route_open"])
         self.assertFalse(result["all_alternative_seed_or_model_contracts_ruled_out"])
         self.assertFalse(result["is_recursive_feasibility_proof"])
         self.assertFalse(result["is_full_six_state_guarantee"])

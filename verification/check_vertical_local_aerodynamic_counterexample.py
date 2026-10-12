@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Exact first-edge counterexample to the Run168 local aerodynamic target."""
+"""Exact counterexample inside the abstract independent-residual contract.
+
+This checker does not construct a trajectory of the nonlinear benchmark plant.
+It proves only that the cycle-lifted outer contract admits an extreme state and
+that the current aerodynamic formula exceeds the Run168 target at that point.
+"""
 import argparse
 from fractions import Fraction as F
 import hashlib
@@ -96,7 +101,7 @@ def local_aerodynamic_counterexample_certificate():
             "horizontal_halfwidth": horizontal_halfwidth,
             "vertical_halfwidth": vertical_halfwidth,
             "source_generator_supports_disjoint": disjoint,
-            "opposite_vertical_and_horizontal_endpoints_jointly_reachable": jointly_reached,
+            "opposite_vertical_and_horizontal_endpoints_jointly_admitted": jointly_reached,
         },
         "admissible_first_edge_witness": {
             "nominal_velocity": (nominal_vx, nominal_vz),
@@ -119,9 +124,12 @@ def local_aerodynamic_counterexample_certificate():
 def run():
     return {
         "status": "pass",
-        "claim": "reachable_j14_return_state_breaks_run168_local_residual_target_on_first_edge",
+        "claim": "abstract_j14_independent_residual_contract_breaks_run168_target",
         **local_aerodynamic_counterexample_certificate(),
-        "frozen_j14_local_residual_route_impossible": True,
+        "abstract_independent_residual_contract_breaks_target": True,
+        "nonlinear_benchmark_trajectory_witness_proved": False,
+        "frozen_j14_local_residual_route_impossible": False,
+        "joint_physical_reachability_route_open": True,
         "all_alternative_seed_or_model_contracts_ruled_out": False,
         "is_recursive_feasibility_proof": False,
         "is_full_six_state_guarantee": False,

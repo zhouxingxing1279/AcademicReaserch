@@ -1,11 +1,11 @@
 {
   "status": "pass",
-  "claim": "reachable_j14_return_state_breaks_run168_local_residual_target_on_first_edge",
+  "claim": "abstract_j14_independent_residual_contract_breaks_run168_target",
   "j14_return_velocity_seed": {
     "horizontal_halfwidth": "113619923/40000000",
     "vertical_halfwidth": "152955031/72000000",
     "source_generator_supports_disjoint": true,
-    "opposite_vertical_and_horizontal_endpoints_jointly_reachable": true
+    "opposite_vertical_and_horizontal_endpoints_jointly_admitted": true
   },
   "admissible_first_edge_witness": {
     "nominal_velocity": [
@@ -34,19 +34,22 @@
     "strict_excess": "376792429915197451/3144960000000000000",
     "strictly_exceeds_target": true
   },
-  "frozen_j14_local_residual_route_impossible": true,
+  "abstract_independent_residual_contract_breaks_target": true,
+  "nonlinear_benchmark_trajectory_witness_proved": false,
+  "frozen_j14_local_residual_route_impossible": false,
+  "joint_physical_reachability_route_open": true,
   "all_alternative_seed_or_model_contracts_ruled_out": false,
   "is_recursive_feasibility_proof": false,
   "is_full_six_state_guarantee": false,
   "source_sha256": {
-    "verification/check_vertical_local_aerodynamic_counterexample.py": "0fc1c3c587e0534fe290e1df1b505f62b951247a9641eaf0f5a8e352b080ecd1",
-    "verification/test_vertical_local_aerodynamic_counterexample.py": "8ca8bae2455066872f349f4295a567fcb3f1e990a29a4fee119b525e0a20208b",
+    "verification/check_vertical_local_aerodynamic_counterexample.py": "e1992f35febe67ce762f3b51481644f41a699878cbbef456a542bbc898ef0919",
+    "verification/test_vertical_local_aerodynamic_counterexample.py": "8f15b5863406e6013817dd39c1130dccada2b9f04e5282dcead1c67db9478073",
     "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
     "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
     "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
-    "docs/learning/105_vertical_local_aerodynamic_counterexample.md": "e18f838bb0f112a6408e31d82fb2ae892bae6654325bc6e89a13eb7fefd326ae",
-    "docs/literature/READ_PAPERS.md": "6bb452b16aad300723565f7a74fd5908d9a3647d28e1169bc9c6e4a591c32402",
-    "docs/research/run169_literature_gate.md": "ec5d5422f8b7542ce2e36a0a1f3b6ed1db0d6c8551fc61522ab0f228188261b1",
-    "docs/research/run169_research_log.md": "f023c7770ea3ec0672d4f7a964c55ebb2808933b7420acb8177e622ccfb389ff"
+    "docs/learning/105_vertical_local_aerodynamic_counterexample.md": "0c24d517851eac5121093012b4367e0f9f71a9c9dde27acdf925cb69ab5915cc",
+    "docs/literature/READ_PAPERS.md": "3609ef02738a986a663cee643a2a0e12ba474cc1eb14e1389d70b9e08d239023",
+    "docs/research/run169_literature_gate.md": "2f247cbe3afcab5d7701931aa612fbcd21ed27ef10de17a775d401fb70b24f81",
+    "docs/research/run169_research_log.md": "2862e04707dc653d4788dfc822e313d8a6fc2da923b7fa226ac67a0741050231"
   }
 }
