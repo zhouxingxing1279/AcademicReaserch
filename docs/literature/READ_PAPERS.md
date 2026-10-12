@@ -21,6 +21,9 @@
   bounded-error posterior是预测集与**已实现观测**逆像的相交；精确相交或任何可靠外包都不能删除
   与先验和噪声合同一致的极端观测。因此它能缩小单个观测后的fiber，却不能自动保证所有可能观测
   的全局创新范围满足控制阈值。
+- Run174 重读 Section 2 Definition 2、Section 3.1 Proposition 1及证明、Section 5估计递推。
+  generalized intersection只保留与实际观测一致的预测状态；它不改变真实plant状态，因此不能
+  将“posterior收缩”解释为“物理速度重置到配置初始盒”。
 
 ## Alamo, Bravo, Camacho — Guaranteed state estimation by zonotopes
 - 年份/出处：2005, *Automatica*, 41(6):1035--1043；DOI：https://doi.org/10.1016/j.automatica.2004.12.008
@@ -179,6 +182,12 @@
 ## Mayne, Seron, Raković — Robust model predictive control of constrained linear systems with bounded disturbances
 - 年份/出处：2005, *Automatica*, 41(2):219–224；DOI：https://doi.org/10.1016/j.automatica.2004.08.019
 - 方法/关系：经典 bounded-disturbance robust/tube MPC 基线；当前 LQR+RPI 不能作为创新。
+
+## Mayne, Raković, Findeisen, Allgöwer — Robust output feedback model predictive control of constrained linear systems
+- 年份/出处：2006, *Automatica*, 42(7):1217--1222；DOI：https://doi.org/10.1016/j.automatica.2006.03.005
+- Run174 阅读：正式摘要、引言、robust output-feedback MPC控制器结构与Theorem 1上下文；出版页正文受限，未逐式核查完整证明。
+- 方法/关键结论：Luenberger估计误差由不变集包络，observer-to-nominal偏差由tube截面包络；二者共同支持收紧与真实约束满足。
+- 与本项目关系：可靠输出反馈闭合依赖误差/tube不变集，不依赖观测把真实状态重置到初始物理盒。本轮只用这一结构作量词对照，不引用未核查证明细节。
 
 ## Raković, Kerrigan, Kouramas, Mayne — Invariant approximations of the minimal robust positively invariant set
 - 年份/出处：2005, *IEEE Transactions on Automatic Control*, 50(3):406–410；DOI：https://doi.org/10.1109/TAC.2005.843854

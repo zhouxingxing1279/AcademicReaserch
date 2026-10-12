@@ -1,0 +1,85 @@
+{
+  "status": "pass",
+  "claim": "successful_measurement_does_not_reset_truth_into_absolute_initial_window_contract",
+  "five_step_physical_witness": {
+    "success_edge": "mode_4_to_mode_0",
+    "thrust_each_step": "2943/200",
+    "torque_each_step": "0",
+    "horizontal_wind_each_step": "0",
+    "trajectory_before_each_step": [
+      {
+        "tick": 0,
+        "vertical_position": "2",
+        "vertical_velocity": "0",
+        "vertical_wind": "0",
+        "vertical_aerodynamic_acceleration": "0"
+      },
+      {
+        "tick": 1,
+        "vertical_position": "2",
+        "vertical_velocity": "981/10000",
+        "vertical_wind": "981/10000",
+        "vertical_aerodynamic_acceleration": "0"
+      },
+      {
+        "tick": 2,
+        "vertical_position": "1000981/500000",
+        "vertical_velocity": "981/5000",
+        "vertical_wind": "981/5000",
+        "vertical_aerodynamic_acceleration": "0"
+      },
+      {
+        "tick": 3,
+        "vertical_position": "1002943/500000",
+        "vertical_velocity": "2943/10000",
+        "vertical_wind": "2943/10000",
+        "vertical_aerodynamic_acceleration": "0"
+      },
+      {
+        "tick": 4,
+        "vertical_position": "502943/250000",
+        "vertical_velocity": "981/2500",
+        "vertical_wind": "981/2500",
+        "vertical_aerodynamic_acceleration": "0"
+      }
+    ],
+    "vertical_acceleration_each_step": "981/200",
+    "vertical_position_after_success": "100981/50000",
+    "vertical_velocity_after_success": "981/2000",
+    "all_inputs_winds_and_states_admissible": true
+  },
+  "successful_measurement": {
+    "measured_position": "100981/50000",
+    "position_noise": "0",
+    "truth_remains_in_posterior": true,
+    "measurement_changes_physical_state": false
+  },
+  "reset_comparison": {
+    "configured_initial_velocity_center": "0",
+    "configured_initial_velocity_halfwidth": "1/10",
+    "post_success_true_vertical_velocity": "981/2000",
+    "strict_excess": "781/2000",
+    "same_absolute_initial_window_contract_rejected": true
+  },
+  "evidence_level": "exact_five_step_nonlinear_plant_measurement_reset_counterexample",
+  "same_initial_window_reset_closure_proved": false,
+  "same_initial_window_reset_closure_rejected": true,
+  "recursive_tube_invariance_proved": false,
+  "next_required_object": "nonlinear_periodic_information_tube_over_5_10_15_tick_returns",
+  "limitations": [
+    "rejects only literal reuse of the absolute configured initial-state box",
+    "does not reject recentered or mode-dependent information tubes",
+    "does not prove terminal invariance or recursive MPC feasibility",
+    "does not provide a full six-degree-of-freedom guarantee"
+  ],
+  "source_sha256": {
+    "verification/check_vertical_measurement_reset_obstruction.py": "be1788974e1bf77bb0db98254ad605cdbd38f107866938d6abc58248165a877f",
+    "verification/test_vertical_measurement_reset_obstruction.py": "84389f39c0e450fb1a977fb2c38189d76a39f1de56d3f94f5d80b6680d0862a5",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/109_vertical_measurement_reset_obstruction.md": "d6885215de5adcab1cd46fcfeee3f8a36bfef14c7cb6bf6bb31d46eff14027b4",
+    "docs/literature/READ_PAPERS.md": "0a0284b1513fb339ff422e16a3eecbc10406712100fe84c859eddef56396ae90",
+    "docs/research/run174_literature_gate.md": "be5147d53d6dec6a41866d87eda138d1faf7009d8e8098f3758fe44f177864f4",
+    "docs/research/run174_research_log.md": "e94d428b635e825691072480566c2f09ada0cc2f4cb6ee01a58012d8172c3ddc"
+  }
+}
