@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "claim": "run169_point_survives_exact_single_step_shared_factor_graph",
+  "shared_factor_graph": {
+    "state_velocity": [
+      "3",
+      "-170955031/72000000"
+    ],
+    "wind": [
+      "-1/2",
+      "1/2"
+    ],
+    "relative_velocity": [
+      "7/2",
+      "-206955031/72000000"
+    ],
+    "pitch": "0",
+    "thrust": "981/100",
+    "all_affine_factor_equalities_hold": true,
+    "state_wind_pitch_and_thrust_domains_hold": true
+  },
+  "sqrt_factors": {
+    "qx": "1229/100",
+    "qz": "43037744856210961/5184000000000000",
+    "sx_bracket": [
+      "7/2",
+      "351/100"
+    ],
+    "sz_bracket": [
+      "206955031/72000000",
+      "207675031/72000000"
+    ]
+  },
+  "vertical_aerodynamic_image": {
+    "lower": "51297584856210961/34560000000000000",
+    "upper": "51446592478530961/34560000000000000",
+    "run168_target": "89401829/65520000",
+    "sqrt_brackets_are_exact": true,
+    "lower_strictly_exceeds_target": true
+  },
+  "exact_nonlinear_graph_point_exists": true,
+  "every_sound_single_step_graph_outer_approximation_must_include_its_image": true,
+  "nonlinear_history_from_initial_set_proved": false,
+  "cross_time_joint_reachability_remains_required": true,
+  "is_recursive_feasibility_proof": false,
+  "is_full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_vertical_shared_factor_graph.py": "bc3719185de9e11bbd9bf43cdf7082b517cd58e456a36f04165cb3388387a096",
+    "verification/test_vertical_shared_factor_graph.py": "8652f30f9584c26b2a79e39ebf3861b52c47e4878b556eabe25621f2cd8cf3c9",
+    "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/106_vertical_shared_factor_graph.md": "9c6e0683319a50ad4a1a946fe8731b415e03a84b68730aea9e5155d27e1bf85d",
+    "docs/literature/READ_PAPERS.md": "05859517f08b4bcd578dcebf3da2a40eefa338b24d568bf2d203a2d672a1c882",
+    "docs/research/run171_literature_gate.md": "d6396a7d29b74b3bf93d5f74211c46806ded13e24a12ac1a40d92d95d56222cd",
+    "docs/research/run171_research_log.md": "d60cde4bf75d2f0992cfffad18dffff5231bf81ca831b0468d6a06c9bd15fd41"
+  }
+}

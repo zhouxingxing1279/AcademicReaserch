@@ -241,6 +241,12 @@
 - 年份/出处：2023, *Acta Informatica*, 60:279–316；DOI：https://doi.org/10.1007/s00236-023-00437-5
 - 方法/关系：支持 quadratic/higher-order maps；“用 polynomial zonotope 表示乘积”已有成熟理论，只能作为实现工具。
 
+## Kochdumper, Althoff — Sparse Polynomial Zonotopes: A Novel Set Representation for Reachability Analysis
+- 年份/出处：2020, *IEEE Transactions on Automatic Control*；DOI：https://doi.org/10.1109/TAC.2020.3024348；预印本：https://arxiv.org/abs/1901.01780
+- Run171 精读：§§1.1--1.2、Definition 1、Propositions 1--4。
+- 方法/关键结论：用 dependent factors 与全局 identifier 保留同一不确定因子在多项式项中的重复依赖；identifier 合并可保持依赖关系，并给出 zonotope、polytope 与 Taylor model 等表示到 SPZ 的转换。
+- 与本项目关系：共享非线性因子表示是成熟 reachability 基线，不构成本项目创新；若一个输入点精确满足真实单步图，任何可靠 SPZ/CZ 图外包都必须保留其像。能否排除 Run169 点取决于从初始集出发的跨时刻联合可达集，而非单步换一种集合表示。
+
 ## Bujarbaruah, Nair, Borrelli — A Semi-Definite Programming Approach to Robust Adaptive MPC under State Dependent Uncertainty
 - 年份/出处：2020, European Control Conference；预印本：arXiv:1910.04378
 - 方法/关系：set-membership refinement + state-dependent uncertainty envelope + robust MPC；“SMF 信息进入 state-dependent robustification”已有先例。

@@ -121,3 +121,13 @@ python scripts/evaluate_model_a.py results/my_model_a --output results/my_model_
 [12 控制权限与输入结构](docs/learning/12_feedback_authority_and_input_structure.md) 的外包改进与不可行性结论保留为控制基础：不为已否定的旧独立全域盒继续搜索覆盖初始中心的终端证书；完整输出反馈、终端条件和递归可行性仍未闭合。
 
 初版方案：2026-09-08；理论优先重置：2026-09-10。AI 辅助文献分析与推导，作者需复核理论及实验；没有代替作者实施人类阅读确认。仓库原有项目名保留。
+
+## 单步共享气动因子图审计（2026-10-12）
+
+```bash
+PYTHONPATH=verification python verification/check_vertical_shared_factor_graph.py \
+  --output results/theory_vertical_shared_factor_graph_20261012/exact_checks.json
+pytest -q verification/test_vertical_shared_factor_graph.py
+```
+
+精确证书表明Run169点满足真实单步共享气动因子图，因此可靠的单步CZ/SPZ外包不能排除其像；这不证明该点可由初始集跨时刻到达。详见[106 单步共享气动因子图](docs/learning/106_vertical_shared_factor_graph.md)及归档`results/theory_vertical_shared_factor_graph_20261012/exact_checks.json`。
