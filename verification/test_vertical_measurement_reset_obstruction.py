@@ -35,11 +35,13 @@ class VerticalMeasurementResetObstructionTests(unittest.TestCase):
     def test_scope_requires_a_periodic_invariant_family(self):
         result = _subject().run()
         self.assertFalse(result["same_initial_window_reset_closure_proved"])
-        self.assertTrue(result["same_initial_window_reset_closure_rejected"])
+        self.assertTrue(result["measurement_only_reset_implication_rejected"])
+        self.assertFalse(result["controlled_return_to_initial_box_impossible"])
+        self.assertTrue(result["control_exists_quantifier_not_tested"])
         self.assertFalse(result["recursive_tube_invariance_proved"])
         self.assertEqual(
             result["next_required_object"],
-            "nonlinear_periodic_information_tube_over_5_10_15_tick_returns",
+            "causal_controlled_return_predecessor_over_observation_fibers",
         )
 
 

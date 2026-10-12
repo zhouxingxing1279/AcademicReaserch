@@ -152,7 +152,7 @@ python -m unittest -q verification.test_vertical_initial_window_aero_support
 
 分层有理数外包认证配置初始集首个15步窗口的竖直气动核心支持不超过`1.23048791`，低于Run168门槛；该结论尚未覆盖测量reset后的重复周期。详见[108 首窗口气动支持](docs/learning/108_vertical_initial_window_aero_support.md)。
 
-## 成功测量的物理reset反例（2026-10-12）
+## 成功测量不等于物理reset（2026-10-12，Run175量词纠错）
 
 ```bash
 PYTHONPATH=verification python verification/check_vertical_measurement_reset_obstruction.py \
@@ -160,4 +160,4 @@ PYTHONPATH=verification python verification/check_vertical_measurement_reset_obs
 python -m unittest -q verification.test_vertical_measurement_reset_obstruction
 ```
 
-五步精确plant轨迹表明成功位置测量不会把真实竖直速度重置到配置初始盒，因此Run173首窗口证书不能逐周期直接复用。详见[109 测量reset反例](docs/learning/109_vertical_measurement_reset_obstruction.md)。
+五步精确plant轨迹仍表明成功位置测量本身不会把真实竖直速度重置到配置初始盒；但该轨迹使用最大推力，而推力属于控制器选择，因此不能据此否定存在因果策略实现受控回返。Run173首窗口证书不能仅凭测量成功直接逐周期复用；受控回返是否成立仍须按“存在同一观测fiber策略、对全部扰动与缺测路径”验证。详见[109 测量reset反例](docs/learning/109_vertical_measurement_reset_obstruction.md)和[Run175量词纠错](docs/research/run175_research_log.md)。

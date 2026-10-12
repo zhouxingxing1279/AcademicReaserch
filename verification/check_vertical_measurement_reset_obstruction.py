@@ -119,15 +119,18 @@ def run():
     result = certificate()
     return {
         "status": "pass",
-        "claim": "successful_measurement_does_not_reset_truth_into_absolute_initial_window_contract",
+        "claim": "successful_measurement_alone_does_not_reset_truth_into_absolute_initial_window_contract",
         **result,
-        "evidence_level": "exact_five_step_nonlinear_plant_measurement_reset_counterexample",
+        "evidence_level": "exact_quantifier_correction_for_measurement_only_reset_witness",
         "same_initial_window_reset_closure_proved": False,
-        "same_initial_window_reset_closure_rejected": True,
+        "measurement_only_reset_implication_rejected": True,
+        "controlled_return_to_initial_box_impossible": False,
+        "control_exists_quantifier_not_tested": True,
         "recursive_tube_invariance_proved": False,
-        "next_required_object": "nonlinear_periodic_information_tube_over_5_10_15_tick_returns",
+        "next_required_object": "causal_controlled_return_predecessor_over_observation_fibers",
         "limitations": [
-            "rejects only literal reuse of the absolute configured initial-state box",
+            "rejects only inferring absolute-box reset from measurement success alone",
+            "does not test existence of a causal controlled-return policy",
             "does not reject recentered or mode-dependent information tubes",
             "does not prove terminal invariance or recursive MPC feasibility",
             "does not provide a full six-degree-of-freedom guarantee",
@@ -163,6 +166,8 @@ def main():
         "docs/literature/READ_PAPERS.md",
         "docs/research/run174_literature_gate.md",
         "docs/research/run174_research_log.md",
+        "docs/research/run175_literature_gate.md",
+        "docs/research/run175_research_log.md",
     ]
     result["source_sha256"] = {
         source: hashlib.sha256((ROOT / source).read_bytes()).hexdigest()

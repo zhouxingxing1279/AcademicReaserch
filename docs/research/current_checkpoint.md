@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-12，Run174）
+# 研究短检查点（2026-10-12，Run175）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run173=`ea7c216`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`、Run174=`ec21e9a`。
 
-Run174精确否定“成功测量后回到同一绝对首窗口盒”：从配置中心连续五步取最大推力、零力矩和`w_z=v_z`，真实plant在首次成功返回时达到`p_z=2.01962,v_z=0.4905`；零测量噪声合法且posterior必须包含真值，但`v_z`超过初始半宽`0.1`达`0.3905`。测量只收缩信息集，不重置物理状态。证据不否定重定心/相位相关tube，也不是递归可行或六自由度保证。
+Run175纠正Run174量词：五步最大推力轨迹仍精确证明“测量本身不重置物理速度”，但推力是控制器选择，不是对手扰动，故不能据此否定存在因果策略实现受控回返。检查器现明确`measurement_only_reset_implication_rejected=true`、`controlled_return_to_initial_box_impossible=false`、`control_exists_quantifier_not_tested=true`。周期tube综合必须采用`exists policy, forall disturbances/dropout paths`。
 
-下一唯一问题：构造覆盖5/10/15步成功返回的非线性周期information tube，先认证各相位绝对`(v_x,v_z,phi)`包络与气动支持，再检验周期映射闭合。
+下一唯一问题：冻结基于可见posterior/模式的因果推力策略类，构造5步return predecessor，并对每个观测fiber用同一策略覆盖全部风、噪声和success/miss后继。

@@ -1,6 +1,6 @@
 {
   "status": "pass",
-  "claim": "successful_measurement_does_not_reset_truth_into_absolute_initial_window_contract",
+  "claim": "successful_measurement_alone_does_not_reset_truth_into_absolute_initial_window_contract",
   "five_step_physical_witness": {
     "success_edge": "mode_4_to_mode_0",
     "thrust_each_step": "2943/200",
@@ -61,25 +61,30 @@
     "strict_excess": "781/2000",
     "same_absolute_initial_window_contract_rejected": true
   },
-  "evidence_level": "exact_five_step_nonlinear_plant_measurement_reset_counterexample",
+  "evidence_level": "exact_quantifier_correction_for_measurement_only_reset_witness",
   "same_initial_window_reset_closure_proved": false,
-  "same_initial_window_reset_closure_rejected": true,
+  "measurement_only_reset_implication_rejected": true,
+  "controlled_return_to_initial_box_impossible": false,
+  "control_exists_quantifier_not_tested": true,
   "recursive_tube_invariance_proved": false,
-  "next_required_object": "nonlinear_periodic_information_tube_over_5_10_15_tick_returns",
+  "next_required_object": "causal_controlled_return_predecessor_over_observation_fibers",
   "limitations": [
-    "rejects only literal reuse of the absolute configured initial-state box",
+    "rejects only inferring absolute-box reset from measurement success alone",
+    "does not test existence of a causal controlled-return policy",
     "does not reject recentered or mode-dependent information tubes",
     "does not prove terminal invariance or recursive MPC feasibility",
     "does not provide a full six-degree-of-freedom guarantee"
   ],
   "source_sha256": {
-    "verification/check_vertical_measurement_reset_obstruction.py": "be1788974e1bf77bb0db98254ad605cdbd38f107866938d6abc58248165a877f",
-    "verification/test_vertical_measurement_reset_obstruction.py": "84389f39c0e450fb1a977fb2c38189d76a39f1de56d3f94f5d80b6680d0862a5",
+    "verification/check_vertical_measurement_reset_obstruction.py": "15faf19c8af3a59557cc73c64e62d04aa9062fbfb2f20ef9ba9a3182fb7b0348",
+    "verification/test_vertical_measurement_reset_obstruction.py": "5b229dde85d6476743aef7e1331d42457c286d31076a6906e1ca975e61fa9652",
     "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
     "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
-    "docs/learning/109_vertical_measurement_reset_obstruction.md": "d6885215de5adcab1cd46fcfeee3f8a36bfef14c7cb6bf6bb31d46eff14027b4",
-    "docs/literature/READ_PAPERS.md": "0a0284b1513fb339ff422e16a3eecbc10406712100fe84c859eddef56396ae90",
+    "docs/learning/109_vertical_measurement_reset_obstruction.md": "3ba7d2de10277f39a74cd0349d3681b284af039c95e861668e683d90cac1357f",
+    "docs/literature/READ_PAPERS.md": "d5e846393782b29362d6f83c06d39cf34df65ade6fb3b0daa94cc78f557acec4",
     "docs/research/run174_literature_gate.md": "be5147d53d6dec6a41866d87eda138d1faf7009d8e8098f3758fe44f177864f4",
-    "docs/research/run174_research_log.md": "e94d428b635e825691072480566c2f09ada0cc2f4cb6ee01a58012d8172c3ddc"
+    "docs/research/run174_research_log.md": "337dcbef54a725f60a4923314477b9f961d70f768c0f38a05ab464587d914b43",
+    "docs/research/run175_literature_gate.md": "9e3d224cd182587bfc9e1c27ff378bf02b62f35b3d2fa77e49b81fe3456f3260",
+    "docs/research/run175_research_log.md": "1426d155afc5b2ff6b930abf230c42691ae044403447b2d433f0509f73d668b1"
   }
 }

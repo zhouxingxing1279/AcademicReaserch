@@ -12,8 +12,8 @@ consistent-state intersection而非物理状态重置；核查Mayne输出反馈t
 零。配置Euler plant给出成功返回时`p_z=2.01962`、`v_z=0.4905`。零位置噪声是允许实现，故
 posterior必须包含该真值；但真实速度比Run173初始合同上界`0.1`高`0.3905`。
 
-证据等级为`exact_five_step_nonlinear_plant_measurement_reset_counterexample`。它只否定同一绝对
-初始盒的直接复用，不否定重定心或相位相关tube，也不是递归可行性或六自由度保证。
+证据等级修正为`exact_five_step_measurement_only_reset_counterexample`。它只否定“测量本身导致
+物理reset”，未检验控制存在量词；不否定受控回返、重定心或相位相关tube。
 
 ## 实现、失败尝试与方向纠正
 
