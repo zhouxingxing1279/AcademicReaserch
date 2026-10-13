@@ -163,3 +163,5 @@ python -m unittest -q verification.test_vertical_measurement_reset_obstruction
 五步精确plant轨迹仍表明成功位置测量本身不会把真实竖直速度重置到配置初始盒；但该轨迹使用最大推力，而推力属于控制器选择，因此不能据此否定存在因果策略实现受控回返。Run173首窗口证书不能仅凭测量成功直接逐周期复用；受控回返是否成立仍须按“存在同一观测fiber策略、对全部扰动与缺测路径”验证。详见[109 测量reset反例](docs/learning/109_vertical_measurement_reset_obstruction.md)和[Run175量词纠错](docs/research/run175_research_log.md)。
 
 Run176进一步确认仓库已有线性product-fiber前驱与固定J14策略无关反证，重复实现策略类没有价值；当前未决对象收敛为配置初始posterior上的五步非线性information-state predecessor。详见[110 受控回返前驱排重](docs/learning/110_controlled_return_predecessor_dedup.md)。
+
+Run177进一步纠正该对象：配置产生的是随tick-0测量变化的posterior族，不是单个盒；第五个输入先于tick-5位置包，且success/miss后继进入不同mode。故暂不实现会混淆物理回返与测量收缩的单盒检查器，下一步先定义mode-indexed terminal information-family。详见[111 五步information-state合同](docs/learning/111_five_step_information_state_contract.md)。

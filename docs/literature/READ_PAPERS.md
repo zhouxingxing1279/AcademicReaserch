@@ -582,6 +582,9 @@
 - Run 152 重读 Section IV-A 的 Information State Formulation、Lemma 4 证明、Remarks
   8--10、Theorems 9--11 与 Corollary 4。由完整历史信息状态压缩到有限标签，必须另证
   初始化覆盖和递归模拟；`mode/age` 标签本身不是充分统计量证明。
+- Run 177 再读 Section IV-A、Lemma 4、Remarks 8--10、Theorems 9--11、Corollary 4，专门核查
+  五步非线性问题的初始条件与时序。配置 prior 经 tick-0 实际测量才形成 posterior，因此应量化
+  posterior 族；有限时域 Bellman 后继还必须保留 tick-5 success/miss 的不同 mode。
 
 ## Kjellqvist — Minimax Dual Control with Finite-Dimensional Information State
 - 年份/出处：2024, L4DC, *Proceedings of Machine Learning Research* 242:299--311；
