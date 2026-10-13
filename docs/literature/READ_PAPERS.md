@@ -534,6 +534,9 @@
   零/label-only 策略失败不能外推为一般 information-ensemble feedback 失败。
 - Run 159 重读 Sections 6.4--6.5、Theorem 3，确认一般 information-set feedback 已有完整
   近邻；本轮只淘汰一个 fixed-residual、bounded centered-affine path，不能外推为一般方法失败。
+- Run 178 全文定向重读 Sections 2、3.1--3.3、Propositions 1--3 及 extreme-set/downward-
+  closure 构造。information ensemble 对任意紧集求交的闭合和最小表示已有一般理论；仓库
+  `T_0/T_1` 只能描述局部边，不能替代既有 60-state/45-recurrent information-family 合同。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

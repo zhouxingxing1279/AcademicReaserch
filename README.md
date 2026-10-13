@@ -164,4 +164,6 @@ python -m unittest -q verification.test_vertical_measurement_reset_obstruction
 
 Run176进一步确认仓库已有线性product-fiber前驱与固定J14策略无关反证，重复实现策略类没有价值；当前未决对象收敛为配置初始posterior上的五步非线性information-state predecessor。详见[110 受控回返前驱排重](docs/learning/110_controlled_return_predecessor_dedup.md)。
 
-Run177进一步纠正该对象：配置产生的是随tick-0测量变化的posterior族，不是单个盒；第五个输入先于tick-5位置包，且success/miss后继进入不同mode。故暂不实现会混淆物理回返与测量收缩的单盒检查器，下一步先定义mode-indexed terminal information-family。详见[111 五步information-state合同](docs/learning/111_five_step_information_state_contract.md)。
+Run177进一步纠正该对象：配置产生的是随tick-0测量变化的posterior族，不是单个盒；第五个输入先于tick-5位置包，且success/miss后继进入不同mode。故暂不实现会混淆物理回返与测量收缩的单盒检查器；当轮曾把下一步记为定义mode-indexed terminal information-family，已由Run178排重纠正。详见[111 五步information-state合同](docs/learning/111_five_step_information_state_contract.md)。
+
+Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边，仓库第88、89章和Run154已定义更完整的60-state扩展、15个首次返回瞬态标签与45个循环terminal标签。故停止重复的两族checker；下一步应先为真实非线性plant冻结fixed-complexity `Gamma`及可靠逐边包含oracle。详见[112 terminal information-family排重](docs/learning/112_terminal_information_family_dedup.md)。
