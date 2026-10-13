@@ -1,5 +1,10 @@
 # AcademicReaserch
 
+最新研究检查点：[Run180 mode-0 miss lifted-cell oracle](docs/learning/114_mode0_miss_lifted_cell.md)：
+固定正体积 `(eta,d)` source cell、仿射可见策略和 10 个 target normals，在保留
+actual-thrust-dependent 共享竖直 residual 的 `0->1 miss` 上得到 exact 一步闭合。该结果只是
+接口实现引理，不是 terminal RCI 或递归可行性证明；下一步转向 mode 4 的未知 success/miss 分叉。
+
 **当前主线：传统集员滤波（SMF）与输出反馈 Tube MPC，暂停学习算法与在线参数辨识。最新入口：[36 执行器权限与 scheduling-conditioned residual 审计](docs/learning/36_actuator_authority_and_scheduled_residual.md)。第33–35章的 static-K 失败不能升级为执行器物理不可能：移除固定反馈结构后，在低推力、全部硬状态/力矩约束下，单一 global residual 的首个数值 torque-feasible horizon 为 381 tick，而按已知 thrust 条件化同一解析 residual 后降为 160 tick（约 58%）。这些 horizon 是 HiGHS 数值边界，不是形式化最短性证明。下一步只做 certificate-based ancillary/RCI synthesis，并以 scheduling-consistent W(T) 作为强基线；该基线闭合前不恢复 CZ 几何收益讨论。**
 
 ## 当前研究与历史边界

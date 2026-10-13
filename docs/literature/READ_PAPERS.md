@@ -490,6 +490,10 @@
 - Run 155 重新精读 Section III-A--C、Definition 2、Theorem 1、式 (3)--(14)。再次确认
   同一 noisy-output fiber 的完整相容状态只能使用一个 output-dependent input，且输入约束与
   鲁棒后继属于同一量词；仿射输入在凸 fiber 上的可行性仍依赖凸输入集。
+- Run 180 全文重读 §II、§III-A--C、Definitions 1--2、Theorem 1、式(3)--(14)与
+  Algorithm 1，定向核查固定 output cell、PWA input 与逐 facet robustification。该框架已覆盖
+  本轮 fiber-shared affine policy/target-normal oracle 的方法思想；当前差异只在 packet edge、
+  joint `(eta,e)` 坐标和 actual-thrust-dependent residual 的可靠实例化。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023 预印本、2026 *Automatica* 183:112661；DOI：https://doi.org/10.1016/j.automatica.2025.112661；全文：https://arxiv.org/pdf/2307.04146

@@ -1,0 +1,171 @@
+{
+  "status": "pass",
+  "claim": "one_fixed_lifted_mode0_cell_closes_on_the_mode0_to1_miss_edge",
+  "source_mode": 0,
+  "target_mode": 1,
+  "edge_label": "miss",
+  "edge_present_in_contract": true,
+  "coordinates": "source=(eta_p,eta_v,d_p,d_v), e=eta+d",
+  "source_cell": "eta in exact Run136 mode-0 projection, |d_p|<=1/5, |d_v|<=1/4",
+  "affine_fibre_policy": {
+    "delta_T": "0*d_p + 0*d_v + 0",
+    "position_gain": "0",
+    "velocity_gain": "0",
+    "offset": "0"
+  },
+  "policy_uses_hidden_eta": false,
+  "nominal_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "actual_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "plant_thrust_interval": [
+    "981/200",
+    "2943/200"
+  ],
+  "residual_graph": "r_z=(1043/500+(81/800)*actual_thrust)*rho_z, |rho_z|<=1",
+  "residual_halfwidth_at_actual_thrust_upper": "411370817/128000000",
+  "shared_residual_realization": true,
+  "current_source_domain_slacks": [
+    "39/50",
+    "52142137/36000000"
+  ],
+  "target_normal_count": 10,
+  "eta_target_normal_rows": [
+    {
+      "normal": [
+        "0",
+        "-72000000",
+        "0",
+        "0"
+      ],
+      "support_upper": "64274918153/800",
+      "target_bound": "80865013",
+      "slack": "417092247/800"
+    },
+    {
+      "normal": [
+        "400000000",
+        "-8000000",
+        "0",
+        "0"
+      ],
+      "support_upper": "6811370817/800",
+      "target_bound": "8572143",
+      "slack": "46343583/800"
+    },
+    {
+      "normal": [
+        "1800000000",
+        "0",
+        "0",
+        "0"
+      ],
+      "support_upper": "73857863",
+      "target_bound": "73857863",
+      "slack": "0"
+    },
+    {
+      "normal": [
+        "0",
+        "72000000",
+        "0",
+        "0"
+      ],
+      "support_upper": "64274918153/800",
+      "target_bound": "80865013",
+      "slack": "417092247/800"
+    },
+    {
+      "normal": [
+        "-400000000",
+        "8000000",
+        "0",
+        "0"
+      ],
+      "support_upper": "6811370817/800",
+      "target_bound": "8572143",
+      "slack": "46343583/800"
+    },
+    {
+      "normal": [
+        "-1800000000",
+        "0",
+        "0",
+        "0"
+      ],
+      "support_upper": "73857863",
+      "target_bound": "73857863",
+      "slack": "0"
+    }
+  ],
+  "tracking_target_normal_rows": [
+    {
+      "normal": [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      "support_upper": "442857863/1800000000",
+      "target_bound": "1",
+      "slack": "1357142137/1800000000"
+    },
+    {
+      "normal": [
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      "support_upper": "442857863/1800000000",
+      "target_bound": "1",
+      "slack": "1357142137/1800000000"
+    },
+    {
+      "normal": [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "support_upper": "78674918153/57600000000",
+      "target_bound": "11/4",
+      "slack": "79725081847/57600000000"
+    },
+    {
+      "normal": [
+        "0",
+        "0",
+        "0",
+        "-1"
+      ],
+      "support_upper": "78674918153/57600000000",
+      "target_bound": "11/4",
+      "slack": "79725081847/57600000000"
+    }
+  ],
+  "minimum_target_normal_slack": "0",
+  "positive_volume_source_cell": true,
+  "one_edge_closed": true,
+  "evidence_level": "exact_one_edge_target_normal_support_certificate",
+  "nonlinear_plant_scope": "certified actual-thrust-dependent vertical residual graph, not exact 6-DoF dynamics",
+  "is_rci_certificate": false,
+  "terminal_family_closed": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_mode0_miss_lifted_cell.py": "c65f2155197251ae31b7df1d8837767bc893548b777adeb28b4c1655cda2a5f8",
+    "verification/test_mode0_miss_lifted_cell.py": "44e65ba76be03bbaf6fb94fe425e6398770a2e166345edf25513253fb9005dab",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/114_mode0_miss_lifted_cell.md": "28deaaad86855faca0efc91cf88bdcf2e5730d938c1a77a8cfe71f7d8568f650",
+    "docs/literature/READ_PAPERS.md": "2d31ec2e3f9daf805fc64521795fced482b0fd7d62d0c358b797edd02a1822d1",
+    "docs/research/run180_literature_gate.md": "4f50ca24b7d115bc87ed07e9a0869ccf3f57aee5fdf6db8367db9824c93f3c67",
+    "docs/research/run180_research_log.md": "ff5cde6bc77195d75fb943482f17b835ca231fa44f50c45c11eed31230646562"
+  }
+}
