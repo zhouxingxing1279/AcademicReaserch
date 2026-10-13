@@ -167,3 +167,5 @@ Run176进一步确认仓库已有线性product-fiber前驱与固定J14策略无�
 Run177进一步纠正该对象：配置产生的是随tick-0测量变化的posterior族，不是单个盒；第五个输入先于tick-5位置包，且success/miss后继进入不同mode。故暂不实现会混淆物理回返与测量收缩的单盒检查器；当轮曾把下一步记为定义mode-indexed terminal information-family，已由Run178排重纠正。详见[111 五步information-state合同](docs/learning/111_five_step_information_state_contract.md)。
 
 Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边，仓库第88、89章和Run154已定义更完整的60-state扩展、15个首次返回瞬态标签与45个循环terminal标签。故停止重复的两族checker；下一步应先为真实非线性plant冻结fixed-complexity `Gamma`及可靠逐边包含oracle。详见[112 terminal information-family排重](docs/learning/112_terminal_information_family_dedup.md)。
+
+Run179进一步纠正`Gamma`的类型：普通CZ/SPZ降阶只压缩一条已实现history的posterior，不能直接表示连续可见`d`上的集合值策略图。下一步必须先冻结lifted `(d,s)` cell、fixed normals和cell内仿射fiber policy，再验证一条真实非线性miss边。详见[113 参数化Gamma类型审计](docs/learning/113_parameterized_gamma_obstruction.md)。

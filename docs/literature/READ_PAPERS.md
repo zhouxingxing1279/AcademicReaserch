@@ -56,6 +56,9 @@
 ## Rego, Raffo, Scott, Raimondo — Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems
 - 年份/出处：2020, *Automatica*, 111:108614；DOI：https://doi.org/10.1016/j.automatica.2019.108614
 - 方法/关系：CZ mean-value/Taylor guaranteed nonlinear propagation/update；四旋翼非线性阶段的重要传播基线。
+- Run 179 全文精读 Section 2、Section 3.1、Sections 4.1--4.5、Theorems 1--3、Lemma 1、
+  Corollaries 1--2、Remarks 8--10及式(22)。其固定阶外包递推针对已知输入和已实现测量下的
+  单个posterior；可作为单fiber传播原语，但不表示连续可见`d`上的information-family策略图。
 
 ## Cong, Wang, Zhou — Stability of linear set-membership filters with respect to initial conditions: An observation-information perspective
 - 年份/出处：2025, *Automatica*；DOI：https://doi.org/10.1016/j.automatica.2024.111993
