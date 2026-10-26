@@ -494,6 +494,10 @@
   Algorithm 1，定向核查固定 output cell、PWA input 与逐 facet robustification。该框架已覆盖
   本轮 fiber-shared affine policy/target-normal oracle 的方法思想；当前差异只在 packet edge、
   joint `(eta,e)` 坐标和 actual-thrust-dependent residual 的可靠实例化。
+- Run 181 重新下载全文并精读 §III-A--C、Definition 2、Theorem 1、式(3)--(14)与
+  Algorithm 1，专门核查“当前输入先于未知 packet label”的 mode-4 双边证书。论文要求每个
+  noisy-output fiber 共用输入并逐 facet robustify，但其 LPV scheduling 在控制时可知、扰动集
+  固定；本轮仍只是在项目的 unknown-edge/shared-residual 合同上可靠实例化，不作创新声明。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023 预印本、2026 *Automatica* 183:112661；DOI：https://doi.org/10.1016/j.automatica.2025.112661；全文：https://arxiv.org/pdf/2307.04146

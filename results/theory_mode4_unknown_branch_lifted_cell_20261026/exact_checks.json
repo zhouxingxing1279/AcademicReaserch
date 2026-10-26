@@ -1,0 +1,652 @@
+{
+  "status": "pass",
+  "claim": "one_fixed_lifted_mode4_cell_closes_on_both_unknown_packet_branches",
+  "source_mode": 4,
+  "coordinates": "source=(eta_p,eta_v,d_p,d_v), e=eta+d",
+  "source_cell": "eta in exact Run136 mode-4 projection, |d_p|<=1/5, |d_v|<=1/4",
+  "affine_fibre_policy": {
+    "delta_T": "0*d_p + 0*d_v + 0",
+    "position_gain": "0",
+    "velocity_gain": "0",
+    "offset": "0"
+  },
+  "policy_uses_hidden_eta": false,
+  "policy_uses_future_edge_label": false,
+  "policy_values_before_label": 1,
+  "nominal_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "actual_thrust_interval": [
+    "1356943/160000",
+    "1782257/160000"
+  ],
+  "plant_thrust_interval": [
+    "981/200",
+    "2943/200"
+  ],
+  "residual_graph": "r_z=(1043/500+(81/800)*actual_thrust)*rho_z, |rho_z|<=1",
+  "residual_halfwidth_at_actual_thrust_upper": "411370817/128000000",
+  "shared_actual_thrust_residual_law": true,
+  "measurement_noise_halfwidth": "1/50",
+  "eta_projection_area": "41105550110953/240000000000000",
+  "current_source_domain_slacks": [
+    "1237120687/1800000000",
+    "41843563/36000000"
+  ],
+  "positive_volume_source_cell": true,
+  "branches": [
+    {
+      "source_mode": 4,
+      "target_mode": 5,
+      "edge_label": "miss",
+      "edge_present_in_contract": true,
+      "eta_target_normal_rows": [
+        {
+          "normal": [
+            "0",
+            "-72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "96312874",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "80752636553/800",
+          "target_bound": "101462161",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "80000000",
+            "-8000000",
+            "0",
+            "0"
+          ],
+          "source_support": "2744286",
+          "residual_support": "411370817/800",
+          "noise_support": 0,
+          "support_upper": "2606799617/800",
+          "target_bound": "3316429",
+          "slack": "46343583/800"
+        },
+        {
+          "normal": [
+            "900000000",
+            "-72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "44652862",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "39424626953/800",
+          "target_bound": "49802149",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "3600000000",
+            "-216000000",
+            "0",
+            "0"
+          ],
+          "source_support": "244028600",
+          "residual_support": "11107012059/800",
+          "noise_support": 0,
+          "support_upper": "206329892059/800",
+          "target_bound": "259476461",
+          "slack": "1251276741/800"
+        },
+        {
+          "normal": [
+            "12000000",
+            "-480000",
+            "0",
+            "0"
+          ],
+          "source_support": "53290721/50",
+          "residual_support": "1234112451/40000",
+          "noise_support": 0,
+          "support_upper": "43866689251/40000",
+          "target_bound": "1100143",
+          "slack": "139030749/40000"
+        },
+        {
+          "normal": [
+            "3600000000",
+            "-72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "405758626",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "328309238153/800",
+          "target_bound": "410907913",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "7200000",
+            "0",
+            "0",
+            "0"
+          ],
+          "source_support": "1004143",
+          "residual_support": "0",
+          "noise_support": 0,
+          "support_upper": "1004143",
+          "target_bound": "1004143",
+          "slack": "0"
+        },
+        {
+          "normal": [
+            "0",
+            "72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "96312874",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "80752636553/800",
+          "target_bound": "101462161",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "-80000000",
+            "8000000",
+            "0",
+            "0"
+          ],
+          "source_support": "2744286",
+          "residual_support": "411370817/800",
+          "noise_support": 0,
+          "support_upper": "2606799617/800",
+          "target_bound": "3316429",
+          "slack": "46343583/800"
+        },
+        {
+          "normal": [
+            "-900000000",
+            "72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "44652862",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "39424626953/800",
+          "target_bound": "49802149",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "-3600000000",
+            "216000000",
+            "0",
+            "0"
+          ],
+          "source_support": "244028600",
+          "residual_support": "11107012059/800",
+          "noise_support": 0,
+          "support_upper": "206329892059/800",
+          "target_bound": "259476461",
+          "slack": "1251276741/800"
+        },
+        {
+          "normal": [
+            "-12000000",
+            "480000",
+            "0",
+            "0"
+          ],
+          "source_support": "53290721/50",
+          "residual_support": "1234112451/40000",
+          "noise_support": 0,
+          "support_upper": "43866689251/40000",
+          "target_bound": "1100143",
+          "slack": "139030749/40000"
+        },
+        {
+          "normal": [
+            "-3600000000",
+            "72000000",
+            "0",
+            "0"
+          ],
+          "source_support": "405758626",
+          "residual_support": "3702337353/800",
+          "noise_support": 0,
+          "support_upper": "328309238153/800",
+          "target_bound": "410907913",
+          "slack": "417092247/800"
+        },
+        {
+          "normal": [
+            "-7200000",
+            "0",
+            "0",
+            "0"
+          ],
+          "source_support": "1004143",
+          "residual_support": "0",
+          "noise_support": 0,
+          "support_upper": "1004143",
+          "target_bound": "1004143",
+          "slack": "0"
+        }
+      ],
+      "tracking_target_normal_rows": [
+        {
+          "normal": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "source_support": "2480143/7200000",
+          "residual_support": "0",
+          "noise_support": 0,
+          "support_upper": "2480143/7200000",
+          "target_bound": "1",
+          "slack": "4719857/7200000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "source_support": "2480143/7200000",
+          "residual_support": "0",
+          "noise_support": 0,
+          "support_upper": "2480143/7200000",
+          "target_bound": "1",
+          "slack": "4719857/7200000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "source_support": "57156437/36000000",
+          "residual_support": "411370817/6400000000",
+          "noise_support": 0,
+          "support_upper": "95152636553/57600000000",
+          "target_bound": "11/4",
+          "slack": "63247363447/57600000000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "source_support": "57156437/36000000",
+          "residual_support": "411370817/6400000000",
+          "noise_support": 0,
+          "support_upper": "95152636553/57600000000",
+          "target_bound": "11/4",
+          "slack": "63247363447/57600000000"
+        }
+      ],
+      "target_normal_count": 18,
+      "minimum_target_normal_slack": "0",
+      "joint_primitive_columns": [
+        {
+          "label": "eta_generator_0",
+          "kind": "source",
+          "vector": [
+            "1/50",
+            "0",
+            "1/50",
+            "0"
+          ]
+        },
+        {
+          "label": "eta_generator_1",
+          "kind": "source",
+          "vector": [
+            "37857863/360000000",
+            "37857863/36000000",
+            "37857863/360000000",
+            "37857863/36000000"
+          ]
+        },
+        {
+          "label": "eta_generator_2",
+          "kind": "source",
+          "vector": [
+            "572143/100000000",
+            "572143/8000000",
+            "572143/100000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_3",
+          "kind": "source",
+          "vector": [
+            "1716429/400000000",
+            "572143/8000000",
+            "1716429/400000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_4",
+          "kind": "source",
+          "vector": [
+            "572143/200000000",
+            "572143/8000000",
+            "572143/200000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_5",
+          "kind": "source",
+          "vector": [
+            "572143/400000000",
+            "572143/8000000",
+            "572143/400000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "d_position",
+          "kind": "source",
+          "vector": [
+            "0",
+            "0",
+            "1/5",
+            "0"
+          ]
+        },
+        {
+          "label": "d_velocity",
+          "kind": "source",
+          "vector": [
+            "0",
+            "0",
+            "1/200",
+            "1/4"
+          ]
+        },
+        {
+          "label": "rho_z",
+          "kind": "residual",
+          "vector": [
+            "0",
+            "411370817/6400000000",
+            "0",
+            "411370817/6400000000"
+          ]
+        }
+      ],
+      "shared_residual_between_eta_and_tracking_error": true,
+      "shared_residual_identity_verified": true,
+      "success_measurement_noise_propagated": false,
+      "measurement_innovation_cancels_from_tracking_error": false,
+      "measurement_cancellation_identity_verified": false,
+      "branch_closed": true
+    },
+    {
+      "source_mode": 4,
+      "target_mode": 0,
+      "edge_label": "success",
+      "edge_present_in_contract": true,
+      "eta_target_normal_rows": [
+        {
+          "normal": [
+            "0",
+            "-36000000",
+            "0",
+            "0"
+          ],
+          "source_support": "64086439/2",
+          "residual_support": "3702337353/1600",
+          "noise_support": "3240000",
+          "support_upper": "60155488553/1600",
+          "target_bound": "37857863",
+          "slack": "417092247/1600"
+        },
+        {
+          "normal": [
+            "50",
+            "0",
+            "0",
+            "0"
+          ],
+          "source_support": "0",
+          "residual_support": "0",
+          "noise_support": "1",
+          "support_upper": "1",
+          "target_bound": "1",
+          "slack": "0"
+        },
+        {
+          "normal": [
+            "0",
+            "36000000",
+            "0",
+            "0"
+          ],
+          "source_support": "64086439/2",
+          "residual_support": "3702337353/1600",
+          "noise_support": "3240000",
+          "support_upper": "60155488553/1600",
+          "target_bound": "37857863",
+          "slack": "417092247/1600"
+        },
+        {
+          "normal": [
+            "-50",
+            "0",
+            "0",
+            "0"
+          ],
+          "source_support": "0",
+          "residual_support": "0",
+          "noise_support": "1",
+          "support_upper": "1",
+          "target_bound": "1",
+          "slack": "0"
+        }
+      ],
+      "tracking_target_normal_rows": [
+        {
+          "normal": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "source_support": "2480143/7200000",
+          "residual_support": "0",
+          "noise_support": "0",
+          "support_upper": "2480143/7200000",
+          "target_bound": "1",
+          "slack": "4719857/7200000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "source_support": "2480143/7200000",
+          "residual_support": "0",
+          "noise_support": "0",
+          "support_upper": "2480143/7200000",
+          "target_bound": "1",
+          "slack": "4719857/7200000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "source_support": "57156437/36000000",
+          "residual_support": "411370817/6400000000",
+          "noise_support": "0",
+          "support_upper": "95152636553/57600000000",
+          "target_bound": "11/4",
+          "slack": "63247363447/57600000000"
+        },
+        {
+          "normal": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "source_support": "57156437/36000000",
+          "residual_support": "411370817/6400000000",
+          "noise_support": "0",
+          "support_upper": "95152636553/57600000000",
+          "target_bound": "11/4",
+          "slack": "63247363447/57600000000"
+        }
+      ],
+      "target_normal_count": 8,
+      "minimum_target_normal_slack": "0",
+      "joint_primitive_columns": [
+        {
+          "label": "eta_generator_0",
+          "kind": "source",
+          "vector": [
+            "0",
+            "-9/100",
+            "1/50",
+            "0"
+          ]
+        },
+        {
+          "label": "eta_generator_1",
+          "kind": "source",
+          "vector": [
+            "0",
+            "416436493/720000000",
+            "37857863/360000000",
+            "37857863/36000000"
+          ]
+        },
+        {
+          "label": "eta_generator_2",
+          "kind": "source",
+          "vector": [
+            "0",
+            "572143/12500000",
+            "572143/100000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_3",
+          "kind": "source",
+          "vector": [
+            "0",
+            "41766439/800000000",
+            "1716429/400000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_4",
+          "kind": "source",
+          "vector": [
+            "0",
+            "23457863/400000000",
+            "572143/200000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "eta_generator_5",
+          "kind": "source",
+          "vector": [
+            "0",
+            "52065013/800000000",
+            "572143/400000000",
+            "572143/8000000"
+          ]
+        },
+        {
+          "label": "d_position",
+          "kind": "source",
+          "vector": [
+            "0",
+            "0",
+            "1/5",
+            "0"
+          ]
+        },
+        {
+          "label": "d_velocity",
+          "kind": "source",
+          "vector": [
+            "0",
+            "0",
+            "1/200",
+            "1/4"
+          ]
+        },
+        {
+          "label": "rho_z",
+          "kind": "residual",
+          "vector": [
+            "0",
+            "411370817/6400000000",
+            "0",
+            "411370817/6400000000"
+          ]
+        },
+        {
+          "label": "n_pz",
+          "kind": "noise",
+          "vector": [
+            "-1/50",
+            "-9/100",
+            "0",
+            "0"
+          ]
+        }
+      ],
+      "shared_residual_between_eta_and_tracking_error": true,
+      "shared_residual_identity_verified": true,
+      "success_measurement_noise_propagated": true,
+      "measurement_innovation_cancels_from_tracking_error": true,
+      "measurement_cancellation_identity_verified": true,
+      "branch_closed": true
+    }
+  ],
+  "both_unknown_branches_closed": true,
+  "evidence_level": "exact_two_edge_unknown_label_target_normal_support_certificate",
+  "nonlinear_plant_scope": "certified actual-thrust-dependent vertical residual graph, not exact 6-DoF dynamics",
+  "is_rci_certificate": false,
+  "terminal_family_closed": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_mode4_unknown_branch_lifted_cell.py": "b2421018107744ccf261c928ea3951af2c0c39628d7ec4dd81f003c8921a6155",
+    "verification/test_mode4_unknown_branch_lifted_cell.py": "95bad0d418f673d8548d0caf62d4815f618d10b3b84d1341873f206da933d897",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "verification/check_cycle_lifted_zonotope.py": "52ba9046bb465a791a74c536a2a49f77efde89e58511dd5fc6e6911829025a3d",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/115_mode4_unknown_branch_lifted_cell.md": "f58f257fa2615e2d2e38672b0fb9c67256c370a134424e685e1d6e73aa61607c",
+    "docs/literature/READ_PAPERS.md": "0b01874af6e8684e7196cbfd7816d748a219aab181a1b61168e75141ee42158d",
+    "docs/research/run181_literature_gate.md": "5c184bc4dea123d223c24aa1f2ae90f0e42a49302bb60b5cffd79562adc882e6",
+    "docs/research/run181_research_log.md": "58de7329d4cb357e71f138b9b408e0e61150ca2da40dd0a2e4bc5c3e355f5835"
+  }
+}

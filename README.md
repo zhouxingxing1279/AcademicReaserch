@@ -1,5 +1,11 @@
 # AcademicReaserch
 
+最新研究检查点：[Run181 mode-4 unknown-branch lifted-cell oracle](docs/learning/115_mode4_unknown_branch_lifted_cell.md)：
+同一正体积 source cell 与同一可见零修正策略，在当前输入后才揭示的 `4->5 miss`、`4->0 success`
+两支共 26 个 target normals 上 exact 闭合，并保留实际推力相关 residual 与 success 噪声语义。
+该结果仍只是双边一步实现证书，不是 terminal RCI 或递归可行性证明；下一步检验有限 cell 覆盖
+和重叠策略一致性。
+
 最新研究检查点：[Run180 mode-0 miss lifted-cell oracle](docs/learning/114_mode0_miss_lifted_cell.md)：
 固定正体积 `(eta,d)` source cell、仿射可见策略和 10 个 target normals，在保留
 actual-thrust-dependent 共享竖直 residual 的 `0->1 miss` 上得到 exact 一步闭合。该结果只是

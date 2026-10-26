@@ -348,3 +348,13 @@ future residual精确分为气动核心`2.086`与姿态--推力项`1.48989375`�
 真实竖直气动余项严格大于`1.484305`，已超过Run168门槛`1.364497`。因此无需继续15步传播，
 当前J14合同的local-aerodynamic缩放支线终止。下一步只审计能否可靠改变联合初始化合同；否则
 停止冻结benchmark主线并重构课题方向。详见第105章。
+
+### 2026-10-26 Run 181
+
+从远端Run180 `9f8d46a`续接而非落后的main。重新下载并精读Hempel等2011的§III-A--C、
+Definition 2、Theorem 1、式(3)--(14)与Algorithm 1；Robbins 2026仍只取得正式摘要，未用于
+首次性判断。冻结Run136 mode-4投影、`|d_p|<=1/5,|d_v|<=1/4`和同一`deltaT=0`，对输入后
+才揭示的`4->5 miss`、`4->0 success`分别检查18、8条联合target normals。26/26 exact闭合；
+success噪声进入estimator并在真实tracking error中抵消，actual-thrust residual在每支`eta/e`
+间共享。证据仅为双边一步证书。下一步固定在线预算，检查有限cell覆盖及重叠处策略一致性。
+详见第115章、`run181_literature_gate.md`与`run181_research_log.md`。
