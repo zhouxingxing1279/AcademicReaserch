@@ -1,5 +1,10 @@
 # AcademicReaserch
 
+最新研究检查点：[Run182 lifted-cell composability gap](docs/learning/116_lifted_cell_composability_gap.md)：
+Run180/181 的 local estimator/tracking 证书不能直接连成 cell graph；两条 miss 边的位置支持已
+越出共同 `d`-cell，mode-4 success 的位置/速度支持越界更大。该结果不否定其他 partition，
+但终止手工 cell 枚举；下一步转向 Houska 式固定模板 information-ensemble terminal 强基线。
+
 最新研究检查点：[Run181 mode-4 unknown-branch lifted-cell oracle](docs/learning/115_mode4_unknown_branch_lifted_cell.md)：
 同一正体积 source cell 与同一可见零修正策略，在当前输入后才揭示的 `4->5 miss`、`4->0 success`
 两支共 26 个 target normals 上 exact 闭合，并保留实际推力相关 residual 与 success 噪声语义。

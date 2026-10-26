@@ -358,3 +358,13 @@ Definition 2、Theorem 1、式(3)--(14)与Algorithm 1；Robbins 2026仍只取得
 success噪声进入estimator并在真实tracking error中抵消，actual-thrust residual在每支`eta/e`
 间共享。证据仅为双边一步证书。下一步固定在线预算，检查有限cell覆盖及重叠处策略一致性。
 详见第115章、`run181_literature_gate.md`与`run181_research_log.md`。
+
+### 2026-10-26 Run 182
+
+重新精读Hempel 2011的完整output partition/PWA control与Houska 2026的固定模板polytopic
+information ensemble、extreme-set control interpolation、invariant terminal ensemble及复杂度。
+精确审计发现Run180/181虽闭合estimator/tracking normals，却没有闭合target `d`-cell：两条miss
+边的`d_p+`半宽为`41/200>1/5`；mode-4 success的`d_p+`、`d_v+`半宽分别为
+`2624143/7200000`、`1548143/1600000`，均严格越界。因此现有local cells不能直接连成graph；
+停止手工cell枚举，下一步复现Houska式15-mode information-ensemble terminal强基线。详见
+第116章、`run182_literature_gate.md`与`run182_research_log.md`。

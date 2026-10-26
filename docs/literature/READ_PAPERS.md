@@ -498,9 +498,18 @@
   Algorithm 1，专门核查“当前输入先于未知 packet label”的 mode-4 双边证书。论文要求每个
   noisy-output fiber 共用输入并逐 facet robustify，但其 LPV scheduling 在控制时可知、扰动集
   固定；本轮仍只是在项目的 unknown-edge/shared-residual 合同上可靠实例化，不作创新声明。
+- Run 182 重新下载全文，定向精读 §III-C、式(9)--(14)与 Algorithm 1。各 facet 的参数解必须
+  覆盖完整 `Y(Omega)`，再交集细化为共同凸分区并在每区求单值 PWA control。因此有限 output
+  partition、完整覆盖与 overlap refinement 均已有直接基线；Run180/181 若不验证 target
+  `d`-cell 覆盖，就还不是可执行 partition graph。
 
 ## Houska — Intrinsic Separation Principles
 - 年份/出处：2023 预印本、2026 *Automatica* 183:112661；DOI：https://doi.org/10.1016/j.automatica.2025.112661；全文：https://arxiv.org/pdf/2307.04146
+- Run 182 重新下载全文并精读 §4.2、§4.4、§6.1--6.7、Definitions 4--5、Lemma 2、
+  Theorem 3 与式(25)--(29)。configuration-constrained polytopes 参数化固定复杂度 information
+  ensembles；extreme vertex polytopes 上的 controls 经凸插值覆盖全部 information sets；式(29)
+  直接综合 invariant terminal ensemble，§6.7给出 facets、ensemble parameters 与 extreme sets
+  数的复杂度权衡。故固定预算 information-family 是本项目必须复现的强基线，不是创新声明。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用

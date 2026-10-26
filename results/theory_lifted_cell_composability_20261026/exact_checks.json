@@ -1,0 +1,66 @@
+{
+  "status": "pass",
+  "claim": "run180_and_run181_local_cells_do_not_compose_under_their_equal_centered_d_box",
+  "source_visible_cell": "|d_p|<=1/5, |d_v|<=1/4",
+  "visible_relation": "d=e-eta",
+  "run180_local_target_normals_closed": true,
+  "run181_local_target_normals_closed": true,
+  "edges": [
+    {
+      "source_mode": 0,
+      "target_mode": 1,
+      "edge_label": "miss",
+      "d_position_support": "41/200",
+      "d_velocity_support": "1/4",
+      "target_d_position_halfwidth": "1/5",
+      "target_d_velocity_halfwidth": "1/4",
+      "position_excess_over_target_cell": "1/200",
+      "velocity_excess_over_target_cell": "0",
+      "contained_in_equal_centered_target_d_cell": false
+    },
+    {
+      "source_mode": 4,
+      "target_mode": 5,
+      "edge_label": "miss",
+      "d_position_support": "41/200",
+      "d_velocity_support": "1/4",
+      "target_d_position_halfwidth": "1/5",
+      "target_d_velocity_halfwidth": "1/4",
+      "position_excess_over_target_cell": "1/200",
+      "velocity_excess_over_target_cell": "0",
+      "contained_in_equal_centered_target_d_cell": false
+    },
+    {
+      "source_mode": 4,
+      "target_mode": 0,
+      "edge_label": "success",
+      "d_position_support": "2624143/7200000",
+      "d_velocity_support": "1548143/1600000",
+      "target_d_position_halfwidth": "1/5",
+      "target_d_velocity_halfwidth": "1/4",
+      "position_excess_over_target_cell": "1184143/7200000",
+      "velocity_excess_over_target_cell": "1148143/1600000",
+      "contained_in_equal_centered_target_d_cell": false
+    }
+  ],
+  "existing_cells_form_a_composable_graph": false,
+  "evidence_level": "exact_visible_successor_support_noncontainment_certificate",
+  "finite_cell_cover_impossible": false,
+  "translated_or_larger_cells_ruled_out": false,
+  "piecewise_affine_policy_ruled_out": false,
+  "terminal_family_closed": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "source_sha256": {
+    "verification/check_lifted_cell_composability.py": "a412bcfaed50f9df5987d7fe879e383a5268f1440023fd47814a2986fccaeefb",
+    "verification/test_lifted_cell_composability.py": "6885388c7bc3f279810508c8990c819e74a7341b8ce5cde1a980939ef5619997",
+    "verification/check_mode0_miss_lifted_cell.py": "c65f2155197251ae31b7df1d8837767bc893548b777adeb28b4c1655cda2a5f8",
+    "verification/check_mode4_unknown_branch_lifted_cell.py": "b2421018107744ccf261c928ea3951af2c0c39628d7ec4dd81f003c8921a6155",
+    "verification/check_vertical_joint_predecessor.py": "1d6495f2ed7b7f5570e1241b417561f311516d8f9e0acb7e6f6feb8402a372d3",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/learning/116_lifted_cell_composability_gap.md": "31de39aa47ba2e8b7c28d2829cdad2a43398e8f5c38ded620e8254c74c208312",
+    "docs/literature/READ_PAPERS.md": "53c5cfad06476dfb032517a2b750a5029cfde0a236458a25f8619c841677649d",
+    "docs/research/run182_literature_gate.md": "72d9a638a1a3549b902b1b27aabfda29de31389056897369047f4de44b193081",
+    "docs/research/run182_research_log.md": "3c46f1285cc4fdf6152d282e2d275aba9b2bc9a4f024342c1efa10932f8a08ee"
+  }
+}
