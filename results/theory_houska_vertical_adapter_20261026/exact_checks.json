@@ -1,0 +1,162 @@
+{
+  "status": "pass",
+  "claim": "vertical_fixed_envelope_houska_adapter_is_fully_instantiated",
+  "state_order": [
+    "e_pz",
+    "e_vz"
+  ],
+  "input": "delta_thrust",
+  "A": [
+    [
+      "1",
+      "1/50"
+    ],
+    [
+      "0",
+      "1"
+    ]
+  ],
+  "B": [
+    [
+      "0"
+    ],
+    [
+      "1/50"
+    ]
+  ],
+  "C": [
+    [
+      "1",
+      "0"
+    ]
+  ],
+  "continuous_residual_halfwidth": "572143/160000",
+  "discrete_W_velocity_halfwidth": "572143/8000000",
+  "tracking_error_box": {
+    "position_halfwidth": "1",
+    "velocity_halfwidth": "11/4"
+  },
+  "correction_input_halfwidth": "572143/160000",
+  "lower_correction_margin": "572143/160000",
+  "upper_correction_margin": "572143/160000",
+  "mode_count": 15,
+  "edge_count": 17,
+  "edges": [
+    [
+      0,
+      1,
+      "miss"
+    ],
+    [
+      1,
+      2,
+      "miss"
+    ],
+    [
+      2,
+      3,
+      "miss"
+    ],
+    [
+      3,
+      4,
+      "miss"
+    ],
+    [
+      4,
+      5,
+      "miss"
+    ],
+    [
+      5,
+      6,
+      "miss"
+    ],
+    [
+      6,
+      7,
+      "miss"
+    ],
+    [
+      7,
+      8,
+      "miss"
+    ],
+    [
+      8,
+      9,
+      "miss"
+    ],
+    [
+      9,
+      10,
+      "miss"
+    ],
+    [
+      10,
+      11,
+      "miss"
+    ],
+    [
+      11,
+      12,
+      "miss"
+    ],
+    [
+      12,
+      13,
+      "miss"
+    ],
+    [
+      13,
+      14,
+      "miss"
+    ],
+    [
+      4,
+      0,
+      "success"
+    ],
+    [
+      9,
+      0,
+      "success"
+    ],
+    [
+      14,
+      0,
+      "success"
+    ]
+  ],
+  "measurement_operators": {
+    "miss": {
+      "intersection": "identity",
+      "noise_halfwidth": null
+    },
+    "success": {
+      "intersection": "position_strip",
+      "noise_halfwidth": "1/50"
+    }
+  },
+  "shared_control_branch_modes": [
+    4,
+    9
+  ],
+  "control_precedes_packet_outcome": true,
+  "houska_equation_29_extension": "one_source_ensemble_per_mode_and_one_successor_inclusion_per_edge",
+  "evidence_level": "exact_houska_vertical_adapter_contract",
+  "invariant_information_ensemble_certified": false,
+  "recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the actuator-wide fixed residual envelope is conservative",
+    "Y/G/Lambda and Z/H/Omega templates have not been selected",
+    "no extreme information-set controls or terminal ensemble have been synthesized"
+  ],
+  "source_sha256": {
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "verification/test_houska_vertical_adapter.py": "f28742fd38e0bcaff1687d56c596f6794925e50de097615a06c738a3de648bdc",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-26-houska-baseline-adapter-design.md": "9cf860c77f4c5d7fbdb359fb0415626d646b26f27e92ca11066e8c93cf98316c"
+  }
+}

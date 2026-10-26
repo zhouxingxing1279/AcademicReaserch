@@ -510,6 +510,11 @@
   ensembles；extreme vertex polytopes 上的 controls 经凸插值覆盖全部 information sets；式(29)
   直接综合 invariant terminal ensemble，§6.7给出 facets、ensemble parameters 与 extreme sets
   数的复杂度权衡。故固定预算 information-family 是本项目必须复现的强基线，不是创新声明。
+- Run 183 重新打开全文并定向精读 §4.2、§5.5、§6.1--6.7、式(24)--(31)与 Theorem 3
+  证明。原问题固定线性 `A,B,C` 和固定多面体 `W,V`；式(29)在每个 extreme information
+  polytope 上配置一个共享控制，并以不变 ensemble 作终端条件。当前实际推力相关 `W(T)` 与
+  packet-dependent measurement 不能直接代入；本轮只构造执行器全域固定包络和15-mode
+  edge-product适配合同，不声称已复现式(29)的数值解。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -522,6 +527,7 @@
 - 局限：其通用信息 ensemble 近似没有直接给出当前15模态 contract 的精确 candidate，
   也不替代 source-domain、input allocation、terminal/shift 的逐项证明。
 - 本项目状态：一般信息集合成的最强直接基线；Run 144 仅实现一个受限一步内证书。
+
 - Run 145 定向重读：Sections 4.2、6.1--6.5、Definition 4、式 (7)、(24)--(27)，
   用于界定15模态首次下降层。extreme information-set control 与多面体信息集合成已有
   一般方法；本轮逐模态零修正内投影只是一种受限实例。
@@ -557,6 +563,16 @@
 - Run 178 全文定向重读 Sections 2、3.1--3.3、Propositions 1--3 及 extreme-set/downward-
   closure 构造。information ensemble 对任意紧集求交的闭合和最小表示已有一般理论；仓库
   `T_0/T_1` 只能描述局部边，不能替代既有 60-state/45-recurrent information-family 合同。
+
+## Villanueva, Müller, Houska — Configuration-Constrained Tube MPC
+- 年份/出处：2022，arXiv:2208.12554；全文：https://arxiv.org/pdf/2208.12554
+- Run 183 实际阅读：摘要、Introduction、§2.1--2.3、§3.1--3.4（pp.1--9）。论文针对具有
+  加性/乘性不确定性的线性系统，用固定 facet directions、configuration cone 和 vertex maps
+  联合参数化 tube facets/vertices，并把 vertex controls 纳入凸优化；论文明确以可表示 tube/
+  policy 类的集合包含定义严格“更少保守”。
+- 与本项目关系：`Y,G,Lambda` 的配置约束几何和 vertex-control machinery 是强基线工具，不能
+  作为创新。本文是 full-state robust tube，不处理当前间歇测量 information ensemble；Run183
+  只借其模板接口，尚未选择模板或证明相对固定/同伦tube的同预算优势。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

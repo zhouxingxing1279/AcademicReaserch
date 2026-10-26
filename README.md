@@ -1,5 +1,11 @@
 # AcademicReaserch
 
+最新研究检查点：[Run183 Houska vertical baseline adapter](docs/learning/117_houska_vertical_adapter_contract.md)：
+式(29)的固定 `A,B,C,W,V` 假设不能原样接入实际推力相关 residual；本轮对真实竖直 tracking
+error 冻结执行器全域 residual 包络，并保留15-mode packet边、miss/success测量语义和分叉前
+共享控制，得到 exact 可执行适配合同。它不是 invariant terminal ensemble；下一步才选择
+`Y/G/Lambda`与`Z/H/Omega`模板并综合极端信息集控制。
+
 最新研究检查点：[Run182 lifted-cell composability gap](docs/learning/116_lifted_cell_composability_gap.md)：
 Run180/181 的 local estimator/tracking 证书不能直接连成 cell graph；两条 miss 边的位置支持已
 越出共同 `d`-cell，mode-4 success 的位置/速度支持越界更大。该结果不否定其他 partition，

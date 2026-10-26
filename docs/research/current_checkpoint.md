@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-26，Run182）
+# 研究短检查点（2026-10-26，Run183）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run181远端`46f33d2`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run182远端`1685b980`。
 
-Run182纠正局部cell可组合性：Run180/181虽闭合estimator/tracking normals，却未检查`d+=e+-eta+`进入target source cell。对共同`|d_p|<=1/5,|d_v|<=1/4`，`0->1 miss`与`4->5 miss`的位置支持均为`41/200`，超界`1/200`；`4->0 success`的位置/速度支持为`2624143/7200000`、`1548143/1600000`，两者均严格越界。证据等级：`exact_visible_successor_support_noncontainment_certificate`。只否定现有cells直接连边，不否定其他partition/PWA policy。Hempel已覆盖完整output partition与共同细化，Houska已覆盖固定模板information ensemble及terminal invariant综合，故停止手工cell枚举。
+Run183冻结Houska强基线适配合同。原式(29)假设固定线性`A,B,C,W,V`，不能原样接入actual-thrust-dependent residual。对真实竖直tracking error取执行器全域包络：连续residual半宽`572143/160000`，离散速度扰动`572143/8000000`；由nominal/physical盒导出`|e_pz|<=1,|e_vz|<=11/4`及`|deltaT|<=572143/160000`。保留15 modes/17 edges、miss identity、success位置strip和mode 4/9分叉前共享控制。证据等级：`exact_houska_vertical_adapter_contract`；不是invariant ensemble或递归可行性证明。
 
-下一唯一问题：在当前竖直15-mode线性/可靠residual-envelope合同上，复现Houska式configuration-constrained polytopic information-ensemble terminal baseline，明确模板参数、extreme information sets、packet edges及硬约束；闭合前不再手工增加cells。
+下一唯一问题：为二维box information template构造`Y/G/Lambda`及最小`Z/H/Omega`，把式(29)扩成15-source/17-edge LP；mode 4/9必须共享当前控制并输出原始/对偶证书。

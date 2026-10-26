@@ -368,3 +368,12 @@ information ensemble、extreme-set control interpolation、invariant terminal en
 `2624143/7200000`、`1548143/1600000`，均严格越界。因此现有local cells不能直接连成graph；
 停止手工cell枚举，下一步复现Houska式15-mode information-ensemble terminal强基线。详见
 第116章、`run182_literature_gate.md`与`run182_research_log.md`。
+
+### 2026-10-26 Run 183
+
+重新精读Houska式(24)--(31)/Theorem 3及CCTMPC模板章节。确认式(29)固定`A,B,C,W,V`，不能
+直接接受实际推力相关residual；因此只准入可靠适配合同。对真实竖直tracking error冻结执行器
+全域residual包络，精确得到连续/离散半宽`572143/160000`、`572143/8000000`，并导出安全误差盒
+`(1,11/4)`和修正推力半宽`572143/160000`。保留15-mode/17-edge测量语义与mode 4/9分叉前共享
+控制。证据是可执行问题合同，不是terminal ensemble。下一步构造二维box configuration maps并
+形成15-source/17-edge式(29) LP。详见第117章、`run183_literature_gate.md`与研究日志。
