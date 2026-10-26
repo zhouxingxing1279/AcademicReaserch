@@ -386,3 +386,12 @@ LP含498变量、2772不等式；HiGHS不可行进一步由最短五边环的21�
 axis-aligned位置测量不收缩速度半径，逐边至少增长`572143/8000000`，聚合得到
 `0<=-572143/800000`。因此终止纯box terminal family，下一步只检查最小相关facet模板。
 详见第118章、`run184_literature_gate.md`与`run184_research_log.md`。
+
+### 2026-10-26 Run 185
+
+精读CCTMPC §3.4--4.2并重读Houska §6.3--6.7；相关facet、configuration cone和集合交已有
+强基线，故只准入形状门槛。独立复审发现初版坐标变换符号错误；正确的`q=p-(1/10)v`
+parallelogram半径矩阵为`[[6/5,1/5],[1/5,4/5]]`，错误候选第一miss欠包`1/125`。
+正确矩阵15步`q->q`增益严格大于1，故success保留`r_q`时不存在非负周期return radius。
+本轮可靠结论降为固定parallelogram shape obstruction；下一步必须保留原active velocity facets，
+检查完整六边形，而非继续调斜率。详见第119章与Run185研究日志。

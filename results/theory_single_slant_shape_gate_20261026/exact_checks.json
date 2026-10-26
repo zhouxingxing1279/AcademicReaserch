@@ -1,0 +1,108 @@
+{
+  "claim": "fixed_slant_parallelogram_outer_recurrence_is_not_graph_invariant",
+  "evidence_level": "exact_fixed_slant_parallelogram_shape_obstruction",
+  "recurrence": {
+    "coordinate": "q = p - kappa * v",
+    "h": "1/50",
+    "kappa": "1/10",
+    "signed_state_matrix": [
+      [
+        "6/5",
+        "-1/5"
+      ],
+      [
+        "1/5",
+        "4/5"
+      ]
+    ],
+    "signed_input_matrix": [
+      [
+        "0"
+      ],
+      [
+        "-1/500"
+      ]
+    ],
+    "radius_matrix": [
+      [
+        "6/5",
+        "1/5"
+      ],
+      [
+        "1/5",
+        "4/5"
+      ]
+    ],
+    "radius_disturbance": [
+      "0",
+      "572143/80000000"
+    ],
+    "velocity_disturbance_halfwidth": "572143/8000000",
+    "measurement_position_radius": "1/50"
+  },
+  "return_obstruction": {
+    "fifteen_step_radius_matrix": [
+      [
+        "1092431105228/30517578125",
+        "452413483753/30517578125"
+      ],
+      [
+        "452413483753/30517578125",
+        "187604137722/30517578125"
+      ]
+    ],
+    "fifteen_step_radius_matrix_q_q": "187604137722/30517578125",
+    "coefficient_excess": "157086559597/30517578125",
+    "positive_position_coefficient": "452413483753/30517578125",
+    "positive_measurement_position_radius": "1/50",
+    "no_nonnegative_return_radius": true,
+    "reason": "r_q(15)-R has positive coefficient on R, positive coefficient on nu, and nonnegative disturbance terms"
+  },
+  "success_return_checks": [
+    {
+      "prediction_age": 5,
+      "q_q_gain": "2096/3125",
+      "q_position_gain": "3629/3125",
+      "nonnegative_fixed_radius_possible": true
+    },
+    {
+      "prediction_age": 10,
+      "q_q_gain": "17562857/9765625",
+      "q_position_gain": "1662082/390625",
+      "nonnegative_fixed_radius_possible": false
+    },
+    {
+      "prediction_age": 15,
+      "q_q_gain": "187604137722/30517578125",
+      "q_position_gain": "452413483753/30517578125",
+      "nonnegative_fixed_radius_possible": false
+    }
+  ],
+  "periodic_shape_cycle_certified": false,
+  "rejected_run185_candidate": {
+    "initial_position_radius": "1/50",
+    "initial_slant_radius": "805322658983099/5546041676000000",
+    "first_miss_position_underbound": "1/125",
+    "first_failed_success_age": 5,
+    "derived_velocity_radius_at_age_5": "27081050832131187893/6932552095000000000",
+    "all_shape_radius_capacity_checks_pass": false
+  },
+  "full_information_ensemble_certified": false,
+  "center_dynamics_certified": false,
+  "input_feasibility_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the obstruction applies to the fixed-orientation p/q parallelogram outer recurrence",
+    "it does not reject a six-facet template that retains active velocity facets",
+    "it does not reject rotating/mode-dependent facets or constrained zonotopes",
+    "centers, controls, meta-ensembles, and terminal MPC remain open"
+  ],
+  "source_sha256": {
+    "verification/check_single_slant_shape_gate.py": "bc1059fcc6a624379bf1368238cde9a51d512ef8a22d7073944afcd3253d7aef",
+    "verification/test_single_slant_shape_gate.py": "6e7542757c2825fabec943a6871a5170cc417a15a5a0a75f5e326ad71a59641c",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-26-single-slant-shape-gate-design.md": "d99606d674f26bc6bb8642e4d3c9fabb9a338972d9c764f30f23d8e666e064a0"
+  }
+}

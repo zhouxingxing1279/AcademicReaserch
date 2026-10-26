@@ -24,6 +24,8 @@
 - Run174 重读 Section 2 Definition 2、Section 3.1 Proposition 1及证明、Section 5估计递推。
   generalized intersection只保留与实际观测一致的预测状态；它不改变真实plant状态，因此不能
   将“posterior收缩”解释为“物理速度重置到配置初始盒”。
+- Run185 核对作者版摘要与Section 1的问题定位；未重新精读降阶算法。CZ精确线性像、交集及
+  固定复杂度外包仍是后续强基线；本轮单对耦合法向保留相关性不构成CZ算法创新。
 
 ## Alamo, Bravo, Camacho — Guaranteed state estimation by zonotopes
 - 年份/出处：2005, *Automatica*, 41(6):1035--1043；DOI：https://doi.org/10.1016/j.automatica.2004.12.008
@@ -519,6 +521,9 @@
   后选control时序不同于当前`control_precedes_successor_edge`；本轮采用每个source一组
   extreme controls、先传播后按edge测量的因果适配。axis-aligned box实例最终由21行exact
   Farkas证书否定；该否证只针对丢失位置--速度相关性的模板，不否定一般information ensemble。
+- Run185 针对相关模板重读 §6.3--6.7、式(25)--(30)与Theorem 3。纠正坐标变换后，固定
+  `(p,q)` parallelogram shape不能周期闭合；尚未构造`Z/H/Omega`、extreme-set controls或
+  invariant ensemble，因而不援引Theorem 3外推一般模板不可行。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -577,6 +582,9 @@
 - Run 184 定向重读 §2.1--2.3、§3.1--3.4，用于逐项构造box的configuration cone与vertex
   maps。4-facet box及其vertex controls是现有框架的直接实例；不可行结论来自当前仅位置测量
   下的velocity-radius环，不是CCTMPC一般方法失败。
+- Run185 精读 §3.4--3.5的Theorems 1--2、式(15)--(21)，§4.1--4.2的Corollary 4、
+  式(25)--(27)与Remark 5。新增facet、configuration domain和vertex-control LP均属已有方法；
+  固定parallelogram外包失败不能替代保留active velocity facets的六facet configuration检查。
 - 与本项目关系：`Y,G,Lambda` 的配置约束几何和 vertex-control machinery 是强基线工具，不能
   作为创新。本文是 full-state robust tube，不处理当前间歇测量 information ensemble；Run183
   只借其模板接口，尚未选择模板或证明相对固定/同伦tube的同预算优势。

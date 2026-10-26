@@ -197,3 +197,5 @@ Run177进一步纠正该对象：配置产生的是随tick-0测量变化的poste
 Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边，仓库第88、89章和Run154已定义更完整的60-state扩展、15个首次返回瞬态标签与45个循环terminal标签。故停止重复的两族checker；下一步应先为真实非线性plant冻结fixed-complexity `Gamma`及可靠逐边包含oracle。详见[112 terminal information-family排重](docs/learning/112_terminal_information_family_dedup.md)。
 
 Run179进一步纠正`Gamma`的类型：普通CZ/SPZ降阶只压缩一条已实现history的posterior，不能直接表示连续可见`d`上的集合值策略图。下一步必须先冻结lifted `(d,s)` cell、fixed normals和cell内仿射fiber policy，再验证一条真实非线性miss边。详见[113 参数化Gamma类型审计](docs/learning/113_parameterized_gamma_obstruction.md)。
+
+最新传统基线进展见[119 固定单斜向形状阻断](docs/learning/119_single_slant_shape_cycle.md)：独立复审纠正`q=p-(1/10)v`坐标变换后，固定`(p,q)` parallelogram的15步`q->q`增益严格大于1，不能周期闭合。该结果不否定保留原active velocity facets的六边形；完整configuration/meta LP仍待构造。
