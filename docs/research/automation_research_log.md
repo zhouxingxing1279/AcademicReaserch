@@ -395,3 +395,12 @@ parallelogram半径矩阵为`[[6/5,1/5],[1/5,4/5]]`，错误候选第一miss欠�
 正确矩阵15步`q->q`增益严格大于1，故success保留`r_q`时不存在非负周期return radius。
 本轮可靠结论降为固定parallelogram shape obstruction；下一步必须保留原active velocity facets，
 检查完整六边形，而非继续调斜率。详见第119章与Run185研究日志。
+
+### 2026-10-27 Run 186
+
+精读CCTMPC configuration/vertex定理、Houska polytopic information ensemble测量构造，并新增
+Badalamenti等2025 template-refinement强基线；手工增加一对facet不作创新声明。精确构造
+`+/-p,+/-v,+/-(p-(1/10)v)`的6个vertex maps和24行configuration cone。位置测量交集的紧
+slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下由`1`降至
+`59/200`，严格减少`141/200`。这说明active velocity facets确能移除Run185局部unchanged-q
+前提，但尚未闭合`Z/H/Omega`或mode graph。详见第120章与Run186研究日志。

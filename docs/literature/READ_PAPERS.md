@@ -524,6 +524,9 @@
 - Run185 针对相关模板重读 §6.3--6.7、式(25)--(30)与Theorem 3。纠正坐标变换后，固定
   `(p,q)` parallelogram shape不能周期闭合；尚未构造`Z/H/Omega`、extreme-set controls或
   invariant ensemble，因而不援引Theorem 3外推一般模板不可行。
+- Run186 精读 §6.2--6.5、式(25)--(27)及Theorem 3构造和证明开头。单个六facet集合的
+  measurement-support映射只提供`Y/G/Lambda`层接口；连续measurement centers、`Z/H/Omega`
+  与extreme information sets仍须另证，不能由一次严格支持收缩升级为invariant ensemble。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -585,9 +588,25 @@
 - Run185 精读 §3.4--3.5的Theorems 1--2、式(15)--(21)，§4.1--4.2的Corollary 4、
   式(25)--(27)与Remark 5。新增facet、configuration domain和vertex-control LP均属已有方法；
   固定parallelogram外包失败不能替代保留active velocity facets的六facet configuration检查。
+- Run186 精读 §3.4--3.5、Definition 6、Lemma 1、Theorems 1--2、式(4)--(8)，并重读
+  Corollary 4、式(15)--(18)。六法向的24行configuration cone和六个vertex maps均是该框架
+  的直接实例；本轮贡献等级仅为项目基线的精确复现与measurement接口纠错。
 - 与本项目关系：`Y,G,Lambda` 的配置约束几何和 vertex-control machinery 是强基线工具，不能
   作为创新。本文是 full-state robust tube，不处理当前间歇测量 information ensemble；Run183
   只借其模板接口，尚未选择模板或证明相对固定/同伦tube的同预算优势。
+
+## Badalamenti, Mulagaleti, Villanueva, Houska, Bemporad — Efficient Configuration-Constrained Tube MPC via Variables Restriction and Template Selection
+- 年份/出处：2025 IEEE CDC；DOI：https://doi.org/10.1109/CDC57313.2025.11312697；全文：https://arxiv.org/pdf/2505.14440
+- Run186精读：§3.1--3.2、§4.1、Problem (19)、Algorithm 1、Proposition 3，以及§5中
+  10-state quadrotor的template/computation比较。
+- 方法/关键结论：以configuration triple `(F,E,V)`表示固定facet/vertex结构；Algorithm 1
+  逐次切除当前vertex、重算configuration triple并解RCI QP，使性能指标非增。论文明确讨论
+  facet/vertex数量与在线变量、约束及保守性的折中，并给出10状态四旋翼例。
+- 与本项目关系：手工给box增加一对耦合法向以及“template refinement”本身已被更强一般方法
+  覆盖，不能作为创新。本项目可研究的差异只剩间歇测量information ensemble、控制先于packet
+  label的因果图、可靠SMF接口及同预算闭环收益。
+- 局限：论文是full-state robust tube/RCI template设计，不直接给出当前`Z/H/Omega`、
+  measurement meta-update或15-mode packet graph证书。
 
 ## Kumar, Kothyari — Set-Theoretic Output Feedback Tracking Control via Linear Programming
 - 年份/出处：2026, MTNS 2026；作者公开全文：

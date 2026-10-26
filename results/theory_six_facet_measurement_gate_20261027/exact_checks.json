@@ -1,0 +1,408 @@
+{
+  "claim": "active_velocity_facets_can_remove_the_unchanged_slant_measurement_obstruction",
+  "evidence_level": "exact_six_facet_measurement_support_map",
+  "template": {
+    "coordinate": "q = p - kappa * v",
+    "kappa": "1/10",
+    "facet_order": [
+      "+p",
+      "+v",
+      "-q",
+      "-p",
+      "-v",
+      "+q"
+    ],
+    "Y": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "-1",
+        "1/10"
+      ],
+      [
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "-1"
+      ],
+      [
+        "1",
+        "-1/10"
+      ]
+    ],
+    "adjacent_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "Lambda": [
+      [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "1/10",
+          "-1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "10",
+          "-10",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1/10",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0"
+        ]
+      ],
+      [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "10",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-10"
+        ]
+      ]
+    ],
+    "G": [
+      [
+        "-1",
+        "1/10",
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      [
+        "1",
+        "-1/10",
+        "0",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "-1",
+        "1/10",
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1/10",
+        "1",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "10",
+        "-10",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-10",
+        "10",
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "1",
+        "-1/10",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "-1",
+        "1/10",
+        "-1"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "0",
+        "-1/10",
+        "1"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "-1",
+        "1/10",
+        "-1"
+      ],
+      [
+        "10",
+        "-1",
+        "0",
+        "0",
+        "0",
+        "-10"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "-10",
+        "0",
+        "0",
+        "0",
+        "-1",
+        "10"
+      ]
+    ]
+  },
+  "support_identity": {
+    "position": "min(a, r_q + kappa*r_v)",
+    "velocity": "min(r_v, (a + r_q)/kappa)",
+    "slant": "min(r_q, a + kappa*r_v)"
+  },
+  "strict_measurement_witness": {
+    "position_radius_before": "1",
+    "velocity_radius": "11/4",
+    "slant_support_before": "1",
+    "measurement_position_cap": "1/50",
+    "pre_measurement_configuration_valid": true,
+    "raw_post_measurement_configuration_valid": false,
+    "canonical_post_measurement_configuration_valid": true,
+    "slant_support_after": "59/200",
+    "strict_slant_reduction": "141/200"
+  },
+  "active_velocity_facets_can_tighten_slant_support": true,
+  "graph_invariant_information_ensemble_certified": false,
+  "center_reparameterization_certified": false,
+  "input_feasibility_certified": false,
+  "terminal_invariance_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the support identity is for one centrally symmetric six-facet set and a centered position strip",
+    "measurement-dependent centers and the Z/H/Omega ensemble remain unconstructed",
+    "the 15-mode/17-edge graph LP and shared current controls remain untested",
+    "a local strict support reduction is not a closed-loop conservatism comparison"
+  ],
+  "source_sha256": {
+    "verification/check_six_facet_measurement_gate.py": "ad4f022c7a776de51bf5bb5723fc37f5813fa717f50b921c735ce93084656cd3",
+    "verification/test_six_facet_measurement_gate.py": "9a4383e073e8c060eaf6a2436ad6c359f49f9523f88e5edf6ef0a2d0957735bd",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-27-six-facet-measurement-gate-design.md": "a82cf6fc4de5c521d21ab4b5a1499ebdb15979bdafd1c0b79667553f49e51c9d"
+  }
+}

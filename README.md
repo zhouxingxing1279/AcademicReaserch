@@ -198,4 +198,4 @@ Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边�
 
 Run179进一步纠正`Gamma`的类型：普通CZ/SPZ降阶只压缩一条已实现history的posterior，不能直接表示连续可见`d`上的集合值策略图。下一步必须先冻结lifted `(d,s)` cell、fixed normals和cell内仿射fiber policy，再验证一条真实非线性miss边。详见[113 参数化Gamma类型审计](docs/learning/113_parameterized_gamma_obstruction.md)。
 
-最新传统基线进展见[119 固定单斜向形状阻断](docs/learning/119_single_slant_shape_cycle.md)：独立复审纠正`q=p-(1/10)v`坐标变换后，固定`(p,q)` parallelogram的15步`q->q`增益严格大于1，不能周期闭合。该结果不否定保留原active velocity facets的六边形；完整configuration/meta LP仍待构造。
+最新传统基线进展见[120 六facet测量支持映射](docs/learning/120_six_facet_measurement_support.md)：恢复`+/-v`后，位置测量交集的紧slant支持为`min(r_q,a+kappa*r_v)`；可靠见证中由`1`严格降至`59/200`，故Run185的unchanged-q阻断不能外推到完整六边形。该结果仍只是局部形状接口；连续measurement-center的`Z/H/Omega`与完整configuration/meta LP待构造。
