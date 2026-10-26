@@ -404,3 +404,12 @@ Badalamenti等2025 template-refinement强基线；手工增加一对facet不作�
 slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下由`1`降至
 `59/200`，严格减少`141/200`。这说明active velocity facets确能移除Run185局部unchanged-q
 前提，但尚未闭合`Z/H/Omega`或mode graph。详见第120章与Run186研究日志。
+
+### 2026-10-27 Run 187
+
+重读Houska sensor ensemble与polytopic meta-learning构造，纠正“连续measurement centers需要
+枚举”的前提。对Run186六facet configuration精确证明：某个位置观测中心与整个`P(y)`相容
+当且仅当`(y_0+y_3)/2<=a`，故measurement block只需`Z_1=(e_0+e_3)/2`。非零平移边界
+见证在`a=1/50`给出唯一中心`1/3`。这只是existing information-ensemble基线的精确复现；
+剩余`Z_2/H/Omega`、因果mode graph与控制证明仍未闭合。详见第121章、
+`run187_literature_gate.md`与研究日志。

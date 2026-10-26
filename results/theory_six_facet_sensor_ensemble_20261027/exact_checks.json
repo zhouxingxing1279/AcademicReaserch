@@ -1,0 +1,68 @@
+{
+  "claim": "continuous_position_measurement_centers_need_no_enumeration",
+  "evidence_level": "exact_six_facet_sensor_ensemble_measurement_row",
+  "facet_order": [
+    "+p",
+    "+v",
+    "-q",
+    "-p",
+    "-v",
+    "+q"
+  ],
+  "Z1": [
+    "1/2",
+    "0",
+    "0",
+    "1/2",
+    "0",
+    "0"
+  ],
+  "measurement_halfwidth": "1/50",
+  "assumptions": [
+    "G*y <= 0 for the Run186 six-facet configuration",
+    "P(y) is nonempty",
+    "C = [1, 0] and measurement noise is [-a, a]"
+  ],
+  "exact_equivalence": "under the stated assumptions, exists eta: eta-C*P(y) subset [-a,a] iff [y_0-a,-y_3+a] is nonempty iff Z1*y<=a",
+  "translated_boundary_witness": {
+    "offsets": [
+      "53/150",
+      "-2/5",
+      "-109/300",
+      "-47/150",
+      "3/5",
+      "121/300"
+    ],
+    "position_max": "53/150",
+    "position_min": "47/150",
+    "center_interval": [
+      "1/3",
+      "1/3"
+    ],
+    "compatible": true,
+    "measurement_meta_coordinate": "1/50",
+    "meta_compatible": true
+  },
+  "continuous_measurement_centers_represented": true,
+  "complete_Z_H_Omega_certified": false,
+  "graph_invariant_information_ensemble_certified": false,
+  "input_feasibility_certified": false,
+  "terminal_invariance_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the equivalence requires G*y <= 0 and a nonempty configured polytope",
+    "Z1 is only the measurement-compatible width coordinate",
+    "the remaining Z2 rows and a fixed H/Omega configuration are unselected",
+    "the control-before-packet 15-mode/17-edge graph LP is unconstructed",
+    "the result is an exact representation lemma, not a controller contribution"
+  ],
+  "source_sha256": {
+    "verification/check_six_facet_sensor_ensemble.py": "ee84dab0330e3feaecd60c195ad32a51e86ec557f91af2997259a5b96a9423d1",
+    "verification/test_six_facet_sensor_ensemble.py": "d45460556eb5bbcccfdbd0be245c1eadcdcbe69342dab9d3959b1a96bc778344",
+    "verification/check_six_facet_measurement_gate.py": "ad4f022c7a776de51bf5bb5723fc37f5813fa717f50b921c735ce93084656cd3",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-27-six-facet-sensor-ensemble-design.md": "907d8f1c1e0d9e5d420b7722e3992eeaf87a3a362bacf6ab0fa69c846c1568ec"
+  }
+}

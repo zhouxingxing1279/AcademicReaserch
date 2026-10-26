@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-27，Run186）
+# 研究短检查点（2026-10-27，Run187）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run185远端`302600a5`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run186远端`2047ee6`。
 
-Run186恢复`+/-p,+/-v,+/-(p-(1/10)v)`，精确构造6个vertex maps与24行configuration cone。位置strip交集的紧支持为`h_p=min(a,r_q+kappa*r_v)`、`h_v=min(r_v,(a+r_q)/kappa)`、`h_q=min(r_q,a+kappa*r_v)`。可靠见证`(r_p,r_v,r_q)=(1,11/4,1)`、`a=1/50`中，raw success offsets离开所选configuration；canonical `h_q=59/200`，严格收缩`141/200`并落在cone边界。因此active velocity facets能消除Run185的局部unchanged-q前提。证据等级：`exact_six_facet_measurement_support_map`；不是graph/meta ensemble、控制或递归可行性证明。Badalamenti等2025已覆盖一般facet refinement，手工加法向不构成创新。
+Run187纠正“连续measurement centers需枚举/min分支可能阻断固定预算”的前提。对Run186 configuration内`P(y)`，精确有`max p=y_0,min p=-y_3`；存在同一观测中心使位置误差不超过`a`当且仅当`(y_0+y_3)/2<=a`。故Houska sensor ensemble首行可取`Z_1=(e_0+e_3)/2`，一次覆盖全部中心。平移边界见证在`a=1/50`给出唯一中心`1/3`。证据等级：`exact_six_facet_sensor_ensemble_measurement_row`；未选择剩余`Z_2/H/Omega`，不是图不变、控制或递归可行性证明。
 
-下一唯一问题：把canonical support分支提升为覆盖连续measurement centers的六facet`Z/H/Omega`，在control-before-packet时序下构造15-mode/17-edge LP并输出exact primal或Farkas证书；若有限extreme meta-polytopes不能覆盖min/disjunction，则停止该模板。
+下一唯一问题：比较direct facet-offset bounds与center/radius/support bounds两种`Z_2`，构造有限固定configuration的exact `H/Omega`与extreme-set预算；在此闭合前不进入15-mode LP。

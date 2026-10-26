@@ -527,6 +527,10 @@
 - Run186 精读 §6.2--6.5、式(25)--(27)及Theorem 3构造和证明开头。单个六facet集合的
   measurement-support映射只提供`Y/G/Lambda`层接口；连续measurement centers、`Z/H/Omega`
   与extreme information sets仍须另证，不能由一次严格支持收缩升级为invariant ensemble。
+- Run187 重读§4.1--4.2、§6.2--6.5、式(7)、(25)--(27)及Theorem 3证明。sensor ensemble
+  `V`已通过“存在同一measurement center”的集合量词覆盖连续观测域；对六facet模板，
+  measurement-compatible coordinate可精确取`Z_1=(e_0+e_3)/2`。因此无需枚举未来center，
+  但剩余`Z_2/H/Omega`及control-before-packet图仍须独立构造。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
