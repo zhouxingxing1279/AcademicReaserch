@@ -1,5 +1,11 @@
 # AcademicReaserch
 
+最新研究检查点：[Run184 box information-ensemble graph obstruction](docs/learning/118_houska_box_ensemble_graph_lp.md)：
+构造完整`Y/G/Lambda`与6参数`Z/H/Omega`后，时序正确的15-mode/17-edge LP含498变量、2772约束。
+axis-aligned position measurement不能收缩velocity radius；最短五边环的21行exact Farkas
+证书把全部变量消去并得到`0<=-572143/800000`。因此纯box terminal family被否定，下一步只
+研究最小position--velocity相关facet模板。
+
 最新研究检查点：[Run183 Houska vertical baseline adapter](docs/learning/117_houska_vertical_adapter_contract.md)：
 式(29)的固定 `A,B,C,W,V` 假设不能原样接入实际推力相关 residual；本轮对真实竖直 tracking
 error 冻结执行器全域 residual 包络，并保留15-mode packet边、miss/success测量语义和分叉前

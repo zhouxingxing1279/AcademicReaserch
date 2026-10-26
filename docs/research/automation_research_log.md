@@ -377,3 +377,12 @@ information ensemble、extreme-set control interpolation、invariant terminal en
 `(1,11/4)`和修正推力半宽`572143/160000`。保留15-mode/17-edge测量语义与mode 4/9分叉前共享
 控制。证据是可执行问题合同，不是terminal ensemble。下一步构造二维box configuration maps并
 形成15-source/17-edge式(29) LP。详见第117章、`run183_literature_gate.md`与研究日志。
+
+### 2026-10-26 Run 184
+
+重读Houska §6.1--6.7/式(25)--(30)/Theorem 3及CCTMPC模板章节。纠正原式“测量后控制”与
+当前“控制后揭示edge”的时序差异，构造4-facet box、6参数meta-template及因果15-mode图LP。
+LP含498变量、2772不等式；HiGHS不可行进一步由最短五边环的21行exact Farkas证书解释：
+axis-aligned位置测量不收缩速度半径，逐边至少增长`572143/8000000`，聚合得到
+`0<=-572143/800000`。因此终止纯box terminal family，下一步只检查最小相关facet模板。
+详见第118章、`run184_literature_gate.md`与`run184_research_log.md`。

@@ -515,6 +515,10 @@
   polytope 上配置一个共享控制，并以不变 ensemble 作终端条件。当前实际推力相关 `W(T)` 与
   packet-dependent measurement 不能直接代入；本轮只构造执行器全域固定包络和15-mode
   edge-product适配合同，不声称已复现式(29)的数值解。
+- Run 184 重新精读 §6.1--6.7、式(25)--(30)、Theorem 3及证明。原式的posterior-measurement
+  后选control时序不同于当前`control_precedes_successor_edge`；本轮采用每个source一组
+  extreme controls、先传播后按edge测量的因果适配。axis-aligned box实例最终由21行exact
+  Farkas证书否定；该否证只针对丢失位置--速度相关性的模板，不否定一般information ensemble。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -570,6 +574,9 @@
   加性/乘性不确定性的线性系统，用固定 facet directions、configuration cone 和 vertex maps
   联合参数化 tube facets/vertices，并把 vertex controls 纳入凸优化；论文明确以可表示 tube/
   policy 类的集合包含定义严格“更少保守”。
+- Run 184 定向重读 §2.1--2.3、§3.1--3.4，用于逐项构造box的configuration cone与vertex
+  maps。4-facet box及其vertex controls是现有框架的直接实例；不可行结论来自当前仅位置测量
+  下的velocity-radius环，不是CCTMPC一般方法失败。
 - 与本项目关系：`Y,G,Lambda` 的配置约束几何和 vertex-control machinery 是强基线工具，不能
   作为创新。本文是 full-state robust tube，不处理当前间歇测量 information ensemble；Run183
   只借其模板接口，尚未选择模板或证明相对固定/同伦tube的同预算优势。

@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-26，Run183）
+# 研究短检查点（2026-10-26，Run184）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run182远端`1685b980`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run183远端`893046dc`。
 
-Run183冻结Houska强基线适配合同。原式(29)假设固定线性`A,B,C,W,V`，不能原样接入actual-thrust-dependent residual。对真实竖直tracking error取执行器全域包络：连续residual半宽`572143/160000`，离散速度扰动`572143/8000000`；由nominal/physical盒导出`|e_pz|<=1,|e_vz|<=11/4`及`|deltaT|<=572143/160000`。保留15 modes/17 edges、miss identity、success位置strip和mode 4/9分叉前共享控制。证据等级：`exact_houska_vertical_adapter_contract`；不是invariant ensemble或递归可行性证明。
+Run184构造box `Y/G/Lambda`与6参数`Z/H/Omega`，并按“source共享control→传播→edge测量”纠正Houska原式时序。15-mode/17-edge LP含498变量、2772约束。纯axis-aligned位置测量不能收缩velocity radius；在最短`0->1->2->3->4->0`环上，21行非负Farkas乘子将全部变量精确消去，得到`0<=-572143/800000`。证据等级：`exact_axis_aligned_box_information_ensemble_infeasibility_certificate`。只否定该box/meta-template，不否定相关多面体/CZ，也未证明MPC递归可行。
 
-下一唯一问题：为二维box information template构造`Y/G/Lambda`及最小`Z/H/Omega`，把式(29)扩成15-source/17-edge LP；mode 4/9必须共享当前控制并输出原始/对偶证书。
+下一唯一问题：在相同15-mode、固定`W/V`、硬约束和extreme-control权限下，加入最小一对position--velocity耦合法向；先检查是否打破速度半径Farkas环，再求图不变LP的exact primal/dual证书。
