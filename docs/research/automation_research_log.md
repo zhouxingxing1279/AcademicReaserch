@@ -413,3 +413,6 @@ slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下
 见证在`a=1/50`给出唯一中心`1/3`。这只是existing information-ensemble基线的精确复现；
 剩余`Z_2/H/Omega`、因果mode graph与控制证明仍未闭合。详见第121章、
 `run187_literature_gate.md`与研究日志。
+### 2026-10-27 Run 188
+
+重读Houska `Z/H/Omega`、CCTMPC configuration domain及Raghuraman--Koeln CZ交集表示。五参数center/radius六边形隐含一个零skew约束；精确实际噪声measurement反例从中心对称source生成同configuration内、六facet全活跃但skew为`3/8000`的posterior，故该family不闭合。补回skew后的六参数表示只是direct offsets的可逆线性变换，同一meta polytope极点预算不变。详见第122章、`run188_literature_gate.md`与研究日志。

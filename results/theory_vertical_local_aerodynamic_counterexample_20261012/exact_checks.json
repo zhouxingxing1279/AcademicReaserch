@@ -48,7 +48,7 @@
     "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
     "src/smf_mpc/plant.py": "86f9a9411835958af2f4df73cca1ffcd6433ac8701ac575e27625692c3f88208",
     "docs/learning/105_vertical_local_aerodynamic_counterexample.md": "0c24d517851eac5121093012b4367e0f9f71a9c9dde27acdf925cb69ab5915cc",
-    "docs/literature/READ_PAPERS.md": "fe689bfcc3bb63a254abf466eae2e8486326dd651faea32647d26f6ec8f2f584",
+    "docs/literature/READ_PAPERS.md": "ee18c2339693aa6c24f21cb04e248504fe74f9655af2e43c4bbc8a2cd3f0850c",
     "docs/research/run169_literature_gate.md": "2f247cbe3afcab5d7701931aa612fbcd21ed27ef10de17a775d401fb70b24f81",
     "docs/research/run169_research_log.md": "2862e04707dc653d4788dfc822e313d8a6fc2da923b7fa226ac67a0741050231"
   }

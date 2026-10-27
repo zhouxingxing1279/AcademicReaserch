@@ -312,6 +312,7 @@
 - 局限：没有给出本项目所需的 rolling SMF shift-support ledger。
 - 本项目状态：作为 fixed-complexity CZ 强基线。
 - Run 130 新增核查：精读 Section 5。其 zonotope/CZ order reduction 直接采用 Sadraddini--Tedrake containment encoding；CZ 经 nullspace/AH-polytope 表示构造 LP，可删一个 generator/constraint 后再缩放。该节做 inner approximation，不能作为 reliable SMF posterior 的 outer enclosure，但已排除“CZ reduction + containment constraint”本身的首次性。
+- Run188 精读§2、§3开头、式(1)--(3)及Theorem 4相关表示讨论。普通zonotope中心对称；CZ的等式约束可打破中心对称性、表示任意凸polytope，并对generalized intersection闭合。因此五参数center/radius在非中心对称measurement posterior上的失败是既有表示边界，不是创新。
 
 ## Robbins, Siefert, Pangborn — Exact Representation Complexity Reduction for Constrained Zonotopes with Applications to Dynamic Systems and Control
 - 年份/出处：2026, *American Control Conference (ACC 2026)*；IEEE Xplore 收录日期 2026-08-13。
@@ -531,6 +532,7 @@
   `V`已通过“存在同一measurement center”的集合量词覆盖连续观测域；对六facet模板，
   measurement-compatible coordinate可精确取`Z_1=(e_0+e_3)/2`。因此无需枚举未来center，
   但剩余`Z_2/H/Omega`及control-before-packet图仍须独立构造。
+- Run188 重读§6.1--6.5、式(25)--(27)、Definition 7、Theorem 3及证明。`Z`坐标影响离散精度，`H/Omega`由所选参数多面体configuration决定；可逆线性换坐标保持同一参数多面体的极点数，不能据此声称减少extreme information-set预算。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用

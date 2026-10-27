@@ -198,4 +198,4 @@ Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边�
 
 Run179进一步纠正`Gamma`的类型：普通CZ/SPZ降阶只压缩一条已实现history的posterior，不能直接表示连续可见`d`上的集合值策略图。下一步必须先冻结lifted `(d,s)` cell、fixed normals和cell内仿射fiber policy，再验证一条真实非线性miss边。详见[113 参数化Gamma类型审计](docs/learning/113_parameterized_gamma_obstruction.md)。
 
-最新传统基线进展见[121 六facet sensor ensemble](docs/learning/121_six_facet_sensor_ensemble.md)：对configuration内任意六facet `P(y)`，连续位置测量中心的存在性精确等价于`(y_0+y_3)/2<=a`，因此Houska measurement block只需一个`Z_1`宽度坐标，无需枚举未来center。该结果仍不是完整`Z/H/Omega`或图不变证明；下一步只选择并认证剩余`Z_2/H/Omega`的固定复杂度表示。
+最新传统基线进展见[122 六facet meta坐标门槛](docs/learning/122_six_facet_meta_coordinate_gate.md)：五参数center/radius模型因缺少独立skew坐标，在一次实际位置测量后即不闭合；补回skew后与六facet offsets可逆，对同一meta polytope不减少极点预算。下一步以direct offsets选择物理有界参数多面体并精确枚举H/Omega，闭合前不进入图LP。

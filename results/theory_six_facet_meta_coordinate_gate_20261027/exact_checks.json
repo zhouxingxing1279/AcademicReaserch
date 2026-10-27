@@ -1,0 +1,70 @@
+{
+  "claim": "five_center_radius_coordinates_are_not_measurement_closed",
+  "evidence_level": "exact_six_facet_meta_coordinate_nonclosure_certificate",
+  "facet_order": [
+    "+p",
+    "+v",
+    "-q",
+    "-p",
+    "-v",
+    "+q"
+  ],
+  "paired_coordinate_order": [
+    "c_p",
+    "c_v",
+    "c_q",
+    "r_p",
+    "r_v",
+    "r_q"
+  ],
+  "skew_definition": "delta = c_q - c_p + kappa*c_v",
+  "source_offsets": [
+    "3/200",
+    "3/200",
+    "3/200",
+    "3/200",
+    "3/200",
+    "3/200"
+  ],
+  "source_skew": "0",
+  "measurement_center": "-23/4000",
+  "measurement_halfwidth": "1/50",
+  "measurement_interval": [
+    "-103/4000",
+    "57/4000"
+  ],
+  "posterior_offsets": [
+    "57/4000",
+    "3/200",
+    "3/200",
+    "3/200",
+    "3/200",
+    "3/200"
+  ],
+  "posterior_skew": "3/8000",
+  "posterior_configuration_max_margin": "-3/4000",
+  "five_coordinate_family_rejected": true,
+  "six_coordinate_map_invertible": true,
+  "same_polytope_extreme_count_before": 7,
+  "same_polytope_extreme_count_after": 7,
+  "same_polytope_extreme_count_preserved": true,
+  "bounded_meta_polytope_selected": false,
+  "complete_H_Omega_certified": false,
+  "graph_invariant_information_ensemble_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the witness is a representation-closure counterexample, not a controller result",
+    "budget neutrality concerns the same polytope under an invertible coordinate map",
+    "no bounded direct-offset meta polytope or H/Omega configuration is selected",
+    "the 15-mode/17-edge graph LP, input constraints, and terminal conditions are untested"
+  ],
+  "source_sha256": {
+    "verification/check_six_facet_meta_coordinate_gate.py": "d9c466cedf9bbba8c2f40999dba73064cc6efb3dcd6815ac6ee63b4d88cc9059",
+    "verification/test_six_facet_meta_coordinate_gate.py": "7cb62e309a8116f8b4fa58080c19adb1ce0a54fc99d3026471b9d1249d8e749a",
+    "verification/check_six_facet_measurement_gate.py": "ad4f022c7a776de51bf5bb5723fc37f5813fa717f50b921c735ce93084656cd3",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-27-six-facet-meta-coordinate-gate-design.md": "138a6aa11efb944cdd71c834c168c3e88afe3967ab7c57d9055970cb22a32da0"
+  }
+}
