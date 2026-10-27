@@ -534,6 +534,7 @@
   但剩余`Z_2/H/Omega`及control-before-packet图仍须独立构造。
 - Run188 重读§6.1--6.5、式(25)--(27)、Definition 7、Theorem 3及证明。`Z`坐标影响离散精度，`H/Omega`由所选参数多面体configuration决定；可逆线性换坐标保持同一参数多面体的极点数，不能据此声称减少extreme information-set预算。
 - Run189 重读§3.1--3.2、§6.2--6.7、式(25)--(30)及Definition 7。参数多面体的几何极点还需按包含极大性过滤为真正extreme sets；仅用物理包含构造的有界域含完整安全盒这一支配成员，故ensemble边界退化为单元素，不能提供information-dependent control。
+- Run190 重读§3.1--3.2、§6.1--6.5、Definition 7、式(56)--(57)及Theorem 3证明接口。真实位置条带生成连续多个互不包含的真正extreme sets，但其offset参数域可是一条仅有两个顶点的线段；真正boundary与finite extreme-vertex representatives必须分开计数。
 - Run 144 精读：Sections 4.4、6.1--6.7，Definition 4、Lemma 2、Theorem 3、
   Problems (24)、(27)、(29) 与 complexity discussion。
 - 方法/关键结论：以 information ensemble 表示未来可能的信息集集合；用
@@ -599,6 +600,7 @@
   Corollary 4、式(15)--(18)。六法向的24行configuration cone和六个vertex maps均是该框架
   的直接实例；本轮贡献等级仅为项目基线的精确复现与measurement接口纠错。
 - Run189 重读§3.4--3.5、Definition 6、Lemma 1、Theorems 1--2。configuration cone与vertex maps可把物理state containment写成参数线性约束，但有界性本身不保证多个不可比较的最大多面体。
+- Run190 重读§3.4--3.5、Lemma 1、Definition 7及Theorem 2的vertex-map证明。测量生成的offset segment落在configuration cone内，但矩形上的斜facets冗余、segment处于退化边界；这不足以认证regular六facet meta configuration。
 - 与本项目关系：`Y,G,Lambda` 的配置约束几何和 vertex-control machinery 是强基线工具，不能
   作为创新。本文是 full-state robust tube，不处理当前间歇测量 information ensemble；Run183
   只借其模板接口，尚未选择模板或证明相对固定/同伦tube的同预算优势。

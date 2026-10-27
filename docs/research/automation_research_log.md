@@ -420,3 +420,7 @@ slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下
 ### 2026-10-27 Run 189
 
 重读Houska extreme-set过滤、CCTMPC configuration domain及2025 template restriction。仅以Run183安全误差盒限制六offsets时，盒的紧支持`(1,11/4,51/40,1,11/4,51/40)`本身属于参数域并包含所有其他允许集合；故诱导ensemble的真正extreme-set边界仅为完整安全盒。物理域虽有界但抹掉在线information差异，停止其`H/Omega`枚举。详见第123章、Run189准入卡与研究日志。
+
+### 2026-10-27 Run 190
+
+重读Houska information-ensemble/extreme-set与extreme-vertex-polytope区分，并复核CCTMPC退化configuration边界。对Run183安全盒和真实位置条带，精确构造`R(c)=[c-1/50,c+1/50]x[-11/4,11/4]`。全部非空posterior均由clamped center成员覆盖；不同等宽成员互不包含，真正extreme boundary是连续族。其六offset参数域仅为双顶点线段，端点是finite representatives而非完整边界。该族仍保留全速度宽度且斜facets冗余，未移除Run184环；下一步只检查active相关source的非退化posterior family。详见第124章、Run190准入卡与研究日志。

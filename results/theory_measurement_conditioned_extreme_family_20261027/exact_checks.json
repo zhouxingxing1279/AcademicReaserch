@@ -1,0 +1,124 @@
+{
+  "claim": "actual_position_measurements_generate_a_continuum_of_incomparable_extreme_sets",
+  "evidence_level": "exact_measurement_conditioned_extreme_information_family",
+  "facet_order": [
+    "+p",
+    "+v",
+    "-q",
+    "-p",
+    "-v",
+    "+q"
+  ],
+  "physical_position_halfwidth": "1",
+  "physical_velocity_halfwidth": "11/4",
+  "measurement_noise_halfwidth": "1/50",
+  "measurement_center_domain": [
+    "-51/50",
+    "51/50"
+  ],
+  "maximal_family_center_domain": [
+    "-49/50",
+    "49/50"
+  ],
+  "maximal_family": "R(c)=[c-a,c+a]x[-V,V] for c in [-P+a,P-a]",
+  "tight_offset_map": "(c+a,V,-c+a+kappa*V,-c+a,V,c+a+kappa*V)",
+  "parameter_polytope_vertex_count": 2,
+  "parameter_polytope_vertex_offsets": [
+    [
+      "-24/25",
+      "11/4",
+      "51/40",
+      "1",
+      "11/4",
+      "-137/200"
+    ],
+    [
+      "1",
+      "11/4",
+      "-137/200",
+      "-24/25",
+      "11/4",
+      "51/40"
+    ]
+  ],
+  "endpoint_configured_vertex_sets": [
+    [
+      [
+        "-1",
+        "-11/4"
+      ],
+      [
+        "-1",
+        "11/4"
+      ],
+      [
+        "-24/25",
+        "-11/4"
+      ],
+      [
+        "-24/25",
+        "11/4"
+      ]
+    ],
+    [
+      [
+        "24/25",
+        "-11/4"
+      ],
+      [
+        "24/25",
+        "11/4"
+      ],
+      [
+        "1",
+        "-11/4"
+      ],
+      [
+        "1",
+        "11/4"
+      ]
+    ]
+  ],
+  "endpoint_extreme_sets_incomparable": true,
+  "true_extreme_set_boundary_cardinality": "continuum",
+  "true_extreme_set_boundary": "{R(c): c in [-P+a,P-a]}",
+  "maximality_argument": "equal-width rectangles satisfy R(c1) subseteq R(c2) iff c1=c2",
+  "boundary_measurement_posteriors": {
+    "-51/50": [
+      "-1",
+      "-1"
+    ],
+    "51/50": [
+      "1",
+      "1"
+    ]
+  },
+  "coverage_map": "eta maps to clip(eta,[-P+a,P-a])",
+  "all_nonempty_measurement_posteriors_covered": true,
+  "measurement_closed_information_ensemble": true,
+  "measurement_closure_argument": "compact subsets of R(c) remain subsets after arbitrary intersections",
+  "endpoint_convex_hull_equals_physical_box": true,
+  "velocity_halfwidth_after_measurement": "11/4",
+  "slant_facets_redundant_on_maximal_family": true,
+  "regular_six_facet_meta_configuration_certified": false,
+  "run184_velocity_cycle_removed": false,
+  "graph_invariant_information_ensemble_certified": false,
+  "input_feasibility_certified": false,
+  "terminal_invariance_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the true extreme boundary is a continuum; the two parameter vertices are finite representatives only",
+    "the position update leaves the full physical velocity halfwidth unchanged",
+    "the slant inequalities are tight supports but redundant on these rectangular maximal sets",
+    "no propagation, control, terminal, or recursive-feasibility condition is certified"
+  ],
+  "source_sha256": {
+    "verification/check_measurement_conditioned_extreme_family.py": "bcc3182cc540d4946b1d0e3256964e0779926823881be47ef416028ef9ae0bc9",
+    "verification/test_measurement_conditioned_extreme_family.py": "ccb7ee2f7e00e2ccba0d3c55c8445874d809d62a6806029993520adf6a8699b8",
+    "verification/check_six_facet_measurement_gate.py": "ad4f022c7a776de51bf5bb5723fc37f5813fa717f50b921c735ce93084656cd3",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-27-measurement-conditioned-extreme-family-design.md": "76d194dd5fce9dae779e8b59b6a7755774b3279ab23c996d96f876244fc81792"
+  }
+}

@@ -198,4 +198,4 @@ Run178排重纠正Run177的下一步：`T0/T1`只是一对局部success/miss边�
 
 Run179进一步纠正`Gamma`的类型：普通CZ/SPZ降阶只压缩一条已实现history的posterior，不能直接表示连续可见`d`上的集合值策略图。下一步必须先冻结lifted `(d,s)` cell、fixed normals和cell内仿射fiber policy，再验证一条真实非线性miss边。详见[113 参数化Gamma类型审计](docs/learning/113_parameterized_gamma_obstruction.md)。
 
-最新传统基线进展见[123 物理有界meta-ensemble门槛](docs/learning/123_physical_bound_meta_ensemble_gate.md)：仅用安全误差盒约束六facet offsets虽得到有界参数域，但完整安全盒支配所有成员，真正extreme information set仅剩一个，无法利用在线SMF差异。下一步从可辨识information变量构造至少两个互不包含且measurement-closed的source-mode extreme sets，闭合前不进入全图LP。
+最新传统基线进展见[124 测量条件化的极端信息集族](docs/learning/124_measurement_conditioned_extreme_family.md)：真实位置条带从安全盒生成连续多个互不包含的maximal rectangles；真正extreme boundary是连续族，而六offset参数域是一条只有两个顶点的线段。该局部门槛恢复了information differentiation，但速度半宽仍为`11/4`、斜facets冗余，尚未移除Run184动力学环。下一步只研究active velocity/slant相关source的非退化posterior family，闭合前不进入全图LP。
