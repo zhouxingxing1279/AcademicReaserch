@@ -1,7 +1,11 @@
-# 研究短检查点（2026-10-11，Run156）
+# 研究短检查点（2026-10-27，Run157）
 
-主线：传统 SMF/鲁棒输出反馈 MPC；学习暂停。远端 `main=1c49659`、Run155=`1a7d413`；控制只读可见 `d=e−eta`。
+主线：间歇位置测量与推力调度不确定性下的鲁棒输出反馈 Tube MPC；先闭合调度一致的 ancillary/RCI 基线，学习与 CZ 收益比较暂停。
 
-Run156 重读 Houska §6.5/Theorem3 完整证明及 Yang--Ozay 的 product safety 量词。固定 global residual 下精确传播九条第二周期零策略 histories：六条全程安全；`last_return 10->15` 在第14 miss、`15->10` 与 `15->15` 在第9 miss 首次违反真实速度硬约束。三处半宽均为 `99649307/36000000`，超过 `11/4` 恰 `649307/36000000`。常数/label-only correction 只平移集合，亦不能修复；但 affine-in-`d` feedback 可改变形状，未被否定。证据是精确二周期受限策略反例，不是 RCI、递归可行性或创新证明。
+仓库核查：main README 仍指向第36章 scheduling-conditioned residual；main 不含短检查点，Run156 分支存在检查点并记录了二周期零策略路径的精确反例。第36章 verifier 与合同已读；381/160 ticks 是 HiGHS 数值边界，不是精确最短性证书。
 
-下一唯一问题：仅针对 `last_return=10,15` 临界 source families，建立 affine-in-`d` gain 的精确支持可行性问题，同时约束未知 success/miss 分支、执行器盒与 `e_v` 硬约束；先判断能否消除上述宽度超量，再恢复九路径传播。
+本轮 DERIVED：固定 (K)、固定多面体 (S={x:Hx\le q}) 下，横向四状态模型的每个 facet-at-vertex 鲁棒不变性左端对 (T) 仿射，因 (A(T)) 与 δ(T)=1.880+T(0.45)^3/6 均仿射，连续 (T\in[T_L,T_U]) 的精确最坏值在端点取得。该结论只简化固定候选验证；不解决联合 (K/S) 合成、packet 因果接口、RCI 存在性或递归可行性。
+
+文献：Köhler et al. 2021 全文阅读 §II–IV；Bujarbaruah et al. 2020 预印本全文阅读 §II–IV、Algorithm 1、Theorem 1/证明；Fleming et al. 2024 仅摘要/作者稿片段；Mayne et al. 2006 仅摘要/元数据。无新颖性声明。
+
+当前阻塞：尚无通过全部调度、扰动、状态及力矩约束的 common RCI 与输出反馈移位证明。下一唯一问题：对仓库已有最简单 correlated RCI candidate 实施精确双端点固定-K 检查；失败只否定该候选，不外推整个控制类。
