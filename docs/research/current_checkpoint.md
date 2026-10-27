@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-27，Run188）
+# 研究短检查点（2026-10-27，Run189）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run187远端`d33c985`。
+主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run188远端`b5253cb`。
 
-Run188比较六offsets与center/radius meta坐标。五参数`(c_p,c_v,r_p,r_v,r_q)`隐含`delta=c_q-c_p+(1/10)c_v=0`。从`y_i=3/200`出发，用实际`a=1/50`、`eta=-23/4000`测量后，posterior为`(57/4000,3/200,...,3/200)`；六facets全活跃、configuration margin `-3/4000`，但`delta=3/8000`，故五参数family不闭合。补回skew后与六offsets可逆，同一meta polytope的极点数不变。证据等级：`exact_six_facet_meta_coordinate_nonclosure_certificate`；未构造`H/Omega`或控制证明。
+Run189否定“仅物理bounds即可给出有用有界meta域”。Run183安全盒`X=[-1,1]x[-11/4,11/4]`的六方向紧支持为`y_X=(1,11/4,51/40,1,11/4,51/40)`，且configured `P(y_X)=X`。任何物理允许`P(y)`均满足`P(y) subseteq X=P(y_X)`，故诱导information ensemble的真正extreme-set边界仅为`{X}`；参数域有界但退化为固定最坏盒，无法利用在线SMF差异。证据等级：`exact_physical_bound_meta_ensemble_singleton_extreme_set`；未构造variable `H/Omega`或控制证明。
 
-下一唯一问题：以direct offsets选择受物理bounds限制的有界meta polytope，精确枚举`H/Omega`与真正extreme information sets；预算不可接受则转向CZ固定复杂度外包。
+下一唯一问题：由可辨识information变量增加线性约束，在一个source mode上精确构造至少两个互不包含且measurement-closed的extreme sets；成功后再扩展mode graph。

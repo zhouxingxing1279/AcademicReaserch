@@ -1,0 +1,75 @@
+{
+  "claim": "physical_containment_only_collapses_to_one_extreme_information_set",
+  "evidence_level": "exact_physical_bound_meta_ensemble_singleton_extreme_set",
+  "facet_order": [
+    "+p",
+    "+v",
+    "-q",
+    "-p",
+    "-v",
+    "+q"
+  ],
+  "physical_position_halfwidth": "1",
+  "physical_velocity_halfwidth": "11/4",
+  "physical_support_offsets": [
+    "1",
+    "11/4",
+    "51/40",
+    "1",
+    "11/4",
+    "51/40"
+  ],
+  "configuration_max_margin": "0",
+  "dominating_offsets_in_configuration_cone": true,
+  "configured_vertex_set": [
+    [
+      "-1",
+      "-11/4"
+    ],
+    [
+      "-1",
+      "11/4"
+    ],
+    [
+      "1",
+      "-11/4"
+    ],
+    [
+      "1",
+      "11/4"
+    ]
+  ],
+  "physical_box_equals_dominating_polytope": true,
+  "domination_argument": "P(y) subseteq X implies h_P(Y_i) <= h_X(Y_i) componentwise",
+  "all_admissible_sets_contained_in_extreme_set": true,
+  "extreme_set_count": 1,
+  "extreme_set_offsets": [
+    [
+      "1",
+      "11/4",
+      "51/40",
+      "1",
+      "11/4",
+      "51/40"
+    ]
+  ],
+  "physical_only_meta_domain_useful_for_online_information": false,
+  "variable_H_Omega_family_certified": false,
+  "graph_invariant_information_ensemble_certified": false,
+  "mpc_recursive_feasibility_certified": false,
+  "full_six_state_guarantee": false,
+  "limitations": [
+    "the result concerns only the meta domain defined by physical containment",
+    "no additional information-conditioned shape or center constraints are selected",
+    "no variable H/Omega family or mode-graph propagation is constructed",
+    "the result is a representation stopping certificate, not a controller theorem"
+  ],
+  "source_sha256": {
+    "verification/check_physical_bound_meta_ensemble_gate.py": "80de2603d23d70270396d15debd237df6b51ae173ee44006d8a4bbd7382962c0",
+    "verification/test_physical_bound_meta_ensemble_gate.py": "eee8b0dda9486b3e984eb89f6e25afed90d43b741148d5ef4db6ff7494888c99",
+    "verification/check_six_facet_measurement_gate.py": "ad4f022c7a776de51bf5bb5723fc37f5813fa717f50b921c735ce93084656cd3",
+    "verification/check_houska_vertical_adapter.py": "7ccf9d39476f4ee9501e7e424bf9945ad45c561a82eb6a21f4de2138446ad871",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "docs/superpowers/specs/2026-10-27-physical-bound-meta-ensemble-gate-design.md": "7c0b7f886c666aa5ee6c23df760186222197ed7cbd2900f66884c2ca79b79f92"
+  }
+}

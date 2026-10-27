@@ -416,3 +416,7 @@ slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下
 ### 2026-10-27 Run 188
 
 重读Houska `Z/H/Omega`、CCTMPC configuration domain及Raghuraman--Koeln CZ交集表示。五参数center/radius六边形隐含一个零skew约束；精确实际噪声measurement反例从中心对称source生成同configuration内、六facet全活跃但skew为`3/8000`的posterior，故该family不闭合。补回skew后的六参数表示只是direct offsets的可逆线性变换，同一meta polytope极点预算不变。详见第122章、`run188_literature_gate.md`与研究日志。
+
+### 2026-10-27 Run 189
+
+重读Houska extreme-set过滤、CCTMPC configuration domain及2025 template restriction。仅以Run183安全误差盒限制六offsets时，盒的紧支持`(1,11/4,51/40,1,11/4,51/40)`本身属于参数域并包含所有其他允许集合；故诱导ensemble的真正extreme-set边界仅为完整安全盒。物理域虽有界但抹掉在线information差异，停止其`H/Omega`枚举。详见第123章、Run189准入卡与研究日志。
