@@ -453,3 +453,12 @@ vertex control及gain-scheduled RCI全文相关章节。停止增加predecessor�
 `tau_lower-tau_upper=(5626543/1569600)alpha+6254383/174400>0`，故所有`alpha>0`均无可行
 低推力端点力矩；该矛盾不依赖物理力矩限幅。只否定冻结homothetic S4类，Gate A仍blocked。
 下一步只做独立offset的configuration-constrained vertex-control综合与独立证书审计。
+
+### 2026-10-28 Run 195
+
+精读PD-RCI的可测当前参数与`u(x,p)`量词，并复核非PD CC-RCI共享vertex input基线；发现历史
+19-pair独立offset综合仍沿用更保守的共享力矩。修正为160顶点各两个端点力矩后，358变量、
+19520不等式的有界/无界LP均数值不可行。24行精确Farkas电路在扩展空间秩23、正乘子、
+`y^T A=0`、`y^T b=-3069803/88290<0`，320个端点力矩列分别抵消且不使用力矩限幅。
+该`COUNTEREXAMPLE`只否定固定19-pair参数无关offset锥；Gate A仍blocked。下一步只定义并审计
+严格更强的parameter-dependent-offset CC/RCI候选。

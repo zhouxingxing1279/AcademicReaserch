@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-28，Run194）
+# 研究短检查点（2026-10-28，Run195）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run193=`aae3a53`，`main=1c49659`。
+唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run194=`5565959`，`main=1c49659`。
 
-冻结四状态合同不变：当前`T`可见、未来`T∈[4.905,14.715]`任意跳变、`W(T)=1.880+T*0.45^3/6`。Run193的S4有102 facets（行选择为HiGHS `NUMERIC_CHECK`）。冻结该行集后，精确有理数见证证明：S4某个秩4顶点在低推力端点满足`tau_lower(alpha)-tau_upper(alpha)=(5626543/1569600)alpha+6254383/174400>0`，故任意`alpha>0`的同心`alpha*S4`即使允许调度可见vertex torque也不能RCI，且矛盾不依赖`|tau|<=0.08`（`COUNTEREXAMPLE`）。这只否定该homothetic模板类，不否定独立offset、不同法向、PWA/PD-RCI或一般RCI。Gate A仍blocked；Gate B/C、六状态接口、terminal/shift均OPEN。
+冻结四状态合同不变：当前`T`可见、未来`T∈[4.905,14.715]`任意跳变、`W(T)=1.880+T*0.45^3/6`。历史19-pair CC-RCI虽允许独立offset，却为每个状态顶点共用一个力矩，量词比当前合同更保守。本轮改为160顶点各有低/高推力独立力矩：完整LP含358变量、19520不等式，有界/无界力矩均数值不可行。更强的24行有理Farkas电路在358维空间满足秩23、正乘子、`y^T A=0`、`y^T b=-3069803/88290<0`，且不用力矩限幅、offset等式或非负边界（`COUNTEREXAMPLE`）。只否定该固定19-pair参数无关offset锥；其他法向、parameter-dependent offsets、一般PD-RCI、六状态与递归可行性均OPEN。Gate A仍blocked。
 
-下一唯一问题：实施独立offset的configuration-constrained vertex-control综合，并独立审计返回候选；不再缩放S4或增加有限层数。
+下一唯一问题：定义严格包含该候选的最小parameter-dependent-offset CC/RCI类，并冻结可独立核查的可行/否证接口。

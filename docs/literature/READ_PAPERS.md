@@ -154,6 +154,9 @@
 - Run 194 重读 Section III-C、Lemma 3、Problem 1、Sections IV--V，专门核查固定法向、可变
   offset和vertex-input充分证书。本轮同心`alpha*S4`只是其严格受限子类；该子类失败不能否定
   independently variable offsets或configuration-constrained联合综合。
+- Run 195 定向精读Lemma 3证明(77)--(81)及Sections IV--V的式(85)--(88)。非PD CC-RCI
+  为每个集合顶点配置一个输入并共同覆盖调度顶点；仓库旧19-pair LP正确复现了这一保守基线，
+  但它不能代替冻结合同允许的当前推力可见端点相关力矩。
 
 ## Mulagaleti, Mejari, Bemporad — Parameter-Dependent Robust Control Invariant Sets for LPV Systems With Bounded Parameter-Variation Rate
 - 年份/出处：2025, *IEEE Transactions on Automatic Control*, 70(2):1259--1266；
@@ -170,6 +173,9 @@
   `exists tau forall T` predecessor比真实信息合同更强，必须纠正为调度可见控制。
 - Run 194 重读Sections 1、3.1--3.4的PD-RCI定义、PD-vertex control及SDP充分条件。任意未来
   推力跳变使后继参数集合仍为全区间；本轮只用其当前参数可见控制权限，不复现PD-set SDP。
+- Run 195 精读定义(4)--(6)、Proposition 2及证明、PD vertex law(14)--(15)、Sections
+  3.2--3.4的式(16)--(27)。当前参数在控制前可测且`u=u(x,p)`，因此本轮为160个状态顶点
+  分配低/高推力独立力矩；未来参数全区间覆盖仍未因该权限而缩小。
 
 ## Mejari, Gupta, Piga — Data-Driven Computation of Robust Invariant Sets and Gain-Scheduled Controllers for Linear Parameter-Varying Systems
 - 年份/出处：2023, *IEEE Control Systems Letters*, 7:3355--3360；

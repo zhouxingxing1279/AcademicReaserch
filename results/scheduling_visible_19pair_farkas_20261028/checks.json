@@ -1,0 +1,449 @@
+{
+  "claim": "the audited parameter-independent 19-pair configuration cone remains infeasible with separate current-thrust-visible endpoint vertex torques",
+  "scope": "four-state reduced lateral-attitude benchmark and the chapter-48 audited 19-pair cone only",
+  "evidence_level": "COUNTEREXAMPLE",
+  "corrected_quantifier": "for each state vertex and measured current-thrust endpoint, choose a separate torque; robustly cover the corresponding disturbance set",
+  "endpoint_reduction": "affine dynamics, affine endpoint-torque interpolation, and affine W(T) support make the two endpoint checks sufficient over the frozen thrust interval",
+  "corrected_lp": {
+    "offset_variables": 38,
+    "state_vertices": 160,
+    "torque_variables": 320,
+    "variables": 358,
+    "configuration_inequalities": 6080,
+    "configuration_plus_invariance_inequalities": 18240,
+    "total_inequalities_with_hard_state": 19520,
+    "pair_offset_equalities": 19,
+    "bounded_torque_0p08_feasible": false,
+    "unbounded_endpoint_torque_feasible": false,
+    "bounded_solver_status": 2,
+    "unbounded_solver_status": 2,
+    "evidence_level": "NUMERIC_CHECK"
+  },
+  "exact_certificate": {
+    "support_rows": 24,
+    "coefficient_rank": 23,
+    "all_multipliers_strictly_positive": true,
+    "weighted_lhs_zero_exact": true,
+    "nonzero_weighted_lhs_coefficients": 0,
+    "weighted_rhs": "-3069803/88290",
+    "weighted_rhs_float": -34.769543549665876,
+    "endpoint_torque_coefficients_checked": 320,
+    "nonzero_low_endpoint_torque_residuals": 0,
+    "nonzero_high_endpoint_torque_residuals": 0,
+    "torque_bound_rows_used": 0,
+    "pair_offset_equality_rows_used": 0,
+    "q_nonnegativity_rows_used": 0,
+    "multipliers": [
+      "200/27",
+      "200/27",
+      "100/27",
+      "100/27",
+      "400/9",
+      "2000000/26487",
+      "2000000/26487",
+      "1000000/26487",
+      "200/9",
+      "32/9",
+      "16000000/79461",
+      "1000000/26487",
+      "1000000/26487",
+      "500000/26487",
+      "1/9",
+      "500000/8829",
+      "2/9",
+      "1000000/8829",
+      "64/27",
+      "8000000/79461",
+      "8000000/79461",
+      "8/27",
+      "4000000/79461",
+      "1"
+    ],
+    "support": [
+      {
+        "row": [
+          "config",
+          15,
+          5,
+          null
+        ],
+        "active_set": [
+          0,
+          6,
+          11,
+          19
+        ],
+        "multiplier": "200/27"
+      },
+      {
+        "row": [
+          "config",
+          17,
+          5,
+          null
+        ],
+        "active_set": [
+          0,
+          6,
+          19,
+          33
+        ],
+        "multiplier": "200/27"
+      },
+      {
+        "row": [
+          "config",
+          60,
+          4,
+          null
+        ],
+        "active_set": [
+          1,
+          7,
+          10,
+          18
+        ],
+        "multiplier": "100/27"
+      },
+      {
+        "row": [
+          "config",
+          62,
+          4,
+          null
+        ],
+        "active_set": [
+          1,
+          7,
+          18,
+          32
+        ],
+        "multiplier": "100/27"
+      },
+      {
+        "row": [
+          "inv",
+          3,
+          5,
+          "981/200"
+        ],
+        "active_set": [
+          0,
+          3,
+          7,
+          11
+        ],
+        "multiplier": "400/9"
+      },
+      {
+        "row": [
+          "inv",
+          20,
+          11,
+          "981/200"
+        ],
+        "active_set": [
+          0,
+          6,
+          25,
+          35
+        ],
+        "multiplier": "2000000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          34,
+          11,
+          "981/200"
+        ],
+        "active_set": [
+          0,
+          21,
+          23,
+          25
+        ],
+        "multiplier": "2000000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          35,
+          11,
+          "981/200"
+        ],
+        "active_set": [
+          0,
+          21,
+          23,
+          33
+        ],
+        "multiplier": "1000000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          40,
+          4,
+          "981/200"
+        ],
+        "active_set": [
+          1,
+          2,
+          6,
+          10
+        ],
+        "multiplier": "200/9"
+      },
+      {
+        "row": [
+          "inv",
+          48,
+          6,
+          "2943/200"
+        ],
+        "active_set": [
+          1,
+          5,
+          6,
+          34
+        ],
+        "multiplier": "32/9"
+      },
+      {
+        "row": [
+          "inv",
+          48,
+          34,
+          "2943/200"
+        ],
+        "active_set": [
+          1,
+          5,
+          6,
+          34
+        ],
+        "multiplier": "16000000/79461"
+      },
+      {
+        "row": [
+          "inv",
+          65,
+          10,
+          "981/200"
+        ],
+        "active_set": [
+          1,
+          7,
+          24,
+          34
+        ],
+        "multiplier": "1000000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          72,
+          10,
+          "981/200"
+        ],
+        "active_set": [
+          1,
+          20,
+          22,
+          24
+        ],
+        "multiplier": "1000000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          73,
+          10,
+          "981/200"
+        ],
+        "active_set": [
+          1,
+          20,
+          22,
+          32
+        ],
+        "multiplier": "500000/26487"
+      },
+      {
+        "row": [
+          "inv",
+          81,
+          6,
+          "981/200"
+        ],
+        "active_set": [
+          2,
+          7,
+          10,
+          30
+        ],
+        "multiplier": "1/9"
+      },
+      {
+        "row": [
+          "inv",
+          81,
+          20,
+          "981/200"
+        ],
+        "active_set": [
+          2,
+          7,
+          10,
+          30
+        ],
+        "multiplier": "500000/8829"
+      },
+      {
+        "row": [
+          "inv",
+          87,
+          7,
+          "981/200"
+        ],
+        "active_set": [
+          3,
+          6,
+          11,
+          31
+        ],
+        "multiplier": "2/9"
+      },
+      {
+        "row": [
+          "inv",
+          87,
+          21,
+          "981/200"
+        ],
+        "active_set": [
+          3,
+          6,
+          11,
+          31
+        ],
+        "multiplier": "1000000/8829"
+      },
+      {
+        "row": [
+          "inv",
+          96,
+          7,
+          "2943/200"
+        ],
+        "active_set": [
+          4,
+          7,
+          31,
+          35
+        ],
+        "multiplier": "64/27"
+      },
+      {
+        "row": [
+          "inv",
+          96,
+          25,
+          "2943/200"
+        ],
+        "active_set": [
+          4,
+          7,
+          31,
+          35
+        ],
+        "multiplier": "8000000/79461"
+      },
+      {
+        "row": [
+          "inv",
+          96,
+          35,
+          "2943/200"
+        ],
+        "active_set": [
+          4,
+          7,
+          31,
+          35
+        ],
+        "multiplier": "8000000/79461"
+      },
+      {
+        "row": [
+          "inv",
+          102,
+          6,
+          "2943/200"
+        ],
+        "active_set": [
+          5,
+          6,
+          30,
+          34
+        ],
+        "multiplier": "8/27"
+      },
+      {
+        "row": [
+          "inv",
+          102,
+          24,
+          "2943/200"
+        ],
+        "active_set": [
+          5,
+          6,
+          30,
+          34
+        ],
+        "multiplier": "4000000/79461"
+      },
+      {
+        "row": [
+          "hard",
+          0,
+          3,
+          1
+        ],
+        "active_set": [
+          0,
+          3,
+          5,
+          6
+        ],
+        "multiplier": "1"
+      }
+    ]
+  },
+  "proves_general_rci_nonexistence": false,
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "gate_A_status": "blocked",
+  "interpretation": [
+    "The old shared-torque proof did not match the measured-current-thrust information pattern; this certificate is checked in the expanded 358-variable space.",
+    "The circuit uses no torque-bound row, so actuator saturation is not the cause of this candidate's contradiction.",
+    "Other normal families, parameter-dependent offsets, non-polytopic sets, and the six-state embedding remain open."
+  ],
+  "dependencies_sha256": {
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "verification/check_s3_minimal_normal_cover.py": "bee99b286e5d7e639d8b5be31d9e146f0f3cdc5519fdb3848928bdf2d064dd23",
+    "verification/check_19pair_cc_seed_cone.py": "47f3f40619583cd1c235caaaccf924e828b1138162ef2d872695e8513335fc9e",
+    "verification/check_scheduling_visible_19pair_farkas.py": "0ae64744871f6d800ecf539436c4f8a6108e32fd504615d136a840c9e50ba80b",
+    "verification/test_scheduling_visible_19pair_farkas.py": "e9f1360fd75f4b8cac365f2629aa1998d09a5a00e275af47a60d17fa98bc239a",
+    "docs/research/run195_literature_gate.md": "3caa3b3768be0cc4ea9034ea686134bee9fb3f9747c7df0c9d8d860373b9b868",
+    "docs/superpowers/specs/2026-10-28-scheduling-visible-19pair-farkas-design.md": "7f17ae44d406bc567208478d7454c946d3300419c0088d787047dcf754a6f6f2"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "next_problem": "formulate the smallest parameter-dependent-offset CC/RCI candidate that strictly contains the corrected information pattern, then seek an independently checkable feasibility or obstruction certificate"
+}
