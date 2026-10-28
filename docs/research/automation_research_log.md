@@ -470,5 +470,5 @@ Definition 1、Lemma 3及Polya/LMI条件。确认参数相关顶点和仿射LPV�
 项，不能沿用参数无关集合的endpoint-only认证。给出纯有理标量反例：
 `S(p)=[-(1+p),1+p]`、`x+=(1-p/2)x`，任意未来`p+ in [0,1]`时共同目标为`[-1,1]`；
 两端点后继幅度均为1，但`p=1/2`为`9/8`，严格违反`1/8`。该`COUNTEREXAMPLE`只否定
-affine-offset候选的端点认证，Gate A仍blocked。下一步只选择声音的全参数综合松弛，并要求
+affine-offset候选的端点认证，Gate A仍blocked。下一步只选择可靠的全参数综合松弛，并要求
 返回候选通过独立全区间精确验证。

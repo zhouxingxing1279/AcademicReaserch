@@ -49,6 +49,6 @@ certification。它不否定 PD-RCI 存在性、19-pair family、六状态安全
 
 ## 下一唯一问题
 
-为 19-pair affine-offset family 选择一个声音的全参数综合松弛（优先比较一维调度的精确
+为 19-pair affine-offset family 选择一个可靠的全参数综合松弛（优先比较一维调度的精确
 二次条件与 S-procedure/SDP），并规定任何返回候选必须通过本轮的独立全区间有理验证；未通过
 前不声明 RCI 可行或安全。
