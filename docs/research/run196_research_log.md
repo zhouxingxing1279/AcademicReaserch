@@ -38,7 +38,14 @@ certification。它不否定 PD-RCI 存在性、19-pair family、六状态安全
 
 最终项目测试39/39、研究验证366/366。新增论文条目改变`READ_PAPERS.md`的SHA-256，导致14个
 历史工件的复现测试按预期失败；逐一运行原checker机械重建后，全部历史语义测试与哈希复现
-恢复通过。提交与远端tree核验记录在本轮最终交付提交中。
+恢复通过。自审未保留Critical、Important或Minor问题。
+
+## 提交与同步
+
+内容提交为本地`4c897f6`；标准HTTPS push因运行环境无GitHub用户名凭据失败。随后通过已授权
+仓库连接器创建远端等树提交`6d2cd88`与分支`research/run196-pd-offset-contract`。重新fetch
+核验本地与远端内容tree均为`ae465ae9792593a56165d8a4de0c871c03a295ac`；最终交付元数据
+提交的远端head在本轮中文简报中报告。
 
 ## 下一唯一问题
 

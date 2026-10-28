@@ -37,10 +37,10 @@
 - Produces: `quadratic_max_on_interval(a: Fraction, b: Fraction, c: Fraction, lower: Fraction, upper: Fraction) -> dict`
 - Produces: `build_report(root: Path) -> dict`
 
-- [ ] Write failing tests for the frozen `9/8` interior violation, concave/convex/linear cases, invalid intervals, scope labels, dependency hashes, CLI reproduction, and perturbation of the frozen algebra.
-- [ ] Run `python -m unittest verification.test_pd_offset_endpoint_counterexample -v`; expect import/failure because the checker does not exist.
-- [ ] Implement the exact interval maximizer, frozen-contract assertions, report construction, and CLI JSON writer.
-- [ ] Re-run the focused test; expect all tests to pass after the result artifact exists in Task 2.
+- [x] Write failing tests for the frozen `9/8` interior violation, concave/convex/linear cases, invalid intervals, scope labels, dependency hashes, CLI reproduction, and perturbation of the frozen algebra.
+- [x] Run `python -m unittest verification.test_pd_offset_endpoint_counterexample -v`; expect import/failure because the checker does not exist.
+- [x] Implement the exact interval maximizer, frozen-contract assertions, report construction, and CLI JSON writer.
+- [x] Re-run the focused test; expect all tests to pass after the result artifact exists in Task 2.
 
 ### Task 2: Literature gate, archived evidence, and research state
 
@@ -57,11 +57,11 @@
 - Consumes: `build_report(root)` and the checker CLI from Task 1.
 - Produces: hash-bound archived JSON and a short checkpoint with the next single blocker.
 
-- [ ] Write the literature gate from targeted full-text reading of Gupta et al. 2023 and Mulagaleti et al. 2025, distinguishing arbitrary successor scheduling, common-target intersection, and polynomial/LMI certification.
-- [ ] Run the checker CLI to create the archived JSON, then run the focused test suite.
-- [ ] Record derivation, exact result, limitations, commands, and source hashes in the learning note and detailed log.
-- [ ] Update the paper ledger, short checkpoint, and cumulative automation log without expanding historical geometry branches.
-- [ ] Re-run the checker after all hash-bound files are final, then run project and verification test suites.
+- [x] Write the literature gate from targeted full-text reading of Gupta et al. 2023 and Mulagaleti et al. 2025, distinguishing arbitrary successor scheduling, common-target intersection, and polynomial/LMI certification.
+- [x] Run the checker CLI to create the archived JSON, then run the focused test suite.
+- [x] Record derivation, exact result, limitations, commands, and source hashes in the learning note and detailed log.
+- [x] Update the paper ledger, short checkpoint, and cumulative automation log without expanding historical geometry branches.
+- [x] Re-run the checker after all hash-bound files are final, then run project and verification test suites.
 
 ### Task 3: Final verification and repository delivery
 
@@ -72,8 +72,8 @@
 - Consumes: all Task 1–2 artifacts.
 - Produces: a clean commit and synchronized research branch.
 
-- [ ] Run `python -m unittest discover -s tests -v` and require all tests pass.
-- [ ] Run `python -m unittest discover -s verification -p 'test_*.py' -v` and require all tests pass.
-- [ ] Run the checker into a temporary path and compare parsed JSON with the archive.
-- [ ] Inspect `git diff --check`, status, and diff scope.
-- [ ] Commit the verified increment and push `research/run196-pd-offset-contract`; independently compare remote and local tree hashes.
+- [x] Run `python -m unittest discover -s tests -v` and require all tests pass.
+- [x] Run `python -m unittest discover -s verification -p 'test_*.py' -v` and require all tests pass.
+- [x] Run the checker into a temporary path and compare parsed JSON with the archive.
+- [x] Inspect `git diff --check`, status, and diff scope.
+- [x] Commit the verified increment and push `research/run196-pd-offset-contract`; independently compare remote and local tree hashes.
