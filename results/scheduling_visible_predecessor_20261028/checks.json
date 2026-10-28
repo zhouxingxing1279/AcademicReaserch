@@ -1,0 +1,146 @@
+{
+  "claim": "scheduling-visible and common-torque predecessor comparison over finite layers",
+  "scope": "four-state reduced lateral-attitude benchmark only",
+  "evidence_level": "NUMERIC_CHECK",
+  "contract": {
+    "current_thrust_measured_before_torque": true,
+    "future_thrust": "arbitrary_jump_in_interval",
+    "thrust_endpoints_N": [
+      "981/200",
+      "2943/200"
+    ],
+    "torque_limit_Nm": "2/25",
+    "state_bounds_px_vx_phi_omega": [
+      "5",
+      "3",
+      "9/20",
+      "2"
+    ],
+    "residual_halfwidth": "47/25 + T*(9/20)^3/6"
+  },
+  "quantifiers": {
+    "common_torque": "exists tau(x) before forall current T",
+    "scheduling_visible": "forall measured current T exists tau(x,T)",
+    "interior_thrust_policy": "affine interpolation of endpoint controls is admissible for the affine plant/input and affine disturbance support"
+  },
+  "common_torque_layers": [
+    {
+      "depth": 1,
+      "unique_candidates": 17,
+      "nonredundant_facets": 16,
+      "origin_feasible": true
+    },
+    {
+      "depth": 2,
+      "unique_candidates": 31,
+      "nonredundant_facets": 28,
+      "origin_feasible": true
+    },
+    {
+      "depth": 3,
+      "unique_candidates": 99,
+      "nonredundant_facets": 52,
+      "origin_feasible": true
+    },
+    {
+      "depth": 4,
+      "unique_candidates": 903,
+      "nonredundant_facets": 102,
+      "origin_feasible": true
+    }
+  ],
+  "scheduling_visible_layers": [
+    {
+      "depth": 1,
+      "unique_candidates": 17,
+      "nonredundant_facets": 16,
+      "origin_feasible": true
+    },
+    {
+      "depth": 2,
+      "unique_candidates": 31,
+      "nonredundant_facets": 28,
+      "origin_feasible": true
+    },
+    {
+      "depth": 3,
+      "unique_candidates": 85,
+      "nonredundant_facets": 52,
+      "origin_feasible": true
+    },
+    {
+      "depth": 4,
+      "unique_candidates": 489,
+      "nonredundant_facets": 102,
+      "origin_feasible": true
+    }
+  ],
+  "layer_comparison": [
+    {
+      "depth": 1,
+      "common_subset_visible_max_violation": 0.0,
+      "visible_subset_common_max_violation": 0.0,
+      "same_polytope_numerical": true
+    },
+    {
+      "depth": 2,
+      "common_subset_visible_max_violation": 0.0,
+      "visible_subset_common_max_violation": 2.220446049250313e-16,
+      "same_polytope_numerical": true
+    },
+    {
+      "depth": 3,
+      "common_subset_visible_max_violation": 2.220446049250313e-16,
+      "visible_subset_common_max_violation": 2.220446049250313e-16,
+      "same_polytope_numerical": true
+    },
+    {
+      "depth": 4,
+      "common_subset_visible_max_violation": 4.440892098500626e-16,
+      "visible_subset_common_max_violation": 4.440892098500626e-16,
+      "same_polytope_numerical": true
+    }
+  ],
+  "legacy_checker_audit": {
+    "fraction_leak_detected": true,
+    "canonicalized_unit_coefficient_type": "float",
+    "effect": "the legacy checker did not preserve Fraction arithmetic after canonicalizing integer hard-box normals",
+    "archived_nonredundant_facet_counts": [
+      16,
+      28,
+      52,
+      102
+    ],
+    "corrected_nonredundant_facet_counts": [
+      16,
+      28,
+      52,
+      102
+    ],
+    "legacy_nonredundant_facet_counts_still_match_corrected_counts": true
+  },
+  "corrected_fraction_construction": true,
+  "redundancy_and_containment_tolerance": 1e-07,
+  "is_rci_certificate": false,
+  "proves_all_depths_equal": false,
+  "proves_six_state_safety": false,
+  "gate_A_status": "blocked",
+  "interpretation": [
+    "The old common-torque projection is semantically stronger than the frozen measured-current-thrust contract.",
+    "For the first audited layers, endpoint-local torque projection changes candidate inequalities but not the retained polytopes within numerical LP tolerance.",
+    "Finite-layer equality neither proves equality at all depths nor supplies an invariant set or controller certificate."
+  ],
+  "dependencies_sha256": {
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "verification/check_scheduling_visible_predecessor.py": "80dde343d4760a91dd57e6c6348bf9b6c935a249a37be5e3a9167f477e9d1104",
+    "verification/test_scheduling_visible_predecessor.py": "afb0fa949dcf6103142802177637d0b39d5e13e7ef97e671b0663a18eff6f00e",
+    "verification/check_projected_predecessor_layers.py": "3c909b82dbcdbb63fe577aecb5dff77a590d88f20139771fba6e06121a666466",
+    "results/projected_predecessor_layers_20260924/checks.json": "b9b8e21c7a82822507f5aea2a21c2598d37c1ad9aaead0d4cfff00f381243de4"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "next_problem": "obtain a sufficient scheduling-visible correlated controller/RCI certificate, or a controller/set-class-specific counterexample, without reverting to local configuration-cone enumeration"
+}

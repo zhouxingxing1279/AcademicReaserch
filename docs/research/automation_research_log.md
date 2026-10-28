@@ -435,3 +435,12 @@ cone分别只构成局部反例；30,000点搜索与执行器权限LP仅是数�
 `T`、future `T`任意跳变，虽可精确端点化，但没有充分controller/RCI证书同时覆盖`W(T)`、
 全部state与torque约束。Gate A=blocked。下一步只构造一个充分correlated controller/RCI
 证书并独立攻击，不再做局部cone邻接枚举。详见第125章、Run192准入卡与研究日志。
+
+### 2026-10-28 Run 193
+
+重读PD-RCI的`u=u(x,p)`量词、configuration-constrained vertex control及gain-scheduled RCI
+近邻，纠正旧predecessor与“当前推力已知”合同不一致的问题。审计同时发现旧checker将整数
+单位法向在`canon`中除成float，故其全Fraction表述失效。新checker保持有理数行构造，并分别
+执行共同力矩与端点条件化力矩投影；前四层调度可见候选明显减少，但两者保留多面体在HiGHS
+双向包含容差内相同。该结果仅为有限层NUMERIC_CHECK，Gate A仍blocked。详见第126章、
+Run193准入卡与研究日志。

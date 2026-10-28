@@ -148,6 +148,9 @@
 - Run 192 重读 Section III-C、Lemma 3、Problem 1与Section IV。其充分RCI条件同时约束
   configuration cone、vertex后继、状态和输入；仓库现有单一cone Farkas否证不能外推到
   orientation family或plant不可行。本轮不再继续局部cone邻接枚举。
+- Run 193 重读 Section III-C、Lemma 3及证明、Problem 1、Sections IV--V。正文顶点输入
+  `u^i`不依赖当前调度参数，属于共同vertex-input策略；可作为保守基线，但不能覆盖冻结合同
+  已允许的`tau(x,T)`全部权限。
 
 ## Mulagaleti, Mejari, Bemporad — Parameter-Dependent Robust Control Invariant Sets for LPV Systems With Bounded Parameter-Variation Rate
 - 年份/出处：2025, *IEEE Transactions on Automatic Control*, 70(2):1259--1266；
@@ -159,6 +162,18 @@
 - 与本项目关系：若未来显式加入并认证推力执行器状态/变化率，该文是直接强基线；当前
   frozen benchmark只有逐点`T`区间，最小通用rate bound等于全区间宽度，不能获得transition
   reduction。PD-RCI与configuration geometry均不作为创新。
+- Run 193 重读式(4)--(6)、Sections 3.1--3.2、式(12)--(25)及算法。其定义明确先读取当前
+  scheduling parameter，再使用`u=u(x,p)`，同时覆盖全部允许`p+`；因此仓库旧
+  `exists tau forall T` predecessor比真实信息合同更强，必须纠正为调度可见控制。
+
+## Mejari, Gupta, Piga — Data-Driven Computation of Robust Invariant Sets and Gain-Scheduled Controllers for Linear Parameter-Varying Systems
+- 年份/出处：2023, *IEEE Control Systems Letters*, 7:3355--3360；
+  DOI：https://doi.org/10.1109/LCSYS.2023.3329291；全文：https://arxiv.org/abs/2309.01814
+- Run 193 阅读：问题陈述、invariance定义及gain-scheduled controller构造相关段落。
+- 方法/关键结论：利用实时可用的scheduling signal综合LPV gain-scheduled feedback与多面体
+  RCI，并对调度集合和有界扰动鲁棒。
+- 与本项目关系：再次确认当前推力可见反馈不是新机制；本文数据驱动不确定模型合同也不是
+  本轮目标。本轮只纠正已有model-based predecessor量词。
 
 ## Köhler, Soloperto, Müller, Allgöwer — A computationally efficient robust model predictive control framework for uncertain nonlinear systems
 - 年份/全文：2020 extended version；https://arxiv.org/abs/1910.12081
