@@ -176,6 +176,20 @@
 - Run 195 精读定义(4)--(6)、Proposition 2及证明、PD vertex law(14)--(15)、Sections
   3.2--3.4的式(16)--(27)。当前参数在控制前可测且`u=u(x,p)`，因此本轮为160个状态顶点
   分配低/高推力独立力矩；未来参数全区间覆盖仍未因该权限而缩小。
+- Run 196 精读Definition/Problem、Proposition 2、式(14)--(15)、(21)--(28)、SDP(33)与
+  Section IV-A。仿射offset给出仿射vertices，和仿射LPV dynamics/vertex control相乘后，
+  式(27)是关于当前参数的可能非凸二次不等式；作者用S-procedure/LMI给充分条件。故参数相关
+  offset不能沿用Run195的endpoint-only LP认证。
+
+## Gupta, Mejari, Falcone, Piga — Computation of Parameter Dependent Robust Invariant Sets for LPV Models with Guaranteed Performance
+- 年份/出处：2023, *Automatica*, 151:110920；DOI：https://doi.org/10.1016/j.automatica.2023.110920；全文：https://arxiv.org/pdf/2009.09778
+- Run 196 精读：Sections 3--5，Definition 1、Problems 1--2、Lemma 3、式(11)、
+  (14)--(28)、多项式条件(20)--(21)与LMI条件(37)--(40)。
+- 方法/关键结论：当前scheduling parameter可测，但未来值未知；PD-RCI一步包含必须对全部
+  future scheduling成立，等价进入全部未来切片的交。参数相关invariance/constraint条件写成
+  多项式矩阵不等式，并以Polya relaxation转为充分LMI/SDP条件。
+- 与本项目关系：直接否定“参数相关set后仍只需检查当前参数顶点”的无依据简化；其LMI是
+  强综合基线，但充分松弛和参数化与当前19-pair offset family不同，不能直接宣称已闭合Gate A。
 
 ## Mejari, Gupta, Piga — Data-Driven Computation of Robust Invariant Sets and Gain-Scheduled Controllers for Linear Parameter-Varying Systems
 - 年份/出处：2023, *IEEE Control Systems Letters*, 7:3355--3360；

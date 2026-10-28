@@ -1,0 +1,49 @@
+{
+  "run": 196,
+  "question": "Are thrust-endpoint checks sound for affine-offset parameter-dependent RCI slices under arbitrary future scheduling jumps?",
+  "counterexample": {
+    "parameter_interval": [
+      "0",
+      "1"
+    ],
+    "slice": "S(p)=[-(1+p),1+p]",
+    "dynamics": "x+=(1-p/2)x",
+    "future_parameter_contract": "p+ may be any value in [0,1]",
+    "common_successor_target": "intersection_{p+ in [0,1]} S(p+)=[-1,1]",
+    "common_target_radius": "1",
+    "quadratic": [
+      "-1/2",
+      "1/2",
+      "1"
+    ],
+    "endpoint_values": {
+      "0": "1",
+      "1": "1"
+    },
+    "endpoint_only_condition_passes": true,
+    "global_maximizer": "1/2",
+    "global_maximum": "9/8",
+    "global_condition_passes": false,
+    "violation": "1/8"
+  },
+  "certification_interface": {
+    "fixed_candidate": "maximize every exact rational quadratic facet/vertex residual over the full closed scheduling interval",
+    "candidate_points": "both endpoints plus an interior stationary point only when the quadratic is concave and the point lies in the interval",
+    "joint_synthesis": "not an LP in general; a sound global polynomial/SDP construction or independently verified returned candidate is required"
+  },
+  "evidence_level": "COUNTEREXAMPLE",
+  "gate_A_status": "blocked",
+  "proves_pd_rci_nonexistence": false,
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "dependencies_sha256": {
+    "verification/check_pd_offset_endpoint_counterexample.py": "b87464adbbc7fcc66517e899a8aff183cb820d1c19f3b1f92bafd46c5eefcccc",
+    "verification/test_pd_offset_endpoint_counterexample.py": "40e1785ccf2ed100e43bc49378abf94c479b4ddb038c135d32b1e049edf1ef60",
+    "docs/research/run196_literature_gate.md": "0ce1984f87b519881ca62d537708675b464b85b531bdad8777697003c6bcb869",
+    "docs/superpowers/specs/2026-10-29-pd-offset-endpoint-counterexample-design.md": "dcfc352f42c16ee9468577a5a4c2f5b93a57e1eb6b04512a62bf3e727960e3d6"
+  },
+  "runtime": {
+    "python": "3.12.14"
+  },
+  "next_problem": "choose a sound synthesis relaxation for the 19-pair affine-offset family and require the returned candidate to pass exact full-interval quadratic verification"
+}

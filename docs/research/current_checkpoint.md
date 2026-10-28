@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-28，Run195）
+# 研究短检查点（2026-10-29，Run196）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run194=`5565959`，`main=1c49659`。
+唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run195=`0e1a757`，`main=1c49659`。
 
-冻结四状态合同不变：当前`T`可见、未来`T∈[4.905,14.715]`任意跳变、`W(T)=1.880+T*0.45^3/6`。历史19-pair CC-RCI虽允许独立offset，却为每个状态顶点共用一个力矩，量词比当前合同更保守。本轮改为160顶点各有低/高推力独立力矩：完整LP含358变量、19520不等式，有界/无界力矩均数值不可行。更强的24行有理Farkas电路在358维空间满足秩23、正乘子、`y^T A=0`、`y^T b=-3069803/88290<0`，且不用力矩限幅、offset等式或非负边界（`COUNTEREXAMPLE`）。只否定该固定19-pair参数无关offset锥；其他法向、parameter-dependent offsets、一般PD-RCI、六状态与递归可行性均OPEN。Gate A仍blocked。
+冻结合同不变：当前`T`可见、未来`T`可在全区间任意跳变。精读两篇PD-RCI原文确认：仿射parameter-dependent offsets产生仿射vertices，与仿射LPV dynamics/control相乘后是不定二次调度条件，最近邻用S-procedure或Polya/LMI充分条件，不能沿用Run195端点LP。纯有理反例`S(p)=[-(1+p),1+p]`、`x+=(1-p/2)x`在任意未来`p+∈[0,1]`时共同目标为`[-1,1]`；端点后继幅度均为1，但`p=1/2`为`9/8`，故endpoint-only认证失效（`COUNTEREXAMPLE`）。不否定PD-RCI、19-pair family、六状态安全或递归可行性；Gate A仍blocked。
 
-下一唯一问题：定义严格包含该候选的最小parameter-dependent-offset CC/RCI类，并冻结可独立核查的可行/否证接口。
+下一唯一问题：为19-pair affine-offset family选择声音的全参数综合松弛，并要求返回候选通过独立全区间精确二次验证。
