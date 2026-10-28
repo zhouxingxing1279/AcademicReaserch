@@ -48,3 +48,10 @@ parameter-dependent offsets、一般PD-RCI、六状态安全或递归可行性�
 最终验证：项目测试39/39，研究验证357/357；文献索引变更导致的14个历史工件均由各自原
 checker重建后通过复现。自审未保留Critical/Important/Minor问题。
 
+## 提交与同步
+
+内容提交为本地`50d4145`；标准HTTPS push因运行环境无GitHub用户名凭据失败。随后通过已授权
+仓库连接器创建远端等树提交`05300f0`与分支
+`research/run195-scheduling-visible-19pair-farkas`。重新fetch核验本地与远端tree均为
+`239437b3e6028a0653f7c9a6ee3ad69b650d16e8`。
+
