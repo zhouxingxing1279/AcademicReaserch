@@ -444,3 +444,12 @@ cone分别只构成局部反例；30,000点搜索与执行器权限LP仅是数�
 执行共同力矩与端点条件化力矩投影；前四层调度可见候选明显减少，但两者保留多面体在HiGHS
 双向包含容差内相同。该结果仅为有限层NUMERIC_CHECK，Gate A仍blocked。详见第126章、
 Run193准入卡与研究日志。
+
+### 2026-10-28 Run 194
+
+重读Rungger--Tabuada有限下降层/RCI停止条件、Mejari等configuration-constrained与PD-RCI
+vertex control及gain-scheduled RCI全文相关章节。停止增加predecessor层，转而审计Run193
+102-facet S4的全部同心缩放。精确有理数顶点与两条后继facet给出
+`tau_lower-tau_upper=(5626543/1569600)alpha+6254383/174400>0`，故所有`alpha>0`均无可行
+低推力端点力矩；该矛盾不依赖物理力矩限幅。只否定冻结homothetic S4类，Gate A仍blocked。
+下一步只做独立offset的configuration-constrained vertex-control综合与独立证书审计。

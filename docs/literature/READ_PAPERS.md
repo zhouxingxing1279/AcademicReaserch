@@ -151,6 +151,9 @@
 - Run 193 重读 Section III-C、Lemma 3及证明、Problem 1、Sections IV--V。正文顶点输入
   `u^i`不依赖当前调度参数，属于共同vertex-input策略；可作为保守基线，但不能覆盖冻结合同
   已允许的`tau(x,T)`全部权限。
+- Run 194 重读 Section III-C、Lemma 3、Problem 1、Sections IV--V，专门核查固定法向、可变
+  offset和vertex-input充分证书。本轮同心`alpha*S4`只是其严格受限子类；该子类失败不能否定
+  independently variable offsets或configuration-constrained联合综合。
 
 ## Mulagaleti, Mejari, Bemporad — Parameter-Dependent Robust Control Invariant Sets for LPV Systems With Bounded Parameter-Variation Rate
 - 年份/出处：2025, *IEEE Transactions on Automatic Control*, 70(2):1259--1266；
@@ -165,6 +168,8 @@
 - Run 193 重读式(4)--(6)、Sections 3.1--3.2、式(12)--(25)及算法。其定义明确先读取当前
   scheduling parameter，再使用`u=u(x,p)`，同时覆盖全部允许`p+`；因此仓库旧
   `exists tau forall T` predecessor比真实信息合同更强，必须纠正为调度可见控制。
+- Run 194 重读Sections 1、3.1--3.4的PD-RCI定义、PD-vertex control及SDP充分条件。任意未来
+  推力跳变使后继参数集合仍为全区间；本轮只用其当前参数可见控制权限，不复现PD-set SDP。
 
 ## Mejari, Gupta, Piga — Data-Driven Computation of Robust Invariant Sets and Gain-Scheduled Controllers for Linear Parameter-Varying Systems
 - 年份/出处：2023, *IEEE Control Systems Letters*, 7:3355--3360；
@@ -173,7 +178,9 @@
 - 方法/关键结论：利用实时可用的scheduling signal综合LPV gain-scheduled feedback与多面体
   RCI，并对调度集合和有界扰动鲁棒。
 - 与本项目关系：再次确认当前推力可见反馈不是新机制；本文数据驱动不确定模型合同也不是
-  本轮目标。本轮只纠正已有model-based predecessor量词。
+  当前已知模型合同的必要组成。
+- Run 194 全文阅读pp.1--6，重点Problem 1、Section III-C、Theorem 1和算法。其
+  gain-scheduled feedback是本轮vertex-control之外的另一强基线；同心模板失败不否定该类。
 
 ## Köhler, Soloperto, Müller, Allgöwer — A computationally efficient robust model predictive control framework for uncertain nonlinear systems
 - 年份/全文：2020 extended version；https://arxiv.org/abs/1910.12081
@@ -686,6 +693,9 @@
 - Run 160 重读 Introduction、式(1)--(10)、Lemma 1 与 outer/inner RCI discussion。当前结论
   来自一条允许字符串上策略无关的硬约束必要条件，而不是有限 predecessor 非空/塌缩；仍只
   否定固定 seed/residual/input contract，不升级为一般 RCI 不存在。
+- Run 194 重读定义、式(4)--(10)、有限确定讨论、Lemma 1、Theorems 1--2及证明。Run193的
+  四层集合仍是一般descending outer sequence；本轮必须直接检查self-predecessor/vertex-control
+  条件，不能由有限层非空推断RCI。
 
 ## Houska, Müller, Villanueva — Polyhedral Control Design: Theory and Methods
 - 年份/出处：2024, arXiv:2412.13082；全文：https://arxiv.org/pdf/2412.13082

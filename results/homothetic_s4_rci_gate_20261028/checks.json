@@ -1,0 +1,75 @@
+{
+  "claim": "no positive homothetic copy of the frozen Run193 S4 admits scheduling-visible vertex torque invariance",
+  "scope": "four-state reduced lateral-attitude benchmark and frozen S4 template only",
+  "evidence_level": "COUNTEREXAMPLE",
+  "template": {
+    "source": "Run193 scheduling-visible predecessor depth 4",
+    "selection_evidence": "NUMERIC_CHECK because HiGHS selects nonredundant rows",
+    "layer_counts": [
+      {
+        "depth": 1,
+        "nonredundant_facets": 16
+      },
+      {
+        "depth": 2,
+        "nonredundant_facets": 28
+      },
+      {
+        "depth": 3,
+        "nonredundant_facets": 52
+      },
+      {
+        "depth": 4,
+        "nonredundant_facets": 102
+      }
+    ],
+    "nonredundant_facets": 102,
+    "homothetic_family": "alpha*S4 for 0<alpha<=1"
+  },
+  "witness": {
+    "vertex": [
+      "19040871601/4000000000",
+      "4786988769/1600000000",
+      "13488347/39240000",
+      "4169653/3139200"
+    ],
+    "inside_s4_exact": true,
+    "minimum_slack": "0",
+    "active_facets": 5,
+    "active_normal_rank": 4
+  },
+  "torque_gap": {
+    "thrust_N": "981/200",
+    "lower_slope": "4546282867/7848000",
+    "lower_intercept_Nm": "6254383/196200",
+    "upper_slope": "564768769/981000",
+    "upper_intercept_Nm": "-6254383/1569600",
+    "slope": "5626543/1569600",
+    "intercept_Nm": "6254383/174400",
+    "identity": "tau_lower(alpha)-tau_upper(alpha)=slope*alpha+intercept_Nm",
+    "strict_for_all_positive_alpha": true,
+    "uses_input_limit": false
+  },
+  "exists_positive_homothetic_scale": false,
+  "proves_general_rci_nonexistence": false,
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "gate_A_status": "blocked",
+  "interpretation": [
+    "Even with a separate torque for the measured low-thrust endpoint, this exact S4 vertex has an empty admissible torque interval for every alpha>0.",
+    "The contradiction does not use the physical torque limit, so scaling this fixed shape cannot repair it.",
+    "Different normals, independently varying offsets, non-homothetic sets, and richer parameter-dependent RCI synthesis remain open."
+  ],
+  "dependencies_sha256": {
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "verification/check_scheduling_visible_predecessor.py": "80dde343d4760a91dd57e6c6348bf9b6c935a249a37be5e3a9167f477e9d1104",
+    "verification/check_homothetic_s4_rci_gate.py": "6040b84db02c4aa17896d4879285666e3e6520805504ff3c7c0bde19d1072555",
+    "verification/test_homothetic_s4_rci_gate.py": "752d6e15132a2b56bc73450aa0ca035eea75640c3b80348bc0a64324dac68ce3"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "next_problem": "run a configuration-constrained vertex-control synthesis with independently variable offsets, then independently verify the returned RCI certificate"
+}
