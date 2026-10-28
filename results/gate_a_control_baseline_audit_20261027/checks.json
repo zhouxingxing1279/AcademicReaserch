@@ -1,0 +1,89 @@
+{
+  "gate": "A",
+  "gate_status": "blocked",
+  "scope": "four-state lateral-attitude local benchmark only; not the six-state planar quadrotor guarantee",
+  "contract": {
+    "current_thrust_measured": true,
+    "future_thrust": "arbitrary_jump_in_interval",
+    "thrust_interval_N": [
+      "4.905",
+      "14.715"
+    ],
+    "smallest_universal_rate_bound_N_per_tick": "9.810",
+    "endpoint_reduction_exact_for_current_affine_contract": true,
+    "residual_halfwidth": "1.880 + T*0.45^3/6"
+  },
+  "audit_dependencies_sha256": {
+    "verification/check_gate_a_control_baseline_audit.py": "e14aae1ce1c05159bc2f0f1c0a8db8c5d3d3287c4d5408ad411d7f99566b027e",
+    "verification/test_gate_a_control_baseline_audit.py": "55e13fe92ea6d60d2866dfd899b891b1e5f073956e2523e494bc39601e67c6ba",
+    "configs/planar_baseline.json": "7f9137f27ebfe77bebb1511dcc6c45d8fd9366b15510956efdda9533d71b0928",
+    "results/lpv_common_quadratic_20260924/checks.json": "4d081a2beb03e8efa90437f1adc6f230d8d3ab725fcc7e26c3b610627fe1c026",
+    "results/lpv_torque_rpi_obstruction_20260924/checks.json": "06f1f9073f75993137593212d86048b0a7b5fe683497d78ab0305e63ff950af7",
+    "results/vertex_consistent_ancillary_20260924/checks.json": "32cbdab1de93b55323d719fa5cc756ffa0e6475861cb64a9ed7b573552cd350c",
+    "results/actuator_authority_scheduled_residual_20260924/checks.json": "8d04b5a34ba5069e13bea3f1daa634cf91b13a66a9c92f959bd9057fcacd64b6",
+    "results/axis_aligned_rci_obstruction_20260924/checks.json": "c73303a70fe93a10680769f4cdccd5fed618a1d460f64f8939c79f146799dd8d",
+    "results/thrust_scheduling_contract_20260924/checks.json": "e9c7e9644a9eaa52daa6b316f7adbffeceeb29b0912927d4fc01c92ba2472f37",
+    "results/endpoint_predecessor_reduction_20260924/checks.json": "23e7d7fca659b36b22fcfc48500097894cf625773698e3b00776531c8e60ee3e",
+    "results/cc_19pair_exact_farkas_20260924/checks.json": "55282d1812fa1469340dcdf23b7eca131161fbbc005b5cd1974a97f0a8968bb8"
+  },
+  "evidence": [
+    {
+      "id": "common_quadratic_static_K",
+      "level": "DERIVED",
+      "source": "verification/check_lpv_common_quadratic_certificate.py",
+      "source_sha256": "aa0a962f926cbac961fa793c61a60ee263dec6efa9aafec85f837debfa4ee2ed",
+      "result": "results/lpv_common_quadratic_20260924/checks.json",
+      "establishes": "One fixed K is strictly common-quadratically stable for the disturbance-free LPV family.",
+      "excludes": "No RCI, disturbance containment, state constraint, torque constraint, or terminal claim."
+    },
+    {
+      "id": "specific_K_torque_obstruction",
+      "level": "COUNTEREXAMPLE",
+      "source": "verification/check_lpv_torque_rpi_obstruction.py",
+      "source_sha256": "737ccfafb463a18c0dabadfa22894edc635a4f98f5ec42aabce06528e9d05f1f",
+      "result": "results/lpv_torque_rpi_obstruction_20260924/checks.json",
+      "establishes": "The certified nominal K cannot have an origin-containing RPI satisfying the torque limit under the cited disturbance path.",
+      "excludes": "No conclusion about another K, a nonlinear policy, a vertex policy, or plant feasibility."
+    },
+    {
+      "id": "static_K_search",
+      "level": "NUMERIC_CHECK",
+      "source": "verification/check_vertex_consistent_ancillary_search.py",
+      "source_sha256": "383ee292528a4ef9e59f9b6e62f0c5af7c0188221102bd31abb95fbfe0854def",
+      "result": "results/vertex_consistent_ancillary_20260924/checks.json",
+      "establishes": "No sampled gain passed every finite necessary state and torque check in the frozen search box.",
+      "excludes": "Sampling failure is not an existence or infeasibility certificate."
+    },
+    {
+      "id": "actuator_authority_trajectory",
+      "level": "NUMERIC_CHECK",
+      "source": "verification/check_actuator_authority_and_scheduled_residual.py",
+      "source_sha256": "0e0dff1a34dbdd80d4f0ac0f17e41e7e0f108079647b59cc903a98d313c3485c",
+      "result": "results/actuator_authority_scheduled_residual_20260924/checks.json",
+      "establishes": "A wider open-loop policy class has feasible low-thrust trajectories numerically; conditioning W on known T materially changes authority.",
+      "excludes": "Not causal feedback, not RCI, and not a recursive-feasibility certificate."
+    },
+    {
+      "id": "axis_aligned_box_obstruction",
+      "level": "COUNTEREXAMPLE",
+      "source": "verification/check_axis_aligned_rci_obstruction.py",
+      "source_sha256": "603a45eb6540c37332392b466f3776fc76da82e137a685ee1e8e2934d6d8daec",
+      "result": "results/axis_aligned_rci_obstruction_20260924/checks.json",
+      "establishes": "No nonempty origin-centred axis-aligned Cartesian RCI box exists for the stated subsystem contract.",
+      "excludes": "Correlated polytopes, ellipsoids, CZs, parameter-dependent sets, and nonlinear policies remain open."
+    },
+    {
+      "id": "one_configuration_cone_farkas",
+      "level": "COUNTEREXAMPLE",
+      "source": "verification/check_19pair_cc_exact_farkas.py",
+      "source_sha256": "45f0984f478c77315ea2c1dfbddee85b64d935095ea3c2bd097c747aad76d23c",
+      "result": "results/cc_19pair_exact_farkas_20260924/checks.json",
+      "establishes": "One audited 19-pair configuration cone is exactly infeasible under its endpoint-robust and hard-state inequalities.",
+      "excludes": "Other cones in the orientation family and other RCI parameterisations remain open."
+    }
+  ],
+  "sufficient_ancillary_rci_certificate_present": false,
+  "why_blocked": "The repository contains nominal stability and several class-specific or candidate-specific obstructions, but no sufficient invariant-set/controller certificate covering every allowed thrust endpoint, disturbance, hard state constraint, and torque constraint.",
+  "stopped_branch": "Do not continue local configuration-cone adjacency enumeration until a controller-level synthesis formulation can return either a sufficient certificate or a class-wide dual certificate.",
+  "next_problem": "Construct one sufficient correlated controller/RCI certificate under W(T), arbitrary future thrust jumps, all state limits, and the torque limit; attack it with independent support checks."
+}

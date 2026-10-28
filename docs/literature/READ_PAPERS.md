@@ -145,6 +145,31 @@
 - 方法/关键结论：RCI 的量词明确要求对每个状态与给定 scheduling parameter 存在 admissible input，使后继对全部 disturbance/model realization 留在集合；configuration-constrained polytope 的 vertex inputs 通过凸插值定义 invariance-inducing controller。
 - 与本项目关系：若采用 controlled-RCI 语义，controller parameterization 与 `exists control` 的位置必须显式冻结。本文允许 controller 使用完整 state；本项目的 augmented state 含不可观测 `eta=x-hat x`，所以还必须收紧为对 observation fiber 共用同一控制的 partial-information RCI。
 - 本项目状态：RCI 量词与 vertex-policy 的强基线；不把 configuration-constrained set 或 controller/set co-design 声称为创新。
+- Run 192 重读 Section III-C、Lemma 3、Problem 1与Section IV。其充分RCI条件同时约束
+  configuration cone、vertex后继、状态和输入；仓库现有单一cone Farkas否证不能外推到
+  orientation family或plant不可行。本轮不再继续局部cone邻接枚举。
+
+## Mulagaleti, Mejari, Bemporad — Parameter-Dependent Robust Control Invariant Sets for LPV Systems With Bounded Parameter-Variation Rate
+- 年份/出处：2025, *IEEE Transactions on Automatic Control*, 70(2):1259--1266；
+  DOI：https://doi.org/10.1109/TAC.2024.3454528；全文：https://arxiv.org/abs/2309.02384
+- Run 192 精读：problem statement、Sections 3.1--3.2、式(14)--(28)及算法步骤。
+- 方法/关键结论：以实时可测scheduling parameter及其有界下一参数集合构造
+  parameter-dependent configuration-constrained RCI和parameter-dependent vertex controls；
+  后继必须落入全部允许下一参数集合对应RCI的交集，同时满足状态和输入约束。
+- 与本项目关系：若未来显式加入并认证推力执行器状态/变化率，该文是直接强基线；当前
+  frozen benchmark只有逐点`T`区间，最小通用rate bound等于全区间宽度，不能获得transition
+  reduction。PD-RCI与configuration geometry均不作为创新。
+
+## Köhler, Soloperto, Müller, Allgöwer — A computationally efficient robust model predictive control framework for uncertain nonlinear systems
+- 年份/全文：2020 extended version；https://arxiv.org/abs/1910.12081
+- Run 192 精读：Sections II--III、Assumptions 1--6、MPC (11)、Theorem 1及其shift proof、
+  Proposition 4；另核对Section IV的additive/LPV special cases。
+- 方法/关键结论：用incremental Lyapunov函数与ancillary feedback的标量界在线传播tube size，
+  对state/input-dependent uncertainty收紧约束；在terminal controller/set/cost和tube terminal
+  条件全部成立时证明递归可行、硬约束满足与实用稳定。
+- 与本项目关系：说明调度一致`W(T)`只是一个必要接口；common-`P`稳定、有限轨迹或单次RCI
+  可行都不能替代terminal append与shift proof。该文是full-state nonlinear tube MPC，未直接
+  解决本项目间歇测量的因果output-feedback信息状态。
 
 ## Ping — Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems
 - 年份/出处：2015, *Journal of Applied Mathematics*, Article 875850；DOI：https://doi.org/10.1155/2015/875850

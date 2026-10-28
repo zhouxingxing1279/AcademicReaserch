@@ -424,3 +424,14 @@ slant支持为`min(r_q,a+kappa*r_v)`；在可靠形状`(1,11/4,1)`与`a=1/50`下
 ### 2026-10-27 Run 190
 
 重读Houska information-ensemble/extreme-set与extreme-vertex-polytope区分，并复核CCTMPC退化configuration边界。对Run183安全盒和真实位置条带，精确构造`R(c)=[c-1/50,c+1/50]x[-11/4,11/4]`。全部非空posterior均由clamped center成员覆盖；不同等宽成员互不包含，真正extreme boundary是连续族。其六offset参数域仅为双顶点线段，端点是finite representatives而非完整边界。该族仍保留全速度宽度且斜facets冗余，未移除Run184环；下一步只检查active相关source的非退化posterior family。详见第124章、Run190准入卡与研究日志。
+
+### 2026-10-27 Run 192
+
+按唯一主方向重置优先级，停止posterior/configuration几何扩张。重读Mejari等LPV RCI、
+Mulagaleti等bounded-rate PD-RCI、Köhler等state/input-dependent nonlinear tube MPC及
+Rungger--Tabuada RCI predecessor边界。新增Gate A只读审计器，以checker SHA-256绑定六类
+既有证据。结论：common-`P`只证名义稳定；特定`K`、axis-aligned box及单一configuration
+cone分别只构成局部反例；30,000点搜索与执行器权限LP仅是数值证据。当前合同为已知current
+`T`、future `T`任意跳变，虽可精确端点化，但没有充分controller/RCI证书同时覆盖`W(T)`、
+全部state与torque约束。Gate A=blocked。下一步只构造一个充分correlated controller/RCI
+证书并独立攻击，不再做局部cone邻接枚举。详见第125章、Run192准入卡与研究日志。

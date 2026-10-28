@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-27，Run190）
+# 研究短检查点（2026-10-27，Run192）
 
-主线：传统SMF/鲁棒输出反馈MPC；学习暂停。远端`main=1c49659`；Run189远端`c24ae0a8`。
+唯一主线：间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；当前只推进Gate A。起点Run190=`97b5ff5`，远端`main=1c49659`。
 
-Run190用真实位置测量构造`R(c)=[c-1/50,c+1/50]x[-11/4,11/4]`，`c in [-49/50,49/50]`。全部非空测量posterior均由`R(clip(eta))`覆盖；不同等宽矩形互不包含，故真正extreme boundary是连续族。六offset关于`c`仿射，参数域仅有两个端点顶点；两者是有限representatives，不能误报为真实边界仅两项。证据等级：`exact_measurement_conditioned_extreme_information_family`。该族仍保留完整速度宽度，斜facets冗余，未移除Run184动力学环；无图不变或控制证明。
+已核查四状态横向基准：当前`T`可知、未来`T`在`[4.905,14.715]`任意跳变；`W(T)`半宽为`1.880+T*0.45^3/6`，当前仿射合同可精确归约端点。现有common-`P`只证一个`K`的无扰动稳定；该`K`被torque reachable support严格否定。30,000点static-`K`搜索仅是NUMERIC_CHECK；axis-aligned box和单一19-pair cone仅是类别反例。执行器权限LP反驳“特定K失败即plant物理不可行”。审计器以源码SHA-256绑定六类证据。没有充分证书同时覆盖全部endpoint、扰动、state与`|tau|<=0.08`，故Gate A=blocked；六状态接口、终端和递归可行性均OPEN。停止局部配置锥邻接枚举。
 
-下一唯一问题：从速度与斜facets真正活跃的相关source polytope构造全连续测量posterior family，检验是否存在有限、固定、非退化meta configuration；通过前不进入完整mode graph。
+下一唯一问题：在冻结`W(T)`与arbitrary-jump合同下，构造一个含全部state/torque约束的充分correlated controller/RCI证书（优先vertex/PWA control），再以独立support检查攻击。
