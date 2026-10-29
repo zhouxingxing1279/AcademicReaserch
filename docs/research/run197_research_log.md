@@ -48,3 +48,9 @@ offset 给出可靠但可能保守的 successor target。整体状态仍为 `OPE
 
 在可复现 SDP 环境中求解固定 cone 的19-pair affine-offset 候选；返回候选必须逐条通过
 6080条全区间二次独立核查，再讨论可行/不可行或扩大 configuration family。
+
+## 提交与同步
+
+内容提交为本地`8fe5fa2`。标准HTTPS push因运行环境无GitHub用户名凭据失败；随后通过已授权
+仓库连接器创建远端等树提交`9c2558c`与分支`research/run197-affine-offset-exact-sdp`。
+重新fetch核验远端与本地内容tree均为`5fcc43ec46d283d8757703b6c61609d0ca34fedf`。

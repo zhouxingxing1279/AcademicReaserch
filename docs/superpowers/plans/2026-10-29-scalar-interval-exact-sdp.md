@@ -71,4 +71,4 @@
 
 - [x] **Step 1: Run focused tests and reproduce archived JSON.**
 - [x] **Step 2: Run project and full research suites plus `git diff --check`.**
-- [ ] **Step 3: Commit and push `research/run197-affine-offset-exact-sdp`; compare local and remote tree hashes.**
+- [x] **Step 3: Commit and push `research/run197-affine-offset-exact-sdp`; compare local and remote tree hashes.**
