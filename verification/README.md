@@ -314,3 +314,16 @@ checker 保留14条 miss 后强制 success 的共享 residual/measurement 原语
 真实 `e` 投影满足当前竖直约束；虽然 `d_v` 支持超过 C3-J3 的 product target。该集合是
 初始化合同必须容纳的低维 reachable seed，不是 RCI、全六状态或递归可行性证书。归档见
 `results/theory_vertical_correlated_return_seed_20261003/exact_checks.json`，证明见第 84 章。
+
+## Gate A / Run197：标量调度区间精确 S-lemma 合同（2026-10-29）
+
+```bash
+python -m unittest verification.test_scalar_interval_slemma -v
+python verification/check_scalar_interval_slemma.py --root . --output /tmp/run197.json
+```
+
+checker 用纯 `Fraction` 验证 `f(s)=a*s^2+b*s+c` 在 `[-1,1]` 上的候选证书
+`f=[1,s]Q[1,s]^T+lambda(1-s^2)`：系数恒等、`lambda>=0` 及 `Q>=0` 的主子式全部精确
+检查。38 facets × 160 vertices 对应下一综合器的6080条区间 LMI。该结果只冻结精确的单条
+二次条件；未求解19-pair SDP，fixed configuration/common-core仍保守，Gate A仍blocked。
+归档见 `results/scalar_interval_slemma_20261029/checks.json`，证明见第130章。

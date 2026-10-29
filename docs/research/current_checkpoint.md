@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-29，Run196）
+# 研究短检查点（2026-10-29，Run197）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run195=`0e1a757`，`main=1c49659`。
+唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run196=`d98ddcd`，`main=1c49659`。
 
-冻结合同不变：当前`T`可见、未来`T`可在全区间任意跳变。精读两篇PD-RCI原文确认：仿射parameter-dependent offsets产生仿射vertices，与仿射LPV dynamics/control相乘后是不定二次调度条件，最近邻用S-procedure或Polya/LMI充分条件，不能沿用Run195端点LP。纯有理反例`S(p)=[-(1+p),1+p]`、`x+=(1-p/2)x`在任意未来`p+∈[0,1]`时共同目标为`[-1,1]`；端点后继幅度均为1，但`p=1/2`为`9/8`，故endpoint-only认证失效（`COUNTEREXAMPLE`）。不否定PD-RCI、19-pair family、六状态安全或递归可行性；Gate A仍blocked。
+冻结合同不变：当前推力可见、未来推力可在全区间任意跳变。Pólik--Terlaky 的S-lemma给出本轮关键收口：归一化`|s|<=1`上二次`f=a s^2+b s+c>=0`，精确等价于存在`lambda>=0`使`Q=[[c-lambda,b/2],[b/2,a+lambda]]>=0`（`DERIVED`）。纯有理checker通过`1-s^2`与`1+s`边界证书，并拒绝Run196残差`(s^2-1)/8`。固定cone的38 facets×160 vertices需6080条该LMI；affine configuration/state/torque条件仍可精确查端点。共同后继core可靠但保守；未求解SDP，19-pair可行性、六状态安全和递归可行性仍`OPEN`，Gate A blocked。
 
-下一唯一问题：为19-pair affine-offset family选择可靠的全参数综合松弛，并要求返回候选通过独立全区间精确二次验证。
+下一唯一问题：在可复现SDP环境求解固定cone affine-offset候选，并逐条用全区间精确二次检查器独立复核。

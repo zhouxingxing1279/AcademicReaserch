@@ -472,3 +472,13 @@ Definition 1、Lemma 3及Polya/LMI条件。确认参数相关顶点和仿射LPV�
 两端点后继幅度均为1，但`p=1/2`为`9/8`，严格违反`1/8`。该`COUNTEREXAMPLE`只否定
 affine-offset候选的端点认证，Gate A仍blocked。下一步只选择可靠的全参数综合松弛，并要求
 返回候选通过独立全区间精确验证。
+
+### 2026-10-29 Run 197
+
+精读Pólik--Terlaky的S-lemma/Slater条件，重读Mulagaleti等式(26)--(28)、Remarks 4--5
+和SDP(33)，并复核Gupta等Polya路线。对归一化标量推力`s in [-1,1]`，证明二次安全余量
+`f=a s^2+b s+c>=0`精确等价于存在`lambda>=0`使
+`[[c-lambda,b/2],[b/2,a+lambda]]>=0`。纯有理checker通过两个边界正例并拒绝Run196
+归一化残差`(s^2-1)/8`。固定19-pair cone的38 facets×160 vertices需要6080条该LMI；
+共同后继core仍保守且本轮未求解SDP，故Gate A仍blocked。下一步只在可复现SDP环境求解
+该固定cone候选，并逐条执行独立全区间复核。

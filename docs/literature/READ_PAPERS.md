@@ -180,6 +180,21 @@
   Section IV-A。仿射offset给出仿射vertices，和仿射LPV dynamics/vertex control相乘后，
   式(27)是关于当前参数的可能非凸二次不等式；作者用S-procedure/LMI给充分条件。故参数相关
   offset不能沿用Run195的endpoint-only LP认证。
+- Run 197 重读式(26)--(28)、Remarks 4--5与SDP(33)。论文的一般多维多面体参数域用
+  S-procedure 给充分 LMI，并明确记录潜在 duality gap；本仓库的单标量闭区间可改用单二次
+  约束 S-lemma 的精确特化，但 fixed normal/configuration 与共同后继 core 仍会保守。
+
+## Pólik, Terlaky — A Survey of the S-Lemma
+- 年份/出处：2007, *SIAM Review*, 49(3):371--418；
+  DOI：https://doi.org/10.1137/S003614450444614X；
+  作者存档：https://optimization-online.org/2004/10/968/
+- Run 197 精读：Theorem 2.2 的 S-lemma、严格可行（Slater）条件，以及 Section 3 的
+  S-procedure 形式。
+- 方法/关键结论：对单个二次约束，存在严格可行点时，约束域上另一二次函数非负等价于存在
+  一个非负标量乘子，使组合后二次函数全局非负；全局二次非负可写成PSD矩阵条件。
+- 与本项目关系：归一化推力区间由 `s^2-1<=0` 描述，`s=0`严格可行，因此每条二次
+  facet residual 的区间非负可精确写成 `2 x 2` LMI。此为经典定理直接推论，不是创新；
+  多参数、多约束或更高次条件不能无条件沿用本轮“精确”标签。
 
 ## Gupta, Mejari, Falcone, Piga — Computation of Parameter Dependent Robust Invariant Sets for LPV Models with Guaranteed Performance
 - 年份/出处：2023, *Automatica*, 151:110920；DOI：https://doi.org/10.1016/j.automatica.2023.110920；全文：https://arxiv.org/pdf/2009.09778

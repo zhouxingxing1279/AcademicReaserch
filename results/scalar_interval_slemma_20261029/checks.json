@@ -1,0 +1,135 @@
+{
+  "run": 197,
+  "question": "Can every scalar-thrust quadratic facet residual be represented exactly by a convex interval LMI?",
+  "normalized_interval": [
+    "-1",
+    "1"
+  ],
+  "theorem_contract": {
+    "polynomial": "f(s)=a*s^2+b*s+c",
+    "identity": "f(s)=[1,s]Q[1,s]^T+lambda*(1-s^2)",
+    "gram": "Q=[[c-lambda,b/2],[b/2,a+lambda]]",
+    "conditions": "lambda>=0 and Q positive semidefinite",
+    "slater_point": "s=0 gives 1-s^2=1>0",
+    "interval_condition_exact": true
+  },
+  "examples": {
+    "one_minus_square": {
+      "coefficients_abc": [
+        "-1",
+        "0",
+        "1"
+      ],
+      "multiplier": "1",
+      "gram": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "check": {
+        "valid": true,
+        "coefficient_identity": true,
+        "gram_psd": true,
+        "multiplier_nonnegative": true,
+        "determinant": "0",
+        "reconstructed": [
+          "-1",
+          "0",
+          "1"
+        ]
+      }
+    },
+    "one_plus_s": {
+      "coefficients_abc": [
+        "0",
+        "1",
+        "1"
+      ],
+      "multiplier": "1/2",
+      "gram": [
+        [
+          "1/2",
+          "1/2"
+        ],
+        [
+          "1/2",
+          "1/2"
+        ]
+      ],
+      "check": {
+        "valid": true,
+        "coefficient_identity": true,
+        "gram_psd": true,
+        "multiplier_nonnegative": true,
+        "determinant": "0",
+        "reconstructed": [
+          "0",
+          "1",
+          "1"
+        ]
+      }
+    },
+    "run196_normalized_residual": {
+      "coefficients_abc": [
+        "1/8",
+        "0",
+        "-1/8"
+      ],
+      "multiplier": "0",
+      "gram": [
+        [
+          "-1/8",
+          "0"
+        ],
+        [
+          "0",
+          "1/8"
+        ]
+      ],
+      "check": {
+        "valid": false,
+        "coefficient_identity": true,
+        "gram_psd": false,
+        "multiplier_nonnegative": true,
+        "determinant": "-1/64",
+        "reconstructed": [
+          "1/8",
+          "0",
+          "-1/8"
+        ]
+      }
+    }
+  },
+  "synthesis_contract": {
+    "model_scope": "four-state reduced lateral-attitude benchmark, fixed audited active sets",
+    "facets": 38,
+    "vertices": 160,
+    "quadratic_interval_lmis": 6080,
+    "affine_constraints_checked_at_endpoints": "configuration, hard state, and vertex torque bounds",
+    "future_schedule": "arbitrary jump in the normalized interval",
+    "successor_target": "auxiliary common-core offsets below both affine-slice endpoints",
+    "common_core_is_conservative": true,
+    "contains_parameter_independent_subclass": true,
+    "returned_candidate_requires_run196_exact_interval_audit": true
+  },
+  "evidence_level": "DERIVED",
+  "full_19pair_status": "OPEN",
+  "gate_A_status": "blocked",
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "dependencies_sha256": {
+    "verification/check_scalar_interval_slemma.py": "70db0c8d661d058db4f25581118504beda158b53f84d6fe213977de763e5a487",
+    "verification/test_scalar_interval_slemma.py": "1f46bd064fa1bb08a5be589997d7f856a27b5ebccfaeaaaa68ee9f62de62ddf6",
+    "docs/research/run197_literature_gate.md": "6b0a682783d8d3d3dd8e2af9914f859d8e6709771e12080ac37b3ed9b4e53b23",
+    "docs/superpowers/specs/2026-10-29-scalar-interval-exact-sdp-design.md": "8bb29d954bcb828b5902700d30d730f59bdbda086218e5ed2cbe7813373b052e"
+  },
+  "runtime": {
+    "python": "3.12.14"
+  },
+  "next_problem": "solve the fixed-cone 19-pair affine-offset SDP with all 6080 interval LMIs, then independently audit every returned quadratic over the full interval"
+}
