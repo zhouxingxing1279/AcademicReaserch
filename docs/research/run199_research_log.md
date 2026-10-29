@@ -37,3 +37,10 @@ blocked。
 下一唯一问题：从高余量浮点ray提取稀疏/可有理化结构，并用精确有理或区间算术认证
 `A^Tz=0`、`z in K*`与`b^Tz<0`；在此之前不切换configuration family。
 
+## 提交与同步
+
+内容提交为`8d87a1c`。标准HTTPS push因运行环境无GitHub用户名凭据失败；随后通过已授权
+仓库接口创建远端等树提交`68c2004`与分支`research/run199-affine-offset-socp-solve`，fetch
+核验两者tree均为`1badee5`。本节与短检查点的同步元数据另作本地元数据提交，并再次执行
+远端tree核验。
+
