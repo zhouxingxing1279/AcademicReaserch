@@ -482,3 +482,12 @@ affine-offset候选的端点认证，Gate A仍blocked。下一步只选择可靠
 归一化残差`(s^2-1)/8`。固定19-pair cone的38 facets×160 vertices需要6080条该LMI；
 共同后继core仍保守且本轮未求解SDP，故Gate A仍blocked。下一步只在可复现SDP环境求解
 该固定cone候选，并逐条执行独立全区间复核。
+
+### 2026-10-29 Run 198
+
+重读Mulagaleti等SDP(33)与YALMIP/MOSEK实现，精读Fawzi的`2 x 2` PSD/SOC同构，并核查
+Clarabel支持的锥与不可行语义。证明每条Run197 LMI精确等价于三维Lorentz cone，纯有理核对
+`trace^2-norm^2=4 det(Q)`。冻结原始模型含6080个SOC、6514个标量变量，pair-offset等式消元
+后6476个；端点线性约束规模亦归档。当前环境没有任何SOCP/SDP接口或可执行文件，故拒绝用
+HiGHS、有限网格或局部NLP冒充证书，数值可行性保持`OPEN`，Gate A仍blocked。下一步只提供
+锁定锥求解器、执行冻结综合并逐条独立复核返回候选。

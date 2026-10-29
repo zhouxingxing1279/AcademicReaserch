@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-29，Run197）
+# 研究短检查点（2026-10-29，Run198）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run196=`d98ddcd`，`main=1c49659`；Run197内容提交=`9c2558c`，内容tree=`5fcc43e`。
+唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run197=`5c6c424`、同树本地=`513a5c1`，`main=1c49659`；Run198内容提交=`5ca99b7`，内容tree=`a1e0265`。
 
-冻结合同不变：当前推力可见、未来推力可在全区间任意跳变。Pólik--Terlaky 的S-lemma给出本轮关键收口：归一化`|s|<=1`上二次`f=a s^2+b s+c>=0`，精确等价于存在`lambda>=0`使`Q=[[c-lambda,b/2],[b/2,a+lambda]]>=0`（`DERIVED`）。纯有理checker通过`1-s^2`与`1+s`边界证书，并拒绝Run196残差`(s^2-1)/8`。固定cone的38 facets×160 vertices需6080条该LMI；affine configuration/state/torque条件仍可精确查端点。共同后继core可靠但保守；未求解SDP，19-pair可行性、六状态安全和递归可行性仍`OPEN`，Gate A blocked。
+冻结合同不变：当前推力可见、未来推力可在全区间任意跳变。每个Run197的`2 x 2` PSD条件精确等价于三维Lorentz cone：`||(2q01,q00-q11)||<=q00+q11`；纯有理恒等式检查通过（`DERIVED`）。固定38-facet、160-vertex原始SOCP含6080个cone、6514个标量变量，pair-offset等式消元后6476个。当前环境没有Clarabel/SCS/CVXPY/CVXOPT/ECOS或锥求解可执行文件；HiGHS、有限网格和局部NLP不能替代SOCP证书。因此未报告数值可行/不可行，19-pair RCI、六状态安全及递归可行性仍`OPEN`，Gate A blocked。
 
-下一唯一问题：在可复现SDP环境求解固定cone affine-offset候选，并逐条用全区间精确二次检查器独立复核。
+下一唯一问题：提供锁定版本SOCP solver，求解冻结模型并逐条独立复核6080条区间二次与全部端点线性约束。

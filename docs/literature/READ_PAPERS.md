@@ -183,6 +183,9 @@
 - Run 197 重读式(26)--(28)、Remarks 4--5与SDP(33)。论文的一般多维多面体参数域用
   S-procedure 给充分 LMI，并明确记录潜在 duality gap；本仓库的单标量闭区间可改用单二次
   约束 S-lemma 的精确特化，但 fixed normal/configuration 与共同后继 core 仍会保守。
+- Run 198 重读式(28)、SDP(33)、算法步骤4与Section IV求解环境。正文以YALMIP建模并用
+  MOSEK求解SDP；solver success本身不是有理不变性证书。本仓库的每个`2 x 2` LMI可精确
+  改写为三维Lorentz cone，但当前运行环境没有相应SOCP/SDP求解器。
 
 ## Pólik, Terlaky — A Survey of the S-Lemma
 - 年份/出处：2007, *SIAM Review*, 49(3):371--418；
@@ -195,6 +198,27 @@
 - 与本项目关系：归一化推力区间由 `s^2-1<=0` 描述，`s=0`严格可行，因此每条二次
   facet residual 的区间非负可精确写成 `2 x 2` LMI。此为经典定理直接推论，不是创新；
   多参数、多约束或更高次条件不能无条件沿用本轮“精确”标签。
+
+## Fawzi — On Representing the Positive Semidefinite Cone Using the Second-Order Cone
+- 年份/出处：2019, *Mathematical Programming*, 175:109--118；
+  DOI：https://doi.org/10.1007/s10107-018-1233-0；
+  作者存档：https://www.repository.cam.ac.uk/handle/1810/270667
+- Run 198 精读：Introduction式(1)、Theorem 1及其表示范围说明。
+- 方法/关键结论：`2 x 2`实对称PSD cone与三维Lorentz cone线性同构；一般`3 x 3` PSD
+  cone则不存在有限SOCP lift。本轮只用前一精确等价，绝不外推到一般SDP。
+- 与本项目关系：6080个S-lemma矩阵恰好全部为`2 x 2`，所以冻结综合可作为SOCP而非一般
+  SDP求解；这只改变实现接口，不改变fixed-normal/common-core保守性，也不是创新。
+
+## Goulart, Chen — Clarabel: An Interior-Point Solver for Conic Programs with Quadratic Objectives
+- 年份/出处：2026, *Mathematical Programming Computation*；
+  DOI：https://doi.org/10.1007/s12532-026-00320-7；
+  正文：https://link.springer.com/article/10.1007/s12532-026-00320-7
+- Run 198 定向精读：Section 2.1的解/不可行解释、Section 2.2支持的nonnegative、second-order、
+  PSD与zero cones，以及实现/数据可得性说明。
+- 方法/关键结论：Clarabel以homogeneous embedding的内点法求一般conic program，并原生支持
+  Lorentz cone与不可行性证书语义；它是本问题可复现求解器候选。
+- 与本项目关系：当前环境未安装Clarabel，故本轮只冻结求解能力门，不报告数值可行/不可行。
+  将来即使安装并返回optimal，仍须把候选送入独立全区间检查器。
 
 ## Gupta, Mejari, Falcone, Piga — Computation of Parameter Dependent Robust Invariant Sets for LPV Models with Guaranteed Performance
 - 年份/出处：2023, *Automatica*, 151:110920；DOI：https://doi.org/10.1016/j.automatica.2023.110920；全文：https://arxiv.org/pdf/2009.09778

@@ -1,0 +1,100 @@
+{
+  "run": 198,
+  "question": "Can the frozen 6080 small LMIs be posed and solved reproducibly in this runtime?",
+  "soc_equivalence": {
+    "matrix": "Q=[[q00,q01],[q01,q11]]",
+    "lorentz_constraint": "norm([2*q01,q00-q11],2) <= q00+q11",
+    "exact_identity": "(q00+q11)^2-(4*q01^2+(q00-q11)^2)=4*det(Q)",
+    "equivalence_exact_for_2_by_2_psd": true
+  },
+  "identity_examples": {
+    "positive_definite": {
+      "identity": true,
+      "trace": "11/4",
+      "norm_squared": "265/144",
+      "determinant": "103/72",
+      "lhs_minus_rhs": "103/18",
+      "psd_by_minors": true,
+      "psd_by_soc_squared": true
+    },
+    "indefinite": {
+      "identity": true,
+      "trace": "2",
+      "norm_squared": "16",
+      "determinant": "-3",
+      "lhs_minus_rhs": "-12",
+      "psd_by_minors": false,
+      "psd_by_soc_squared": false
+    },
+    "negative_definite": {
+      "identity": true,
+      "trace": "-2",
+      "norm_squared": "0",
+      "determinant": "1",
+      "lhs_minus_rhs": "4",
+      "psd_by_minors": false,
+      "psd_by_soc_squared": false
+    }
+  },
+  "problem_size": {
+    "facets": 38,
+    "vertices": 160,
+    "state_dimension": 4,
+    "soc_constraints": 6080,
+    "soc_dimension_each": 3,
+    "offset_coefficient_variables": 76,
+    "vertex_torque_coefficient_variables": 320,
+    "common_core_offset_variables": 38,
+    "slemma_multiplier_variables": 6080,
+    "raw_scalar_variables": 6514,
+    "pair_offset_coefficient_equalities": 38,
+    "effective_scalar_variables_after_pair_equalities": 6476,
+    "configuration_endpoint_inequalities": 12160,
+    "hard_state_endpoint_inequalities": 2560,
+    "torque_endpoint_inequalities": 640,
+    "common_core_endpoint_inequalities": 76,
+    "offset_nonnegativity_endpoint_inequalities": 76,
+    "slemma_multiplier_nonnegativity_inequalities": 6080,
+    "counting_scope": "raw formulation; no common-core pair symmetry is imposed and no redundant linear row is removed"
+  },
+  "solver_inventory": {
+    "python_modules": {
+      "clarabel": false,
+      "scs": false,
+      "cvxpy": false,
+      "cvxopt": false,
+      "ecos": false
+    },
+    "executables": {
+      "clarabel": false,
+      "scs": false,
+      "mosek": false,
+      "gurobi_cl": false,
+      "cplex": false
+    },
+    "usable_conic_solver": false,
+    "scipy_linprog_is_not_conic": true
+  },
+  "evidence_level": "DERIVED",
+  "numerical_feasibility": "OPEN",
+  "solver_gate": "blocked",
+  "gate_A_status": "blocked",
+  "invalid_substitutes": [
+    "scipy.optimize.linprog/HiGHS because the Lorentz cones are nonpolyhedral",
+    "finite scheduling grids because they do not certify the full interval",
+    "generic nonlinear local optimization because success is not a conic feasibility certificate"
+  ],
+  "proves_four_state_rci": false,
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "dependencies_sha256": {
+    "verification/check_affine_offset_socp_gate.py": "fed9587b78090f4a763d5b2624ae8fece83ee9ab1e755cd4d795b0cd1c3a29e0",
+    "verification/test_affine_offset_socp_gate.py": "132e3a945b25404c6f5855dcb81a5236cc63ccdebb257e1b9b1781bf402b2dbc",
+    "verification/check_scalar_interval_slemma.py": "70db0c8d661d058db4f25581118504beda158b53f84d6fe213977de763e5a487",
+    "docs/research/run198_literature_gate.md": "f1d83569780599eb378971b2a7f8c008406d8266bdd8f8cf68d3112ada65c526"
+  },
+  "runtime": {
+    "python": "3.12.14"
+  },
+  "next_problem": "provide a locked SOCP solver, solve the frozen formulation, and independently audit all returned interval quadratics and linear endpoint constraints"
+}
