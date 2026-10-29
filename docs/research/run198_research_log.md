@@ -43,6 +43,8 @@ solver。故不以HiGHS LP、有限网格或局部NLP替代。`numerical_feasibi
 
 ## 提交与下一问题
 
-内容提交=`5ca99b7`，tree=`a1e0265`。下一唯一问题：提供锁定版本SOCP solver，求解冻结
-affine-offset模型；无论solver状态如何，返回候选必须逐条通过6080个全区间二次条件与全部
-端点线性约束的独立审计。
+本地内容提交=`5ca99b7`、元数据提交=`46dfcca`。标准HTTPS push因环境无GitHub用户名凭据
+失败；随后通过已授权仓库连接器创建远端等树提交`4fd575a`与分支
+`research/run198-affine-offset-socp-gate`，fetch核验本地与远端tree均为`399e00a`。下一唯一
+问题：提供锁定版本SOCP solver，求解冻结affine-offset模型；无论solver状态如何，返回候选
+必须逐条通过6080个全区间二次条件与全部端点线性约束的独立审计。
