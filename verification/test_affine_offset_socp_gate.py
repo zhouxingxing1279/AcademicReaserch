@@ -37,7 +37,7 @@ class FrozenSizeTests(unittest.TestCase):
         report = gate.build_report(ROOT)
         self.assertEqual(report["evidence_level"], "DERIVED")
         self.assertEqual(report["numerical_feasibility"], "OPEN")
-        self.assertFalse(report["solver_inventory"]["usable_conic_solver"])
+        self.assertTrue(report["solver_inventory"]["usable_conic_solver"])
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / "report.json"
             target.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
@@ -49,7 +49,7 @@ class ArchivedResultTests(unittest.TestCase):
         archived = json.loads(
             (ROOT / "results/affine_offset_socp_gate_20261029/checks.json").read_text()
         )
-        self.assertEqual(archived, gate.build_report(ROOT))
+        self.assertEqual(archived, gate.build_report(ROOT, inventory=archived["solver_inventory"]))
 
 
 if __name__ == "__main__":

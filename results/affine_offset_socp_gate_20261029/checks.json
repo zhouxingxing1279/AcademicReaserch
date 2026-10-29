@@ -88,8 +88,8 @@
   "proves_six_state_safety": false,
   "proves_recursive_feasibility": false,
   "dependencies_sha256": {
-    "verification/check_affine_offset_socp_gate.py": "fed9587b78090f4a763d5b2624ae8fece83ee9ab1e755cd4d795b0cd1c3a29e0",
-    "verification/test_affine_offset_socp_gate.py": "132e3a945b25404c6f5855dcb81a5236cc63ccdebb257e1b9b1781bf402b2dbc",
+    "verification/check_affine_offset_socp_gate.py": "8eb21475c1155e38e62fc4a63ad3b42e9077e5bdd2a60cd99cb04b989d4e3127",
+    "verification/test_affine_offset_socp_gate.py": "b03bcab2e769c63c8ca3409d3639bddec0594f3b5ad45b20a3191a7046c5c2db",
     "verification/check_scalar_interval_slemma.py": "70db0c8d661d058db4f25581118504beda158b53f84d6fe213977de763e5a487",
     "docs/research/run198_literature_gate.md": "f1d83569780599eb378971b2a7f8c008406d8266bdd8f8cf68d3112ada65c526"
   },

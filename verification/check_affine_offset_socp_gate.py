@@ -104,7 +104,7 @@ def _json_fractions(value):
     return value
 
 
-def build_report(root: Path) -> dict:
+def build_report(root: Path, inventory: dict | None = None) -> dict:
     examples = {
         "positive_definite": verify_psd_soc_identity(F(3, 2), F(-2, 3), F(5, 4)),
         "indefinite": verify_psd_soc_identity(F(1), F(2), F(1)),
@@ -116,7 +116,7 @@ def build_report(root: Path) -> dict:
         "verification/check_scalar_interval_slemma.py",
         "docs/research/run198_literature_gate.md",
     ]
-    inventory = solver_inventory()
+    inventory = solver_inventory() if inventory is None else inventory
     return {
         "run": 198,
         "question": "Can the frozen 6080 small LMIs be posed and solved reproducibly in this runtime?",

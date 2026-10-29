@@ -491,3 +491,12 @@ Clarabel支持的锥与不可行语义。证明每条Run197 LMI精确等价于�
 后6476个；端点线性约束规模亦归档。当前环境没有任何SOCP/SDP接口或可执行文件，故拒绝用
 HiGHS、有限网格或局部NLP冒充证书，数值可行性保持`OPEN`，Gate A仍blocked。下一步只提供
 锁定锥求解器、执行冻结综合并逐条独立复核返回候选。
+
+### 2026-10-29 Run 199
+
+重读Clarabel不可行语义、Mulagaleti等PD-RCI SDP与S-lemma精确特化。安装并锁定
+`clarabel==0.11.1`，求解冻结6514变量、39870行、6080-SOC模型；默认和关闭equilibration
+均返回`PrimalInfeasible`。主39870维对偶ray独立检查得到`b^Tz=-0.9999999666`、
+`||A^Tz||_inf=3.69e-9`及最差dual-cone margin `0.0758`，另一scaling亦通过`1e-7`审计。
+结论仍仅为`NUMERIC_CHECK`，不否定一般PD-RCI、六状态安全或递归可行性，Gate A blocked。
+下一步只把高余量浮点ray转成精确有理或区间认证的conic Farkas证书。

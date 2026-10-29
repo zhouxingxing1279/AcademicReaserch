@@ -1,7 +1,7 @@
-# 研究短检查点（2026-10-29，Run198）
+# 研究短检查点（2026-10-29，Run199）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；只推进Gate A。起点远端Run197=`5c6c424`、同树本地=`513a5c1`，`main=1c49659`；Run198本地内容提交=`5ca99b7`、元数据提交=`46dfcca`，已同步远端等树提交=`4fd575a`，最终tree=`399e00a`。
+唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；当前只推进Gate A。接续远端Run198=`42be3a2`、tree=`4baee10`（纠正Run198旧检查点在同步后仍写`399e00a`的问题），`main=1c49659`。
 
-冻结合同不变：当前推力可见、未来推力可在全区间任意跳变。每个Run197的`2 x 2` PSD条件精确等价于三维Lorentz cone：`||(2q01,q00-q11)||<=q00+q11`；纯有理恒等式检查通过（`DERIVED`）。固定38-facet、160-vertex原始SOCP含6080个cone、6514个标量变量，pair-offset等式消元后6476个。当前环境没有Clarabel/SCS/CVXPY/CVXOPT/ECOS或锥求解可执行文件；HiGHS、有限网格和局部NLP不能替代SOCP证书。因此未报告数值可行/不可行，19-pair RCI、六状态安全及递归可行性仍`OPEN`，Gate A blocked。
+冻结合同不变：四状态横向—姿态降阶基准，当前推力可见、未来推力可全区间任意跳变；19-pair fixed-normal configuration采用仿射offset/vertex torque和共同后继core。锁定`clarabel==0.11.1`求解6514变量、39870行、225744非零元、6080个SOC的充分模型；默认与关闭equilibration均返回`PrimalInfeasible`。主39870维浮点对偶ray独立复核：`b^Tz=-0.9999999666`、`||A^Tz||inf=3.69e-9`、最差dual-cone margin=`0.0758`；另一scaling亦通过`1e-7`审计。证据仅为`NUMERIC_CHECK`：不能推出精确不可行、一般PD-RCI不可行、物理权限不足、六状态安全失败或递归不可行。Gate A仍blocked。
 
-下一唯一问题：提供锁定版本SOCP solver，求解冻结模型并逐条独立复核6080条区间二次与全部端点线性约束。
+下一唯一问题：将高余量浮点ray稀疏化/有理化，并用精确有理或区间算术认证`A^Tz=0`、`z in K*`、`b^Tz<0`；此前不更换configuration family。

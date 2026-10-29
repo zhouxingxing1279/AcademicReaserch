@@ -1,0 +1,83 @@
+{
+  "run": 199,
+  "question": "Is the frozen 19-pair affine-offset SOCP numerically feasible, and does a returned candidate pass an independent audit?",
+  "scope": "four-state reduced lateral-attitude benchmark; one frozen 19-pair configuration cone",
+  "problem": {
+    "variables": 6514,
+    "rows": 39870,
+    "nonzeros": 225744,
+    "cone_objects": 27710,
+    "soc_constraints": 6080
+  },
+  "solver": {
+    "name": "Clarabel",
+    "version": "0.11.1",
+    "status": "PrimalInfeasible",
+    "iterations": 20,
+    "solve_time_seconds": 0.8372875489999387,
+    "primal_cost": null,
+    "primal_residual": 0.02437548669267046,
+    "dual_residual": 1.5877930939391978e-15
+  },
+  "candidate_audit": null,
+  "dual_infeasibility_ray_audit": {
+    "dimension": 39870,
+    "b_dot_z": -0.9999999666165422,
+    "stationarity_inf_norm": 3.6884557630401105e-09,
+    "dual_ray_l2_norm": 7806593.892210513,
+    "worst_dual_cone_margin": 0.07578612251984826,
+    "dual_cone_margins": {
+      "nonnegative": 0.114920428144749,
+      "soc": 0.07578612251984826
+    },
+    "cone_counts": {
+      "zero": 38,
+      "nonnegative": 21592,
+      "soc": 6080
+    },
+    "passes_tolerance_1e_7": true
+  },
+  "dual_ray_artifact": {
+    "path": "results/affine_offset_socp_solve_20261029/dual_ray.npy",
+    "sha256": "af21a2b1cff5aab6f323c5095ebd3c314928c91fb5db6bd49a6c81ff972929e1"
+  },
+  "robustness_solve_no_equilibration": {
+    "status": "PrimalInfeasible",
+    "iterations": 19,
+    "solve_time_seconds": 0.830697442000087,
+    "dual_ray_audit": {
+      "dimension": 39870,
+      "b_dot_z": -0.999999993388883,
+      "stationarity_inf_norm": 1.430303697702584e-08,
+      "dual_ray_l2_norm": 200500.41958274404,
+      "worst_dual_cone_margin": 0.08018399542180811,
+      "dual_cone_margins": {
+        "nonnegative": 0.1135238155869827,
+        "soc": 0.08018399542180811
+      },
+      "cone_counts": {
+        "zero": 38,
+        "nonnegative": 21592,
+        "soc": 6080
+      },
+      "passes_tolerance_1e_7": true
+    }
+  },
+  "evidence_level": "NUMERIC_CHECK",
+  "gate_A_status": "blocked",
+  "proves_exact_feasibility": false,
+  "proves_six_state_safety": false,
+  "proves_recursive_feasibility": false,
+  "dependencies_sha256": {
+    "verification/check_affine_offset_socp_solve.py": "143ceb13ee64a4ebde260417f7825320ab152f5db4a3efee8e6c4eb09855a1a9",
+    "verification/test_affine_offset_socp_solve.py": "3b98dad903eb81443a933ae751cd321960ea8465098dc4d2f1e30102d44bb69e",
+    "verification/requirements.txt": "ce36ef9593db613077a1b7d138eadd9542adc47445f57c35accda47b6c223a08",
+    "docs/research/run199_literature_gate.md": "fd8726a3b3c996eb3039ebb0e1e5ebe8eb6921dbc60143fd2fbbadd01aa0d78f"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "next_problem": "rationalize a strictly feasible candidate or extract and independently certify an infeasibility ray before changing the configuration family"
+}

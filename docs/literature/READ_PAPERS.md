@@ -186,6 +186,9 @@
 - Run 198 重读式(28)、SDP(33)、算法步骤4与Section IV求解环境。正文以YALMIP建模并用
   MOSEK求解SDP；solver success本身不是有理不变性证书。本仓库的每个`2 x 2` LMI可精确
   改写为三维Lorentz cone，但当前运行环境没有相应SOCP/SDP求解器。
+- Run 199 重读式(26)--(28)、SDP(33)、算法步骤4及Section IV求解设置。锁定Clarabel求解
+  仓库受限实例后得到可重放浮点不可行ray；这只否定当前fixed-normal、affine-offset、
+  common-core充分模板的数值实例，不否定论文一般PD-RCI参数化。
 
 ## Pólik, Terlaky — A Survey of the S-Lemma
 - 年份/出处：2007, *SIAM Review*, 49(3):371--418；
@@ -198,6 +201,8 @@
 - 与本项目关系：归一化推力区间由 `s^2-1<=0` 描述，`s=0`严格可行，因此每条二次
   facet residual 的区间非负可精确写成 `2 x 2` LMI。此为经典定理直接推论，不是创新；
   多参数、多约束或更高次条件不能无条件沿用本轮“精确”标签。
+- Run 199 复核Theorem 2.2与Slater条件，确认区间二次到`2 x 2` LMI的变换本身精确；
+  本轮数值不确定性来自大规模锥综合和浮点ray，而不是S-lemma特化。
 
 ## Fawzi — On Representing the Positive Semidefinite Cone Using the Second-Order Cone
 - 年份/出处：2019, *Mathematical Programming*, 175:109--118；
@@ -219,6 +224,9 @@
   Lorentz cone与不可行性证书语义；它是本问题可复现求解器候选。
 - 与本项目关系：当前环境未安装Clarabel，故本轮只冻结求解能力门，不报告数值可行/不可行。
   将来即使安装并返回optimal，仍须把候选送入独立全区间检查器。
+- Run 199 重读Sections 2.1--2.2的锥、homogeneous embedding与不可行语义，并锁定
+  `clarabel==0.11.1`。两种equilibration设置均返回`PrimalInfeasible`，但只按独立浮点ray
+  审计记为`NUMERIC_CHECK`，未升级为精确不可行证明。
 
 ## Gupta, Mejari, Falcone, Piga — Computation of Parameter Dependent Robust Invariant Sets for LPV Models with Guaranteed Performance
 - 年份/出处：2023, *Automatica*, 151:110920；DOI：https://doi.org/10.1016/j.automatica.2023.110920；全文：https://arxiv.org/pdf/2009.09778
