@@ -902,3 +902,13 @@
 - 与本项目关系：直接说明 output-feedback 与 full/noisy-state feedback 的信息权限及在线集合选择不同；因此读取隐藏 `eta` 的 vertex control 只能作乐观上界，不能作为当前 causal ancillary policy。
 - 局限：论文处理 LTI、静态输出增益和嵌套多面体，不含 15-mode missing-data graph、实际推力相关余项或 SMF zonotope fiber。
 - 本项目状态：作为 output-feedback set synthesis 的强方法基线；Run 141 只实例化因果性负对照，不复现其 bilinear synthesis。
+
+## Run201 定向重读（2026-10-30；历史84篇中的 Lorenzetti & Pavone，不新增篇数）
+
+- **论文：** Joseph Lorenzetti, Marco Pavone, *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*, 2020, arXiv:1911.07360v2；原文 https://arxiv.org/pdf/1911.07360 。
+- **阅读层级与范围：** 2026-10-30，原文 Section II Assumptions 1–2、Section III-A RPI 定义、Section IV-D 式(10)–(11)、Section IV-E/F 式(12)–(13)及 Proposition 1；其余章节本轮未重新核验。
+- **问题/方法：** LTI 系统受有界过程与测量噪声影响时，用 Luenberger observer、耦合估计/控制误差的固定截面 RPI、nominal MPC 与约束收紧建立输出反馈鲁棒约束满足。
+- **关键假设/结论：** 需要 (A,B) 可控、(A,C) 可观、误差闭环稳定、存在 RPI 与满足终端包含/下降的 nominal terminal ingredients，且初始误差落入 RPI、初始 MPC 可行；Proposition 1 在这些条件下保证约束满足。固定 RPI 本身不替代 terminal/shift。
+- **局限：** 连续的线性观测器测量、LTI 与固定误差截面；不直接涵盖冻结仓库的15-tick位置缺测图、推力调度任意跳变及状态相关气动 residual。
+- **本项目关联/可复用：** 用耦合误差状态与 support 收紧审计四状态 SMF-MPC 接口，不能把“一个 tube + RPI + 终端”宣称新贡献。本轮的横向不可辨识下界是必须满足的必要条件，尚不是 Lorenzetti 充分控制方案。
+- **待查问题：** 对每 tick 姿态观测和每5/10/15 tick位置更新，能否建立有限复杂度且 shift-compatible 的条件化后验/backup policy，并通过原四状态 Gate A？

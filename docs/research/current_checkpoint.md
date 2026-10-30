@@ -1,11 +1,11 @@
-# 研究短检查点（2026-10-30，Run200）
+# 研究短检查点（2026-10-30，Run201）
 
-接续 main=a5b7eeca04eb（Run199）。目标仍是无人机 MPC + 集员滤波的可验证闭环硕士课题，不预设唯一算法结构；优先完成可复现的控制闭环、终端可行性与安全保证。
+主目标：四旋翼 MPC + SMF 的可复现闭环与可完成的硕士课题。承接 Run200 main=`25aa83bfe2e0` 的**标量**间歇 SMF-MPC 闭环，本轮转入原四状态横向—姿态冻结合同的**必要**观测信息边界；不把标量递归可行性证明迁移为四旋翼安全结论。
 
-**本轮新证据：** 新增 verification/check_intermit_smf_mpc_closed_loop.py 与5项测试，建立标量稳定代理系统的间歇测量区间 SMF + 3步有限网格鲁棒 MPC 闭环。通过终端不变性和旧计划移位给出该标量合同的递归可行性归纳论证；384步确定性重放无违约，含220次缺测。证据范围严格限于标量代理，**不能证明**原四状态或六状态四旋翼安全。
+**新增可验证结论：** 在合法的15 tick位置丢测历史上，若初始后验包含配置中的两条对称极端状态，持续姿态/角速率观测无法辨别独立横向扰动的对称轨迹。对任意仅使用共同可见历史的因果推力/力矩控制，横向位置后验的必要半宽至少为 `211342043/1600000000 ≈ 0.13208878m`（低推力给出的统一下界）；固定高推力时为 `221354129/1600000000 ≈ 0.13834633m`。该结果不构成全局位置约束违例、终端/RCI不存在性或四旋翼闭环证明。
 
-**文献：** docs/literature/PAPER_READING_LOG.md 迁移 READ_PAPERS.md 的85条既有已读/核对记录，按题名去重为84篇，并补充本轮三篇关键论文的定向复核。原文件保留作为历史哈希依赖，不再作为新阅读的追加入口。
+**工件：** `verification/check_lateral_dropout_support_floor.py`、`verification/test_lateral_dropout_support_floor.py`、`results/lateral_dropout_support_floor_20261030/checks.json`、`docs/research/run201_research_log.md`。本地 Python 3.13.5 在核对的配置字段镜像上7/7测试通过，9组精确分数审计；未运行整个远端仓库回归或 CI。
 
-**原主线状态：** Run199 的19-pair affine-offset/common-core SOCP 仅有数值 PrimalInfeasible 浮点对偶 ray；精确有理/区间证书未完成，Gate A 仍 blocked。任何更广泛的 PD-RCI、无人机执行器或闭环不可能性结论均不成立。
+**文献：** `docs/literature/PAPER_READING_LOG.md` 增加 Lorenzetti & Pavone（2020）原文 Section II/IV 定向重读，原84篇去重计数不变。其耦合误差 RPI 与终端闭合是强基线，不能作为本项目创新。
 
-**下一唯一问题：** 将标量证明的后验包含、移位候选、终端不变三个接口逐项映射到四状态横向—姿态实际推力条件化模型，找出可证闭合或最小阻塞。当前 main 的最终 SHA 以本轮 GitHub 合并核验为准。
+**Gate A：blocked。** Run199 的19-pair affine-offset/common-core SOCP 浮点不可行 ray 仍不是精确类普遍不可行证明；尚无原四状态的充分 terminal/backup 控制证书。下一唯一问题：实现四状态条件化 SMF（含每 tick 姿态观测）可靠外包并与15 tick必要半宽及终端收紧进行兼容性检查。
