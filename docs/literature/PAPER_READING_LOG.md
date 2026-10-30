@@ -4,6 +4,23 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run202 定向重读与新推导（原84篇内，不重复计数）
+
+### Scott、Raimondo、Marseglia、Braatz（2016）
+- **题名：** *Constrained zonotopes: A new tool for set-based estimation and fault detection*；*Automatica* 69:126–136；DOI：https://doi.org/10.1016/j.automatica.2016.02.036；作者版：https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf
+- **阅读日期/层级：** 2026-10-30，原文 Definition 2（式(6) generalized intersection）、Definition 3（式(9) CZ），Section 3.1；属于原84篇的定向重读。
+- **问题/方法/假设：** 有界噪声下离散线性系统的集合状态估计；CZ以 `c+Gξ, ||ξ||∞≤1, Aξ=b` 表示，并可通过增加有界噪声生成元与等式约束精确更新测量一致集合。若不压缩生成元与约束，其规模持续增长。
+- **结论/局限：** 精确线性像、Minkowski和及 generalized intersection 是既有技术；本轮四状态代码只是实例化。它不提供 MPC 终端不变性或实时求解保证；浮点 LP 投影支持不自动变成数学证书。
+- **本课题复用/待查：** 固定推力下按真实姿态/位置观测更新 `(px,vx,phi,omega)` 的精确 CZ；下一步比较控制相关后验支持、固定预算约减与实际控制准入，避免把 CZ 本身当创新。
+
+### Lorenzetti、Pavone（2020）
+- **题名：** *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*；2020 ECC；DOI：https://doi.org/10.23919/ECC51009.2020.9143979；全文：https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf
+- **阅读日期/层级：** 2026-10-30，Section II 问题模型、Section IV 的管束误差/约束收紧与终端条件；原84篇中的定向重读。
+- **问题/方法/假设：** 线性离散定常系统、有界加性扰动与噪声，使用输出反馈鲁棒 MPC 与离线 RPI/终端约束；递归可行性不能仅由状态估计集合包含推出。
+- **局限/关联/待查：** 本项目有间歇位置测量、当前推力可见但未来任意跳变的 LPV 合同，不符合直接套用其 LTI/持续观测证明的前提。需要独立的模式相关 backup、控制误差管束和终端证书。
+
+**Run202新推导（非论文原定理）：** 对零位置/姿态观测历史、固定已知推力，利用两次位置观测消去初始速度，得到严格返包后速度界 `|v_n|≤2σp/(nh)+h(n+1)(Tσφ+d(T))/2`；15 tick 低/高推力下相对独立区间预测可靠收紧35.1%/36.0%。精确 CZ 递推和该恒等式是冻结模型审计，不宣称新通用滤波算法或鲁棒控制定理。
+
 ## Run200 定向复核与课题判断（下述三篇已在历史84篇内，不重复计数）
 
 ### Köhler、Müller、Allgöwer（2021）

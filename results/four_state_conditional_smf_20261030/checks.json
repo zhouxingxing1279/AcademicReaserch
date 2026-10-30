@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "evidence": "EXACT_RATIONAL_CZ_REPRESENTATION_AND_BOX_OUTER;NUMERIC_LP_SUPPORT_ONLY",
+  "scope": "frozen four-state lateral-attitude proxy; fixed thrust/zero torque; zero measurement history",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "execution": "local mirrored subset of config, not full repository checkout",
+    "new_unit_tests": "7/7"
+  },
+  "reproduction": [
+    "PYTHONPATH=verification python -m unittest verification.test_four_state_conditional_smf -v",
+    "python verification/check_four_state_conditional_smf.py --output results/four_state_conditional_smf_20261030/checks.json"
+  ],
+  "rows": [
+    {
+      "gap_ticks": 5,
+      "thrust": "low",
+      "exact_indistinguishable_position_floor": "30254383/800000000",
+      "exact_indistinguishable_velocity_floor": "9454383/32000000",
+      "certified_box_position_outer_halfwidth": "30332863/800000000",
+      "certified_box_velocity_outer_halfwidth": "9532863/32000000",
+      "certified_post_return_velocity_outer_halfwidth": "9532863/32000000",
+      "certified_velocity_reduction_fraction": "0",
+      "post_return_numeric_CZ_velocity_upper": 0.29790196874999997,
+      "numeric_CZ_generators": 22,
+      "numeric_CZ_constraints": 13
+    },
+    {
+      "gap_ticks": 5,
+      "thrust": "high",
+      "exact_indistinguishable_position_floor": "30731149/800000000",
+      "exact_indistinguishable_velocity_floor": "9931149/32000000",
+      "certified_box_position_outer_halfwidth": "30966589/800000000",
+      "certified_box_velocity_outer_halfwidth": "10166589/32000000",
+      "certified_post_return_velocity_outer_halfwidth": "10166589/32000000",
+      "certified_velocity_reduction_fraction": "0",
+      "post_return_numeric_CZ_velocity_upper": 0.31770590625,
+      "numeric_CZ_generators": 22,
+      "numeric_CZ_constraints": 13
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "low",
+      "exact_indistinguishable_position_floor": "120289447/1600000000",
+      "exact_indistinguishable_velocity_floor": "7854383/16000000",
+      "certified_box_position_outer_halfwidth": "120995767/1600000000",
+      "certified_box_velocity_outer_halfwidth": "7932863/16000000",
+      "certified_post_return_velocity_outer_halfwidth": "133661493/320000000",
+      "certified_velocity_reduction_fraction": "861923/5470940",
+      "post_return_numeric_CZ_velocity_upper": 0.41769216562499994,
+      "numeric_CZ_generators": 37,
+      "numeric_CZ_constraints": 23
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "high",
+      "exact_indistinguishable_position_floor": "124580341/1600000000",
+      "exact_indistinguishable_velocity_floor": "8331149/16000000",
+      "certified_box_position_outer_halfwidth": "126699301/1600000000",
+      "certified_box_velocity_outer_halfwidth": "8566589/16000000",
+      "certified_post_return_velocity_outer_halfwidth": "140632479/320000000",
+      "certified_velocity_reduction_fraction": "30699301/171331780",
+      "post_return_numeric_CZ_velocity_upper": 0.43947649687499996,
+      "numeric_CZ_generators": 37,
+      "numeric_CZ_constraints": 23
+    },
+    {
+      "gap_ticks": 15,
+      "thrust": "low",
+      "exact_indistinguishable_position_floor": "211342043/1600000000",
+      "exact_indistinguishable_velocity_floor": "21963149/32000000",
+      "certified_box_position_outer_halfwidth": "212990123/1600000000",
+      "certified_box_velocity_outer_halfwidth": "22198589/32000000",
+      "certified_post_return_velocity_outer_halfwidth": "26998589/60000000",
+      "certified_velocity_reduction_fraction": "116990123/332978835",
+      "post_return_numeric_CZ_velocity_upper": 0.44685295312499995,
+      "numeric_CZ_generators": 52,
+      "numeric_CZ_constraints": 33
+    },
+    {
+      "gap_ticks": 15,
+      "thrust": "high",
+      "exact_indistinguishable_position_floor": "221354129/1600000000",
+      "exact_indistinguishable_velocity_floor": "23393447/32000000",
+      "certified_box_position_outer_halfwidth": "226298369/1600000000",
+      "certified_box_velocity_outer_halfwidth": "24099767/32000000",
+      "certified_post_return_velocity_outer_halfwidth": "28899767/60000000",
+      "certified_velocity_reduction_fraction": "130298369/361496505",
+      "post_return_numeric_CZ_velocity_upper": 0.4765588593749999,
+      "numeric_CZ_generators": 52,
+      "numeric_CZ_constraints": 33
+    }
+  ],
+  "caveats": [
+    "Certified bounds are exact rational under the specified observation history",
+    "CZ supports from SciPy HiGHS are numeric only, not verified dual certificates",
+    "No MPC controller, terminal invariance, recursive feasibility or six-state UAV safety result"
+  ]
+}
