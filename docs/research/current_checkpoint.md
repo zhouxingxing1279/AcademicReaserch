@@ -1,9 +1,9 @@
-# 研究短检查点（2026-10-30，Run203）
+# 研究短检查点（2026-10-30，Run204）
 
-唯一总方向：四旋翼/无人机 MPC＋SMF 闭环与可完成硕士课题。Run200建立标量闭环基线；Run201给出四状态缺测信息下界；Run202建立四状态精确CZ递推和返包后速度可靠界。Run203将Run202精确有理后验**区间外包**接入15-mode位置包成功/缺失分支，建立未来两拍推力全区间任意跳变下的三拍硬约束准入审计。当前推力可见、选择一个tau0、后两拍tau=0；生成元和端点推力最大化均为有理数。10种合法历史分支（5/10成功或缺包、15只能成功）全部在3拍内满足原始硬约束，5个力矩网格点亦通过；这不是MPC、RCI或终端证明。
+唯一总方向：四旋翼/无人机 MPC＋SMF 闭环与可完成硕士课题。Run200标量SMF–MPC闭环；Run201四状态缺测信息下界；Run202四状态条件化CZ/返包速度界；Run203三拍硬约束准入与永久零力矩72 tick违约；**Run204证明15-mode五边合法成功环上，任何固定原点对称直积盒形式的模式相关物理状态终端族都不可能对所有边一步鲁棒受控不变**。理由：每边位置积分器强制 P_next≥P_i+h V_i，环求和强制全部V_i=0，而合法非零残差立即产生 v_next>0。精确有理证据为 EXACT_RATIONAL_CLASS_SPECIFIC_NO_GO；不排除平移/相关/条件化信息集合或一般RCI。
 
-重要信息收益：10 tick高推力时，第3拍速度外包在成功包下为0.57028m/s，缺包下为0.66621m/s。假设的0.65m/s诊断阈值因此改变判定，但不是实际硬约束或终端集。**反例：** 恒定高推力、最大正横向扰动、永久零力矩，在第72拍达到v=3.02901705m/s，违反|v|<=3；因此局部安全不能递推为长期安全。
+Run204还实现四状态区间SMF+非零饱和反馈的150 tick闭环数值探针：3个合法推力/残差场景×零力矩、SMF中点反馈、真值全状态反馈共9条轨迹，浮点容差下SMF覆盖1350/1350；非零SMF反馈在高推力正残差tick114违反角速度约束、切换推力正残差tick125违反姿态角约束。它不是MPC，亦无鲁棒安全/递归可行性保证。17/17新增测试在本地关键配置镜像通过，未运行完整仓库回归/CI。
 
-工件：`verification/check_mode_indexed_backup_admission.py`、`verification/test_mode_indexed_backup_admission.py`、`results/mode_indexed_backup_admission_20261030/checks.json`、`docs/research/run203_research_log.md`。Python 3.13.5标准库，远端字段镜像，9/9新增测试通过；完整仓库回归/CI未运行。文献重读Lorenzetti & Pavone (2020) Section IV-C/D/E 与 Athanasopoulos et al. (2017) 图约束切换概念，更新 `docs/literature/PAPER_READING_LOG.md`，仍为原84篇，不虚增。
+工件：verification/check_mode_indexed_box_terminal_obstruction.py、verification/test_mode_indexed_box_terminal_obstruction.py、verification/check_four_state_feedback_smf_probe.py、verification/test_four_state_feedback_smf_probe.py、results/mode_indexed_box_terminal_obstruction_20261030/checks.json、results/four_state_feedback_smf_probe_20261030/summary.json、docs/research/run204_research_log.md；docs/literature/PAPER_READING_LOG.md复核Athanasopoulos、Lorenzetti与Pavone、Ping等已有论文，84篇总数不变。
 
-**Gate A仍blocked。下一唯一任务：** 构造模式相关的非零因果反馈及一拍controlled invariant候选，检验成功/缺包与任意未来推力；若不可行，保存最小反例并评估收敛至有限时域安全过滤器方案。
+**Gate A仍blocked。下一唯一任务：** 构建观测条件化的移动中心/相关SMF信息状态下可实施的有限时域backup或安全过滤器，统一合法测量边和未来任意推力，并对完整四状态闭环进行保守安全准入与失败见证。

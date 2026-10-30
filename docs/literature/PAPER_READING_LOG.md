@@ -4,6 +4,30 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run204 定向复核与证据边界（仍为历史84篇，不新增计数）
+
+### Athanasopoulos、Smpoukis、Jungers（2017）
+- **题名/作者/年份/链接：** *Invariance in Constrained Switching*；Nikolaos Athanasopoulos, Konstantinos Smpoukis, Raphaël M. Jungers；2017；https://arxiv.org/abs/1702.00598；相关期刊版本题名为 *Invariant Sets Analysis for Constrained Switching Systems*，DOI https://doi.org/10.1109/LCSYS.2017.2714840（区分版本）。
+- **阅读日期与层级：** 2026-10-30；核对 arXiv 摘要、Introduction、图约束切换与 invariant multi-set 定义/基本描述；未重新证明全文定理。
+- **研究问题/模型/方法：** 有向自动机约束切换的离散线性扰动系统，按图节点定义 invariant multi-set，以前向/后向可达映射研究不变集合。
+- **关键前提/结论：** 系统切换序列受合法图边约束，图索引集合必须满足相应边的后继包含；稳定性与普通单一不变集存在性不能简单等同。具体近似定理有稳定性等前提，本轮不援引未核实的适用性。
+- **局限/课题关联/可复用/待查：** 文中主要为切换系统不变性框架，不直接解决本仓库“控制先于未知边、观测更新改变后验”的信息状态；可复用图索引不变性表述。Run204 对固定原点直积物理状态盒的排除是**本仓库冻结合同自己的推导**，不是该论文定理。下一步构造移动中心/相关后验集合上的因果后继包含。
+
+### Lorenzetti、Pavone（2020）
+- **题名/作者/年份/链接：** *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*；Joseph Lorenzetti, Marco Pavone；2020 ECC；DOI https://doi.org/10.23919/ECC51009.2020.9143979；作者全文 https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf 。
+- **阅读日期与层级：** 2026-10-30；核对作者全文 Section II Assumptions 1–2、Section III-A RPI定义、Section IV-A/B/C 的式(7)–(9)与终端结构，结合原有Run203深读记录。
+- **研究问题/方法：** 离散LTI、加性有界扰动/测量噪声下的输出反馈 Tube MPC；Luenberger估计、误差RPI、名义轨迹约束收紧和终端约束。
+- **关键假设/结论：** 论文要求可控可观、紧有界噪声集合、合适的稳定估计器和反馈及终端条件；本轮区间SMF+饱和中点LQR没有满足其终端/误差管束条件，不能转移递归可行性结论。
+- **局限/关联/复用/待查：** 原文LTI与持续观测结构不覆盖未来推力任意跳变及15-mode位置缺包；可复用终端—RPI—约束收紧—移位的证明架构。待查如何将后验移动中心和未来观测分支纳入同一可计算控制条件。
+
+### Ping、Yao、Ding、Li（2022）
+- **题名/作者/年份/链接：** *Tube-Based Output Feedback Robust MPC for LPV Systems With Scaled Terminal Constraint Sets*；Xubin Ping, Junying Yao, Baocang Ding, Zhiwu Li；IEEE Transactions on Cybernetics 52(8):7563–7576，2022；DOI https://doi.org/10.1109/TCYB.2020.3041334；PubMed PMID 33417577。
+- **阅读日期与层级：** 2026-10-30；**仅正式摘要复核**，没有重读正文定理/公式；延续历史Run131的同级证据。
+- **问题/方法/结论：** 有界扰动和噪声的离散LPV输出反馈Tube RMPC，离线设计查找表、在线约束收紧与scaled terminal；论文声称递归可行性/稳定性，具体定理前提需原文核对。
+- **局限/关联/复用/待查：** 与本课题的LPV、输出反馈和终端收紧高度相关，但不能把其scaled terminal当作新机制；尚未核对是否支持任意快速推力跳变、间歇位置包及CZ相关性。下一步按原文逐式核对再移植。
+
+**Run204自有实验（非论文结论）：** 15-mode五边环排除固定原点直积物理状态盒族，为精确类特定反证；四状态区间SMF中点饱和反馈9条150 tick数值探针显示多种硬约束失败。不能由此推断一般鲁棒输出反馈Tube MPC不可行。
+
 ## Run203 定向复核（历史84篇内，不重复计数）
 
 ### Lorenzetti、Pavone（2020）

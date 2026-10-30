@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "evidence": "NUMERIC_DETERMINISTIC_CAUSAL_FEEDBACK_PROBE",
+  "source_main": "run203",
+  "contract": "four-state Euler proxy; 15-tick position packet success with misses at 5,10; phi/omega each tick; zero measurement noise; known thrust",
+  "feedback": "saturated u=0.8*p_hat+1.08*v_hat-2.95*phi_hat-0.4*omega_hat; midpoint interval SMF; heuristic, not MPC",
+  "scenarios": [
+    {
+      "scenario": "positive_high",
+      "controller": "zero",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": [
+        72,
+        1,
+        3.0290170500000047
+      ],
+      "nonzero_torque_ticks": 0
+    },
+    {
+      "scenario": "positive_high",
+      "controller": "feedback",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": [
+        114,
+        3,
+        2.007467074502784
+      ],
+      "nonzero_torque_ticks": 135
+    },
+    {
+      "scenario": "positive_high",
+      "controller": "fullstate",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": null,
+      "nonzero_torque_ticks": 149
+    },
+    {
+      "scenario": "alternating_high",
+      "controller": "zero",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": null,
+      "nonzero_torque_ticks": 0
+    },
+    {
+      "scenario": "alternating_high",
+      "controller": "feedback",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": null,
+      "nonzero_torque_ticks": 135
+    },
+    {
+      "scenario": "alternating_high",
+      "controller": "fullstate",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": [
+        88,
+        3,
+        2.0267013205126343
+      ],
+      "nonzero_torque_ticks": 149
+    },
+    {
+      "scenario": "switch_positive",
+      "controller": "zero",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": [
+        74,
+        1,
+        3.011843637500001
+      ],
+      "nonzero_torque_ticks": 0
+    },
+    {
+      "scenario": "switch_positive",
+      "controller": "feedback",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": [
+        125,
+        2,
+        0.4569261313015362
+      ],
+      "nonzero_torque_ticks": 135
+    },
+    {
+      "scenario": "switch_positive",
+      "controller": "fullstate",
+      "steps": 150,
+      "position_packets": 10,
+      "misses": 20,
+      "smf_coverage": 150,
+      "first_violation": null,
+      "nonzero_torque_ticks": 149
+    }
+  ],
+  "gate_A": "blocked",
+  "caveats": [
+    "float interval calculations not outward-rounded: scenario coverage not mathematical proof",
+    "three deterministic scenarios, not universal robustness",
+    "fullstate is an unrealistic optimistic information baseline",
+    "no RCI, recursive feasibility, MPC, or six-state guarantee"
+  ],
+  "note": "Compact archived summary; regenerate full state maxima, estimator widths and all rows with python verification/check_four_state_feedback_smf_probe.py --output ..."
+}

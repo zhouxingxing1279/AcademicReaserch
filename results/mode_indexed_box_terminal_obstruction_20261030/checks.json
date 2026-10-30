@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "evidence": "EXACT_RATIONAL_CLASS_SPECIFIC_NO_GO",
+  "source_main": "run203",
+  "cycle_proof": {
+    "cycle": [
+      {
+        "source": 0,
+        "target": 1,
+        "label": "miss"
+      },
+      {
+        "source": 1,
+        "target": 2,
+        "label": "miss"
+      },
+      {
+        "source": 2,
+        "target": 3,
+        "label": "miss"
+      },
+      {
+        "source": 3,
+        "target": 4,
+        "label": "miss"
+      },
+      {
+        "source": 4,
+        "target": 0,
+        "label": "success"
+      }
+    ],
+    "necessary_inequality": "P_next >= P_current + h * V_current on each cycle edge",
+    "cycle_sum": "0 >= h*(V0+V1+V2+V3+V4); V_i>=0 => all V_i=0",
+    "residual_step": "at x=0, phi=0, any tau, choose r=d(Tmin)>0; v_next=h*d(Tmin)>0",
+    "forced_positive_velocity_radius": "6254383/160000000",
+    "no_go": "NO fixed-origin nonempty symmetric Cartesian-product physical-state boxes indexed by the 15-mode graph can satisfy robust one-step invariance on all legal edges",
+    "scope": "applies to all causal policies, even full-state; not to translated/correlated/measurement-conditioned sets"
+  },
+  "corner_witness": {
+    "mode": 4,
+    "successor_mode": 0,
+    "initial": [
+      "1",
+      "1/2",
+      "0",
+      "0"
+    ],
+    "torque": "1/25",
+    "next": [
+      "101/100",
+      "1/2",
+      "0",
+      "1/25"
+    ],
+    "position_excess": "1/100",
+    "residual": "0",
+    "thrust": "981/200"
+  },
+  "relative_degree": {
+    "state_order": [
+      "p",
+      "v",
+      "phi",
+      "omega"
+    ],
+    "delta_state_by_tick": [
+      [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "2/25"
+      ],
+      [
+        "0",
+        "0",
+        "1/625",
+        "2/25"
+      ],
+      [
+        "0",
+        "-981/6250000",
+        "2/625",
+        "2/25"
+      ],
+      [
+        "-981/312500000",
+        "-2943/6250000",
+        "3/625",
+        "2/25"
+      ]
+    ],
+    "first_torque_effect": {
+      "omega": 1,
+      "phi": 2,
+      "v": 3,
+      "p": 4
+    }
+  },
+  "gate_A": "blocked",
+  "caveats": [
+    "No-go excludes only fixed-origin axis-aligned Cartesian-product physical-state terminal families, not general RCI or mode-indexed information states",
+    "Full-state nonzero feedback witness has more information than the actual intermittent-measurement controller",
+    "No feedback policy or terminal certificate for the four-state plant has been synthesized"
+  ]
+}
