@@ -1,0 +1,214 @@
+{
+  "status": "PASS",
+  "evidence": "EXACT_RATIONAL_THREE_TICK_OUTER_REACHABILITY",
+  "scope": "four-state proxy; zero observation history; fixed historical thrust; future thrust T1/T2 arbitrary; one chosen torque then zero torque",
+  "hard_limits": [
+    "5",
+    "3",
+    "9/20",
+    "2"
+  ],
+  "torque_grid": [
+    "-2/25",
+    "-1/25",
+    "0",
+    "1/25",
+    "2/25"
+  ],
+  "diagnostic_velocity_limit": "13/20 (not an original hard or certified terminal bound)",
+  "rows": [
+    {
+      "gap_ticks": 5,
+      "thrust": "low",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "403293347/10000000000",
+      "zero_torque_final_velocity": "84948261/200000000",
+      "zero_torque_horizon_peaks": [
+        "403293347/10000000000",
+        "84948261/200000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 5,
+      "thrust": "low",
+      "packet": "miss",
+      "successor_mode": 5,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "1164908269/20000000000",
+      "zero_torque_final_velocity": "84948261/200000000",
+      "zero_torque_horizon_peaks": [
+        "1164908269/20000000000",
+        "84948261/200000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 5,
+      "thrust": "high",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "833520049/20000000000",
+      "zero_torque_final_velocity": "44850603/100000000",
+      "zero_torque_horizon_peaks": [
+        "833520049/20000000000",
+        "44850603/100000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 5,
+      "thrust": "high",
+      "packet": "miss",
+      "successor_mode": 5,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "603842387/10000000000",
+      "zero_torque_final_velocity": "44850603/100000000",
+      "zero_torque_horizon_peaks": [
+        "603842387/10000000000",
+        "44850603/100000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "low",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "3801339721/80000000000",
+      "zero_torque_final_velocity": "871250403/1600000000",
+      "zero_torque_horizon_peaks": [
+        "3801339721/80000000000",
+        "871250403/1600000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "low",
+      "packet": "miss",
+      "successor_mode": 10,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "134782259/1250000000",
+      "zero_torque_final_velocity": "498114619/800000000",
+      "zero_torque_horizon_peaks": [
+        "134782259/1250000000",
+        "498114619/800000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "high",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "3918579031/80000000000",
+      "zero_torque_final_velocity": "912442593/1600000000",
+      "zero_torque_horizon_peaks": [
+        "3918579031/80000000000",
+        "912442593/1600000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 10,
+      "thrust": "high",
+      "packet": "miss",
+      "successor_mode": 10,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": false,
+      "zero_torque_final_position": "2278508399/20000000000",
+      "zero_torque_final_velocity": "532969549/800000000",
+      "zero_torque_horizon_peaks": [
+        "2278508399/20000000000",
+        "532969549/800000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 15,
+      "thrust": "low",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "1978152223/40000000000",
+      "zero_torque_final_velocity": "1384357967/2400000000",
+      "zero_torque_horizon_peaks": [
+        "1978152223/40000000000",
+        "1384357967/2400000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    },
+    {
+      "gap_ticks": 15,
+      "thrust": "high",
+      "packet": "success",
+      "successor_mode": 0,
+      "zero_torque_hard_admissible": true,
+      "zero_torque_v065_admissible": true,
+      "zero_torque_final_position": "2060536603/40000000000",
+      "zero_torque_final_velocity": "1469910977/2400000000",
+      "zero_torque_horizon_peaks": [
+        "2060536603/40000000000",
+        "1469910977/2400000000",
+        "7/1250",
+        "1/100"
+      ],
+      "admissible_torque_candidates": 5
+    }
+  ],
+  "zero_torque_perpetual_counterexample": {
+    "first_violation_tick": 72,
+    "state": [
+      "4301204211/2000000000",
+      "60580341/20000000",
+      "0",
+      "0"
+    ],
+    "violated_coordinates": [
+      1
+    ],
+    "thrust": "2943/200",
+    "torque": "0",
+    "residual": "6731149/3200000"
+  },
+  "gate_A": "blocked",
+  "caveats": [
+    "Run202 rational boxes outer-bound actual posterior; joint CZ correlations discarded",
+    "Endpoint exactness applies only to frozen affine thrust dependence and fixed torque sequence",
+    "No position packet within next 3 ticks on audited modes",
+    "The branch is observed before the next torque choice; this is not a pre-edge common-policy certificate",
+    "Finite-horizon hard admissibility does not imply a backup invariant set, recursive MPC feasibility or six-state safety"
+  ]
+}
