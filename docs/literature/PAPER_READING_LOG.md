@@ -4,6 +4,24 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run205 定向复核：移动中心信息盒的四拍控制准入（历史84篇内，不重复计数）
+
+### Lorenzetti、Pavone（2020）
+- **题名/作者/年份/链接：** *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*；Joseph Lorenzetti, Marco Pavone；ECC 2020；DOI https://doi.org/10.23919/ECC51009.2020.9143979；作者全文 https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf 。
+- **阅读日期/证据层级：** 2026-10-30；核对摘要与作者版中的输出反馈单管束、RPI和终端条件定位；承接历史 Run203/204 已有章节复核，不声称本轮逐定理重读。
+- **研究问题/模型/方法：** 离散 LTI、加性有界扰动及测量噪声的输出反馈鲁棒 Tube MPC；估计误差/跟踪误差集合、约束收紧、终端控制。
+- **关键前提/结论：** 论文的递归可行性与鲁棒约束保证依赖适当 RPI/终端包含及初始可行性等条件；本轮仅固定四拍开环 backup，未满足这些条件。
+- **局限/课题关联/可复用技术/待查：** 不直接覆盖15-mode间歇位置观测与未来推力任意跳变。可复用终端约束与移位可行性证明框架；待查观测条件化、控制先于后继边的统一递归策略。
+
+### Scott、Raimondo、Marseglia、Braatz（2016）
+- **题名/作者/年份/链接：** *Constrained zonotopes: A new tool for set-based estimation and fault detection*；Joseph K. Scott, Davide M. Raimondo, Giuseppe Roberto Marseglia, Richard D. Braatz；Automatica 69:126–136 (2016)；DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。
+- **阅读日期/证据层级：** 2026-10-30；核对摘要、Introduction 和集合表示/精确交投影运算的定位，结合 Run202 的既有深入记录；本轮未逐式复核全文。
+- **研究问题/模型/方法：** 用 constrained zonotope 表示有界不确定状态集合并执行集合估计/故障检测。
+- **关键前提/结论：** 不限制表示复杂度时 CZ 可表示凸多面体，且标准集合运算有代数表达；不能由此自动得到控制律、稳定性或递归可行性。
+- **局限/课题关联/可复用技术/待查：** Run205 仅使用独立坐标区间外包，舍弃 CZ 相关性；下一轮需对可达的条件化 CZ 后验使用支持函数/外包并比较与区间过滤器的保守性。
+
+**Run205自有结果（不是上述论文的结论）：** 固定四拍开环 backup 下，移动中心盒的原始硬约束可接受力矩区间可由精确有理数和未来推力顶点穷举计算；合成中心未证明可由冻结初态到达，Gate A 仍 blocked。
+
 ## Run204 定向复核与证据边界（仍为历史84篇，不新增计数）
 
 ### Athanasopoulos、Smpoukis、Jungers（2017）

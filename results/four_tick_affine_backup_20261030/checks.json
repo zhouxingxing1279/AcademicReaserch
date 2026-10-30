@@ -1,0 +1,228 @@
+{
+  "status": "PASS",
+  "evidence": "EXACT_RATIONAL_FOUR_TICK_OPEN_LOOP_BACKUP_ADMISSION",
+  "main_contract": "frozen four-state Euler proxy; current thrust known; future T independent in full interval; residual independent each tick",
+  "policy": "one causal tau0, future tau1..tau3 identically zero; packet results ignored after decision",
+  "rows": [
+    {
+      "case": "origin",
+      "packet": "success",
+      "center": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "radii": [
+        "1/50",
+        "140632479/320000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": "1/25",
+      "feasible": true,
+      "lower": "-2/25",
+      "upper": "2/25",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [],
+      "horizon": 4
+    },
+    {
+      "case": "origin",
+      "packet": "miss",
+      "center": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "radii": [
+        "126699301/1600000000",
+        "8566589/16000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": "1/25",
+      "feasible": true,
+      "lower": "-2/25",
+      "upper": "2/25",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [],
+      "horizon": 4
+    },
+    {
+      "case": "shifted_velocity",
+      "packet": "success",
+      "center": [
+        "0",
+        "47/20",
+        "0",
+        "0"
+      ],
+      "radii": [
+        "1/50",
+        "140632479/320000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": "1/25",
+      "feasible": true,
+      "lower": "-2/25",
+      "upper": "2/25",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [],
+      "horizon": 4
+    },
+    {
+      "case": "shifted_velocity",
+      "packet": "miss",
+      "center": [
+        "0",
+        "47/20",
+        "0",
+        "0"
+      ],
+      "radii": [
+        "126699301/1600000000",
+        "8566589/16000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": null,
+      "feasible": false,
+      "lower": "20724769/2354400",
+      "upper": "2/25",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [
+        [
+          3,
+          1,
+          [
+            "981/200",
+            "981/200",
+            "981/200"
+          ],
+          "47/20",
+          "-981/500000",
+          "526538113/800000000"
+        ],
+        [
+          4,
+          1,
+          [
+            "981/200",
+            "981/200",
+            "981/200"
+          ],
+          "47/20",
+          "-2943/500000",
+          "139562379/200000000"
+        ],
+        [
+          4,
+          1,
+          [
+            "2943/200",
+            "981/200",
+            "981/200"
+          ],
+          "47/20",
+          "-2943/500000",
+          "280724769/400000000"
+        ]
+      ],
+      "horizon": 4
+    },
+    {
+      "case": "shifted_attitude",
+      "packet": "success",
+      "center": [
+        "0",
+        "0",
+        "19/50",
+        "4/5"
+      ],
+      "radii": [
+        "1/50",
+        "140632479/320000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": "1/300",
+      "feasible": true,
+      "lower": "-2/25",
+      "upper": "1/300",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [
+        [
+          4,
+          2,
+          [
+            "981/200",
+            "981/200",
+            "981/200"
+          ],
+          "111/250",
+          "3/50",
+          "29/5000"
+        ]
+      ],
+      "horizon": 4
+    },
+    {
+      "case": "shifted_attitude",
+      "packet": "miss",
+      "center": [
+        "0",
+        "0",
+        "19/50",
+        "4/5"
+      ],
+      "radii": [
+        "126699301/1600000000",
+        "8566589/16000000",
+        "1/200",
+        "1/100"
+      ],
+      "proposed_torque": "1/25",
+      "filtered_torque": "1/300",
+      "feasible": true,
+      "lower": "-2/25",
+      "upper": "1/300",
+      "inequalities": 128,
+      "future_vertices": 8,
+      "active_updates": [
+        [
+          4,
+          2,
+          [
+            "981/200",
+            "981/200",
+            "981/200"
+          ],
+          "111/250",
+          "3/50",
+          "29/5000"
+        ]
+      ],
+      "horizon": 4
+    }
+  ],
+  "gate_A": "blocked",
+  "caveats": [
+    "Synthetic shifted posterior centers are physically admissible but their reachability from the frozen initial set is not established",
+    "Run202 reliable interval outer boxes discard CZ correlations",
+    "All four ticks share one open-loop policy, but no terminal/recursive feasibility or all-time safety follows",
+    "No state/measurement feedback used within four-tick backup; this is a safety admission building block, not MPC"
+  ]
+}

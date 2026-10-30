@@ -1,9 +1,11 @@
-# 研究短检查点（2026-10-30，Run204）
+# 研究短检查点（2026-10-30，Run205）
 
-唯一总方向：四旋翼/无人机 MPC＋SMF 闭环与可完成硕士课题。Run200标量SMF–MPC闭环；Run201四状态缺测信息下界；Run202四状态条件化CZ/返包速度界；Run203三拍硬约束准入与永久零力矩72 tick违约；**Run204证明15-mode五边合法成功环上，任何固定原点对称直积盒形式的模式相关物理状态终端族都不可能对所有边一步鲁棒受控不变**。理由：每边位置积分器强制 P_next≥P_i+h V_i，环求和强制全部V_i=0，而合法非零残差立即产生 v_next>0。精确有理证据为 EXACT_RATIONAL_CLASS_SPECIFIC_NO_GO；不排除平移/相关/条件化信息集合或一般RCI。
+唯一总方向仍为四旋翼/无人机 MPC＋SMF 可完成硕士课题。Run200 标量闭环，Run201 四状态缺测下界，Run202 条件化 CZ/返包速度界，Run203 三拍硬约束准入与永久零力矩反例，Run204 固定中心模式盒终端族精确排除及非零反馈数值失败。本轮 Run205 在**移动中心假设后验盒**上得到一个严格有理数的**四拍开环 backup 力矩可接受区间**，包括候选力矩投影、空集拒绝、未来推力全区间端点穷举。
 
-Run204还实现四状态区间SMF+非零饱和反馈的150 tick闭环数值探针：3个合法推力/残差场景×零力矩、SMF中点反馈、真值全状态反馈共9条轨迹，浮点容差下SMF覆盖1350/1350；非零SMF反馈在高推力正残差tick114违反角速度约束、切换推力正残差tick125违反姿态角约束。它不是MPC，亦无鲁棒安全/递归可行性保证。17/17新增测试在本地关键配置镜像通过，未运行完整仓库回归/CI。
+冻结四状态 Euler 模型 `h=J=1/50`、`T∈[4.905,14.715]`、`|tau|≤0.08`、`|r|≤47/25+243T/16000`，原始状态硬约束 `(5,3,0.45,2)`。10 tick 高推力 success/miss 使用 Run202 精确区间外包的不同半宽；四拍备份策略为 `tau0` 可选、`tau1..3=0`，未来推力可任意逐拍跳变。每个坐标的生成元支持 `|a+b*tau0|+Σ|g|` 给出闭区间，8个未来推力端点×4拍×4坐标共128条严格有理准入条件。四拍首次看到力矩对位置的影响。
 
-工件：verification/check_mode_indexed_box_terminal_obstruction.py、verification/test_mode_indexed_box_terminal_obstruction.py、verification/check_four_state_feedback_smf_probe.py、verification/test_four_state_feedback_smf_probe.py、results/mode_indexed_box_terminal_obstruction_20261030/checks.json、results/four_state_feedback_smf_probe_20261030/summary.json、docs/research/run204_research_log.md；docs/literature/PAPER_READING_LOG.md复核Athanasopoulos、Lorenzetti与Pavone、Ping等已有论文，84篇总数不变。
+假设中心 `(0,2.35,0,0)`：success 四拍所有 `tau∈[-0.08,0.08]` 通过；miss 没有可接受 `tau`，存在合法最大正残差/高推力真实速度越界顶点。假设中心 `(0,0,0.38,0.8)`：准入 `[-0.08,1/300]`，将 `0.04` 裁剪为 `1/300`。这些**中心未证明由冻结初态与观测历史可达**，因此仅是条件性信息盒控制审计，不是实际实验的成功/缺包概率结论。
 
-**Gate A仍blocked。下一唯一任务：** 构建观测条件化的移动中心/相关SMF信息状态下可实施的有限时域backup或安全过滤器，统一合法测量边和未来任意推力，并对完整四状态闭环进行保守安全准入与失败见证。
+本轮新增 `verification/check_four_tick_affine_backup.py`、`verification/test_four_tick_affine_backup.py`、`results/four_tick_affine_backup_20261030/checks.json`、`docs/research/run205_research_log.md`，复核文献记录保持84篇。14/14测试在本地关键字段镜像通过；未完成完整仓库历史回归/CI。
+
+**Gate A 仍 blocked。下一唯一任务：** 将四拍过滤器接入真实可达的 SMF/CZ 后验滚动闭环，处理下一次成功/缺包观测后的统一因果 backup，并寻找终端/递归可行性可证明的安全子域。不能把本轮四拍条件性证书视作长期鲁棒安全。
