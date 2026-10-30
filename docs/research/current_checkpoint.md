@@ -1,7 +1,11 @@
-# 研究短检查点（2026-10-29，Run199）
+# 研究短检查点（2026-10-30，Run200）
 
-唯一主线仍为间歇测量与推力调度不确定性下的鲁棒输出反馈Tube MPC；当前只推进Gate A。接续远端Run198=`42be3a2`、tree=`4baee10`（纠正Run198旧检查点在同步后仍写`399e00a`的问题），`main=1c49659`。Run199本地内容提交=`8d87a1c`，远端等树提交=`68c2004`，tree=`1badee5`。
+接续 main=a5b7eeca04eb（Run199）。目标仍是无人机 MPC + 集员滤波的可验证闭环硕士课题，不预设唯一算法结构；优先完成可复现的控制闭环、终端可行性与安全保证。
 
-冻结合同不变：四状态横向—姿态降阶基准，当前推力可见、未来推力可全区间任意跳变；19-pair fixed-normal configuration采用仿射offset/vertex torque和共同后继core。锁定`clarabel==0.11.1`求解6514变量、39870行、225744非零元、6080个SOC的充分模型；默认与关闭equilibration均返回`PrimalInfeasible`。主39870维浮点对偶ray独立复核：`b^Tz=-0.9999999666`、`||A^Tz||inf=3.69e-9`、最差dual-cone margin=`0.0758`；另一scaling亦通过`1e-7`审计。证据仅为`NUMERIC_CHECK`：不能推出精确不可行、一般PD-RCI不可行、物理权限不足、六状态安全失败或递归不可行。Gate A仍blocked。
+**本轮新证据：** 新增 verification/check_intermit_smf_mpc_closed_loop.py 与5项测试，建立标量稳定代理系统的间歇测量区间 SMF + 3步有限网格鲁棒 MPC 闭环。通过终端不变性和旧计划移位给出该标量合同的递归可行性归纳论证；384步确定性重放无违约，含220次缺测。证据范围严格限于标量代理，**不能证明**原四状态或六状态四旋翼安全。
 
-下一唯一问题：将高余量浮点ray稀疏化/有理化，并用精确有理或区间算术认证`A^Tz=0`、`z in K*`、`b^Tz<0`；此前不更换configuration family。
+**文献：** docs/literature/PAPER_READING_LOG.md 迁移 READ_PAPERS.md 的85条既有已读/核对记录，按题名去重为84篇，并补充本轮三篇关键论文的定向复核。原文件保留作为历史哈希依赖，不再作为新阅读的追加入口。
+
+**原主线状态：** Run199 的19-pair affine-offset/common-core SOCP 仅有数值 PrimalInfeasible 浮点对偶 ray；精确有理/区间证书未完成，Gate A 仍 blocked。任何更广泛的 PD-RCI、无人机执行器或闭环不可能性结论均不成立。
+
+**下一唯一问题：** 将标量证明的后验包含、移位候选、终端不变三个接口逐项映射到四状态横向—姿态实际推力条件化模型，找出可证闭合或最小阻塞。当前 main 的最终 SHA 以本轮 GitHub 合并核验为准。

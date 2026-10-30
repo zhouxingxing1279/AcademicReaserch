@@ -1,0 +1,37 @@
+{
+  "episodes": 16,
+  "evidence_level": "EXACT_SCALAR_CONTRACT_PLUS_FINITE_REPLAY",
+  "initial_zero_plan_feasible": true,
+  "limitations": [
+    "finite-grid optimality, not continuous QP optimality",
+    "sampled trajectories are not proof of physical UAV safety",
+    "recursive feasibility proof uses exact scalar terminal inclusion"
+  ],
+  "max_abs_u": "1/2",
+  "max_abs_x": "9/10",
+  "max_posterior_width": "11/10",
+  "missed_packets": 220,
+  "model": {
+    "a": "1/2",
+    "grid": [
+      "-1/2",
+      "-1/4",
+      "0",
+      "1/4",
+      "1/2"
+    ],
+    "horizon": 3,
+    "input_bound": "3/5",
+    "measurement_halfwidth": "1/10",
+    "state_bound": "2",
+    "terminal_bound": "1/2",
+    "w_halfwidth": "1/20"
+  },
+  "optimizer_changes": 9,
+  "received_packets": 164,
+  "scope": "scalar stable proxy; not planar/6-state quadrotor or Gate A RCI",
+  "status": "PASS",
+  "steps": 384,
+  "terminal_invariant": true,
+  "violations": 0
+}
