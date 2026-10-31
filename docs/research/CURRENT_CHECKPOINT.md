@@ -1,3 +1,21 @@
+## Run226 当前研究检查点（2026-10-31）
+
+**基准远端main：** `5ddca85294ecfd5a1693410c9cc9b0e0e70ef2bc`。唯一主方向：无人机MPC＋SMF鲁棒输出反馈闭环，子问题允许证据驱动调整。
+
+**严格新增：** 冻结四状态Euler及Run208/210逐拍独立横向残差下，三步正确因果前驱Pre³(X)有正负两个严格可行见证 `(0,±3,±0.15,0)`，固定三拍TMAX、tau=0；而 `(0,±3,±0.15,∓0.4)` 严格属于Pre²(X)但不属于Pre³(X)。所有合法因果控制在三拍对抗残差下的速度越界下界为 `31023794855816198031/39062500000000000000000≈0.0007942091483m/s>0`。这是一项有限时域严格证书，**不是**非空RCI核、四状态输出反馈安全或递归可行性证明。
+
+**测试：** Python 3.13.5本地兼容镜像7项聚焦测试6通过1项完整checkout配置跳过，语法编译、归档JSON通过。新增CI用于完整checkout Run224/225/226测试、真实配置和归档逐字比对；未取得CI成功前不宣称成功。无全仓库回归和20ms最坏耗时保证。
+
+**文献：** Liu等（2021）arXiv:2109.12378，新增原文§II–IV-A分节阅读，核对可见/不可见扰动量词、Theorems 1–2；去重已读87→88，非全文精读。唯一论文日志已更新，历史READ_PAPERS不改。
+
+**Gate A=blocked。** 二维姿态SMF＋MPC局部递归可行性（Run221限定假设）仍成立；四状态RCI终端、完整SMF输出反馈Tube MPC、稳定性和六状态安全未建立。不要把有限步全状态反馈证书当作鲁棒安全控制器。
+
+**工件：** `verification/check_four_state_three_step_predecessor.py`、`verification/test_four_state_three_step_predecessor.py`、`results/three_step_predecessor_20261031/checks.json`、`docs/research/run226_research_log.md`、`.github/workflows/run226-three-step-predecessor.yml`。
+
+**下一轮唯一优先任务：** 不再机械增加Pre步数；构造具有双侧倾角切换的四状态联合终端候选并验证真正鲁棒受控不变性，失败则保留阻塞证书并收敛课题范围。
+
+---
+
 ## Run225 合并与 CI 实测补记（2026-10-31）
 
 PR #18 https://github.com/zhouxingxing1279/AcademicReaserch/pull/18 已通过非强制 Squash 安全合并，首个 main 落地 SHA 为 6c1a574c6c742c1335bd5b3592eea486b2d2171b；重新读取远端 main 和新增源码/测试/结果文件 Blob SHA 确认落地。PR 完整 checkout CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232818700 为 success；合并后 main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232866432 为 success。两者均执行旧 Run224 和新 Run225 聚焦测试、Python 语法编译、真实配置合同检查、归档 JSON 逐字比对。**未执行全仓库历史回归，亦无四状态终端不变性/20ms 最坏执行时间保证。**
