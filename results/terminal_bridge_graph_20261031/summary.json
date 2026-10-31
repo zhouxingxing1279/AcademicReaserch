@@ -1,0 +1,34 @@
+{
+  "run": "228",
+  "base_main": "2d25c3736bc987edf2b4b3d53e0dc155e9263810",
+  "model": "Run224 frozen four-state Euler; Run208/210 independent residual",
+  "center_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "minimum_adversarial_next_velocity": "6254383/160000000",
+  "narrow_bridge_velocity_limit": "3/100",
+  "narrow_bridge_strict_violation": "1454383/160000000",
+  "expanded_bridge_velocity_limit": "1/20",
+  "expanded_center_obstruction": false,
+  "certified_fixed_input_actions_per_cell": {
+    "narrow": {
+      "bridge": 0,
+      "positive": 0,
+      "negative": 0
+    },
+    "expanded": {
+      "bridge": 0,
+      "positive": 0,
+      "negative": 0
+    }
+  },
+  "tested_input_menu_per_cell": 9,
+  "evidence": "exact all-control center obstruction for narrow candidate; graph scan only sufficient and inconclusive otherwise",
+  "pr_ci_url": "https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41246301443",
+  "main_ci_url": "https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41246344516",
+  "focused_tests_passed": 34,
+  "gate_A": "blocked"
+}

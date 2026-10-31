@@ -2,7 +2,7 @@
 
 **Yinan Li; Jun Liu（2018）**，*Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*，*IEEE Transactions on Automatic Control* 63(7):2206–2211，DOI https://doi.org/10.1109/TAC.2017.2760106，正式版原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**阅读日期/状态：** 2026-10-31，直接复核正式版§II–III、Definition 1、Propositions 2–3、Algorithm 2、Assumption 1及Theorem 1附近段落；分节阅读，非全文精读。**去重：** 与Run227已读的2016 arXiv:1608.08683为同一研究工作的预印本/正式版，2018正式版题名增加“Nonlinear”，更新版本关联但**不新增已读篇数**。**研究问题：** 离散切换非线性系统中如何计算受控不变内近似和分区控制器。**方法/模型：** 有限控制模式、连续映射、区间包含函数、前驱与细分固定点。**重要定理/假设：** Proposition 2为受控不变的前驱包含判据；Assumption 1为Lipschitz条件；Theorem 1的有限终止/内近似保证有额外鲁棒裕度与精度条件，不能省略。**主要结论：** 在其有限切换模式及鲁棒不变性前提下，可通过区间细分计算具有控制器的内近似。**局限：** 本课题连续推力、控制依赖的逐拍不可见残差、部分观测SMF，不能直接照搬。**与课题关联：** Run228为四状态冻结模型实现严格区间后继与并集覆盖的保守充分认证；仅对狭窄桥给出独立严格反例。**可复用技术：** 区间外包、细分、单元策略与鲁棒裕度审计。**待查：** 连续输入细分及扰动量词如何得到可认证非空四状态RCI，如何提升至SMF信息纤维与MPC递归可行性？
 
-**本轮工件：** [Run228研究日志](../research/run228_research_log.md)；\`verification/check_four_state_bridge_graph.py\`。未将算法失败视作RCI不存在证明。
+**本轮工件：** [Run228研究日志](../research/run228_research_log.md)；`verification/check_four_state_bridge_graph.py`。未将算法失败视作RCI不存在证明。
 
 ## Run227 新增分节原文阅读：区间分区不变控制（2026-10-31；去重已读89篇）
 
