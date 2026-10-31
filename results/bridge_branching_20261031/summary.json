@@ -42,6 +42,9 @@
   "terminal_RCI": false,
   "output_feedback": false,
   "recursive_feasibility": false,
-  "test_status": "local mirror: 5 passed, 1 skipped full checkout; PR CI pending",
-  "gate_A": "blocked"
+  "test_status": "full checkout PR and main CI: 40/40 focused tests passed, no skips",
+  "gate_A": "blocked",
+  "pr_ci_url": "https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251472104",
+  "main_ci_url": "https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251521934",
+  "code_merge_sha": "4964ff795a4dd8a4e1398ef77a2c1b740b436fae"
 }
