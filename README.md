@@ -1,5 +1,7 @@
 # AcademicReaserch
 
+> **当前唯一有效的最新研究检查点：[Run208 两层因果 SMF backup](docs/research/CURRENT_CHECKPOINT.md)**（2026-10-30）。已得到可达第95拍非零后继力矩的严格局部可行性见证，但第96拍仍拒绝；四状态终端不变性、递归可行与完整MPC尚未闭合，Gate A = blocked。最新论文记录见 [PAPER_READING_LOG](docs/literature/PAPER_READING_LOG.md)。以下旧“最新检查点”段落均为历史研究快照，不能覆盖此处的当前状态。
+
 最新研究检查点：[Run184 box information-ensemble graph obstruction](docs/learning/118_houska_box_ensemble_graph_lp.md)：
 构造完整`Y/G/Lambda`与6参数`Z/H/Omega`后，时序正确的15-mode/17-edge LP含498变量、2772约束。
 axis-aligned position measurement不能收缩velocity radius；最短五边环的21行exact Farkas
