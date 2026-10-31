@@ -32,7 +32,7 @@
 
 - 新源码：`verification/check_rolling_history_support.py`；5项测试：`verification/test_rolling_history_support.py`；结果：`results/rolling_history_support_20261031/checks.json`。
 - 指令：`PYTHONPATH=verification python -m unittest -v verification.test_rolling_history_support`；`python -m py_compile verification/check_rolling_history_support.py verification/test_rolling_history_support.py`；`PYTHONPATH=verification python verification/check_rolling_history_support.py --output results/rolling_history_support_20261031/checks.json`。
-- Python 3.13.5，Linux x86_64。**5/5测试通过**，包含精确系数恒等式、因果历史、Run213可达前缀、20个三包支持的真值包含、193拍拒绝和五拍盒角点见证。新源码与测试文件的远端 Git Blob SHA 分别应为 `392563cc6146a9a30a824f641cf5cfd142dff8c5`、`f4bbe6c8841e76ce8713680e2730d5756edb318c`。
+- Python 3.13.5，Linux x86_64。**5/5测试通过**，包含精确系数恒等式、因果历史、Run213可达前缀、20个三包支持的真值包含、193拍拒绝和五拍盒角点见证。新源码与测试文件的远端 Git Blob SHA 分别应为 `392563cc6146a9a30a824f641cf5cfd142dff8c5`、`648d63c6f7bc1e644f5f43bd386fcf82b1dc812e`。
 - 本地测试依赖与远端函数逐式核对的轻量镜像，**不是完整仓库 checkout**；未完成仓库全量回归和 GitHub CI。所有数学判定使用精确分数；性能和 LP 诊断使用浮点，不参与安全证明。
 
 ## 4. 文献与硕士课题收敛
