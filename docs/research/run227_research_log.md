@@ -27,3 +27,7 @@
 **Gate A=blocked。** 四状态RCI、完整SMF输出反馈Tube MPC、递归可行性、稳定性、六状态安全和20ms最坏耗时均未建立。可行性：需要带中间倾角桥的相关集合；创新性：这是已知不变性理论下模型特定的严格负面筛选，不作为独立创新；难度：高。
 
 **下一轮唯一优先任务：** 构造包含|phi|<=0.02过渡区、位置—速度—姿态—角速度耦合的有限单元终端策略图，利用区间外包与exists u forall r验证所有单元后继闭合；若失败，保留反例并收敛课题范围。
+
+## Run227 合并与完整仓库CI核验补记（2026-10-31）
+
+PR #22 https://github.com/zhouxingxing1279/AcademicReaserch/pull/22 已经通过非强制Squash安全合并，首个main落地SHA为 `5efed49fd0c477cc591b4d91ee16c5ce138aab01`。完整checkout PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41242517572 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41242569200 均为success；Run224–227合计26/26项聚焦测试通过（无跳过），真实配置合同、Python编译和归档JSON逐字比较通过。重新读取远端main确认SHA与新增源码/测试/归档Blob SHA分别为 `2078adf8af6ea0c26d2fa90d1cab69d5522a3384`、`8b3cac1861228f4d792d9306d19bf8e260581cb4`、`0ebc83cc6bb64742b0ca2ef5b942a832eea79c19`。**未执行全仓库历史回归；没有四状态RCI、输出反馈MPC递归可行或20ms最坏时间保证。** 此补记为文档更新，若另行合并不会单独触发聚焦CI。

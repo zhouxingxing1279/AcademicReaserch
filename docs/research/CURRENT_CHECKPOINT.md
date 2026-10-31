@@ -1,3 +1,9 @@
+## Run227 合并与CI核验补记（2026-10-31）
+
+PR #22已非强制Squash合并到main首个SHA `5efed49fd0c477cc591b4d91ee16c5ce138aab01`；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41242517572 和合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41242569200 均success，完整checkout Run224–227聚焦测试26/26通过、配置/编译/归档逐字核验通过。新增源码、测试、结果Blob SHA与研究分支一致。仍未完成全仓库回归、四状态RCI、SMF输出反馈Tube MPC递归可行性、六状态安全或20ms最坏耗时。
+
+---
+
 ## Run227 当前研究检查点（2026-10-31）
 
 **基准main：** 4817403c2ac4dae7c1abe348f0096b3e21bcf5ff。冻结Run224–226四状态Euler及Run208/210逐拍独立残差。提出非空位置—速度—倾角耦合双模式终端候选 C_switch，严格证明它不是RCI：x=(0,0,0.15,0)在r=-R(T)下对任何控制后继phi*v<0。更一般地，任何非空RCI都必须包含至少一个|phi|<=0.02 rad的状态；任何完全落在|phi|>=0.15两倾角带的集合均非RCI，最迟112拍有严格对抗速度越界证书。任何非空轴对齐四状态笛卡尔积盒也不可能为RCI。以上是严格必要几何/负面结果，**没有构造非空RCI**。
