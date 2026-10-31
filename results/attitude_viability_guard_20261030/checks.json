@@ -1,0 +1,48 @@
+{
+  "run": "210",
+  "date": "2026-10-30",
+  "environment": "Python 3.13.5 standard library Fraction; local mirrors of Run206/208 checked against remote; NOT full repository checkout",
+  "tests": "8/8",
+  "base_main_sha": "4c3096f4e8fb845400976a5a2811a5517da8acd4",
+  "horizon": 8,
+  "brake_gain": "1/5",
+  "status": "DETERMINISTIC_REACHABLE_PREFIX_ONLY",
+  "scenarios": [
+    {
+      "scenario": "alternating_high",
+      "prior_accepted": 95,
+      "prior_refusal": 96,
+      "earliest_baseline_next_warning": 93,
+      "earliest_current_state_warning": 94,
+      "guard_only_accepted": 93,
+      "guard_only_refusal": 94,
+      "braking_accepted": 200,
+      "braking_refusal": null
+    },
+    {
+      "scenario": "positive_high",
+      "prior_accepted": 113,
+      "prior_refusal": 114,
+      "braking_accepted": 191,
+      "braking_refusal": 192
+    },
+    {
+      "scenario": "switch_positive",
+      "prior_accepted": 121,
+      "prior_refusal": 122,
+      "braking_accepted": 200,
+      "braking_refusal": null
+    }
+  ],
+  "evidence": "Exact rational necessary double-integrator braking inequality; numerical finite-horizon replay is not a universal guarantee.",
+  "limitations": [
+    "Finite deterministic histories, not all disturbance and measurement sequences",
+    "No invariant terminal safe set or recursive feasibility",
+    "Full historical regression and GitHub CI not executed",
+    "Dependencies mirrored locally, not full checkout"
+  ],
+  "reproduce": [
+    "PYTHONPATH=verification python -m unittest -v verification.test_attitude_viability_guard",
+    "PYTHONPATH=verification python verification/check_attitude_viability_guard.py --output /tmp/run210_full.json"
+  ]
+}

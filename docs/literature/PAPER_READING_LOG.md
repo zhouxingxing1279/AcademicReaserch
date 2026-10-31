@@ -4,6 +4,24 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run210 新增定向正文阅读：SMF 与终端安全集的严格区分
+
+### Didier、Wabersich、Zeilinger（2021）——新增第87篇去重文献
+- **题名：** *Adaptive Model Predictive Safety Certification for Learning-based Control -- Extended Version*。
+- **作者、年份、出版信息：** Alexandre Didier、Kim P. Wabersich、Melanie N. Zeilinger；2021；arXiv:2109.13033，相关 CDC 2021 会议论文；本轮未核实会议 DOI，不编造。
+- **来源：** https://arxiv.org/abs/2109.13033 。
+- **阅读日期及证据层级：** 2026-10-30；核对 arXiv HTML 正文 Sections II-A、II-B、III-A，Assumptions 1–2、Definition 1、Algorithm 1、Theorem 1；不是逐页全文精读。
+- **研究问题：** 有界参数/扰动不确定下，如何对任意建议控制器构造具有安全终端和可恢复备份的自适应模型预测安全认证？
+- **方法/模型：** 线性参数仿射系统、紧参数集合和有界加性扰动；在线参数集员辨识、鲁棒 tube、MPSC 有限时域优化及终端 safe set/backup 策略。
+- **重要假设/定理：** Assumption 1 参数仿射依赖；Assumption 2 真实参数始终包含于逐步嵌套的参数集合。Definition 1 要求终端 safe set 上存在对未来全时域有效的备份控制。Theorem 1 的安全结论依赖上述假设和 Algorithm 1 的可行初始条件与终端备份，不适用于只有四拍安全准入的本仓库。
+- **主要结论：** 可用模型更新与备份计划扩张改进安全过滤的可行集合；其证明的关键是终端可持续安全性，不是单纯有限步不越界。
+- **局限：** 本文参数 SMF 与本课题状态后验 SMF 不同；未直接覆盖15-mode间歇位置测量和任意推力跳变。其安全结论不能从 Run210 的必要制动区间直接继承。
+- **与本课题关联/可复用：** 用作后续 MPC 安全过滤的强基线；复用“终端 safe set＋旧备份移位/回退”的证明结构，严格区分可行核必要条件与终端充分条件。
+- **待查问题：** 是否能在四状态模式图上构造可计算的终端备份集合，避免 Run210 正扰动第192拍拒绝？状态 SMF 外包能否保留相关性并支持该终端集合？
+
+**本轮核验但不新增已读条目：** Wabersich、Zeilinger（2021），*A predictive safety filter for learning-based control of constrained nonlinear dynamical systems*，*Automatica* 129:109597，https://doi.org/10.1016/j.automatica.2021.109597；本轮只核对出版社摘要和书目，未逐式研读，不计入87篇。
+
+
 ## Run209 新增分章节阅读：Zonotope viability / discriminating kernel 与四旋翼
 
 ### Mitchell、Budzis、Bolyachevets（2019）——新增第86篇去重文献
