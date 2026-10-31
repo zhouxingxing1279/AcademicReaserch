@@ -22,6 +22,11 @@ class JointSupportBackupTests(unittest.TestCase):
     def test_degenerate_singleton(self):
         p=j.polygon(((Q(1),Q(1)),(Q(-2),Q(-2))),((1,0,1),))
         self.assertEqual(j.support(p,Q(3,7),Q(-4,9)),Q(3,7)+Q(8,9))
+        self.assertTrue(j.contains(p,(Q(1),Q(-2))))
+        self.assertFalse(j.contains(p,(Q(2),Q(-2))))
+        p0=j.polygon(((Q(1),Q(1)),(Q(-2),Q(-2))))
+        self.assertTrue(j.contains(p0,(Q(1),Q(-2))))
+        self.assertFalse(j.contains(p0,(Q(1),Q(-1))))
 
     def test_box_vs_joint_strict_control_recovery(self):
         box=((Q(-5),Q(5)),(Q(-2),Q(2)),(Q(0),Q(0)),(Q(0),Q(0)))
