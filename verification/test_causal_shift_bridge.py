@@ -58,13 +58,15 @@ class TestCausalShiftBridge(unittest.TestCase):
         self.assertEqual(r['accepted_ticks'],95)
         self.assertEqual(r['first_refusal']['tick'],96)
 
-    def test_bridge_trajectory_never_outlasts_original(self):
+    def test_bridge_trajectory_executes_and_checks_shift(self):
         for s in ('positive_high','alternating_high','switch_positive'):
-            original=m.rollout(s,100,'packet_velocity')
             bridge=b.bridge_rollout(s,100)
             self.assertLessEqual(bridge['accepted_ticks'],100)
             self.assertGreaterEqual(bridge['accepted_ticks'],1)
-            # Different control histories: no pointwise monotonicity claimed.
-            self.assertIsNotNone(bridge['accepted_ticks'])
+            self.assertEqual(bridge['next_step_zero_backup_verified'],
+                             bridge['accepted_ticks'] if bridge['first_refusal_tick'] else bridge['accepted_ticks']-1)
+            if s=='alternating_high':
+                self.assertEqual(bridge['first_refusal_tick'],95)
+                self.assertTrue(bridge['zero_four_tick_fallback_at_bridge_refusal'])
 
 if __name__=='__main__':unittest.main()
