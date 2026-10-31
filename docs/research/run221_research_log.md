@@ -57,3 +57,8 @@ python -m py_compile verification/check_attitude_terminal_smf_mpc.py verificatio
 - **难度：** 将此正向终端证书扩展到`(p_x,v_x,phi,omega)`时，位置缺测、推力跳变与横向扰动会破坏简单固定截面RPI；需要全量词的可行性/安全证书。
 
 **下一轮唯一优先任务：** 在四状态冻结横向—姿态系统中检验本轮姿态终端集合能否与横向状态/速度硬约束组成一个**充分的、因果的受控不变终端集合**；若不能，构造精确阻塞证书，不把姿态子通道的递归可行性误推广到四状态。
+
+
+## 完整仓库GitHub Actions补充验证（2026-10-31 15:09 UTC）
+
+[Run221 CI #41213452861](https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41213452861) 在GitHub-hosted Ubuntu、Python 3.13.17、**完整checkout**中执行：6/6项测试通过（包含对真实`configs/planar_baseline.json`的严格合同断言），`py_compile`通过，脚本使用`--root .`重新生成`checks.json`并与提交工件`diff -u`逐字相等。CI结论`success`，无跳过、无失败。此结果验证的是本轮两状态模块与配置的一致性及可复现性；不等于全仓库历史回归、四/六状态闭环或20ms最坏执行时间。
