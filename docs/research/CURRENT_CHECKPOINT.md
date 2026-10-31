@@ -1,3 +1,7 @@
+## Run225 合并与 CI 实测补记（2026-10-31）
+
+PR #18 https://github.com/zhouxingxing1279/AcademicReaserch/pull/18 已通过非强制 Squash 安全合并，首个 main 落地 SHA 为 6c1a574c6c742c1335bd5b3592eea486b2d2171b；重新读取远端 main 和新增源码/测试/结果文件 Blob SHA 确认落地。PR 完整 checkout CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232818700 为 success；合并后 main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232866432 为 success。两者均执行旧 Run224 和新 Run225 聚焦测试、Python 语法编译、真实配置合同检查、归档 JSON 逐字比对。**未执行全仓库历史回归，亦无四状态终端不变性/20ms 最坏执行时间保证。**
+
 # 当前研究检查点 — Run225（2026-10-31）
 
 **基准 main：** b4b8d6beeaabf0e25d53fef4dad9289a2e822716。唯一主方向为无人机 MPC＋SMF 鲁棒输出反馈闭环；不锁死历史子题。
