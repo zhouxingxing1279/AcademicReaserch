@@ -1,17 +1,17 @@
-# 当前研究检查点 — Run216（2026-10-31）
+# 当前研究检查点 — Run217（2026-10-31）
 
-**主方向：** 四旋翼/无人机MPC＋SMF闭环；依据可验证证据收敛，不预先锁死子课题。
+**主方向：** 四旋翼/无人机MPC＋SMF闭环；仅按可验证结果收敛课题，不预先锁死子方向。
 
-**唯一瓶颈：** 第193拍原独立盒拒绝是否能由历史联合支持直接用于两层因果Backup而恢复？本轮新增精确有理数二维H多边形裁剪、支持函数、五拍鲁棒两层控制审计，避免预测盒重置。
+**本轮瓶颈：** Run216第193拍五拍负速度约束在(p,v)×(phi,omega)乘积H外包下严格阻塞（最有利控制后约-0.0363203688）。本轮构造跨(p,v,phi,omega)的历史一致4D H-strip，并使用单条带精确Fraction标量对偶，直接改善控制相关方向的可靠支持上界。它是必要条件外包，**不是完整CZ后验**。
 
-**严格负面结果：** 历史联合外包 `P_pv×P_phiomega` 包含真实状态，顶点数分别11和6；原独立盒无重置与历史联合H外包无重置两层Backup**均拒绝**。连续高推力的第5拍速度下界单行 `a*u0+b*u1≤d` 即使取最有利合法力矩仍有严格负裕度约 `-0.0363203688`。临界支持较独立盒改善精确 `57617501/1440000000≈0.04001215347m/s`，没有超过Run214单变量速度收紧；不能将证书拒绝解释为真实状态不可生存。
+**严格数学增量：** 通过已执行力矩与冻结Euler姿态动力学反推历史phi_i，导出 |p_k-(k-a)h v_k-A phi_k+B omega_k-(y_a+D)|<=R。每条带的支持上界由min_lambda[h_(Ppv×Pao)(q-lambda*c)+lambda*d+|lambda|R]计算；单条带交集非空时精确，多条带逐个取最小仅为外支持。O(n)力矩加权后缀计算已实现。
 
-**正面合成见证：** 在`p+v=0`的相关集合上，独立盒五拍拒绝，联合H支持五拍准入非空，表明方法能利用相关性，但**第193拍没有恢复**。
+**本地验证：** Linux/Python3.13标准库，6/6单元测试、py_compile通过；14条附加确定性历史的无噪声恒等式验证；合成相关集合支持2→1/5（不是实际第193拍）。人工6包/11+6顶点负载下构造6条带中位约5.28ms，6次对偶中位约19.39ms，串行约24.66ms，**尚不满足20ms周期**。源码/测试Git Blob SHA为 ede966c9c328ced7e713a1b377f609b11cbc2ebf / 017f4ff9fdef0ecc2a26b01f03eaa4b561455fd6。
 
-**验证：** 本地Linux/Python 3.13源兼容镜像重放，8/8聚焦测试、py_compile通过，新增源码/测试Git Blob SHA分别 `3f923fc67ac52c7de65f54c297c53a975c68bf6f` / `8bb83f0065b73a20cf4272d1d6f8976126a646e4`。**不是完整仓库checkout回归**，无GitHub CI。5次联合Backup计时中位数约99ms，超过20ms控制周期。
+**集成边界：** 本地容器无法通过网络克隆GitHub完整仓库，run_tick193()仅作为真实仓库入口，**尚未执行**；第193拍真实支持改善、是否消除单行阻塞及控制可行性均未知。完整回归及GitHub CI未执行，不得虚报。
 
-**工件：** `verification/check_joint_support_backup.py`、`verification/test_joint_support_backup.py`、`results/joint_support_backup_20261031/checks.json`、`docs/research/run216_research_log.md`。统一论文日志 `docs/literature/PAPER_READING_LOG.md` 保持87篇去重，更新Scott等（2016）和Köhler等（2021）定向核验范围。
+**工件：** verification/check_cross_block_history_support.py、verification/test_cross_block_history_support.py、results/cross_block_history_support_20261031/checks.json、docs/research/run217_research_log.md。docs/literature/PAPER_READING_LOG.md维持87篇去重记录，Scott等（2016）本轮只核对原稿摘要、书目和既有分节记录。
 
-**Gate A=blocked：** 没有完整4D CZ/历史一致SMF、完整Tube MPC优化、终端受控不变集、递归可行性/稳定性或六状态安全证明；当前仅为冻结四状态模型的有限安全备份审计。
+**Gate A=blocked：** 尚无完整历史一致4D CZ、真正MPC优化、终端受控不变集、递归可行性/稳定性或六状态安全证明。数学局部证据不能升级为全时域鲁棒安全。
 
-**下一轮唯一优先任务：** 对第193拍阻塞的第5拍速度行，构造保留`v`与`phi/omega`跨块历史相关性的4D窗口H/CZ外包并计算精确/可核验控制相关支持，检验能否消除该单行严格阻塞，同时评估20ms预算。
+**下一轮唯一优先任务：** 在完整仓库checkout运行第193拍跨块支持集成，比较精确改善量与0.0363203688阻塞门槛并记录时间；未消除阻塞则改进多条带联合支持/增量计算，优先保持可复现负面结果。
