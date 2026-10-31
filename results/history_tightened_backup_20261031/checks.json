@@ -1,0 +1,60 @@
+{
+  "run": 213,
+  "date": "2026-10-31",
+  "base_main_sha": "36618465d45b5c386520c284eebdf410556bdd58",
+  "scope": "four-state Euler proxy; Run210 positive_high reachable tick192",
+  "old_velocity_lower_approx": -2.4931037251954926,
+  "old_velocity_upper_approx": -0.5718721710288258,
+  "historical_intersection_lower_approx": -2.419767402278826,
+  "historical_intersection_upper_approx": -0.5718721710288258,
+  "certified_lower_improvement_exact": "7040287/96000000",
+  "old_two_stage_feasible": false,
+  "refined_two_stage_feasible": true,
+  "refined_two_stage_torque_interval_exact": [
+    "-2/25",
+    "2/25"
+  ],
+  "old_combined_guard_feasible": false,
+  "refined_combined_guard_feasible": true,
+  "selected_torque_tick192_approx": -0.0020447389406053726,
+  "independent_next_backup_checks": {
+    "first_torques": [
+      "-2/25",
+      "0",
+      "2/25"
+    ],
+    "next_thrusts": [
+      "981/200",
+      "981/100",
+      "2943/200"
+    ],
+    "all_nine_feasible": true
+  },
+  "rollouts": {
+    "baseline_accepted": 191,
+    "baseline_first_refusal_tick": 192,
+    "refined_accepted": 192,
+    "refined_first_refusal_tick": 193,
+    "observed_hard_violations": 0,
+    "truth_contained": true,
+    "requested_max_ticks": 220
+  },
+  "tests": "5/5 unittest passed; py_compile passed; deterministic exact replay passed",
+  "environment": "Python 3.13.5; Linux 6.18.57 x86_64; local mirrored repository dependencies, not full checkout",
+  "commands": [
+    "PYTHONPATH=verification python -m unittest -v verification.test_history_tightened_backup",
+    "python -m py_compile verification/check_history_tightened_backup.py verification/test_history_tightened_backup.py",
+    "PYTHONPATH=verification python verification/check_history_tightened_backup.py --output /tmp/run213_checks.json"
+  ],
+  "tested_git_blob_sha": {
+    "source": "778451bf5175e5590a11095e7c3d5ea591547444",
+    "test": "8202d819477efcebaf52b65a8adb004feb57ab08"
+  },
+  "gate_A": "blocked",
+  "limitations": [
+    "one-time history intersection, not rolling CZ",
+    "finite causal backup, not recursive feasibility",
+    "only one deterministic history",
+    "no full repository regression or GitHub CI"
+  ]
+}

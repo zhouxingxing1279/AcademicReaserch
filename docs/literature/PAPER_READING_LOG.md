@@ -4,6 +4,28 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run213 定向核验：历史一致外包能否转化为控制准入（2026-10-31；去重87篇不变）
+
+### Scott、Raimondo、Marseglia、Braatz（2016）——既有文献，摘要及Run212正文笔记复核
+- **题名、作者、年份、正式信息：** *Constrained zonotopes: A new tool for set-based estimation and fault detection*；Joseph K. Scott、Davide M. Raimondo、Giuseppe Roberto Marseglia、Richard D. Braatz；2016；*Automatica* 69:126–136；https://doi.org/10.1016/j.automatica.2016.02.036 。
+- **阅读日期及层级：** 2026-10-31；核对公开原文摘要、Run212已核对的Definitions 2–3、Proposition 1和Section 5笔记；本轮未重新全文精读。
+- **问题/方法：** 有界误差集员状态估计；通过CZ的线性映射、Minkowski和广义交保留状态相关性。
+- **关键假设/结论：** CZ表示中的生成元约束与有效测量误差集是运算成立的前提；集合运算有精确公式，但规模会增长。
+- **局限：** 不是现成的15-mode四旋翼鲁棒MPC终端不变集或安全定理。
+- **课题关联/可复用：** Run213将Run212三包历史速度外包与当前SMF盒相交，使真实可达第192拍两层因果backup从空恢复为全力矩区间。该交集不是CZ实现；下一步可复用CZ保留跨步联合约束。
+- **待查问题：** 以固定预算持续保留相关性后，是否能阻止第193拍再次拒绝？
+
+### Köhler、Müller、Allgöwer（2021）——既有文献，摘要及Run211理论条件复核
+- **题名、作者、年份、链接：** *Robust output feedback model predictive control using online estimation bounds*；Johannes Köhler、Matthias A. Müller、Frank Allgöwer；2021；https://arxiv.org/abs/2105.03427 。
+- **阅读日期及层级：** 2026-10-31；arXiv摘要与既有Run211 Assumption 7、Theorem 4阅读笔记核对；非全文重读。
+- **问题/方法：** 有界估计误差的在线更新、homothetic tube和输出反馈MPC约束收紧。
+- **关键假设/结论：** 递归可行与鲁棒约束满足依赖有效在线估计误差界、终端反馈/集合及初始可行性等条件。
+- **局限：** 本仓库当前尚无所需终端条件；Run213一次有限步准入不能套用其全时域结论。
+- **课题关联/可复用：** 估计界改善须通过控制准入与终端可行性双重检验，不能仅用集合宽度代表控制性能。
+- **待查问题：** 如何为15-mode推力调度与间歇测量建立可计算终端安全策略？
+
+**本轮自有证据：** [Run213日志](../research/run213_research_log.md)；第192拍恢复准入，但第193拍仍拒绝；去重论文数保持87。
+
 ## Run212 定向正文复核：历史一致集员估计与 CZ 集合运算（2026-10-30；去重87篇不变）
 
 ### Scott、Raimondo、Marseglia、Braatz（2016）——既有文献，本轮原文分节核对

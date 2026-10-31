@@ -1,13 +1,13 @@
-# 当前研究检查点 — Run212（2026-10-30）
+# 当前研究检查点 — Run213（2026-10-31）
 
 **唯一主方向：** 四旋翼/无人机 MPC＋SMF 闭环；子课题随证据收敛，不预设无限时域保证。
 
-**本轮可验证增量：** 在Run210 `positive_high` 第192拍真实可达历史，利用第150、165、180拍位置返包及150..190每拍姿态观测，建立精确有理数三包历史一致速度外包。旧独立SMF盒速度下端 `-2.4931037251954926 m/s` 被排除；新严格下端 `-2.419767402278826 m/s`，精确收紧 `7040287/96000000 m/s`。因此Run211旧盒的该速度端点及包含它的联合角点与这段测量历史不相容。**这不是精确CZ后验，也未证明控制可准入或长期安全。**
+**最新可验证增量：** Run212三包历史一致速度界（下界严格改善 `7040287/96000000 m/s`）已经实际接入Run208两层因果backup与Run210 8拍姿态必要guard。冻结四状态 `positive_high` 的真实可达第192拍，原独立盒两层backup为空；历史速度交集后两层backup和综合首力矩准入恢复为 **[-2/25,2/25] N·m**。同策略反事实重放成功准入拍数由191增至**192**，但第193拍仍拒绝。已执行状态保持在后验与硬约束内。**这是严格有限步局部证书，不是递归可行性或无限时域安全证明。**
 
-**实现/验证：** `verification/check_three_packet_velocity_support.py`、`verification/test_three_packet_velocity_support.py`、`results/three_packet_velocity_support_20261030/checks.json`、[Run212日志](run212_research_log.md)。Python 3.13.5标准库Fraction；4/4测试、语法编译、191拍可达重放通过；在与远端算法核对的本地镜像执行，尚无完整仓库历史回归与GitHub CI。精确Fraction结果由脚本重生，JSON保留精确改善分数及近似展示值。
+**实现/证据：** `verification/check_history_tightened_backup.py`、`verification/test_history_tightened_backup.py`、`results/history_tightened_backup_20261031/checks.json`、[Run213日志](run213_research_log.md)。Python 3.13.5精确Fraction；5/5新增测试、语法编译、191拍历史重放、9个独立后继backup检查及220拍预算对照通过。测试在核对过的本地依赖镜像中完成；尚无完整仓库checkout回归或GitHub CI。远端新文件Git Blob SHA可与本地实测版本对照。
 
-**文献：** Scott等(2016) *Automatica* 69:126–136，DOI 10.1016/j.automatica.2016.02.036，本轮复核Definitions 2–3、Proposition 1、Section 5片段；统一阅读日志去重87篇不变。
+**文献：** Scott等（2016），DOI 10.1016/j.automatica.2016.02.036；Köhler等（2021），arXiv:2105.03427。本轮仅核对公开摘要及已有定向阅读笔记，统一去重87篇不变。
 
-**未闭合：** 四状态完整鲁棒Tube MPC、终端RCI、递归可行性/稳定性、六状态四旋翼安全保证。Gate A = **blocked**。
+**未闭合：** 持续历史一致CZ/SMF、四状态完整鲁棒Tube MPC、终端RCI、递归可行性/稳定性、六状态四旋翼安全保证。Gate A = **blocked**。
 
-**下一轮唯一优先任务：** 将三包历史一致速度界接入原Run208/210因果backup准入，对第192拍及整段闭环进行同策略、同信息的复核；检查能否真正扩大可接受首力矩集合，并记录仍阻塞的坐标与耗时。
+**下一轮唯一优先任务：** 诊断第193拍再次拒绝的阻塞坐标和历史不一致角点，设计小窗口滚动CZ/等价历史线性约束估计，保持因果性并与原控制器同预算对照。
