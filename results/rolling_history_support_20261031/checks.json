@@ -46,7 +46,7 @@
     "py_compile": true,
     "environment": "Python 3.13.5, Linux x86_64; local source-compatible mirror of repository dependencies (not full checkout)",
     "source_git_blob": "392563cc6146a9a30a824f641cf5cfd142dff8c5",
-    "test_git_blob": "f4bbe6c8841e76ce8713680e2730d5756edb318c",
+    "test_git_blob": "648d63c6f7bc1e644f5f43bd386fcf82b1dc812e",
     "full_repository_regression": false,
     "github_ci": false
   },
