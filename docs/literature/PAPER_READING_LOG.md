@@ -1167,3 +1167,14 @@
 - **局限：** 连续的线性观测器测量、LTI 与固定误差截面；不直接涵盖冻结仓库的15-tick位置缺测图、推力调度任意跳变及状态相关气动 residual。
 - **本项目关联/可复用：** 用耦合误差状态与 support 收紧审计四状态 SMF-MPC 接口，不能把“一个 tube + RPI + 终端”宣称新贡献。本轮的横向不可辨识下界是必须满足的必要条件，尚不是 Lorenzetti 充分控制方案。
 - **待查问题：** 对每 tick 姿态观测和每5/10/15 tick位置更新，能否建立有限复杂度且 shift-compatible 的条件化后验/backup policy，并通过原四状态 Gate A？
+
+
+## Run215 定向正文复核（2026-10-31；Scott等2016，既有87篇内，不新增计数）
+
+- **题名/作者/年份/出处：** Joseph K. Scott, Davide M. Raimondo, Giuseppe Roberto Marseglia, Richard D. Braatz (2016), *Constrained zonotopes: A new tool for set-based estimation and fault detection*, *Automatica* 69:126–136。DOI：https://doi.org/10.1016/j.automatica.2016.02.036；作者公开全文：https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。
+- **本轮实际阅读范围：** Definition 3 (9)，Proposition 1 (11)–(13)，Proposition 2 (19)–(20)，Theorem 1 (21)，Section 4 复杂度增长/降阶讨论，Section 5 (31)–(33) 状态估计递推；其余章节未在本轮精读。
+- **研究问题/方法：** 在有界过程/观测误差下，用 CG 表示 \(Z=\{G\xi+c:\|\xi\|_\infty\le1,A\xi=b\}\) 保留集合交、线性映射与 Minkowski 和；通过约束/生成元降阶平衡精度和复杂度。
+- **定理与假设：** Theorem 1 给出凸多面体与不限复杂度 CZ 表示的等价；Proposition 1 给出精确集合运算公式；Section 5 递推依赖线性离散动力学及紧有界扰动、量测误差。成员资格/非空通常需要 LP。
+- **主要结论与局限：** 保留联合线性约束可避免过早区间外包；但约束数随递推增长，降阶须证明包含。论文没有为本仓库15-mode间歇测量和推力调度提供可直接套用的递归可行性定理。
+- **本课题关联/可复用技术：** Run215先将位置—速度、姿态—角速度历史恒等式实现为精确有理数联合线性条带，并以三包位置支持严格排除第193拍旧盒角点。这是**H-表示外包**，虽可由 Theorem 1 转为CZ，却**没有实现CZ的CG表示、完整后验传播或降阶**；不将既有 CZ 理论宣称为新贡献。
+- **阅读日期与待查问题：** 2026-10-31。需实现可复核的CG表示和联合支持优化，并在完整仓库/同等计算预算下验证能否恢复Run214第193拍控制准入；现有独立盒过滤仍拒绝。
