@@ -1,3 +1,21 @@
+# 当前研究检查点 — Run222（2026-10-31）
+
+**主方向：** 无人机MPC＋SMF输出反馈闭环；保持证据驱动单一课题收敛。基准main `5632a93296983955606dc42822f4de5dfeb824f9`。
+
+**严格负面增量：** Run221名义姿态终端 `|z_phi|≤1/20` 与误差RPI `|e_phi|≤1/100` 蕴含真实 `|phi|≤3/50`。在Run208/210冻结四状态Euler横向残差包络 `|r_x|≤47/25+(243/16000)T`、`T∈[981/200,2943/200]` 下，扰动选择 `r_x=+R(T)` 使所有保持该姿态条带的控制策略都满足 `v_x^+-v_x≥3905869/160000000≈0.02441168m/s`。从任意 `|v_x|≤3` 初态出发最多246拍严格越过 `v_x≤3`，故**不存在非空、完全位于该姿态条带及速度硬界内的四状态鲁棒受控不变集合**。这否定了直接扩展Run221姿态终端管的路线，不否定允许更大倾角的其他终端集合。
+
+**验证：** Python 3.13.5 Fraction，6项聚焦测试本地5通过、1项完整checkout配置检查跳过；语法编译通过；新增GitHub Actions完整checkout配置/归档结果核验工作流。CI结果见本轮PR（在完成前不宣称成功）。
+
+**边界：** 上述残差可由不确定性集合中的对手逐拍选择，未证明实际物理气动能持续取极值；与`external_process_halfwidth=0`不矛盾。无四状态闭环MPC、递归可行性、终端Lyapunov或六状态安全证明。**Gate A=blocked。**
+
+**文献：** Mayne等（2006）DOI https://doi.org/10.1016/j.automatica.2006.03.005（已读章节定向复核）；Blanchini（1999）DOI https://doi.org/10.1016/S0005-1098(99)00113-2（仅书目核验，未读正文）。唯一论文阅读记录维持87篇已读历史去重计数。
+
+**本轮工件：** `verification/check_four_state_terminal_obstruction.py`、`verification/test_four_state_terminal_obstruction.py`、`results/four_state_terminal_obstruction_20261031/checks.json`、`docs/research/run222_research_log.md`、`.github/workflows/run222-four-state-obstruction.yml`。
+
+**下一轮唯一优先任务：** 审计允许更大姿态倾角的四状态联合终端可生存核，在全扰动/全推力/硬约束下检验非空性；优先精确必要条件和反例，再进行优化器集成。
+
+---
+
 # 当前研究检查点 — Run221（2026-10-31）
 
 **主方向：** 四旋翼/无人机 MPC＋SMF 输出反馈闭环；单一课题、允许证据驱动收敛。基准main `df66453b7dc0565905c3d366c77f1ee0f27f2141`。
