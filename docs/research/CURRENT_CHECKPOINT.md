@@ -1,15 +1,13 @@
-# 当前研究检查点 — Run211（2026-10-30）
+# 当前研究检查点 — Run212（2026-10-30）
 
 **唯一主方向：** 四旋翼/无人机 MPC＋SMF 闭环；子课题随证据收敛，不预设无限时域保证。
 
-**Run211实际增量：** 在Run208精确两层因果四拍backup与Run210必要姿态guard约束下，增加8拍名义有限候选预测控制。三条确定性合法轨迹200拍上限下，Run210基线准入191/200/200拍，新增优化仅133/200/81拍；负结果保留。相同80拍比较位置RMS也未整体改善。已执行控制的状态包含检查通过，实际硬约束违约0；这不代表所有历史安全。
+**本轮可验证增量：** 在Run210 `positive_high` 第192拍真实可达历史，利用第150、165、180拍位置返包及150..190每拍姿态观测，建立精确有理数三包历史一致速度外包。旧独立SMF盒速度下端 `-2.4931037251954926 m/s` 被排除；新严格下端 `-2.419767402278826 m/s`，精确收紧 `7040287/96000000 m/s`。因此Run211旧盒的该速度端点及包含它的联合角点与这段测量历史不相容。**这不是精确CZ后验，也未证明控制可准入或长期安全。**
 
-**最关键新诊断：** Run210第192拍的独立区间SMF后验含一个速度下端/姿态上端/角速度上端联合角点。在合法固定高推力、最负残差下，即使未来5拍全用最强负力矩，其速度也仅能达到约-3.044998m/s，违反-3m/s下界。该角点是**外包盒角点，未证明与历史观测联合相容**，因此只说明盒重置控制证书阻塞，不证明真实物理状态不可生存。
+**实现/验证：** `verification/check_three_packet_velocity_support.py`、`verification/test_three_packet_velocity_support.py`、`results/three_packet_velocity_support_20261030/checks.json`、[Run212日志](run212_research_log.md)。Python 3.13.5标准库Fraction；4/4测试、语法编译、191拍可达重放通过；在与远端算法核对的本地镜像执行，尚无完整仓库历史回归与GitHub CI。精确Fraction结果由脚本重生，JSON保留精确改善分数及近似展示值。
 
-**文献：** Köhler/Müller/Allgöwer (2021) arXiv:2105.03427 定向核对 Assumption 7/Theorem 4；Wabersich/Zeilinger (2021) Automatica 129:109597 仅出版社摘要核验。统一论文日志去重87篇不变。
+**文献：** Scott等(2016) *Automatica* 69:126–136，DOI 10.1016/j.automatica.2016.02.036，本轮复核Definitions 2–3、Proposition 1、Section 5片段；统一阅读日志去重87篇不变。
 
-**验证：** Python 3.13.5、标准库Fraction；8/8新增测试、py_compile通过；在与远端Run206/208/210核对过的本地镜像运行，尚无完整仓库回归与GitHub CI结果。文件 `verification/check_nominal_short_mpc.py`、`verification/test_nominal_short_mpc.py`、`results/nominal_short_mpc_20261030/checks.json`、[Run211日志](run211_research_log.md)。
+**未闭合：** 四状态完整鲁棒Tube MPC、终端RCI、递归可行性/稳定性、六状态四旋翼安全保证。Gate A = **blocked**。
 
-**未闭合：** 四状态终端RCI、完整鲁棒Tube MPC、递归可行性/稳定性、六状态四旋翼安全证明。Gate A = **blocked**。
-
-**下一轮唯一优先任务：** 构造第192拍历史的测量一致相关性保留SMF/CZ后验，严格判断盒角点是否真实可达，并在相同信息与计算预算下比较安全准入保守性；不再盲目调名义优化权重。
+**下一轮唯一优先任务：** 将三包历史一致速度界接入原Run208/210因果backup准入，对第192拍及整段闭环进行同策略、同信息的复核；检查能否真正扩大可接受首力矩集合，并记录仍阻塞的坐标与耗时。
