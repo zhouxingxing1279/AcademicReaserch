@@ -1,0 +1,49 @@
+{
+  "base": "Run222 frozen lateral Euler and Run208/210 residual envelope",
+  "evidence": "EXACT_RATIONAL_TAYLOR_UPPER_AND_ADVERSARIAL_DRIFT",
+  "gate_A": "blocked",
+  "limitations": [
+    "Necessary condition only; does not prove existence or nonexistence of a wider four-state terminal kernel.",
+    "Uses independently selectable lateral residual +/-[47/25+(243/16000)T] every tick, not verified persistent physical aerodynamics.",
+    "Reversal ticks are a kinematic lower bound only, not a guaranteed or required transition.",
+    "No four-state SMF-MPC rollout, recursive feasibility, stability, or six-state guarantee."
+  ],
+  "minimum_reversal_ticks_if_opposite_thresholds_are_visited": 8,
+  "necessary_projection": "Any nonempty robust controlled invariant C must have sup_C(phi)>717/5000 and inf_C(phi)<-717/5000.",
+  "rows": [
+    {
+      "adversarial_acceleration_lower": "3052784267867/2500000000000",
+      "positive_drift_obstruction": true,
+      "radius": "3/50",
+      "sin_upper": "749550081/12500000000",
+      "uniform_crossing_seconds": "123/25",
+      "uniform_crossing_ticks": 246,
+      "velocity_step_lower": "3052784267867/125000000000000"
+    },
+    {
+      "adversarial_acceleration_lower": "125267818583/2500000000000",
+      "positive_drift_obstruction": true,
+      "radius": "7/50",
+      "sin_upper": "5232866807/37500000000",
+      "uniform_crossing_seconds": "2994/25",
+      "uniform_crossing_ticks": 5988,
+      "velocity_step_lower": "125267818583/125000000000000"
+    },
+    {
+      "adversarial_acceleration_lower": "14439858027668066783/25000000000000000000000",
+      "positive_drift_obstruction": true,
+      "radius": "717/5000",
+      "sin_upper": "17863629529212481119/125000000000000000000",
+      "uniform_crossing_seconds": "259698/25",
+      "uniform_crossing_ticks": 519396,
+      "velocity_step_lower": "14439858027668066783/1250000000000000000000000"
+    },
+    {
+      "adversarial_acceleration_lower": "-2444750383/25600000000",
+      "positive_drift_obstruction": false,
+      "radius": "3/20",
+      "sin_upper": "19128081/128000000"
+    }
+  ],
+  "run": "223"
+}
