@@ -1,3 +1,7 @@
+**Run229完整仓库CI与合并核验（2026-10-31）：** 研究PR #27 https://github.com/zhouxingxing1279/AcademicReaserch/pull/27 已通过非强制Squash合并，代码main SHA `4964ff795a4dd8a4e1398ef77a2c1b740b436fae`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251472104 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251521934 均为success；Python 3.13，完整checkout Run224–229共40/40聚焦测试通过，无跳过，真实配置、编译、有理数摘要断言和完整JSON artifact上传成功。已重新读取main SHA及新增源码/测试Blob。**未执行全仓库历史回归；无非空终端RCI、输出反馈SMF＋MPC递归可行、稳定性、六状态安全或20ms最坏耗时证明。** 本补记是文档更新，不改变控制算法。
+
+---
+
 ## Run229 当前检查点（2026-10-31）
 
 **基准main：** `20bf13cdfb1de57ffddacae58ecda5b11ded69cb`。针对Run228中央桥速度分叉，构造种子小盒与正负速度分支，使用Run228精确Fraction外包和并集覆盖取得3条经认证的有向边：种子→正负速度两盒，各分支→各自第二拍位置—速度关联盒。固定 `T=981/200`、`tau=0`；所有后继均满足冻结四状态安全盒。第一拍速度半宽为 `17675197493460000327/400000000000000000000≈0.044188` m/s，中心点两侧对抗速度幅值至少 `6254383/160000000≈0.039089894` m/s。此图为**两拍无环DAG**，无自环、无非空RCI、无SMF输出反馈递归可行性或稳定性证明。验证器正向回归价值明确，但研究创新性仍未建立。
