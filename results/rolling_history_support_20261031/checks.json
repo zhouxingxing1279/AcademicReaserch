@@ -1,0 +1,66 @@
+{
+  "run": 214,
+  "date": "2026-10-31",
+  "base_main_sha": "6debbe5282fed27ee5478381f495951d30bc95dc",
+  "scenario": "positive_high",
+  "refusal_tick": 193,
+  "history_window": "six latest successful position packets 105,120,135,150,165,180; attitude/thrust 105..191",
+  "original_velocity_interval_approx": [
+    -2.535558759499142,
+    -0.6005811657491417
+  ],
+  "last_three_packet_support_approx": [
+    -2.535558759499142,
+    -0.6562115824158083
+  ],
+  "six_packet_20_triples_support_approx": [
+    -2.4955466060269194,
+    -0.6674724157491416
+  ],
+  "strict_lower_improvement_exact": "57617501/1440000000",
+  "strict_lower_improvement_approx": 0.04001215347222222,
+  "best_lower_packet_triple": [
+    105,
+    165,
+    180
+  ],
+  "best_lower_coefficient_q": "50/9",
+  "true_velocity_approx": -0.763344499082475,
+  "truth_contained": true,
+  "two_stage_backup_original": "refused",
+  "two_stage_backup_refined": "refused",
+  "refined_box_corner_max_braking_velocity_tick5_approx": -3.035849488799785,
+  "velocity_hard_lower": -3,
+  "corner_violation_approx": 0.035849488799785,
+  "refined_box_corner_history_consistency": "unverified",
+  "relaxed_history_lp_diagnostic": {
+    "method": "scipy.optimize.linprog HiGHS float",
+    "all_position_packets_to_180": true,
+    "lower_approx": -2.495546606026924,
+    "upper_approx": -0.6674724157491441,
+    "certification": "numerical diagnostic only; not proof of exact LP optimum"
+  },
+  "tests": {
+    "passed": 5,
+    "total": 5,
+    "py_compile": true,
+    "environment": "Python 3.13.5, Linux x86_64; local source-compatible mirror of repository dependencies (not full checkout)",
+    "source_git_blob": "392563cc6146a9a30a824f641cf5cfd142dff8c5",
+    "test_git_blob": "f4bbe6c8841e76ce8713680e2730d5756edb318c",
+    "full_repository_regression": false,
+    "github_ci": false
+  },
+  "commands": [
+    "PYTHONPATH=verification python -m unittest -v verification.test_rolling_history_support",
+    "python -m py_compile verification/check_rolling_history_support.py verification/test_rolling_history_support.py",
+    "PYTHONPATH=verification python verification/check_rolling_history_support.py --output results/rolling_history_support_20261031/checks.json"
+  ],
+  "evidence": "exact rational three-packet elimination and bounded-memory intersections; reachable deterministic replay; conditional box-corner obstruction",
+  "gate_A": "blocked",
+  "limitations": [
+    "not a joint CZ or exact posterior",
+    "no robust recursive feasibility or terminal invariant set",
+    "one deterministic scenario",
+    "no full repository regression; no GitHub CI"
+  ]
+}
