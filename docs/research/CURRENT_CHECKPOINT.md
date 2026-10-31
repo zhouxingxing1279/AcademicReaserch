@@ -8,7 +8,7 @@
 
 **正面合成见证：** 在`p+v=0`的相关集合上，独立盒五拍拒绝，联合H支持五拍准入非空，表明方法能利用相关性，但**第193拍没有恢复**。
 
-**验证：** 本地Linux/Python 3.13源兼容镜像重放，8/8聚焦测试、py_compile通过，新增源码/测试Git Blob SHA分别 `caf38e2d10c85b311b2dd9cdb3b0aa2c7bd77886` / `5de0a97a1ac3f2dfb7cdcc15444443664691df90`。**不是完整仓库checkout回归**，无GitHub CI。5次联合Backup计时中位数约112ms，超过20ms控制周期。
+**验证：** 本地Linux/Python 3.13源兼容镜像重放，8/8聚焦测试、py_compile通过，新增源码/测试Git Blob SHA分别 `3f923fc67ac52c7de65f54c297c53a975c68bf6f` / `8bb83f0065b73a20cf4272d1d6f8976126a646e4`。**不是完整仓库checkout回归**，无GitHub CI。5次联合Backup计时中位数约99ms，超过20ms控制周期。
 
 **工件：** `verification/check_joint_support_backup.py`、`verification/test_joint_support_backup.py`、`results/joint_support_backup_20261031/checks.json`、`docs/research/run216_research_log.md`。统一论文日志 `docs/literature/PAPER_READING_LOG.md` 保持87篇去重，更新Scott等（2016）和Köhler等（2021）定向核验范围。
 
