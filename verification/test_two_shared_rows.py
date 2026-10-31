@@ -41,6 +41,9 @@ class TwoSharedRowsTests(unittest.TestCase):
         result=s.audit_tick193()
         self.assertGreaterEqual(Q(result['extra_certified_gain_exact']),0)
         self.assertTrue(result['truth_contained'])
+        self.assertEqual(result['candidate_rows_checked'],12)
+        self.assertEqual(result['solver_failures'],0)
+        self.assertEqual(Q(result['original_support_exact'])-Q(result['one_row_support_upper_exact']),Q(5212367,450000000))
 
 
 if __name__=='__main__':
