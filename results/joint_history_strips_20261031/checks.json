@@ -1,0 +1,54 @@
+{
+  "run": 215,
+  "date": "2026-10-31",
+  "base_main_sha": "8ef0cceccf9b2fc64883346cc3b6e324d711b151",
+  "scenario": "positive_high",
+  "decision_tick": 193,
+  "history_end_tick": 192,
+  "original_position_lower_approx": 1.2965541978275679,
+  "three_packet_position_lower_approx": 1.322291105702568,
+  "position_lower_improvement_exact": "205895263/8000000000",
+  "position_lower_improvement_m": 0.025736907875,
+  "support_packet_ticks": [
+    105,
+    165,
+    180
+  ],
+  "support_coefficient_q": "7/3",
+  "actual_position_approx": 1.6244666658692346,
+  "original_corner_excluded_by_three_packet_support": true,
+  "six_individual_position_velocity_strips_exclude_original_corner": false,
+  "attitude_rate_strip_excludes_original_corner": false,
+  "full_history_lp_probe": {
+    "method": "SciPy HiGHS floating point",
+    "window": "150..192",
+    "all_position_packets_in_window": true,
+    "corner_feasible": false,
+    "evidence": "numerical diagnostic only; no exact Farkas certificate; not used in safety proof"
+  },
+  "refined_box_backup_feasible": false,
+  "refined_box_backup_reason": "two_stage_refusal",
+  "status": "LOCAL_TESTED_NOT_FULL_REPOSITORY_REGRESSION",
+  "tests": {
+    "passed": 8,
+    "total": 8,
+    "syntax_compile": true,
+    "environment": "Python 3.13.5 Linux x86_64; source-compatible independent mirror of Run206/208/210/214 dependencies, not a full checkout",
+    "new_source_git_blob": "963f65ec77404b060de26d8fe36a1de37a4a87e7",
+    "new_test_git_blob": "54d99de67c91afbd279047674db25d48d477f4bd",
+    "full_repository_regression": false,
+    "github_ci": false
+  },
+  "commands": [
+    "PYTHONPATH=/mnt/data/run215/mirror_shims:/mnt/data/run215/verification:/mnt/data/run215 python -m unittest -v test_joint_history_strips",
+    "python -m py_compile verification/check_joint_history_strips.py verification/test_joint_history_strips.py"
+  ],
+  "evidence": "Exact-rational causal three-packet position support excludes a previously spurious box corner; full 4D historical CZ and robust MPC feasibility remain open.",
+  "limitations": [
+    "The exact support uses independent measurement/disturbance relaxation, not exact joint historical posterior",
+    "The six individual oblique strips alone do not exclude the corner",
+    "Historical corner exclusion does not imply any nonempty backup interval",
+    "The actual GitHub repository was read and patched through connector; local execution used source-compatible mirror, not checkout",
+    "No recursive feasibility, terminal RCI, six-state proof, or realtime guarantee"
+  ]
+}
