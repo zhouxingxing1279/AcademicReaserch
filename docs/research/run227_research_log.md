@@ -19,7 +19,7 @@
 ## 文献、验证与评价
 新增原文分节阅读：Yinan Li、Jun Liu（2016），Invariance Control Synthesis for Switched Systems: An Interval Analysis Approach，arXiv:1608.08683，https://arxiv.org/pdf/1608.08683 。核对§I–III、§IV Algorithm 2/3和Theorems 1/2、§V Theorem 4/Proposition 8。论文有限切换模式下的区间内外近似与分区控制器为下一轮提供方法，但不直接覆盖本项目连续推力、控制依赖对抗扰动、部分观测。唯一论文日志去重已读88→89（分节阅读，非全文）。本轮证书均为独立推导。
 
-本地Python 3.11，标准库Fraction和与远端Run224一致的常数/正弦函数镜像：7项聚焦测试6通过、1项因容器无法clone完整仓库而跳过；语法编译、JSON生成通过。完整checkout的真实配置和Run224–227回归由新增GitHub Actions执行；CI成功前不宣称通过。复现：
+本地Python 3.13.5，标准库Fraction和与远端Run224一致的常数/正弦函数镜像：7项聚焦测试6通过、1项因容器无法clone完整仓库而跳过；语法编译、JSON生成通过。完整checkout的真实配置和Run224–227回归由新增GitHub Actions执行；CI成功前不宣称通过。复现：
     PYTHONPATH=verification python -m unittest -v verification.test_four_state_terminal_bridge
     python -m py_compile verification/check_four_state_terminal_bridge.py verification/test_four_state_terminal_bridge.py
     PYTHONPATH=verification python verification/check_four_state_terminal_bridge.py --output results/terminal_bridge_20261031/checks.json
