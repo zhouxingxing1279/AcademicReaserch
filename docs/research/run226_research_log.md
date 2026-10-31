@@ -37,3 +37,8 @@ PYTHONPATH=verification python verification/check_four_state_three_step_predeces
 **可行性：** `Pre³(X)` 非空，但RCI核仍未知。**创新性：** 三步前驱属于已知控制不变集理论；本轮价值在严格排除有限步虚假终端保证，不作为独立创新声明。**难度：** 高，关键是从局部有限步见证转为非空不变终端策略并满足输出反馈量词、计算预算。**Gate A=blocked**；没有四状态终端RCI、完整SMF＋Tube MPC递归可行性、稳定性、六状态安全保证。
 
 **下一轮唯一优先任务：** 停止机械逐拍扩展，围绕可允许双侧倾角切换的四状态联合终端候选，构造并检验真正的 `forall x in C exists u forall r: F(x,u,r) in C` 不变性条件；若无法构造，给出明确阻塞与课题范围调整建议。
+
+## Run226合并与CI核验补记（2026-10-31）
+
+PR #20 https://github.com/zhouxingxing1279/AcademicReaserch/pull/20 已通过非强制Squash安全合并，落地main提交 `8caa45710f9c3255c602274613a60d36ad3c0adf`。完整checkout PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41237414093 和合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41237460322 均为 `success`；Python 3.13.17，Run224/225/226聚焦测试19/19通过，源码编译、真实配置合同、归档JSON逐字比较成功。合并后重新读取main SHA，新增源码/测试/结果Blob分别为 `d120e52789f258adfbc6d455f7fc92702ecc3741`、`9d96e671bd6f33e3d804622cb3b6ebdcb98e5184`、`202c434afd1cf30912b236d5cdb586922f5f557e`，与本地验证一致。**未执行全仓库历史回归；未证明四状态RCI、完整SMF＋MPC递归可行性或20ms最坏耗时。**
+
