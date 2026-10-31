@@ -30,3 +30,8 @@ v2-3 ≥ h[2R0+2TMAX·RT-TMAX(s5(3/20)+s5(11/100))]
 **课题评价：** 可行性：Pre²(X) 有非空见证，但不能推出无限时域 RCI；创新性：二步前驱是成熟集合控制理论，暂属基线/阻塞定位；难度：高，必须处理角速度导致的预测安全损失、部分观测、失测和在线复杂度。**Gate A=blocked**。无四状态 Tube MPC、终端不变集、递归可行性、Lyapunov 稳定性、六状态安全或20ms最坏执行时间保证。
 
 **下一轮唯一优先任务：** 在同一冻结模型上计算第三轮鲁棒前驱的严格局部包含/排除，优先检查本轮二步正见证能否继续，以及角速度约束引起的前驱边界收缩；只有形成非空不变终端集合后才接入输出反馈 MPC。
+
+
+## 合并后核验（2026-10-31）
+
+PR #18 https://github.com/zhouxingxing1279/AcademicReaserch/pull/18 通过非强制 Squash 合并，落地 main SHA 6c1a574c6c742c1335bd5b3592eea486b2d2171b。PR 聚焦 CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232818700 和合并后 main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41232866432 均为 success；均核验旧新两组测试、真实配置、语法编译与归档 JSON 逐字一致。已再次读取 main SHA 与源码/测试/结果 Blob 确认落地。CI 为聚焦测试，不代表全仓库回归、完整四状态闭环或实时安全证明。
