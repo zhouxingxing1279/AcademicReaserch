@@ -4,6 +4,28 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run214 定向复核：滚动历史线性约束与 CZ 联合相关性（2026-10-31；已计数去重87篇不变）
+
+### Scott、Raimondo、Marseglia、Braatz（2016）——已有文献，公开正文定向复核
+- **题名、作者、年份、正式信息：** *Constrained zonotopes: A new tool for set-based estimation and fault detection*；Joseph K. Scott、Davide M. Raimondo、Giuseppe Roberto Marseglia、Richard D. Braatz；2016；*Automatica* 69:126–136；DOI https://doi.org/10.1016/j.automatica.2016.02.036 。
+- **阅读日期/证据层级：** 2026-10-31；核对公开论文 PDF 的引言及 CZ 交运算、状态估计方法概述，并复核仓库 Run212 对 Definition 2/3、Proposition 1、Section 5 的阅读记录；**本轮不宣称全文重读**。
+- **研究问题与模型/方法：** 如何在有界噪声线性系统中兼顾集合估计精度与运算成本；使用 CZ 表示、交集、投影、Minkowski 和保守降阶。
+- **关键假设/定理：** 相关集合运算在其表示合同下成立；精确交集与无损降阶是两回事。Run214 尚未构造 CZ，不能直接继承其数值精度结论。
+- **主要结论/局限：** CZ 可以保存一般线性耦合约束，但高阶表示的计算成本需要降阶；论文并未直接保证本仓库15-mode输出反馈安全闭环的终端可行性。
+- **与课题关联及可复用技术：** Run214 的20个三包一维支持交集仍存在危险联合盒角点；下一步可用 CZ 保存 `(p,v,phi,omega)` 关联，而非继续增加单变量独立支持界。
+- **待查问题：** 能否在相同测量历史与0.02秒控制周期内，得到可靠且可验证的联合支持/可行性证书？
+
+### Rego、Raffo、Scott、Raimondo（2020）——已有文献，本轮仅摘要与书目复核
+- **题名、作者、年份、正式信息：** *Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems*；Brenner S. Rego、Guilherme V. Raffo、Joseph K. Scott、Davide M. Raimondo；2020；*Automatica* 111:108614；DOI https://doi.org/10.1016/j.automatica.2019.108614；arXiv https://arxiv.org/abs/1908.09950 。
+- **阅读日期/证据层级：** 2026-10-31 仅核对摘要与正式书目；**历史 Run179 已有分章节全文精读记录，本轮不重复声称精读**。
+- **研究问题与模型/方法：** 非线性有界扰动系统的 CZ 预测外包与量测交集，采用 mean-value 和 Taylor 扩展。
+- **关键假设/定理：** 适用性依赖有效非线性映射外包、误差界与量测集合；Run214 的四状态线性 Euler 恒等式不需要使用其非线性 Taylor 扩展。
+- **主要结论/局限：** 相对简单集合外包，CZ 可能保留更多相关性；不能将其示例结果当成本课题的控制安全证明。
+- **与课题关联及可复用技术：** 六状态/非线性扩展的候选估计基线；当前先实现可验证线性联合 CZ 与复杂度控制。
+- **待查问题：** 对四状态离散动力学，如何实现精确线性 CZ 预测/交，再决定是否有必要采用非线性扩展？
+
+**本轮自有负面结果：** 第193拍最近6个位置包的20组精确支持函数将速度下界提高 `57617501/1440000000 m/s`，但两层因果 Backup 仍拒绝；保留为外包证书阻塞，不推断物理不可生存。参见 [Run214日志](../research/run214_research_log.md)。
+
 ## Run213 定向核验：历史一致外包能否转化为控制准入（2026-10-31；去重87篇不变）
 
 ### Scott、Raimondo、Marseglia、Braatz（2016）——既有文献，摘要及Run212正文笔记复核
