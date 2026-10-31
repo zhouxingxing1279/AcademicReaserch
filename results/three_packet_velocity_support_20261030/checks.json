@@ -1,0 +1,29 @@
+{
+  "run": 212,
+  "date": "2026-10-30",
+  "scope": "four-state Euler proxy; Run210 positive_high reachable history, pre-control tick 192",
+  "method": "exact rational 3-position-packet/41-attitude-observation velocity support; correlation retained across packets; independent bounded acceleration relaxation",
+  "position_packet_ticks": [
+    150,
+    165,
+    180
+  ],
+  "attitude_measurement_ticks": "150..190 inclusive",
+  "current_state_tick": 191,
+  "baseline_outer_velocity_lower_approx": -2.4931037251954926,
+  "new_measurement_consistent_outer_velocity_lower_approx": -2.419767402278826,
+  "new_measurement_consistent_outer_velocity_upper_approx": -0.014163275195492491,
+  "true_velocity_approx": -0.7331640043621591,
+  "certified_lower_improvement_exact": "7040287/96000000",
+  "certified_lower_improvement_approx": 0.07333632291666667,
+  "previous_box_lower_excluded_by_history": true,
+  "code_reproduces_exact_fractions": "python verification/check_three_packet_velocity_support.py --output /tmp/run212_exact.json",
+  "tests": "PYTHONPATH=verification python -m unittest -v verification.test_three_packet_velocity_support",
+  "tested_in": "Python 3.11 local exact algorithm mirrors of Run206/208/210/211; 4/4 tests, full deterministic replay; not full repository checkout",
+  "gate_A": "blocked",
+  "limitations": [
+    "This is a rigorous outer velocity interval, not an exact CZ posterior.",
+    "It excludes one old box endpoint but does not prove a nonempty four-tick or two-stage backup after reoptimization.",
+    "Not a terminal RCI or recursive feasibility certificate."
+  ]
+}
