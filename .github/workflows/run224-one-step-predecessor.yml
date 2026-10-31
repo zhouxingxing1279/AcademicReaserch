@@ -1,0 +1,36 @@
+name: Run224 four-state one-step robust predecessor
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_one_step_predecessor.py'
+      - 'verification/test_four_state_one_step_predecessor.py'
+      - 'results/one_step_predecessor_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run224-one-step-predecessor.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_one_step_predecessor.py'
+      - 'verification/test_four_state_one_step_predecessor.py'
+      - 'results/one_step_predecessor_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run224-one-step-predecessor.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Rational robust predecessor proof checks and archive equality
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_one_step_predecessor.py verification/test_four_state_one_step_predecessor.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor
+          python verification/check_four_state_one_step_predecessor.py --root . --output /tmp/run224_checks.json
+          diff -u results/one_step_predecessor_20261031/checks.json /tmp/run224_checks.json

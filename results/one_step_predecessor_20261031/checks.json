@@ -1,0 +1,79 @@
+{
+  "base": "Run223 frozen four-state Euler; Run208/210 lateral residual envelope",
+  "boundary_exclusion_gap_lower": "14439858027668066783/367875000000000000000000",
+  "boundary_exclusion_radius": "717/5000",
+  "boundary_witnesses": [
+    {
+      "certified_for_all_residuals": true,
+      "input": [
+        "2943/200",
+        "0"
+      ],
+      "state": [
+        "0",
+        "3",
+        "3/20",
+        "0"
+      ],
+      "successor_bounds": {
+        "omega": [
+          "0",
+          "0"
+        ],
+        "p": [
+          "3/50",
+          "3/50"
+        ],
+        "phi": [
+          "3/20",
+          "3/20"
+        ],
+        "v": [
+          "3729856865617/1280000000000",
+          "21490309398570349/7168000000000000"
+        ]
+      }
+    },
+    {
+      "certified_for_all_residuals": true,
+      "input": [
+        "2943/200",
+        "0"
+      ],
+      "state": [
+        "0",
+        "-3",
+        "-3/20",
+        "0"
+      ],
+      "successor_bounds": {
+        "omega": [
+          "0",
+          "0"
+        ],
+        "p": [
+          "-3/50",
+          "-3/50"
+        ],
+        "phi": [
+          "-3/20",
+          "-3/20"
+        ],
+        "v": [
+          "-21490309398570349/7168000000000000",
+          "-3729856865617/1280000000000"
+        ]
+      }
+    }
+  ],
+  "evidence": "EXACT_RATIONAL_SINE_ENCLOSURE_ONE_STEP_PREDECESSOR",
+  "gate_A": "blocked",
+  "limitations": [
+    "One-step predecessor of the full state safety box X only; witnesses are NOT an invariant subset or terminal kernel.",
+    "Uses full-state causal feedback and zero angular process disturbance; does not establish SMF output-feedback feasibility.",
+    "The Run208/210 residual is independently adversarial and need not represent persistent physical aerodynamics.",
+    "No recursive feasibility, Lyapunov stability, 20ms timing guarantee, or six-state safety."
+  ],
+  "quantifiers": "exists (T,tau) chosen from current full state; forall r_x in [-R(T),R(T)]",
+  "run": "224"
+}

@@ -1,3 +1,21 @@
+# 当前研究检查点 — Run224（2026-10-31）
+
+**基准main：** 372fdc669e58ec8a3987e544f401e077813f6eed。**主方向：** 四旋翼MPC＋SMF鲁棒输出反馈闭环，证据驱动收敛。
+
+**严格增量：** 对冻结四状态安全盒X，定义正确因果前驱Pre(X)：存在当前状态反馈控制(T,tau)，使对所有合法Run208/210横向残差，下一状态仍属于X。以Fraction和sin的s7/s5 Taylor上下界证明x=(0,±3,±3/20,0)在T=2943/200、tau=0时属于Pre(X)，而x=(0,±3,±717/5000,0)在任何合法推力下都被对抗残差严格排除。**仅一步前驱，不是终端鲁棒受控不变核，也不是SMF输出反馈可行性。**
+
+**验证：** 本地Python 6项测试5通过、1项因缺完整checkout跳过；py_compile及归档JSON生成通过。新增GitHub Actions工作流负责完整checkout配置核验、6项测试和结果逐字比对，需实际成功后才可宣称CI通过。
+
+**文献：** Kolmanovsky与Gilbert（1998），DOI https://doi.org/10.1155/S1024123X98000866，出版商摘要/书目核验，非正文精读；唯一论文日志去重已读仍87篇。
+
+**Gate A=blocked：** Run221二维姿态局部递归可行性仍成立（限定假设）；四状态终端RCI、部分观测Tube MPC递归可行性、稳定性、六状态鲁棒安全、20ms最坏耗时均未证明。不能由Pre(X)非空推出无限时域安全。
+
+**工件：** verification/check_four_state_one_step_predecessor.py、verification/test_four_state_one_step_predecessor.py、results/one_step_predecessor_20261031/checks.json、docs/research/run224_research_log.md、.github/workflows/run224-one-step-predecessor.yml。
+
+**下一轮唯一优先任务：** 计算第二轮正确因果前驱Pre(Pre(X))，严格检查双侧边界见证是否可持续；不在单步非空基础上虚报终端不变性。
+
+---
+
 # 当前研究检查点 — Run223（2026-10-31）
 
 **基准main：** f72155bf15c782ca32d51d0cd873524060d1372e。**主方向：** 无人机MPC＋SMF鲁棒输出反馈闭环，保持单课题收敛。
