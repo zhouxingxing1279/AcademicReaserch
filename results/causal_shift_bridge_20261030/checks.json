@@ -1,0 +1,68 @@
+{
+  "run": "207",
+  "date": "2026-10-30",
+  "status": "PASS_WITH_LIMITATIONS",
+  "evidence": "EXACT_RATIONAL_ONE_STEP_SHIFT_BRIDGE_AND_THREE_REACHABLE_HISTORY_REPLAYS",
+  "baseline_main": "92415656e545cf9c873be5dca02e8e494ff08273",
+  "initial_bridge": {
+    "feasible": true,
+    "lower": "-2/25",
+    "upper": "2/25",
+    "inequalities": 260,
+    "future_thrust_vertices": 16
+  },
+  "scenarios": [
+    {
+      "scenario": "positive_high",
+      "four_tick_accepted": 100,
+      "bridge_accepted": 100,
+      "first_bridge_refusal_tick": null,
+      "next_step_zero_backup_verified": 99
+    },
+    {
+      "scenario": "alternating_high",
+      "four_tick_accepted": 95,
+      "bridge_accepted": 94,
+      "first_bridge_refusal_tick": 95,
+      "next_step_zero_backup_verified": 94,
+      "zero_four_tick_fallback_at_bridge_refusal": true
+    },
+    {
+      "scenario": "switch_positive",
+      "four_tick_accepted": 100,
+      "bridge_accepted": 100,
+      "first_bridge_refusal_tick": null,
+      "next_step_zero_backup_verified": 99
+    }
+  ],
+  "independent_initial_shift_checks": {
+    "torques": [
+      "-2/25",
+      "0",
+      "2/25"
+    ],
+    "next_thrust": [
+      "981/200",
+      "10",
+      "2943/200"
+    ],
+    "all_nine_pass": true
+  },
+  "test_command": "python -m unittest verification.test_causal_shift_bridge -v",
+  "run_command": "python verification/check_causal_shift_bridge.py --output /tmp/run207_full.json",
+  "tests": {
+    "new_tests_passed": 7,
+    "new_tests_total": 7,
+    "environment": "Python 3.13 standard library; Run206 exact-rational local execution mirror validated against all six archived refusal counts",
+    "full_repository_checkout": false,
+    "full_historical_regression": false,
+    "github_ci": false
+  },
+  "caveats": [
+    "The next-step four-tick zero-torque backup is guaranteed for all legal successor observations and future thrusts, not a two-step or infinite-time invariant set",
+    "Bridge uses predicted coordinate box reset and is conservative; it may refuse earlier than four-tick admission",
+    "Different feedback policies generate different trajectories; no paired performance improvement is claimed",
+    "At alternating scenario tick 95, bridge is empty but the previous bridge guarantees a four-tick zero-torque fallback; no next bridge is guaranteed",
+    "Gate A blocked"
+  ]
+}
