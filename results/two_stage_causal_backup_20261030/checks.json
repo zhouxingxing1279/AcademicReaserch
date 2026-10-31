@@ -1,0 +1,76 @@
+{
+  "run": "208",
+  "artifact_kind": "verified summary; regenerate complete deterministic JSON using python verification/check_two_stage_causal_backup.py --output /tmp/run208_full.json",
+  "evidence": "EXACT_RATIONAL_TWO_STAGE_THRUST_CONTINGENT_BACKUP",
+  "model": "four-state discrete Euler proxy, box-SMF; T0 visible; T1 visible only next tick; future T2..T4 uncertain",
+  "initial": {
+    "four_tick_interval": [
+      "-2/25",
+      "2/25"
+    ],
+    "two_stage_interval": [
+      "-2/25",
+      "2/25"
+    ],
+    "per_t1_endpoint": {
+      "signed_inequalities": 256,
+      "unique_rows": 53,
+      "lower_lines": 14,
+      "upper_lines": 14,
+      "pairwise_FM": 196
+    }
+  },
+  "reachable_rollouts": [
+    {
+      "scenario": "positive_high",
+      "zero_bridge_accepted": 100,
+      "two_stage_accepted": 100,
+      "first_refusal": null
+    },
+    {
+      "scenario": "alternating_high",
+      "zero_bridge_accepted": 94,
+      "two_stage_accepted": 95,
+      "first_refusal": 96
+    },
+    {
+      "scenario": "switch_positive",
+      "zero_bridge_accepted": 100,
+      "two_stage_accepted": 100,
+      "first_refusal": null
+    }
+  ],
+  "strict_witness": {
+    "scenario": "alternating_high",
+    "tick": 95,
+    "zero_bridge_feasible": false,
+    "two_stage_feasible": true,
+    "u0_interval_exact": [
+      "-2/25",
+      "-10104353123125665976922047248097549910158446520201033548941236431399261393797/181898940354585647583007812500000000000000000000000000000000000000000000000000"
+    ],
+    "u0_interval_approx": [
+      -0.08,
+      -0.05554926875015705
+    ],
+    "selected_u0_approx": -0.05554926875015705,
+    "next_backup_u1": "-2/25",
+    "independent_audit_next_thrust": [
+      "981/200",
+      "981/100",
+      "2943/200"
+    ],
+    "independent_audits_passed": 3
+  },
+  "tests": {
+    "new_unit_tests": 10,
+    "passed": 10,
+    "environment": "Python 3, standard library Fraction, local verified minimal mirror of Run206; no full repository checkout or GitHub CI"
+  },
+  "gate_A": "blocked",
+  "limitations": [
+    "No measurement-conditioned recourse in this iteration",
+    "One-step finite backup only, no terminal invariant set or recursive feasibility",
+    "Three deterministic admissible histories are not a universal guarantee"
+  ]
+}
