@@ -97,14 +97,14 @@ def rolling_support(positions,attitudes,thrusts,end_tick,max_packets=6):
         'newest_packet':indices[-1]}
 
 
-def replay_to_193():
+def replay_to_193(return_controls=False):
     """Run210's exact deterministic positive_high history; refine at tick192.
 
     The returned state is immediately before control at tick193. No future
     observation is used for control or refinement.
     """
     x=(Z,)*4;box=m.initial_box();prev_p=box[0];accels=[]
-    positions={};attitudes={};thrusts={}
+    positions={};attitudes={};thrusts={};torques={}
     for k in range(192):
         t=m.thrust('positive_high',k)
         if k==191:
@@ -121,6 +121,7 @@ def replay_to_193():
         allowed,reason=base.interval(box,t)
         assert allowed is not None,(k+1,reason)
         u=max(allowed[0],min(allowed[1],m.proposed(box)-Q(1,5)*m.mid(box[3])))
+        torques[k]=u
         old_phi=box[2]
         accels.append(m.add(m.scale(old_phi,-t),(-m.rad(t),m.rad(t))))
         attitudes[k]=x[2]+m.measurement_noise('positive_high',k)[2]
@@ -135,6 +136,7 @@ def replay_to_193():
             prev_p=box[0];accels=[]
         assert all(lo<=val<=hi for (lo,hi),val in zip(box,x))
         assert all(abs(val)<=lim for val,lim in zip(x,m.LIMITS))
+    if return_controls:return box,x,positions,attitudes,thrusts,torques
     return box,x,positions,attitudes,thrusts
 
 
