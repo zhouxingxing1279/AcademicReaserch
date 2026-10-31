@@ -1,0 +1,22 @@
+name: Run220 focused history support audit
+on:
+  pull_request:
+    paths:
+      - 'verification/check_two_shared_rows.py'
+      - 'verification/test_two_shared_rows.py'
+      - '.github/workflows/run220-history-audit.yml'
+  workflow_dispatch:
+jobs:
+  history-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install scipy==1.17.0
+      - name: Focused exact tests
+        run: PYTHONPATH=verification python -m unittest -v verification.test_two_shared_rows
+      - name: Actual tick-193 integration
+        run: RUN_TICK193_AUDIT=1 PYTHONPATH=verification python -m unittest -v verification.test_two_shared_rows
