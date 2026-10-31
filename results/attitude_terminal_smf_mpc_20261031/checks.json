@@ -1,0 +1,472 @@
+{
+  "certificate": {
+    "actual_input_limit": "2/25",
+    "actual_state_limits": [
+      "9/20",
+      "2"
+    ],
+    "correction": "8/625",
+    "error_image": [
+      "1/100",
+      "1/25"
+    ],
+    "error_radii": [
+      "1/100",
+      "1/25"
+    ],
+    "feedback_noise": "2/625",
+    "nominal_input_limit": "42/625",
+    "nominal_state_limits": [
+      "11/25",
+      "48/25"
+    ],
+    "terminal_image": [
+      "1/20",
+      "23/125"
+    ],
+    "terminal_nominal_input_support": "6/125",
+    "terminal_radii": [
+      "1/20",
+      "1/5"
+    ]
+  },
+  "episodes": 32,
+  "evidence": "EXACT_RATIONAL_INVARIANCE_AND_SHIFT_PROOF_PLUS_FINITE_REPLAY",
+  "gate_A": "blocked",
+  "limitations": [
+    "This is NOT the 4-state lateral or six-state UAV terminal invariant set.",
+    "Position dropouts, thrust jumps, lateral/vertical disturbances and constraints are outside this certificate.",
+    "Finite-grid candidate optimization is not a continuous-QP optimum.",
+    "No wall-clock worst-case 20ms guarantee; no proof of target convergence.",
+    "If attitude measurement width exceeds sigma, controller fails closed rather than claiming safety."
+  ],
+  "max_abs_omega": "9960297/39062500",
+  "max_abs_phi": "201793044729463020606351016770142035828437137298362293906844684283/4038967834731580443708050254247865495926816947758197784423828125000",
+  "max_abs_tau": "79/1250",
+  "mpc_mean_tracking_rmse": 0.013295355270388226,
+  "optimizer_changed_steps": 624,
+  "rows": [
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.017227842058355612
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.015244978189097159
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.015296369174081661
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.015272523911526139
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.015173019721153777
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.015037524911082312
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.014575944072584932
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.014521856407634622
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.011904739381706752
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.011513886413128154
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.011008775613758822
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.010991865271653382
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.010696531845844851
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.01288642024352497
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.010686373346946552
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 39,
+      "policy": "mpc",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.010687033764131913
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04824893319992185
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04298854558549411
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.043087531631853374
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04304357494541473
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04440729187529758
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.03783497766446371
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.041790758896675516
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "-1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04164115319090474
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.04257397539369712
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.0355944023210235
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.03825748223110582
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "-1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.03816775280117302
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "positive",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.03708084468367638
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "negative",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.031797448863795194
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "alternating",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.03698774517048028
+    },
+    {
+      "constraint_violations": 0,
+      "noise_case": "cycling",
+      "optimizer_changes": 0,
+      "policy": "terminal_only",
+      "smf_coverage": 49,
+      "start": [
+        "1/200",
+        "1/100"
+      ],
+      "steps": 48,
+      "tracking_rmse": 0.0367973529710987
+    }
+  ],
+  "run": "221",
+  "scope": "isolated frozen 2-state UAV attitude channel; always-measured phi/omega; zero angular process disturbance",
+  "terminal_only_mean_tracking_rmse": 0.04001873571412973,
+  "total_steps": 1536,
+  "violations": 0,
+  "worst_tracking_rmse": 0.04824893319992185
+}
