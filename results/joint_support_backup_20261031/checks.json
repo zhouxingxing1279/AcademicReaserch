@@ -1,0 +1,82 @@
+{
+  "run": 216,
+  "date": "2026-10-31",
+  "base_main_sha": "ae68ead9c9011b7edb22cefe44420fbb49ba3a69",
+  "scenario": "positive_high",
+  "decision_tick": 193,
+  "history_end_tick": 192,
+  "model": "frozen four-state Euler proxy; exact Fraction arithmetic",
+  "method": "factorized (p,v)x(phi,omega) exact 2D H-polytope supports, not full 4D CZ",
+  "posterior_outer_vertices": {
+    "position_velocity": 11,
+    "attitude_rate": 6
+  },
+  "truth_in_joint_outer": true,
+  "independent_box_no_reset_backup_feasible": false,
+  "history_joint_no_reset_backup_feasible": false,
+  "critical_row_support_gain_exact": "57617501/1440000000",
+  "critical_row_support_gain_m_s": 0.04001215347222222,
+  "critical_row_obstruction": {
+    "future_thrusts": [
+      "2943/200",
+      "2943/200",
+      "2943/200",
+      "2943/200",
+      "2943/200"
+    ],
+    "physical_step": 5,
+    "state_index": 1,
+    "constraint_sign": -1,
+    "a_u0": "8829/250000",
+    "b_u1": "8829/500000",
+    "rhs": "-163682691295049425696152896493513100175847213957245881443495723457046924601550847240822245416250495851143359686555965121328166214856501272930370433999556236022859033/4035739577255473164260341199874958458087154392604365422660356657602598318135278532281517982482910156250000000000000000000000000000000000000000000000000000000000000000",
+    "best_case_slack_exact": "-146579549825806910863870711315739016227150500613739989131494944770659721137158987643295754727926521241768359686555965121328166214856501272930370433999556236022859033/4035739577255473164260341199874958458087154392604365422660356657602598318135278532281517982482910156250000000000000000000000000000000000000000000000000000000000000000",
+    "best_case_slack_approx": -0.03632036879978493,
+    "individually_impossible": true
+  },
+  "best_case_slack_box_approx": -0.07633252227200715,
+  "best_case_slack_joint_approx": -0.03632036879978493,
+  "synthetic_strict_admission_recovery": true,
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "source_compatible_mirror_not_full_checkout": true,
+    "replay_ms": 3241.725,
+    "polytope_build_ms": 7.803,
+    "joint_backup_ms_samples": [
+      103.272,
+      112.756,
+      111.858,
+      105.424,
+      114.211
+    ],
+    "joint_backup_ms_median": 111.858,
+    "control_period_ms": 20,
+    "within_control_period": false
+  },
+  "tests": {
+    "focused_passed": 8,
+    "focused_total": 8,
+    "py_compile": true,
+    "full_repository_regression": false,
+    "github_ci": false,
+    "source_blob_sha": "caf38e2d10c85b311b2dd9cdb3b0aa2c7bd77886",
+    "test_blob_sha": "5de0a97a1ac3f2dfb7cdcc15444443664691df90"
+  },
+  "commands": [
+    "PYTHONPATH=/mnt/data/run216/shims:/mnt/data/run216/verification python -m unittest -v test_joint_support_backup",
+    "python -m py_compile /mnt/data/run216/verification/*.py",
+    "PYTHONPATH=verification python -m unittest -v verification.test_joint_support_backup",
+    "PYTHONPATH=verification python verification/check_joint_support_backup.py"
+  ],
+  "evidence_level": "exact algebraic outer-set finite-horizon obstruction plus source-compatible deterministic replay; not a full repository integration",
+  "gate_A": "blocked",
+  "limitations": [
+    "No full 4D CZ or exact historical posterior; pairwise product outer loses cross-block correlation",
+    "The obstructing joint state need not be historically attainable",
+    "Finite backup refusal is not physical nonviability or infinite-time safety conclusion",
+    "Synthetic feasibility recovery is not a Run215 tick193 recovery",
+    "Runtime exceeds 20ms; no embedded timing guarantee",
+    "No complete MPC, terminal RCI, recursive feasibility or six-state proof"
+  ]
+}
