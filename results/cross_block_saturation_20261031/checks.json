@@ -1,0 +1,76 @@
+{
+  "run": 218,
+  "date": "2026-10-31",
+  "base_main_sha": "39acef9f3792502f1584cd8145a1c79a203027ae",
+  "scenario": "positive_high",
+  "decision_tick": 193,
+  "history_end_tick": 192,
+  "method": "exact Fraction maximizing-vertex witness in P_pv x P_phiomega intersected with six 4D history strips",
+  "critical_direction": [
+    "0",
+    "-1",
+    "2943/2000",
+    "2943/50000"
+  ],
+  "posterior_outer_vertices": {
+    "pv": 11,
+    "attitude_rate": 6
+  },
+  "historical_packets": [
+    105,
+    120,
+    135,
+    150,
+    165,
+    180
+  ],
+  "maximizing_point_approx": [
+    1.322291105702568,
+    -2.4955466060269194,
+    0.24270286319176987,
+    -0.3818210442375785
+  ],
+  "strip_slack_approx": [
+    2.7528856067166667,
+    2.2111642466333334,
+    1.1394906777,
+    0.39766713028333334,
+    0.029703054116666665,
+    0.0395714992
+  ],
+  "all_six_strips_exactly_satisfied": true,
+  "critical_support_gain_exact": "0",
+  "old_best_case_slack_approx": -0.03632036879978493,
+  "conclusion": "All six cross-block strips jointly leave the critical support unchanged, since a product-support maximizer satisfies all strips. The finite outer-backup obstruction persists.",
+  "tests": {
+    "focused_passed": 4,
+    "focused_total": 4,
+    "full_replay_test_skipped_without_checkout": true,
+    "source_compatible_mirror_replay_passed": true,
+    "mirror_matched_run216_slack": true,
+    "py_compile": true,
+    "full_repository_regression": false,
+    "github_ci": false,
+    "source_git_blob": "59a0529ea841d1370189169b1c19278b6cc4e080",
+    "test_git_blob": "f8087a18e212d810738642ad92193a1e7e4ef4ff"
+  },
+  "environment": "Python 3.13.5 Linux, standard library Fraction; GitHub connector source reads; container DNS blocked direct clone",
+  "runtime": {
+    "mirror_192_tick_replay_and_audit_s": 2.8861,
+    "control_period_ms": 20,
+    "online_cycle_verified": false
+  },
+  "commands": [
+    "cd /mnt/data/run218 && python -m unittest -v test_cross_block_saturation",
+    "cd /mnt/data/run218 && python -m py_compile check_cross_block_saturation.py test_cross_block_saturation.py",
+    "cd /mnt/data/run218 && python run_mirror_integration.py",
+    "RUN_TICK193_AUDIT=1 PYTHONPATH=verification python -m unittest -v verification.test_cross_block_saturation (not executed: requires full checkout)"
+  ],
+  "limitations": [
+    "The maximizing witness is feasible for six necessary outer strips, not necessarily the full historical SMF posterior",
+    "No physical nonviability proof",
+    "No terminal invariant set, recursive feasibility, full Tube MPC or six-state guarantee"
+  ],
+  "gate_A": "blocked",
+  "next_priority": "Check shared disturbance and all position-packet history consistency of the critical maximizing point; do not optimize the same six-strip LP again."
+}
