@@ -25,7 +25,9 @@ class RollingHistorySupportTests(unittest.TestCase):
     def test_causal_history_only(self):
         self.assertEqual(self.meta6['triples'],20)
         self.assertEqual(self.meta6['newest_packet'],180)
-        self.assertTrue(all(k<192 for k in self.attitudes if k<192))
+        self.assertEqual(max(self.attitudes),191)
+        self.assertEqual(max(self.thrusts),191)
+        self.assertEqual(max(self.positions),180)
         self.assertEqual(self.meta6['best_lower']['packets'],(105,165,180))
 
     def test_run213_prefix_and_truth_containment(self):
