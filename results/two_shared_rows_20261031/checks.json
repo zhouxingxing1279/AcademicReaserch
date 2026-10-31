@@ -14,15 +14,21 @@
   },
   "tests": {
     "focused_passed": 4,
-    "full_checkout_integration_skipped": true,
+    "full_checkout_integration_skipped": false,
     "py_compile": true,
     "full_repo_regression": false,
-    "github_ci": false
+    "github_ci": true,
+    "full_checkout_integration_passed": true
   },
   "actual_tick193": {
-    "evaluated": false,
-    "extra_gain": null,
-    "remaining_slack": null
+    "evaluated": true,
+    "candidate_second_rows": 12,
+    "solver_failures": 0,
+    "extra_certified_gain_exact": "0",
+    "certified_slack_lower_bound_approx": -0.02473733102200715,
+    "full_audit_wall_seconds": 4.923801438,
+    "all_rows_contain_true_state": true,
+    "interpretation": "No additional gain certified by tested 12 second rows; negative slack lower bound inconclusive"
   },
   "limitations": [
     "No full checkout due DNS failure",
@@ -30,5 +36,12 @@
     "No full SMF/CZ posterior or terminal MPC guarantee"
   ],
   "gate_A": "blocked",
-  "next_priority": "Run real tick193 two-row audit in full checkout and measure total cost"
+  "next_priority": "Build minimum terminal-safe recursive baseline rather than adding unproductive three-packet rows",
+  "github_actions": {
+    "run_id": 41208687506,
+    "url": "https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41208687506",
+    "conclusion": "success",
+    "python": "3.13.17",
+    "scipy": "1.17.0"
+  }
 }
