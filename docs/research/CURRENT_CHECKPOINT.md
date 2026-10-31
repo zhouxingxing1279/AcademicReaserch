@@ -6,7 +6,7 @@
 
 **关键负面结果：** 两层因果 Backup **仍拒绝第193拍**。改进盒的一个未核实历史可达性的联合角点在合法高推力/负残差下，5拍最大反向力矩仍给出 `v≈-3.0358494888 m/s`，超过 -3 m/s 限制。这仅是**独立外包盒证书阻塞**，不是实际无人机不可生存证明。SciPy HiGHS对独立残差放松的全位置历史 LP 给出与三包支持界数值一致的上下界，但不是精确最优性证明。
 
-**可运行工件：** `verification/check_rolling_history_support.py`、`verification/test_rolling_history_support.py`、`results/rolling_history_support_20261031/checks.json`、[Run214日志](run214_research_log.md)。本地 Python 3.13.5精确分数验证5/5通过、语法编译通过；源码/测试Git Blob SHA `392563cc6146a9a30a824f641cf5cfd142dff8c5` / `f4bbe6c8841e76ce8713680e2730d5756edb318c`。测试为本地核对过的依赖镜像，尚未执行完整仓库回归或GitHub CI。20组合支持计算约0.75s，超过0.02s采样周期，尚不能在线部署。
+**可运行工件：** `verification/check_rolling_history_support.py`、`verification/test_rolling_history_support.py`、`results/rolling_history_support_20261031/checks.json`、[Run214日志](run214_research_log.md)。本地 Python 3.13.5精确分数验证5/5通过、语法编译通过；源码/测试Git Blob SHA `392563cc6146a9a30a824f641cf5cfd142dff8c5` / `648d63c6f7bc1e644f5f43bd386fcf82b1dc812e`。测试为本地核对过的依赖镜像，尚未执行完整仓库回归或GitHub CI。20组合支持计算约0.75s，超过0.02s采样周期，尚不能在线部署。
 
 **文献：** Scott等（2016），DOI 10.1016/j.automatica.2016.02.036（公开正文定向复核）；Rego等（2020），arXiv:1908.09950（仅摘要核验）。论文记录去重已计数87篇不变。
 
