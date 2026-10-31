@@ -20,3 +20,13 @@ jobs:
         run: PYTHONPATH=verification python -m unittest -v verification.test_two_shared_rows
       - name: Actual tick-193 integration
         run: RUN_TICK193_AUDIT=1 PYTHONPATH=verification python -m unittest -v verification.test_two_shared_rows
+      - name: Report tick-193 exact-certified support and wall time
+        run: |
+          PYTHONPATH=verification python - <<'PY'
+          import json, time
+          from check_two_shared_rows import audit_tick193
+          start=time.perf_counter()
+          result=audit_tick193()
+          print("RUN220_AUDIT_JSON="+json.dumps(result,sort_keys=True))
+          print("RUN220_AUDIT_WALL_SECONDS="+str(time.perf_counter()-start))
+          PY
