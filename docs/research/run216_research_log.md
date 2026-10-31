@@ -22,8 +22,8 @@
 
 - 本地 `Python 3.13`、Linux，标准库 `fractions.Fraction`；使用从仓库Run206/208/210/214/215逐式复核的**源兼容镜像**重放192步，精确复现Run214的第193拍盒 `p∈[1.2965541978,1.6812343259]`、`v∈[-2.5355587595,-0.6005811657]`、Run214六包速度支持下界 `-2.4955466060` 和离线真值。**不是完整GitHub checkout测试**。
 - 命令：`PYTHONPATH=/mnt/data/run216/shims:/mnt/data/run216/verification python -m unittest -v test_joint_support_backup`；结果**8/8通过**。`python -m py_compile /mnt/data/run216/verification/*.py`通过。真实仓库复现：`PYTHONPATH=verification python -m unittest -v verification.test_joint_support_backup`，`PYTHONPATH=verification python verification/check_joint_support_backup.py`（尚未在完整仓库执行）。
-- 本地5次计时中，联合审计中位数约**112ms**，单次二维多边形构造约数毫秒；明显超过20ms控制周期。计时仅为该机器上的Python原型，不作为普适实时性结论。
-- 远端新增源码和测试的Git Blob SHA已分别核对为 `caf38e2d10c85b311b2dd9cdb3b0aa2c7bd77886`、`5de0a97a1ac3f2dfb7cdcc15444443664691df90`，与本地已测文件一致。完整仓库历史回归和GitHub CI尚未运行；详见 `results/joint_support_backup_20261031/checks.json`。
+- 本地5次计时中，联合审计中位数约**99ms**，单次二维多边形构造约数毫秒；明显超过20ms控制周期。计时仅为该机器上的Python原型，不作为普适实时性结论。
+- 远端新增源码和测试的Git Blob SHA已分别核对为 `3f923fc67ac52c7de65f54c297c53a975c68bf6f`、`8bb83f0065b73a20cf4272d1d6f8976126a646e4`，与本地已测文件一致。完整仓库历史回归和GitHub CI尚未运行；详见 `results/joint_support_backup_20261031/checks.json`。
 
 ## 文献与课题评估
 
