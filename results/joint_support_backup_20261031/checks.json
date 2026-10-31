@@ -41,16 +41,16 @@
     "python": "3.13.5",
     "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
     "source_compatible_mirror_not_full_checkout": true,
-    "replay_ms": 3241.725,
-    "polytope_build_ms": 7.803,
+    "replay_ms": 2847.438,
+    "polytope_build_ms": 6.529,
     "joint_backup_ms_samples": [
-      103.272,
-      112.756,
-      111.858,
-      105.424,
-      114.211
+      104.477,
+      97.205,
+      90.632,
+      101.794,
+      99.035
     ],
-    "joint_backup_ms_median": 111.858,
+    "joint_backup_ms_median": 99.035,
     "control_period_ms": 20,
     "within_control_period": false
   },
@@ -60,8 +60,8 @@
     "py_compile": true,
     "full_repository_regression": false,
     "github_ci": false,
-    "source_blob_sha": "caf38e2d10c85b311b2dd9cdb3b0aa2c7bd77886",
-    "test_blob_sha": "5de0a97a1ac3f2dfb7cdcc15444443664691df90"
+    "source_blob_sha": "3f923fc67ac52c7de65f54c297c53a975c68bf6f",
+    "test_blob_sha": "8bb83f0065b73a20cf4272d1d6f8976126a646e4"
   },
   "commands": [
     "PYTHONPATH=/mnt/data/run216/shims:/mnt/data/run216/verification python -m unittest -v test_joint_support_backup",
