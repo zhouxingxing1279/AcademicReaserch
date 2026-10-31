@@ -1,0 +1,49 @@
+name: Run229 four-state finite robust branching graph
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_bridge_branching.py'
+      - 'verification/test_four_state_bridge_branching.py'
+      - 'verification/check_four_state_bridge_graph.py'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run229-bridge-branching.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_bridge_branching.py'
+      - 'verification/test_four_state_bridge_branching.py'
+      - '.github/workflows/run229-bridge-branching.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact Run224-229 focused regression and real-config audit
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_bridge_branching.py verification/test_four_state_bridge_branching.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching
+          python verification/check_four_state_bridge_branching.py --root . --output /tmp/run229_checks.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as Q
+          d=json.load(open('/tmp/run229_checks.json'))
+          assert d['gate_A']=='blocked'
+          assert len(d['certified_edges'])==3
+          assert all(e['robust_covered'] for e in d['certified_edges'])
+          assert Q(d['two_step_branching']['center_adversarial_velocity_magnitude'])==Q(6254383,160000000)
+          assert Q(d['two_step_branching']['seed_successor_velocity_halfwidth'])==Q(17675197493460000327,400000000000000000000)
+          assert d['two_step_branching']['each_single_sign_destination_insufficient']
+          assert d['two_step_branching']['distinct_second_step_position_intervals']
+          print('Run229 exact two-step branching assertions passed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run229-exact-branching-json
+          path: /tmp/run229_checks.json
