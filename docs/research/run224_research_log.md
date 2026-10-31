@@ -32,3 +32,7 @@ Kolmanovsky与Gilbert（1998），Theory and computation of disturbance invarian
 可行性：第一轮前驱有非空证据，但无终端核；创新性：前驱运算是成熟控制理论，当前只是可复现基线；难度：高，须处理多轮集合和部分观测。Gate A仍blocked。
 
 **下一轮唯一优先任务：** 计算第二轮正确量词前驱 Pre(Pre(X))，检验双侧边界见证是否能持续，提供严格内外逼近或有限步排除，而不将单步可行误称为递归可行。
+
+## 合并后证据补记（2026-10-31）
+
+PR #16 https://github.com/zhouxingxing1279/AcademicReaserch/pull/16 已通过非强制Squash合并；main首次落地SHA 1defcf77b9776c40e7febb835b2fe6db2d9a7fdb，重新读取远端main及核心Git Blob SHA确认落地。完整checkout聚焦CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41227640954 为success；verify job的配置合同、6项测试、语法编译和归档JSON逐字比对均成功。没有执行完整仓库历史回归、20ms最坏耗时审计或四状态多拍闭环；Gate A仍blocked。
