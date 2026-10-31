@@ -1,3 +1,11 @@
+## Run220 文献核验与双约束支持算法（2026-10-31；去重仍87篇）
+
+**Scott、Raimondo、Marseglia、Braatz（2016）**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，Automatica 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者稿 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。本轮阅读层级：公开摘要及仓库已有Definition 3、Proposition 1/Section 5笔记交叉核验，非全文重读。研究问题：有界噪声线性系统集合估计；方法：CZ保留线性映射、集合交与Minkowski和相关性。关键前提：有界误差与有效集合表示。结论：可精确表示多面体但复杂度需管理。局限：不直接给出本仓库Tube MPC终端安全保证。关联/可复用：历史联合半空间的控制相关支持；Run220双乘子证书为本仓库自行推导，并非论文定理。待查：真实tick193联合收益及在线预算。
+
+**Köhler、Müller、Allgöwer（2021）**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 。本轮阅读层级：公开摘要与仓库既有定理条件笔记交叉核验，非全文重读。研究问题：噪声输出和扰动下的鲁棒MPC；方法：在线估计误差界结合homothetic tube。关键前提：可靠在线界、检测性/增量可稳定性及相应终端条件。结论：可在这些假设下改善保守性并实现鲁棒约束满足，含10状态四旋翼示例。局限：不自动适用于仓库四状态有限Backup。关联/可复用：将可证上界用于MPC收紧；待查：终端受控不变集、递归可行性及实际运行时间。
+
+**本轮自有算法与证据：** [Run220研究日志](../research/run220_research_log.md)。合成双约束支持从1降至0；实际第193拍未测。不得将本轮标成新增已读论文。
+
 # PAPER_READING_LOG — 无人机 MPC + SMF 论文阅读记录
 
 > 首次整理：2026-10-30（Run200）。从 [READ_PAPERS.md](READ_PAPERS.md) 的85条历史“已阅读/核对”记录迁移，按**论文题名去重为84篇**；Robbins等《Online Constraint Tightening...》的Run126/161/170记录已合并在同一条下，原有阅读说明均保留。历史文件不修改，以避免破坏依赖其SHA-256的既有可复现实验。此后本文件是新增阅读和修订的唯一入口；旧文件只作为历史快照。

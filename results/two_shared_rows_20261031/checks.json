@@ -1,0 +1,34 @@
+{
+  "run": 220,
+  "date": "2026-10-31",
+  "base_main_sha": "157b8375d2469048f8b6ecf91a661d8644018665",
+  "scope": "rational certified support upper bound for up to two shared-history rows",
+  "synthetic_case": {
+    "single_row_support": "1",
+    "two_row_certified_support": "0",
+    "rational_multipliers": [
+      "1/2",
+      "1/2"
+    ],
+    "off_optimal_exact_upper": "1/500"
+  },
+  "tests": {
+    "focused_passed": 4,
+    "full_checkout_integration_skipped": true,
+    "py_compile": true,
+    "full_repo_regression": false,
+    "github_ci": false
+  },
+  "actual_tick193": {
+    "evaluated": false,
+    "extra_gain": null,
+    "remaining_slack": null
+  },
+  "limitations": [
+    "No full checkout due DNS failure",
+    "Negative certified slack lower bound is inconclusive",
+    "No full SMF/CZ posterior or terminal MPC guarantee"
+  ],
+  "gate_A": "blocked",
+  "next_priority": "Run real tick193 two-row audit in full checkout and measure total cost"
+}
