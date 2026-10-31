@@ -4,6 +4,23 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run206 定向复核：真实可达后验与有限时域 backup 的区别（仍为历史84篇）
+
+### Köhler、Müller、Allgöwer（2021）
+- **题名/作者/年份/链接：** *Robust output feedback model predictive control using online estimation bounds*；Johannes Köhler, Matthias A. Müller, Frank Allgöwer；2021；arXiv:2105.03427，https://arxiv.org/abs/2105.03427；作者全文 https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf 。
+- **阅读日期/层级：** 2026-10-30；本轮定向重读作者全文 Section III-C（set-membership bounds）、Section IV Algorithm 1、Assumption 7、Theorem 4 及旧计划移位证明；承接 Run200 既有深读，不宣称重读全部定理。
+- **研究问题/方法：** 有界扰动及噪声下的非线性鲁棒输出反馈 MPC；使用在线有效的估计误差界、homothetic tube、约束收紧及终端成分。
+- **关键假设/结论：** Theorem 4 需要 Assumptions 1、3、4、5、7，δ-IOSS 与 δ-ISS CLF、初始优化可行及有效初始误差界；移位候选与终端包含支撑递归可行性及真实约束满足。单步/四拍备份安全准入不满足这些前提。
+- **局限/课题关联/可复用技术/待查：** 论文提供输出反馈 MPC 证明骨架及四旋翼数值示例，但未直接认证本仓库15-mode位置缺包与推力每拍任意跳变。下一步需证明任意合法后继观测下存在同一当前动作和可行后继备份；不能仅把更紧的后验解释为安全控制器。
+
+### Alamo、Bravo、Camacho（2005）
+- **题名/作者/年份/链接：** *Guaranteed state estimation by zonotopes*；Teodoro Alamo, José Manuel Bravo, Eduardo F. Camacho；Automatica 41(6):1035–1043（2005）；DOI https://doi.org/10.1016/j.automatica.2004.12.008 。
+- **阅读日期/层级：** 2026-10-30；仅正式书目、摘要和历史笔记交叉核对；**未取得可逐式核验的全文**，不引用具体未核实定理。
+- **研究问题/方法/结论：** 以 zonotope 构造有界过程/测量不确定性下的可靠状态集合外包；说明保证包含与集合收紧是既有集合估计技术。
+- **局限/课题关联/可复用技术/待查：** 该估计文献不提供本仓库四拍控制准入或递归终端保证；Run206 的两包速度约束是冻结离散积分恒等式，非新型 zonotope 方法。后续比较区间、CZ 与测量条件化支持函数时需控制同一信息和计算预算。
+
+**Run206 自有结果（不是上述论文的定理）：** 真实零初态、合法扰动/观测历史的精确 Fraction 递推中，纯区间估计在第55/63/57拍首次拒绝四拍 backup；两包速度约束后对应100拍内未拒绝/第96拍拒绝/100拍内未拒绝。它仅证实三条指定轨迹上有限前缀安全和过滤器保守性差异，Gate A 仍 blocked。
+
 ## Run205 定向复核：移动中心信息盒的四拍控制准入（历史84篇内，不重复计数）
 
 ### Lorenzetti、Pavone（2020）
