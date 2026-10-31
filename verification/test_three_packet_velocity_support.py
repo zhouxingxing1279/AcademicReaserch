@@ -1,4 +1,4 @@
-"""Exact standalone tests plus deterministic full-repository replay."""
+"""Exact standalone tests; full-repository replay is a separate integration test."""
 import unittest
 from fractions import Fraction as Q
 import check_three_packet_velocity_support as s
