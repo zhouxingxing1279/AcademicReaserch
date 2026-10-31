@@ -1,3 +1,11 @@
+## Run221 定向原文阅读与终端安全基线（2026-10-31；去重仍87篇）
+
+**Mayne, Raković, Findeisen, Allgöwer（2006）**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222；DOI https://doi.org/10.1016/j.automatica.2006.03.005；原文 https://www2.ee.ic.ac.uk/publications/p5346.pdf 。**阅读日期/层级：** 2026-10-31，直接阅读§2–4、Propositions 1–3、Theorems 1–2、A1–A3与终端条件，非全文逐页精读。**问题/模型/方法：** 有界状态与输出扰动的约束线性系统，Luenberger观测器、两个误差RPI、名义Tube MPC及Pontryagin收紧。**关键假设：** 误差闭环Schur稳定、估计误差与控制误差的RPI、初始误差属于这些集合、终端不变与Lyapunov下降条件。**结论：** 在这些前提下得到鲁棒约束满足及稳定性。**局限：** 不直接覆盖15模式位置丢包、推力跳变与控制相关非线性残差。**关联/可复用：** Run221严格构造孤立姿态通道误差RPI与终端名义集合、证明移位可行；并未满足全系统A1–A3，不引用该文证明本项目六状态稳定性。**待查：** 如何在横向—姿态耦合及不确定推力下获得非空的终端不变集合及终端下降函数？
+
+**Lorenzetti, Pavone（2020）**，*A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*，ECC 2020，DOI https://doi.org/10.23919/ECC51009.2020.9143979；arXiv https://arxiv.org/abs/1911.07360；原文 https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf 。**阅读日期/层级：** 2026-10-31，直接阅读§II–IV-D式(7)–(11)，非全文重读。**问题/方法：** 有界测量/过程噪声下的LTI输出反馈Tube MPC，以固定误差截面和收紧名义优化控制复杂度。**关键假设：** 线性模型、可稳定化/观测性及有界噪声，存在RPI与终端控制/代价下降条件。**结论：** 在其条件下可构造高效的Tube MPC。**局限：** 不包含本仓库推力调度和缺测信息状态；固定截面可能保守。**关联/可复用：** Run221复用其固定截面、名义终端/移位设计思想，但没有完整终端下降或20ms最坏运行时间证据。**待查：** 相同终端保证和计算预算下，测量条件化SMF/CZ能否改善四状态控制可行域？
+
+**本轮自有证据：** [Run221研究日志](../research/run221_research_log.md)；32条48拍确定性闭环、精确不变性与移位证书。上述两篇均已在历史阅读记录中出现，不增加去重篇数；不把本轮工程实现写成文献原定理或新的理论创新。
+
 ## Run220 文献核验与双约束支持算法（2026-10-31；去重仍87篇）
 
 **Scott、Raimondo、Marseglia、Braatz（2016）**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，Automatica 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者稿 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。本轮阅读层级：公开摘要及仓库已有Definition 3、Proposition 1/Section 5笔记交叉核验，非全文重读。研究问题：有界噪声线性系统集合估计；方法：CZ保留线性映射、集合交与Minkowski和相关性。关键前提：有界误差与有效集合表示。结论：可精确表示多面体但复杂度需管理。局限：不直接给出本仓库Tube MPC终端安全保证。关联/可复用：历史联合半空间的控制相关支持；Run220双乘子证书为本仓库自行推导，并非论文定理。待查：真实tick193联合收益及在线预算。
