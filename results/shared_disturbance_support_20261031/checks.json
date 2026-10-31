@@ -1,0 +1,55 @@
+{
+  "run": 219,
+  "date": "2026-10-31",
+  "base_main_sha": "3467cced8d3ad2421d65d51c9d9435fabbbbd163",
+  "decision_tick": 193,
+  "model": "frozen four-state Euler, exact Fraction",
+  "shared_packet_weights": {
+    "135": "1",
+    "165": "-6",
+    "180": "5"
+  },
+  "shared_disturbance_witness": {
+    "all_old_support_maximizers_excluded": true,
+    "old_support_maximizer_count": 2,
+    "left_side_exact": "10787547317/8000000000",
+    "right_side_exact": "2140829889/1600000000",
+    "strict_exclusion_margin_exact": "5212367/500000000",
+    "strict_exclusion_margin_approx": 0.010424734,
+    "truth_satisfies_shared_history_halfspace": true
+  },
+  "critical_support_gain_exact": "5212367/450000000",
+  "critical_support_gain_approx": 0.011583037777777777,
+  "previous_obstruction_slack_approx": -0.03632036879978493,
+  "new_one_halfspace_obstruction_slack_approx": -0.024737331022007154,
+  "finite_backup_still_blocked": true,
+  "attitude_history_independent_exclusion": {
+    "packet_tick": 135,
+    "residual_exact": "4/625",
+    "noise_halfwidth": "1/200",
+    "strict_margin_exact": "7/5000"
+  },
+  "tests": {
+    "focused_passed": 4,
+    "focused_total": 4,
+    "full_checkout_integration_skipped": true,
+    "mirror_integration_passed": true,
+    "py_compile": true,
+    "full_repository_regression": false,
+    "github_ci": false
+  },
+  "environment": "Python 3.13.5 Linux, Fraction; source-compatible independent mirror, not checkout",
+  "timing": {
+    "mirror_replay_seconds": 3.02396,
+    "single_halfspace_clip_ms": 12.3831,
+    "online_20ms_budget_certified": false
+  },
+  "limitations": [
+    "One shared-residual necessary halfspace, not exact full historical posterior",
+    "Only one critical backup row, not full MPC optimization",
+    "No recursive feasibility or terminal RCI",
+    "No full checkout due container DNS failure"
+  ],
+  "gate_A": "blocked",
+  "next_priority": "Check whether additional independent shared-residual rows can close the remaining fifth-step velocity obstruction under a bounded online budget."
+}
