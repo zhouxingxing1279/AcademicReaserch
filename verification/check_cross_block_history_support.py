@@ -147,8 +147,8 @@ def run_tick193():
             'critical_support_dual_multiplier':str(improved['lambda']),
             'best_packet_index':improved['strip_index'],
             'old_slack_exact':old_ob['best_case_slack_exact'],
-            'new_slack_upper_bound_exact':str(Q(old_ob['best_case_slack_exact'])+gain),
-            'new_slack_upper_bound_approx':float(Q(old_ob['best_case_slack_exact'])+gain),
+            'certified_slack_lower_bound_exact':str(Q(old_ob['best_case_slack_exact'])+gain),
+            'certified_slack_lower_bound_approx':float(Q(old_ob['best_case_slack_exact'])+gain),
             'note':'single-row necessary test only; positive slack does NOT certify backup feasibility'}
 
 if __name__=='__main__':
