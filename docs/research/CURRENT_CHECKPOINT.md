@@ -1,3 +1,13 @@
+## Run229 当前检查点（2026-10-31）
+
+**基准main：** `20bf13cdfb1de57ffddacae58ecda5b11ded69cb`。针对Run228中央桥速度分叉，构造种子小盒与正负速度分支，使用Run228精确Fraction外包和并集覆盖取得3条经认证的有向边：种子→正负速度两盒，各分支→各自第二拍位置—速度关联盒。固定 `T=981/200`、`tau=0`；所有后继均满足冻结四状态安全盒。第一拍速度半宽为 `17675197493460000327/400000000000000000000≈0.044188` m/s，中心点两侧对抗速度幅值至少 `6254383/160000000≈0.039089894` m/s。此图为**两拍无环DAG**，无自环、无非空RCI、无SMF输出反馈递归可行性或稳定性证明。验证器正向回归价值明确，但研究创新性仍未建立。
+
+**测试：** Python 3.13本地等公式隔离镜像6项中5通过、1项因无完整checkout跳过；语法编译与JSON生成成功。新增GitHub Actions完整仓库Run224–229回归及配置/有理数断言，CI成功之前不宣称通过。统一论文日志定向复核Li/Liu(2018)原文Proposition 2等，去重已读仍89篇。
+
+**Gate A=blocked。下一轮唯一任务：** 寻找并严格认证一个非空闭合循环单元终端集合（含正负扰动分叉），或提供严谨阻塞证书；不将有限DAG当作MPC终端集合。
+
+---
+
 **Run228合并与CI核验补记（2026-10-31）：** PR #25已非强制Squash合并至main `57f749a884588247b846d251103a2c745f444b6b`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41246301443 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41246344516 均success；Python 3.13.17，完整checkout Run224–228聚焦测试34/34通过、真实配置/编译/精确摘要核验及JSON artifact上传成功。无全仓库历史回归、四状态RCI、输出反馈MPC安全或20ms最坏耗时保证。
 
 ---
