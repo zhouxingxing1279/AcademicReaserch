@@ -4,6 +4,22 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run207 定向核验：因果移位桥与终端可行性的差异（既有84篇，不重复计数）
+
+### Köhler、Müller、Allgöwer（2021）
+- **题名/作者/年份/链接：** *Robust output feedback model predictive control using online estimation bounds*；Johannes Köhler, Matthias A. Müller, Frank Allgöwer；2021；https://arxiv.org/abs/2105.03427 。
+- **本轮日期/证据层级：** 2026-10-30；核对 arXiv 正式题名、作者、摘要及 Run206 已有的 Algorithm 1、Assumption 7、Theorem 4 历史精读记录；本轮未重新逐式阅读全文。
+- **问题/方法/结论：** 有界测量噪声与扰动下，结合在线有效估计误差界、homothetic tube、约束收紧和终端条件，建立鲁棒输出反馈 MPC 的约束保证。历史精读记录指出递归可行性依赖初始可行性、增量稳定/可检测及终端条件。
+- **局限/课题关系/可复用/待查：** 论文没有直接认证本仓库15-mode位置丢包、任意推力调度的盒重置一步桥。可复用“旧计划移位须保留终端可行性”的证明检查顺序；下一步需明确本仓库是否存在后继测量条件化的安全控制策略，不能把一次可移位等同于无限时域递归可行。
+
+### Lorenzetti、Pavone（2020）
+- **题名/作者/年份/链接：** *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*；Joseph Lorenzetti, Marco Pavone；ECC 2020；DOI https://doi.org/10.23919/ECC51009.2020.9143979 ；作者版 https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf 。
+- **本轮日期/证据层级：** 2026-10-30；核对论文摘要及 Run204/205 已有的固定截面 tube、RPI 相关阅读笔记；不宣称本轮全文精读。
+- **问题/方法/结论：** 离散线性系统中以固定截面 tube 和 RPI 误差集进行输出反馈鲁棒 MPC 设计，降低在线复杂度。
+- **局限/课题关系/可复用/待查：** RPI 终端及误差管束不能由 Run207 的五拍盒重置安全约束替代。下一步可借鉴其终端设计和误差耦合思路，但需要在本仓库四状态调度与观测图上独立建立不变性。
+
+**Run207 自有结论：** 260项精确有理约束可保证同一当前力矩之后，任意合法下一观测后验均有四拍零力矩备份；交变扰动可达场景第95拍该更强桥条件拒绝，而四拍零力矩备份仍可行。这是特定控制模板的一步条件性充分保证，不是上述论文的定理，也不是终端 RCI。详见 [Run207 日志](../research/run207_research_log.md)。
+
 ## Run206 定向复核：真实可达后验与有限时域 backup 的区别（仍为历史84篇）
 
 ### Köhler、Müller、Allgöwer（2021）
