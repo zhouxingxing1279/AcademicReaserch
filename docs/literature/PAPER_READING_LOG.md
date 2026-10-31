@@ -1,3 +1,11 @@
+## Run222 终端不变集阻塞与文献核验（2026-10-31；去重已读仍87篇）
+
+**Mayne, Raković, Findeisen, Allgöwer（2006）**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222；DOI https://doi.org/10.1016/j.automatica.2006.03.005 。**阅读日期/层级：** 2026-10-31，对Run221已阅读§2–4、Propositions 1–3、Theorems 1–2、A1–A3笔记及公开摘要定向复核，非重新全文精读。**研究问题/模型/方法：** 有界扰动约束线性系统的输出反馈Tube MPC；观测误差RPI、跟踪误差管、名义收紧及终端集合。**关键假设：** 误差集合有效、终端不变/下降条件及初始可行性。**主要结论：** 在所列条件下可保证约束与稳定性。**局限：** 不自动覆盖推力调度、姿态小角度不足以抵消横向残差的情况。**本课题关联/可复用：** Run222验证终端非空性这一前提在四状态扩展中失败；不能引用论文为失败模板背书。**待查：** 扩大倾角的联合四状态终端核是否非空？
+
+**Franco Blanchini（1999）**，*Set invariance in control*，*Automatica* 35(11):1747–1767；DOI https://doi.org/10.1016/S0005-1098(99)00113-2；书目 https://dblp.org/rec/journals/automatica/Blanchini99.html 。**核验日期/状态：** 2026-10-31，仅DBLP书目元数据核验，**未阅读正文，不计入已读篇数**。**研究问题：** 控制不变性理论综述（仅根据题名/书目定位）。**方法、具体定理假设、主要结论、局限：** 待原文阅读核验，不编造。**本课题关联/可复用：** 后续审计四状态鲁棒受控不变核的基础参考。**待查：** 具体鲁棒可生存核算法与适用假设。
+
+**本轮自有结果：** [Run222研究日志](../research/run222_research_log.md)，严格有理数漂移反证，仅适用于冻结横向残差不确定性合同，不是文献原定理。论文去重已读数仍87篇。
+
 ## Run221 定向原文阅读与终端安全基线（2026-10-31；去重仍87篇）
 
 **Mayne, Raković, Findeisen, Allgöwer（2006）**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222；DOI https://doi.org/10.1016/j.automatica.2006.03.005；原文 https://www2.ee.ic.ac.uk/publications/p5346.pdf 。**阅读日期/层级：** 2026-10-31，直接阅读§2–4、Propositions 1–3、Theorems 1–2、A1–A3与终端条件，非全文逐页精读。**问题/模型/方法：** 有界状态与输出扰动的约束线性系统，Luenberger观测器、两个误差RPI、名义Tube MPC及Pontryagin收紧。**关键假设：** 误差闭环Schur稳定、估计误差与控制误差的RPI、初始误差属于这些集合、终端不变与Lyapunov下降条件。**结论：** 在这些前提下得到鲁棒约束满足及稳定性。**局限：** 不直接覆盖15模式位置丢包、推力跳变与控制相关非线性残差。**关联/可复用：** Run221严格构造孤立姿态通道误差RPI与终端名义集合、证明移位可行；并未满足全系统A1–A3，不引用该文证明本项目六状态稳定性。**待查：** 如何在横向—姿态耦合及不确定推力下获得非空的终端不变集合及终端下降函数？

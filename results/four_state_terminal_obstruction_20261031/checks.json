@@ -1,0 +1,25 @@
+{
+  "attitude_phi_radius": "3/50",
+  "evidence": "EXACT_RATIONAL_ADVERSARIAL_DRIFT_OBSTRUCTION",
+  "gate_A": "blocked",
+  "lateral_residual_positive_branch": "47/25 + (243/16000)*T",
+  "limitations": [
+    "Applies to the Run208/210 independent adversarial lateral residual envelope, not necessarily realizable physical aerodynamics.",
+    "Does not exclude a four-state terminal set permitting |phi|>3/50, a reduced disturbance set, or a different terminal strategy.",
+    "No four-state SMF/MPC closed loop or terminal Lyapunov stability is established."
+  ],
+  "necessary_positive_tilt_lower_bound_for_nonpositive_acceleration": "6731149/47088000",
+  "nonempty_robust_invariant_subset_of_attitude_strip_and_bounded_vx": false,
+  "run": "222",
+  "scope": "frozen four-state Euler lateral uncertainty envelope, all admissible thrust and torque policies",
+  "steps_to_violate_from_vx_minus_three": 246,
+  "steps_to_violate_from_vx_zero": 123,
+  "thrust_interval": [
+    "981/200",
+    "2943/200"
+  ],
+  "velocity_growth_per_tick_lower_bound": "3905869/160000000",
+  "velocity_lower_bound_at_worst_witness_step": "240421887/80000000",
+  "velocity_lower_bound_at_zero_witness_step": "480421887/160000000",
+  "worst_case_acceleration_lower_bound": "3905869/3200000"
+}

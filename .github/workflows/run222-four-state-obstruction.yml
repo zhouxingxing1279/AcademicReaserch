@@ -1,0 +1,36 @@
+name: Run222 four-state terminal obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_terminal_obstruction.py'
+      - 'verification/test_four_state_terminal_obstruction.py'
+      - 'results/four_state_terminal_obstruction_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run222-four-state-obstruction.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_terminal_obstruction.py'
+      - 'verification/test_four_state_terminal_obstruction.py'
+      - 'results/four_state_terminal_obstruction_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run222-four-state-obstruction.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact certificate and full checkout configuration tests
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_terminal_obstruction.py verification/test_four_state_terminal_obstruction.py
+          python -m unittest -v verification.test_four_state_terminal_obstruction
+          python verification/check_four_state_terminal_obstruction.py --root . --output /tmp/run222_checks.json
+          diff -u results/four_state_terminal_obstruction_20261031/checks.json /tmp/run222_checks.json
