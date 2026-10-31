@@ -4,6 +4,26 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run218 定向阅读：跨块历史约束的零增益支持证书（2026-10-31；去重87篇不变）
+
+### Scott、Raimondo、Marseglia、Braatz（2016）——已有论文，本轮原稿局部复核
+- **题名/作者/年份/出版：** Joseph K. Scott, Davide M. Raimondo, Giuseppe Roberto Marseglia, Richard D. Braatz, *Constrained zonotopes: A new tool for set-based estimation and fault detection*, 2016, *Automatica* 69:126–136；DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开稿 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf。
+- **阅读日期与级别：** 2026-10-31，核对作者原文第2节集合表示与运算、Definition 3和第3节开头；**本轮不是全文重读**。
+- **研究问题/方法/模型：** 在有界误差离散系统中，用受约束Zonotope的生成元与线性等式约束表达非对称相关集合；研究线性映射、广义交、Minkowski和及保守降阶。
+- **重要假设/结论：** 不限制表示复杂度时可表达任意凸多面体；在所定义的表示和运算下部分集合运算可精确计算；复杂度与精度存在权衡。该结论不保证添加任意历史条带后控制相关支持必然收紧。
+- **局限/课题关联/可复用技术：** Run218在第193拍发现一个属于Run216乘积外包的关键支持极大点，同时满足全部6条Run217跨块必要条带，故即使联合使用这些条带该方向增益仍精确为0；无需再对相同6条带重复昂贵的4D LP。此结果不说明完整CZ历史后验同样无增益。
+- **待查问题：** 保留共享扰动和多包观测一致性的完整历史约束能否排除该极大点？如何给出可检查的可行/不可行证书？
+
+### Köhler、Müller、Allgöwer（2021）——已有论文，本轮原稿局部复核
+- **题名/作者/年份/链接：** Johannes Köhler, Matthias A. Müller, Frank Allgöwer, *Robust output feedback model predictive control using online estimation bounds*, 2021, arXiv https://arxiv.org/abs/2105.03427；公开稿 https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf。
+- **阅读日期与级别：** 2026-10-31，核对摘要、第I节贡献、第II节问题设置及Assumption 1有界扰动；**不是全文重读**。
+- **研究问题/方法/模型：** 在线验证状态估计误差界并结合homothetic Tube MPC实现带噪声与扰动的输出反馈约束控制；论文给出非线性四旋翼示例。
+- **重要假设/结论：** 有界扰动、检测性/稳定性和相应估计误差、终端/优化条件是其递归可行与约束保证的组成部分；本仓库尚未建立这些条件。
+- **局限/课题关联/可复用技术：** 本轮只证明一条有限时域安全审计行在六条历史必要约束下未改善，不是MPC递归可行性结果。在线可靠支持界可作为未来Tube MPC约束收紧的候选接口。
+- **待查问题：** 何种紧凑历史一致集合能在20ms预算内提供真正的控制相关支持改善，并连接可验证终端安全集？
+
+**本轮自有负面证据（非论文定理）：** [Run218研究日志](../research/run218_research_log.md)；关键方向6条跨块H-strip联合支持增益精确为0，五步负速度行仍严格阻塞；完整仓库集成尚未执行。去重87篇不变。
+
 ## Run217 定向核对：跨块历史相关性与控制相关支持（2026-10-31；去重87篇不变）
 
 ### Scott、Raimondo、Marseglia、Braatz（2016）——既有论文，本轮书目/摘要核对
