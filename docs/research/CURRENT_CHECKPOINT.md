@@ -1,3 +1,21 @@
+# 当前研究检查点 — Run223（2026-10-31）
+
+**基准main：** f72155bf15c782ca32d51d0cd873524060d1372e。**主方向：** 无人机MPC＋SMF鲁棒输出反馈闭环，保持单课题收敛。
+
+**本轮严格必要条件：** 在Run208/210允许每拍独立选择|r_x|≤47/25+(243/16000)T、T∈[981/200,2943/200]、h=1/50、|vx|≤3的冻结横向Euler模型下，使用Taylor有理数上界证明：任何非空鲁棒受控不变四状态集合C必须满足sup_C(phi)>717/5000=0.1434和inf_C(phi)<-717/5000。任意完全落在phi≤0.1434或phi≥-0.1434的候选终端集合都会被合法持续对抗残差强制违反速度约束。r=0.14的严格有限越界上限为5988拍；r=0.1434为519396拍。若轨迹需要从+0.1434转到-0.1434，姿态速率界给出至少8拍的运动学下界，不是可达性证明。
+
+**证据边界：** 必要条件，不是非空终端核构造。对r=0.15漂移下界为负，不能断言可行。未完成四状态SMF/MPC递归可行、稳定、六状态安全。Run221二维姿态闭环保证不变；Gate A仍blocked。该极端扰动合同不等同真实持续气动扰动。
+
+**测试：** 本地Python 3标准库Fraction，5项测试4通过、1项因无完整checkout跳过，py_compile成功；新增CI将核对真实配置、全部5项测试及归档JSON。未见成功CI前不得宣称已通过。
+
+**文献：** Kolmanovsky与Gilbert（1998），DOI https://doi.org/10.1155/S1024123X98000866，出版商摘要核验；Blanchini（1999），DOI https://doi.org/10.1016/S0005-1098(99)00113-2，书目核验。均未新增正文精读计数；统一论文阅读记录87篇不变。
+
+**工件：** verification/check_two_sided_terminal_necessity.py、verification/test_two_sided_terminal_necessity.py、results/two_sided_terminal_20261031/checks.json、docs/research/run223_research_log.md、.github/workflows/run223-two-sided-terminal.yml。
+
+**下一轮唯一优先任务：** 对允许|phi|>0.1434的四状态联合终端候选，计算一轮正确因果量词的鲁棒前驱，给出非空内核见证或严格进一步阻塞；之后再谈SMF＋Tube MPC集成。
+
+---
+
 # 当前研究检查点 — Run222（2026-10-31）
 
 **主方向：** 无人机MPC＋SMF输出反馈闭环；保持证据驱动单一课题收敛。基准main `5632a93296983955606dc42822f4de5dfeb824f9`。

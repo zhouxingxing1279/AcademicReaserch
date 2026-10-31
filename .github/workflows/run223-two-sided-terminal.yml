@@ -1,0 +1,36 @@
+name: Run223 two-sided terminal necessary condition
+on:
+  pull_request:
+    paths:
+      - 'verification/check_two_sided_terminal_necessity.py'
+      - 'verification/test_two_sided_terminal_necessity.py'
+      - 'results/two_sided_terminal_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run223-two-sided-terminal.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_two_sided_terminal_necessity.py'
+      - 'verification/test_two_sided_terminal_necessity.py'
+      - 'results/two_sided_terminal_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run223-two-sided-terminal.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact rational necessity and real configuration checks
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_two_sided_terminal_necessity.py verification/test_two_sided_terminal_necessity.py
+          python -m unittest -v verification.test_two_sided_terminal_necessity
+          python verification/check_two_sided_terminal_necessity.py --root . --output /tmp/run223_checks.json
+          diff -u results/two_sided_terminal_20261031/checks.json /tmp/run223_checks.json
