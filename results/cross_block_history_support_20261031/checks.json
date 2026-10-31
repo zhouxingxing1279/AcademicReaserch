@@ -1,0 +1,56 @@
+{
+  "run": 217,
+  "date": "2026-10-31",
+  "base_main_sha": "62d845a628ea78933d8451d205bf3307f4acc656",
+  "problem": "Run216 tick193 fifth-step negative-velocity obstruction; cross-block historical coupling",
+  "method": "4D H-strips from exact Euler attitude recursion plus per-strip scalar exact-rational LP dual; not full CZ",
+  "theory": {
+    "cross_strip": "|p_k-(k-a)h v_k - A phi_k + B omega_k - (y_a+D)| <= sigma_p+h^2 sum_{i=a}^{k-1}(i-a+1)rmax(T_i)",
+    "A": "h^2 sum (i-a+1) T_i",
+    "B": "h^3 sum (i-a+1)(k-i) T_i",
+    "D": "h^2 sum (i-a+1)T_i*(h^2/J) sum_{j=i}^{k-1}(j-i+1)u_j",
+    "support_dual": "min_lambda h_(Ppv x Pao)(q-lambda c)+lambda center+|lambda|radius",
+    "guarantee": "valid necessary history strip and upper support bound under exact Euler attitude dynamics, known applied torques and bounded disturbances",
+    "caveat": "one-strip dual exact when strip-product intersection nonempty; min over strips separately is outer bound"
+  },
+  "tests": {
+    "command": "cd /mnt/data/run217 && python -m unittest -v test_cross_block_history_support && python -m py_compile *.py",
+    "passed": 6,
+    "total": 6,
+    "py_compile": true,
+    "full_checkout": false,
+    "github_ci": false,
+    "source_git_blob": "4850a04d9d7df9ec08d82724b0a6d6f91f9c7a1c",
+    "test_git_blob": "017f4ff9fdef0ecc2a26b01f03eaa4b561455fd6"
+  },
+  "synthetic": {
+    "independent_support": "2",
+    "cross_strip_support": "1/5",
+    "exact_improvement": "9/5",
+    "not_real_tick193": true
+  },
+  "runtime": {
+    "environment": "local Linux Python 3.13 standard library",
+    "data": "synthetic 6 packets, 11/6 polygon vertices, constant high thrust, artificial torques",
+    "six_strip_build_median_ms": 5.2783,
+    "six_one_strip_duals_median_ms": 19.3852,
+    "total_sequential_median_approx_ms": 24.6635,
+    "control_period_ms": 20,
+    "real_time_verified": false
+  },
+  "integration": {
+    "tick193_entry_point": "PYTHONPATH=verification python verification/check_cross_block_history_support.py",
+    "tick193_executed": false,
+    "reason": "full GitHub checkout unavailable in local runtime; connector read/write available but container network DNS blocked",
+    "tick193_support_gain": null,
+    "backup_feasibility": null
+  },
+  "literature": {
+    "reviewed": "Scott et al 2016 existing entry; original author manuscript and metadata checked",
+    "doi": "10.1016/j.automatica.2016.02.036",
+    "new_full_read_count": 0,
+    "existing_deduplicated_count": 87
+  },
+  "gate_A": "blocked",
+  "next_priority": "Run tick193 full-repository integration and check exact dual gain against 0.0363203688 obstruction; optimize to <20ms before extending to all backup rows"
+}
