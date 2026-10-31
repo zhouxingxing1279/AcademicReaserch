@@ -38,7 +38,7 @@
 ## 4. 文献与硕士课题收敛
 
 - Scott、Raimondo、Marseglia、Braatz（2016），*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036。复核公开正文引言与集合表示/交运算的相关论述；CZ 能表示联合约束，不能将本文一维支持交集冒称 CZ。
-- Rego、Raffo、Scott、Raimondo（2020），*Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems*，*Automatica* 111:108614，arXiv https://arxiv.org/abs/1908.09950。仅核对摘要/书目信息，未全文精读，不增加已读去重计数；非线性 CZ 传播方法可作为后续候选，当前四状态模型先采用线性精确传播。
+- Rego、Raffo、Scott、Raimondo（2020），*Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems*，*Automatica* 111:108614，arXiv https://arxiv.org/abs/1908.09950。本轮仅核对摘要/书目信息；仓库Run179已有分章节全文精读记录，本轮不重复声称精读，也不增加去重计数；非线性 CZ 传播方法可作为后续候选，当前四状态模型先采用线性精确传播。
 - 统一论文阅读记录仍为87篇已计数文献，按证据级别更新本轮复核，不将摘要核验标为已读全文。
 
 **Gate A = blocked。** 现有成果：四状态 SMF 数值闭环、有限时域因果 Backup、历史一致一维支持的严格局部准入恢复及其后续负面界。缺口：联合 `(p,v,phi,omega)` 历史相关性、可在线计算的 CZ/线性约束表示、完整 MPC、终端不变性、递归可行性、稳定性与六状态安全证明。
