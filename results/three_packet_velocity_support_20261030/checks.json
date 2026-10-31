@@ -19,7 +19,7 @@
   "previous_box_lower_excluded_by_history": true,
   "code_reproduces_exact_fractions": "python verification/check_three_packet_velocity_support.py --output /tmp/run212_exact.json",
   "tests": "PYTHONPATH=verification python -m unittest -v verification.test_three_packet_velocity_support",
-  "tested_in": "Python 3.11 local exact algorithm mirrors of Run206/208/210/211; 4/4 tests, full deterministic replay; not full repository checkout",
+  "tested_in": "Python 3.13.5 local exact algorithm mirrors of Run206/208/210/211; 4/4 tests, full deterministic replay; not full repository checkout",
   "gate_A": "blocked",
   "limitations": [
     "This is a rigorous outer velocity interval, not an exact CZ posterior.",
