@@ -39,12 +39,19 @@ def cross_block_packet_strip(packet_tick, packet_position, end_tick,
         raise ValueError('missing applied causal history')
     n=k-a
     A=B=D=R=Z
+    # Reverse suffix recurrence: W_i = sum_{j=i}^{k-1}(j-i+1)u_j
+    # = W_{i+1} + sum_{j=i}^{k-1}u_j. This is O(k-a), not quadratic.
+    suffix=weighted=Z
+    weighted_by_tick={}
+    for i in range(k-1,a-1,-1):
+        suffix+=Q(applied_torques[i])
+        weighted+=suffix
+        weighted_by_tick[i]=weighted
     # Compute phi_i=phi_k-(k-i)*h*omega_k+C_i exactly.
     for i in range(a,k):
         t=Q(thrusts[i]); w=i-a+1
         if t<0:raise ValueError('negative thrust')
-        ci=h*h/inertia*sum(((j-i+1)*Q(applied_torques[j])
-                             for j in range(i,k)),Z)
+        ci=h*h/inertia*weighted_by_tick[i]
         A+=h*h*w*t
         B+=h*h*h*w*(k-i)*t
         D+=h*h*w*t*ci
