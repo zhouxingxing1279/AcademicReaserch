@@ -1,0 +1,96 @@
+{
+  "run": "Run206",
+  "date": "2026-10-30",
+  "status": "AUDIT_COMPLETED_WITH_REFUSALS",
+  "evidence": "EXACT_RATIONAL_REACHABLE_DETERMINISTIC_REPLAY_PLUS_CONDITIONAL_FOUR_TICK_AUDIT",
+  "model": "frozen four-state Euler; h=J=1/50; T in [4.905,14.715]; |tau|<=0.08; |r_x|<=1.88+243*T/16000",
+  "initial_true_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "initial_outer_halfwidth": [
+    "1/50",
+    "1/10",
+    "1/200",
+    "1/100"
+  ],
+  "packet": "position at ticks 15,30,...; scheduled misses at 5 and 10 of each 15-tick cycle; phi and omega observed every tick",
+  "policy": "causal midpoint feedback; exact four-tick robust admissible interval; future torques fixed zero in audit; reject if interval empty",
+  "display": "approximate decimals for summary only; computations, inclusion and audit decisions use exact Fraction",
+  "rows": [
+    {
+      "estimator": "interval",
+      "scenario": "positive_high",
+      "accepted": 54,
+      "first_refusal_tick": 55,
+      "refusal_reason": "empty_four_tick_backup_interval",
+      "max_velocity_halfwidth_approx": 2.451223788,
+      "max_abs_true_velocity_approx": 1.92572909,
+      "success_packets": 3
+    },
+    {
+      "estimator": "interval",
+      "scenario": "alternating_high",
+      "accepted": 62,
+      "first_refusal_tick": 63,
+      "refusal_reason": "empty_four_tick_backup_interval",
+      "max_velocity_halfwidth_approx": 2.710586348,
+      "max_abs_true_velocity_approx": 0.6301253798,
+      "success_packets": 4
+    },
+    {
+      "estimator": "interval",
+      "scenario": "switch_positive",
+      "accepted": 56,
+      "first_refusal_tick": 57,
+      "refusal_reason": "empty_four_tick_backup_interval",
+      "max_velocity_halfwidth_approx": 2.435325675,
+      "max_abs_true_velocity_approx": 1.972837375,
+      "success_packets": 3
+    },
+    {
+      "estimator": "packet_velocity",
+      "scenario": "positive_high",
+      "accepted": 100,
+      "first_refusal_tick": null,
+      "max_velocity_halfwidth_approx": 1.091239321,
+      "max_abs_true_velocity_approx": 2.160123224,
+      "success_packets": 6
+    },
+    {
+      "estimator": "packet_velocity",
+      "scenario": "alternating_high",
+      "accepted": 95,
+      "first_refusal_tick": 96,
+      "refusal_reason": "empty_four_tick_backup_interval",
+      "max_velocity_halfwidth_approx": 1.059072331,
+      "max_abs_true_velocity_approx": 1.18511266,
+      "success_packets": 6,
+      "filtered_torque_ticks": 2
+    },
+    {
+      "estimator": "packet_velocity",
+      "scenario": "switch_positive",
+      "accepted": 100,
+      "first_refusal_tick": null,
+      "max_velocity_halfwidth_approx": 1.054271971,
+      "max_abs_true_velocity_approx": 1.292676054,
+      "success_packets": 6
+    }
+  ],
+  "checks": {
+    "new_unittests": "10/10 PASS",
+    "python": "3.13",
+    "environment": "minimal config mirror of frozen repository fields; full repository regression and CI not run",
+    "violations_before_refusal": 0
+  },
+  "caveats": [
+    "Only three selected disturbance/thrust histories and two interval estimators; not exhaustive over observations",
+    "Initial true state is zero with a containing outer box, not a proof for the full frozen initialization ensemble",
+    "Four-tick backup certificates do not guarantee next-step feasibility or terminal invariance",
+    "No CZ optimization or MPC QP is implemented",
+    "Refusal is not a safe recovery action; Gate A remains blocked"
+  ]
+}
