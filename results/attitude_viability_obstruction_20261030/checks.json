@@ -1,0 +1,32 @@
+{
+  "run": "209",
+  "kind": "verified summary; full exact Fraction output regenerable by verification/check_attitude_viability_obstruction.py",
+  "source": "Run208 alternating_high reachable state before tick 96",
+  "accepted_prior_ticks": 95,
+  "attitude_phi_approx": 0.29924394150001254,
+  "rate_omega_approx": 1.944450731249843,
+  "h": "1/50",
+  "J": "1/50",
+  "torque_limit": "2/25",
+  "attitude_limit": "9/20",
+  "minimum_attitude_by_n_approx": [
+    0.33813295612500943,
+    0.3754219707500063,
+    0.4111109853750031,
+    0.4452,
+    0.47768901462499685
+  ],
+  "minimum_attitude_n5_exact": "4344556278965654737160284984001902450089841553479798966451058763568600738606203/9094947017729282379150390625000000000000000000000000000000000000000000000000000",
+  "unavoidable_excess_n5_exact": "251830120987477666542609202751902450089841553479798966451058763568600738606203/9094947017729282379150390625000000000000000000000000000000000000000000000000000",
+  "unavoidable_excess_n5_approx": 0.027689014624996858,
+  "torque_vertices_checked": 32,
+  "tests_passed": 9,
+  "status": "PROVEN_LOCAL_REACHABLE_STATE_NONVIABLE_WITHIN_FIVE_TICKS",
+  "gate_A": "blocked",
+  "limitations": [
+    "defined-discrete four-state Euler proxy only",
+    "single reachable history",
+    "no infinite-horizon controller certified",
+    "local minimal mirror tests, no full repository checkout or CI"
+  ]
+}
