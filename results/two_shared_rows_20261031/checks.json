@@ -31,7 +31,7 @@
     "interpretation": "No additional gain certified by tested 12 second rows; negative slack lower bound inconclusive"
   },
   "limitations": [
-    "No full checkout due DNS failure",
+    "Local container DNS prevented checkout; full checkout succeeded in GitHub Actions",
     "Negative certified slack lower bound is inconclusive",
     "No full SMF/CZ posterior or terminal MPC guarantee"
   ],
