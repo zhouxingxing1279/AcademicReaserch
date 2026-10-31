@@ -1,3 +1,5 @@
+**Run224验证后补记（2026-10-31）：** PR #16（https://github.com/zhouxingxing1279/AcademicReaserch/pull/16）已通过非强制Squash合并至main提交 1defcf77b9776c40e7febb835b2fe6db2d9a7fdb。完整checkout GitHub Actions运行 https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41227640954 状态success；verify job含Python语法编译、6项测试、真实配置断言与归档JSON逐字比对，均成功。新增源码、测试、归档及CI工作流的Git Blob SHA与本地已测文件逐项一致。**这是聚焦测试，不是全仓库回归或完整闭环证明。**
+
 # 当前研究检查点 — Run224（2026-10-31）
 
 **基准main：** 372fdc669e58ec8a3987e544f401e077813f6eed。**主方向：** 四旋翼MPC＋SMF鲁棒输出反馈闭环，证据驱动收敛。
