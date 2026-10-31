@@ -28,7 +28,8 @@ def polygon(box2, strips=()):
     """
     (xl,xh),(yl,yh)=box2
     if xl>xh or yl>yh: return ()
-    vertices=[(Q(xl),Q(yl)),(Q(xh),Q(yl)),(Q(xh),Q(yh)),(Q(xl),Q(yh))]
+    vertices=list(dict.fromkeys(((Q(xl),Q(yl)),(Q(xh),Q(yl)),
+                                 (Q(xh),Q(yh)),(Q(xl),Q(yh)))))
     for a,b,c in strips:
         a,b,c=Q(a),Q(b),Q(c)
         if not vertices: return ()
