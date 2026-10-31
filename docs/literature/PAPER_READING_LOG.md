@@ -4,6 +4,28 @@
 >
 > 证据口径：“原文精读”需有明确章节/公式/定理；“正文片段核对”不能推断未见部分；“仅摘要核对”不能视作完整论文阅读。历史记录中缺失的作者、日期、定理假设、局限或待查问题一律保留为**待核验**，不编造。未来每条统一补齐：题名、作者、年份、DOI/arXiv/正式链接、阅读日期及层级、研究问题、模型与方法、关键假设/定理、结论、局限、对课题的关系、可复用技术、待查问题。
 
+## Run216 定向复核：联合历史支持与控制相关安全准入（2026-10-31；去重87篇不变）
+
+### Scott、Raimondo、Marseglia、Braatz（2016）——既有论文，作者原文分节复核
+- **题名、作者、年份、出版信息：** *Constrained zonotopes: A new tool for set-based estimation and fault detection*；Joseph K. Scott、Davide M. Raimondo、Giuseppe Roberto Marseglia、Richard D. Braatz；2016；*Automatica* 69:126–136；DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开原文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。
+- **阅读日期及证据层级：** 2026-10-31；直接核对Definition 3、Proposition 1、Theorem 1、Section 5估计递推及复杂度说明；不是全篇重新精读。
+- **研究问题与方法/模型：** 用CG表示的constrained zonotope保留有界误差状态估计中的线性映射、集合交及Minkowski和的相关性，并在复杂度增长后做保守降阶。
+- **重要假设/定理：** Proposition 1给出CZ三种集合运算的精确恒等式；Theorem 1指出不限制表示复杂度时，CZ可表示任意凸多面体。该等价性**不表示**任意H多边形程序已实现CG形式的CZ递推。
+- **主要结论与局限：** 相关性保留有潜在精度优势，但生成元、约束和计算成本会增长；该论文不直接证明本仓库的15-mode推力调度、间歇量测和五拍备份递归可行。
+- **与课题关联/可复用技术：** Run216用二维H多边形顶点支持直接进入两层Backup，避免预测盒重置；真实第193拍仍被第5拍速度下界阻塞，说明仅保留(p,v)、(phi,omega)块内历史条带不够。下一步考虑完整4D跨块约束及可验证压缩。
+- **待查问题：** 如何在同等历史信息下保存v与phi/omega的动态耦合，并对第193拍临界支持给出可检查的精确/对偶证书和20ms内的计算方案？
+
+### Köhler、Müller、Allgöwer（2021）——既有论文，摘要与既有定理笔记核对
+- **题名、作者、年份、链接：** *Robust output feedback model predictive control using online estimation bounds*；Johannes Köhler、Matthias A. Müller、Frank Allgöwer；2021；arXiv https://arxiv.org/abs/2105.03427 。
+- **阅读日期及证据层级：** 2026-10-31；核对arXiv公开摘要与仓库既有Assumption 7/Theorem 4笔记，未重新全文精读。
+- **研究问题与方法/模型：** 通过在线验证估计误差界，将输出反馈估计与homothetic Tube MPC约束收紧结合；含非线性四旋翼示例。
+- **重要假设/定理：** 可靠估计误差界、增量稳定/可检测性、有效终端条件与初始可行性等是全时域保证的前提，不能从有限步Backup的局部准入直接推导。
+- **主要结论与局限：** 在线估计界可改善性能/保守性，但其证明条件尚未由本仓库四状态实验满足。
+- **与课题关联/可复用技术：** 控制相关支持函数可用于局部鲁棒约束审计；仍须补齐终端不变性及真正滚动MPC。
+- **待查问题：** 能否构造一个范围适中、计算可行的终端安全基线，再公平比较CZ与区间SMF？
+
+**本轮自有负面证据（非文献定理）：** [Run216研究日志](../research/run216_research_log.md)；第193拍联合H外包五拍Backup仍拒绝，精确临界行裕度约-0.03632037，原型中位计算约99ms，超出20ms。去重文献仍87篇。
+
 ## Run214 定向复核：滚动历史线性约束与 CZ 联合相关性（2026-10-31；已计数去重87篇不变）
 
 ### Scott、Raimondo、Marseglia、Braatz（2016）——已有文献，公开正文定向复核
