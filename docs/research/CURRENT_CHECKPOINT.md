@@ -1,3 +1,21 @@
+# 当前研究检查点 — Run221（2026-10-31）
+
+**主方向：** 四旋翼/无人机 MPC＋SMF 输出反馈闭环；单一课题、允许证据驱动收敛。基准main `df66453b7dc0565905c3d366c77f1ee0f27f2141`。
+
+**严格正向增量（限定范围）：** 在真实冻结Euler姿态子通道 `(phi,omega)`，用每拍有界姿态/角速度测量、区间SMF中点、`K=(-8/25,-4/25)`、误差RPI `E={|e_phi|<=1/100,|e_omega+4e_phi|<=1/25}`、名义终端不变集 `Zf={|z_phi|<=1/20,|z_omega+4z_phi|<=1/5}`，完成可执行的有限网格名义MPC与移位尾计划。精确证明姿态通道误差不变、硬约束收紧与递归可行；没有终端Lyapunov下降/目标收敛证明。现有 `check_terminal_polytope.py` 已有同K的角度RPI理论，本轮不宣称创新。
+
+**有限闭环证据：** Python 3.13.5 本地6项测试中5项通过、1项因缺完整checkout跳过；32条48拍确定性轨迹合计1536拍，SMF包含检查全通过、硬约束违约0。相同SMF和K下，MPC平均角度跟踪RMSE约0.01329536 rad，终端律对照约0.04001874 rad；624拍选择非原尾计划。单点优化本地中位5.49ms、p95约6.70ms，非20ms最坏耗时保证。新增GitHub Actions全仓库配置断言与归档结果逐字比对。
+
+**证据边界：** 姿态测量每拍成功、姿态过程扰动为零、初始姿态误差属于E；横向/垂向残差、位置缺测、推力任意跳变、完整四/六状态安全与递归可行均**未证明**。Gate A仍为blocked。当前没有证据表明独立盒/CZ的控制性能优劣在全系统成立。
+
+**文献：** Mayne等(2006), DOI https://doi.org/10.1016/j.automatica.2006.03.005；Lorenzetti与Pavone(2020), DOI https://doi.org/10.23919/ECC51009.2020.9143979。两篇本轮核对原文终端/收紧相关章节，统一论文日志去重87篇不变。
+
+**本轮工件：** `verification/check_attitude_terminal_smf_mpc.py`、`verification/test_attitude_terminal_smf_mpc.py`、`results/attitude_terminal_smf_mpc_20261031/checks.json`、`docs/research/run221_research_log.md`、`.github/workflows/run221-attitude-terminal.yml`。
+
+**下一轮唯一优先任务：** 审计是否存在将本轮姿态终端集合与四状态横向位置/速度约束组合的充分因果受控不变终端集合；如无，则给出精确阻塞证书，绝不把姿态局部保证推广到四状态。
+
+---
+
 # 当前研究检查点 — Run220（2026-10-31）
 
 **主方向：** 无人机MPC＋SMF输出反馈闭环；以可复现的安全基线与真实控制收益为目标。
