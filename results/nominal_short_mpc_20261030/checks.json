@@ -1,0 +1,114 @@
+{
+  "run": "211",
+  "date": "2026-10-30",
+  "base_main_sha": "4af23146b4233c37f6ae18a3c5a4533633e21964",
+  "environment": "Python 3.13.5, Linux-6.18.57-x86_64-with-glibc2.41; local mirrors of Run206/208/210, NOT full repo checkout",
+  "new_tests": "8/8 passed",
+  "reproduction": [
+    "PYTHONPATH=verification python -m unittest -v verification.test_nominal_short_mpc",
+    "PYTHONPATH=verification python verification/check_nominal_short_mpc.py --output /tmp/run211_full.json"
+  ],
+  "policy": {
+    "horizon": 8,
+    "first_torque_candidates": "7 quantized grid + Run210 anchor",
+    "future_block_candidates": 9,
+    "cost_weights": [
+      2,
+      10,
+      2,
+      1
+    ],
+    "terminal_multiplier": 4,
+    "effort_weight": 0.02,
+    "future_thrust_nominal": "frozen current thrust",
+    "future_residual_nominal": 0
+  },
+  "rows": [
+    {
+      "scenario": "positive_high",
+      "baseline_accepted": 191,
+      "optimized_accepted": 133,
+      "baseline_refusal": {
+        "tick": 192,
+        "reason": "two_stage_refusal"
+      },
+      "optimized_refusal": {
+        "tick": 134,
+        "reason": "two_stage_refusal"
+      },
+      "optimized_interventions": 114,
+      "observed_hard_violations": 0,
+      "containment_checks_passed": 532,
+      "common_prefix_80_rms_position_m": {
+        "baseline": 0.7494619228338019,
+        "optimized": 1.0985551506968674
+      },
+      "common_prefix_80_rms_velocity_m_s": {
+        "baseline": 0.8568177405067233,
+        "optimized": 1.6439697038196424
+      },
+      "baseline_mean_decision_ms": 18.718,
+      "optimized_mean_decision_ms": 18.453
+    },
+    {
+      "scenario": "alternating_high",
+      "baseline_accepted": 200,
+      "optimized_accepted": 200,
+      "baseline_refusal": null,
+      "optimized_refusal": null,
+      "optimized_interventions": 199,
+      "observed_hard_violations": 0,
+      "containment_checks_passed": 800,
+      "common_prefix_80_rms_position_m": {
+        "baseline": 0.12415436678237343,
+        "optimized": 0.2509979479098798
+      },
+      "common_prefix_80_rms_velocity_m_s": {
+        "baseline": 0.3704229645783424,
+        "optimized": 0.31324509221063696
+      },
+      "baseline_mean_decision_ms": 19.119,
+      "optimized_mean_decision_ms": 20.102
+    },
+    {
+      "scenario": "switch_positive",
+      "baseline_accepted": 200,
+      "optimized_accepted": 81,
+      "baseline_refusal": null,
+      "optimized_refusal": {
+        "tick": 82,
+        "reason": "two_stage_refusal"
+      },
+      "optimized_interventions": 61,
+      "observed_hard_violations": 0,
+      "containment_checks_passed": 324,
+      "common_prefix_80_rms_position_m": {
+        "baseline": 0.851367418374751,
+        "optimized": 1.118805068112714
+      },
+      "common_prefix_80_rms_velocity_m_s": {
+        "baseline": 1.0593068630164257,
+        "optimized": 1.7289570379100323
+      },
+      "baseline_mean_decision_ms": 17.369,
+      "optimized_mean_decision_ms": 17.034
+    }
+  ],
+  "outer_box_obstruction": {
+    "tick": 192,
+    "corner_v_lower": -2.4931037251954926,
+    "actual_v": -0.7331640043621591,
+    "best_v_at_step_5_under_fixed_TMAX_and_negative_residual": -3.044998077967292,
+    "velocity_lower_limit": -3,
+    "excess": 0.04499807796729192,
+    "qualification": "corner is from independent interval outer box, may not be jointly reachable"
+  },
+  "evidence": "finite deterministic traces + exact rational box-corner obstruction; NOT universal plant nonviability",
+  "gate_A": "blocked",
+  "limitations": [
+    "no terminal RCI or recursive feasibility",
+    "no 6-state full quadrotor",
+    "no complete repo regression/CI",
+    "no matched compute-budget benchmark; per-tick timings only"
+  ]
+}
