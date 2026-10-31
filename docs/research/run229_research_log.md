@@ -33,3 +33,10 @@
 **Gate A=blocked。** 可行性：两拍全状态有限图正向认证已建立，终端RCI依旧未知；创新性：低，属于验证工具正向对照；研究难度：四状态终端循环与部分观测提升仍高。Run221二维姿态SMF＋MPC的限定证明不受本轮改变。
 
 **下一轮唯一优先任务：** 从本轮有理数DAG出发，寻找并严格认证一个**包含全部扰动分叉的非空闭合循环单元集合**（允许不同控制/细分），或者给出导致无法闭合的可核验必要条件；在此之前不把两拍图接入MPC终端条件。
+
+## 合并后验证记录
+
+**Run229完整仓库CI与合并核验（2026-10-31）：** 研究PR #27 https://github.com/zhouxingxing1279/AcademicReaserch/pull/27 已通过非强制Squash合并，代码main SHA `4964ff795a4dd8a4e1398ef77a2c1b740b436fae`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251472104 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251521934 均为success；Python 3.13，完整checkout Run224–229共40/40聚焦测试通过，无跳过，真实配置、编译、有理数摘要断言和完整JSON artifact上传成功。已重新读取main SHA及新增源码/测试Blob。**未执行全仓库历史回归；无非空终端RCI、输出反馈SMF＋MPC递归可行、稳定性、六状态安全或20ms最坏耗时证明。** 本补记是文档更新，不改变控制算法。
+
+---
+
