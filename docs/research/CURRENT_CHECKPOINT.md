@@ -1,3 +1,9 @@
+## Run226合并与CI核验补记（2026-10-31）
+
+PR #20 https://github.com/zhouxingxing1279/AcademicReaserch/pull/20 已通过非强制Squash安全合并，落地main提交 `8caa45710f9c3255c602274613a60d36ad3c0adf`。完整checkout PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41237414093 和合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41237460322 均为 `success`；Python 3.13.17，Run224/225/226聚焦测试19/19通过，源码编译、真实配置合同、归档JSON逐字比较成功。合并后重新读取main SHA，新增源码/测试/结果Blob分别为 `d120e52789f258adfbc6d455f7fc92702ecc3741`、`9d96e671bd6f33e3d804622cb3b6ebdcb98e5184`、`202c434afd1cf30912b236d5cdb586922f5f557e`，与本地验证一致。**未执行全仓库历史回归；未证明四状态RCI、完整SMF＋MPC递归可行性或20ms最坏耗时。**
+
+---
+
 ## Run226 当前研究检查点（2026-10-31）
 
 **基准远端main：** `5ddca85294ecfd5a1693410c9cc9b0e0e70ef2bc`。唯一主方向：无人机MPC＋SMF鲁棒输出反馈闭环，子问题允许证据驱动调整。
