@@ -1,0 +1,47 @@
+name: Run228 four-state bridge interval graph
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_bridge_graph.py'
+      - 'verification/test_four_state_bridge_graph.py'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run228-bridge-graph.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_bridge_graph.py'
+      - 'verification/test_four_state_bridge_graph.py'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run228-bridge-graph.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run228 exact interval bridge graph and predecessor regressions
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_bridge_graph.py verification/test_four_state_bridge_graph.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph
+          python verification/check_four_state_bridge_graph.py --root . --output /tmp/run228_checks.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as Q
+          d=json.load(open('/tmp/run228_checks.json'))
+          assert d['gate_A']=='blocked'
+          assert Q(d['cases']['narrow']['center_obstruction']['minimum_adversarial_next_speed'])==Q(6254383,160000000)
+          assert d['cases']['narrow']['center_obstruction']['certified_noninvariant']
+          assert not d['cases']['expanded']['center_obstruction']['certified_noninvariant']
+          assert all(len(cell['certified_actions'])==0 for case in d['cases'].values() for cell in case['cell_policy_scan'].values())
+          print('Run228 exact summary assertions passed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run228-exact-bridge-graph-json
+          path: /tmp/run228_checks.json
