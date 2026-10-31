@@ -1,0 +1,57 @@
+{
+  "base_main": "4817403c2ac4dae7c1abe348f0096b3e21bcf5ff",
+  "candidate": "|p+v/2|<=5, |phi|>=3/20, phi*v>=0, x in X",
+  "candidate_nonempty_witnesses": [
+    [
+      "0",
+      "3",
+      "3/20",
+      "0"
+    ],
+    [
+      "0",
+      "-3",
+      "-3/20",
+      "0"
+    ]
+  ],
+  "candidate_one_step_exclusion": {
+    "adversary": "r=-R(T)",
+    "all_legal_inputs_next_phi": "3/20",
+    "all_legal_inputs_next_v_upper": "-385278383943217/7168000000000000",
+    "excluded_from_Pre_C": true,
+    "state": [
+      "0",
+      "0",
+      "3/20",
+      "0"
+    ],
+    "violated_constraint": "phi*v>=0 (positive phi, negative next v)"
+  },
+  "certificate": "EXACT_RATIONAL_KINEMATIC_GAP_AND_ADVERSARIAL_DRIFT",
+  "gate_A": "blocked",
+  "global_necessary_condition": "Every nonempty four-state RCI C subset X intersects |phi|<=1/50 rad",
+  "limitations": [
+    "These are necessary geometry restrictions and explicit negative candidate results; no nonempty four-state RCI constructed.",
+    "Full-state feedback and independently adversarial residual, not output-feedback SMF.",
+    "No four-state MPC recursive feasibility, Lyapunov stability, six-state safety or 20ms bound."
+  ],
+  "model": "Run224 frozen four-state Euler; Run208/210 independent lateral residual",
+  "no_axis_aligned_terminal_box": {
+    "forced_velocity_interval": "[0,0]",
+    "min_successor_velocity_separation": "6254383/80000000",
+    "proved": true,
+    "reason": "p+=p+h*v at both position endpoints; r=+/-R(T) prevents V={0}"
+  },
+  "no_two_disconnected_tilt_bands": {
+    "a": "3/20",
+    "adversary": "r=-R(T) in positive-angle mode; r=+R(T) in negative-angle mode",
+    "adverse_velocity_drift_per_tick_lower": "385278383943217/7168000000000000",
+    "forbidden_mode_gap": "3/10",
+    "latest_strict_exit_tick": 112,
+    "max_one_step_angle_jump": "1/25",
+    "proved": true,
+    "velocity_overshoot_lower": "1278383943217/64000000000000"
+  },
+  "run": "227"
+}

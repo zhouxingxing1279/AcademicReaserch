@@ -1,0 +1,35 @@
+name: Run227 four-state terminal bridge obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_terminal_bridge.py'
+      - 'verification/test_four_state_terminal_bridge.py'
+      - 'results/terminal_bridge_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run227-terminal-bridge.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_terminal_bridge.py'
+      - 'verification/test_four_state_terminal_bridge.py'
+      - 'results/terminal_bridge_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run227-terminal-bridge.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact terminal obstruction and predecessor regressions
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_terminal_bridge.py verification/test_four_state_terminal_bridge.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge
+          python verification/check_four_state_terminal_bridge.py --root . --output /tmp/run227_checks.json
+          diff -u results/terminal_bridge_20261031/checks.json /tmp/run227_checks.json
