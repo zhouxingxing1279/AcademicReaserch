@@ -1,0 +1,40 @@
+name: Run221 attitude terminal SMF MPC audit
+on:
+  pull_request:
+    paths:
+      - 'verification/check_attitude_terminal_smf_mpc.py'
+      - 'verification/test_attitude_terminal_smf_mpc.py'
+      - 'results/attitude_terminal_smf_mpc_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run221-attitude-terminal.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_attitude_terminal_smf_mpc.py'
+      - 'verification/test_attitude_terminal_smf_mpc.py'
+      - 'results/attitude_terminal_smf_mpc_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run221-attitude-terminal.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and run exact rational tests on full checkout
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_attitude_terminal_smf_mpc.py verification/test_attitude_terminal_smf_mpc.py
+          python -m unittest -v verification.test_attitude_terminal_smf_mpc
+      - name: Check config contract and regenerate archived evidence
+        env:
+          PYTHONPATH: verification
+        run: |
+          python verification/check_attitude_terminal_smf_mpc.py --root . --output /tmp/run221_checks.json
+          diff -u results/attitude_terminal_smf_mpc_20261031/checks.json /tmp/run221_checks.json
