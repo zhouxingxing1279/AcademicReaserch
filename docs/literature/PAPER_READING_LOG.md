@@ -4,7 +4,7 @@
 
 **Köhler、Müller、Allgöwer（2021）**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 。本轮阅读层级：公开摘要与仓库既有定理条件笔记交叉核验，非全文重读。研究问题：噪声输出和扰动下的鲁棒MPC；方法：在线估计误差界结合homothetic tube。关键前提：可靠在线界、检测性/增量可稳定性及相应终端条件。结论：可在这些假设下改善保守性并实现鲁棒约束满足，含10状态四旋翼示例。局限：不自动适用于仓库四状态有限Backup。关联/可复用：将可证上界用于MPC收紧；待查：终端受控不变集、递归可行性及实际运行时间。
 
-**本轮自有算法与证据：** [Run220研究日志](../research/run220_research_log.md)。合成双约束支持从1降至0；实际第193拍未测。不得将本轮标成新增已读论文。
+**本轮自有算法与证据：** [Run220研究日志](../research/run220_research_log.md)。合成双约束支持从1降至0；GitHub Actions完整checkout实际第193拍12个候选第二半空间的额外可认证增益为0，不能由此证明完整后验无收益。不得将本轮标成新增已读论文。
 
 # PAPER_READING_LOG — 无人机 MPC + SMF 论文阅读记录
 
