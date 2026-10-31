@@ -1,0 +1,35 @@
+name: Run225 four-state two-step robust predecessor
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_two_step_predecessor.py'
+      - 'verification/test_four_state_two_step_predecessor.py'
+      - 'results/two_step_predecessor_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run225-two-step-predecessor.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_two_step_predecessor.py'
+      - 'verification/test_four_state_two_step_predecessor.py'
+      - 'results/two_step_predecessor_20261031/checks.json'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run225-two-step-predecessor.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact rational two-step certificates and archive equality
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_one_step_predecessor.py verification/check_four_state_two_step_predecessor.py verification/test_four_state_two_step_predecessor.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor
+          python verification/check_four_state_two_step_predecessor.py --root . --output /tmp/run225_checks.json
+          diff -u results/two_step_predecessor_20261031/checks.json /tmp/run225_checks.json

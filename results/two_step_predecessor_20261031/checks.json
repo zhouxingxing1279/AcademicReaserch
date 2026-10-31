@@ -1,0 +1,109 @@
+{
+  "adversarial_second_step_velocity_violation_lower_bound": "15703932131047/2000000000000000",
+  "adversary": "r0=sign*R(T0), r1=sign*R(T1), for any causal thrust/torque choices",
+  "base": "Run224 frozen four-state Euler; Run208/210 lateral residual envelope",
+  "certificate": "EXACT_RATIONAL_TAYLOR_TWO_STEP_INCLUSION_AND_EXCLUSION",
+  "gate_A": "blocked",
+  "limitations": [
+    "Only two-step full-state feedback predecessor witnesses, not an RCI terminal kernel.",
+    "Exclusion is robust to arbitrary causal controls but relies on independent adversarial residual envelope.",
+    "Does not establish output-feedback SMF feasibility, recursive feasibility, stability or six-state safety.",
+    "No 20ms worst-case execution-time certification."
+  ],
+  "one_step_but_not_two_step": [
+    {
+      "excluded_from_Pre2_X": true,
+      "in_Pre_X": true,
+      "one_step_input": [
+        "2943/200",
+        "2/25"
+      ],
+      "state": [
+        "0",
+        "3",
+        "3/20",
+        "-2"
+      ]
+    },
+    {
+      "excluded_from_Pre2_X": true,
+      "in_Pre_X": true,
+      "one_step_input": [
+        "2943/200",
+        "-2/25"
+      ],
+      "state": [
+        "0",
+        "-3",
+        "-3/20",
+        "2"
+      ]
+    }
+  ],
+  "quantifiers": "Pre2(X): exists u0 forall r0 exists u1(x1) forall r1, all intermediate states in X",
+  "run": "225",
+  "two_step_inclusions": [
+    {
+      "first_velocity": [
+        "3729856865617/1280000000000",
+        "21490309398570349/7168000000000000"
+      ],
+      "fixed_inputs": [
+        [
+          "2943/200",
+          "0"
+        ],
+        [
+          "2943/200",
+          "0"
+        ]
+      ],
+      "in_Pre2_X_sufficient": true,
+      "second_position": [
+        "7569856865617/64000000000000",
+        "42994309398570349/358400000000000000"
+      ],
+      "second_velocity": [
+        "1809856865617/640000000000",
+        "10738309398570349/3584000000000000"
+      ],
+      "state": [
+        "0",
+        "3",
+        "3/20",
+        "0"
+      ]
+    },
+    {
+      "first_velocity": [
+        "-21490309398570349/7168000000000000",
+        "-3729856865617/1280000000000"
+      ],
+      "fixed_inputs": [
+        [
+          "2943/200",
+          "0"
+        ],
+        [
+          "2943/200",
+          "0"
+        ]
+      ],
+      "in_Pre2_X_sufficient": true,
+      "second_position": [
+        "-42994309398570349/358400000000000000",
+        "-7569856865617/64000000000000"
+      ],
+      "second_velocity": [
+        "-10738309398570349/3584000000000000",
+        "-1809856865617/640000000000"
+      ],
+      "state": [
+        "0",
+        "-3",
+        "-3/20",
+        "0"
+      ]
+    }
+  ]
+}

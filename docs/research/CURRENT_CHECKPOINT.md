@@ -1,3 +1,21 @@
+# 当前研究检查点 — Run225（2026-10-31）
+
+**基准 main：** b4b8d6beeaabf0e25d53fef4dad9289a2e822716。唯一主方向为无人机 MPC＋SMF 鲁棒输出反馈闭环；不锁死历史子题。
+
+**严格增量：** 在冻结四状态 Euler 模型及 Run208/210 每拍独立横向残差合同下，二步正确量词 Pre²(X)=Pre(Pre(X))：exists u0 forall r0 exists u1(x1) forall r1。以 Fraction 和 sin 的严格 Taylor 上下界证明 (0,±3,±3/20,0) 属于 Pre²(X)（固定两拍 TMAX、tau=0）；而 (0,±3,±3/20,∓2) 属于 Pre(X) 但不属于 Pre²(X)。对抗速度越界的精确下界为 15703932131047/2000000000000000 m/s，任意合法因果推力/力矩均不能避免；严格排除不等于真实物理气动必然如此。
+
+**证据边界：** 两步前驱非空，不是鲁棒受控不变终端核；全状态反馈不等于部分观测SMF；没有四状态 MPC 递归可行性、Lyapunov 稳定性、六状态安全或20ms最坏耗时。**Gate A=blocked。**
+
+**测试：** 本地源码兼容镜像 Python 3.13：6项中5通过，1项因缺完整 checkout 跳过；py_compile、JSON生成通过。新增 GitHub Actions 将在完整仓库检查旧新测试、配置与归档JSON逐字一致；成功前不宣称 CI 通过。
+
+**文献：** Kolmanovsky & Gilbert (1998), DOI https://doi.org/10.1155/S1024123X98000866，出版商摘要及书目复核；未读正文，不新增已读篇数；唯一阅读日志去重87篇不变。
+
+**工件：** verification/check_four_state_two_step_predecessor.py；verification/test_four_state_two_step_predecessor.py；results/two_step_predecessor_20261031/checks.json；docs/research/run225_research_log.md；.github/workflows/run225-two-step-predecessor.yml。
+
+**下一轮唯一优先任务：** 计算第三轮鲁棒前驱的严格局部内外证书，检验二步正见证是否继续安全，不把有限步见证误称为终端不变性。
+
+---
+
 **Run224验证后补记（2026-10-31）：** PR #16（https://github.com/zhouxingxing1279/AcademicReaserch/pull/16）已通过非强制Squash合并至main提交 1defcf77b9776c40e7febb835b2fe6db2d9a7fdb。完整checkout GitHub Actions运行 https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41227640954 状态success；verify job含Python语法编译、6项测试、真实配置断言与归档JSON逐字比对，均成功。新增源码、测试、归档及CI工作流的Git Blob SHA与本地已测文件逐项一致。**这是聚焦测试，不是全仓库回归或完整闭环证明。**
 
 # 当前研究检查点 — Run224（2026-10-31）

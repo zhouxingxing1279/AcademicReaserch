@@ -1,3 +1,9 @@
+## Run225 二步鲁棒前驱与文献复核（2026-10-31；去重已读仍87篇）
+
+**Ilya Kolmanovsky; Elmer G. Gilbert (1998)**, *Theory and computation of disturbance invariant sets for discrete-time linear systems*, *Mathematical Problems in Engineering* 4(4):317–367；DOI https://doi.org/10.1155/S1024123X98000866；出版商 https://onlinelibrary.wiley.com/doi/10.1155/S1024123X98000866 。**核验日期/层级：** 2026-10-31，重新核对出版商摘要、作者、出版信息；**未阅读正文，不新增已读计数**。**研究问题：** 有界扰动 LTI 系统在状态约束域中的最大扰动不变集。**方法/模型：** 摘要指出 Pontryagin 差、最大不变集生成算法、有限确定性条件及 Lyapunov 稳定系统扩展。**重要定理/假设：** 正文具体定理编号与适用条件未核验，不能引用为本轮非线性模型证明。**主要结论：** 摘要称可生成最大不变集的计算表示并给出数值示例。**局限：** LTI/扰动不变性框架，不能直接代替本仓库非线性推力调度和因果控制策略分析。**本课题关联/可复用：** 前驱迭代、集合差与终端核的理论背景；本轮二步包含/排除证书独立推导。**待查：** 受控不变与纯扰动不变的量词区别、非线性/部分观测情形的可计算内核、有限终止性。
+
+**本轮自有结果：** [Run225研究日志](../research/run225_research_log.md)；两个二步可行见证、两个一步可行但二步严格排除状态。不是完整鲁棒终端核；去重已读仍87篇。
+
 ## Run224 四状态一步鲁棒前驱与文献核验（2026-10-31；去重已读仍87篇）
 
 **Ilya Kolmanovsky；Elmer G. Gilbert（1998）**，*Theory and computation of disturbance invariant sets for discrete-time linear systems*，*Mathematical Problems in Engineering* 4(4):317–367；DOI https://doi.org/10.1155/S1024123X98000866；出版商 https://onlinelibrary.wiley.com/doi/10.1155/S1024123X98000866 。**核验日期/层级：** 2026-10-31，出版商摘要及书目复核，**未阅读正文、不新增已读计数**。**研究问题：** 有界扰动离散LTI系统在约束域中的最大扰动不变集。**模型/方法：** 摘要说明Pontryagin差、最大不变集生成算法及有限确定性条件。**重要假设/定理：** 具体编号及条件未核验，不能直接迁移至非线性推力调度模型。**主要结论：** 摘要指出给出计算表示、Lyapunov稳定系统扩展及数值例子。**局限：** 主要研究LTI系统，本仓库需要独立证明非线性、控制—扰动量词和输出反馈条件。**关联/可复用：** 鲁棒前驱与终端不变集的概念参考；Run224的一步Taylor区间证书是自行推导，不是该文定理。**待查：** 正文中有限终止条件、控制不变与扰动不变的区别、如何形成可计算内核。
