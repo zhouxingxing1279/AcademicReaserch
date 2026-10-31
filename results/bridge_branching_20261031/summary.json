@@ -1,0 +1,47 @@
+{
+  "run": "229",
+  "base_main": "20bf13cdfb1de57ffddacae58ecda5b11ded69cb",
+  "model": "Run224 full-state Euler; Run208/210 independent control-dependent residual",
+  "control": {
+    "thrust_N": "981/200",
+    "torque_Nm": "0"
+  },
+  "seed_halfwidths": {
+    "p": "1/1000",
+    "v": "1/200",
+    "phi": "1/1000",
+    "omega": "1/100"
+  },
+  "first_successor_velocity_halfwidth": "17675197493460000327/400000000000000000000",
+  "center_adversarial_velocity_magnitude": "6254383/160000000",
+  "certified_robust_edges": 3,
+  "edges": [
+    [
+      "seed",
+      [
+        "velocity_negative",
+        "velocity_positive"
+      ]
+    ],
+    [
+      "velocity_negative",
+      [
+        "next_negative"
+      ]
+    ],
+    [
+      "velocity_positive",
+      [
+        "next_positive"
+      ]
+    ]
+  ],
+  "second_step_position_negative_lower": "-39675197493460000327/20000000000000000000000",
+  "second_step_position_positive_upper": "39675197493460000327/20000000000000000000000",
+  "finite_horizon_steps": 2,
+  "terminal_RCI": false,
+  "output_feedback": false,
+  "recursive_feasibility": false,
+  "test_status": "local mirror: 5 passed, 1 skipped full checkout; PR CI pending",
+  "gate_A": "blocked"
+}
