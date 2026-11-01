@@ -1,0 +1,50 @@
+name: Run250 sharp zero-backup horizon certificate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_zero_backup_horizon.py'
+      - 'verification/test_four_state_zero_backup_horizon.py'
+      - 'results/four_state_zero_backup_horizon_20261101/checks.json'
+      - '.github/workflows/run250-zero-backup-horizon.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_zero_backup_horizon.py'
+      - 'verification/test_four_state_zero_backup_horizon.py'
+      - '.github/workflows/run250-zero-backup-horizon.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-250 focused regressions and exact certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_zero_backup_horizon.py verification/test_four_state_zero_backup_horizon.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping verification.test_four_state_pulse_authority verification.test_four_state_tilt_authority verification.test_four_state_terminal_nonviability verification.test_four_state_early_viability_guard verification.test_four_state_corner_viability verification.test_four_state_shielded_smf_mpc verification.test_four_state_zero_backup_horizon
+          python verification/check_four_state_zero_backup_horizon.py --root . --output /tmp/run250_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_zero_backup_horizon_20261101/checks.json'))
+          actual=json.load(open('/tmp/run250_certificate.json'))
+          assert expected==actual, 'Run250 rational archive mismatch'
+          assert actual['zero_backup_last_uniformly_safe_tick']==67
+          assert actual['zero_backup_first_unsafe_tick']==68
+          assert F(actual['strict_velocity_violation_margin_lower_bound_m_s'])>0
+          assert not actual['smf_terminal_invariance_proved']
+          assert not actual['general_recursive_feasibility_proved']
+          print('Run250 sharp zero-backup horizon certificate verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run250-sharp-zero-backup-horizon
+          path: /tmp/run250_certificate.json
