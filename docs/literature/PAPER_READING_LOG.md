@@ -1,3 +1,13 @@
+## Run246 鲁棒可生存核与四旋翼安全控制文献（2026-11-01；新增分节已读1篇，去重91→92篇）
+
+**题名：** *Scalable Safety-Preserving Robust Control Synthesis for Continuous-Time Linear Systems*。**作者：** Shahab Kaynama; Ian M. Mitchell; Meeko M. K. Oishi; Guy A. Dumont。**年份/出版：** 2013预印本，2015 *IEEE Transactions on Automatic Control* 60(11):3065–3070。**DOI：** https://doi.org/10.1109/TAC.2015.2411872 ；**公开预印本：** https://arxiv.org/abs/1312.3399 。**阅读日期/核验状态：** 2026-11-01，实际阅读arXiv公开正文§1、§2（Definition 1–2与对抗扰动量词）、§5.3及§6（12维四旋翼飞行包线）；2015期刊终版具体公式未逐式对照，标记为**分节已读而非全文逐式核验**。书目与期刊DOI已独立核对。**研究问题：** 有界扰动和饱和执行器下，哪些状态允许无限时域保持硬安全，如何计算可用的安全控制策略？**方法/模型：** 连续时间LTI、discriminating kernel的保守内近似、robust maximal reachable sets、分段椭球及安全/性能混合控制器。**重要假设/定理：** 控制/扰动紧凸、有界动力学、连续时间全状态反馈及对抗扰动的非预见性；Definition 1–2区分有限安全与核内可生存性，§5.3讨论由有限时域构造无限安全的额外条件。**主要结论：** 在相应假设和核内近似条件下，可合成安全保护控制器；§6给出含饱和与风扰动的12状态四旋翼算例。**局限：** 不是离散Euler非线性、有噪部分观测/丢包自动机，不能直接将其安全定理移植至本仓库；论文已有此类安全核思想，本轮不将其称为创新。**与本课题关联：** Run246证明Run245的30拍有限安全管包含真实不可生存终点，必须增加终端viability guard而非只检查状态硬约束。**可复用技术：** 有限安全集合与鲁棒可生存核的量词区分、鲁棒内近似和安全后备策略筛选。**待查问题：** 如何把全状态discriminating kernel的内近似转成含SMF后验与5拍success/miss模式的可计算信息状态前驱，并确保控制器对同一观测纤维共享输入？
+
+**既有书目未升级：** Franco Blanchini (1999), *Set invariance in control*, *Automatica* 35(11):1747–1767，DOI https://doi.org/10.1016/S0005-1098(99)00113-2 ，本轮再次核验DBLP元数据，但未阅读正文，仍**不计入已读**。
+
+**本轮独立数学证据：** [Run246研究日志](../research/run246_research_log.md)、精确有理数非可生存终点证书。新增论文分节阅读计入去重已读总数92篇；未将Blanchini书目核验或数值sanity计为全文阅读。
+
+---
+
 ## Run245 保留非零倾角与真实丢包因果控制文献复核（2026-11-01；历史已读去重91篇不变）
 
 **Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/核验状态：** 2026-11-01重新阅读原文§3 Assumption 1、§4.1–4.2 string automaton和因果控制承诺、§4.4 Proposition 4–5；既有已读，非本轮全文逐式精读。**研究问题：** 在由自动机描述的间歇全状态缺测下无限时域硬安全。**方法/模型：** string automaton、product system、控制器在不知道下一包是否成功时的开放环承诺及安全游戏不变集。**关键假设/定理：** 成功测量是无噪全状态；Assumption 1限制缺测语言；Proposition 4–5在其条件下联系product不变集与原系统安全控制。**主要结论：** 特定缺测自动机下可将部分信息综合转换为product安全游戏。**局限：** 不直接覆盖有噪位置+持续角传感器、非线性不确定集后验；不能将本文结论直接用于本项目。**本课题关联/可复用：** Run245使用每5拍机会、最多连续2次缺包的全部44个有限字串并提前承诺共享输入；需进一步实现可见SMF集合值product前驱。**待查问题：** 非空关联后验族的全部success/miss后继如何与共享反馈共同满足终端闭合？

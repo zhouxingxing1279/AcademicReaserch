@@ -1,3 +1,15 @@
+# 当前研究检查点 — Run246（2026-11-01）
+
+**基准main：** `e4e832a3fbfb02281c1b179d8bb6e2338e57406e`。Run245的30拍开环共享倾角策略虽然严格保证有限时域安全，但本轮在完整初始盒的合法角点`(-0.02,-0.1,-0.005,-0.01)`和合法持续`r=-R`下，找到一条**真实可达、非外包伪角点**的终点：`phi30=0.2194,omega30=-0.01,v30∈[-2.034914078,-2.034904500]m/s`。对第30拍以后**所有**合法力矩（包括全状态/非因果）证明`v43<=-3.026321633m/s`，越界裕度严格大于0.026321633m/s。精确有理数Euler姿态极值＋Taylor正弦下界证书见[Run246研究日志](run246_research_log.md)、`verification/check_four_state_terminal_nonviability.py`和`results/four_state_terminal_nonviability_20261101/checks.json`。
+
+**证据边界：** 只排除Run245 30拍可达集合中的一个真实终点在冻结四状态、固定推力、独立有界残差模型下的无限时域可生存性；不排除其他终点或一般SMF＋Tube MPC。该反例即使未来获得完整状态也不可救，不能仅靠提高SMF精度解决。Gate A=blocked，仍无递归终端信息集合、MPC优化、六状态安全、推力调度及20ms最坏时延。新增Kaynama等2013预印本分节阅读（2015 TAC DOI 10.1109/TAC.2015.2411872），唯一去重分节已读91→92篇；Blanchini(1999)仅书目核验。
+
+**本轮测试：** 隔离Python 10项中8通过、2项因无完整仓库配置/归档跳过；完整checkout Run224–246聚焦CI须以实际GitHub Actions核验。未执行全仓库历史回归。
+
+**下一轮唯一优先任务：** 在Run245终点之前构造含真实5拍success/miss与SMF后验的双向鲁棒可生存前驱筛选，先认证一个非空、可执行的共享因果后继集合，排除本轮已证伪的终端分支。
+
+---
+
 ## Run245完整checkout CI与安全合并核验（2026-11-01）
 
 研究PR #60 https://github.com/zhouxingxing1279/AcademicReaserch/pull/60 基于main `a4ae3a7f6bf8587d0f328160a44cda3be6b8b0eb`，合并前compare ahead=7/behind=0、mergeable_state=clean、head=`a039c58c54e2a263f75802085770ade03dbc1c21`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41324536887 **completed/success**；Python 3.13.17完整checkout执行Run224–245共**190/190项聚焦测试通过、无跳过**，真实配置核验、精确Fraction外包、归档JSON比对、artifact上传成功。PR通过非强制squash合并到main `8984d21d796fc6d57edc13cace9addfd5a720664`；再次读取远端main SHA、PR merged状态及源码/测试/JSON Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41324650743 **completed/success**，Python 3.13.17完整checkout再次**190/190通过、无跳过**（38.727s），归档证书比对和artifact上传成功。此补记不改变数学证书或算法，未单独触发CI；全仓库历史回归、SMF-MPC递归可行、六状态安全与20ms最坏时延仍未认证。
