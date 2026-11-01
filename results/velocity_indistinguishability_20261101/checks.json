@@ -26,8 +26,8 @@
       "dual_upper": "31/7",
       "necessary_velocity_posterior_halfwidth_m_s": "14376839/80000000",
       "observed_position_half_separation_m": {
-        "5": "463769/80000000",
-        "10": "0"
+        "10": "0",
+        "5": "463769/80000000"
       },
       "primal_sum": "31/7",
       "residual_multipliers_by_weight_0_to_n_minus_1": [
@@ -52,9 +52,9 @@
       "dual_upper": "13/2",
       "necessary_velocity_posterior_halfwidth_m_s": "42202979/160000000",
       "observed_position_half_separation_m": {
-        "5": "3246383/400000000",
         "10": "22724681/1600000000",
-        "15": "0"
+        "15": "0",
+        "5": "3246383/400000000"
       },
       "primal_sum": "13/2",
       "residual_multipliers_by_weight_0_to_n_minus_1": [
