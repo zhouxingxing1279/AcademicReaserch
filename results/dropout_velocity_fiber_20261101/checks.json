@@ -40,10 +40,10 @@
   "evidence": "EXACT_RATIONAL_CAUSAL_TWO_MISS_VELOCITY_DIAMETER_NECESSARY_BOUND",
   "gate_A": "blocked",
   "limitation": "one admissible observation history and loss word, not a uniform lower bound for all SMF posteriors; does not disprove existence of safe feedback",
-  "quantifiers": "for every causal admissible torque policy, choose two admissible residual sequences and identical available noisy observations",
+  "quantifiers": "after the specific Run251 zero-torque prefix, for every causal admissible torque continuation choose two legal residual sequences and identical available noisy observations",
   "recursive_feasibility_proved": false,
   "run": 252,
-  "safety_scope": "both adversarial paths remain within all state bounds through tick25 for any shared admissible torque sequence",
+  "safety_scope": "both adversarial paths remain within all state bounds through tick25 for any shared admissible torque continuation after tick15",
   "terminal_invariant_set_proved": false,
   "witness": "two physical paths; common angular measurements at every tick; no position measurement at 20/25"
 }
