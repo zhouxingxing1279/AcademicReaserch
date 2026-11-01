@@ -1,3 +1,5 @@
+**Run235完整仓库验证与合并补记（2026-11-01 UTC）：** 研究PR #39 https://github.com/zhouxingxing1279/AcademicReaserch/pull/39 已通过非强制Squash安全合并至main SHA 995b5c49991870e80920caeb659eea17f81a5329。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275719918 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275783414 均success；Python 3.13.17完整checkout Run224–235共86/86项聚焦测试通过、无跳过，配置、编译、精确支撑/尾项、JSON归档及工件上传通过。main源码、测试、归档Blob与本地实测字节一致。**仍无SMF共享控制、MPC递归可行、全仓库回归、六状态安全或20ms最坏时限保证。**
+
 # 当前研究检查点 — Run235（2026-11-01）
 
 **基准main：** db23aaa410a67fc929100146e12a51d8b3ebf820。冻结四状态Euler、固定T=9.81N、完整真实状态反馈K=(-.123,-.494,2.341,.933)下，Run234无限zonotope S的有限外包F现已构造：F=P_800⊕Q，Q=(1-rho)^(-1)∑_{j=0}^{799}A^j W，W=eps[-1,1]^4，eps=D||A^800 B||∞，rho=||A^800||∞<0.044224501。严格有理数证明A F⊕B[-D,D]⊆F；F有4000生成元，可用4×4000 LP判定成员资格。可靠状态绝对上界(4.36189355,2.55727183,0.37147212,0.77413543)，力矩<0.06690522Nm，均低于冻结硬约束。原非线性sin余项在F姿态范围内被D包络覆盖，故F对固定推力**全状态反馈**非线性系统RCI。
