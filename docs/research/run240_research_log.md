@@ -30,3 +30,8 @@
 - 本地隔离Python3执行13项测试：12通过、1项因缺完整仓库配置跳过；语法编译、JSON生成通过。完整checkout CI需真实运行并读取结果，不能预先宣称成功。严格证据限于指定两点纤维、固定零力矩与有界残差的精确一维后验区间和有限安全管。没有一般初始SMF后验、可调共享恢复律、四状态输出反馈MPC、递归可行、六状态耦合安全、稳定性或20ms最坏时延认证。
 - 可行性：后验条件化计算可行；创新性：分数背包和CZ条带均为已知基础运算，尚不足独立支撑硕士论文；研究难度：在每个y与每种丢包模式上构造shift-compatible共享备份/终端集合仍高。
 - **下一轮唯一优先任务：** 基于本轮全部y的速度区间，构造**依赖可见后验而非隐藏真实状态**的非零力矩恢复控制准入判据，首先检验15拍最坏观测后的共享控制是否能使信息状态严格回到一个可重复闭合的候选域；失败时保留对抗反例。
+
+
+## 4. 完整checkout CI、PR与main落地核验（2026-11-01）
+
+研究PR #49 https://github.com/zhouxingxing1279/AcademicReaserch/pull/49 基于main e8e2516146b9390a8c5b7d9166a581ff45f7e922，ahead=1/behind=0、mergeable=true、预期head 8780c7ed819fede385a75b1fad37497d41956039；完整checkout PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41301543344 为completed/success。Python 3.13完整仓库执行Run224–240共**134/134项聚焦测试通过、无跳过**（21.819s），真实配置合同、精确Fraction原始—对偶断言、归档JSON逐字diff、代码编译与工件上传均成功。通过非强制Squash合并至main SHA **af072cccf1cee23a711c1d0d756d32623f38d3d0**，随后重新读取远端main与源码/测试/JSON/论文记录/检查点Blob，均已落地。main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41301632613 亦为completed/success，134/134通过、无跳过（22.382s），JSON一致并上传工件。**未执行全仓库历史回归**；这些测试不证明一般输出反馈递归可行或20ms最坏时延。
