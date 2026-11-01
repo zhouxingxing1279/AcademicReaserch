@@ -1,3 +1,13 @@
+## Run244 固定脉冲鲁棒权限反例与文献核验（2026-11-01；去重已读91篇不变）
+
+**Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427，公开HTML https://arxiv.org/html/2105.03427v1 。**阅读日期/核验状态：** 2026-11-01实际核对原文§II-A Assumption 1、§III开头三项估计器误差合同和§IV相关接口；既有已读，非新增全文精读。**研究问题：** 非线性系统有噪输出与扰动下的鲁棒约束MPC。**方法/模型：** δ-IOSS/SMF/MHE在线估计误差界、homothetic Tube MPC。**关键假设/定理：** 有界扰动、可检测与增量可稳定性，需当前估计误差、未来估计误差及估计器偏差可靠界以支持递归可行。**主要结论：** 在其假设下可获得鲁棒约束与递归可行，展示10状态四旋翼算例。**局限：** 本项目Run243仅有无扰局部Schur，Run244证明固定角度复位脉冲在合法持续极端残差下必失效，不能套用论文保证。**关联/可复用：** 未来设计需先闭合控制权限，再构造完整SMF预测界与Tube接口。**待查：** 保留稳态倾角后如何为5拍success/miss自动机给出可计算估计误差与递归控制约束？
+
+**Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 。**阅读日期/核验状态：** 2026-11-01对照历史Run240–242原文分节笔记，本轮未重新阅读全文。**研究问题：** 受约束丢包语言下的因果安全控制。**方法/假设：** 丢包自动机、product安全游戏，成功包提供无噪完整状态。**主要结论：** 在相应假设下可进行无限时域安全策略综合。**局限：** 不直接覆盖有噪部分位置测量。**关联/可复用：** Run244使用合法all-success路径反证Run243固定脉冲族的全模式安全；不能将选中使用的20/25/30拍误写为连续实际成功包间隔。**待查：** 带CZ后验的可实现product信息状态如何建立逐边闭合？
+
+**本轮独立证据：** [Run244研究日志](../research/run244_research_log.md)，严格Fraction反例及单独标记的浮点sanity。两文历史已登记，唯一论文阅读记录去重91篇不变。
+
+---
+
 ## Run243 两包速度区间与阻尼输出反馈（2026-11-01；历史已读去重91篇不变）
 
 **Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427，全文 https://arxiv.org/pdf/2105.03427 。**阅读日期/状态：** 2026-11-01实际核对原文§II-A Assumption 1、§III开头、§IV-A/B和§V数值四旋翼实验；历史已读，非新增全文逐式阅读。**研究问题：** 非线性系统有噪输出、受扰与硬约束下的鲁棒MPC。**方法/模型：** δ-IOSS/在线估计误差界、SMF/MHE、homothetic Tube MPC。**重要假设/定理接口：** 有界扰动、可检测/增量可稳定性；递归可行需当前估计误差、未来误差及估计器与名义动力学偏差的可靠界。**主要结论：** 适当条件下约束满足与递归可行；10状态四旋翼示例展示在线误差界减保守性。**局限：** SMF全局优化成本高，不能直接处理本仓库15拍缺测及未知初始姿态；不能把本轮Schur结果当论文安全定理。**课题关联/可复用：** Run243提供特殊已知角轨迹的两包速度SMF包含界，但尚缺预测误差与终端移位合同。**待查：** Run240 CZ关联后验与预测误差合同能否支持5/10/15任意模式下统一输入裕度？
