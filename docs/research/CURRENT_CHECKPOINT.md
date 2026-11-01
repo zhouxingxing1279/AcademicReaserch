@@ -1,3 +1,7 @@
+**Run248阶段检查点（2026-11-01；合并/CI须独立核验）：** 基于main 72724f81ef10046eeb41f0ed6398695ab6533e05，发现Run245固定前缀另一合法真实初始角点(p,v,phi,omega)=(-0.02,-0.1,+0.005,+0.01)、持续r=-R下，**第14拍已严格不可生存**：phi14=0.1502、omega14=0.81，任何后续合法力矩（甚至全状态/非因果）在持续r=-R下最迟第44拍有v44<=-3.002033058421m/s，严格越界裕度>0.002033m/s；Run247原角点第26拍拒绝仍正确但不是最坏初始盒角点。数学证书 verification/check_four_state_corner_viability.py、11项测试、results/four_state_corner_viability_20261101/checks.json、日志 docs/research/run248_research_log.md。隔离Python 9通过/2缺完整仓库跳过；PR/main CI需按真实结果另行确认。Yang/Ozay(2021)§3–4重读，统一论文去重94篇不增加。**证据范围：** 只反证Run245指定前缀，有限guard首次拒绝不等于真实最早失效；无SMF后验、MPC优化、递归可行、六状态安全或20ms WCET，Gate A仍blocked。**下一轮唯一优先任务：** 把共享因果控制与关联SMF决策前移至第10拍success/miss机会，覆盖双向扰动及真实丢包自动机，先验证非空安全前缀，不能再仅在第25拍补救。
+
+---
+
 **Run247完整checkout与安全合并核验（2026-11-01）：** 研究PR #64 https://github.com/zhouxingxing1279/AcademicReaserch/pull/64 基于main `8b7b22c757749fcc6290d7bdbd7fc494a64e86b6`，合并前compare ahead=7/behind=0、mergeable_state=clean，head=`8271e2e5e1042b2bda9595f3b1a5863bc10d4111`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41335351537 **completed/success**；Python 3.13.17完整checkout Run224–247聚焦测试**211/211通过、无跳过**（74.114s），真实配置、Run246轨迹逐项比较、Fraction精确证书、归档JSON对比与artifact上传成功。PR非强制squash合并至main `193d4cd99e7f48ff56b43f8289336ff75c492cc5`，已重新读取main、PR merged及源码/归档/阅读记录Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41335523410 **completed/success**，Python 3.13.17完整checkout再次**211/211通过、无跳过**（56.300s），证书一致性与artifact上传成功。此证据补记仅更新文档，未改变算法；全仓库历史回归、SMF＋MPC递归可行、六状态安全和20ms最坏求解时延仍未认证。
 
 ---
