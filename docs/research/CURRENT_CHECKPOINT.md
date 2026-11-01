@@ -1,3 +1,13 @@
+# 当前研究检查点 — Run250（2026-11-01；CI/合并状态须另行核验）
+
+**基准远端main：** `f9348c2b5ff83a3f9713ad8058ea4b0f8eafb4cf`，含Run249完整四状态有限截止SMF＋网格MPC闭环及背景研究PR #72。**本轮唯一瓶颈：** Run249零力矩55拍备份能否作为可反复滚动的终端安全合同？**严格结论：不能直接重启同一个零力矩55拍备份。**对配置整个初始盒、所有独立有界扰动，精确Fraction区间外包认证零力矩至第67拍全部安全；一个合法真实初始角点 `(-0.02,-0.1,+0.005,+0.01)`、逐拍`r=-R`、零力矩下第68拍`v<=-3.0155175025m/s`，严格越界裕度至少0.0155175025m/s。故**固定零力矩策略**的全初始盒鲁棒安全最长67拍；这不排除其他可执行反馈、也不证明第55拍真实状态对任何未来控制不可生存。
+
+**新增工件：** `verification/check_four_state_zero_backup_horizon.py`、`verification/test_four_state_zero_backup_horizon.py`（9项）、`results/four_state_zero_backup_horizon_20261101/checks.json`、`.github/workflows/run250-zero-backup-horizon.yml`、`docs/research/run250_research_log.md`。隔离Linux/Python3.13.5本地7通过/2因无完整checkout跳过，源码编译与JSON生成成功；完整checkout与GitHub Actions待实际核验。新增Wabersich/Zeilinger (2023) IEEE TAC预测CBF公开正文分节已读，统一论文去重96→97；不能套用其全状态终端CBF定理给当前有噪间歇SMF补造无限安全保证。
+
+**Gate A仍blocked：** Run249有固定55拍SMF＋MPC真实滚动闭环及有限安全证明，但无非空输出反馈终端信息状态RCI、无限时域递归可行/稳定性、六状态安全、20ms最坏时延。**下一轮唯一优先任务：** 针对Run249第55拍真实可达的关联SMF后验，尝试非零共享因果备份与非空终端后继闭合的严格正向证书；不能只继续增加零备份截止时间。
+
+---
+
 **Run249完整checkout与安全合并核验（2026-11-01 UTC）：** 研究PR #70 https://github.com/zhouxingxing1279/AcademicReaserch/pull/70 基于main `c00e7c70557159811bd09862ce9ef2d54354e2e3`，合并前compare ahead=7/behind=0、mergeable_state=clean，预期head=`60748cd92f41205c22c24e09fe85a351ce578397`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345024930 为**completed/success**，Python 3.13完整checkout Run224–249聚焦**233/233测试通过、无跳过**（64.267s），真实配置、归档JSON逐字核验与artifact上传成功。通过非强制squash合并至main `ce1ec02602270521963d00f408ccae873913bbd6`，重新读取main SHA、PR merged状态及新增源码/测试/证书Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345183186 **completed/success**，完整checkout再次**233/233通过、无跳过**（84.508s），归档一致与artifact上传成功。该补记仅更新文档，未改变算法或验证证书；仍无无限时域输出反馈递归可行性、六状态安全或20ms最坏耗时认证。
 
 ---
