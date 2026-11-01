@@ -1,3 +1,9 @@
+## Run245完整checkout CI与安全合并核验（2026-11-01）
+
+研究PR #60 https://github.com/zhouxingxing1279/AcademicReaserch/pull/60 基于main `a4ae3a7f6bf8587d0f328160a44cda3be6b8b0eb`，合并前compare ahead=7/behind=0、mergeable_state=clean、head=`a039c58c54e2a263f75802085770ade03dbc1c21`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41324536887 **completed/success**；Python 3.13.17完整checkout执行Run224–245共**190/190项聚焦测试通过、无跳过**，真实配置核验、精确Fraction外包、归档JSON比对、artifact上传成功。PR通过非强制squash合并到main `8984d21d796fc6d57edc13cace9addfd5a720664`；再次读取远端main SHA、PR merged状态及源码/测试/JSON Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41324650743 **completed/success**，Python 3.13.17完整checkout再次**190/190通过、无跳过**（38.727s），归档证书比对和artifact上传成功。此补记不改变数学证书或算法，未单独触发CI；全仓库历史回归、SMF-MPC递归可行、六状态安全与20ms最坏时延仍未认证。
+
+---
+
 # 当前研究检查点 — Run245（2026-11-01）
 
 **基准main：** `a4ae3a7f6bf8587d0f328160a44cda3be6b8b0eb`。Run244已严格排除15拍复位脉冲在持续`+R`下的鲁棒无限安全。本轮采用`+0.08Nm×12拍，-0.08Nm×12拍，0Nm×6拍`的共享开环倾角建立策略，冻结四状态Euler、固定推力9.81N、完整配置初始水平/姿态盒及每拍独立`|r|<=2.028989375m/s²`下，以Fraction+正弦Taylor可靠外包证明**全部30拍硬约束满足**。最坏`|p|<=0.577744215m,|v|<=2.126530612m/s,|phi|<=0.2414rad,|omega|<=0.97rad/s,|tau|<=0.08Nm`；第24至30拍对持续`+R`的加速度反向裕度严格大于0.106057198m/s²。所有44条合法6包success/miss字串由同一不读取观测的控制序列覆盖，区间SMF预测/交集可保持噪声相容真值包含。
