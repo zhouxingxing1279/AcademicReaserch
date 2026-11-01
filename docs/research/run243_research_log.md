@@ -47,3 +47,10 @@ n=5、10、15三种**分别固定**模式的det(M_n)=4549721/5000000=0.9099442<1
 本地Python标准库执行 PYTHONPATH=verification python -m unittest -v verification.test_four_state_posterior_damping：12通过、1项因隔离目录缺真实配置跳过；py_compile与精确证书JSON生成通过。完整checkout、聚焦回归、归档一致性及远端合并需由GitHub CI另行验证，不能预先声称成功。
 
 **下一轮唯一优先任务：** 将两包速度区间与Run240关联CZ后验相交，在实际残差/噪声和任意5/10/15成功模式下检验阻尼控制的共享输入裕度与递归信息状态闭合；若失败，归档严格阻塞证书。
+
+## 5. 完整checkout CI、PR合并及远端main核验（2026-11-01）
+
+研究PR #55 https://github.com/zhouxingxing1279/AcademicReaserch/pull/55 基于main 8a795a5575bf787313ba23ad299007ee4f7be420，合并前ahead=1/behind=0、mergeable_state=clean、head=05ec02cd272df06f225bdf56e1971dbdec6ff6e2。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315031734 completed/success；Python 3.13.17完整checkout Run224–243聚焦测试**167/167通过，无跳过**（21.872s），真实配置检查、源码编译、精确Fraction、JSON归档（浮点sanity允许1e-10跨平台容差）及artifact上传成功。通过非强制Squash合并至main b59bae34b6765d974df3bfa4047474dacb146f51，再次读取远端main并核对源码Blob b192948685c62136b589c8606cc07b5931d31856、测试Blob 7d80fb34cebfdc04467feb2411f537014ef49f8e、归档Blob 1309833a1389fe5d532a07ca71e7b01a031256e5 与本地实际字节一致。
+
+合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315122060 completed/success；完整checkout Python 3.13.17 **167/167通过，无跳过**（39.047s），归档校验与工件上传成功。**未执行全仓库历史回归**。本轮严格结论仍仅为已知角轨迹的两包速度包含与无扰固定模式局部Schur；没有鲁棒SMF+MPC递归可行性证明。
+
