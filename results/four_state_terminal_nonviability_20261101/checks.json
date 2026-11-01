@@ -1,0 +1,36 @@
+{
+  "adverse_disturbance": "r_k=-3246383/1600000 m/s^2 for every tick",
+  "all_terminal_states_nonviable": false,
+  "base_run": 245,
+  "evidence": "EXACT_RATIONAL_REACHABLE_TERMINAL_NONVIABILITY",
+  "first30_control": "Run245 fixed +U x12, -U x12, 0 x6",
+  "future_pitch_lower_bound": "phi30+H*j*omega30-H*(H/J)*U*j*(j-1)/2",
+  "gate_A": "blocked",
+  "general_smf_mpc_impossible": false,
+  "initial_corner": [
+    "-1/50",
+    "-1/10",
+    "-1/200",
+    "-1/100"
+  ],
+  "last_future_pitch_lower_bound": "557/5000",
+  "model": "frozen four-state Euler; fixed thrust 9.81N; |tau|<=0.08Nm",
+  "necessary_velocity_floor_at_tick30": "-2510728582968547/1250000000000000",
+  "one_reachable_terminal_state_outside_robust_viability_kernel": true,
+  "post30_torque_quantifier": "all admissible torque policies, including full-state/noncausal",
+  "recursive_feasibility_proved": false,
+  "run": 246,
+  "strict_velocity_violation_margin": "4112755273957527852863/156250000000000000000000",
+  "tick30_omega_exact": "-1/100",
+  "tick30_phi_exact": "1097/5000",
+  "tick30_position_enclosure": [
+    "-3465538216291317915672389/6250000000000000000000000",
+    "-346553158736153064730307/625000000000000000000000"
+  ],
+  "tick30_velocity_enclosure": [
+    "-1271821298548831127913541/625000000000000000000000",
+    "-317953828145025902852863/156250000000000000000000"
+  ],
+  "unavoidable_violation_tick": 43,
+  "velocity_upper_bound_at_tick43": "-472862755273957527852863/156250000000000000000000"
+}
