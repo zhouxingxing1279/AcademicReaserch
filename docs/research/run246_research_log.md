@@ -1,3 +1,9 @@
+## Run246完整checkout CI与main安全合并核验（2026-11-01）
+
+研究PR #62 https://github.com/zhouxingxing1279/AcademicReaserch/pull/62 基于main `e4e832a3fbfb02281c1b179d8bb6e2338e57406e`；合并前compare ahead=7/behind=0，mergeable_state=clean，head=`b1d047f48d2c1783b06d86a3054e68a8476935f5`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41330175901 **completed/success**；Python 3.13.17完整checkout Run224–246聚焦**200/200通过、无跳过**，真实配置、精确Fraction证书、归档JSON对比与artifact上传成功。PR非强制squash合并到main `83675ca663e7df210db7a51de4d873768f609715`，重新读取main SHA、PR merged状态及验证源码/JSON Blob核验落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41330291108 **completed/success**，Python 3.13.16完整checkout再次**200/200通过、无跳过**（28.491s），证书对比与artifact上传成功。此补记仅更新文档，不修改算法、测试或数学证书；全仓库历史回归、递归可行、六状态安全与20ms最坏时延仍未认证。
+
+---
+
 # Run246 — Run245终点存在真实可达但不可恢复的状态：精确13拍可生存性反例（2026-11-01）
 
 **远端main基准：** `e4e832a3fbfb02281c1b179d8bb6e2338e57406e`。读取Run245日志、检查点、真实配置、源码、归档证书、工作流及唯一论文阅读记录。Run245已经认证全初始盒在30拍内安全，但没有终端可生存性；本轮优先回答“30拍末端能否作为可重复安全备份的起点”，不并行设计多个未经证明的控制器。
