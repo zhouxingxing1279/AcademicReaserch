@@ -1,0 +1,119 @@
+{
+  "all_legal_packet_patterns_robust_safety_for_this_pulse_family": false,
+  "base_run": 243,
+  "disturbance_witness": "r_x=+R at every tick; other noises zero; every 5-tick position packet succeeds (controller may ignore intermediate successes)",
+  "evidence": "EXACT_RATIONAL_ADVERSARIAL_VELOCITY_OBSTRUCTION",
+  "gate_A": "blocked",
+  "general_output_feedback_infeasible": false,
+  "initial_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "limitations": [
+    "Only the specific attitude-resetting pulse shape with zero-torque free intervals is ruled out, not arbitrary bounded torque sequences",
+    "The counterexample is one admissible all-success packet pattern; it suffices to disprove a guarantee quantified over all patterns",
+    "The state may violate other constraints earlier; the contradiction assumes safe evolution until the stated velocity bound and proves that assumption false",
+    "No general noisy-attitude SMF, MPC optimization, terminal invariant information set, or six-state guarantee is supplied"
+  ],
+  "max_attitude_abs_rad": "9/625",
+  "max_unit_angle": "9/50",
+  "modes": [
+    {
+      "all_packet_opportunities_success": true,
+      "cycles_until_guaranteed_velocity_violation_at_latest": 4,
+      "free_ticks": 5,
+      "numerical_sanity_only": {
+        "final_p_m": 2.5070082105064033,
+        "final_v_m_s": 3.178577871184004,
+        "first_velocity_violation_tick": 76,
+        "ticks": 80
+      },
+      "per_cycle_velocity_growth_lower_m_s": "79464407/100000000",
+      "selected_packet_gap_ticks": 20,
+      "selected_packets_are_successful": true,
+      "ticks_until_violation_at_latest": 80,
+      "velocity_constraint_margin_m_s": "4464407/25000000",
+      "velocity_lower_at_end_m_s": "79464407/25000000"
+    },
+    {
+      "all_packet_opportunities_success": true,
+      "cycles_until_guaranteed_velocity_violation_at_latest": 4,
+      "free_ticks": 10,
+      "numerical_sanity_only": {
+        "final_p_m": 3.9428133208024043,
+        "final_v_m_s": 3.990173621184004,
+        "first_velocity_violation_tick": 76,
+        "ticks": 100
+      },
+      "per_cycle_velocity_growth_lower_m_s": "399017203/400000000",
+      "selected_packet_gap_ticks": 25,
+      "selected_packets_are_successful": true,
+      "ticks_until_violation_at_latest": 100,
+      "velocity_constraint_margin_m_s": "99017203/100000000",
+      "velocity_lower_at_end_m_s": "399017203/100000000"
+    },
+    {
+      "all_packet_opportunities_success": true,
+      "cycles_until_guaranteed_velocity_violation_at_latest": 3,
+      "free_ticks": 15,
+      "numerical_sanity_only": {
+        "final_p_m": 3.197044439807403,
+        "final_v_m_s": 3.6013270283880034,
+        "first_velocity_violation_tick": 76,
+        "ticks": 90
+      },
+      "per_cycle_velocity_growth_lower_m_s": "240088389/200000000",
+      "selected_packet_gap_ticks": 30,
+      "selected_packets_are_successful": true,
+      "ticks_until_violation_at_latest": 90,
+      "velocity_constraint_margin_m_s": "120265167/200000000",
+      "velocity_lower_at_end_m_s": "720265167/200000000"
+    }
+  ],
+  "per_pulse_max_velocity_correction_m_s": "26487/1562500",
+  "proof_inequality": "v_{k+N} >= v_k + N*H*R - H*T*TAU_MAX*sum(abs(phi_unit_j)); |sin(u*phi_unit_j)|<=|u*phi_unit_j|",
+  "pulse_shape": [
+    1,
+    1,
+    1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "pulse_ticks": 15,
+  "quantifier": "forall bounded pulse amplitudes (even full-state or clairvoyant), exists one legal constant positive residual and legal all-success packet history producing |v|>3 by stated tick",
+  "residual_halfwidth_m_s2": "3246383/1600000",
+  "run": 244,
+  "scope": "Fixed T, frozen four-state Euler; repeating 15-tick Run243 pulse shape followed by 5/10/15 zero-torque ticks; |pulse amplitude|<=0.08; known zero initial attitude",
+  "smf_mpc_recursive_feasibility_proved": false,
+  "unit_angle_sum": "27/25",
+  "unit_pulse_attitude_angles": [
+    "0",
+    "0",
+    "1/50",
+    "3/50",
+    "3/25",
+    "4/25",
+    "9/50",
+    "9/50",
+    "4/25",
+    "3/25",
+    "3/50",
+    "1/50",
+    "0",
+    "0",
+    "0"
+  ],
+  "velocity_limit_m_s": "3"
+}
