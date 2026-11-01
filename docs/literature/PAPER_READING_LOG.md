@@ -1,3 +1,15 @@
+## 背景模型选型第5轮 — Song、Nuske、Scherer（2017）多传感器MAV估计（2026-11-01；新增分节已读1篇，去重98→99篇）
+
+**题名/作者**：*A Multi-Sensor Fusion MAV State Estimation from Long-Range Stereo, IMU, GPS and Barometric Sensors*；Yu Song, Stephen Nuske, Sebastian Scherer。**出版**：*Sensors* 17(1):11 (2017期；2016-12-22在线)，DOI https://doi.org/10.3390/s17010011 ；**作者公开全文** https://publications.ri.cmu.edu/storage/publications/2016/12/sensors-17-00011.pdf 。**阅读日期/状态**：2026-11-01，实际分节阅读§4.1–4.4（PDF pp.11–15，式15–40）、§5.3–5.5（pp.20–24）、§6；未复现，不冒充全文逐式审计。
+
+**研究问题与方法/模型**：为MAV在间歇GPS、强运动和高空视觉条件下提供状态估计；IMU积分和含陀螺/加计偏置的**随机**误差状态EKF，式(19)为`S=(p3,delta_theta3,v_body3,delta_b_g3,delta_b_a3)∈R15`，式(26)增广上一视觉位姿6维成21维stochastic cloning EKF，使用VO相对6维位姿、气压计高度及GPS绝对测量。**关键量测纠偏**：§4.4 GPS最终直接测水平**位置和速度**`(p_n,p_e,v_n,v_e)`，非仅位置；IMU提供加速度/角速率。本文没有MPC控制律或推力/力矩输入约束。§5.4以记录数据关闭GPS更新60秒及约120秒评估估计漂移；§5.5报告EKF链约2–3ms、VO约28–144ms（硬件依赖）。
+
+**定理/假设/结论/局限**：式(15)–(17)假设高斯IMU噪声和缓慢变化偏置，式(29),(38)协方差传播/更新；相对VO帮助减缓GPS失测时漂移。论文**没有SMF/CZ状态集合包含定理、MPC/Tube MPC、终端RCI、硬状态/输入约束或无限递归可行性证明**；其3σ带是随机统计量，不能冒充所有有界扰动下的硬保证。实证为公开数据/真实飞行记录分析，不是本文证明飞行安全。
+
+**本课题关联与可复用技术**：借鉴保留历史位姿关联/相对观测更新的思想，但现有仓库只每5拍有噪位置和每拍姿态/角速，无GPS速度/IMU/VO/气压计、无测量延迟；若引入这些传感器需新合同、偏置/延迟队列及可靠SMF集合传播。当前优先完成Run249–251的共享因果终端可行性；不能用15/21维滤波状态替换6维物理模型。**待查问题**：是否能在原位置-only合同下证明非空终端信息状态？如加入IMU/VO，其有界误差和时间关联如何认证？**背景日志**：[第5轮](../research/model_selection/background_run_20261101_1437_song_gamagedara.md)。
+
+---
+
 ## Run251 — Yang与Ozay（2021）丢包因果安全控制定向重读（2026-11-01；去重98篇不变）
 
 **题名/作者：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay。**正式发表：** ADHS 2021，*IFAC-PapersOnLine*，pp.97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者公开正文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读状态：** 2026-11-01重新阅读§3式(3)–(7)、§4.2–4.4及Proposition 4/5；历史Run248已分节阅读，故不新增去重数，未宣称逐式复核全文。
