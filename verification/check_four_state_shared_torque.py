@@ -55,7 +55,8 @@ def certificate(root=None):
     for _ in range(SUPPORT_PREFIX):
         prefix+=rpi.D*abs(rpi.dot(rpi.K,v))
         v=rpi.mv(v)
-    assert prefix+delta>rpi.TAU_MAX
+    assert prefix>F(3,50)
+    assert F(3,50)+delta>rpi.TAU_MAX
     return {
         'run':236,
         'evidence':'EXACT_RATIONAL_INFORMATION_FIBER_COUNTEREXAMPLE',
@@ -69,8 +70,8 @@ def certificate(root=None):
         'minimax_common_torque_error_lower':str(delta),
         'minimax_omega_successor_error_lower':str(delta),
         'prefix_terms':SUPPORT_PREFIX,
-        'terminal_torque_support_lower':str(prefix),
-        'support_plus_error_exceeds_limit':prefix+delta>rpi.TAU_MAX,
+        'terminal_torque_support_lower':str(F(3,50)),
+        'support_plus_error_exceeds_limit':F(3,50)+delta>rpi.TAU_MAX,
         'torque_limit':str(rpi.TAU_MAX),
         'conclusion':'Full-state terminal law is not output-measurable; naive global additive-error tightening with budget >= minimax error cannot certify the torque limit',
         'limitations':['Does not show that no shared torque keeps both successors in F',
