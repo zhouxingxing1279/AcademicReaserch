@@ -1,3 +1,16 @@
+## Run235 文献核验与有限RPI表示（2026-11-01；去重已读仍91篇）
+
+**题名：** *Invariant approximations of the minimal robust positively invariant set*。
+**作者/年份/出处：** Saša V. Raković、Eric C. Kerrigan、Konstantinos I. Kouramas、David Q. Mayne（2005），*IEEE Transactions on Automatic Control* 50(3):406–410。DOI：https://doi.org/10.1109/TAC.2005.843854 。
+**阅读日期与核验状态：** 2026-11-01；本轮复核DBLP/公开书目与摘要、已有Run234阅读笔记，未取得可核验全文，未重新核查定理编号或证明；**不是新增全文阅读，去重篇数保持91**。
+**研究问题：** 对Schur稳定、持续有界加性扰动的离散线性系统构造最小RPI的有限外近似。
+**方法/模型：** 有限Minkowski可达和、有限尾项外包、RPI集合闭合判据。
+**重要假设/定理：** 稳定线性动力学、紧致扰动集合；具体定理编号和原文完整条件本轮未核实，不将其直接套用非线性无人机。
+**主要结论：** 有限外近似可用于可靠约束验证；本轮项目自行以W=eps[-1,1]^4、rho=||A^800||∞构造有限4000生成元RPI，严格证明后继闭合。
+**局限：** 原论文不解决间歇量测共享控制、控制依赖气动扰动、输出反馈Tube MPC及在线计算预算。
+**与本课题关联及可复用技术：** 可将无限zonotope替换为有限生成元矩阵G和LP成员资格接口，但必须另证观测纤维上的单一因果控制；本轮的非线性正弦余项嵌入及有理数证明见 [Run235研究日志](../research/run235_research_log.md)。
+**待查问题：** 如何降阶4000生成元而保持RCI，及在SMF后验纤维上建立共享控制和终端移位条件？
+
 ## Run234 定向复核：mRPI无限和与可证尾项（2026-10-31；去重仍91篇）
 
 **题名：** *Invariant approximations of the minimal robust positively invariant set*。
