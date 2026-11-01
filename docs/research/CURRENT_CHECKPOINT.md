@@ -1,3 +1,7 @@
+**Run250完整checkout与main合并核验（2026-11-01 UTC）：** 研究PR #73 https://github.com/zhouxingxing1279/AcademicReaserch/pull/73 已在ahead=7/behind=0、mergeable_state=clean、expected head `879ee532e3fe1e5c876f81266d65a0f389b9077f` 条件下非强制squash合并，代码main SHA `5f410044071d629522bbe18a2edddf0927412119`，已重新读取main、PR merged及源码/归档Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350799741 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350936591 均completed/success；Python3.13完整checkout Run224–250聚焦回归、真实配置/Run249交叉核验、精确归档JSON对比及工件上传均成功。沿用Run249的233项并新增9项理论上共242项，但未读取逐项unittest日志，故只以实际工作流成功为证据。全仓库历史回归、一般SMF＋MPC递归可行、六状态安全和20ms最坏时延仍未认证。此补记不改变控制算法或数学证书。
+
+---
+
 # 当前研究检查点 — Run250（2026-11-01；CI/合并状态须另行核验）
 
 **基准远端main：** `f9348c2b5ff83a3f9713ad8058ea4b0f8eafb4cf`，含Run249完整四状态有限截止SMF＋网格MPC闭环及背景研究PR #72。**本轮唯一瓶颈：** Run249零力矩55拍备份能否作为可反复滚动的终端安全合同？**严格结论：不能直接重启同一个零力矩55拍备份。**对配置整个初始盒、所有独立有界扰动，精确Fraction区间外包认证零力矩至第67拍全部安全；一个合法真实初始角点 `(-0.02,-0.1,+0.005,+0.01)`、逐拍`r=-R`、零力矩下第68拍`v<=-3.0155175025m/s`，严格越界裕度至少0.0155175025m/s。故**固定零力矩策略**的全初始盒鲁棒安全最长67拍；这不排除其他可执行反馈、也不证明第55拍真实状态对任何未来控制不可生存。
