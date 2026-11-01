@@ -1,3 +1,7 @@
+**Run243合并后完整checkout验证（2026-11-01）：** 研究PR #55 https://github.com/zhouxingxing1279/AcademicReaserch/pull/55 已安全Squash合并至代码main b59bae34b6765d974df3bfa4047474dacb146f51；重新读取main及新增源码、测试、归档Blob确认落地。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315031734 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315122060 均completed/success；Python 3.13.17完整checkout Run224–243聚焦测试**167/167通过、无跳过**，真实配置、Fraction证书、归档JSON及artifact上传成功。仍未执行全仓库历史回归、一般输出反馈递归可行、六状态安全或20ms最坏时延认证。此段为合并证据补记，不改变控制算法。
+
+---
+
 # 当前研究检查点 — Run243（2026-11-01）
 
 **基准远端main：** 8a795a5575bf787313ba23ad299007ee4f7be420。Run242的原位置脉冲固定重复局部不稳定。本轮构造从两次成功有噪位置包及已知力矩历史恢复速度的SMF区间；在**精确已知初始零姿态**的特殊冻结四状态模型下，对20/25/30拍包间隔给出全部残差/位置噪声下速度包含半宽0.526088/0.607537/0.695653m/s。该估计界有效但过宽。
