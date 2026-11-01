@@ -1,0 +1,15 @@
+{
+  "run": "230",
+  "base_main": "d3f221144d73142dc2da2b9f31e21c2c30fb46e4",
+  "model": "frozen Run224 four-state Euler; independent Run208/210 residual",
+  "horizon_steps": 25,
+  "step_seconds": "1/50",
+  "initial_state_family": "(p0,0,0,0)",
+  "adversary": "r_k=sign(p0)*[47/25+(243/16000)*T_k], selected after each control",
+  "outward_position_displacement_lower": "98296135986106564467/762939453125000000000",
+  "positive_position_threshold": "3716401129638893435533/762939453125000000000",
+  "strict_exclusion_example": "(49/10,0,0,0) and (-49/10,0,0,0)",
+  "claim": "both examples necessarily violate |p|<=5 within 25 samples for all causal admissible controllers under a legal adversarial residual",
+  "status": "finite-horizon necessary exclusion; no nonempty RCI construction, no output-feedback MPC safety proof",
+  "local_validation": "Python 3.13.5 standard library, 5 passed, 1 skipped (full checkout unavailable); GitHub CI pending"
+}
