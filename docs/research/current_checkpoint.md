@@ -1,5 +1,9 @@
 # 当前研究检查点 — Run234（2026-10-31）
 
+**Run234合并验证补记（2026-11-01 UTC）：** 研究PR #37 https://github.com/zhouxingxing1279/AcademicReaserch/pull/37 已安全Squash合并，代码main SHA `0f4f61431b4ea226de4fe29080ba0c6009e68701`；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272122206 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272164237 均success。完整checkout Python 3.13.17执行Run224–234共77/77项聚焦测试通过、无跳过，真实配置、编译、Fraction精确证书、JSON逐字对照与工件上传成功。重新读取远端main、源码/测试/结果Blob验证落地。**未执行全仓库历史回归；全状态固定推力四状态RCI证明不等于SMF+MPC输出反馈闭合。**
+
+
+
 **基准main：** `107d08ac91e71948d65f535b19c9fe06caf3cb5b`。本轮建立首个**非空、严格无限时域四状态RCI存在性证书**，仅针对固定推力9.81 N、冻结Euler横向模型、完整全状态反馈 `tau=-Kx`，`K=(-.123,-.494,2.341,.933)`，对所有逐拍独立有界横向残差成立。并非Run233的饱和LQR策略。
 
 **证书：** `S=⊕_{j>=0} A_cl^j B[-D,D]`，`D=1742383/800000`；精确Fraction计算800步支撑与几何尾项，`||A_cl^800||∞<0.044224501`；可靠状态幅值上界(4.406855m,2.538442m/s,0.361233rad,0.742976rad/s)，力矩幅值<0.064424 Nm，均严格低于硬约束。用 `|phi-sin(phi)|<=|phi|^3/6` 证明真实非线性闭环每拍被线性扰动集合包含，故S严格不变。详见 [Run234研究日志](run234_research_log.md)及 `verification/check_four_state_rpi_zonotope.py`。
