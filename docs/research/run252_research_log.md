@@ -1,3 +1,7 @@
+**Run252完整checkout/CI与main合并复核（2026-11-01 UTC）：** 研究PR #79 https://github.com/zhouxingxing1279/AcademicReaserch/pull/79 ，起点main `2b7daf58ca5761e261fa12a2d9fff5a19661db44`，合并前compare ahead=11/behind=0、仅7个预期文件，PR head `689e5f0b6c9c9144ed5125e96385300c157e43c1`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41361021188 **completed/success**；读取完整checkout Python3.13 job日志确认Run249–252聚焦 **35/35通过、无跳过**，Run249配置交叉项通过、py_compile、Fraction JSON逐字比对及artifact上传均成功。使用expected head非强制squash合并至main `46d7b3e1a171c385b3b5201dda27ee92e74fb53b`，重新读取main SHA及源码、证书、唯一论文阅读日志和检查点Blob确认落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41361070222 **completed/success**，job日志再次确认 **35/35通过、无跳过**，证书逐字比对及上传成功。本段仅补记验证证据，不修改算法/数学证书。全仓库历史回归、无限时域递归可行、六状态保证与20ms WCET仍未认证。Gate A仍blocked。
+
+---
+
 # Run252 — 两次合法位置失测下的速度信息纤维必要扩张（2026-11-01）
 
 ## 1. 远端基线、唯一问题及证据级别
