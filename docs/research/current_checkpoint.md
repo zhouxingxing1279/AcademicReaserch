@@ -1,3 +1,13 @@
+# 当前研究检查点 — Run245（2026-11-01）
+
+**基准main：** `a4ae3a7f6bf8587d0f328160a44cda3be6b8b0eb`。Run244已严格排除15拍复位脉冲在持续`+R`下的鲁棒无限安全。本轮采用`+0.08Nm×12拍，-0.08Nm×12拍，0Nm×6拍`的共享开环倾角建立策略，冻结四状态Euler、固定推力9.81N、完整配置初始水平/姿态盒及每拍独立`|r|<=2.028989375m/s²`下，以Fraction+正弦Taylor可靠外包证明**全部30拍硬约束满足**。最坏`|p|<=0.577744215m,|v|<=2.126530612m/s,|phi|<=0.2414rad,|omega|<=0.97rad/s,|tau|<=0.08Nm`；第24至30拍对持续`+R`的加速度反向裕度严格大于0.106057198m/s²。所有44条合法6包success/miss字串由同一不读取观测的控制序列覆盖，区间SMF预测/交集可保持噪声相容真值包含。
+
+**负面结果：** 30拍`+v`上界较零力矩改善至少0.764009721m/s，但双向残差最坏绝对速度上界反而从1.363892472增至2.126530612m/s，不能声称一般鲁棒性能提升。该策略仅为有限时域共享控制权限见证，不是后验反馈、终端信息RCI、递归可行或MPC。**Gate A=blocked**；六状态/推力调度/20ms最坏时延均未认证。验证源码、12项测试、JSON归档与完整工作流见[Run245日志](run245_research_log.md)；隔离11通过1因缺完整配置跳过，完整checkout CI须独立核验。文献定向重读Yang/Ozay 2021和Köhler/Müller/Allgöwer 2021，唯一已读去重91篇不变。
+
+**下一轮唯一优先任务：** 对30拍末端关联后验设计双向非零倾角共享因果反馈，首先认证最坏`-R`分支，再检验真实5拍success/miss图上的递归信息状态闭合。
+
+---
+
 **Run244远端合并与完整checkout验证（2026-11-01）：** 研究PR #58 https://github.com/zhouxingxing1279/AcademicReaserch/pull/58 已非强制squash合并至代码main 0be31388bdb49a859c7c882d6c90edd1b625f92f；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320036916 及合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320133837 均completed/success。Python 3.13.17完整checkout Run224–244聚焦测试**178/178通过、无跳过**，真实配置、Fraction反例、归档JSON和artifact上传成功。重新读取main SHA及验证源码/JSON Blob核验落地。该证据补记不改变算法，未单独触发CI；未执行全仓库历史回归，Gate A仍blocked。
 
 ---

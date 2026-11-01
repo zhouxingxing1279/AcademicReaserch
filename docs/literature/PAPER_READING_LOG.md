@@ -1,3 +1,13 @@
+## Run245 保留非零倾角与真实丢包因果控制文献复核（2026-11-01；历史已读去重91篇不变）
+
+**Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/核验状态：** 2026-11-01重新阅读原文§3 Assumption 1、§4.1–4.2 string automaton和因果控制承诺、§4.4 Proposition 4–5；既有已读，非本轮全文逐式精读。**研究问题：** 在由自动机描述的间歇全状态缺测下无限时域硬安全。**方法/模型：** string automaton、product system、控制器在不知道下一包是否成功时的开放环承诺及安全游戏不变集。**关键假设/定理：** 成功测量是无噪全状态；Assumption 1限制缺测语言；Proposition 4–5在其条件下联系product不变集与原系统安全控制。**主要结论：** 特定缺测自动机下可将部分信息综合转换为product安全游戏。**局限：** 不直接覆盖有噪位置+持续角传感器、非线性不确定集后验；不能将本文结论直接用于本项目。**本课题关联/可复用：** Run245使用每5拍机会、最多连续2次缺包的全部44个有限字串并提前承诺共享输入；需进一步实现可见SMF集合值product前驱。**待查问题：** 非空关联后验族的全部success/miss后继如何与共享反馈共同满足终端闭合？
+
+**Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 ；作者PDF https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf 。**阅读日期/核验状态：** 2026-11-01复核引言、§II-A Assumption 1及§III/IV框架；历史已读，非新增全文阅读。**研究问题：** 非线性有界扰动与有噪输出下的鲁棒MPC。**方法/模型：** 在线估计误差界、δ-IOSS/SMF/MHE、homothetic Tube MPC。**重要假设/定理：** 有界噪声与扰动、检测性/增量可稳定性及可靠当前/未来估计误差和估计器偏差界，结合MPC终端/移位条件。**主要结论：** 在完整假设下保证递归可行及约束，10状态四旋翼算例展示保守性改善。**局限：** Run245仅有30拍开放环可靠外包和粗区间SMF，没有在线优化与终端证书；论文保证不可直接移植。**关联/可复用：** 将双向控制权限、SMF后验可靠界与Tube收紧接口分开验证。**待查问题：** 在真实5/10/15拍失测序列和未知角度下如何构造共同终端移位证书？
+
+**本轮独立证据：** [Run245研究日志](../research/run245_research_log.md)、精确Fraction外包和零力矩基线的负面权衡。两文历史已登记，不增加91篇去重计数。
+
+---
+
 ## Run244 固定脉冲鲁棒权限反例与文献核验（2026-11-01；去重已读91篇不变）
 
 **Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427，公开HTML https://arxiv.org/html/2105.03427v1 。**阅读日期/核验状态：** 2026-11-01实际核对原文§II-A Assumption 1、§III开头三项估计器误差合同和§IV相关接口；既有已读，非新增全文精读。**研究问题：** 非线性系统有噪输出与扰动下的鲁棒约束MPC。**方法/模型：** δ-IOSS/SMF/MHE在线估计误差界、homothetic Tube MPC。**关键假设/定理：** 有界扰动、可检测与增量可稳定性，需当前估计误差、未来估计误差及估计器偏差可靠界以支持递归可行。**主要结论：** 在其假设下可获得鲁棒约束与递归可行，展示10状态四旋翼算例。**局限：** 本项目Run243仅有无扰局部Schur，Run244证明固定角度复位脉冲在合法持续极端残差下必失效，不能套用论文保证。**关联/可复用：** 未来设计需先闭合控制权限，再构造完整SMF预测界与Tube接口。**待查：** 保留稳态倾角后如何为5拍success/miss自动机给出可计算估计误差与递归控制约束？

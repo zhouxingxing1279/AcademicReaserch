@@ -1,0 +1,217 @@
+{
+  "run": 245,
+  "base_run": 244,
+  "evidence": "EXACT_RATIONAL_FINITE_HORIZON_SHARED_TILT_AND_SMF_CONTAINMENT",
+  "scope": "frozen four-state Euler, fixed T, full configured initial horizontal/attitude prior box, all independent r_x in [-R,R], all admissible 5-tick success/miss histories; open-loop shared torque",
+  "horizon_ticks": 30,
+  "horizon_seconds": "3/5",
+  "torque_schedule_Nm": [
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "-2/25",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "residual_halfwidth_m_s2": "3246383/1600000",
+  "initial_box": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-1/50",
+      "1/50"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "v": [
+      "-1/10",
+      "1/10"
+    ]
+  },
+  "max_abs_bounds": {
+    "omega": "97/100",
+    "p": "3610901339066418501006941/6250000000000000000000000",
+    "phi": "1207/5000",
+    "v": "1329081631885826099252863/625000000000000000000000"
+  },
+  "bounds_at_tick24": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-2806727041301680712461111/7812500000000000000000000",
+      "3729430475318636965976681/15625000000000000000000000"
+    ],
+    "phi": [
+      "1103/5000",
+      "1201/5000"
+    ],
+    "v": [
+      "-62594844019896974432071/39062500000000000000000",
+      "95845897193507972147137/156250000000000000000000"
+    ]
+  },
+  "bounds_at_tick30": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-3610901339066418501006941/6250000000000000000000000",
+      "194752030326346935269693/625000000000000000000000"
+    ],
+    "phi": [
+      "1097/5000",
+      "1207/5000"
+    ],
+    "v": [
+      "-1329081631885826099252863/625000000000000000000000",
+      "93731679667474097147137/156250000000000000000000"
+    ]
+  },
+  "strict_minimum_tilt_at_tick24_rad": "1103/5000",
+  "strict_maximum_tilt_at_tick24_rad": "1201/5000",
+  "strict_positive_acceleration_reversal_margin_at_tick24_m_s2": "2938607874271/25000000000000",
+  "strict_min_acceleration_reversal_margin_ticks24_to30_m_s2": "2651429951929/25000000000000",
+  "zero_torque_baseline_tick30_bounds": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-2779781471279967024625469/6250000000000000000000000",
+      "2779781471279967024625469/6250000000000000000000000"
+    ],
+    "phi": [
+      "-11/1000",
+      "11/1000"
+    ],
+    "v": [
+      "-34097311791485131696759/25000000000000000000000",
+      "34097311791485131696759/25000000000000000000000"
+    ]
+  },
+  "positive_velocity_upper_improvement_vs_zero_torque_at_tick30_m_s": "477506076117231903830427/625000000000000000000000",
+  "worst_absolute_velocity_tilt_at_tick30_m_s": "1329081631885826099252863/625000000000000000000000",
+  "worst_absolute_velocity_zero_torque_at_tick30_m_s": "34097311791485131696759/25000000000000000000000",
+  "legal_packet_words_six_opportunities": 44,
+  "packet_words": [
+    "SSSSSS",
+    "SSSSSM",
+    "SSSSMS",
+    "SSSSMM",
+    "SSSMSS",
+    "SSSMSM",
+    "SSSMMS",
+    "SSMSSS",
+    "SSMSSM",
+    "SSMSMS",
+    "SSMSMM",
+    "SSMMSS",
+    "SSMMSM",
+    "SMSSSS",
+    "SMSSSM",
+    "SMSSMS",
+    "SMSSMM",
+    "SMSMSS",
+    "SMSMSM",
+    "SMSMMS",
+    "SMMSSS",
+    "SMMSSM",
+    "SMMSMS",
+    "SMMSMM",
+    "MSSSSS",
+    "MSSSSM",
+    "MSSSMS",
+    "MSSSMM",
+    "MSSMSS",
+    "MSSMSM",
+    "MSSMMS",
+    "MSMSSS",
+    "MSMSSM",
+    "MSMSMS",
+    "MSMSMM",
+    "MSMMSS",
+    "MSMMSM",
+    "MMSSSS",
+    "MMSSSM",
+    "MMSSMS",
+    "MMSSMM",
+    "MMSMSS",
+    "MMSMSM",
+    "MMSMMS"
+  ],
+  "smf_update_semantics": "prior propagation by interval inclusion, success position strip intersection, always observed angle/rate strip intersection; true state remains contained by induction for noise-consistent observations; no arbitrary-observation nonempty claim",
+  "float_sanity_only": {
+    "pattern": "SMMSSS",
+    "final_truth": [
+      -0.027296023822751,
+      -0.4224880322297401,
+      0.23000000000000004,
+      -0.004000000000000031
+    ],
+    "final_smf_bounds": {
+      "omega": [
+        -0.01,
+        0.0009999999999998
+      ],
+      "p": [
+        -0.037296023822751,
+        0.002703976177249
+      ],
+      "phi": [
+        0.22750000000000004,
+        0.23617999999999992
+      ],
+      "v": [
+        -2.112489039415294,
+        0.5645342611468863
+      ]
+    },
+    "maximum_interval_width_sanity": 2.67702330056218
+  },
+  "finite_horizon_robust_state_and_input_constraints": true,
+  "all_legal_packet_histories_covered_by_open_loop_policy": true,
+  "persistent_tilt_at_tick24": true,
+  "general_output_feedback_invariant_terminal_set_proved": false,
+  "robust_recursive_feasibility_proved": false,
+  "mpc_optimization_implemented": false,
+  "six_state_safety_proved": false,
+  "gate_A": "blocked",
+  "limitations": [
+    "The open-loop tilt ramp does not use posterior feedback; SMF strips are sound but interval outer approximations may be conservative.",
+    "Only a finite 30-tick maneuver is certified; no repeatable backup, robust stability or recursive terminal invariant set.",
+    "Angle/rate are initially uncertain and may drift during zero-torque hold; +R acceleration reversal does not imply robustness to -R or switching residuals.",
+    "Fixed thrust horizontal model, not coupled vertical six-state model or thrust scheduling.",
+    "No online MPC optimization or 20ms worst-case runtime guarantee."
+  ]
+}
