@@ -39,3 +39,10 @@ v_(k+1)-v_k ≥ h*[R0 + min(Tmin*(RT-s5(alpha_k)), Tmax*(RT-s5(alpha_k)))]。
 **Gate A=blocked。** 仅二维姿态SMF+MPC在Run221限定假设下有递归可行性；四状态非空终端RCI、输出反馈Tube MPC递归可行、稳定性和六状态安全仍未证明。可行性：特定单桥方案被严格排除，但一般方案未知；创新性：单项剪枝不足以构成硕士贡献；难度：高。不能把该反例推广为全局不可控。
 
 **下一轮唯一优先任务：** 用本轮b≥0.4060367...的必要条件筛除过窄单桥，允许多个小倾角位置—速度相关单元，寻找一个经严格区间覆盖认证的非空闭合控制循环；若仍不能闭合，评估缩小课题保证对象。
+
+
+## GitHub Actions与main合并落地核验（2026-11-01 UTC）
+
+研究PR #33 https://github.com/zhouxingxing1279/AcademicReaserch/pull/33 以非强制Squash安全合并；合并前确认head为 718d70d1728e9dfefc2c01233223a46ad5eda88a、main基准 0f05bf4273be2f00b5731e3a371a1500f7177236、ahead=8、behind=0、mergeable=true。合并生成main SHA 8236ccebd8eeb99fb82fcb09f8c9aa8cfb3f91f6，重新读取远端main及新增源码、测试、检查点、论文日志与结果文件的Git Blob，均确认落地。
+
+完整checkout PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41264059008 和代码合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41264106302 均为**success**；Python 3.13.17执行Run224–232聚焦测试 **61/61通过，无跳过**，真实配置合同、源码编译、Fraction精确证书、归档certificate.json比对及Actions工件上传均成功。**没有执行全仓库历史回归**；没有四状态终端RCI、完整输出反馈SMF+MPC递归可行性、稳定性、六状态安全或20ms最坏耗时证明。本节为事后文档记录，不改变数学/代码。
