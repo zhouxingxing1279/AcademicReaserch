@@ -1,3 +1,9 @@
+## Run250 GitHub完整checkout、CI及main合并核验（2026-11-01 UTC）
+
+研究PR #73 https://github.com/zhouxingxing1279/AcademicReaserch/pull/73 基于main `f9348c2b5ff83a3f9713ad8058ea4b0f8eafb4cf`；合并前compare ahead=7/behind=0、mergeable_state=clean，expected head `879ee532e3fe1e5c876f81266d65a0f389b9077f`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350799741 为**completed/success**，Python3.13完整checkout运行Run224–250聚焦回归、真实配置与Run249零备份交叉核验、精确JSON归档对比及工件上传，所有工作流步骤成功；按Run249原233项加本轮9项应为242项，但**未独立取得unittest逐项输出**，故不将推算计数冒充已读取日志。非强制squash合并到main `5f410044071d629522bbe18a2edddf0927412119`，已重新读取main SHA、PR merged状态、验证源码/JSON/日志Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350936591 为**completed/success**，完整checkout上述步骤及工件上传再次成功。本段仅补充证据，不改变算法、测试、证书；全仓库历史回归、输出反馈递归可行与20ms WCET仍未认证。
+
+---
+
 # Run250 — Run249零力矩备份的严格最大安全时域（2026-11-01）
 
 **远端基准main：** `f9348c2b5ff83a3f9713ad8058ea4b0f8eafb4cf`（已包含背景研究PR #72和Run249）。**唯一瓶颈：** Run249已证明55拍有限截止时间SMF＋网格MPC＋零力矩尾备份的鲁棒安全，但尚无可反复移位的输出反馈终端合同。先对现有零备份计算**精确最大鲁棒安全时域**，检验能否直接重新启动55拍保证，避免把有限时域归纳误用成递归可行。
