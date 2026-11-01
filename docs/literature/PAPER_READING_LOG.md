@@ -1,3 +1,23 @@
+## Run250 — Wabersich与Zeilinger（2023）预测控制障碍函数（2026-11-01；新增分节已读1篇，去重96→97篇）
+
+**题名：** *Predictive Control Barrier Functions: Enhanced Safety Mechanisms for Learning-Based Control*。**作者：** Kim P. Wabersich; Melanie N. Zeilinger。**年份/正式出版：** 2023，*IEEE Transactions on Automatic Control* 68(5):2638–2651。**DOI：** https://doi.org/10.1109/TAC.2022.3175628 。**公开正文：** https://arxiv.org/abs/2105.10241 （2021初稿、2022更新；与2023期刊终版逐式一致性尚未核验）。
+
+**阅读日期/核验状态：** 2026-11-01；实际分节阅读公开正文§1、§2.1、§3.1–3.3、§4，特别是式(5f)、Definition 3.1式(13)、Assumption 1、Theorem 3.4/3.6及终端CBF设计思路；**分节已读，不冒充期刊终版逐式精读**。IEEE期刊DOI、卷期、页码由作者公开书目及DBLP独立核验。
+
+**研究问题：** 当预测安全过滤器因初态不可行或未建模扰动而失效时，如何引入可恢复的软约束机制，同时对原安全过滤可行域给出稳定性分析？
+
+**方法/模型：** 离散时间非线性系统，性能控制器外置，预测安全过滤(PSF)要求预测终点进入安全终端集合；通过沿预测时域逐级收紧的软约束、终端控制障碍函数和预测障碍值函数构造恢复机制。论文给出线性2D与非线性车辆数值案例；不是有噪间歇测量四旋翼状态SMF。**状态估计/参数估计：** 本文不是状态SMF或参数SMF论文；使用全状态名义控制模型，不能与Didier等2021的参数SMF混淆。
+
+**重要定理/假设：** 式(5f)要求终端安全集；Definition 3.1给出离散CBF在安全集内后继闭合、集外下降的条件；Assumption 1要求终端CBF存在；Theorem 3.4在不变域等条件下给出安全集不变与渐近稳定；Theorem 3.6还需终端与软约束、连续性等条件，不能跳过。**主要结论：** 在完整假设成立时，软约束预测障碍函数可使原PSF可行域获得恢复机制，区别于单纯将优化问题改成总能求解。
+
+**局限：** 软约束优化可行不等于所有物理硬约束在不可行初态下仍满足；本文没有直接处理有界有噪位置丢包SMF、共享因果控制、四状态对抗横向残差。不得直接迁移其全时域安全定理。
+
+**与课题关联：** Run249的55拍零尾只是固定截止时间合同；Run250精确证明固定零备份对全初始盒最多67拍，68拍有真实角点越界。文献强调终端安全集必须存在后继闭合控制，Run249尚无这一条件。**可复用技术：** 终端控制律与安全集合证明清单、PSF旧计划移位、将不可行恢复与硬安全保证分开评价。**待查问题：** 在真实5拍success/miss和SMF后验信息状态上，能否构造非空共享因果终端控制集合？软约束恢复应如何作为非安全诊断通道而非硬安全证明？
+
+**本轮独立数学证据：** [Run250研究日志](../research/run250_research_log.md)；精确Fraction真实角点第68拍反例。去重计数从96增加至97；历史Wabersich与Zeilinger（2021）*A predictive safety filter...*仍为不同论文的仅摘要核验记录，不在本轮升级已读。
+
+---
+
 ## 背景模型选型第3轮 — Miladi等（2020）位置＋角度量测的四旋翼观测器ENMPC（2026-11-01；首次公开正文分节已读，去重95→96篇）
 
 **题名：** *Explicit nonlinear model predictive control tracking control based on a sliding mode observer for a quadrotor subject to disturbances*。**作者：** Nadia Miladi; Habib Dimassi; Salim Hadj Said; Faouzi M’Sahli。**出版：** *Transactions of the Institute of Measurement and Control* 42(2):214–227 (2020)，2019-08-07在线首发。**DOI：** https://doi.org/10.1177/0142331219865816；**期刊页面：** https://journals.sagepub.com/doi/10.1177/0142331219865816；**公开正文：** https://www.researchgate.net/publication/335024865_Explicit_nonlinear_model_predictive_control_tracking_control_based_on_a_sliding_mode_observer_for_a_quadrotor_subject_to_disturbances。
