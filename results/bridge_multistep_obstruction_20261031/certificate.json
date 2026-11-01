@@ -1,0 +1,29 @@
+{
+  "run": "232",
+  "base_main": "0f05bf4273be2f00b5731e3a371a1500f7177236",
+  "model": "frozen four-state Euler; independent control-dependent |r|<=R(T)",
+  "initial_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "horizon": 14,
+  "adversary": "r_k=+R(T_k) after every causal control; negative sign gives mirror",
+  "quantifiers": "for every full-state causal thrust/torque controller, there exists this legal disturbance policy",
+  "terminal_tilt_absolute_upper": "91/625",
+  "outer_mode_tilt_floor": "3/20",
+  "necessary_bridge_velocity_halfwidth": "7744536014241741013/19073486328125000000",
+  "run228_narrow_first_exit_tick": 1,
+  "run228_expanded_first_exit_tick": 2,
+  "width_0p40_first_exit_tick": 13,
+  "width_0p41_certificate": "inconclusive",
+  "result": "strict noninvariance of origin-containing three-mode bridge for b below necessary width",
+  "not_proven": [
+    "nonempty RCI",
+    "global RCI emptiness",
+    "output feedback MPC recursive feasibility",
+    "six-state safety",
+    "stability"
+  ]
+}

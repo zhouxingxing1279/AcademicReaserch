@@ -1,0 +1,55 @@
+name: Run232 exact central-bridge multistep obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_bridge_multistep_obstruction.py'
+      - 'verification/test_four_state_bridge_multistep_obstruction.py'
+      - 'verification/check_four_state_bridge_graph.py'
+      - 'configs/planar_baseline.json'
+      - 'results/bridge_multistep_obstruction_20261031/certificate.json'
+      - '.github/workflows/run232-bridge-multistep-obstruction.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_bridge_multistep_obstruction.py'
+      - 'verification/test_four_state_bridge_multistep_obstruction.py'
+      - '.github/workflows/run232-bridge-multistep-obstruction.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-232 exact focused regression and real config contract
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_bridge_multistep_obstruction.py verification/test_four_state_bridge_multistep_obstruction.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction
+          python verification/check_four_state_bridge_multistep_obstruction.py --root . --output /tmp/run232_summary.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as Q
+          d=json.load(open('/tmp/run232_summary.json'))
+          assert d['gate_A']=='blocked'
+          assert d['horizon']==14
+          assert Q(d['necessary_bridge_velocity_halfwidth'])==Q(7744536014241741013,19073486328125000000)
+          assert Q(d['terminal_tilt_absolute_upper'])==Q(91,625)<Q(3,20)
+          assert d['cases']['run228_expanded']['first_forced_velocity_exit_tick']==2
+          assert d['cases']['width_0p40']['first_forced_velocity_exit_tick']==13
+          assert not d['cases']['width_0p41']['strict_noninvariance']
+          cert=json.load(open('results/bridge_multistep_obstruction_20261031/certificate.json'))
+          assert cert['necessary_bridge_velocity_halfwidth']==d['necessary_bridge_velocity_halfwidth']
+          assert cert['terminal_tilt_absolute_upper']==d['terminal_tilt_absolute_upper']
+          assert cert['run228_expanded_first_exit_tick']==d['cases']['run228_expanded']['first_forced_velocity_exit_tick']
+          assert cert['width_0p40_first_exit_tick']==d['cases']['width_0p40']['first_forced_velocity_exit_tick']
+          print('Run232 all-control 14-tick bridge obstruction and archived certificate verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run232-exact-bridge-multistep-json
+          path: /tmp/run232_summary.json
