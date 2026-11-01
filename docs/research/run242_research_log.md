@@ -26,3 +26,7 @@ M_n=[[1-beta,(1-beta)nh+L],[-alpha,1-alpha nh]]。
 - **课题评估：** 正向可行性（一次性有限安全）不变；否定“原脉冲原样重复可稳定悬停”的直接路线；创新性仍待基于后验速度与模式的可证闭环策略，理论难度高。没有六状态安全、20ms最坏时延或MPC递归可行证据。
 
 **下一轮唯一优先任务：** 设计一个利用SMF后验速度中心/区间的因果**阻尼型**恢复律，在无扰/无噪固定宏周期首先取得Schur稳定的精确Jacobian及合法输入裕度，再扩展到全部观测与5/10/15丢包模式的集合包含/递归终端证书。
+
+## 4. GitHub完整checkout、合并与main核验（2026-11-01）
+
+研究PR #53 https://github.com/zhouxingxing1279/AcademicReaserch/pull/53 基于main `475cbf3598286ce4d57068dd876191ad88329684`；合并前ahead=1/behind=0、mergeable_state=clean，head `4ce8c9430d119d657567c3b419f26e6337320730`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309752362 completed/success；Python 3.13.17完整checkout Run224–242聚焦测试**154/154通过、无跳过**（32.796s），真实配置合同、精确Fraction、归档JSON一致、源码编译与artifact上传成功。通过非强制Squash合并至main `4a63fa5eb64e8b49b9337853a3eac385e32aee27`，再次读取远端main确认。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309850659 completed/success，**154/154通过、无跳过**（38.591s），归档核验及工件上传成功。**全仓库历史回归未执行**；本轮证明只针对固定重复脉冲的局部不稳定性，不证明一般SMF+MPC递归安全或否定所有输出反馈终端控制。
