@@ -1,3 +1,11 @@
+## Run248 — Yang/Ozay (2021) 间歇量测安全综合分节重读（2026-11-01；已读去重94篇不变）
+
+**题名：** *Safety Control Synthesis for Systems with Missing Measurements*。**作者：** Liren Yang; Necmiye Ozay。**出版：** 2021，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；**公开全文：** https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/状态：** 2026-11-01，重新阅读§3 Assumption 1/Problem 1、§4.1–4.4 string automaton、因果承诺、Proposition 4–5；历史已读，本轮**重读而非新增**，统一去重总数仍94篇（含背景任务Sasfi 2023）。
+
+**研究问题/模型：** 离散系统在有界扰动、自动机约束的间歇**完整状态**观测下，如何综合无限时域硬安全控制；成功包提供无噪完整状态，丢包时无状态测量。**方法：** string automaton和product safety game，控制必须在不知道下一次成功包何时出现时因果承诺控制序列。**假设与重要结论：** Assumption 1约束丢包语言、存在成功包及有限连续丢包；Proposition 4–5在紧性/连续性及自动机假设下建立product不变集与原问题安全控制的关系。**局限：** 不能直接处理本仓库有噪位置、每拍有噪姿态、隐藏速度的关联CZ后验。**与本课题关联/可复用：** 在第10拍或更早设计共享因果前缀，覆盖success/miss全部边；Run248的第14拍全状态不可恢复角点说明不能把第15/25拍成功位置包当成已失效前缀的补救。**待查：** 在每拍有噪姿态和位置间歇测量的集合值信息状态上如何构造非空安全前驱？**研究工件：** docs/research/run248_research_log.md。未将此文的理论结论冒充本仓库的递归可行证明。
+
+---
+
 ## 背景模型选型任务：Sasfi/Zeilinger/Köhler (2023) 六状态平面四旋翼与参数SMF（2026-11-01；首次核验正文分节阅读，去重93→94篇）
 
 **题名：** *Robust adaptive MPC using control contraction metrics*。**作者：** András Sasfi; Melanie N. Zeilinger; Johannes Köhler。**年份/出版：** 2023，*Automatica* 155:111169。**DOI：** https://doi.org/10.1016/j.automatica.2023.111169 。**arXiv：** https://arxiv.org/abs/2209.11713 （v2，2023-07-11）；**公开全文：** https://arxiv.org/html/2209.11713v2 。
