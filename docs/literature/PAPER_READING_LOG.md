@@ -1,3 +1,13 @@
+## Run236 文献核验与共享控制信息权限（2026-11-01；去重已读仍91篇）
+
+**Mayne, Raković, Findeisen, Allgöwer (2006)**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222，DOI https://doi.org/10.1016/j.automatica.2006.03.005 。**本轮阅读/核验层级：** 2026-11-01，重新核对DBLP书目及公开摘要，并对照Run221已经阅读的§2–4、Propositions 1–3、Theorems 1–2笔记；本轮没有重新取得全文，不能声称重新逐条核对定理。**研究问题：** 有界过程与输出扰动下约束线性系统的输出反馈鲁棒MPC。**模型/方法：** Luenberger估计器、估计误差RPI、固定截面tube、名义MPC约束收紧。**重要假设/结论：** 需要估计误差包含、稳定误差系统、终端不变/下降与初始可行条件，方可保证约束与稳定性；不能从状态反馈RPI直接推导输出反馈。**局限：** 不覆盖本仓库连续丢包至15拍、非线性sin余项与控制依赖气动残差。**本课题关联/可复用：** Run236用同一后验观测纤维的两个真值证明Run235全状态律不可直接执行；下一步应研究联合估计/跟踪误差RPI或共享因果终端律。**待查：** 15模式观测图下能否得到可证明的模式条件化误差管并实现终端移位？书目 https://dblp.org/rec/journals/automatica/MayneRFA06.html 。
+
+**Lucia, Ernesto, Castelan (2023)**，*Set-theoretic output feedback control: A bilinear programming approach*，*Automatica* **153:111004**，DOI https://doi.org/10.1016/j.automatica.2023.111004 。**本轮阅读/核验层级：** DBLP书目及公开资料复核，纠正本日志历史错误卷号/DOI，未重新精读原文；历史Run141已读状态保留。**研究问题/方法：** 输出反馈控制器及受控不变多面体的双线性联合综合。**假设/结论/局限：** 历史Run141的分节笔记讨论静态输出反馈与嵌套集合；该线性方法不能直接证明本项目非线性、失测及推力相关扰动下的安全性。**可复用：** 把观测等价类上统一控制作为合成约束。**待查：** 能否以更小维的模式依赖多面体替代4000生成元F？书目 https://dblp.org/rec/journals/automatica/LuciaEC23.html 。
+
+**本轮自有证据：** [Run236研究日志](../research/run236_research_log.md)。去重已读仍91篇；不将仅核对书目的文献重复计入已读。
+
+---
+
 ## Run235 文献核验与有限RPI表示（2026-11-01；去重已读仍91篇）
 
 **题名：** *Invariant approximations of the minimal robust positively invariant set*。
@@ -1336,7 +1346,7 @@
 - 与本项目关系：是 2026 新近邻，但仍先冻结 observer-based closed loop；不覆盖 observation-fiber controlled RCI、bounded-dropout automaton 和 feedback-dependent residual graph。
 
 ## Lucia, Ernesto, Castelan — Set-theoretic output feedback control: a bilinear programming approach
-- 年份/出处：2023, *Automatica*, 151:110861；DOI：https://doi.org/10.1016/j.automatica.2023.110861；作者预印本：https://users.encs.concordia.ca/~wlucia/files/STOutput2023.pdf
+- 年份/出处：2023, *Automatica*, **153:111004**；DOI：**https://doi.org/10.1016/j.automatica.2023.111004**；作者预印本：https://users.encs.concordia.ca/~wlucia/files/STOutput2023.pdf（预印本链接本轮未重新核验）。Run236据DBLP https://dblp.org/rec/journals/automatica/LuciaEC23.html 与交叉书目核实并纠正原日志误记的151:110861及错误DOI；历史Run141阅读层级不变。
 - Run 141 精读：Sections 2--5、Definitions 2--3、Propositions 1--2、Algorithm 1、式 (7)--(31)。
 - 方法/关键结论：联合综合静态输出反馈增益、terminal RCI 与嵌套 robust one-step controllable sets；rank-deficient output 情形采用不依赖隐藏状态的离线切换，满状态带噪情形才可用当前测量选择更小集合。集合包含和输入约束由 extended Farkas lemma 转成双线性条件。
 - 与本项目关系：直接说明 output-feedback 与 full/noisy-state feedback 的信息权限及在线集合选择不同；因此读取隐藏 `eta` 的 vertex control 只能作乐观上界，不能作为当前 causal ancillary policy。

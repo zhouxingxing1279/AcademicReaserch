@@ -1,0 +1,38 @@
+{
+  "common_observation_p_phi_omega": [
+    "0",
+    "0",
+    "0"
+  ],
+  "conclusion": "Full-state terminal law is not output-measurable; naive global additive-error tightening with budget >= minimax error cannot certify the torque limit",
+  "evidence": "EXACT_RATIONAL_INFORMATION_FIBER_COUNTEREXAMPLE",
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "limitations": [
+    "Does not show that no shared torque keeps both successors in F",
+    "Does not show that F is unsuitable for all output-feedback designs",
+    "No SMF-MPC recursive feasibility, stability, or six-state guarantee"
+  ],
+  "main_theorem": "two distinct states in F and initial prior have identical available observation, but require distinct Run235 feedback torques",
+  "minimax_common_torque_error_lower": "430368601/20000000000",
+  "minimax_omega_successor_error_lower": "430368601/20000000000",
+  "prefix_terms": 100,
+  "run": 236,
+  "scope": "Run235 frozen Euler 4-state, fixed thrust, full-state K, Run221 sensing at initial position packet",
+  "state_minus": [
+    "0",
+    "-1742383/40000000",
+    "0",
+    "0"
+  ],
+  "state_plus": [
+    "0",
+    "1742383/40000000",
+    "0",
+    "0"
+  ],
+  "support_plus_error_exceeds_limit": true,
+  "terminal_torque_support_lower": "3/50",
+  "torque_fullstate_minus": "-430368601/20000000000",
+  "torque_fullstate_plus": "430368601/20000000000",
+  "torque_limit": "2/25"
+}

@@ -1,0 +1,47 @@
+name: Run236 four-state shared-torque observation fiber
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_shared_torque.py'
+      - 'verification/test_four_state_shared_torque.py'
+      - 'results/four_state_shared_torque_20261101/checks.json'
+      - '.github/workflows/run236-shared-torque.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_shared_torque.py'
+      - 'verification/test_four_state_shared_torque.py'
+      - '.github/workflows/run236-shared-torque.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-236 focused regression and exact information-fiber certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_finite_rpi.py verification/check_four_state_shared_torque.py verification/test_four_state_shared_torque.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque
+          python verification/check_four_state_shared_torque.py --root . --output /tmp/run236_certificate.json
+          diff -u results/four_state_shared_torque_20261101/checks.json /tmp/run236_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('/tmp/run236_certificate.json'))
+          d=F(a['minimax_common_torque_error_lower'])
+          assert a['run']==236 and d==F(430368601,20000000000)
+          assert F(a['terminal_torque_support_lower'])+d>F(a['torque_limit'])
+          assert a['gate_A']=='blocked_for_output_feedback_SMF_MPC'
+          print('Run236 exact output-fiber obstruction verified; no claim of shared-torque infeasibility')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run236-shared-torque-exact-certificate
+          path: /tmp/run236_certificate.json

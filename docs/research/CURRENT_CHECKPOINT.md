@@ -1,3 +1,13 @@
+## Run236 当前检查点（2026-11-01）
+
+**基准main：** 9442a873d89c270204fa32b4562334e1d0a07d1b。Run235有限4000生成元F仍为严格固定推力全状态反馈RCI；Run236证明F内且属于初始先验的两个状态 x±=(0,±1742383/40000000,0,0)，在初始成功位置包下具有相同(p,phi,omega)观测，但Run235反馈需要相反力矩±430368601/20000000000 Nm。任何共享观测力矩至少对一个状态偏离原全状态律0.02151843005 Nm；角速度下一拍相对该全状态律误差同值。100项精确有理数支持函数证明sup_F|Kx|>0.06 Nm，故朴素全局三角收紧0.06+0.02151843005>0.08 Nm无法认证。**不证明没有其他共享力矩，也不证明F在共享控制下必然不变性失败。**
+
+**证据：** verification/check_four_state_shared_torque.py、8项测试、results/four_state_shared_torque_20261101/checks.json。Python 3.13本地最小模块镜像7/8通过、1项缺完整checkout跳过；GitHub Actions真实配置和Run224–236聚焦回归待验证。首次缺Run235模块的ModuleNotFoundError已修复并重测。文献日志纠正Lucia等2023期刊DOI及卷号，已读仍91篇。**Gate A仍blocked**：没有共享因果终端律、SMF+Tube MPC递归可行、六状态安全或20ms最坏时延证明。
+
+**下一轮唯一任务：** 对同一后验纤维建立真正的exists shared torque / forall hidden states and disturbances的一步F后继包含判定；不可把Run236特定K不具备观测可实现性误写成所有共享控制不可能。
+
+---
+
 **Run229完整仓库CI与合并核验（2026-10-31）：** 研究PR #27 https://github.com/zhouxingxing1279/AcademicReaserch/pull/27 已通过非强制Squash合并，代码main SHA `4964ff795a4dd8a4e1398ef77a2c1b740b436fae`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251472104 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41251521934 均为success；Python 3.13，完整checkout Run224–229共40/40聚焦测试通过，无跳过，真实配置、编译、有理数摘要断言和完整JSON artifact上传成功。已重新读取main SHA及新增源码/测试Blob。**未执行全仓库历史回归；无非空终端RCI、输出反馈SMF＋MPC递归可行、稳定性、六状态安全或20ms最坏耗时证明。** 本补记是文档更新，不改变控制算法。
 
 ---
