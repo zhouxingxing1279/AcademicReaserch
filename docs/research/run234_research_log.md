@@ -76,3 +76,11 @@ python verification/check_four_state_rpi_zonotope.py --root . --output /tmp/run2
 可行性由“无四状态终端正证”提升为“固定推力、全状态反馈的非空RCI已严格证明”；创新性：该mRPI构造本身是经典技术，尚不构成独立创新，真正研究问题仍在SMF条件化误差集合与共享控制的输出反馈闭合；难度仍高，但终端存在性障碍显著缩小。
 
 **下一轮唯一优先任务：** 将隐式S转成可计算成员资格/支撑约束的有限外近似终端表示，严格验证其鲁棒后继闭合，并明确间歇位置量测下`SMF后验集合 subset terminal`时可使用的同一因果控制律；若有限表示外近似不保持不变，保留失败证据而不偷换为证明。
+
+## 6. 完整checkout CI与安全合并事后核验（2026-11-01 UTC）
+
+研究PR #37 https://github.com/zhouxingxing1279/AcademicReaserch/pull/37 ，以main `107d08ac91e71948d65f535b19c9fe06caf3cb5b` 为基准，合并前compare为ahead=7、behind=0，PR mergeable=true；非强制Squash合并，代码落地main SHA `0f4f61431b4ea226de4fe29080ba0c6009e68701`。已重新读取远端main SHA，源码及测试Blob分别为 `1fa72e05f5e22ac63cd57bf17788818f6ca435f6`、`c82d43d99299afa290d6af4281e7c511dcb5bd49`，与本地已测文件一致；归档JSON Blob `dcb518d0ed82f3ee2e318d5427cb301d1421269b` 也一致。
+
+PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272122206 与代码合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272164237 **均success**。完整checkout Python 3.13.17执行Run224–234共**77/77项聚焦测试通过、无跳过**，真实配置合同、语法编译、精确Fraction支撑/尾项、归档JSON全量相等与Actions工件上传均成功。全仓库历史回归与20ms最坏在线时间未测；最终验证记录补记属于文档变更，不代表新算法测试。
+
+**结论仍有限定：** 这是一份固定推力、完整状态反馈、冻结四状态非线性模型的RCI存在性证明；**不是**部分观测SMF、Tube MPC递归可行、六状态鲁棒安全或全系统稳定性证明。
