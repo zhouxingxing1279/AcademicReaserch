@@ -1,3 +1,7 @@
+**Run247完整checkout与安全合并核验（2026-11-01）：** 研究PR #64 https://github.com/zhouxingxing1279/AcademicReaserch/pull/64 基于main `8b7b22c757749fcc6290d7bdbd7fc494a64e86b6`，合并前compare ahead=7/behind=0、mergeable_state=clean，head=`8271e2e5e1042b2bda9595f3b1a5863bc10d4111`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41335351537 **completed/success**；Python 3.13.17完整checkout Run224–247聚焦测试**211/211通过、无跳过**（74.114s），真实配置、Run246轨迹逐项比较、Fraction精确证书、归档JSON对比与artifact上传成功。PR非强制squash合并至main `193d4cd99e7f48ff56b43f8289336ff75c492cc5`，已重新读取main、PR merged及源码/归档/阅读记录Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41335523410 **completed/success**，Python 3.13.17完整checkout再次**211/211通过、无跳过**（56.300s），证书一致性与artifact上传成功。此证据补记仅更新文档，未改变算法；全仓库历史回归、SMF＋MPC递归可行、六状态安全和20ms最坏求解时延仍未认证。
+
+---
+
 # Run247 — 双向速度可生存必要条件与Run245更早不可恢复时刻（2026-11-01）
 
 **远端main基准：** `8b7b22c757749fcc6290d7bdbd7fc494a64e86b6`。读取Run245/246研究日志、源码、精确证书、`configs/planar_baseline.json`、唯一论文阅读记录和历史检查点。**唯一瓶颈：** Run246只在第30拍终点证明不可恢复；要让SMF/MPC的安全前驱在终端之前拒绝危险分支，需要一个能在任意当前状态计算、且对未来所有合法控制有效的必要筛选条件。
