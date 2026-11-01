@@ -1,3 +1,7 @@
+**Run243量测时序重要限定（2026-11-01）：** 原配置位置包每5拍一次机会、最多连续2次丢包，故**连续实际成功包间隔不超过15拍**。Run243使用的20/25/30拍只能解释为**选中使用的成功包**间隔，中间必须存在被主动忽略的成功包，且预设末端包成功并无保证。固定模式Schur证书仅覆盖受限观测历史，**不覆盖配置允许的任意success/miss模式**；详见[Run243日志§6](run243_research_log.md)。下一轮须按真实包自动机建立共享因果控制，而不能把固定宏周期直接当一般闭环。
+
+---
+
 **Run243合并后完整checkout验证（2026-11-01）：** 研究PR #55 https://github.com/zhouxingxing1279/AcademicReaserch/pull/55 已安全Squash合并至代码main b59bae34b6765d974df3bfa4047474dacb146f51；重新读取main及新增源码、测试、归档Blob确认落地。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315031734 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41315122060 均completed/success；Python 3.13.17完整checkout Run224–243聚焦测试**167/167通过、无跳过**，真实配置、Fraction证书、归档JSON及artifact上传成功。仍未执行全仓库历史回归、一般输出反馈递归可行、六状态安全或20ms最坏时延认证。此段为合并证据补记，不改变控制算法。
 
 ---
