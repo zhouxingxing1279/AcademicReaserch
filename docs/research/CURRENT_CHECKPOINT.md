@@ -1,3 +1,17 @@
+# 当前研究检查点 — Run252（2026-11-01；PR/CI及main合并状态待核验）
+
+**起点远端main：** `2b7daf58ca5761e261fa12a2d9fff5a19661db44`。Run249的55拍SMF＋网格MPC＋零尾有限时域安全、Run250的零力矩67拍严格上限和Run251的15拍真实不可区分速度纤维仍有效，**Gate A仍blocked**。
+
+**本轮新必要条件：** 对Run251的特定0–15拍零力矩前缀及三个成功位置包（5/10/15拍），随后20/25拍两次合法miss，任何共享因果合法力矩**后续序列**下，存在两个继续合法、逐拍满足全部硬约束、所有可用读数相同的真实扰动实现，其第20拍和25拍速度直径分别为 `0.9333351125` 和 `1.3391329875 m/s`。严格Fraction证书与所有后续力矩的安全外包见 `verification/check_dropout_velocity_fiber.py`、`results/dropout_velocity_fiber_20261101/checks.json` 和 `docs/research/run252_research_log.md`。这**不是**任意0–15拍控制历史的通用下界，也不是递归安全不可行性证明。
+
+**文献：** 分节阅读Cosner等（IROS 2021, DOI 10.1109/IROS51168.2021.9636584）的测量鲁棒CBF/备份集Theorems 2–3与Segway实验；该文假设已知不变备份集，不能直接证明本仓库终端闭合。唯一论文阅读记录由99篇增至100篇去重条目。
+
+**本地测试：** Run252独立8项中7通过、1项因隔离环境缺Run249模块显式跳过；标准库编译与有理数JSON生成成功。PR完整checkout、Actions和main合并**尚未核验，不能提前宣称通过或合并**。无限时域递归可行性、稳定性、六状态鲁棒安全和20ms最坏执行时间均未证明。
+
+**下一轮唯一优先任务：** 从Run252第25拍 `SSSMM` 真实双速度纤维出发，构造覆盖第30拍下一次必成功位置包之前所有合法扰动的**非零共享因果备份及后继信息状态**，寻找非空可移位闭合证书。
+
+---
+
 **Run251完整checkout/安全合并核验（2026-11-01 UTC）：** PR #76 https://github.com/zhouxingxing1279/AcademicReaserch/pull/76 的CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41355983604 已completed/success；Python3.13完整checkout的Run249/250/251聚焦测试**27/27通过、无跳过**（读取job日志），源码编译、精确JSON归档逐字对比及artifact上传成功。合并前ahead=8/behind=0，expected head `d6d06582347e29f301743cc5fd57bf63869f780b`，非强制squash合并代码main SHA `913a79ff69a453245c4f6b90d030503925bb8283`；重新读取main及源码/归档/日志Blob确认落地。push触发的main Actions运行未独立读取，**不宣称main CI成功**。本补记仅修改文档，不改变数学证书。Gate A仍blocked。
 
 ---
