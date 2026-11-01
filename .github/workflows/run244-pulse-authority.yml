@@ -1,0 +1,55 @@
+name: Run244 pulse authority obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_pulse_authority.py'
+      - 'verification/test_four_state_pulse_authority.py'
+      - 'results/four_state_pulse_authority_20261101/checks.json'
+      - '.github/workflows/run244-pulse-authority.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_pulse_authority.py'
+      - 'verification/test_four_state_pulse_authority.py'
+      - '.github/workflows/run244-pulse-authority.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-244 focused regressions and exact adverse-residual certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_pulse_authority.py verification/test_four_state_pulse_authority.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping verification.test_four_state_pulse_authority
+          python verification/check_four_state_pulse_authority.py --root . --output /tmp/run244_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_pulse_authority_20261101/checks.json'))
+          actual=json.load(open('/tmp/run244_certificate.json'))
+          for a,b in zip(expected['modes'],actual['modes']):
+              x=a.pop('numerical_sanity_only')
+              y=b.pop('numerical_sanity_only')
+              assert x.keys()==y.keys()
+              for k in x:
+                  if isinstance(x[k],float):
+                      assert abs(x[k]-y[k])<1e-10,(k,x[k],y[k])
+                  else:assert x[k]==y[k]
+          assert expected==actual, 'Run244 archived exact certificate mismatch'
+          assert actual['run']==244
+          assert all(F(x['velocity_constraint_margin_m_s'])>0 for x in actual['modes'])
+          assert not actual['general_output_feedback_infeasible']
+          print('Run244 exact adversarial pulse-family certificate matches archive')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run244-exact-pulse-authority
+          path: /tmp/run244_certificate.json
