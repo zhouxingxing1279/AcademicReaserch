@@ -8,7 +8,7 @@
 
 **文献：** 定向复核Li/Liu (2018), IEEE TAC 63(7):2206–2211, DOI https://doi.org/10.1109/TAC.2017.2760106，§II–III、Proposition 2及Theorem 1；已读版本复核不重复计数，统一去重**90篇**。该文有限模式无对抗残差的定理不能直接作为本模型的RCI证明。
 
-**复现：** `PYTHONPATH=verification python -m unittest -v verification.test_four_state_cell_position_guard`；`PYTHONPATH=verification python verification/check_four_state_cell_position_guard.py --root . --output /tmp/run231_checks.json`。本地Python标准库6/7通过，1项因缺完整checkout跳过；源码编译及有理数结果生成成功。完整checkout CI及合并落地情况以实际GitHub Actions与main复读结果为准。
+**复现：** `PYTHONPATH=verification python -m unittest -v verification.test_four_state_cell_position_guard`；`PYTHONPATH=verification python verification/check_four_state_cell_position_guard.py --root . --output /tmp/run231_checks.json`。本地Python标准库6/7通过，1项因缺完整checkout跳过；源码编译及有理数结果生成成功。PR #31完整checkout CI（https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41259598573）已成功：53/53聚焦测试通过、无跳过，配置合同与精确结果断言通过。研究代码已安全Squash合并main，复读确认SHA `83e47ee149d53d63ae4e406637b209e32f543344`。未执行全仓库历史回归。
 
 **Gate A=blocked。** 当前创新性不足以独立支撑硕士论文；四状态非空RCI与SMF信息状态下的递归可行性仍是高难度核心风险。六状态安全、20ms最坏计算时间及全仓库历史回归未验证。
 
