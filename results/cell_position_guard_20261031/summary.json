@@ -1,0 +1,37 @@
+{
+  "run": "231",
+  "base_main": "b6ab233a2188a138f9ef64d76418827a52fb37f4",
+  "model": "frozen four-state Euler with causal full-state control and independent |r|<=R(T)",
+  "horizon_steps": 25,
+  "positive_cell": {
+    "p": [
+      "49/10",
+      "491/100"
+    ],
+    "v": [
+      "-1/200",
+      "1/200"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "omega": [
+      "-1/200",
+      "1/200"
+    ]
+  },
+  "negative_cell": "exact sign mirror",
+  "strict_p25_lower": "5+461731712952866342887537/25000000000000000000000000",
+  "strict_exclusion_margin": "461731712952866342887537/25000000000000000000000000",
+  "claim": "entire positive and negative full-dimensional initial boxes are necessarily unsafe within 25 steps under a legal adversarial residual, for all causal controls",
+  "run230_zero_slice_reproduced": true,
+  "local_validation": "Python 3.13 standard-library: 6 passed, 1 skipped due missing full checkout; py_compile and exact JSON generated",
+  "ci_validation": "pending GitHub Actions",
+  "gate_A": "blocked",
+  "limitations": [
+    "finite-horizon exclusion only, not an RCI construction",
+    "not output feedback or SMF/MPC recursive feasibility",
+    "no six-state or worst-case runtime guarantee"
+  ]
+}
