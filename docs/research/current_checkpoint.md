@@ -1,3 +1,9 @@
+# 当前研究检查点 — Run240（2026-11-01）
+
+**基准main：** e8e2516146b9390a8c5b7d9166a581ff45f7e922。Run240已对Run236两点初始纤维在零力矩下的5/10/15拍**全部连续可达成功位置观测**，用精确Fraction分支原始—对偶与有限断点包络计算后验速度区间。最坏后验半宽分别0.2464585125、0.3188500014、0.3681367927m/s；相对各自先验半宽的统一缩减分别0%、29.04%、43.56%。**5拍成功观测不保证任何速度区间半宽缩减**；10/15拍虽有半宽缩减，某些观测仍不降低绝对速度上界。继续共同零力矩15拍仅得到有限时域安全，不构成RCI或MPC。证据详见[Run240日志](run240_research_log.md)、验证器与JSON归档。Gate A仍blocked；全仓库CI与main合并结果需实际核验，不能提前宣称。已读去重91篇，Yang & Ozay 2021与Scott等2016为既有文献定向重读。下一轮唯一优先任务：构造全部后验观测分支上可执行的非零力矩共享恢复准入判据，寻找严格递归闭合的信息状态终端。
+
+---
+
 **Run238完整checkout与main合并核验（2026-11-01）：** PR #45 https://github.com/zhouxingxing1279/AcademicReaserch/pull/45 已经安全Squash合并，代码main SHA `973460fe93a05e7a00a6b1c24a4c2dbd580e3740`；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287562924 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287634108 均success。Python 3.13.17完整checkout Run224–238共**111/111项聚焦测试通过、无跳过**，真实配置合同、精确Fraction、JSON归档及工件上传通过。**仍未实现SMF后验更新、递归输出反馈MPC或完整历史回归**。
 
 # 当前研究检查点 — Run238（2026-11-01）

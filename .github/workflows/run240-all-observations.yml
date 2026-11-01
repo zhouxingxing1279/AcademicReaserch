@@ -1,0 +1,49 @@
+name: Run240 all-observation SMF envelope
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_all_observations.py'
+      - 'verification/test_four_state_all_observations.py'
+      - 'results/four_state_all_observations_20261101/checks.json'
+      - '.github/workflows/run240-all-observations.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_all_observations.py'
+      - 'verification/test_four_state_all_observations.py'
+      - '.github/workflows/run240-all-observations.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-240 focused tests and exact all-observation certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_all_observations.py verification/test_four_state_all_observations.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations
+          python verification/check_four_state_all_observations.py --root . --output /tmp/run240_certificate.json
+          diff -u results/four_state_all_observations_20261101/checks.json /tmp/run240_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('/tmp/run240_certificate.json'))
+          assert a['run']==240
+          assert [F(x['max_posterior_velocity_interval_radius']) for x in a['modes']]==[
+              F(19716681,80000000),F(229572001,720000000),F(353411321,960000000)]
+          assert not a['modes'][0]['uniform_strict_radius_reduction']
+          assert all(x['uniform_strict_radius_reduction'] for x in a['modes'][1:])
+          assert not a['recursive_invariance_certified']
+          print('Run240 exact all-observation envelope verified; no recursive guarantee')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run240-exact-all-observation-envelope
+          path: /tmp/run240_certificate.json
