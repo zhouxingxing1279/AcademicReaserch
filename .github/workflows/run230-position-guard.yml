@@ -1,0 +1,47 @@
+name: Run230 exact actuator-lag position guard
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_position_guard.py'
+      - 'verification/test_four_state_position_guard.py'
+      - 'verification/check_four_state_bridge_graph.py'
+      - 'configs/planar_baseline.json'
+      - '.github/workflows/run230-position-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_position_guard.py'
+      - 'verification/test_four_state_position_guard.py'
+      - '.github/workflows/run230-position-guard.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact Run224-230 focused tests and real-config audit
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_position_guard.py verification/test_four_state_position_guard.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard
+          python verification/check_four_state_position_guard.py --root . --output /tmp/run230_checks.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as Q
+          d=json.load(open('/tmp/run230_checks.json'))
+          assert d['gate_A']=='blocked'
+          assert d['horizon']==25 and len(d['rows'])==25
+          assert Q(d['outward_displacement_lower'])==Q(98296135986106564467,762939453125000000000)
+          assert Q(d['strict_positive_witness_p25_lower'])>5
+          assert Q(d['positive_position_threshold'])<Q(49,10)
+          print('Run230 25-step exact exclusion assertions passed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run230-exact-position-guard-json
+          path: /tmp/run230_checks.json
