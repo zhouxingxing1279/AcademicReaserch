@@ -1,0 +1,135 @@
+{
+  "alpha_per_unit_torque": "26487/125000",
+  "arbitrary_switching_schur_certified": false,
+  "base_run": 242,
+  "beta_per_unit_torque": "79461/2500000",
+  "evidence": "EXACT_RATIONAL_FIXED_MODE_JURY_AND_TWO_PACKET_VELOCITY_INTERVAL",
+  "fixed_mode_local_schur_certified": true,
+  "full_smf_mpc_closed_loop_certified": false,
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "limitations": [
+    "Schur applies to no-noise/no-disturbance unsaturated local dynamics only; not robust safety",
+    "Two-packet velocity interval assumes exact known attitude history from a zero attitude reset; real noisy angle sensing not handled",
+    "No common Lyapunov certificate for arbitrary 5/10/15 mode switching",
+    "Worst-case two-packet velocity halfwidth can be much larger than admissible local unsaturated feedback range",
+    "Simulation is deterministic sanity evidence only; no general SMF posterior, online MPC, recursive terminal set, six-state proof or 20ms worst-case bound"
+  ],
+  "local_macro_start_p_abs_m": "1/50",
+  "local_macro_start_v_abs_m_s": "1/10",
+  "local_one_macro_state_bounds": {
+    "omega_rad_s": "9/40",
+    "p_m": "2238383/25000000",
+    "phi_rad": "27/2000",
+    "v_m_s": "579461/5000000"
+  },
+  "local_unsaturated_torque_bound_Nm": "3/40",
+  "modes": [
+    {
+      "determinant": "4549721/5000000",
+      "fixed_mode_schur_certified": true,
+      "free_ticks": 5,
+      "jacobian": [
+        [
+          "4920539/5000000",
+          "19125929/50000000"
+        ],
+        [
+          "-26487/250000",
+          "2208643/2500000"
+        ]
+      ],
+      "jury_margins": [
+        "450279/5000000",
+        "26487/625000",
+        "9443773/2500000"
+      ],
+      "packet_gap_ticks": 20,
+      "trace": "373513/200000",
+      "velocity_interval_halfwidth_m_s": "84174043/160000000"
+    },
+    {
+      "determinant": "4549721/5000000",
+      "fixed_mode_schur_certified": true,
+      "free_ticks": 10,
+      "jacobian": [
+        [
+          "4920539/5000000",
+          "6011617/12500000"
+        ],
+        [
+          "-26487/250000",
+          "545539/625000"
+        ]
+      ],
+      "jury_margins": [
+        "450279/5000000",
+        "26487/500000",
+        "4708643/1250000"
+      ],
+      "packet_gap_ticks": 25,
+      "trace": "9284851/5000000",
+      "velocity_interval_halfwidth_m_s": "48602979/80000000"
+    },
+    {
+      "determinant": "4549721/5000000",
+      "fixed_mode_schur_certified": true,
+      "free_ticks": 15,
+      "jacobian": [
+        [
+          "4920539/5000000",
+          "28967007/50000000"
+        ],
+        [
+          "-26487/250000",
+          "2155669/2500000"
+        ]
+      ],
+      "jury_margins": [
+        "450279/5000000",
+        "79461/1250000",
+        "9390799/2500000"
+      ],
+      "packet_gap_ticks": 30,
+      "trace": "9231877/5000000",
+      "velocity_interval_halfwidth_m_s": "333913619/480000000"
+    }
+  ],
+  "packet_noise_halfwidth_m": "1/50",
+  "position_gain": "1/2",
+  "pulse_shape": [
+    1,
+    1,
+    1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "residual_halfwidth_m_s2": "3246383/1600000",
+  "robust_input_and_state_invariance_certified": false,
+  "run": 243,
+  "scope": "Frozen four-state Euler lateral channel, fixed T, exactly known initial zero attitude and applied torque; successful noisy position packets separated by 20/25/30 ticks",
+  "velocity_gain": "1/2",
+  "velocity_interval_derivation": "v_N-vhat_N=H/N*sum((j+1)*r_j)+(eta_old-eta_new)/(N*H); |r_j|<=R, |eta|<=NOISE",
+  "zero_noise_deterministic_simulation": {
+    "cycles": 75,
+    "final_p": -0.003032571259853773,
+    "final_v": 0.0005107275950588626,
+    "last_amplitude": -0.001554095415607497,
+    "max_omega": 0.14199824775692754,
+    "max_p": 0.08188625155080931,
+    "max_phi": 0.00851989486541565,
+    "max_torque": 0.04733274925230918,
+    "max_v": 0.05,
+    "max_velocity_reconstruction_error": 2.7238411179353328e-15,
+    "zero_noise_zero_disturbance_only": true
+  }
+}

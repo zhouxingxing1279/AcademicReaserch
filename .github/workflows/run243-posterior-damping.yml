@@ -1,0 +1,54 @@
+name: Run243 causal posterior damping and exact Jury
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_posterior_damping.py'
+      - 'verification/test_four_state_posterior_damping.py'
+      - 'results/four_state_posterior_damping_20261101/checks.json'
+      - '.github/workflows/run243-posterior-damping.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_posterior_damping.py'
+      - 'verification/test_four_state_posterior_damping.py'
+      - '.github/workflows/run243-posterior-damping.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-243 focused tests, exact Jury and velocity-interval certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_posterior_damping.py verification/test_four_state_posterior_damping.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping
+          python verification/check_four_state_posterior_damping.py --root . --output /tmp/run243_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_posterior_damping_20261101/checks.json'))
+          actual=json.load(open('/tmp/run243_certificate.json'))
+          ex_sim=expected.pop('zero_noise_deterministic_simulation')
+          ac_sim=actual.pop('zero_noise_deterministic_simulation')
+          assert expected==actual, 'archived exact certificate mismatch'
+          assert ex_sim.keys()==ac_sim.keys()
+          for k in ex_sim:
+              if isinstance(ex_sim[k],float):
+                  assert abs(ex_sim[k]-ac_sim[k])<1e-10, (k,ex_sim[k],ac_sim[k])
+              else: assert ex_sim[k]==ac_sim[k]
+          assert actual['run']==243
+          assert all(all(F(j)>0 for j in x['jury_margins']) for x in actual['modes'])
+          assert not actual['robust_input_and_state_invariance_certified']
+          print('Run243 exact Jury and two-packet radius certificate matches archive')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run243-exact-posterior-damping
+          path: /tmp/run243_certificate.json
