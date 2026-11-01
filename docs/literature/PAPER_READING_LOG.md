@@ -1,3 +1,17 @@
+## 背景模型选型第3轮 — Miladi等（2020）位置＋角度量测的四旋翼观测器ENMPC（2026-11-01；首次公开正文分节已读，去重95→96篇）
+
+**题名：** *Explicit nonlinear model predictive control tracking control based on a sliding mode observer for a quadrotor subject to disturbances*。**作者：** Nadia Miladi; Habib Dimassi; Salim Hadj Said; Faouzi M’Sahli。**出版：** *Transactions of the Institute of Measurement and Control* 42(2):214–227 (2020)，2019-08-07在线首发。**DOI：** https://doi.org/10.1177/0142331219865816；**期刊页面：** https://journals.sagepub.com/doi/10.1177/0142331219865816；**公开正文：** https://www.researchgate.net/publication/335024865_Explicit_nonlinear_model_predictive_control_tracking_control_based_on_a_sliding_mode_observer_for_a_quadrotor_subject_to_disturbances。
+
+**阅读日期与核验状态：** 2026-11-01；实际核对公开正文§2式(1)模型与量测、§3 ENMPC展开、§4式(19)–(32)与A1/A2、§5 Proposition 1/2和输入QP式(35)、§6仿真及附录Lyapunov思路；标为**公开正文分节已读**，不是期刊终版逐式核验，公开转录公式存在排版损失。此前唯一日志按DOI/标题核对未登记此文。
+
+**研究问题：** 四旋翼只测位置和姿态角、线/角速度与气动扰动未知时，如何利用观测器辅助预测控制完成轨迹跟踪？**方法/模型：** Newton–Euler 12状态，`X=(φ,φdot,θ,θdot,ψ,ψdot,z,zdot,x,xdot,y,ydot)`；四输入 `(U1,U2,U3,U4)` 为总推力及姿态力矩通道；测量 `Y=(φ,θ,ψ,z,x,y)`（无速度直接量测），跟踪输出 `(x,y,z,ψ)`。级联高增益近似微分器＋滑模未知输入点观测器，ENMPC在输入盒约束下改为在线凸QP。**无SMF/CZ集合状态估计、无明确位置丢包自动机**。
+
+**重要假设/定理：** Assumptions A1角速度有界、A2扰动有界且相对观测器变化缓慢；§4匹配条件 `rank(CD)=rank(D)` 不成立，借辅助输出处理。Proposition 1在条件下证明跟踪误差最终进入可调小紧集；Proposition 2给出四输入盒约束QP，并非全部状态硬约束或信息状态终端递归可行性定理。**主要结论：** 论文以位置＋角度量测构建点状态/扰动估计辅助的四旋翼ENMPC，数值仿真展示跟踪。**局限：** 连续可用量测、没有success/miss和SMF可靠后验，未提供本仓库全部对抗扰动下硬状态安全、20ms WCET或实飞证明。
+
+**与课题关联：** 反证“未测速度＋四旋翼输出反馈MPC”是新组合的说法；本项目真正待验证缺口为有噪间歇位置、状态SMF/CZ、共享因果控制与硬约束安全终端。**可复用技术：** 12状态到位置/角度量测的观测权限建模、辅助输出与点估计基线、输入QP构造；不可将点估计收敛视为集合包含或递归安全。**待查问题：** GPS/位置包丢失时高增益/滑模观测器如何退化？能否在六状态平面模型上构造信息状态安全前驱并与Run249有限安全过滤形成对照？**本轮工件：** [模型矩阵](../research/model_selection/MODEL_SELECTION_EVIDENCE.md)、[研究日志](../research/model_selection/background_run_20261101_1233_miladi.md)。
+
+---
+
 ## Run249 — Qiu等（2020）椭球状态SMF＋输出反馈MPC终端条件复核（2026-11-01；历史已读去重95篇不变）
 
 **题名/作者/出版：** *Output feedback model predictive control based on set-membership state estimation*；Quanwei Qiu、Fuwen Yang、Yong Zhu、Eman Mousavinejad；*IET Control Theory & Applications* 14(4):558–567 (2020)。**DOI与原文：** https://doi.org/10.1049/iet-cta.2019.0881 ；https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。**阅读日期/核验状态：** 2026-11-01，重新分节阅读开放正文§2、§3.1–3.2（Theorem 1、式(19)）、§4（终端RPI条件）与§6；历史已读，**不是新读一篇，也不是逐式全文核验**。

@@ -63,3 +63,14 @@
 **与主任务Run248关系**：第14拍不可恢复反例不能通过引入每拍速度观测或概率约束“消除”；改变观测/扰动/硬界即是改变问题合同，须另列基线并重新验证。
 
 **下一轮唯一优先问题**：核验一篇真正仅用位置/间歇位置输出的四旋翼控制论文的 `C`、丢包时序与保证条件，检查是否存在可复用的状态SMF＋硬安全终端接口。详见 [本轮日志](background_run_20261101_1136_xue_output.md)。
+
+## 7. 背景第3轮：Miladi等（2020）仅位置＋角度观测的12状态四旋翼ENMPC
+
+**来源与等级**：[公开正文分节核验] Nadia Miladi, Habib Dimassi, Salim Hadj Said, Faouzi M’Sahli, *Explicit nonlinear model predictive control tracking control based on a sliding mode observer for a quadrotor subject to disturbances*, *Transactions of the Institute of Measurement and Control* **42**(2):214–227 (2020)，DOI https://doi.org/10.1177/0142331219865816；期刊摘要 https://journals.sagepub.com/doi/10.1177/0142331219865816，公开正文转录 https://www.researchgate.net/publication/335024865_Explicit_nonlinear_model_predictive_control_tracking_control_based_on_a_sliding_mode_observer_for_a_quadrotor_subject_to_disturbances。核验§2模型/输出、§3 ENMPC、§4高增益＋滑模观测、§5 Proposition 1/2、§6数值实验；转录公式排版有损，不宣称期刊终版逐式审计。
+
+- **状态/输入/输出**：12状态 `(φ,φdot,θ,θdot,ψ,ψdot,z,zdot,x,xdot,y,ydot)`；输入 `(U1,U2,U3,U4)` 为总推力＋3力矩相关通道；测量 `Y=(φ,θ,ψ,z,x,y)`，**6个速度均隐藏**，追踪输出 `(x,y,z,ψ)`。
+- **观测与不确定性**：级联高增益/滑模未知输入点估计，A1角速度有界、A2外扰有界且变化缓慢；**无SMF/CZ状态集合、无明确有界量测条带、无位置丢包success/miss自动机**。
+- **MPC与保证**：ENMPC基于输出Taylor展开；输入盒约束下Proposition 2为四输入在线QP；Proposition 1为估计误差存在下的实用跟踪收敛到小紧集，**不是状态硬安全或递归可行终端证明**。§6仅数值仿真，未核验实飞或WCET。
+- **课题决策**：论文已做“仅位置＋角度可测、速度隐藏的四旋翼输出反馈MPC”，因此不得把此组合称为创新。当前差异应收敛于**有噪间歇位置SMF/CZ后验＋共享因果鲁棒MPC＋硬约束安全终端**。首选仍是条件性6状态平面四旋翼，4状态Run249保留已认证55拍安全基线，2状态姿态保底。扩维不能替代Run249缺少无限终端集合、31.65ms平均求解超20ms的实际瓶颈。
+
+详见 [本轮独立日志](background_run_20261101_1233_miladi.md)。**下一轮唯一问题**：核验一篇具有实际GPS位置丢包/延迟和IMU观测的四旋翼控制/估计论文，确认是否具备可复用硬安全终端合同。
