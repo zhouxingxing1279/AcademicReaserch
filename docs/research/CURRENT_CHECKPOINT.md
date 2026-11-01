@@ -1,3 +1,17 @@
+# 当前研究检查点 — Run249（2026-11-01；CI与合并须另行核验）
+
+**基准main：** `c00e7c70557159811bd09862ce9ef2d54354e2e3`，含Run248与模型选型PR #69。**新增真实闭环：** 四状态固定T=9.81的冻结Euler子系统，55拍（1.1秒）固定绝对截止时域的SMF后验→三步网格MPC→首拍+全零尾鲁棒安全过滤→plant→有噪位置success/miss及每拍姿态测量更新。控制不读取隐藏速度/未来包；全区间用Fraction、正弦Taylor包络与向外网格舍入。精确全初始盒零力矩55拍安全（|p|<=1.3849438439m、|v|<=2.4441121266m/s）；首拍通过零尾检验后，任何合法测量后验都包含于预测集合，零尾剩余时域仍可行，因此证明**仅至绝对第55拍的因果硬约束满足和有限截止时间可行性**，不是无限递归可行/终端不变/稳定。
+
+**数值重放：** 24条55拍轨迹（12 MPC＋12零力矩），1320拍，5280个四维分量包含检查、0采样约束违约；MPC 94次非零力矩，选定样本平均位置RMSE 0.09203m vs 零力矩0.09701m，不能推广为普遍优势。隔离Python3.13.5测试11项中9通过、2项因无完整checkout跳过，`py_compile`与归档生成成功；本地平均单步求解约31.65ms，**超过20ms目标**，非WCET。PR完整checkout CI及真实配置断言待验证，不能提前宣称成功。
+
+**严格边界：** Run248固定脉冲第14拍不可生存反例仍成立；Run249不是对该前缀的无限修复。仅四状态、固定推力、粗区间SMF和有限截止55拍；无非空输出反馈终端RCI、一般SMF/CZ＋Tube MPC无限递归可行、六状态安全、推力调度或20ms最坏时延。Gate A仍blocked。Qiu等(2020)期刊开放正文§2–4分节重读，统一去重论文数保持95篇。
+
+**工件：** `verification/check_four_state_shielded_smf_mpc.py`、`verification/test_four_state_shielded_smf_mpc.py`、`results/four_state_shielded_smf_mpc_20261101/checks.json`、`.github/workflows/run249-shielded-smf-mpc.yml`、`docs/research/run249_research_log.md`。
+
+**下一轮唯一优先任务：** 尝试构造非空、可重复闭合的输出反馈终端信息状态与共享因果备份律，先检查Run249第55拍后验族及Run248不可生存反例；若不能给出严格正向证书，明确将硕士目标调整为条件性有限时域安全过滤而非无止境扩大截止时间。
+
+---
+
 **Run248完整checkout与合并核验（2026-11-01）：** PR #67 https://github.com/zhouxingxing1279/AcademicReaserch/pull/67 已安全squash合并，代码main SHA 671c7a5a878524fc522d17c4ccd8de3daa601016；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340127964 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340319892 均completed/success，Python 3.13.17完整checkout Run224–248聚焦测试**222/222通过、无跳过**，真实配置、精确Fraction归档与artifact上传均成功。已重新读取main SHA、PR merged、源码与证书Blob。此补记只修改文档，不改变数学证明或算法；全仓库历史回归及SMF+MPC递归可行性、六状态安全、20ms最坏时延仍未认证。
 
 ---

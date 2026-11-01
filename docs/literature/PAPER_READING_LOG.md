@@ -1,3 +1,11 @@
+## Run249 — Qiu等（2020）椭球状态SMF＋输出反馈MPC终端条件复核（2026-11-01；历史已读去重95篇不变）
+
+**题名/作者/出版：** *Output feedback model predictive control based on set-membership state estimation*；Quanwei Qiu、Fuwen Yang、Yong Zhu、Eman Mousavinejad；*IET Control Theory & Applications* 14(4):558–567 (2020)。**DOI与原文：** https://doi.org/10.1049/iet-cta.2019.0881 ；https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。**阅读日期/核验状态：** 2026-11-01，重新分节阅读开放正文§2、§3.1–3.2（Theorem 1、式(19)）、§4（终端RPI条件）与§6；历史已读，**不是新读一篇，也不是逐式全文核验**。
+
+**研究问题：** 有界过程/量测噪声下不可测状态的约束预测控制。**方法/模型：** 线性时变/多面体不确定系统，椭球集员状态估计（先预测后量测更新）、基于后验椭球的有限时域minimax/LMI MPC。**关键定理与假设：** Theorem 1给出在适当LMI条件下的估计椭球包含；§4的稳定/可行性论证需要鲁棒正不变终端集合、终端反馈及相应附加约束，不是有限安全管自动成立。**结论：** 论文在相应假设下给出估计—控制—约束一体化框架及数值/DC-DC变换器案例。**局限：** 没有本仓库四旋翼有噪位置-only丢包自动机、非线性正弦和独立极端残差；LMI框架也不能直接赋予Run249的55拍回退无限安全。**关联/可复用：** 状态SMF后验驱动优化、估计集合包含与终端RPI条件分离。**待查问题：** 如何把Run249固定截止时域的零尾安全合同转化为一个非空、对所有success/miss边闭合的共享因果信息状态终端合同？参考 [Run249日志](../research/run249_research_log.md)。
+
+---
+
 ## 背景模型选型第2轮 — Xue等（2024）有噪全运动学输出的分层随机MPC（2026-11-01；首次分节已读，去重94→95篇）
 
 **题名：** *Output feedback stochastic MPC for tracking control of quadrotors with disturbances*。**作者：** Ruochen Xue; Li Dai; Peizhan Wang; Zhongqi Sun; Yuanqing Xia。**出版：** *IET Control Theory & Applications* 18(5):566–580 (2024)，线上首发2023-10-18，正式卷期2024-03-11。**DOI/原文：** https://doi.org/10.1049/cth2.12588 ; https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/cth2.12588 。**阅读日期/状态：** 2026-11-01；期刊开放正文§2.1–2.3式(2.1)–(2.15)/Assumption 1–2、§3.1–3.4（Theorems 1–2、Problem 1、Algorithm 1）、§4（Theorems 3–4/ESO）、§5–6仿真/局限**分节已读**；未复现推导与仿真，不标全文逐式核验。
