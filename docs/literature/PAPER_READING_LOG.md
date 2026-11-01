@@ -1,3 +1,13 @@
+## Run239 精确有噪位置后验与CZ交运算复核（2026-11-01；去重已读仍91篇）
+
+**Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/核验：** 2026-11-01，实际重新核对§2 Definition 1/2、§3 Definition 3、Proposition 1(11)–(13)、Proposition 2(19)–(20)、§5(31)–(33)；其余章节本轮未精读。此文已有Run215等历史阅读记录，**不重复计数**。
+
+**研究问题：** 有界过程和量测误差下如何保留状态集合的关联、交集和映射。**方法/模型：** 线性离散动力学，CZ表示{Gξ+c:||ξ||∞≤1,Aξ=b}；用线性等式与新增噪声变量实现量测条带交集。**关键定理/假设：** Proposition 1给出精确广义交及线性映射；§5(31)–(33)假设初始状态、过程扰动和量测噪声有已知紧致集合；Proposition 2给出CZ非空/成员资格LP判据。**结论：** 保留约束可以避免过早盒外包的相关性损失。**局限：** 生成元和等式随时间增长，在线降阶需另行保证外包；原论文未证明本仓库非线性、丢包、控制相关残差下的递归可行性。**与课题关联/可复用：** Run239对两初始符号分支分别引入15个扰动系数和一个位置测量噪声松弛，使用精确原始—对偶分数证书计算y=0时速度支持；单个CZ不能精确表示非凸两分支并集。**待查：** 全观测值及5/10/15拍模式下的有界复杂度后验、因果备份律与递归终端是否存在？
+
+**本轮自有证据：** [Run239研究日志](../research/run239_research_log.md)。给定y=0的速度半宽0.3681367927m/s是限定子系统的精确Fraction结果，不是原论文直接提供的数值；不能推广为所有y均收缩。**去重已读仍91篇。**
+
+---
+
 ## Run238 文献核验与15拍共享控制有限安全管（2026-11-01；去重已读仍91篇）
 
 **Bemporad, Alberto; Garulli, Andrea (2000)**，*Output-feedback predictive control of constrained linear systems via set-membership state estimation*，*International Journal of Control* 73(8):655–665，DOI https://doi.org/10.1080/002071700403420 。**核验层级：** 2026-11-01，出版社摘要及作者研究机构书目 https://old.control.ee.ethz.ch/publications/2000/407.html ，未取得全文，不标记本轮全文已读。**研究问题：** 约束线性系统的部分观测与有界扰动下，如何对所有信息相容状态施加鲁棒MPC约束。**方法/模型：** 摘要确认MPC+SMF联合框架，线性、硬约束、有界扰动；具体优化及定理条件未逐式核验。**结论：** 摘要报告对所有信息相容状态与扰动的约束保证；不将其推断为适用于本项目非线性丢包模型。**局限：** 非线性sin、控制相关残差和15模式丢包合同尚无可直接套用的结论。**关联/可复用：** 把后验纤维上共同控制作为约束量词。**待查：** 取得原文并核对完整递归可行性条件。
