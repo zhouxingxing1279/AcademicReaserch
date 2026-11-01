@@ -1,3 +1,7 @@
+**Run248 PR/main完整checkout核验（2026-11-01）：** PR #67 https://github.com/zhouxingxing1279/AcademicReaserch/pull/67 基于main 72724f81ef10046eeb41f0ed6398695ab6533e05，合并前compare ahead=7/behind=0，mergeable_state=clean，head=3b371d37a8c1bf44c31a2742041fae378232466a。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340127964 **completed/success**；Python 3.13.17完整checkout Run224–248聚焦**222/222通过、无跳过**（82.072s），真实配置、Fraction证书与归档JSON一致、artifact上传成功。PR非强制squash合并到main 671c7a5a878524fc522d17c4ccd8de3daa601016，重新读取main SHA、PR merged和源码/归档Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340319892 **completed/success**，Python 3.13.17完整checkout再次**222/222通过、无跳过**（82.089s），归档证书一致与artifact上传成功。此证据补记仅更新文档，未改变算法；全仓库历史回归、SMF＋MPC递归可行性、六状态安全与20ms最坏求解时延仍未认证。
+
+---
+
 # Run248 — 合法初始角点在第14拍已不可生存（2026-11-01）
 
 **基准远端main：** 72724f81ef10046eeb41f0ed6398695ab6533e05（包含背景任务PR #66）。主方向为四旋翼MPC＋状态SMF/CZ鲁棒输出反馈闭环；本轮不重复模型选型任务的Sasfi 2023综述。
