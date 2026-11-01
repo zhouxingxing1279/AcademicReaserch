@@ -25,3 +25,10 @@ Scott, Raimondo, Marseglia, Braatz (2016), *Constrained zonotopes: A new tool fo
 - 可行性：历史相关的SMF更新已有可复核增量；创新性仍需一般观测与闭环控制收益对比；难度主要在递归信息状态不变性。
 
 **下一轮唯一优先任务：** 对所有可达成功观测y（而非只y=0）和允许的5/10/15拍观测模式，构造统一可计算的SMF后验与因果恢复控制准入判据，先验证最坏观测分支是否存在可重复的安全后继。
+
+
+## 4. 完整checkout与main落地核验（2026-11-01）
+
+研究PR #47 https://github.com/zhouxingxing1279/AcademicReaserch/pull/47 在基准main未变、ahead=1/behind=0、mergeable=true、PR head SHA eb2d5270ee08a8436725cd20082ae1a81bcdd0b1 与预期一致后，经**非强制Squash**合并至main 60905d7f00c0da013e1d8995fa0da64af47fe8eb。重新读取main与源码、测试、归档JSON、论文阅读日志的Git Blob，全部与提交工件一致。
+
+PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296087821 和代码合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296187607 均为completed/success。GitHub Actions Python 3.13.17完整checkout执行Run224–239共**121/121项聚焦测试通过、无跳过**（PR 28.623s，main 33.288s），真实配置核验、源码编译、精确Fraction原始—对偶证书、JSON逐字比对及artifact上传均成功。**尚未执行全仓库历史回归**；不证明一般后验递归可行或20ms最坏耗时。本段为证据补记，未改变算法。
