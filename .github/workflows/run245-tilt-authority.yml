@@ -1,0 +1,57 @@
+name: Run245 persistent tilt finite-horizon certificate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_tilt_authority.py'
+      - 'verification/test_four_state_tilt_authority.py'
+      - 'results/four_state_tilt_authority_20261101/checks.json'
+      - '.github/workflows/run245-tilt-authority.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_tilt_authority.py'
+      - 'verification/test_four_state_tilt_authority.py'
+      - '.github/workflows/run245-tilt-authority.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-245 focused regressions and exact tilt authority certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_tilt_authority.py verification/test_four_state_tilt_authority.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping verification.test_four_state_pulse_authority verification.test_four_state_tilt_authority
+          python verification/check_four_state_tilt_authority.py --root . --output /tmp/run245_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_tilt_authority_20261101/checks.json'))
+          actual=json.load(open('/tmp/run245_certificate.json'))
+          sanity_a=expected.pop('float_sanity_only')
+          sanity_b=actual.pop('float_sanity_only')
+          assert sanity_a.keys()==sanity_b.keys()
+          assert sanity_a['pattern']==sanity_b['pattern']
+          for a,b in zip(sanity_a['final_truth'],sanity_b['final_truth']):
+              assert abs(a-b)<1e-10
+          for key in sanity_a['final_smf_bounds']:
+              for a,b in zip(sanity_a['final_smf_bounds'][key],sanity_b['final_smf_bounds'][key]):
+                  assert abs(a-b)<1e-10
+          assert abs(sanity_a['maximum_interval_width_sanity']-sanity_b['maximum_interval_width_sanity'])<1e-10
+          assert expected==actual, 'Run245 exact archived certificate mismatch'
+          assert actual['run']==245
+          assert F(actual['strict_min_acceleration_reversal_margin_ticks24_to30_m_s2'])>0
+          assert F(actual['worst_absolute_velocity_tilt_at_tick30_m_s'])>F(actual['worst_absolute_velocity_zero_torque_at_tick30_m_s'])
+          print('Run245 exact tilt certificate and negative tradeoff match archive')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run245-exact-tilt-authority
+          path: /tmp/run245_certificate.json
