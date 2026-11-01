@@ -87,3 +87,14 @@
 - **与其他文献的边界：** Gamagedara/Lee/Snyder (2021), IEEE TAES, DOI https://doi.org/10.1109/TAES.2021.3061795 仅摘要核验，不计新增已读；后续优先读其正文验证延迟历史更新的数学接口。
 
 详见[第4轮独立研究日志](background_run_20261101_1335_gnss_belief.md)。**唯一下一轮问题：** 正文核验Gamagedara等2021延迟RTK-GPS＋IMU的具体状态、测量与误差假设，区分随机滤波与有界SMF。
+
+
+## 9. 背景第5轮：Song等（2017）GPS outage与15/21维滤波器的真实信息权限
+
+**来源与阅读等级**：[作者公开PDF正文分节已读] Yu Song, Stephen Nuske, Sebastian Scherer, *A Multi-Sensor Fusion MAV State Estimation from Long-Range Stereo, IMU, GPS and Barometric Sensors*, *Sensors* 17(1):11 (2017; online 2016-12-22), DOI https://doi.org/10.3390/s17010011 ，CMU PDF https://publications.ri.cmu.edu/storage/publications/2016/12/sensors-17-00011.pdf 。核验§4.1–4.4式(15)–(40)、§5.3–5.5、§6。2021年Gamagedara/Lee/Snyder IEEE TAES DOI https://doi.org/10.1109/TAES.2021.3061795 本轮**仍仅摘要核验**，不猜正文模型，也不计新增已读。
+
+- **状态维数≠自由度**：Song式(19)是`(p3,delta_theta3,v_body3,delta_b_g3,delta_b_a3)∈R15` EKF误差状态；式(26)加入上一视觉位姿6维clone成21维。这**不是15/21状态物理控制plant**。真实姿态采用`SO(3)`与局部误差坐标。
+- **关键纠偏：GPS不只是位置**。§4.4式(39)–(40)使用水平GPS`(p_n,p_e,v_n,v_e)`，还有IMU三轴加速度/角速率、VO相对六维位姿和气压计高度；速度有外部直接观测。仓库仅每5拍有噪位置、每拍姿态/角速，无GPS速度/IMU/VO/气压计。不能以该文“GPS失测下估计成功”宣称仓库位置-only问题已有直接解。
+- **GPS outage实证**：§5.4记录数据人为停用GPS更新60秒和约120秒，VO相对运动与IMU/气压计维持估计；使用随机协方差、stochastic cloning EKF，**不是SMF/CZ**，没有有界全扰动真值包含、MPC、硬约束终端RCI、递归可行或20ms WCET。§5.5估计链2–3ms及视觉前端28–144ms为论文平台经验报告。
+- **选型影响**：条件性首选仍为仓库六状态平面`(px,pz,vx,vz,phi,omega)`与双输入`(T,tau)`，四状态Run249有限安全为实证基线，2状态姿态保底；10/12状态不因滤波器扩维而变成更合理硕士主模型。加入IMU/VO/延迟GPS是**独立的传感器合同变更**，必须显式建偏置/历史关联和有界量测界，再证明SMF包含。Run251同观测速度下界在原合同内仍有效。
+- **下轮唯一模型问题**：在六状态实际推力域、推力相关垂向残差和倾角限制下，先审计hover附近垂向最坏扰动的必要可生存性；若两侧扰动不能被总推力覆盖，降低六状态主模型优先级。详见[第5轮日志](background_run_20261101_1437_song_gamagedara.md)。
