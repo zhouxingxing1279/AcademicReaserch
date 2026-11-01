@@ -1,3 +1,17 @@
+# 当前研究检查点 — Run247（2026-11-01）
+
+**main基准：** `8b7b22c757749fcc6290d7bdbd7fc494a64e86b6`。主方向仍为四旋翼MPC＋SMF输出反馈闭环，允许背景任务比较低维/平面/高维模型，但不得把四状态必要guard误称一般模型的充分控制律。
+
+**严格数学增量：** 在Run245/246冻结四状态Euler、固定T=9.81N、`|tau|<=0.08Nm`、`|r|<=2.028989375m/s²`和角度/速度硬界下，推导任意当前真实`(v,phi,omega)`、未来N拍的**双向必要可生存速度区间**。通过Euler因果索引`j(j-1)/2`、安全角度剪裁和精确有理数sin上下界，分别固定合法`r=-R`和`r=+R`；即使允许任意未来全状态/非因果力矩，区间外状态也不可能满足全部安全约束。它是**必要条件**，不提供控制器、充分性、终端不变性或递归可行性。
+
+**Run245合法角点真实轨迹：** 前26拍安全，但第26拍`phi=0.2202rad`、`omega=-0.01rad/s`、`v<=-1.70139869449m/s`；未来20拍的必要下界为`v>=-1.69261511798m/s`，严格差距`0.00878357651m/s`。因此即使从第26拍起完全知晓状态并任意选择合法力矩，合法持续负向扰动使`v46<=-3.00878357651m/s`，最迟第46拍越界。Run246第30拍才检测到的不可恢复性，本轮提前至第26拍。对第0至25拍的1–30拍必要guard扫描未拒绝，**不证明那些状态可生存**。实际位置包第25拍可success/miss，不能预设一定获得新位置测量。
+
+**验证与文献：** `verification/check_four_state_early_viability_guard.py`、11项测试、精确JSON、Run247 CI工作流、`docs/research/run247_research_log.md`。隔离Python测试9通过、2项因缺完整checkout跳过；完整GitHub PR CI和远端合并状态需单独核验。新分节已读Breeden/Zaccarian/Panagou (2024) arXiv:2403.03663v3（定时量测/误差界/robust timed CBF，卫星算例，不直接覆盖四旋翼有噪位置SMF），统一去重已读92→93篇。**Gate A仍blocked**：无四状态SMF＋MPC递归可行、六状态安全或20ms最坏求解时延认证。
+
+**下一轮唯一优先任务：** 在真实第25拍success/miss分支上结合Run240关联SMF后验，寻找能避开第26拍不可生存区域的共享因果可执行控制，并严格认证至少一个非空后继分支；不要把必要筛选通过写成充分安全。
+
+---
+
 **Run239完整checkout及合并核验（2026-11-01）：** PR #47 https://github.com/zhouxingxing1279/AcademicReaserch/pull/47 已安全Squash合并，代码main SHA 60905d7f00c0da013e1d8995fa0da64af47fe8eb，重新读取main及源码、测试、JSON和论文日志Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296087821 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296187607 均success；Python 3.13.17完整checkout聚焦测试121/121通过、无跳过，真实配置、Fraction证书、JSON逐字比对、artifact上传成功。未执行全仓库历史回归、递归可行性或20ms最坏时间认证。该补记不改变算法。
 
 ---
