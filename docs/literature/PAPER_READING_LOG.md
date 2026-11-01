@@ -1,3 +1,17 @@
+## Run252 — Cosner等（2021）测量鲁棒CBF与安全备份（2026-11-01；新增分节已读1篇，去重99→100篇）
+
+**真实题名/作者：** *Measurement-Robust Control Barrier Functions: Certainty in Safety with Uncertainty in State*；Ryan K. Cosner、Andrew W. Singletary、Andrew J. Taylor、Tamás G. Molnár、Katherine L. Bouman、Aaron D. Ames。**发表：** 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2021)，DOI https://doi.org/10.1109/IROS51168.2021.9636584 ，arXiv:2104.14030，作者公开正文 https://arxiv.org/pdf/2104.14030 （v1，2021-04-28）。**阅读日期/层级：** 2026-11-01，实际核对六页预印本§II-A/B、§III-A/B（Theorems 2–3、式(13)–(17)）及§IV实验；**分节已读**，未对IEEE终版逐式比对。
+
+**研究问题/方法/模型：** 在状态估计有已知误差集合时，如何将measurement-robust control barrier functions (MR-CBF)与已知control-invariant backup set结合？一般理论为连续时间control-affine `xdot=f(x)+g(x)u`，非MPC；实验为四状态Segway `(position,forward velocity,pitch,pitch rate)`，输入车轮力矩（硬件饱和±20 Nm），不是四旋翼，也不是参数SMF或状态SMF/CZ滤波器。视觉VIO位置估计、编码器/IMU辅助估计；没有离散位置包丢失自动机、推力调度或本项目的隐藏速度-only位置测量合同。硬件Jetson TX2+ECOS SOCP，250Hz运行；报告仿真及真实Segway实验。
+
+**重要定理/假设：** §II-B式(7)的隐式安全集要求存在**预先已知的控制不变备份集和备份控制律**，且备份轨迹在T时间内进入该集合。§III-A Theorem 2要求测量误差 `e(x)∈E(y)` 的已知界、CBF及Lie导数Lipschitz常数和满足测量鲁棒CBF不等式的Lipschitz控制器；§III-B Definition 4/Theorem 3在MRISS与全部式(16)条件满足时给出前向不变性。§IV实验误差界采用0.4m，备份预测T=1s、积分步5ms。论文不证明本仓库离散有噪SMF＋MPC无限时域递归可行；其数值求得Lipschitz界部分来自采样，不可直接视为我们模型的全域严格界。
+
+**主要结论与局限：** 给出基于误差界收紧的测量鲁棒安全备份SOCP，Segway实验对比无鲁棒性的BS-QP；其安全结论有明确的备份不变集、正则性及优化可行性前提，不含有界独立外扰下的四旋翼终端信息状态后继闭合证明。
+
+**本课题关联/可复用：** 可借鉴“先认证非空不变备份集、再扩张安全域”的论证顺序与误差界收紧；不能用有限55拍零尾充当论文的无限不变备份集。Run252针对特定Run251零力矩前缀及合法 `SSSMM` 观测串，精确得到第25拍速度投影必要直径1.3391329875m/s；这是仓库独立证书，**不是Cosner等论文结果**。**待查问题：** 能否在该真实双速度纤维上构造共享因果非零备份、并认证下一次必成功位置测量之前及其后继的安全集合闭合？**研究日志：** [Run252](../research/run252_research_log.md)。
+
+---
+
 ## 背景模型选型第5轮 — Song、Nuske、Scherer（2017）多传感器MAV估计（2026-11-01；新增分节已读1篇，去重98→99篇）
 
 **题名/作者**：*A Multi-Sensor Fusion MAV State Estimation from Long-Range Stereo, IMU, GPS and Barometric Sensors*；Yu Song, Stephen Nuske, Sebastian Scherer。**出版**：*Sensors* 17(1):11 (2017期；2016-12-22在线)，DOI https://doi.org/10.3390/s17010011 ；**作者公开全文** https://publications.ri.cmu.edu/storage/publications/2016/12/sensors-17-00011.pdf 。**阅读日期/状态**：2026-11-01，实际分节阅读§4.1–4.4（PDF pp.11–15，式15–40）、§5.3–5.5（pp.20–24）、§6；未复现，不冒充全文逐式审计。
