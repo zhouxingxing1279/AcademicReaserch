@@ -27,11 +27,13 @@
   "claim": "entire positive and negative full-dimensional initial boxes are necessarily unsafe within 25 steps under a legal adversarial residual, for all causal controls",
   "run230_zero_slice_reproduced": true,
   "local_validation": "Python 3.13 standard-library: 6 passed, 1 skipped due missing full checkout; py_compile and exact JSON generated",
-  "ci_validation": "pending GitHub Actions",
+  "ci_validation": "GitHub Actions PR #31 run 41259598573 success: 53/53 focused tests passed, no skips, real config and exact JSON assertions passed",
   "gate_A": "blocked",
   "limitations": [
     "finite-horizon exclusion only, not an RCI construction",
     "not output feedback or SMF/MPC recursive feasibility",
     "no six-state or worst-case runtime guarantee"
-  ]
+  ],
+  "research_merge_main_sha": "83e47ee149d53d63ae4e406637b209e32f543344",
+  "pr_url": "https://github.com/zhouxingxing1279/AcademicReaserch/pull/31"
 }

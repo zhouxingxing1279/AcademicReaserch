@@ -32,3 +32,8 @@ PYTHONPATH=verification python verification/check_four_state_cell_position_guard
 **Gate A=blocked。** 二维姿态SMF+MPC限定假设下的闭环不变；四状态非空终端RCI、输出反馈Tube MPC递归可行、稳定性、六状态安全、20ms最坏耗时和全仓库历史回归均未完成。可行性：增加可计算的正体积单元严格剪枝，但中央区域是否有闭合终端核仍未知；创新性：此剪枝本身低；难度：仍高。
 
 **下一轮唯一优先任务：** 在远离已排除边界的中央位置区域，设计含位置—速度—姿态—角速度关联及控制标记的有限候选终端图，并尝试严格认证**至少一个非空闭合循环**；若失败，保留失败证书并审慎缩小硕士课题保证范围。
+
+
+## GitHub Actions与合并核验（2026-11-01 UTC）
+
+研究PR #31 https://github.com/zhouxingxing1279/AcademicReaserch/pull/31 已以**非强制Squash**方式安全合并。PR完整checkout CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41259598573 状态为success；GitHub Actions Python 3.13环境执行Run224–231共**53/53项聚焦测试通过、无跳过**，完整配置合同检查、精确有理数断言、源码编译与JSON工件上传均成功。已在合并前确认PR分支比main超前7个提交、落后0个且mergeable=true。合并后重新读取远端main SHA `83e47ee149d53d63ae4e406637b209e32f543344`，并确认核心源码与检查点已落地。未执行全仓库历史回归；没有四状态RCI、输出反馈Tube MPC、六状态安全或20ms最坏时间证明。
