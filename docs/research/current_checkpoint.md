@@ -1,5 +1,8 @@
 # 当前研究检查点 — Run232（2026-10-31）
 
+
+**GitHub验证补记（2026-11-01 UTC）：** 研究PR #33 https://github.com/zhouxingxing1279/AcademicReaserch/pull/33 已非强制Squash合并，重新读取远端main SHA 8236ccebd8eeb99fb82fcb09f8c9aa8cfb3f91f6 并核验新增工件Blob。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41264059008 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41264106302 均success；完整checkout Python 3.13.17，Run224–232共61/61聚焦测试通过、无跳过，真实配置合同、精确证书、编译和JSON工件上传成功。**仍未执行全仓库历史回归或20ms最坏时间认证。** 此补记不改变Gate A=blocked。
+
 **唯一主方向：** 四旋翼/无人机MPC＋SMF鲁棒输出反馈闭环，子课题随证据收敛。**基准main：** 0f05bf4273be2f00b5731e3a371a1500f7177236。
 
 **已验证边界：** Run221二维姿态子系统实现有限网格SMF+MPC滚动闭环，在限定的每拍测量、无姿态过程扰动和初始误差集合条件下证明误差RPI、约束及递归可行性；没有目标收敛、四状态/六状态安全证明。Run224–231四状态研究建立有限前驱正反见证、两拍分叉DAG和边界四维盒严格排除，**尚无非空闭合四状态RCI**。
