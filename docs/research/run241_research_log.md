@@ -37,3 +37,8 @@
 - 本地隔离Python标准库：`PYTHONPATH=verification python -m unittest -v verification.test_four_state_observation_pulse`，11项中**10通过、1项因隔离目录缺真实配置跳过**；`python -m py_compile verification/check_four_state_observation_pulse.py verification/test_four_state_observation_pulse.py`通过；生成JSON通过。独立浮点Euler极端轨迹测试仅是索引/实现sanity check，不用于数学证明。完整checkout配置、历史聚焦回归和归档一致性由GitHub Actions实际结果确认，不预先声称成功。
 - **证据级别：** 精确有理数模型包含+严格Taylor外包（有限时域），并非严格最优控制；比较使用零力矩基线的精确最坏支持与脉冲的可靠上界。**可行性：** 共享非零控制与可证明微小收益存在；**创新性：** 有噪观测线性脉冲及Taylor外包属基础技术，尚不足独立成题；**难度：** 一般CZ后验与多模式递归可行性仍高。Gate A继续blocked。
 - **下一轮唯一优先任务：** 将本轮一次性脉冲策略嵌入重复5/10/15成功/缺包信息状态转移，验证可否构造非空、含位置速度相关性的**递归闭合**信息状态终端域；如失败保存明确的反例或外包障碍。
+
+
+## 4. 完整checkout CI与main落地核验（2026-11-01）
+
+研究PR #51 https://github.com/zhouxingxing1279/AcademicReaserch/pull/51 基于main `a61ed856bffe12058d4e8fc5cf9e15b7290c512b`，合并前核对ahead=7、behind=0、mergeable=true、head=`f3c7246df0758af3a8a183d49bf448ed08d7c8a1`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305256384 completed/success；Python 3.13.17完整checkout执行Run224–241共**145/145项聚焦测试通过、无跳过**（21.635s），精确Fraction、真实配置、归档JSON语义一致、编译、artifact上传均通过。通过非强制Squash合并至main `327adea4ed882bb236afde6b71ca40caacf10a88`，重新读取main SHA及新增源码/测试/JSON Blob均一致（源码`b02bec7487894d58693236e2594673e7c45152ca`，测试`7c2eea78c385f76a0e7ba235475e2b096f6eec3f`，JSON`c8fb74a983b64862fccdc996de016cbe7f3c220c`）。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305374967 completed/success，**145/145通过、无跳过**（38.341s），归档核验与上传成功。**全仓库历史回归未执行；CI通过不等于一般SMF+MPC递归安全证明。** 本段为证据补记，未改变控制算法。
