@@ -1,3 +1,7 @@
+**Run251完整checkout/安全合并核验（2026-11-01 UTC）：** PR #76 https://github.com/zhouxingxing1279/AcademicReaserch/pull/76 的CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41355983604 已completed/success；Python3.13完整checkout的Run249/250/251聚焦测试**27/27通过、无跳过**（读取job日志），源码编译、精确JSON归档逐字对比及artifact上传成功。合并前ahead=8/behind=0，expected head `d6d06582347e29f301743cc5fd57bf63869f780b`，非强制squash合并代码main SHA `913a79ff69a453245c4f6b90d030503925bb8283`；重新读取main及源码/归档/日志Blob确认落地。push触发的main Actions运行未独立读取，**不宣称main CI成功**。本补记仅修改文档，不改变数学证书。Gate A仍blocked。
+
+---
+
 # 当前研究检查点 — Run251（2026-11-01；CI/合并待独立核验）
 
 **基准远端main：** `bf323f99a6b8dcd8a96d17dcd70de734e20ae972`，含Run250及背景第4轮。**本轮严格信息限制：** 对Run249冻结四状态Euler、固定T=9.81N、h=0.02s、|r|≤2.028989375m/s²，构造从同一真实初态(0,0,0,0)、共同零力矩出发的两条**真实可达且逐拍满足硬约束**的扰动轨迹。第5/10/15拍位置包即使全部成功，存在相同位置读数0（噪声半宽0.02m）及相同角度/角速读数；但第15拍真实速度分别为±0.26376861875m/s，相差**0.5275372375m/s**。所以这一合法共同观测历史的任何可靠SMF后验速度投影直径至少0.5275372375m/s。Fraction精确原始/对偶证书证明该差距在“成对反号扰动、精确相同终点位置”的受限LP中最优；**不是每个后验的统一宽度下界、不是安全不可行性证明**。5/10拍的对应必要半宽也已精确归档。
