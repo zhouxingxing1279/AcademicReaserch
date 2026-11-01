@@ -57,3 +57,14 @@ A Q⊕W ⊆ (1-rho)^(-1)[⊕_{j=1}^{n-1}A^jW ⊕ rho W ⊕ (1-rho)W] = Q。
 **Gate A仍blocked。** 四状态固定推力全状态RCI由Run234的隐式存在性推进到有限生成元可计算表示；理论可行性提高，创新性仍低（经典mRPI外逼近），工程难度在4000生成元LP、间歇位置量测下的隐藏状态纤维、共享因果控制与MPC终端移位。该有限F不能直接作为部分观测SMF后验集合的安全终端：tau=-Kx读取真实隐藏状态，当前观测并不允许此操作；“后验集合包含于F”也不能让控制器使用不同的tau(x)。
 
 **下一轮唯一优先任务：** 对当前冻结四状态F和Run221的间歇量测模式，构造**共享观测控制**的必要/充分接口：从同一SMF后验纤维中两个不同隐藏状态计算所需力矩差，先严格判断是否存在单一合法控制可保持后继包含F；若不成立，给出反例并转向估计误差联合RPI或更保守的可实现输出反馈终端，不直接宣称MPC递归可行。
+
+
+## 6. 完整checkout、PR与main的实际验证（2026-11-01 UTC）
+
+研究PR #39：https://github.com/zhouxingxing1279/AcademicReaserch/pull/39 ，基准main为 db23aaa410a67fc929100146e12a51d8b3ebf820。合并前compare为ahead=9、behind=0，mergeable=true；使用expected head SHA=582ddb6886fc7bb602bfa820455b82b2fce0a5d7进行**非强制Squash合并**，代码落地main SHA **995b5c49991870e80920caeb659eea17f81a5329**，已重新读取远端main核验。
+
+PR CI：https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275719918 ，合并后main CI：https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275783414 ，两者均**completed/success**。GitHub Actions Python 3.13.17完整checkout执行Run224–235共**86/86项聚焦测试通过、无跳过**；真实配置合同、源码编译、精确生成元支持函数、n=400拒绝、JSON归档完全一致及工件上传成功。日志分别报告Ran 86 tests in 25.751s / OK和Ran 86 tests in 14.493s / OK。
+
+重新读取main上新增源码、测试和JSON的Git Blob SHA分别为0313ff6876ddde14f7f2ce8d921324fa1b12887e、d9c32dbf8a98d1aace7ee805b7a6e4edc93136c4、e722f5c82d96d05b7592e7d1d045716ade63e321，与本地实际测试的字节完全一致。
+
+**严格边界不变：** 86项是Run224–235聚焦回归，未执行全仓库历史回归；没有在线4000变量LP最坏时间、间歇量测共享控制、输出反馈MPC递归可行性、六状态安全或点渐近稳定性证明。文档证据补记不会改变已验证代码。
