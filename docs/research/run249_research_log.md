@@ -1,3 +1,7 @@
+**Run249完整checkout与安全合并核验（2026-11-01 UTC）：** 研究PR #70 https://github.com/zhouxingxing1279/AcademicReaserch/pull/70 基于main `c00e7c70557159811bd09862ce9ef2d54354e2e3`，合并前compare ahead=7/behind=0、mergeable_state=clean，预期head=`60748cd92f41205c22c24e09fe85a351ce578397`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345024930 为**completed/success**，Python 3.13完整checkout Run224–249聚焦**233/233测试通过、无跳过**（64.267s），真实配置、归档JSON逐字核验与artifact上传成功。通过非强制squash合并至main `ce1ec02602270521963d00f408ccae873913bbd6`，重新读取main SHA、PR merged状态及新增源码/测试/证书Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345183186 **completed/success**，完整checkout再次**233/233通过、无跳过**（84.508s），归档一致与artifact上传成功。该补记仅更新文档，未改变算法或验证证书；仍无无限时域输出反馈递归可行性、六状态安全或20ms最坏耗时认证。
+
+---
+
 # Run249 — 有限截止时域SMF后验驱动MPC与严格安全回退（2026-11-01）
 
 **基准main：** `c00e7c70557159811bd09862ce9ef2d54354e2e3`，包含Run248控制研究与背景任务PR #69；**唯一瓶颈：** Run245固定+0.08力矩脉冲在某合法初始角点第14拍进入不可恢复区域（Run248），因此不再只寻找更早的必要反例，而是实现一个可运行、可验证的**后验驱动闭环**，同时诚实限定为有限截止时域安全。
