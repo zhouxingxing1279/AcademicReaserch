@@ -1,0 +1,35 @@
+name: Run251 exact velocity indistinguishability
+on:
+  pull_request:
+    paths:
+      - 'verification/check_velocity_indistinguishability.py'
+      - 'verification/test_velocity_indistinguishability.py'
+      - 'results/velocity_indistinguishability_20261101/checks.json'
+      - '.github/workflows/run251-velocity-indistinguishability.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_velocity_indistinguishability.py'
+      - 'verification/test_velocity_indistinguishability.py'
+      - 'results/velocity_indistinguishability_20261101/checks.json'
+      - '.github/workflows/run251-velocity-indistinguishability.yml'
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile exact verifier and tests
+        run: python -m py_compile verification/check_velocity_indistinguishability.py verification/test_velocity_indistinguishability.py
+      - name: Run focused Run249 Run250 Run251 regressions
+        run: PYTHONPATH=verification python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability
+      - name: Reproduce exact rational JSON
+        run: |
+          python verification/check_velocity_indistinguishability.py --output /tmp/run251_checks.json
+          cmp /tmp/run251_checks.json results/velocity_indistinguishability_20261101/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run251-exact-certificate
+          path: /tmp/run251_checks.json
