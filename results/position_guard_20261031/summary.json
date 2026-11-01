@@ -11,5 +11,7 @@
   "strict_exclusion_example": "(49/10,0,0,0) and (-49/10,0,0,0)",
   "claim": "both examples necessarily violate |p|<=5 within 25 samples for all causal admissible controllers under a legal adversarial residual",
   "status": "finite-horizon necessary exclusion; no nonempty RCI construction, no output-feedback MPC safety proof",
-  "local_validation": "Python 3.13.5 standard library, 5 passed, 1 skipped (full checkout unavailable); GitHub CI pending"
+  "local_validation": "Python 3.13.5 standard library: 5 passed, 1 skipped (no full checkout)",
+  "github_validation": "Python 3.13.17 complete checkout: 46/46 focused tests passed, no skips; PR Actions 41255007550 and merged-main Actions 41255049647 success; exact JSON artifact ID 13061824630",
+  "code_merge_main_sha": "3ad53240ed9b57149cf9aa8459cea20dbca72832"
 }

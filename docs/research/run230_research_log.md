@@ -41,3 +41,7 @@ GitHub Actions将执行Run224–230共46项聚焦测试、真实配置检查及�
 **Gate A=blocked。** 可行性：增加了四状态终端集合的严格必要剪枝；创新性：低，属模型特定安全必要条件，不是新RCI算法；难度：闭合非空RCI、SMF信息状态与MPC递归可行仍高。二维姿态Run221限定保证未改变。
 
 **下一轮唯一优先任务：** 在排除位置边界静止切片后，使用控制标记、位置—速度—姿态关联的细分单元，寻找**真正非空且所有扰动后继闭合的四状态循环终端图**；若仍无法构造，给出有量词正确性的严格阻塞并据此收缩课题范围。
+
+## 完整checkout验证及main合并记录（2026-10-31/11-01 UTC）
+
+研究PR #29 https://github.com/zhouxingxing1279/AcademicReaserch/pull/29 已通过非强制Squash合并，代码main SHA `3ad53240ed9b57149cf9aa8459cea20dbca72832`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41255007550 与代码合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41255049647 均为success。GitHub Actions Python 3.13.17完整checkout中Run224–230共**46/46聚焦测试通过，无跳过**，真实配置、语法编译、25拍有理数证书断言及JSON artifact上传成功（artifact ID 13061824630）。已重新读取远端main SHA及源码/测试Blob，与本地已测版本逐字一致。**不是全仓库历史回归；无四状态终端RCI、输出反馈SMF＋MPC递归可行、稳定性、六状态安全或20ms最坏耗时证明。**
