@@ -1,3 +1,7 @@
+**Run237完整checkout CI与合并核验（2026-11-01）：** PR #43 https://github.com/zhouxingxing1279/AcademicReaserch/pull/43 已非强制Squash合并到main `12213e80725935931c1fb5578b19450bb01ef270`，重新读取main及验证器Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283529172 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283612955 均success。Python 3.13.17完整checkout Run224–237聚焦测试**102/102通过、无跳过**，真实配置、精确支持证书、JSON归档比对及artifact上传成功。文档补记不改变算法，未单独触发CI；全仓库历史回归、SMF-MPC闭环和20ms最坏时间仍未认证。
+
+---
+
 ## Run237 当前检查点（2026-11-01）
 
 **基准main：** a51a657de081c7b49884569fd02b87326c93126d。Run235固定推力全状态反馈有限4000生成元F仍严格RPI，但Run237以精确Fraction计算F的支持函数，找到方向l=(13939/100000,55667/100000,-252917/100000,-1)；对Run236相同观测的x±=(0,±hD,0,0)，分别选合法r=±R，若两个实际后继都属于F，前者要求共享tau>0.0181 Nm，后者要求tau< -0.0181 Nm。严格矛盾，证明**指定两状态SMF后验纤维对原F不存在共享一步终端力矩**，强于Run236的“原K不可测”结论；不排除其他输出反馈终端集合/动态策略。

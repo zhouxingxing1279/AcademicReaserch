@@ -30,3 +30,7 @@ PYTHONPATH=verification python verification/check_four_state_shared_successor.py
 Gate A=blocked。全状态F的RCI证明仍成立；该F对上述部分观测信息状态不能作为共享力矩不变终端。可行性：需转向估计误差/信息状态联合终端设计；创新性：负面证书本身不足支撑硕士论文；难度：高但目标更清楚。
 
 **下一轮唯一优先任务：** 在保留已证明全状态F为对照的同时，构造一个包含估计误差/观测历史的可实现输出反馈终端集合与备份律，首先对同一两状态纤维给出一步严格可行见证（可使用更大且满足硬约束的终端集合），再讨论递归闭合。
+
+## 5. PR/main完整checkout CI与合并核验（2026-11-01）
+
+PR #43 https://github.com/zhouxingxing1279/AcademicReaserch/pull/43 已通过非强制Squash合并，代码落地main SHA `12213e80725935931c1fb5578b19450bb01ef270`，已重新读取远端main及验证器Blob（8d8a177a672253d227db6764b19defd933638f52）核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283529172 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283612955 均completed/success。GitHub Actions Python 3.13.17完整checkout Run224–237共**102/102项聚焦测试通过、无跳过**，真实配置断言、精确支持证书、归档JSON逐字比对及工件上传成功；main CI日志报告Ran 102 tests in 28.567s / OK。此后文档补记未单独触发CI。仍未运行全仓库历史回归、四状态SMF+MPC闭环、六状态安全或20ms最坏时延验证。
