@@ -1,3 +1,7 @@
+**Run236合并与完整checkout验证（2026-11-01）：** PR #41 https://github.com/zhouxingxing1279/AcademicReaserch/pull/41 已安全Squash合并到main 7afc3a60e663fd7640fc7e6eb60bb7d8c4643744；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279295891 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279361402 均success。Python 3.13.17完整checkout Run224–236共94/94项聚焦测试通过、无跳过，真实配置、编译、精确有理数及归档JSON逐字比对成功；新增源码/测试/JSON Blob已重新读取核验。**证据补记不改变算法，未单独触发CI；未执行全仓库历史回归，Gate A仍blocked。**
+
+---
+
 ## Run236 当前检查点（2026-11-01）
 
 **基准main：** 9442a873d89c270204fa32b4562334e1d0a07d1b。Run235有限4000生成元F仍为严格固定推力全状态反馈RCI；Run236证明F内且属于初始先验的两个状态 x±=(0,±1742383/40000000,0,0)，在初始成功位置包下具有相同(p,phi,omega)观测，但Run235反馈需要相反力矩±430368601/20000000000 Nm。任何共享观测力矩至少对一个状态偏离原全状态律0.02151843005 Nm；角速度下一拍相对该全状态律误差同值。100项精确有理数支持函数证明sup_F|Kx|>0.06 Nm，故朴素全局三角收紧0.06+0.02151843005>0.08 Nm无法认证。**不证明没有其他共享力矩，也不证明F在共享控制下必然不变性失败。**
