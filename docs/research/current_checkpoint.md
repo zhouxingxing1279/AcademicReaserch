@@ -1,3 +1,13 @@
+# 当前研究检查点 — Run241（2026-11-01）
+
+**基准main：** `a61ed856bffe12058d4e8fc5cf9e15b7290c512b`。本轮在Run236两点隐藏速度纤维上，使用成功位置观测`y`设计共同可执行非零力矩脉冲`tau_j=(2/3)y[+1×3,-1×6,+1×3,0×3]_j`，对n=5/10/15全部合法成功观测、独立残差及噪声给出精确Fraction与sin Taylor余项的15拍可靠外包。全部中间硬约束认证通过，末端phi/omega精确归零。10/15拍模式相对零力矩基线的精确最坏终端位置/速度均有严格可靠上界改善；15拍分别至少0.0016587797m、0.0110585315m/s。5拍模式的证书上界反而更大，保留负面结果，不断言实际性能更差。详见[Run241日志](run241_research_log.md)及`verification/check_four_state_observation_pulse.py`。
+
+**证据边界：** 仅指定两点初始纤维、冻结四状态固定推力、一次成功观测与一次15拍预承诺策略。没有一般SMF后验、重复信息状态终端闭合、MPC优化、递归可行、六状态安全、稳定性或20ms时延证明。Gate A仍blocked；论文去重91篇不变。本地隔离11项测试10通过、1项缺完整checkout配置跳过；完整CI及远端合并结果必须另行读取，不能提前宣称成功。
+
+**下一轮唯一优先任务：** 对重复5/10/15成功/缺包模式的SMF信息状态建立非空递归闭合终端域，验证本轮一次性脉冲能否组合为可重复的共享因果策略。
+
+---
+
 **Run240完整checkout与main合并核验（2026-11-01）：** 研究PR #49 https://github.com/zhouxingxing1279/AcademicReaserch/pull/49 已非强制Squash合并，代码main SHA af072cccf1cee23a711c1d0d756d32623f38d3d0。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41301543344 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41301632613 均success；Python 3.13完整checkout Run224–240共**134/134聚焦测试通过、无跳过**，配置、精确证书、归档JSON与工件上传通过。尚未执行全仓库历史回归，Gate A仍blocked。
 
 ---
