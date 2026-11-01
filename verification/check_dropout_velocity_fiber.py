@@ -47,7 +47,7 @@ def verify():
         'basis': 'Run251 same initial state and common successful position observations at ticks 5/10/15',
         'dropout_word_at_position_opportunities': 'SSSMM',
         'evidence': 'EXACT_RATIONAL_CAUSAL_TWO_MISS_VELOCITY_DIAMETER_NECESSARY_BOUND',
-        'quantifiers': 'for every causal admissible torque policy, choose two admissible residual sequences and identical available noisy observations',
+        'quantifiers': 'after the specific Run251 zero-torque prefix, for every causal admissible torque continuation choose two legal residual sequences and identical available noisy observations',
         'witness': 'two physical paths; common angular measurements at every tick; no position measurement at 20/25',
         'assumptions': 'frozen fixed-thrust four-state Euler, independent lateral residual, no extra velocity/IMU measurement',
         'bounds': [{
@@ -56,7 +56,7 @@ def verify():
             'necessary_velocity_halfwidth_m_s': str(velocity_gap(j) / 2),
             'universal_true_state_abs_envelope': {k: str(v) for k, v in envelope(j).items()},
         } for j in (0, 5, 10)],
-        'safety_scope': 'both adversarial paths remain within all state bounds through tick25 for any shared admissible torque sequence',
+        'safety_scope': 'both adversarial paths remain within all state bounds through tick25 for any shared admissible torque continuation after tick15',
         'limitation': 'one admissible observation history and loss word, not a uniform lower bound for all SMF posteriors; does not disprove existence of safe feedback',
         'terminal_invariant_set_proved': False,
         'recursive_feasibility_proved': False,
