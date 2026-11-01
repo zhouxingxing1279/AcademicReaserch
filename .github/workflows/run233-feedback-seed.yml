@@ -1,0 +1,49 @@
+name: Run233 four-state numerical feedback seed
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_feedback_seed.py'
+      - 'verification/test_four_state_feedback_seed.py'
+      - 'results/feedback_seed_20261031/checks.json'
+      - '.github/workflows/run233-feedback-seed.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_feedback_seed.py'
+      - 'verification/test_four_state_feedback_seed.py'
+      - '.github/workflows/run233-feedback-seed.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-233 focused tests and frozen config
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_feedback_seed.py verification/test_four_state_feedback_seed.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed
+          python verification/check_four_state_feedback_seed.py --root . --output /tmp/run233_summary.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/run233_summary.json'))
+          a=json.load(open('results/feedback_seed_20261031/checks.json'))
+          assert d['run']==233 and d['gate_A']=='blocked'
+          assert len(d['deterministic_scenarios'])==7
+          assert all(x['first_violation_tick'] is None for x in d['deterministic_scenarios'].values())
+          assert d['uncontrolled_positive']['first_violation_tick']==a['uncontrolled_positive_first_violation_tick']
+          assert d['random_episodes']==a['random_episodes']==128
+          assert d['random_violations']==a['random_violations']==0
+          assert d['random_max_abs_state']==a['random_max_abs_state']
+          print('Run233 reproducible numerical feedback seed verified; NOT an RCI certificate')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run233-fullstate-feedback-seed
+          path: /tmp/run233_summary.json

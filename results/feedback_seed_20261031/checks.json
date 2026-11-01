@@ -1,0 +1,13 @@
+{
+  "run": 233,
+  "uncontrolled_positive_first_violation_tick": 74,
+  "random_episodes": 128,
+  "random_violations": 0,
+  "random_max_abs_state": [
+    0.259195888,
+    0.451869508,
+    0.090051287,
+    0.320795279
+  ],
+  "evidence": "1000-tick finite numerical episodes only; no robust RCI"
+}
