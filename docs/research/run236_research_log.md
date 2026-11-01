@@ -54,4 +54,4 @@ Run235状态反馈给出的合法力矩为
 
 ## 5. 合并状态
 
-待GitHub PR CI和main合并后记录；不得提前宣称已合并。
+PR #41 https://github.com/zhouxingxing1279/AcademicReaserch/pull/41 已安全Squash合并。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279295891 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279361402 均为 completed/success。GitHub Actions Python 3.13.17完整checkout执行Run224–236共 **94/94项聚焦测试通过、无跳过**，真实配置、源码编译、精确分数证书、JSON逐字比对及工件上传均成功；main CI日志报告Ran 94 tests in 23.894s / OK。合并落地main SHA **7afc3a60e663fd7640fc7e6eb60bb7d8c4643744**，已重新读取远端main及新增源码/测试/JSON的Git Blob，与本地验证文件一致。研究代码合并后的CI已成功；本次仅文档证据补记未单独触发CI。仍未执行全仓库历史回归、在线LP 20ms最坏时间、输出反馈终端递归可行或六状态安全证明。
