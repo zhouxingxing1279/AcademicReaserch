@@ -8,7 +8,7 @@
 
 **文献：** 新增Liu/Yang/Ozay (2020) ACC输入延迟RCI论文的§I–III及Theorem 1分节阅读，DOI https://doi.org/10.23919/ACC45564.2020.9147731，arXiv:2003.04953；去重已读89→90。其线性输入延迟定理不能直接用于非线性控制依赖扰动模型。
 
-**复现：** `PYTHONPATH=verification python -m unittest -v verification.test_four_state_position_guard`；`PYTHONPATH=verification python verification/check_four_state_position_guard.py --root . --output /tmp/run230_checks.json`。本地Python 3.13.5，5通过、1项因缺完整checkout跳过；完整仓库CI结果须另行核实。新增源码、测试、CI、摘要及研究日志；**Gate A仍blocked**。
+**复现：** `PYTHONPATH=verification python -m unittest -v verification.test_four_state_position_guard`；`PYTHONPATH=verification python verification/check_four_state_position_guard.py --root . --output /tmp/run230_checks.json`。本地Python 3.13.5，5通过、1项因缺完整checkout跳过；GitHub Actions Python 3.13.17完整checkout聚焦46/46通过、无跳过（PR run 41255007550，main run 41255049647），真实配置和归档JSON断言通过。代码已安全合并main SHA 3ad53240ed9b57149cf9aa8459cea20dbca72832。新增源码、测试、CI、摘要及研究日志；**Gate A仍blocked**。
 
 **尚存理论缺口：** 非空四状态RCI及控制策略、SMF信息状态下的因果递归可行、终端稳定性、六状态鲁棒安全、全仓库回归和20ms最坏耗时。当前创新性证据不足，四状态终端可行性风险高。
 
