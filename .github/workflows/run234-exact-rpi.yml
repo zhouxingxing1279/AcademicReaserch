@@ -1,0 +1,47 @@
+name: Run234 certified nonlinear four-state RCI
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_rpi_zonotope.py'
+      - 'verification/test_four_state_rpi_zonotope.py'
+      - 'results/four_state_rpi_20261031/checks.json'
+      - '.github/workflows/run234-exact-rpi.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_rpi_zonotope.py'
+      - 'verification/test_four_state_rpi_zonotope.py'
+      - '.github/workflows/run234-exact-rpi.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact rational RCI proof and Run224-234 focused regression
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_rpi_zonotope.py verification/test_four_state_rpi_zonotope.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope
+          python verification/check_four_state_rpi_zonotope.py --root . --output /tmp/run234_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('results/four_state_rpi_20261031/checks.json'))
+          b=json.load(open('/tmp/run234_certificate.json'))
+          assert a==b and b['run']==234
+          assert F(b['power_infinity_norm_upper'])<1
+          assert all(F(x)<F(y) for x,y in zip(b['state_abs_upper_rounded_outward'],b['state_limits']))
+          assert F(b['torque_abs_upper_rounded_outward'])<F(b['torque_limit'])
+          print('Run234 exact nonlinear RCI certificate verified (fixed thrust, full state only)')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run234-exact-rational-four-state-rci
+          path: /tmp/run234_certificate.json
