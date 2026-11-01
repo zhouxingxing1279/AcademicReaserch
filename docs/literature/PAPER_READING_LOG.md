@@ -1,3 +1,13 @@
+## Run240 全观测包络与丢包因果性复核（2026-11-01；去重已读仍91篇）
+
+**Yang, Liren; Ozay, Necmiye (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481；作者公开全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/状态：** 2026-11-01定向重读§3、Assumption 1、§4.1–4.2、Proposition 2；历史已读文献，不重复计数。**研究问题：** 丢包自动机约束下无限时域硬安全综合。**方法/模型：** 成功包提供无噪完整状态，缺包时用字符串自动机编码最长缺测串，按控制因果性预先承诺输入并在product game中求安全策略。**关键假设/结论：** 初始成功包、丢包连续长度有界、自动机语言满足Assumption 1；Proposition 2验证字符串自动机保留允许语言。**局限：** 不处理本仓库成功包仅含有噪位置、姿态单独持续观测的连续信息状态。**关联/可复用：** 5/10/15成功返回的分支必须由同一个提前可执行控制策略覆盖，不能事后知道返回时刻。**待查：** 如何在有噪SMF集合和非线性动力学下建立product信息状态的递归闭合证书？
+
+**Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136；DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/状态：** 2026-11-01复核摘要、Proposition 1和Run239历史精读笔记，未重新阅读全文；已登记，不重复计数。**研究问题：** 如何以有限集合表示精确实现有界噪声下的线性预测、交集与支持计算。**方法/假设：** 线性映射、CZ的约束生成元表示及精确交运算，需有界过程/测量误差。**结论/局限：** 保留位置—速度相关性，但在线复杂度会增长；不直接给出有丢包非线性SMF＋MPC递归安全。**关联/可复用：** Run240的各初始分支是带测量条带的CZ，先计算一维支持再对两支取并，不能把非凸并集当成一个CZ。**待查：** 有界复杂度降阶能否保持共享恢复控制的可行性证书？
+
+**本轮自有结果：** [Run240日志](../research/run240_research_log.md)。对所有成功观测值的5/10/15拍速度区间最大半宽分别0.2464585125、0.3188500014、0.3681367927m/s；仅限Run236两点纤维，不能推广为一般后验或MPC闭环。**去重已读仍91篇。**
+
+---
+
 ## Run239 精确有噪位置后验与CZ交运算复核（2026-11-01；去重已读仍91篇）
 
 **Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/核验：** 2026-11-01，实际重新核对§2 Definition 1/2、§3 Definition 3、Proposition 1(11)–(13)、Proposition 2(19)–(20)、§5(31)–(33)；其余章节本轮未精读。此文已有Run215等历史阅读记录，**不重复计数**。
