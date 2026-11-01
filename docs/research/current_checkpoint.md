@@ -1,3 +1,7 @@
+**Run241完整checkout与main核验（2026-11-01）：** 研究PR #51 https://github.com/zhouxingxing1279/AcademicReaserch/pull/51 已安全Squash合并至代码main `327adea4ed882bb236afde6b71ca40caacf10a88`，重新读取main SHA及源码/测试/JSON Blob确认落地。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305256384 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305374967 均completed/success；完整checkout Python 3.13.17聚焦测试**145/145通过、无跳过**，真实配置、精确Fraction、归档JSON和artifact上传成功。全仓库历史回归、SMF-MPC递归可行性及20ms最坏时延未认证。此补记不改变算法。
+
+---
+
 # 当前研究检查点 — Run241（2026-11-01）
 
 **基准main：** `a61ed856bffe12058d4e8fc5cf9e15b7290c512b`。本轮在Run236两点隐藏速度纤维上，使用成功位置观测`y`设计共同可执行非零力矩脉冲`tau_j=(2/3)y[+1×3,-1×6,+1×3,0×3]_j`，对n=5/10/15全部合法成功观测、独立残差及噪声给出精确Fraction与sin Taylor余项的15拍可靠外包。全部中间硬约束认证通过，末端phi/omega精确归零。10/15拍模式相对零力矩基线的精确最坏终端位置/速度均有严格可靠上界改善；15拍分别至少0.0016587797m、0.0110585315m/s。5拍模式的证书上界反而更大，保留负面结果，不断言实际性能更差。详见[Run241日志](run241_research_log.md)及`verification/check_four_state_observation_pulse.py`。
