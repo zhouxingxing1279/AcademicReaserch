@@ -1,0 +1,36 @@
+{
+  "adverse_disturbance": "r=-R every tick",
+  "base_run": 247,
+  "earliest_true_nonviability_time_proved": false,
+  "evidence": "EXACT_RATIONAL_FULL_INFORMATION_EARLY_NONVIABILITY_WITNESS",
+  "first_rejection_within_prefix_and_horizon_le_30": 14,
+  "future_extremal_pitch_max": "601/2500",
+  "future_extremal_pitch_min": "-37/1250",
+  "future_horizon_ticks": 30,
+  "gate_A": "blocked",
+  "initial_true_corner": [
+    "-1/50",
+    "-1/10",
+    "1/200",
+    "1/100"
+  ],
+  "model": "frozen four-state explicit Euler, fixed T=9.81, |tau|<=0.08, |r|<=R",
+  "mpc_optimization_implemented": false,
+  "packet_observations_cannot_rescue_after_tick14_even_with_full_state": true,
+  "prefix_control": "Run245 +U*12,-U*12,0*6",
+  "recursive_feasibility_proved": false,
+  "rigorous_upper_velocity_at_tick44": "-1876270661513130313664589/625000000000000000000000",
+  "run": 248,
+  "shared_causal_feedback_synthesized": false,
+  "smf_posterior_tested": false,
+  "strict_negative_violation_margin_m_s": "1270661513130313664589/625000000000000000000000",
+  "tick14_necessary_velocity_ceiling": "153959558315743447302981/39062500000000000000000",
+  "tick14_necessary_velocity_floor": "-498419738090794186335411/625000000000000000000000",
+  "tick14_omega_exact": "81/100",
+  "tick14_phi_exact": "751/5000",
+  "tick14_velocity_enclosure": [
+    "-499690472777032223570151/625000000000000000000000",
+    "-999380799207849/1250000000000000"
+  ],
+  "unavoidable_velocity_violation_by_tick": 44
+}
