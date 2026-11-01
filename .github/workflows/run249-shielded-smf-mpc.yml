@@ -1,0 +1,53 @@
+name: Run249 guarded SMF MPC finite-deadline certificate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_shielded_smf_mpc.py'
+      - 'verification/test_four_state_shielded_smf_mpc.py'
+      - 'results/four_state_shielded_smf_mpc_20261101/checks.json'
+      - '.github/workflows/run249-shielded-smf-mpc.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_shielded_smf_mpc.py'
+      - 'verification/test_four_state_shielded_smf_mpc.py'
+      - '.github/workflows/run249-shielded-smf-mpc.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-249 focused regression and archived Run249 certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_shielded_smf_mpc.py verification/test_four_state_shielded_smf_mpc.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping verification.test_four_state_pulse_authority verification.test_four_state_tilt_authority verification.test_four_state_terminal_nonviability verification.test_four_state_early_viability_guard verification.test_four_state_corner_viability verification.test_four_state_shielded_smf_mpc
+          python verification/check_four_state_shielded_smf_mpc.py --root . --output /tmp/run249_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_shielded_smf_mpc_20261101/checks.json'))
+          actual=json.load(open('/tmp/run249_certificate.json'))
+          assert expected==actual, 'Run249 deterministic certificate mismatch'
+          assert actual['run']==249
+          assert actual['deadline_ticks']==55
+          assert actual['replay_episodes']==24
+          assert actual['replay_violations']==0
+          assert actual['mpc_nonzero_actions']>0
+          assert F(actual['zero_backup_max_abs']['v'])<3
+          assert not actual['terminal_invariant_set']
+          assert not actual['wcet_20ms']
+          print('Run249 finite-deadline guard and deterministic archive verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run249-finite-deadline-safety
+          path: /tmp/run249_certificate.json
