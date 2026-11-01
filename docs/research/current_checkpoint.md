@@ -1,3 +1,7 @@
+**Run244远端合并与完整checkout验证（2026-11-01）：** 研究PR #58 https://github.com/zhouxingxing1279/AcademicReaserch/pull/58 已非强制squash合并至代码main 0be31388bdb49a859c7c882d6c90edd1b625f92f；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320036916 及合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320133837 均completed/success。Python 3.13.17完整checkout Run224–244聚焦测试**178/178通过、无跳过**，真实配置、Fraction反例、归档JSON和artifact上传成功。重新读取main SHA及验证源码/JSON Blob核验落地。该证据补记不改变算法，未单独触发CI；未执行全仓库历史回归，Gate A仍blocked。
+
+---
+
 # 当前研究检查点 — Run244（2026-11-01）
 
 **基准main：** a8009179dc0b9491735f0dc1fd5123f0445824c2。严格Fraction证明：对Run243的15拍姿态复位脉冲形状＋5/10/15拍零力矩自由段，即使每次幅值允许任意因果/全状态选择且|u|≤0.08Nm，在合法初始x=0、每拍r_x=+3246383/1600000m/s²、所有5拍位置包成功且噪声0的合法模式下，单脉冲速度抵消量至多0.01695168m/s；20/25/30拍宏周期分别在不晚于80/100/90拍严格违反|v|≤3m/s。**这是该脉冲族的无限时域鲁棒安全反例，不是一般SMF-MPC不可行证明。** Run243无扰局部Schur仍正确，Run234/235全状态RCI仍有效。隔离测试10通过/1缺完整配置跳过；完整checkout CI与远端合并另行核验。Gate A=blocked。见[Run244研究日志](run244_research_log.md)、verification/check_four_state_pulse_authority.py及results/four_state_pulse_authority_20261101/checks.json。唯一下一轮任务：设计允许非零稳态倾角/跨量测机会保留姿态的共享因果备份律，并逐success/miss边验证鲁棒控制权限。
