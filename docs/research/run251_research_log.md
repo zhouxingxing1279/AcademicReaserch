@@ -1,3 +1,7 @@
+**Run251完整checkout/CI/合并核验（2026-11-01 UTC）：** 研究PR #76 https://github.com/zhouxingxing1279/AcademicReaserch/pull/76 基于main `bf323f99a6b8dcd8a96d17dcd70de734e20ae972`；合并前compare ahead=8/behind=0，7个预期文件。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41355983604 **completed/success**，Python3.13完整checkout Run249/250/251聚焦**27/27测试通过、无跳过**（0.952s），源码编译、精确JSON逐字对比、artifact `run251-exact-certificate` 上传均成功；已读取job日志核对实际测试数。通过expected head `d6d06582347e29f301743cc5fd57bf63869f780b` 非强制squash合并到main `913a79ff69a453245c4f6b90d030503925bb8283`，重新读取main SHA及源码/证书/日志Blob确认落地。**本轮未能独立读取push触发的main Actions运行状态**，不能宣称main CI成功；上述PR CI已在完整checkout验证代码。此补记仅更新文档，不修改算法或数学证书；全仓库历史回归、无限递归可行、六状态安全及20ms WCET均未认证。
+
+---
+
 # Run251 — 有噪位置测量下不可区分扰动导致的速度后验宽度下界（2026-11-01）
 
 **基准远端main：** `bf323f99a6b8dcd8a96d17dcd70de734e20ae972`（已含Run250和背景任务第4轮）。**唯一研究问题：** Run249已有55拍有界SMF＋网格MPC＋安全过滤闭环，但尚未得到无限时域终端信息状态。首先检查一个更基础的必要条件：在每5拍都有成功位置包的有利情况下，是否仍存在合法、观测不可区分但真实速度相差显著的扰动历史？若存在，终端信息集合不能假定速度已被精确识别。
