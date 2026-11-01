@@ -1,3 +1,16 @@
+## Run234 定向复核：mRPI无限和与可证尾项（2026-10-31；去重仍91篇）
+
+**题名：** *Invariant approximations of the minimal robust positively invariant set*。
+**作者/年份/出版信息：** Saša V. Raković、Eric C. Kerrigan、Konstantinos I. Kouramas、David Q. Mayne，2005，*IEEE Transactions on Automatic Control* 50(3):406–410，DOI https://doi.org/10.1109/TAC.2005.843854 。
+**阅读日期/核验状态：** 2026-10-31；本轮核对DBLP书目、公开摘要与仓库既有阅读笔记，**未重新阅读全文/逐条核查定理证明**；已在本日志历史条目登记，去重已读篇数保持91，不新增“已读”。
+**研究问题：** 如何对稳定线性受扰系统的最小鲁棒正不变集构造可控制精度的外近似。
+**方法/模型：** Schur线性离散系统、有界加性扰动、Minkowski可达和及尾项近似。
+**重要定理/假设：** 线性稳定性、扰动紧致性、有限和外逼近；本轮未重新核对论文定理编号或全部假设。
+**主要结论：** 经典mRPI可用有限可达和及可验证的尾项界近似；Run234使用精确有理数自行构造相应证书。
+**局限：** 原论文线性条件不直接推出本项目非线性推力调度、间歇量测或输出反馈安全；本轮仅对固定推力、完整状态反馈、冻结四状态Euler模型独立证明。
+**与本课题关联/可复用技术：** Run234定义无限zonotope S、用800步精确有理数矩阵幂和几何尾项证明S包含于物理硬约束、力矩不饱和，并以sin Taylor余项将真实非线性闭环嵌入稳定线性扰动包络。
+**待查问题：** 如何得到可在线判定成员资格的有限RCI表示，并在SMF后验状态纤维上实现共享因果控制？参见 [Run234研究日志](../research/run234_research_log.md)。
+
 ## Run233 新增分节原文阅读：非线性鲁棒不变集的图方法（2026-10-31；去重90→91篇）
 
 **题名：** *Computing robust control invariant sets of constrained nonlinear systems: A graph algorithm approach*。
