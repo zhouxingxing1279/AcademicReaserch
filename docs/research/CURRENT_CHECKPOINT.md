@@ -1,3 +1,7 @@
+**Run239完整checkout及合并核验（2026-11-01）：** PR #47 https://github.com/zhouxingxing1279/AcademicReaserch/pull/47 已安全Squash合并，代码main SHA 60905d7f00c0da013e1d8995fa0da64af47fe8eb，重新读取main及源码、测试、JSON和论文日志Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296087821 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41296187607 均success；Python 3.13.17完整checkout聚焦测试121/121通过、无跳过，真实配置、Fraction证书、JSON逐字比对、artifact上传成功。未执行全仓库历史回归、递归可行性或20ms最坏时间认证。该补记不改变算法。
+
+---
+
 ## Run239 当前检查点（2026-11-01）
 
 **基准main：** f40c17e4833f6186c4e44b67b552c1a1e70f9e5e。Run238指定两状态纤维15拍可达zonotope与本轮配置核验一致。本轮在15拍成功有噪位置观测y_px=0、|n_px|≤0.02m条件下，按初始速度正负两分支建立精确CZ测量交，使用Fraction原始/对偶支持证书得到速度后验半宽353411321/960000000≈0.36813679m/s，相对先验0.6522563875m/s收紧约43.56%；若y=先验最大位置，速度上界不收缩，故**无统一观测收缩率**。该条件后验下再零力矩15拍的严格安全盒为|p|≤0.215659m、|v|≤0.976834m/s；**不是终端不变集、全先验SMF或MPC递归可行证明**。源码、10项测试、JSON、CI及日志见Run239研究记录；CI及远端合并状态须单独核验。Gate A仍blocked。
