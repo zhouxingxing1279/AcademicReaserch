@@ -1,3 +1,19 @@
+## 背景模型选型第4轮 — Panda与Guo（2026）GNSS/IMU延迟融合（2026-11-01；新增分节已读1篇，去重97→98篇）
+
+**题名：** *Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments*。**作者：** Deepak Kumar Panda; Weisi Guo。**年份/出版状态：** 2026-09-13 arXiv预印本，arXiv:2609.14806；https://arxiv.org/abs/2609.14806 ，公开正文 https://arxiv.org/html/2609.14806 。**未核验同行评审发表或DOI，不能写作期刊论文。**
+
+**阅读日期/状态：** 2026-11-01；公开正文§I、§II-A–C式(1)–(11)、§III-A/B式(12)–(21)、§IV式(22)–(27)与Algorithm 1、§V-A/B、§VI **分节已读**；未逐式证明审计或代码复现。
+
+**研究问题：** 四旋翼城市飞行中，GNSS多径、位置偏置和测量延迟使传统GNSS/IMU融合误差增大，如何在线自适应测量可信度？**方法/模型：** 真值为12状态刚体`s=(p3,v3,roll,pitch,yaw,p,q,r)`，输入总推力和3轴力矩；估计器为9状态`(p3,v3,bias3)` EKF，IMU加速度高频预测、GNSS`z=p+b+nu`位置更新，延迟到达时回溯更新历史状态并重传播；信任变量`beta`经NIS驱动的二阶在线更新调节协方差。**SMF类型：** 既非有界状态SMF，也非参数SMF；是随机EKF和自适应协方差。**控制：** 外环PID加速度、内环姿态PD，非MPC。
+
+**重要假设/理论保证：** 采用随机过程/量测噪声、多径偏置与有上限的模拟延迟；没有本项目“每5拍位置机会、最多miss两次”的确定性丢包模型、全样本有界集合包含、输入/状态硬约束终端、输出反馈MPC递归可行性定理。**实验/结论：** Python模拟12状态飞行，IMU200Hz、GNSS/控制20Hz、最大延迟1.2s、10条城市任务；论文报告估计误差和跟踪误差分别改善约80%/30%（仅其仿真与基线），没有实飞验证或WCET。**局限：** 预印本未经核验同行评审，概率协方差不等于确定性安全集合；加入IMU将改变仓库现有观测权限。
+
+**与本课题关联/可复用：** 有依据地解释GNSS低频/延迟与高频IMU多速率背景；可参考历史回溯观测更新，但必须重新定义有界偏置、延迟信息状态及集合包含证明。仓库Run249仅55拍安全、Run250零备份67拍上限不因EKF结果而改变。六状态平面模型仍为条件性物理首选，四状态仍为实际已验证的闭环/反例基线。**待查：** IMU辅助实验是否需要增广加速度偏置与延迟队列？在原量测权限下能否先完成非空终端信息状态？**研究日志：** [背景第4轮](../research/model_selection/background_run_20261101_1335_gnss_belief.md)。
+
+**旁证不计已读：** Gamagedara、Lee、Snyder (2021), *Quadrotor State Estimation With IMU and Delayed Real-Time Kinematic GPS*, IEEE TAES 57(5):2661–2673, DOI https://doi.org/10.1109/TAES.2021.3061795 ，仅IEEE摘要核验，未核对正文模型/定理。
+
+---
+
 ## Run250 — Wabersich与Zeilinger（2023）预测控制障碍函数（2026-11-01；新增分节已读1篇，去重96→97篇）
 
 **题名：** *Predictive Control Barrier Functions: Enhanced Safety Mechanisms for Learning-Based Control*。**作者：** Kim P. Wabersich; Melanie N. Zeilinger。**年份/正式出版：** 2023，*IEEE Transactions on Automatic Control* 68(5):2638–2651。**DOI：** https://doi.org/10.1109/TAC.2022.3175628 。**公开正文：** https://arxiv.org/abs/2105.10241 （2021初稿、2022更新；与2023期刊终版逐式一致性尚未核验）。
