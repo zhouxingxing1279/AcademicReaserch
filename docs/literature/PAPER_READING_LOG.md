@@ -1,3 +1,13 @@
+## Run241 观测条件化非零力矩备份与文献复核（2026-11-01；去重已读仍91篇）
+
+**Yang, Liren; Ozay, Necmiye (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/核验：** 2026-11-01，核对公开摘要并对照Run240已有§3–4、Proposition 2分节笔记；本轮未重读全文，既有已读不重复计数。**研究问题：** 丢包模式下因果安全控制。**模型/方法：** 字符串自动机、product game、提前承诺的输入策略。**重要假设/结论：** 成功包提供无噪完整状态、丢包语言由自动机约束；在适当假设下将部分信息安全综合化为product全信息博弈。**局限：** 本项目只有有噪位置成功包及持续姿态测量。**关联/可复用：** Run241的一次成功包后承诺15拍非零力矩是因果策略见证，不是递归product game。**待查：** 如何在5/10/15多模式下严格证明信息状态循环闭合？
+
+**Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036 ，全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/核验：** 2026-11-01复核公开摘要及Run239既有Definition 3/Proposition 1–2笔记，未重读全文。**研究问题：** 有界误差下关联集合估计。**方法/假设：** 线性映射、CZ精确交集与已知有界噪声。**主要结论：** CZ可保留位置—速度相关性，代价是表示复杂度增长。**局限：** 不直接给出非线性输出反馈递归MPC。**关联/可复用：** Run241利用Run240关联生成元直接计算可见位置脉冲对速度/位置的可靠支持，而不是将隐藏状态当成可测。**待查：** 将该支持证书嵌入可降阶、可重复的SMF信息状态。两文均为既有文献，去重91篇不变。
+
+**本轮独立结果：** [Run241研究日志](../research/run241_research_log.md)。10/15拍全部成功观测下，一次性15拍共享非零力矩脉冲的严格终端上界优于零力矩精确基线；5拍的同一上界方法不能认证收益。没有一般SMF-MPC递归可行性。
+
+---
+
 ## Run240 全观测包络与丢包因果性复核（2026-11-01；去重已读仍91篇）
 
 **Yang, Liren; Ozay, Necmiye (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481；作者公开全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/状态：** 2026-11-01定向重读§3、Assumption 1、§4.1–4.2、Proposition 2；历史已读文献，不重复计数。**研究问题：** 丢包自动机约束下无限时域硬安全综合。**方法/模型：** 成功包提供无噪完整状态，缺包时用字符串自动机编码最长缺测串，按控制因果性预先承诺输入并在product game中求安全策略。**关键假设/结论：** 初始成功包、丢包连续长度有界、自动机语言满足Assumption 1；Proposition 2验证字符串自动机保留允许语言。**局限：** 不处理本仓库成功包仅含有噪位置、姿态单独持续观测的连续信息状态。**关联/可复用：** 5/10/15成功返回的分支必须由同一个提前可执行控制策略覆盖，不能事后知道返回时刻。**待查：** 如何在有噪SMF集合和非线性动力学下建立product信息状态的递归闭合证书？

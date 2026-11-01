@@ -1,0 +1,78 @@
+{
+  "evidence": "EXACT_RATIONAL_OBSERVATION_CONDITIONED_FINITE_HORIZON_OUTER_BOUND",
+  "five_tick_noise_dominance_negative_result": true,
+  "gain_Nm_per_m": "2/3",
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "limitations": [
+    "One successful packet and one committed recovery pulse only; not a repeated causal mode policy",
+    "Two-point initial fiber, not the full initial prior or general CZ posterior",
+    "Robust terminal bounds are conservative outer bounds, not exact nonlinear supports",
+    "No recursive information-state invariant set, MPC optimizer, six-state safety or 20ms timing certificate"
+  ],
+  "modes": [
+    {
+      "all_intermediate_hard_constraints": true,
+      "baseline_terminal_position_m": "68650809/400000000",
+      "baseline_terminal_speed_m_s": "34206213/40000000",
+      "max_observation_m": "6494383/200000000",
+      "packet_after_ticks": 5,
+      "position_improvement_lower_m": "-398795730592308418324085260617/2500000000000000000000000000000000",
+      "pulse_terminal_position_bound_m": "429466351980592308418324085260617/2500000000000000000000000000000000",
+      "pulse_terminal_speed_bound_m_s": "107027347535197436139441361753539/125000000000000000000000000000000",
+      "speed_improvement_lower_m_s": "-132931910197436139441361753539/125000000000000000000000000000000",
+      "strict_both_improved": false,
+      "terminal_angle_and_rate_exactly_zero": true
+    },
+    {
+      "all_intermediate_hard_constraints": true,
+      "baseline_terminal_position_m": "21220681/80000000",
+      "baseline_terminal_speed_m_s": "84644341/80000000",
+      "max_observation_m": "52186979/800000000",
+      "packet_after_ticks": 10,
+      "position_improvement_lower_m": "85549268316323569588643936744451/160000000000000000000000000000000000",
+      "pulse_terminal_position_bound_m": "42355812731683676430411356063255549/160000000000000000000000000000000000",
+      "pulse_terminal_speed_bound_m_s": "8435917677227892143470452021085183/8000000000000000000000000000000000",
+      "speed_improvement_lower_m_s": "28516422772107856529547978914817/8000000000000000000000000000000000",
+      "strict_both_improved": true,
+      "terminal_angle_and_rate_exactly_zero": true
+    },
+    {
+      "all_intermediate_hard_constraints": true,
+      "baseline_terminal_position_m": "303343917/800000000",
+      "baseline_terminal_speed_m_s": "3152383/2500000",
+      "max_observation_m": "94628341/800000000",
+      "packet_after_ticks": 15,
+      "position_improvement_lower_m": "265404755119082060682582480635589/160000000000000000000000000000000000",
+      "pulse_terminal_position_bound_m": "60403378644880917939317417519364411/160000000000000000000000000000000000",
+      "pulse_terminal_speed_bound_m_s": "9999157348293639313105805839788137/8000000000000000000000000000000000",
+      "speed_improvement_lower_m_s": "88468251706360686894194160211863/8000000000000000000000000000000000",
+      "strict_both_improved": true,
+      "terminal_angle_and_rate_exactly_zero": true
+    }
+  ],
+  "packet_noise_halfwidth_m": "1/50",
+  "policy": "tau_j=(2/3)*y_px*shape_j, shape=[+1]*3+[-1]*6+[+1]*3+[0]*3, committed open-loop after the packet",
+  "recursive_invariance_certified": false,
+  "residual_halfwidth_m_s2": "3246383/1600000",
+  "run": 241,
+  "scope": "Run236 two-point fiber; fixed thrust, frozen four-state Euler, all bounded residual/noise histories; one successful packet after 5/10/15 ticks",
+  "shape": [
+    1,
+    1,
+    1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "sine_remainder": "|sin(z)-z|<=|z|^3/6; global measurement magnitude bounds the remainder",
+  "smf_mpc_closed_loop_certified": false
+}

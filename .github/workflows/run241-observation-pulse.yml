@@ -1,0 +1,50 @@
+name: Run241 observation-conditioned torque pulse
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_observation_pulse.py'
+      - 'verification/test_four_state_observation_pulse.py'
+      - 'results/four_state_observation_pulse_20261101/checks.json'
+      - '.github/workflows/run241-observation-pulse.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_observation_pulse.py'
+      - 'verification/test_four_state_observation_pulse.py'
+      - '.github/workflows/run241-observation-pulse.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-241 focused tests and exact observation-conditioned pulse certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_observation_pulse.py verification/test_four_state_observation_pulse.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse
+          python verification/check_four_state_observation_pulse.py --root . --output /tmp/run241_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_observation_pulse_20261101/checks.json'))
+          actual=json.load(open('/tmp/run241_certificate.json'))
+          assert expected==actual, 'archived rational certificate mismatch'
+          assert actual['run']==241
+          assert [m['strict_both_improved'] for m in actual['modes']]==[False,True,True]
+          assert all(m['all_intermediate_hard_constraints'] for m in actual['modes'])
+          assert all(F(m['position_improvement_lower_m'])>0 for m in actual['modes'][1:])
+          assert all(F(m['speed_improvement_lower_m_s'])>0 for m in actual['modes'][1:])
+          assert not actual['recursive_invariance_certified']
+          print('Run241 certificate matches archive; finite-horizon only')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run241-exact-observation-pulse
+          path: /tmp/run241_certificate.json
