@@ -1,3 +1,15 @@
+# 当前研究检查点 — Run251（2026-11-01；CI/合并待独立核验）
+
+**基准远端main：** `bf323f99a6b8dcd8a96d17dcd70de734e20ae972`，含Run250及背景第4轮。**本轮严格信息限制：** 对Run249冻结四状态Euler、固定T=9.81N、h=0.02s、|r|≤2.028989375m/s²，构造从同一真实初态(0,0,0,0)、共同零力矩出发的两条**真实可达且逐拍满足硬约束**的扰动轨迹。第5/10/15拍位置包即使全部成功，存在相同位置读数0（噪声半宽0.02m）及相同角度/角速读数；但第15拍真实速度分别为±0.26376861875m/s，相差**0.5275372375m/s**。所以这一合法共同观测历史的任何可靠SMF后验速度投影直径至少0.5275372375m/s。Fraction精确原始/对偶证书证明该差距在“成对反号扰动、精确相同终点位置”的受限LP中最优；**不是每个后验的统一宽度下界、不是安全不可行性证明**。5/10拍的对应必要半宽也已精确归档。
+
+**本轮工件：** `verification/check_velocity_indistinguishability.py`、`verification/test_velocity_indistinguishability.py`、`results/velocity_indistinguishability_20261101/checks.json`、`.github/workflows/run251-velocity-indistinguishability.yml`、`docs/research/run251_research_log.md`。隔离Python3.13本地7项测试中6通过、1项因缺Run249完整源码跳过，语法编译和精确JSON生成通过；完整仓库集成与CI须实际验证。Yang/Ozay(2021)公开论文§3–4及Proposition 4/5重读，统一论文去重98篇不变。
+
+**Gate A仍blocked：** Run249的55拍有限安全闭环、Run250零备份67拍最大安全时域不变。没有非空输出反馈终端信息状态受控不变核、无限递归可行/稳定性、六状态安全或20ms WCET。本轮证明必要信息宽度，不是新控制器。
+
+**下一轮唯一优先任务：** 对15拍共同观测的两种隐藏速度构造共享因果非零控制和安全后继检验，先在一个非空信息状态上尝试后继闭合的正向证书；不把必要信息宽度或有限安全误写为无限保证。
+
+---
+
 **Run250完整checkout与main合并核验（2026-11-01 UTC）：** 研究PR #73 https://github.com/zhouxingxing1279/AcademicReaserch/pull/73 已在ahead=7/behind=0、mergeable_state=clean、expected head `879ee532e3fe1e5c876f81266d65a0f389b9077f` 条件下非强制squash合并，代码main SHA `5f410044071d629522bbe18a2edddf0927412119`，已重新读取main、PR merged及源码/归档Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350799741 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41350936591 均completed/success；Python3.13完整checkout Run224–250聚焦回归、真实配置/Run249交叉核验、精确归档JSON对比及工件上传均成功。沿用Run249的233项并新增9项理论上共242项，但未读取逐项unittest日志，故只以实际工作流成功为证据。全仓库历史回归、一般SMF＋MPC递归可行、六状态安全和20ms最坏时延仍未认证。此补记不改变控制算法或数学证书。
 
 ---

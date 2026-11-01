@@ -1,3 +1,11 @@
+## Run251 — Yang与Ozay（2021）丢包因果安全控制定向重读（2026-11-01；去重98篇不变）
+
+**题名/作者：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay。**正式发表：** ADHS 2021，*IFAC-PapersOnLine*，pp.97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者公开正文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读状态：** 2026-11-01重新阅读§3式(3)–(7)、§4.2–4.4及Proposition 4/5；历史Run248已分节阅读，故不新增去重数，未宣称逐式复核全文。
+
+**研究问题/方法：** 具有自动机约束的完整状态测量丢失时，如何利用string automaton和因果控制承诺将部分信息安全问题转换为产品系统安全游戏。成功时观测`y=x`、失测时`y=∅`；无本仓库的成功位置有界噪声、隐藏速度和每拍姿态有噪SMF。**主要理论条件与结论：** 在论文Assumption 1的测量模式、产品系统紧性和连续性条件下，Proposition 4/5建立不变核与winning set联系；不能直接替代有噪位置SMF的终端递归可行性证明。**局限/课题关联：** 控制不能预知下一次测量何时成功，真实共享观测历史下必须施加相同因果动作。Run251独立推导15拍两条不可区分真实扰动路径的速度投影直径必要下界0.5275372375m/s，**不是Yang/Ozay原文结果**。可复用：丢包自动机、因果量词、信息状态安全游戏。待查：如何将共享观测速度纤维与四状态非零备份的后继闭合检验结合？详见[Run251日志](../research/run251_research_log.md)。
+
+---
+
 ## 背景模型选型第4轮 — Panda与Guo（2026）GNSS/IMU延迟融合（2026-11-01；新增分节已读1篇，去重97→98篇）
 
 **题名：** *Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments*。**作者：** Deepak Kumar Panda; Weisi Guo。**年份/出版状态：** 2026-09-13 arXiv预印本，arXiv:2609.14806；https://arxiv.org/abs/2609.14806 ，公开正文 https://arxiv.org/html/2609.14806 。**未核验同行评审发表或DOI，不能写作期刊论文。**
