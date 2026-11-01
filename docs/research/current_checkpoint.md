@@ -1,3 +1,17 @@
+# 当前研究检查点 — Run243（2026-11-01）
+
+**基准远端main：** 8a795a5575bf787313ba23ad299007ee4f7be420。Run242的原位置脉冲固定重复局部不稳定。本轮构造从两次成功有噪位置包及已知力矩历史恢复速度的SMF区间；在**精确已知初始零姿态**的特殊冻结四状态模型下，对20/25/30拍包间隔给出全部残差/位置噪声下速度包含半宽0.526088/0.607537/0.695653m/s。该估计界有效但过宽。
+
+**正向理论：** 采用饱和的u=0.5y+0.5vhat力矩幅值，承诺15拍角度复位脉冲。无噪无扰、局部不饱和时三个**固定**n=5/10/15宏周期的精确Jacobian行列式均0.9099442，全部Jury条件严格成立，故各固定模式局部渐近稳定；单宏周期局部盒可认证输入/状态安全但**未自映射**。75个混合模式宏周期的无扰浮点闭环终点p≈-0.003033m、v≈0.000511m/s，只是单轨迹现象，非任意切换稳定证明。
+
+**核心缺口/负面结果：** 实际两包速度区间半宽至少0.526m/s，大于无饱和局部设计的0.1m/s速度盒，无法认证全扰动下力矩裕度、递归信息状态不变、完整四状态SMF+Tube MPC、六状态安全或20ms最坏时延。Gate A仍blocked。源码、13项测试、JSON证书、CI和详细边界见[Run243研究日志](run243_research_log.md)。本地隔离12通过/1跳过；完整checkout CI及main合并须以实际结果核验。
+
+**文献：** Köhler/Müller/Allgöwer (2021) arXiv:2105.03427分节重读；Mayne等(2006) DOI 10.1016/j.automatica.2006.03.005仅书目/摘要复核。唯一论文日志去重仍91篇。
+
+**下一轮唯一优先任务：** 将两包速度区间与Run240关联CZ后验交集，在实际残差/噪声和任意5/10/15成功模式下检验阻尼律共享输入裕度与信息状态递归闭合，保留失败证书。
+
+---
+
 **Run242完整checkout与main核验（2026-11-01）：** PR #53 https://github.com/zhouxingxing1279/AcademicReaserch/pull/53 已非强制Squash合并至代码main `4a63fa5eb64e8b49b9337853a3eac385e32aee27`，再次读取main SHA核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309752362 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309850659 均completed/success；Python 3.13.17完整checkout Run224–242聚焦测试**154/154通过、无跳过**，精确Fraction、真实配置、归档JSON与artifact上传成功。全仓库历史回归、一般SMF+MPC递归安全和20ms最坏时延仍未认证。该段为验证记录，不改变算法。
 
 ---

@@ -1,3 +1,13 @@
+## Run243 两包速度区间与阻尼输出反馈（2026-11-01；历史已读去重91篇不变）
+
+**Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427，全文 https://arxiv.org/pdf/2105.03427 。**阅读日期/状态：** 2026-11-01实际核对原文§II-A Assumption 1、§III开头、§IV-A/B和§V数值四旋翼实验；历史已读，非新增全文逐式阅读。**研究问题：** 非线性系统有噪输出、受扰与硬约束下的鲁棒MPC。**方法/模型：** δ-IOSS/在线估计误差界、SMF/MHE、homothetic Tube MPC。**重要假设/定理接口：** 有界扰动、可检测/增量可稳定性；递归可行需当前估计误差、未来误差及估计器与名义动力学偏差的可靠界。**主要结论：** 适当条件下约束满足与递归可行；10状态四旋翼示例展示在线误差界减保守性。**局限：** SMF全局优化成本高，不能直接处理本仓库15拍缺测及未知初始姿态；不能把本轮Schur结果当论文安全定理。**课题关联/可复用：** Run243提供特殊已知角轨迹的两包速度SMF包含界，但尚缺预测误差与终端移位合同。**待查：** Run240 CZ关联后验与预测误差合同能否支持5/10/15任意模式下统一输入裕度？
+
+**D.Q. Mayne; S.V. Raković; R. Findeisen; F. Allgöwer (2006)**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222，DOI https://doi.org/10.1016/j.automatica.2006.03.005 。**阅读日期/核验：** 2026-11-01核对书目与公开摘要，未阅读全文；历史已登记不重复计数。**研究问题：** 有界过程与输出扰动下的线性约束MPC。**方法/模型：** 稳定观测器、估计误差RPI、Tube MPC和名义约束收紧。**关键假设/主要结论：** 误差与控制管束在相应不变性假设下保证硬约束。**局限：** 线性且要求误差集合不变；不覆盖本项目非线性角度、丢包模式。**关联/可复用：** 估计误差与控制误差分离的终端收紧合同。**待查：** 如何为带有噪角观测的冻结四状态系统构造共享因果估计误差RPI？
+
+**独立验证：** [Run243研究日志](../research/run243_research_log.md)；精确Fraction Jury和两包速度区间证书、单条无扰数值闭环。固定模式局部Schur不等于任意切换鲁棒安全。已读去重仍91篇。
+
+---
+
 ## Run242 重复脉冲局部不稳定性与文献定向阅读（2026-11-01；去重已读仍91篇）
 
 **Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，作者全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**核验状态/日期：** 2026-11-01本轮实际重读§3、Assumption 1、§4.1–4.2，历史已读不重复计数。**研究问题：** 丢包自动机下的无限时域硬约束。**方法：** 字符串自动机与控制因果性、product safety game。**关键假设/结论：** 成功包提供无噪完整状态，有限丢包串按自动机约束，策略在缺包期间必须提前承诺控制。**局限：** 与本仓库有噪位置、持续姿态量测不同。**关联/复用：** Run242的固定重复脉冲只是允许因果策略的受限特例，不能以其失败否定一般product信息状态策略。**待查：** 可否把有噪SMF后验作为product安全游戏状态并构造非空闭合域？
