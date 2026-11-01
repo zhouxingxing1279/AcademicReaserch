@@ -1,3 +1,9 @@
+## Run246完整checkout CI与main安全合并核验（2026-11-01）
+
+研究PR #62 https://github.com/zhouxingxing1279/AcademicReaserch/pull/62 基于main `e4e832a3fbfb02281c1b179d8bb6e2338e57406e`；合并前compare ahead=7/behind=0，mergeable_state=clean，head=`b1d047f48d2c1783b06d86a3054e68a8476935f5`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41330175901 **completed/success**；Python 3.13.17完整checkout Run224–246聚焦**200/200通过、无跳过**，真实配置、精确Fraction证书、归档JSON对比与artifact上传成功。PR非强制squash合并到main `83675ca663e7df210db7a51de4d873768f609715`，重新读取main SHA、PR merged状态及验证源码/JSON Blob核验落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41330291108 **completed/success**，Python 3.13.16完整checkout再次**200/200通过、无跳过**（28.491s），证书对比与artifact上传成功。此补记仅更新文档，不修改算法、测试或数学证书；全仓库历史回归、递归可行、六状态安全与20ms最坏时延仍未认证。
+
+---
+
 # 当前研究检查点 — Run246（2026-11-01）
 
 **基准main：** `e4e832a3fbfb02281c1b179d8bb6e2338e57406e`。Run245的30拍开环共享倾角策略虽然严格保证有限时域安全，但本轮在完整初始盒的合法角点`(-0.02,-0.1,-0.005,-0.01)`和合法持续`r=-R`下，找到一条**真实可达、非外包伪角点**的终点：`phi30=0.2194,omega30=-0.01,v30∈[-2.034914078,-2.034904500]m/s`。对第30拍以后**所有**合法力矩（包括全状态/非因果）证明`v43<=-3.026321633m/s`，越界裕度严格大于0.026321633m/s。精确有理数Euler姿态极值＋Taylor正弦下界证书见[Run246研究日志](run246_research_log.md)、`verification/check_four_state_terminal_nonviability.py`和`results/four_state_terminal_nonviability_20261101/checks.json`。
