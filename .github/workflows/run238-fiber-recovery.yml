@@ -1,0 +1,48 @@
+name: Run238 four-state finite-horizon shared-information backup
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_fiber_recovery.py'
+      - 'verification/test_four_state_fiber_recovery.py'
+      - 'results/four_state_fiber_recovery_20261101/checks.json'
+      - '.github/workflows/run238-fiber-recovery.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_fiber_recovery.py'
+      - 'verification/test_four_state_fiber_recovery.py'
+      - '.github/workflows/run238-fiber-recovery.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-238 focused regression and exact 15-tick certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_fiber_recovery.py verification/test_four_state_fiber_recovery.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery
+          python verification/check_four_state_fiber_recovery.py --root . --output /tmp/run238_certificate.json
+          diff -u results/four_state_fiber_recovery_20261101/checks.json /tmp/run238_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('/tmp/run238_certificate.json'))
+          assert a['run']==238 and a['max_observation_gap_ticks']==15
+          assert F(a['exact_15_step_position_halfwidth'])==F(78628341,800000000)
+          assert F(a['exact_15_step_velocity_halfwidth'])==F(52180511,80000000)
+          assert a['all_0_to_15_state_and_input_hard_constraints_certified']
+          assert not a['terminal_invariance_certified']
+          print('Run238 finite-horizon causal backup verified; no terminal invariance claim')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run238-fiber-recovery-exact-certificate
+          path: /tmp/run238_certificate.json

@@ -1,3 +1,13 @@
+## Run238 文献核验与15拍共享控制有限安全管（2026-11-01；去重已读仍91篇）
+
+**Bemporad, Alberto; Garulli, Andrea (2000)**，*Output-feedback predictive control of constrained linear systems via set-membership state estimation*，*International Journal of Control* 73(8):655–665，DOI https://doi.org/10.1080/002071700403420 。**核验层级：** 2026-11-01，出版社摘要及作者研究机构书目 https://old.control.ee.ethz.ch/publications/2000/407.html ，未取得全文，不标记本轮全文已读。**研究问题：** 约束线性系统的部分观测与有界扰动下，如何对所有信息相容状态施加鲁棒MPC约束。**方法/模型：** 摘要确认MPC+SMF联合框架，线性、硬约束、有界扰动；具体优化及定理条件未逐式核验。**结论：** 摘要报告对所有信息相容状态与扰动的约束保证；不将其推断为适用于本项目非线性丢包模型。**局限：** 非线性sin、控制相关残差和15模式丢包合同尚无可直接套用的结论。**关联/可复用：** 把后验纤维上共同控制作为约束量词。**待查：** 取得原文并核对完整递归可行性条件。
+
+**Qiu, Quanwei; Yang, Fuwen; Zhu, Yong; Mousavinejad, Eman (2020)**，*Output feedback model predictive control based on set-membership state estimation*，*IET Control Theory & Applications* 14(4):558–567，DOI https://doi.org/10.1049/iet-cta.2019.0881 。**阅读日期与核验：** 2026-11-01，重新阅读出版社开放正文§3.1–3.2、§4，未重建图片形式的全部LMI。**研究问题/方法：** 椭球SMF预测与量测更新、LMI/SDP鲁棒MPC、终端约束。**关键条件与结论：** 初始估计包含与初始优化可行、终端不变约束对可行性/稳定性分析重要；不能仅凭有限时域无违约推断无限递归可行。**局限：** 本项目冻结非线性、观测丢包与控制依赖残差未覆盖。**关联/可复用：** 估计集合必须进入未来控制决策。**待查：** Z15的后验测量收缩是否可与可执行终端备份形成闭合。此文此前已登记，不重复计数。
+
+**本轮自有证据：** [Run238研究日志](../research/run238_research_log.md)。指定两状态纤维在共同零力矩下15拍安全的精确Fraction归纳，不是以上论文定理的直接应用。**统一已读计数仍91篇。**
+
+---
+
 ## Run237 原文分节复核与共享后继判定（2026-11-01；去重已读仍91篇）
 
 **题名：** *Output feedback model predictive control based on set-membership state estimation*。**作者/年份/出版：** Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad (2020), *IET Control Theory & Applications* 14(4):558–567, DOI https://doi.org/10.1049/iet-cta.2019.0881 。**核验状态与阅读日期：** 2026-11-01，出版社公开正文§2、§3.1–3.4、§4及结论的分节阅读；网页公式大量为图片，**没有逐式重建或核对全部LMI**。已在历史文献索引登记，本轮不重复增加去重篇数。

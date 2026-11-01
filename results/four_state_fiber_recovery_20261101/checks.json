@@ -1,0 +1,33 @@
+{
+  "D": "1742383/800000",
+  "R": "3246383/1600000",
+  "all_0_to_15_state_and_input_hard_constraints_certified": true,
+  "common_causal_policy": "T=981/100 N, tau=0 Nm; ignores all measurements",
+  "disturbance": "r_k in [-3246383/1600000,+3246383/1600000] independently each tick",
+  "evidence": "EXACT_RATIONAL_FINITE_HORIZON_SHARED_INFORMATION_BACKUP",
+  "exact_15_step_position_halfwidth": "78628341/800000000",
+  "exact_15_step_velocity_halfwidth": "52180511/80000000",
+  "exact_one_step_position_halfwidth": "1742383/2000000000",
+  "exact_one_step_velocity_halfwidth": "6731149/80000000",
+  "full_prior_certified": false,
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "h": "1/50",
+  "initial_fiber": [
+    "(0,+hD,0,0)",
+    "(0,-hD,0,0)"
+  ],
+  "limitations": [
+    "Not a robust invariant set or a recursive output-feedback terminal policy",
+    "Only the specified Run236 two-point fiber, not the full initial prior or arbitrary posterior",
+    "No use of noisy measurements or measurement updates; does not implement MPC",
+    "15 ticks of finite safety do not permit indefinite repetition without a new certified recovery step",
+    "No six-state dynamics, stability or real-time worst-case timing certification"
+  ],
+  "max_observation_gap_ticks": 15,
+  "run": 238,
+  "scope": "Run236 two-state fiber only, fixed-thrust frozen four-state Euler, 15 ticks",
+  "smf_mpc_recursive_feasibility_certified": false,
+  "terminal_invariance_certified": false,
+  "zero_torque_backup_first_speed_violation_tick_under_positive_adversary": 73,
+  "zonotope_generators_at_tick_15": 16
+}

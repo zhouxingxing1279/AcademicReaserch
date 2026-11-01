@@ -1,3 +1,9 @@
+# 当前研究检查点 — Run238（2026-11-01）
+
+**基准main：** `be3596f98686c7bde600bcade8269ca66be8616f`。Run237对原全状态RCI F的指定两状态观测纤维证明共享一步控制不可能；Run238构造**同一两状态纤维的15拍共同零力矩有限安全备份**：固定T=9.81N、tau=0，精确Fraction归纳Z_n有n+1个生成元，所有逐拍独立|r|<=2.028989375，15拍内|p|<=0.09828542625m、|v|<=0.6522563875m/s、phi=omega=0，硬约束成立；第73拍正向极端残差下速度越界，故**非无限时域终端RCI**。仅针对两点，不覆盖全先验、不进行SMF更新、无MPC或递归可行性证明。Gate A仍blocked。测试：隔离Linux本地9项中8通过、1项真实配置因无完整checkout跳过；完整checkout CI结果需实际读取后补记。去重已读91篇，Bemporad & Garulli (2000)仅摘要核验，Qiu等(2020)重读公开章节。唯一下一轮任务：在Z15与噪声观测后构造可重复闭合的共享因果恢复/收缩策略。详见 [Run238研究日志](run238_research_log.md)。
+
+---
+
 **Run235完整仓库验证与合并补记（2026-11-01 UTC）：** 研究PR #39 https://github.com/zhouxingxing1279/AcademicReaserch/pull/39 已通过非强制Squash安全合并至main SHA 995b5c49991870e80920caeb659eea17f81a5329。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275719918 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41275783414 均success；Python 3.13.17完整checkout Run224–235共86/86项聚焦测试通过、无跳过，配置、编译、精确支撑/尾项、JSON归档及工件上传通过。main源码、测试、归档Blob与本地实测字节一致。**仍无SMF共享控制、MPC递归可行、全仓库回归、六状态安全或20ms最坏时限保证。**
 
 # 当前研究检查点 — Run235（2026-11-01）
