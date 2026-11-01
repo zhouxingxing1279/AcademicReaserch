@@ -46,3 +46,8 @@ v_{k+N}-v_k=hNR-hT\sum_j\sin(u a_j)
 ## 4. 下一轮唯一优先任务
 
 构造**允许非零稳态倾角、跨5拍量测机会保留姿态**的共享因果备份律，先检查固定推力四状态模型对恒定极端扰动的控制权限，再对每条success/miss边做SMF集合传播和硬约束认证。不要继续把15拍强制复位脉冲当作可重复安全终端策略。
+
+
+## 5. 完整checkout CI与远端main核验（2026-11-01）
+
+研究PR #58 https://github.com/zhouxingxing1279/AcademicReaserch/pull/58 基于main a8009179dc0b9491735f0dc1fd5123f0445824c2，合并前compare ahead=7/behind=0、mergeable=true。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320036916 completed/success，Python 3.13.17完整checkout执行Run224–244聚焦测试**178/178通过、无跳过**，真实配置、精确证书与归档JSON（浮点sanity容差1e-10）、artifact上传均通过。PR以非强制squash安全合并，代码main SHA 0be31388bdb49a859c7c882d6c90edd1b625f92f；已重新读取main、源码Blob及归档JSON确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41320133837 completed/success，完整checkout **178/178通过、无跳过**（32.558s），归档校验和artifact上传成功。**未执行全仓库历史回归、一般SMF-MPC递归可行或20ms最坏时延认证。** 此补记只增加证据记录，不修改算法。
