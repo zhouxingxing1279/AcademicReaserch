@@ -1,0 +1,38 @@
+{
+  "block_length": 800,
+  "certificate": "EXACT_RATIONAL_INFINITE_ZONOTOPE_RPI_AND_NONLINEAR_EMBEDDING",
+  "effective_acceleration_halfwidth": "1742383/800000",
+  "gain": [
+    "-123/1000",
+    "-247/500",
+    "2341/1000",
+    "933/1000"
+  ],
+  "gate_A": "blocked_for_output_feedback_MPC",
+  "limitations": [
+    "Fixed thrust and full-state feedback only; not intermittent-measurement SMF or MPC.",
+    "S is implicitly represented as an infinite zonotope; finite support/tail bounds certify containment, not exact membership.",
+    "No six-state coupled vertical safety, tracking objective, stability to a point, or 20 ms online guarantee."
+  ],
+  "nonlinear_remainder_acceleration_bound": "238383/1600000",
+  "power_infinity_norm_upper": "0.044224501",
+  "quantifiers": "for all x in S, all r in [-R,R], fixed T=9.81 and tau=-Kx, next state in S",
+  "residual_acceleration_halfwidth": "3246383/1600000",
+  "run": 234,
+  "set_definition": "S=sum_{j>=0} A_cl^j B [-D,D], compact nonempty robust invariant set",
+  "state_abs_upper_rounded_outward": [
+    "4.406855",
+    "2.538442",
+    "0.361233",
+    "0.742976"
+  ],
+  "state_limits": [
+    "5",
+    "3",
+    "9/20",
+    "2"
+  ],
+  "thrust_N": "981/100",
+  "torque_abs_upper_rounded_outward": "0.064424",
+  "torque_limit": "2/25"
+}
