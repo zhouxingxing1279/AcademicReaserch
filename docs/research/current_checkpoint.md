@@ -1,3 +1,7 @@
+**Run242完整checkout与main核验（2026-11-01）：** PR #53 https://github.com/zhouxingxing1279/AcademicReaserch/pull/53 已非强制Squash合并至代码main `4a63fa5eb64e8b49b9337853a3eac385e32aee27`，再次读取main SHA核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309752362 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41309850659 均completed/success；Python 3.13.17完整checkout Run224–242聚焦测试**154/154通过、无跳过**，精确Fraction、真实配置、归档JSON与artifact上传成功。全仓库历史回归、一般SMF+MPC递归安全和20ms最坏时延仍未认证。该段为验证记录，不改变算法。
+
+---
+
 # 当前研究检查点 — Run242（2026-11-01）
 
 **基准远端main：** 475cbf3598286ce4d57068dd876191ad88329684。Run241单次共享非零力矩脉冲严格保证指定两点后验纤维的15拍安全及10/15拍模式微小可靠上界收益；Run242检查原脉冲原样重复是否可作终端稳定策略。对固定n∈{5,10,15}零力矩等待+15拍脉冲的宏周期，允许的无噪无扰特例下，精确Fraction得到Jacobian det=1276487/1250000=1.0211896>1、判别式严格小于0，故两特征值模长均>1，非线性sin系统悬停平衡点局部不稳定。**严格排除的仅是此固定重复策略的局部稳定性，不排除其他有界RCI、模式切换或基于SMF后验速度的阻尼控制。**
