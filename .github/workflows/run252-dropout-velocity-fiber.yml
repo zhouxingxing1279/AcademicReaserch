@@ -1,0 +1,40 @@
+name: Run252 exact two-miss velocity fiber
+on:
+  pull_request:
+    paths:
+      - 'verification/check_dropout_velocity_fiber.py'
+      - 'verification/test_dropout_velocity_fiber.py'
+      - 'verification/check_velocity_indistinguishability.py'
+      - 'verification/check_four_state_shielded_smf_mpc.py'
+      - 'results/dropout_velocity_fiber_20261101/checks.json'
+      - '.github/workflows/run252-dropout-velocity-fiber.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_dropout_velocity_fiber.py'
+      - 'verification/test_dropout_velocity_fiber.py'
+      - 'results/dropout_velocity_fiber_20261101/checks.json'
+      - '.github/workflows/run252-dropout-velocity-fiber.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run focused regressions (Run249-252)
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber
+      - name: Compile, regenerate, compare exact certificate
+        run: |
+          python -m py_compile verification/check_dropout_velocity_fiber.py verification/test_dropout_velocity_fiber.py
+          cd verification
+          PYTHONPATH=. python check_dropout_velocity_fiber.py --output /tmp/run252_checks.json
+          cmp /tmp/run252_checks.json ../results/dropout_velocity_fiber_20261101/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run252-exact-certificate
+          path: results/dropout_velocity_fiber_20261101/checks.json
