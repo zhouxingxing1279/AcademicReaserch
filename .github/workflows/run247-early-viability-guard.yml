@@ -1,0 +1,50 @@
+name: Run247 two-sided early viability guard
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_early_viability_guard.py'
+      - 'verification/test_four_state_early_viability_guard.py'
+      - 'results/four_state_early_viability_guard_20261101/checks.json'
+      - '.github/workflows/run247-early-viability-guard.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_early_viability_guard.py'
+      - 'verification/test_four_state_early_viability_guard.py'
+      - '.github/workflows/run247-early-viability-guard.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-247 focused regressions and exact early viability guard
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_early_viability_guard.py verification/test_four_state_early_viability_guard.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse verification.test_four_state_posterior_damping verification.test_four_state_pulse_authority verification.test_four_state_tilt_authority verification.test_four_state_terminal_nonviability verification.test_four_state_early_viability_guard
+          python verification/check_four_state_early_viability_guard.py --root . --output /tmp/run247_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_early_viability_guard_20261101/checks.json'))
+          actual=json.load(open('/tmp/run247_certificate.json'))
+          assert expected==actual, 'Run247 exact archived certificate mismatch'
+          assert actual['run']==247
+          assert actual['earliest_rejected_prefix_tick_within_30_tick_guard_scan']==26
+          assert actual['unavoidable_violation_by_tick']==46
+          assert F(actual['strict_velocity_upper_bound_at_tick46'])<-3
+          assert F(actual['strict_negative_violation_margin_m_s'])>0
+          assert not actual['recursive_feasibility_proved']
+          print('Run247 exact two-sided necessary viability guard matches archive')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run247-exact-early-viability-guard
+          path: /tmp/run247_certificate.json

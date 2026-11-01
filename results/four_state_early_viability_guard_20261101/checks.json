@@ -1,0 +1,38 @@
+{
+  "adverse_prefix_and_future_disturbance": "r=-R every tick",
+  "base_run": 246,
+  "earliest_rejected_prefix_tick_within_30_tick_guard_scan": 26,
+  "evidence": "EXACT_RATIONAL_TWO_SIDED_NECESSARY_VIABILITY_GUARD",
+  "future_horizon_ticks": 20,
+  "gate_A": "blocked",
+  "guard_is_sufficient_for_viability": false,
+  "guard_on_outer_SMF_can_prove_true_posterior_infeasible": false,
+  "hover_13tick_necessary_velocity_interval": [
+    "-781909140769619646037/305175781250000000000",
+    "781909140769619646037/305175781250000000000"
+  ],
+  "initial_corner": [
+    "-1/50",
+    "-1/10",
+    "-1/200",
+    "-1/100"
+  ],
+  "model": "frozen 4-state Euler, fixed T, |tau|<=U, |r|<=R",
+  "necessary_velocity_ceiling_at_tick26": "2106234729865954356341131/625000000000000000000000",
+  "necessary_velocity_floor_at_tick26": "-1057884448735920931915627/625000000000000000000000",
+  "no_rejection_before_tick26_under_this_finite_guard_scan": true,
+  "no_rejection_implies_viability": false,
+  "prefix_control": "Run245 +U*12, -U*12, zero*6",
+  "recursive_feasibility_proved": false,
+  "run": 247,
+  "shared_causal_feedback_synthesized": false,
+  "strict_negative_violation_margin_m_s": "219589412806987179833/25000000000000000000000",
+  "strict_velocity_upper_bound_at_tick46": "-75219589412806987179833/25000000000000000000000",
+  "tick26_omega_exact": "-1/100",
+  "tick26_phi_exact": "1101/5000",
+  "tick26_velocity_enclosure": [
+    "-212675613647853505830201/125000000000000000000000",
+    "-265843546014023902852863/156250000000000000000000"
+  ],
+  "unavoidable_violation_by_tick": 46
+}
