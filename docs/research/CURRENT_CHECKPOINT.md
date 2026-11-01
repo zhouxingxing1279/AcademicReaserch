@@ -1,3 +1,13 @@
+## Run237 当前检查点（2026-11-01）
+
+**基准main：** a51a657de081c7b49884569fd02b87326c93126d。Run235固定推力全状态反馈有限4000生成元F仍严格RPI，但Run237以精确Fraction计算F的支持函数，找到方向l=(13939/100000,55667/100000,-252917/100000,-1)；对Run236相同观测的x±=(0,±hD,0,0)，分别选合法r=±R，若两个实际后继都属于F，前者要求共享tau>0.0181 Nm，后者要求tau< -0.0181 Nm。严格矛盾，证明**指定两状态SMF后验纤维对原F不存在共享一步终端力矩**，强于Run236的“原K不可测”结论；不排除其他输出反馈终端集合/动态策略。
+
+**工件：** verification/check_four_state_shared_successor.py、8项测试、results/four_state_shared_successor_20261101/checks.json、.github/workflows/run237-shared-successor.yml、docs/research/run237_research_log.md。隔离最小镜像7/8通过、1项缺完整checkout跳过，GitHub CI待核实。Qiu等(2020)公开原文§2–4分节阅读，去重91篇不变。**Gate A=blocked**，尚无四状态SMF+MPC递归可行、稳定、六状态安全或20ms最坏时延保证。
+
+**下一轮唯一任务：** 构造允许估计误差/观测历史进入终端状态的共享因果备份律及终端集合，首先对Run236两状态纤维给出严格一步可行见证，再追求递归闭合。
+
+---
+
 **Run236合并与完整checkout验证（2026-11-01）：** PR #41 https://github.com/zhouxingxing1279/AcademicReaserch/pull/41 已安全Squash合并到main 7afc3a60e663fd7640fc7e6eb60bb7d8c4643744；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279295891 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41279361402 均success。Python 3.13.17完整checkout Run224–236共94/94项聚焦测试通过、无跳过，真实配置、编译、精确有理数及归档JSON逐字比对成功；新增源码/测试/JSON Blob已重新读取核验。**证据补记不改变算法，未单独触发CI；未执行全仓库历史回归，Gate A仍blocked。**
 
 ---

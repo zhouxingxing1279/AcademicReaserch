@@ -1,0 +1,36 @@
+{
+  "D": "1742383/800000",
+  "R": "3246383/1600000",
+  "disturbances": [
+    "+R",
+    "-R"
+  ],
+  "evidence": "EXACT_RATIONAL_SUPPORT_SEPARATION",
+  "finite_generators": 4000,
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "h": "1/50",
+  "limitations": [
+    "Only this two-state posterior fiber, not every SMF posterior",
+    "Does not refute the full-state F invariance proof",
+    "Does not establish four-state output-feedback MPC feasibility or impossibility"
+  ],
+  "negative_fiber_requires": "tau < -0.0181 Nm",
+  "normal": [
+    "13939/100000",
+    "55667/100000",
+    "-252917/100000",
+    "-1"
+  ],
+  "positive_fiber_requires": "tau > 0.0181 Nm",
+  "positive_successor_projection_rounded": "0.046959295",
+  "run": 237,
+  "scope": "Run235 fixed-thrust frozen four-state Euler, initial Run236 two-state observation fiber",
+  "shared_torque_feasible": false,
+  "states": [
+    "(0,+hD,0,0)",
+    "(0,-hD,0,0)"
+  ],
+  "strict_gap_lower": "181/10000",
+  "support_upper_rounded": "0.028770186",
+  "thrust": "981/100"
+}
