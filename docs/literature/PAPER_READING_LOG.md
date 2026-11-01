@@ -1,3 +1,19 @@
+## 背景模型选型第2轮 — Xue等（2024）有噪全运动学输出的分层随机MPC（2026-11-01；首次分节已读，去重94→95篇）
+
+**题名：** *Output feedback stochastic MPC for tracking control of quadrotors with disturbances*。**作者：** Ruochen Xue; Li Dai; Peizhan Wang; Zhongqi Sun; Yuanqing Xia。**出版：** *IET Control Theory & Applications* 18(5):566–580 (2024)，线上首发2023-10-18，正式卷期2024-03-11。**DOI/原文：** https://doi.org/10.1049/cth2.12588 ; https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/cth2.12588 。**阅读日期/状态：** 2026-11-01；期刊开放正文§2.1–2.3式(2.1)–(2.15)/Assumption 1–2、§3.1–3.4（Theorems 1–2、Problem 1、Algorithm 1）、§4（Theorems 3–4/ESO）、§5–6仿真/局限**分节已读**；未复现推导与仿真，不标全文逐式核验。
+
+**研究问题：** 四旋翼在有噪测量、随机阵风、姿态跟踪误差和机会约束下的轨迹跟踪。**实际模型/控制输入：** 平移6状态 `xi_s=(xp,xv,yp,yv,zp,zv)` 加Dryden风滤波3状态 `xi_w`，外环MPC增广9状态 `x=(xi_s,xi_w)`，输入 `u=(ux,uy,uz)` 是三轴虚拟惯性加速度，由总推力和姿态角映射（式2.4、3.42）；内环3个二阶姿态通道用ADRC和三阶ESO，并非9状态统一MPC。**实际量测：** 式(2.3) `C_xi=I6`、式(2.11) `C=[I6,0]`，故每拍可得到带噪的三轴**位置和速度**，仅风状态隐藏；**没有位置-only/有界丢包**。状态估计为Luenberger observer，**不是SMF状态后验或参数SMF**。
+
+**关键假设/定理：** Assumption 1噪声已知、独立、紧支撑分布；`A-LCA` 与 `A+BK` Schur。Theorem 1用概率分位数及最坏支持构造机会约束充分收紧，Problem 1引入近似最大允许终端集以支持shift递归可行；Theorem 2给出期望时间平均二次成本上界，不是逐路径硬安全/零误差渐近稳定。内环Theorems 3–4需扰动及导数有界、观测器和控制带宽满足条件。原文Assumption 1“Gaussian且紧支撑”文字与普通高斯性质冲突，§5实际使用截断高斯，应按截断分布理解而不能无条件搬用。
+
+**主要结论/实验：** §5 MATLAB/YALMIP/SeDuMi仿真、外环 `Ts=0.05s`、内环 `Tsr=0.01s`、MPC `Tp=7`、100组噪声；机会约束概率阈值0.8，数值违约率低于20%。**局限：** 非本项目对抗扰动硬约束、位置每5拍success/miss、隐藏速度关联SMF；虚拟加速度约束不等于真实旋翼 `(T,tau)` 可行域；没有20ms WCET、实飞或完整物理输入硬安全证书。
+
+**与本课题关联/可复用技术：** 已有“四旋翼+输出反馈+MPC”直接近邻，不能以术语组合主张创新。可复用：分层外环/内环接口、observer-error与控制误差耦合、shift-compatible终端及扰动收紧的证明结构；必须重新构造位置-only间歇观测的SMF/CZ和共享因果控制，明确内环误差集合与执行器约束。**待查问题：** 是否有论文在真实位置-only/丢包量测下给出四旋翼输出反馈鲁棒MPC硬约束递归安全；六状态平面系统是否能构造非空信息状态可生存核？
+
+**本轮工件：** [模型证据矩阵](../research/model_selection/MODEL_SELECTION_EVIDENCE.md)、[独立背景日志](../research/model_selection/background_run_20261101_1136_xue_output.md)。只做正文证据与静态模型对照，未增加控制验证脚本。
+
+---
+
 ## Run248 — Yang/Ozay (2021) 间歇量测安全综合分节重读（2026-11-01；已读去重94篇不变）
 
 **题名：** *Safety Control Synthesis for Systems with Missing Measurements*。**作者：** Liren Yang; Necmiye Ozay。**出版：** 2021，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；**公开全文：** https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/状态：** 2026-11-01，重新阅读§3 Assumption 1/Problem 1、§4.1–4.4 string automaton、因果承诺、Proposition 4–5；历史已读，本轮**重读而非新增**，统一去重总数仍94篇（含背景任务Sasfi 2023）。
