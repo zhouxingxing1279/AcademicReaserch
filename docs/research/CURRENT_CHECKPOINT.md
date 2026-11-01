@@ -1,3 +1,7 @@
+**Run249完整checkout与安全合并核验（2026-11-01 UTC）：** 研究PR #70 https://github.com/zhouxingxing1279/AcademicReaserch/pull/70 基于main `c00e7c70557159811bd09862ce9ef2d54354e2e3`，合并前compare ahead=7/behind=0、mergeable_state=clean，预期head=`60748cd92f41205c22c24e09fe85a351ce578397`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345024930 为**completed/success**，Python 3.13完整checkout Run224–249聚焦**233/233测试通过、无跳过**（64.267s），真实配置、归档JSON逐字核验与artifact上传成功。通过非强制squash合并至main `ce1ec02602270521963d00f408ccae873913bbd6`，重新读取main SHA、PR merged状态及新增源码/测试/证书Blob确认落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41345183186 **completed/success**，完整checkout再次**233/233通过、无跳过**（84.508s），归档一致与artifact上传成功。该补记仅更新文档，未改变算法或验证证书；仍无无限时域输出反馈递归可行性、六状态安全或20ms最坏耗时认证。
+
+---
+
 # 当前研究检查点 — Run249（2026-11-01；CI与合并须另行核验）
 
 **基准main：** `c00e7c70557159811bd09862ce9ef2d54354e2e3`，含Run248与模型选型PR #69。**新增真实闭环：** 四状态固定T=9.81的冻结Euler子系统，55拍（1.1秒）固定绝对截止时域的SMF后验→三步网格MPC→首拍+全零尾鲁棒安全过滤→plant→有噪位置success/miss及每拍姿态测量更新。控制不读取隐藏速度/未来包；全区间用Fraction、正弦Taylor包络与向外网格舍入。精确全初始盒零力矩55拍安全（|p|<=1.3849438439m、|v|<=2.4441121266m/s）；首拍通过零尾检验后，任何合法测量后验都包含于预测集合，零尾剩余时域仍可行，因此证明**仅至绝对第55拍的因果硬约束满足和有限截止时间可行性**，不是无限递归可行/终端不变/稳定。
