@@ -1,3 +1,21 @@
+## 背景模型选型任务：Sasfi/Zeilinger/Köhler (2023) 六状态平面四旋翼与参数SMF（2026-11-01；首次核验正文分节阅读，去重93→94篇）
+
+**题名：** *Robust adaptive MPC using control contraction metrics*。**作者：** András Sasfi; Melanie N. Zeilinger; Johannes Köhler。**年份/出版：** 2023，*Automatica* 155:111169。**DOI：** https://doi.org/10.1016/j.automatica.2023.111169 。**arXiv：** https://arxiv.org/abs/2209.11713 （v2，2023-07-11）；**公开全文：** https://arxiv.org/html/2209.11713v2 。
+
+**阅读日期与核验状态：** 2026-11-01；实际核对公开作者稿§2.1、§3.1（Assumption 1）、§3.2（Theorem 6）、§3.3（Proposition 7）、§3.4（Assumption 10）、§3.5（Theorem 12）、§4数值案例及动力学/约束/实现。标记**分节已读**，不是附录或期刊终版全文逐式核验。历史`READ_PAPERS.md`及本日志旧节仅有该论文的简短书目/方法关联，未有可核验的实际分节阅读记录；本轮按DOI去重后新增1篇阅读证据，既有书目不另计。
+
+**研究问题：** 连续时间非线性系统有界加性扰动与未知固定参数下，如何在鲁棒状态/输入约束下使用在线参数更新降低Tube MPC保守性？**实际模型：** §4平面四旋翼六状态 `x=(p1,p2,phi,v1_body,v2_body,omega)`；p为惯性系位置、v为**机体系速度**；控制输入为两旋翼推力`u=(u1,u2)`，合推力与力矩由`u1+u2`、`l(u1-u2)`得到。**量测/失测：** §2.1与§3.3假设完整状态与输入精确可测、状态导数有界噪声；没有位置包丢失模型。**SMF类型：** 仅用有界导数噪声和模型方程对未知常参数`theta=1/m`构造非否证集合并交集更新`Theta_t`（式14）；**不是**对隐藏速度的状态后验SMF。
+
+**不确定性与硬约束：** §4`theta=1/m`初始相对不确定性±1%、`d∈[-0.1,0.1]`；`|phi|≤pi/3`、`|omega|≤pi`、`|v1|≤2`、`|v2|≤1`、`u_i∈[-1,3.5]`及避障；负推力数学下限不可未经执行器解释直接用于真实旋翼。**方法：** CCM合成增量反馈与homothetic tube（Theorem 6），多面体参数SMF（Proposition 7），联合优化名义参数、名义轨迹及tube尺度的RAMPC（式18）。**关键定理/假设：** Assumption 1要求约束域上存在CCM；Assumption 10要求终端正不变、约束与下降及对参数/管束收缩单调性；Theorem 12在上述条件及初始MPC可行时证明递归可行、连续模型硬约束满足和**名义轨迹**趋近参考邻域/参考（具体以定理为准），不保证本项目的有噪输出反馈递归安全。
+
+**主要结论与实验：** §4六状态平面四旋翼仿真展示参数SMF更新可减少tube保守性、改变避障路径；RK4、Ts=150ms、N=25（3.75s）、MATLAB/CasADi/IPOPT、笔记本仿真；文中采样点数值施加约束，不是实飞或20ms WCET。**局限：** 需要全状态反馈、CCM存在、终端集合及较小扰动；其风扰±0.1与本仓库在T=9.81N处水平约±2.029、垂向约±3.079的残差界相差很大，不能直接移植可行性结论；其机体系速度不同于仓库惯性系速度。
+
+**与课题关联：** 文献证明六状态平面四旋翼是严肃的鲁棒MPC模型候选，也提醒“SMF+Tube MPC+平面四旋翼”不是可单独主张的新颖组合。可复用：CCM/tube随状态与参数变化的设计思路、参数集合嵌套与终端单调性条件；若本课题保留有噪位置/失测，则需**另外**构造状态SMF及同观测纤维共享控制。**待查问题：** 现有六状态配置的双向扰动下是否有非空信息状态可生存核？是否能用简单固定截面Tube代替复杂CCM？位置缺测时怎样把Theorem 12的真实状态初始化条件替换为集合条件？
+
+**本轮独立证据：** [模型选型矩阵](../research/model_selection/MODEL_SELECTION_EVIDENCE.md)；[背景研究日志](../research/model_selection/background_run_20261101_1036_sasfi.md)。未修改主任务控制算法或宣称已认证六状态闭环。
+
+---
+
 ## Run247 间歇量测安全过滤与定时CBF新论文（2026-11-01；新增分节已读1篇，去重92→93篇）
 
 **题名：** *Robust Safety-Critical Control for Systems with Sporadic Measurements and Dwell Time Constraints*。**作者：** Joseph Breeden; Luca Zaccarian; Dimitra Panagou。**年份/出版：** 2024，arXiv预印本v3（2024-06-04），arXiv:2403.03663；公开正文 https://arxiv.org/html/2403.03663v3 ；摘要与版本 https://arxiv.org/abs/2403.03663 ；arXiv DOI https://doi.org/10.48550/arXiv.2403.03663 。未独立核验正式期刊版本，暂不填写期刊DOI。**阅读日期/状态：** 2026-11-01，实际分节阅读§II-C Rule 4、Lemma 1与Assumption 2、§III Theorem 1、§IV Lemma 3/Definition 2/Theorem 2、§V案例；**分节已读，非全文逐式精读**。**研究问题：** 在扰动、稀疏量测及执行器/量测间隔约束下，如何使真实系统始终满足安全集合。**方法/模型：** 连续时间/混合动力学，open-loop observer及误差半径上界，impulsive/continuous actuator两类robust timed control barrier functions（RIT-CBF/RT-CBF）；非四旋翼，算例为卫星交会和轨道保持。**重要假设/定理：** Rule 4每次量测提供带已知误差界的状态估计及下次量测时间界；Assumption 2要求新估计球包含于预测球；Lemma 1/3给出误差包含，Theorem 1/2在CBF可行及相关正则/时序条件下证明安全集合正向不变；不是本项目的离散有噪位置success/miss假设。**主要结论：** 通过控制时机和估计误差预测界联合构造安全过滤条件，满足相应CBF条件可得到严格安全保证。**局限：** 需要可验证的CBF存在性、误差增长界及量测时序；未解决本项目四状态非线性Euler、位置SMF后验与随机/对抗丢包的共享控制前驱。**与本课题关联：** Run247的双向速度可生存必要guard说明仅检查当前状态硬约束不足，且在第25拍位置包可能缺失时需要预测未来安全；与该文的timed uncertainty tube思想相容但不等价。**可复用技术：** 量测之间的误差半径预测、定时安全过滤器结构、CBF存在性与在线可行性条件的分离。**待查问题：** 能否把当前Fraction必要guard提升为带精确关联SMF后验的充分控制前驱，并在5拍success/miss自动机上闭合；是否存在满足该文CBF正则条件的非空安全域？
