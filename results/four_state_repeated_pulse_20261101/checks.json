@@ -1,0 +1,82 @@
+{
+  "alpha": "8829/62500",
+  "arbitrary_causal_controller_ruled_out": false,
+  "base_run": 241,
+  "beta": "26487/1250000",
+  "conclusion": "Noiseless disturbance-free repeated fixed n-zero-ticks plus Run241 pulse is locally unstable at hover; not a stabilizing terminal backup",
+  "determinant": "1276487/1250000",
+  "determinant_minus_one": "26487/1250000",
+  "evidence": "EXACT_RATIONAL_JACOBIAN_LOCAL_INSTABILITY_CERTIFICATE",
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "limitations": [
+    "Only this unmodified repeated fixed macrocycle, not arbitrary switching/measurement-conditioned strategies",
+    "Local instability does not rule out a bounded non-attractive invariant set",
+    "Disturbances/noise set to zero only for a valid necessary stability test",
+    "No general SMF posterior, MPC optimizer, terminal set, or six-state certificate"
+  ],
+  "modes": [
+    {
+      "both_eigenvalues_outside_unit_circle": true,
+      "complex_pair_modulus_squared": "1276487/1250000",
+      "determinant": "1276487/1250000",
+      "discriminant": "-14048448759/62500000000",
+      "jacobian": [
+        [
+          "1223513/1250000",
+          "4973513/12500000"
+        ],
+        [
+          "-8829/62500",
+          "616171/625000"
+        ]
+      ],
+      "macrocycle_ticks": 20,
+      "pre_pulse_zero_ticks": 5,
+      "trace": "491171/250000"
+    },
+    {
+      "both_eigenvalues_outside_unit_circle": true,
+      "complex_pair_modulus_squared": "1276487/1250000",
+      "determinant": "1276487/1250000",
+      "discriminant": "-437630389191/1562500000000",
+      "jacobian": [
+        [
+          "1223513/1250000",
+          "3098513/6250000"
+        ],
+        [
+          "-8829/62500",
+          "303671/312500"
+        ]
+      ],
+      "macrocycle_ticks": 25,
+      "pre_pulse_zero_ticks": 10,
+      "trace": "2438197/1250000"
+    },
+    {
+      "both_eigenvalues_outside_unit_circle": true,
+      "complex_pair_modulus_squared": "1276487/1250000",
+      "determinant": "1276487/1250000",
+      "discriminant": "-523425949479/1562500000000",
+      "jacobian": [
+        [
+          "1223513/1250000",
+          "7420539/12500000"
+        ],
+        [
+          "-8829/62500",
+          "598513/625000"
+        ]
+      ],
+      "macrocycle_ticks": 30,
+      "pre_pulse_zero_ticks": 15,
+      "trace": "2420539/1250000"
+    }
+  ],
+  "nonlinear_justification": "The exact sine map is C1 and has this Jacobian at hover; an eigenvalue outside the unit disk implies local instability of the fixed point",
+  "pulse_ticks": 15,
+  "recursive_invariance_ruled_out": false,
+  "run": 242,
+  "scope": "Frozen four-state Euler, fixed thrust, true angle and rate zero at each macrocycle boundary, noiseless success measurement y=p, zero process residual; fixed n in {5,10,15}",
+  "smf_mpc_closed_loop_certified": false
+}
