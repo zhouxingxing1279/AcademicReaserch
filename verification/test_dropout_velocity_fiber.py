@@ -38,6 +38,7 @@ class TwoMissVelocityFiberTests(unittest.TestCase):
         self.assertEqual(obj['dropout_word_at_position_opportunities'], 'SSSMM')
         self.assertFalse(obj['terminal_invariant_set_proved'])
         self.assertFalse(obj['recursive_feasibility_proved'])
+        self.assertIn('continuation', obj['quantifiers'])
         self.assertEqual(obj['gate_A'], 'blocked')
 
     def test_run249_constants_agree_when_available(self):
