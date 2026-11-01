@@ -1557,8 +1557,8 @@
   nominal tube，并以`X⊖Z`、`V⊖KZ`收紧约束；设计要求扰动与增益使收紧后集合非空。
 - 与本项目关系：是固定全局余项包络的直接基线，但不从在线SMF信息集生成局部未来扰动界。
 
-## Hu, Bujarbaruah, Zhang, Borrelli — Real-Time Tube MPC Applied to a 10-State Quadrotor Model
-- 年份/出处：2018, American Control Conference；全文：https://borrelli.me.berkeley.edu/pdfpub/2018_15.pdf
+## Hu, Feng, Quirynen, Villanueva, Houska — Real-Time Tube MPC Applied to a 10-State Quadrotor Model
+- **真实题名/作者/出版**：Haimin Hu, Xuhui Feng, Rien Quirynen, Mario Eduardo Villanueva, Boris Houska, *Real-Time Tube MPC Applied to a 10-State Quadrotor Model*, 2018 American Control Conference (ACC), pp.3135–3140；DOI https://doi.org/10.23919/ACC.2018.8431112；作者公开正文 https://haiminhu.org/wp-content/uploads/2018/11/2018acc_1123_fi.pdf 。**2026-11-01纠正原总账误署名**“Hu/Bujarbaruah/Zhang/Borrelli”；保留本篇历史去重身份，不新增篇数。
 - Run168精读：Theorem 1、式(8)、Lemma 1及对应证明。
 - 方法/关键结论：用椭球tube与RFIT条件处理四旋翼非线性；`Omega_n(q,Q)`必须包含tube中每个
   状态和允许扰动对应的非线性余项，Lemma 1给出tube-dependent解析外包。
@@ -1569,6 +1569,10 @@
   全量词，也无需继续传播其余14步。
 - Run170纠错：上一句的“J14要求族”只对独立残差外包成立；没有从benchmark初始集出发的
   非线性轨迹证书时，不能把外包成员称作真实plant可达，也不能据此外推物理路线不可能。
+
+- **2026-11-01背景第6轮重新核验状态：作者公开PDF第1–6页§II-A/B、§III-A–E（式(5)(7)(8)(10)、Theorem 1、Lemma 1）、§IV Table II分节已读**；未核对IEEE排版终版，不复现ACADO控制器。实际模型状态为`(p1,p2,p3,v1,v2,v3,pitch,roll,pitch_rate,roll_rate)`，10状态≠10自由度；控制为俯仰/滚转命令与垂向推力通道`(u1,u2,u3)`，`dot(v3)=-g+k_T u3`，忽略真实总推力倾斜的`T cos(phi)`耦合；外扰`w1,w2,w3`加在位置导数，而非本仓库平动加速度。论文采用当前全状态测量`xhat0`和低层`mu(t,x)`，**无位置-only有噪丢包、无状态/参数SMF/CZ**。
+- **本轮约束/定理/实验复核**：一般式(2)状态多面体；10状态算例仅墙面`x1<=4`，输入`u1,u2∈[-pi/9,pi/9]`、`u3∈[0,2g]`，扰动椭球`Qw=diag(0.01,0.09,0.25)`。Theorem 1需椭球RFIT动力学及输入/非线性余项条件，§III-C讨论终端不变椭球而**明确不证明严格闭环稳定性**。§IV为ACADO/qpOASES数值仿真，非实飞；**高层Tube MPC平均81.6ms/RTI，低层显式反馈20μs，名义MPC 159μs**；椭球OCP有65状态/35控制优化变量，未给20ms WCET。不得用低层20μs宣传高层每20ms可求解。
+- **本课题关联/可复用/待查**：可复用“对完整未来tube所有状态/扰动认证非线性余项、再验证终端RFIT”的论证结构；不能移植其垂向解耦、全状态反馈或实时性结论到仓库六状态`T cos(phi)`和位置失测SMF。与本轮垂向边界精确一步非可生存反例的关系见[背景第6轮日志](../research/model_selection/background_run_20261101_1537_vertical_hu2018.md)。待查：原六状态hover附近是否存在非空、可移位的局部信息状态安全前驱域？
 
 ## Rego, Raffo, Terra, Scott — Reachability Analysis of Nonlinear Discrete-Time Systems Using Polyhedral Relaxations and Constrained Zonotopes
 - 年份/出处：CDC 2024；作者预印本2025，arXiv:2504.11663；DOI：https://doi.org/10.1109/CDC56724.2024.10886592；全文：https://arxiv.org/abs/2504.11663
