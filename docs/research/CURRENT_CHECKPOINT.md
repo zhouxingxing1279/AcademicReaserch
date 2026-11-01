@@ -1,3 +1,7 @@
+**Run248完整checkout与合并核验（2026-11-01）：** PR #67 https://github.com/zhouxingxing1279/AcademicReaserch/pull/67 已安全squash合并，代码main SHA 671c7a5a878524fc522d17c4ccd8de3daa601016；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340127964 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41340319892 均completed/success，Python 3.13.17完整checkout Run224–248聚焦测试**222/222通过、无跳过**，真实配置、精确Fraction归档与artifact上传均成功。已重新读取main SHA、PR merged、源码与证书Blob。此补记只修改文档，不改变数学证明或算法；全仓库历史回归及SMF+MPC递归可行性、六状态安全、20ms最坏时延仍未认证。
+
+---
+
 **Run248阶段检查点（2026-11-01；合并/CI须独立核验）：** 基于main 72724f81ef10046eeb41f0ed6398695ab6533e05，发现Run245固定前缀另一合法真实初始角点(p,v,phi,omega)=(-0.02,-0.1,+0.005,+0.01)、持续r=-R下，**第14拍已严格不可生存**：phi14=0.1502、omega14=0.81，任何后续合法力矩（甚至全状态/非因果）在持续r=-R下最迟第44拍有v44<=-3.002033058421m/s，严格越界裕度>0.002033m/s；Run247原角点第26拍拒绝仍正确但不是最坏初始盒角点。数学证书 verification/check_four_state_corner_viability.py、11项测试、results/four_state_corner_viability_20261101/checks.json、日志 docs/research/run248_research_log.md。隔离Python 9通过/2缺完整仓库跳过；PR/main CI需按真实结果另行确认。Yang/Ozay(2021)§3–4重读，统一论文去重94篇不增加。**证据范围：** 只反证Run245指定前缀，有限guard首次拒绝不等于真实最早失效；无SMF后验、MPC优化、递归可行、六状态安全或20ms WCET，Gate A仍blocked。**下一轮唯一优先任务：** 把共享因果控制与关联SMF决策前移至第10拍success/miss机会，覆盖双向扰动及真实丢包自动机，先验证非空安全前缀，不能再仅在第25拍补救。
 
 ---
