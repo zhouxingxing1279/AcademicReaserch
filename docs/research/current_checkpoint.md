@@ -1,3 +1,12 @@
+# 当前研究检查点 — Run242（2026-11-01）
+
+**基准远端main：** 475cbf3598286ce4d57068dd876191ad88329684。Run241单次共享非零力矩脉冲严格保证指定两点后验纤维的15拍安全及10/15拍模式微小可靠上界收益；Run242检查原脉冲原样重复是否可作终端稳定策略。对固定n∈{5,10,15}零力矩等待+15拍脉冲的宏周期，允许的无噪无扰特例下，精确Fraction得到Jacobian det=1276487/1250000=1.0211896>1、判别式严格小于0，故两特征值模长均>1，非线性sin系统悬停平衡点局部不稳定。**严格排除的仅是此固定重复策略的局部稳定性，不排除其他有界RCI、模式切换或基于SMF后验速度的阻尼控制。**
+
+**工件：** verification/check_four_state_repeated_pulse.py、verification/test_four_state_repeated_pulse.py、results/four_state_repeated_pulse_20261101/checks.json、.github/workflows/run242-repeated-pulse.yml、docs/research/run242_research_log.md。本地Python3 9项中8通过、1项因缺完整checkout跳过；真实配置与完整聚焦CI待运行验证。论文日志定向重读Yang/Ozay(2021)与Köhler/Müller/Allgöwer(2021)，去重91篇不变。
+
+**Gate A=blocked：** 仍无一般SMF后验、四状态输出反馈Tube MPC递归可行/稳定、六状态安全及20ms最坏时延保证。**下一轮唯一任务：** 合成基于SMF后验速度信息的阻尼型共享恢复律，先证明固定宏周期Schur稳定，再认证模式相关误差管与信息状态递归闭合。
+
+---
 **Run241完整checkout与main核验（2026-11-01）：** 研究PR #51 https://github.com/zhouxingxing1279/AcademicReaserch/pull/51 已安全Squash合并至代码main `327adea4ed882bb236afde6b71ca40caacf10a88`，重新读取main SHA及源码/测试/JSON Blob确认落地。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305256384 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41305374967 均completed/success；完整checkout Python 3.13.17聚焦测试**145/145通过、无跳过**，真实配置、精确Fraction、归档JSON和artifact上传成功。全仓库历史回归、SMF-MPC递归可行性及20ms最坏时延未认证。此补记不改变算法。
 
 ---

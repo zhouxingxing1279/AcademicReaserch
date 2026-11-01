@@ -1,3 +1,12 @@
+## Run242 重复脉冲局部不稳定性与文献定向阅读（2026-11-01；去重已读仍91篇）
+
+**Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，作者全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**核验状态/日期：** 2026-11-01本轮实际重读§3、Assumption 1、§4.1–4.2，历史已读不重复计数。**研究问题：** 丢包自动机下的无限时域硬约束。**方法：** 字符串自动机与控制因果性、product safety game。**关键假设/结论：** 成功包提供无噪完整状态，有限丢包串按自动机约束，策略在缺包期间必须提前承诺控制。**局限：** 与本仓库有噪位置、持续姿态量测不同。**关联/复用：** Run242的固定重复脉冲只是允许因果策略的受限特例，不能以其失败否定一般product信息状态策略。**待查：** 可否把有噪SMF后验作为product安全游戏状态并构造非空闭合域？
+
+**Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 。**核验状态/日期：** 2026-11-01实际阅读公开正文Introduction、§III-C集合估计、§IV输出反馈MPC概述；已有历史登记，去重已读仍91篇，不声称全文逐式验证。**研究问题：** 非线性受扰系统有噪输出下鲁棒约束满足。**方法：** 在线估计误差界、可预测估计偏差、homothetic tube MPC与MHE。**重要假设/结论：** 依赖检测性/估计误差有效性及适当递归可行条件；报告10状态四旋翼算例和减少保守性。**局限：** 未直接覆盖本项目5/10/15成功/丢包模式及控制相关扰动；无法直接借用其结论当本项目证明。**关联/复用：** 下一轮将SMF后验中心与半宽引入可实现阻尼控制，分别验证估计误差界与终端移位条件。**待查：** 固定复杂度集合降阶能否保持递归可行和20ms预算？
+
+**项目独立证据：** [Run242日志](../research/run242_research_log.md)；精确Fraction Jacobian和判别式证明原样重复Run241脉冲的悬停平衡点局部不稳定，但不否定一般RCI或输出反馈控制。
+
+---
 ## Run241 观测条件化非零力矩备份与文献复核（2026-11-01；去重已读仍91篇）
 
 **Yang, Liren; Ozay, Necmiye (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，全文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读日期/核验：** 2026-11-01，核对公开摘要并对照Run240已有§3–4、Proposition 2分节笔记；本轮未重读全文，既有已读不重复计数。**研究问题：** 丢包模式下因果安全控制。**模型/方法：** 字符串自动机、product game、提前承诺的输入策略。**重要假设/结论：** 成功包提供无噪完整状态、丢包语言由自动机约束；在适当假设下将部分信息安全综合化为product全信息博弈。**局限：** 本项目只有有噪位置成功包及持续姿态测量。**关联/可复用：** Run241的一次成功包后承诺15拍非零力矩是因果策略见证，不是递归product game。**待查：** 如何在5/10/15多模式下严格证明信息状态循环闭合？

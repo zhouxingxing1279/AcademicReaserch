@@ -1,0 +1,47 @@
+name: Run242 repeated observation pulse stability obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_repeated_pulse.py'
+      - 'verification/test_four_state_repeated_pulse.py'
+      - 'results/four_state_repeated_pulse_20261101/checks.json'
+      - '.github/workflows/run242-repeated-pulse.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_repeated_pulse.py'
+      - 'verification/test_four_state_repeated_pulse.py'
+      - '.github/workflows/run242-repeated-pulse.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-242 focused tests and exact repeated pulse obstruction
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_repeated_pulse.py verification/test_four_state_repeated_pulse.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor verification.test_four_state_fiber_recovery verification.test_four_state_posterior_strip verification.test_four_state_all_observations verification.test_four_state_observation_pulse verification.test_four_state_repeated_pulse
+          python verification/check_four_state_repeated_pulse.py --root . --output /tmp/run242_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          expected=json.load(open('results/four_state_repeated_pulse_20261101/checks.json'))
+          actual=json.load(open('/tmp/run242_certificate.json'))
+          assert expected==actual, 'archived certificate mismatch'
+          assert actual['run']==242
+          assert all(F(m['determinant'])>1 and F(m['discriminant'])<0 for m in actual['modes'])
+          assert not actual['recursive_invariance_ruled_out']
+          print('Run242 exact local instability certificate matches archive')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run242-exact-repeated-pulse-obstruction
+          path: /tmp/run242_certificate.json
