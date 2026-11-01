@@ -29,3 +29,10 @@
 **Gate A=blocked。** 可行性：初步数值闭环轨迹提供可搜索的控制策略种子，但四状态非空RCI未知；创新性：LQR反馈和数值成功均属基线而非论文创新；难度：高。四状态输出反馈SMF+Tube MPC、递归可行、稳定性、六状态安全尚未建立。
 
 **下一轮唯一优先任务：** 从本轮全状态反馈轨迹提取位置—速度—姿态—角速度相关的小单元，使用Run228严格Fraction外包及正确“先控制后扰动”的量词，验证候选终端集合的全部后继闭合；如认证失败，记录可归因于控制菜单、外包保守性或真实反例的不同证据，不将数值成功误称RCI。
+
+
+## 完整checkout CI与安全合并的事后核验（2026-11-01 UTC）
+
+研究PR #35 https://github.com/zhouxingxing1279/AcademicReaserch/pull/35 以基准main 8cee19a9a937f7037cf4ba1b28f2ede8ed82b98b 创建；合并前核验ahead=2、behind=0、mergeable=true、无冲突。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41268160006 与代码合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41268193922 均为**success**；完整checkout Python 3.13.17执行Run224–233共**69/69项聚焦测试通过，无跳过**，配置合同、源码编译、数值摘要与归档JSON对照及Actions工件上传均成功。PR #35以非强制Squash合并，首个main落地SHA 52d4d02cce7d9f60fb11a25880cec714c12992f4；重新读取远端main，源码与测试Git Blob SHA分别为 db9b5ac93c044af53af793341dc8007188ca7c4b、47bda39816624c5c4e19224f998cb636e6fa0cc7，与本地已测文件完全一致。
+
+**边界不变：** 69项均为聚焦回归，未执行全仓库历史回归；7种固定扰动与128次随机实验未违约不等于RCI证明，也没有四状态输出反馈SMF+Tube MPC、递归可行、稳定性、六状态安全或20ms最坏耗时保证。本节仅补记CI证据，不修改算法。
