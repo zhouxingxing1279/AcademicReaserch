@@ -1,3 +1,17 @@
+# 当前研究检查点 — Run235（2026-11-01）
+
+**基准main：** db23aaa410a67fc929100146e12a51d8b3ebf820。冻结四状态Euler、固定T=9.81N、完整真实状态反馈K=(-.123,-.494,2.341,.933)下，Run234无限zonotope S的有限外包F现已构造：F=P_800⊕Q，Q=(1-rho)^(-1)∑_{j=0}^{799}A^j W，W=eps[-1,1]^4，eps=D||A^800 B||∞，rho=||A^800||∞<0.044224501。严格有理数证明A F⊕B[-D,D]⊆F；F有4000生成元，可用4×4000 LP判定成员资格。可靠状态绝对上界(4.36189355,2.55727183,0.37147212,0.77413543)，力矩<0.06690522Nm，均低于冻结硬约束。原非线性sin余项在F姿态范围内被D包络覆盖，故F对固定推力**全状态反馈**非线性系统RCI。
+
+**证据边界：** F有限维不等于在线高效；未实现成员资格LP求解时间评估。tau=-Kx读取真实隐藏状态，不能直接用于间歇量测SMF或输出反馈MPC，不能宣称共享因果控制、递归可行、六状态安全、稳定性或20ms保证。**Gate A仍blocked。**
+
+**测试：** 本地Python3.13最小等价配置镜像9/9测试通过，包含4000生成元支撑复核与n=400不可认证负例；完整checkout CI结果待实际验证，不能预先报成功。唯一论文日志继续91篇，Raković等2005仅复核书目/摘要与历史记录，不新增“已读”。
+
+**唯一下一轮任务：** 严格分析间歇量测同一SMF后验纤维上是否存在共享控制将后继送入F；如不可行保留反例，改用联合估计误差RPI/输出反馈终端。
+
+详见 [Run235研究日志](run235_research_log.md)。
+
+---
+
 # 当前研究检查点 — Run234（2026-10-31）
 
 **Run234合并验证补记（2026-11-01 UTC）：** 研究PR #37 https://github.com/zhouxingxing1279/AcademicReaserch/pull/37 已安全Squash合并，代码main SHA `0f4f61431b4ea226de4fe29080ba0c6009e68701`；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272122206 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41272164237 均success。完整checkout Python 3.13.17执行Run224–234共77/77项聚焦测试通过、无跳过，真实配置、编译、Fraction精确证书、JSON逐字对照与工件上传成功。重新读取远端main、源码/测试/结果Blob验证落地。**未执行全仓库历史回归；全状态固定推力四状态RCI证明不等于SMF+MPC输出反馈闭合。**

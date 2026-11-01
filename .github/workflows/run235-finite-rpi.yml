@@ -1,0 +1,47 @@
+name: Run235 finite-generator four-state RPI
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_finite_rpi.py'
+      - 'verification/test_four_state_finite_rpi.py'
+      - 'results/four_state_finite_rpi_20261101/checks.json'
+      - '.github/workflows/run235-finite-rpi.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_finite_rpi.py'
+      - 'verification/test_four_state_finite_rpi.py'
+      - '.github/workflows/run235-finite-rpi.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Exact finite RPI and Run224-235 focused regression
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_finite_rpi.py verification/test_four_state_finite_rpi.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi
+          python verification/check_four_state_finite_rpi.py --root . --output /tmp/run235_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('results/four_state_finite_rpi_20261101/checks.json'))
+          b=json.load(open('/tmp/run235_certificate.json'))
+          assert a==b and b['run']==235 and b['generator_count']==4000
+          assert F(b['rho_upper'])<1
+          assert all(F(x)<F(y) for x,y in zip(b['state_abs_upper'],b['state_limits']))
+          assert F(b['torque_abs_upper'])<F(b['torque_limit'])
+          print('Run235 finite-generator nonlinear RCI certificate verified; output-feedback gate remains blocked')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run235-finite-rational-four-state-rpi
+          path: /tmp/run235_certificate.json

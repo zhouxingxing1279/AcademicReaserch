@@ -1,0 +1,41 @@
+{
+  "block_length": 800,
+  "certificate": "EXACT_RATIONAL_FINITE_GENERATOR_NONLINEAR_RCI",
+  "disturbance_halfwidth": "1742383/800000",
+  "finite_set": "F=P_n (+) Q; P_n=sum_{j=0}^{n-1} A^j B[-D,D]; W=eps[-1,1]^4; Q=(1-rho)^-1 sum_{j=0}^{n-1} A^j W",
+  "gain": [
+    "-123/1000",
+    "-247/500",
+    "2341/1000",
+    "933/1000"
+  ],
+  "gate_A": "blocked_for_output_feedback_SMF_MPC",
+  "generator_count": 4000,
+  "limitations": [
+    "No intermittent-measurement shared-information feedback",
+    "No MPC recursive feasibility or stability proof",
+    "No six-state coupled proof or 20ms bound"
+  ],
+  "membership": "finite 4-by-4000 generator matrix: exists xi in [-1,1]^4000 with x=G xi (LP feasibility); not benchmarked online",
+  "model": "defined_discrete_euler_four_state_fixed_thrust_full_state_feedback",
+  "proof": "A^n B[-D,D] subset W; A^n W subset rho W; A Q (+) W subset Q; A F (+) B[-D,D] subset F; F subset state and torque hard bounds; nonlinear d=r+T(phi-sin(phi)) subset [-D,D].",
+  "rho_upper": "0.044224501",
+  "run": 235,
+  "state_abs_upper": [
+    "4.36189355",
+    "2.55727183",
+    "0.37147212",
+    "0.77413543"
+  ],
+  "state_limits": [
+    "5",
+    "3",
+    "9/20",
+    "2"
+  ],
+  "tail_box_halfwidth_upper": "0.0002561563",
+  "tail_scale_upper": "0.0002680089",
+  "thrust_N": "981/100",
+  "torque_abs_upper": "0.06690522",
+  "torque_limit": "2/25"
+}
