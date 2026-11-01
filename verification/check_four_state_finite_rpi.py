@@ -137,5 +137,4 @@ def main():
         args.output.write_text(s)
     else: print(s,end='')
 
-
 if __name__=='__main__': main()
