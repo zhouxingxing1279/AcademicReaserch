@@ -1,3 +1,5 @@
+**Run238完整checkout与main合并核验（2026-11-01）：** PR #45 https://github.com/zhouxingxing1279/AcademicReaserch/pull/45 已经安全Squash合并，代码main SHA `973460fe93a05e7a00a6b1c24a4c2dbd580e3740`；PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287562924 与main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287634108 均success。Python 3.13.17完整checkout Run224–238共**111/111项聚焦测试通过、无跳过**，真实配置合同、精确Fraction、JSON归档及工件上传通过。**仍未实现SMF后验更新、递归输出反馈MPC或完整历史回归**。
+
 # 当前研究检查点 — Run238（2026-11-01）
 
 **基准main：** `be3596f98686c7bde600bcade8269ca66be8616f`。Run237对原全状态RCI F的指定两状态观测纤维证明共享一步控制不可能；Run238构造**同一两状态纤维的15拍共同零力矩有限安全备份**：固定T=9.81N、tau=0，精确Fraction归纳Z_n有n+1个生成元，所有逐拍独立|r|<=2.028989375，15拍内|p|<=0.09828542625m、|v|<=0.6522563875m/s、phi=omega=0，硬约束成立；第73拍正向极端残差下速度越界，故**非无限时域终端RCI**。仅针对两点，不覆盖全先验、不进行SMF更新、无MPC或递归可行性证明。Gate A仍blocked。测试：隔离Linux本地9项中8通过、1项真实配置因无完整checkout跳过；完整checkout CI结果需实际读取后补记。去重已读91篇，Bemporad & Garulli (2000)仅摘要核验，Qiu等(2020)重读公开章节。唯一下一轮任务：在Z15与噪声观测后构造可重复闭合的共享因果恢复/收缩策略。详见 [Run238研究日志](run238_research_log.md)。

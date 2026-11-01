@@ -35,3 +35,10 @@
 - **课题评估：** 有限时间共享控制可行性得到正向见证；长期可行性仍被Gate A阻塞。该初等备份无独立创新性，技术难点是从`Z_15`设计模式依赖的估计误差/信息状态递归恢复；不应将本轮结果包装成完整硕士创新。
 
 **下一轮唯一优先任务：** 在15拍观测间隔末端，针对包含位置—速度相关性的 `Z_15` 和有噪位置/姿态观测，构造并验证一个不读取隐藏速度的恢复/收缩策略及可重复闭合的信息状态终端候选；若无法闭合，给出可验证反例并收缩课题安全主张。
+
+
+## 5. 完整checkout、PR与main的实际验证（2026-11-01）
+
+研究PR #45 https://github.com/zhouxingxing1279/AcademicReaserch/pull/45 已在main未并发变化、compare ahead=1/behind=0、mergeable=true及expected head SHA `4c92e4f16bbc4ff825ebeac03d81aaf8a6205501` 校验后通过**非强制Squash合并**。合并代码main SHA `973460fe93a05e7a00a6b1c24a4c2dbd580e3740`，已重新读取远端main及源码/JSON Blob核验落地。
+
+PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287562924 与合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41287634108 均为completed/success。GitHub Actions Python 3.13.17完整checkout执行Run224–238共**111/111项聚焦测试通过、无跳过**，真实配置合同、精确Fraction归纳、归档JSON逐字比对和工件上传成功。PR日志报告Ran 111 tests in 28.600s / OK，main日志报告Ran 111 tests in 19.271s / OK。**不是全仓库历史回归**，没有SMF-MPC递归可行性或20ms最坏时延认证。后续此文档补记不单独触发CI。
