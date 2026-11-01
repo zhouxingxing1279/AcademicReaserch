@@ -1,3 +1,11 @@
+## Run239 当前检查点（2026-11-01）
+
+**基准main：** f40c17e4833f6186c4e44b67b552c1a1e70f9e5e。Run238指定两状态纤维15拍可达zonotope与本轮配置核验一致。本轮在15拍成功有噪位置观测y_px=0、|n_px|≤0.02m条件下，按初始速度正负两分支建立精确CZ测量交，使用Fraction原始/对偶支持证书得到速度后验半宽353411321/960000000≈0.36813679m/s，相对先验0.6522563875m/s收紧约43.56%；若y=先验最大位置，速度上界不收缩，故**无统一观测收缩率**。该条件后验下再零力矩15拍的严格安全盒为|p|≤0.215659m、|v|≤0.976834m/s；**不是终端不变集、全先验SMF或MPC递归可行证明**。源码、10项测试、JSON、CI及日志见Run239研究记录；CI及远端合并状态须单独核验。Gate A仍blocked。
+
+**下一轮唯一任务：** 对所有可达位置观测和5/10/15拍模式建立统一SMF后验及共享控制可行性判据，首先审计最坏观测分支。
+
+---
+
 **Run237完整checkout CI与合并核验（2026-11-01）：** PR #43 https://github.com/zhouxingxing1279/AcademicReaserch/pull/43 已非强制Squash合并到main `12213e80725935931c1fb5578b19450bb01ef270`，重新读取main及验证器Blob核验。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283529172 和main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41283612955 均success。Python 3.13.17完整checkout Run224–237聚焦测试**102/102通过、无跳过**，真实配置、精确支持证书、JSON归档比对及artifact上传成功。文档补记不改变算法，未单独触发CI；全仓库历史回归、SMF-MPC闭环和20ms最坏时间仍未认证。
 
 ---
