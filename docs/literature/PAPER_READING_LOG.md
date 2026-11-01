@@ -1,3 +1,13 @@
+## Run237 原文分节复核与共享后继判定（2026-11-01；去重已读仍91篇）
+
+**题名：** *Output feedback model predictive control based on set-membership state estimation*。**作者/年份/出版：** Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad (2020), *IET Control Theory & Applications* 14(4):558–567, DOI https://doi.org/10.1049/iet-cta.2019.0881 。**核验状态与阅读日期：** 2026-11-01，出版社公开正文§2、§3.1–3.4、§4及结论的分节阅读；网页公式大量为图片，**没有逐式重建或核对全部LMI**。已在历史文献索引登记，本轮不重复增加去重篇数。
+
+**研究问题：** 有界过程/观测扰动、状态不可直接测量时如何同时保证MPC约束与状态估计包含。**模型/方法：** 线性离散系统，椭球SMF预测+测量更新，估计集合参与minimax MPC，以S-procedure/Schur补和LMI/SDP处理约束，终端鲁棒正不变椭球。**重要定理/假设：** §2 Assumptions 1–2要求噪声与初始状态由已知椭球包围；§3 Theorem 1为递推估计包含的充分LMI条件；§4终端约束及初始可行是稳定/可行分析的重要条件（公式图片未逐式核实）。**主要结论：** 提出SMF+MPC统一设计及数值/电源变换器例子。**局限：** 椭球外包可能保守，SDP计算开销未达到本项目20ms认证，且不直接适用非线性sin、连续位置丢包和控制依赖扰动。**与本课题关联/可复用：** 信息状态集合而非单点估计必须进入终端控制；Run237严格证明原4000生成元F不适用于一个合法共享观测纤维。**待查：** 能否构造含估计误差/观测历史的非空输出反馈终端RPI与递归可行性证书？
+
+**本轮项目自有证据：** [Run237研究日志](../research/run237_research_log.md)。严格支持超平面反例独立推导，不冒充Qiu等文献定理。
+
+---
+
 ## Run236 文献核验与共享控制信息权限（2026-11-01；去重已读仍91篇）
 
 **Mayne, Raković, Findeisen, Allgöwer (2006)**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222，DOI https://doi.org/10.1016/j.automatica.2006.03.005 。**本轮阅读/核验层级：** 2026-11-01，重新核对DBLP书目及公开摘要，并对照Run221已经阅读的§2–4、Propositions 1–3、Theorems 1–2笔记；本轮没有重新取得全文，不能声称重新逐条核对定理。**研究问题：** 有界过程与输出扰动下约束线性系统的输出反馈鲁棒MPC。**模型/方法：** Luenberger估计器、估计误差RPI、固定截面tube、名义MPC约束收紧。**重要假设/结论：** 需要估计误差包含、稳定误差系统、终端不变/下降与初始可行条件，方可保证约束与稳定性；不能从状态反馈RPI直接推导输出反馈。**局限：** 不覆盖本仓库连续丢包至15拍、非线性sin余项与控制依赖气动残差。**本课题关联/可复用：** Run236用同一后验观测纤维的两个真值证明Run235全状态律不可直接执行；下一步应研究联合估计/跟踪误差RPI或共享因果终端律。**待查：** 15模式观测图下能否得到可证明的模式条件化误差管并实现终端移位？书目 https://dblp.org/rec/journals/automatica/MayneRFA06.html 。

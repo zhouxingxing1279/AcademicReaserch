@@ -1,0 +1,46 @@
+name: Run237 four-state shared successor support separation
+on:
+  pull_request:
+    paths:
+      - 'verification/check_four_state_shared_successor.py'
+      - 'verification/test_four_state_shared_successor.py'
+      - 'results/four_state_shared_successor_20261101/checks.json'
+      - '.github/workflows/run237-shared-successor.yml'
+      - 'configs/planar_baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_four_state_shared_successor.py'
+      - 'verification/test_four_state_shared_successor.py'
+      - '.github/workflows/run237-shared-successor.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run224-237 focused regression and exact support certificate
+        env:
+          PYTHONPATH: verification
+        run: |
+          python -V
+          python -m py_compile verification/check_four_state_shared_successor.py verification/test_four_state_shared_successor.py
+          python -m unittest -v verification.test_four_state_one_step_predecessor verification.test_four_state_two_step_predecessor verification.test_four_state_three_step_predecessor verification.test_four_state_terminal_bridge verification.test_four_state_bridge_graph verification.test_four_state_bridge_branching verification.test_four_state_position_guard verification.test_four_state_cell_position_guard verification.test_four_state_bridge_multistep_obstruction verification.test_four_state_feedback_seed verification.test_four_state_rpi_zonotope verification.test_four_state_finite_rpi verification.test_four_state_shared_torque verification.test_four_state_shared_successor
+          python verification/check_four_state_shared_successor.py --root . --output /tmp/run237_certificate.json
+          diff -u results/four_state_shared_successor_20261101/checks.json /tmp/run237_certificate.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          a=json.load(open('/tmp/run237_certificate.json'))
+          assert a['run']==237 and F(a['strict_gap_lower'])==F(181,10000)
+          assert not a['shared_torque_feasible']
+          assert a['gate_A']=='blocked_for_output_feedback_SMF_MPC'
+          print('Run237 exact shared-torque infeasibility on specified fiber verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run237-shared-successor-exact-certificate
+          path: /tmp/run237_certificate.json
