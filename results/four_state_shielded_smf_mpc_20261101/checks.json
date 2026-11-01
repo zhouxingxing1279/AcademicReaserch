@@ -1,0 +1,33 @@
+{
+  "controller": "3-step grid MPC nominal objective; robust first-action+zero-tail safety filter",
+  "deadline_s": "11/10",
+  "deadline_ticks": 55,
+  "evidence": "EXACT_OUTWARD_RATIONAL_FINITE_DEADLINE_GUARDED_OUTPUT_FEEDBACK_SIMULATION",
+  "first_tick_safe_action_count": 3,
+  "gate_A": "blocked",
+  "general_smf_cz_recursive_mpc": false,
+  "model": "frozen four-state Euler, fixed T, bounded independent lateral residual",
+  "mpc_mean_rmse_p": 0.09203260174766174,
+  "mpc_nonzero_actions": 94,
+  "replay_episodes": 24,
+  "replay_smf_contained_components": 5280,
+  "replay_total_steps": 1320,
+  "replay_violations": 0,
+  "run": 249,
+  "safe_zero_backup_all_initial_box": true,
+  "safety_claim": "all initial states, all bounded residuals and noise-consistent observations and legal dropout words, up to fixed deadline; mathematical induction, not sampled trajectories",
+  "safety_proof_level": "finite-deadline conditional on model and sound outward rounding",
+  "six_state_guarantee": false,
+  "smf_update": "prediction, always observed noisy angle/rate, success-only noisy position; interval overapprox",
+  "terminal_invariant_set": false,
+  "timing_measurement": "wallclock measured separately; not included in deterministic rational/simulation certificate",
+  "wcet_20ms": false,
+  "worst_replay_max_abs_v": 0.4782718675808243,
+  "zero_backup_max_abs": {
+    "omega": "1/100",
+    "p": "13849438439/10000000000",
+    "phi": "2/125",
+    "v": "12220560633/5000000000"
+  },
+  "zero_mean_rmse_p": 0.0970092269885226
+}
