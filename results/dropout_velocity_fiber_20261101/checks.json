@@ -1,0 +1,49 @@
+{
+  "assumptions": "frozen fixed-thrust four-state Euler, independent lateral residual, no extra velocity/IMU measurement",
+  "basis": "Run251 same initial state and common successful position observations at ticks 5/10/15",
+  "bounds": [
+    {
+      "necessary_velocity_diameter_m_s": "42202979/80000000",
+      "necessary_velocity_halfwidth_m_s": "42202979/160000000",
+      "tick": 15,
+      "universal_true_state_abs_envelope": {
+        "omega": "0",
+        "p": "0",
+        "phi": "0",
+        "v": "42202979/160000000"
+      }
+    },
+    {
+      "necessary_velocity_diameter_m_s": "74666809/80000000",
+      "necessary_velocity_halfwidth_m_s": "74666809/160000000",
+      "tick": 20,
+      "universal_true_state_abs_envelope": {
+        "omega": "2/5",
+        "p": "276193691/8000000000",
+        "phi": "2/125",
+        "v": "75169081/160000000"
+      }
+    },
+    {
+      "necessary_velocity_diameter_m_s": "107130639/80000000",
+      "necessary_velocity_halfwidth_m_s": "107130639/160000000",
+      "tick": 25,
+      "universal_true_state_abs_envelope": {
+        "omega": "4/5",
+        "p": "181187993/2000000000",
+        "phi": "9/125",
+        "v": "113157903/160000000"
+      }
+    }
+  ],
+  "dropout_word_at_position_opportunities": "SSSMM",
+  "evidence": "EXACT_RATIONAL_CAUSAL_TWO_MISS_VELOCITY_DIAMETER_NECESSARY_BOUND",
+  "gate_A": "blocked",
+  "limitation": "one admissible observation history and loss word, not a uniform lower bound for all SMF posteriors; does not disprove existence of safe feedback",
+  "quantifiers": "after the specific Run251 zero-torque prefix, for every causal admissible torque continuation choose two legal residual sequences and identical available noisy observations",
+  "recursive_feasibility_proved": false,
+  "run": 252,
+  "safety_scope": "both adversarial paths remain within all state bounds through tick25 for any shared admissible torque continuation after tick15",
+  "terminal_invariant_set_proved": false,
+  "witness": "two physical paths; common angular measurements at every tick; no position measurement at 20/25"
+}
