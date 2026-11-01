@@ -1,0 +1,43 @@
+{
+  "base_run": 249,
+  "evidence": "EXACT_RATIONAL_SHARP_UNIFORM_ZERO_BACKUP_HORIZON",
+  "full_information_viability_of_tick55_corner_unknown": true,
+  "gate_A": "blocked",
+  "general_recursive_feasibility_proved": false,
+  "model": "frozen four-state Euler, fixed T=9.81N, |r|<=R, tau=0",
+  "no_other_policy_impossibility_claim": true,
+  "run": 250,
+  "run249_original_deadline_tick": 55,
+  "run249_zero_backup_terminal_not_repeatable_for_55_more_ticks": true,
+  "smf_terminal_invariance_proved": false,
+  "strict_velocity_violation_margin_lower_bound_m_s": "6207001/400000000",
+  "true_adverse_disturbance": "r=-R for ticks 0..67",
+  "true_control": "tau=0 for ticks 0..67",
+  "true_initial_corner": [
+    "-1/50",
+    "-1/10",
+    "1/200",
+    "1/100"
+  ],
+  "true_tick68_pitch_exact": "93/5000",
+  "true_tick68_rate_exact": "1/100",
+  "true_tick68_velocity_enclosure": [
+    "-30155175093/10000000000",
+    "-1206207001/400000000"
+  ],
+  "uniform_tick55_velocity_box": [
+    "-12220560633/5000000000",
+    "12220560633/5000000000"
+  ],
+  "uniform_tick67_velocity_box": [
+    "-5942655691/2000000000",
+    "5942655691/2000000000"
+  ],
+  "uniform_tick68_velocity_box": [
+    "-30155175093/10000000000",
+    "30155175093/10000000000"
+  ],
+  "wcet_20ms_proved": false,
+  "zero_backup_first_unsafe_tick": 68,
+  "zero_backup_last_uniformly_safe_tick": 67
+}
