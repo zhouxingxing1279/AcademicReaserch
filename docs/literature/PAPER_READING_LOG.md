@@ -1901,3 +1901,17 @@
 - **实验/计算**：§IV HCW轨道交会仿真，采样11.7s、`N_k∈{1,...,30}`，Gurobi LP，100组Monte Carlo，平均求解约0.5s，平均最终距离约0.04m；仅数值仿真，无四旋翼/无人机实飞，**不能证明20ms WCET**。
 - **局限/可复用技术**：可复用式(5),(10),(11)的误差外包、双管束收紧与式(15),(23)的移位候选/终端目标集合扩张思路。论文假设每拍输出、LTI和直接加速度输入，无法直接迁移本仓库间歇有噪位置、Euler`tau→v`三拍时滞、物理T/τ约束。§V将SMF和非线性系统作为未来扩展。其已有的输出反馈自适应终端贡献限制本课题创新宣称。
 - **与Run265关联、阅读日期、待查问题**：2026-11-02；Run265在冻结四状态真值下证明零姿态零角速切片的三拍绝对速度必要带`|v|<=2.8785745575`，而非可移位终端RCI。下一步：是否存在覆盖Run260第60拍所有合法有噪后验、具有绝对状态/姿态关联且共享因果反馈可回返的非空信息集合？详见`docs/research/run265_research_log.md`。
+
+---
+
+## 背景第18轮：Borbolla-Burillo等四旋翼实飞级联LMPC与执行器混控（2026-11-02）
+
+- **真实题名/书目**：Patricio Borbolla-Burillo; David Sotelo; Michael Frye; Luis E. Garza-Castañón; Luis Juárez-Moreno; Carlos Sotelo. *Design and Real-Time Implementation of a Cascaded Model Predictive Control Architecture for Unmanned Aerial Vehicles*. *Mathematics* **12**(5):739, pp.1–20 (2024-02-29). DOI https://doi.org/10.3390/math12050739；出版社PDF https://www.mdpi.com/2227-7390/12/5/739/pdf；实际阅读开放20页全文 https://www.researchgate.net/publication/378669203_Design_and_Real-Time_Implementation_of_a_Cascaded_Model_Predictive_Control_Architecture_for_Unmanned_Aerial_Vehicles。
+- **阅读日期/状态/范围**：2026-11-02，**开放全文§1–6已读（pp.1–20）**，重点pp.3–8式(1)–(38)、pp.8–11式(39)–(55)、pp.11–18表2/4及§5.2实飞。出版社网页本轮429，未逐页核对期刊服务器PDF，不冒称独立复现。
+- **问题/物理模型**：Quanser QDrone 2真实四旋翼三维轨迹跟踪与风扰悬停；完整6自由度非线性刚体物理模型包含位置3/速度3/姿态3/角速3共12状态坐标、四桨推力f_i=kω_i²；在线MPC为悬停小角度线性化分块：高度(z,ż)2状态、XY(x,ẋ,y,ẏ)4状态、姿态(φ,φdot,θ,θdot,ψ,ψdot)6状态，**不是一个全耦合12状态优化**。
+- **控制输入/执行器**：高度MPC优化总推力U1；XY MPC优化虚拟期望俯仰/滚转(θ_d,φ_d)并后饱和±45°；姿态MPC优化力矩U2,U3,U4；式(55)4×4混控→PWM→电池电压下降补偿→4电机。质量1.5kg，每电机最大标称8.5N；未给每电机饱和/变化率的预测内联合硬约束与有界混控误差。
+- **量测/估计/噪声/失测**：OptiTrack Flex13动捕120Hz位置、IMU姿态/角状态，MPC用位置、速度、角度、角速度反馈；速度误差/滤波器的可复现有界集合**未从全文确认**。没有有界位置失测自动机、状态或参数SMF/CZ；35s一次通信异常仅实验观察。
+- **MPC/理论**：离散LTI二次跟踪+输入代价，式(52),(54)闭式无显式预测硬约束优化；外部姿态角饱和。高度N10/Ts0.25s、XY N10/Ts0.05s、姿态N15/Ts0.025s；没有可确认终端RPI、递归可行性/鲁棒稳定性定理、20ms WCET；求解器名称/最坏求解耗时**未报告**。
+- **实验/结论**：QDrone 2实飞螺旋、8字轨迹、风机扰动，PIV基线；轨迹RMSE螺旋MPC0.17/PIV0.495、8字0.095/0.315；风机177km/h额定、3m远，PIV/MPC扰动时长不同，不能解释为同一最坏扰动。属于实验经验改善，非数学硬安全保证。
+- **局限/关联/可复用技术**：可复用2+4+6分层线性化、混控矩阵/电池补偿作为**物理执行链审计样例**；但其动捕每拍信息、虚拟姿态输入、后饱和及未证明终端集合，不能直接迁移仓库有噪间歇位置SMF+物理T/τ的安全证明。Run246/261/265必要条件不受该实飞结果消除。详细见 `docs/research/model_selection/background_run_20261102_1236_borbolla_qdrone2.md`。
+- **待查问题**：Bicego等的NMPC是否在优化中直接处理单向旋翼推力/推力变化率，四旋翼实飞与多旋翼对照的物理约束证据强度如何？
