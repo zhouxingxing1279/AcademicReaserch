@@ -1,3 +1,7 @@
+**Run276 PR #149 CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR https://github.com/zhouxingxing1279/AcademicReaserch/pull/149 基于main `fb8a8675e5dea7175d0e7e0be134201be72f3824`，合并前compare ahead=7/behind=0，仅7个预期文件且无删除；mergeable=true，expected head `3ce055763ca21a57ce0418c63f34efa1c8bc9fbe`。GitHub Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41534362938 **completed/success**，Python3.13.17完整checkout、源码编译、Run276聚焦**6/6通过**、冻结配置检查和Fraction归档JSON逐字比较成功，已独立读取job日志。使用expected-head非强制squash合并至main `fb349a5e7c2f60dc3ada5c91d6b96eb682e40e88`；重新读取main SHA、PR merged及脚本/证书/日志/检查点/唯一论文总账Blob确认落地。**合并后main push CI及全仓库历史回归未独立确认**。真实SMM后验见证仅否定第三块速度门槛自动普遍通过，不证明硬约束违约、MPC不可行或无限时域不安全；**Gate A=blocked**。
+
+---
+
 # Run276 — Run260真实SMM观测历史下第90拍速度门槛的严格反例（2026-11-02）
 
 ## 基准与唯一问题
