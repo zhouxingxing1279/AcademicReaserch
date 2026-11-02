@@ -1,3 +1,17 @@
+## Run270 — Niazi等（2023）传感器攻击/间歇传输下的zonotope集合估计（2026-11-02；新增去重论文）
+
+- **书目**：Muhammad Umar B. Niazi, Amr Alanwar, Michelle S. Chong, Karl H. Johansson, *Resilient set-based state estimation for linear time-invariant systems using zonotopes*, *European Journal of Control* **74** (2023), Article 100837, DOI https://doi.org/10.1016/j.ejcon.2023.100837 。开放全文：https://www.sciencedirect.com/science/article/pii/S0947358023000663 。
+- **阅读日期/范围/状态**：2026-11-02；**出版社开放全文HTML §2–7分节已读**（§3 Assumption 1、§4 Theorems 2/4和Algorithm 1、§5.3间歇传输/复杂度、§6数值案例、§7结论）；未逐页核验PDF/未独立复现实验，不称全文PDF已读。
+- **研究问题**：LTI系统遭受时间变化传感器攻击时，如何保持有界噪声下的可靠状态集合包含，避免误将被攻击读数用于收缩真实后验。
+- **模型/控制输入**：离散LTI `x+=Ax+Bu+w`、多传感器`y_i=C_i x+v_i+a_i`，已知有界输入；不是四旋翼动力学，也不设计MPC控制输入。
+- **量测与不确定性**：有界过程/测量噪声、最多`q<p`个攻击传感器；Assumption 1要求每个单独传感器`(A,C_i)`可观测、系统BIBS稳定及已知初始zonotope。§5.3讨论DoS/间歇传输属于易处理情形，但不是本项目每5拍一次位置机会的定理。
+- **方法/重要定理**：zonotope预测、各传感器一致性集合、按未攻击传感器候选子集构造CZ交集并保留集合族；Theorem 4在Assumption 1下保证真值包含；§4.5剪枝、合并/外包降低复杂度。没有MPC终端约束或递归可行性定理。
+- **主要结论/证据**：§6二维旋转目标数值仿真，报告平均每步约0.273s；属于仿真而非四旋翼实飞/20ms WCET；§5.3指出隐蔽攻击下候选集合数最坏可指数增长。
+- **局限/课题关联/可复用技术**：本项目持续角度/角速测量并不单独可观测横向位置速度，不能直接套用论文全部保证。可借鉴成功包交集、丢包只预测、集合分支剪枝与复杂度预算；Run270证明即使第60拍成功位置包仍可有`0.568117025m/s`特定后验速度直径必要下界，此结论是本仓库独立推导，非论文结果。
+- **待查问题**：在本项目固定位置机会/最多2次丢包自动机下，能否放宽逐传感器可观测假设，建立有界且可计算的观测纤维集合并与MPC终端安全接口相连？
+
+---
+
 ## Run268 — de Paula等（2024）非线性CZ＋DC规划SMF（2026-11-02；新增去重论文）
 
 - **书目**：Alesi A. de Paula, Davide M. Raimondo, Guilherme V. Raffo, Bruno O. S. Teixeira, *Set-based state estimation for discrete-time constrained nonlinear systems: An approach based on constrained zonotopes and DC programming*, *Automatica* **159** (2024), Article 111401, DOI https://doi.org/10.1016/j.automatica.2023.111401；公开作者预印本 arXiv:2211.05912v1 https://arxiv.org/pdf/2211.05912 。出版信息由DBLP和作者公开稿交叉核验，期刊终版未逐页比对。
