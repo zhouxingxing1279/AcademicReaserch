@@ -1,3 +1,14 @@
+## 背景第27轮 — Cao/Lai/Alam（2017）四旋翼分层GP-MPC：机会约束与真实执行器边界（2026-11-02；新增去重）
+
+- **书目/链接/版本**：Gang Cao; Edmund M.-K. Lai; Fakhrul Alam, *Gaussian Process Model Predictive Control of an Unmanned Quadrotor*, *Journal of Intelligent & Robotic Systems* **88**(1):147–162 (2017), DOI https://doi.org/10.1007/s10846-017-0549-y；作者预印本 arXiv:1707.04515v1 https://arxiv.org/pdf/1707.04515 ，22页；机构稿 https://openrepository.aut.ac.nz/items/abfa201e-c3ce-4b48-927f-160b92af42d6 。**2026-11-02作者预印本§2–6 pp.3–18分节阅读**（重点§2模型、§3式(19)–(20)、§4 QP、§5仿真/计算），参考文献未逐条核验，**未对照期刊终版、未复现代码**；状态：**部分全文阅读，非仅摘要**。
+- **研究问题/物理模型/控制输入**：6DOF四旋翼分层轨迹跟踪；外环6状态`(x,xdot,y,ydot,z,zdot)`、虚拟输入`(U1,ux,uy)`，`ux=cos(phi)sin(theta)cos(psi)+sin(phi)sin(psi)`、`uy=cos(phi)sin(theta)sin(psi)-sin(phi)cos(psi)`；内环6状态`(phi,phidot,theta,thetadot,psi,psidot)`、三轴力矩`(U2,U3,U4)`。两个6状态不是两个物理刚体，也不是本仓库平面6状态。GP从离散状态增量训练；数值系统产生189条训练数据/轨迹，**非真实实飞采样**。未给最终四桨RPM/PWM/DSHOT分配、饱和、速率、ESC动态/误差界。
+- **量测/不确定性/SMF**：§5高斯白噪声、仿真状态/输入训练；实际IMU、视觉、Vicon、GPS、气压计、状态观测器、延迟/丢包均**未报告/无法从该预印本确认**。GP均值/协方差是概率预测，不是有界真值包含的状态SMF/CZ；模型和量测不满足仓库位置每5拍机会、最多连续2miss的硬自动机。
+- **MPC与约束/求解**：外环、内环各自GP随机MPC，期望二次成本，概率状态约束eta=0.95和虚拟输入盒，局部线性化QP、active-set；比较仿真H=Np=Nc=1、fs=1Hz；无可复核终端代价/集合、全路径递归可行定理、逐桨速率或20ms WCET。**重要原稿公式审计**：v1式(7)Sigma定义为协方差，但式(20)写`mu±2Sigma`声称等价95%机会约束；独立一维反例`X~N(0,0.01), xmax=0.05`使`2Sigma=0.02<=0.05`却`P(X<=0.05)=0.691462<0.95`，因此**该v1公式按字面并非概率保证充分条件**；期刊终版是否已修订**待查**，不得将其移植为本课题硬安全。
+- **结果/证据级别/计算**：仅MATLAB 8.1、Core2 Duo 3.40GHz数值仿真，Elliptical/Lorenz轨迹50次；189步GPMPC累计60s/56s，即0.31746s/0.29630s每步算术平均，非最坏耗时；比较非线性GPMPC 220s/272s。作者报告跟踪接近无约束NMPC但更容易加输入约束，**不等于真实逐桨可执行、20ms预算或无限时域安全**。没有实飞、HIL/SITL、SMF/CZ或确定性硬约束违约统计。
+- **局限/复用/下一步**：可复用分层模型与虚拟输入权限审计；概率GP与可靠SMF必须分离；PX4独立源码`FunctionMotors.hpp`/`motor_params.yaml`/`mixer_module.cpp`/`DShot.cpp`固定commit `216039a12bab5a86769128f7be3e5f63dc7b4952`显示归一化推力→标称静态反解→PWM/DSHOT数字指令，**不含真实推力硬误差证书**。六状态平面(T,tau)条件性首选不变；4状态有限数学基线，2状态内环保底。**Gate A blocked**；下一步核验标准单向四旋翼逐样本ESC命令/RPM/推力数据。详见`docs/research/model_selection/background_run_20261102_2135_cao_gp_px4_chance.md`。
+
+---
+
 ## Run275 — Reis de Souza、Efimov、Raïssi（2022）时滞系统区间观测器＋输出反馈MPC（2026-11-02；新增去重）
 
 - **书目与来源**：Alex Reis de Souza; Denis Efimov; Tarek Raïssi, *Robust output feedback model predictive control of time-delayed systems using interval observers*, *International Journal of Robust and Nonlinear Control* 32(3):1180–1193 (2022), DOI https://doi.org/10.1002/rnc.5874 。作者公开全文 https://www.researchgate.net/publication/355700252_Robust_output_feedback_MPC_of_time-delayed_systems_using_interval_observers ；出版社 https://onlinelibrary.wiley.com/doi/10.1002/rnc.5874 。2021-11-08在线发表、2022卷期。核验/阅读日期2026-11-02。**状态：作者全文分节阅读§2–6（印刷pp.1182–1192），部分数学符号网页提取乱码，未逐式核验全部LMI、未复现仿真；不标记为全公式核验。**
