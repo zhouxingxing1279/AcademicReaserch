@@ -1,3 +1,16 @@
+## Run260 — Vinod、Weiss、Di Cairano（2025）CZ鲁棒可控集前驱全文分节阅读（2026-11-02；新增去重第108篇）
+
+- **真实题名/作者/年份/出版**：Abraham P. Vinod, Avishai Weiss, Stefano Di Cairano, *Projection-free computation of robust controllable sets with constrained zonotopes*, *Automatica* **175** (2025), article 112211；DOI https://doi.org/10.1016/j.automatica.2025.112211；原始作者全文PDF https://www.merl.com/publications/docs/TR2025-023.pdf ；arXiv https://arxiv.org/abs/2403.13730 。
+- **阅读日期/状态/范围**：2026-11-02，**作者公开全文分节已读**，PDF pp.3–5（§1–2.3、Def.2、式(13)–(14)），pp.9–11（§4.4–5、计算复杂度），pp.12–14（§6案例）；未声称全部19页逐式审校。
+- **研究问题/实际模型**：一般线性时变离散系统`x_{t+1}=A_t x_t+B_t u_t+F_t w_t`，状态向量为任意`n`维全状态`x`，输入`u`为任意`m`维约束控制；扰动集合对称、紧、凸；目标集合、状态约束、输入约束以多面体/CZ描述。案例包括双积分器、稳定2状态LTI、100维线性系统与简化航天器安全撤离；**不是四旋翼2/4/6/10/12状态模型**。
+- **实际量测/失测/噪声**：计算全状态空间中的鲁棒可控集，不设部分状态量测、SMF后验、测量噪声或丢包自动机；CZ在本文用于**可控/可达集合计算**，不是状态SMF也不是参数SMF。无四旋翼实际推力、力矩、执行器延迟/饱和物理映射。
+- **方法/MPC类型/保证**：基于CZ的Pontryagin差内外近似、线性最小二乘、后向鲁棒可控集递推（式14），为有限步安全目标可达性提供**内近似**。是MPC终端集/安全前驱的可用离线构件，但本文不实现仓库的输出反馈Tube MPC或闭环估计器；§5要求特定满维、集合与线性系统条件，复杂度随时域增长。
+- **主要结论/实验与局限**：§6给双积分器与高维线性数值对比；报告100维20步内近似低于15秒，不等于无人机20ms单步WCET；§7航天器应用不是四旋翼实飞。其全状态反馈鲁棒可控集合不直接解决“同一有噪测量纤维共享因果控制”的信息状态前驱。
+- **与本课题关联/可复用技术**：将其安全**内近似**作为未来终端信息状态集合计算的候选几何工具；必须先定义SMF后验/失测模式的提升状态与统一量词，不能将全状态RC集合直接宣布为终端信息RCI。Run260的15拍共享开环安全桥是固定历史的有限证书，不是本文算法复现。
+- **待查问题**：能否在固定15拍历史锚点下对所有合法非空测量分支构造可移位的终端信息状态族，并在有限输入与计算预算下获得非空安全前驱？参见`docs/research/run260_research_log.md`。
+
+---
+
 ## 背景第13轮：Yan、Cannon、Goulart（2022）随机间歇观测输出反馈MPC（2026-11-02；新增去重第107篇）
 
 - **题名/作者/出版**：Shuhao Yan, Mark Cannon, Paul J. Goulart, *Stochastic output feedback MPC with intermittent observations*, *Automatica* **141** (2022), article 110282；DOI https://doi.org/10.1016/j.automatica.2022.110282；作者预印本 arXiv:2009.11071v3 (2022-03-01), https://arxiv.org/pdf/2009.11071 ；牛津机构记录 https://ora.ox.ac.uk/objects/uuid%3A65493a65-7eb6-4897-9f30-bc51e091266c 。
