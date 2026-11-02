@@ -516,3 +516,25 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 
 ---
 
+---
+
+## 28. Elokda等(2021)真实四旋翼DeePC/8状态MPC与单向桨台架数据采样门槛（2026-11-02）
+
+**新增直接四旋翼预测控制论文 [期刊开放正文§1–4、附录A–C已读]**：Ezzat Elokda; Jeremy Coulson; Paul N. Beuchat; John Lygeros; Florian Dörfler, *Data-enabled predictive control for quadcopters*, *International Journal of Robust and Nonlinear Control* 31(18):8916–8936 (2021), DOI https://doi.org/10.1002/rnc.5686 ，全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC9291934/ 。28g真实Crazyflie 2.0，6DOF仿真12状态`(p3,v3,Euler3,ω3)`＋4桨推力；**真实DeePC不显式假定12状态**，内环电机电流/控制器状态未知；同论文实飞模型式对照MPC是悬停线性化8状态`(p3,v3,roll,pitch)`＋3虚拟输入`(总推力,roll/pitch机体角速度参考)`，假定内环角速无延迟跟踪。25Hz位置/横滚/俯仰动捕；DeePC用p=3或5历史I/O隐式估计，不是可靠状态SMF/CZ。
+
+**可计算约束/实时证据**：DeePC滚动25步、`h=0.04s`、1s预测，`T_d=331,T_ini=6`，OSQP，外环总推力盒`[0.1597,0.4791]`N、角速参考盒`[-π/2,π/2]`rad/s；p=3与p=5各28次实飞，求解均值4.14ms与6.66ms、SD 1.49ms与4.78ms，非最坏耗时；25Hz周期40ms，不满足将其**直接**视为仓库20ms控制频率的要求。优化内部虚拟输入盒≠厂家内环混控/ESC真实逐桨推力硬盒。论文LTI Hankel轨迹定理只在确定性LTI假设下成立；非线性噪声下正则DeePC实飞改善不提供确定性失测SMF真值包含或终端递归可行性。
+
+**新增真实硬件数据可用性证据（非MPC论文）**：QuadQuestions/Motor-Test-Data https://github.com/QuadQuestions/Motor-Test-Data ，RC Benchmark 1580测力台、4S电池；固定T-Motor MN2205-12 2400kV/LittleBee 30A/HQ5x4x3组合原始CSV https://github.com/QuadQuestions/Motor-Test-Data/blob/master/TMotor%20MN2205-12%202400kV/LittleBee_30A/HQ5x4x3/withHQ5x4x3_2017-04-18_111625.csv ，blob `4ad0d1c15364e494b020e3eb03895dbce677d0c7`。2026-11-02**只读取前199数据行**，时间差min/median/max约0.08901/0.098505/0.22162s，典型约10Hz；记录PWM `ESC signal(µs)`、电转速RPM、光学RPM、测力gf、电压。它证明存在真实组合级台架样本，**不证明20ms内的瞬时推力速率或ESC残差可靠界**：无已知带宽/导数上界时，任意两采样端点之间可构造连续但中间峰值不同的响应；采样差分只能给区间平均。PWM台架硬件≠本仓库1kg/PX4 DShot硬件；不得拿此数据的最大推力、标称曲线或静态拟合直接认证`(T,τ)`。
+
+| 候选 | 本轮新增对照 | 结论 |
+|---|---|---|
+| 2状态姿态/高度 | DeePC实飞需要厂商内环，不能证明2状态覆盖位置/高度硬约束 | 保留低风险保底 |
+| 4状态横向-姿态固定T | 论文真实位置历史反馈存在，但未处理非零倾角垂向漂移、Run246/260/261/276失测安全障碍 | 仅有限数学基线 |
+| **6状态平面`(p_x,p_z,v_x,v_z,φ,ω)`＋`(T,τ)`** | 真正双输入物理权限与单桨共同可实现域仍需认证；DeePC的`(f_tot,ω_ref)`是**不同**虚拟权限 | **条件性首选不变** |
+| 8状态悬停MPC（新对照） | 真正四旋翼实飞，但隐藏速度用差分，内环瞬时跟踪是假设；25Hz | 架构对照，不替代首选 |
+| 10/12状态与级联 | 12状态仿真模型不等于真实DeePC黑箱状态；更多状态需对应真实量测、输入及约束传递 | 不因维数升级 |
+| 完整6DOF/逐桨电机增广 | 真正物理执行误差需机体级辨识与更高频同步数据；复杂度上升 | 保留外部对照 |
+
+**SMF/CZ创新边界与主任务接口**：位置历史DeePC≠状态SMF/CZ，经验正则化≠有界集合真值包含；已存在真实四旋翼输出反馈预测控制，不能宣称首次。要从目标机体逐桨`(ESC command,RPM,thrust)`带时间戳与量测误差得到同一观测纤维的可靠可执行`(T,τ)`及残差集合，需采样带宽、动力学先验、温度/电压工作域及逐桨动态标定；否则只能作**明确假设下的仿真安全**，不得宣称实机硬安全。Run276真实后验速度门槛反例与Gate A=blocked不变。本轮仅原文/CSV前199行/算术检查，**没有新控制器、仿真、SITL、完整CSV重放或飞行实验**。详见`background_run_20261102_2237_elokda_deepc_esc_data.md`。
+
+**下一轮唯一优先问题**：核验Elokda公开数据集是否含同步逐桨ESC命令/RPM/推力，判断能否支持20ms执行器误差外包；如无，则列出本机体台架辨识的最小实验合同。
