@@ -1,3 +1,7 @@
+**Run269 PR/main落地独立复核（2026-11-02 UTC）：** PR #129 https://github.com/zhouxingxing1279/AcademicReaserch/pull/129 基于main `7d0006ab2521d94150131100e8e8e339c97b10d6`，compare ahead=7/behind=0、仅7个预期文件、mergeable=true。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41478868445 completed/success，Python3.13完整checkout Run26x聚焦**83/83通过**，源码编译、冻结真实配置核验及Fraction JSON归档逐字比较成功。以expected head `31cc2155a4e831c12411b975bfa61b5610bf0442` 非强制squash合并main `b2905c03022b1f46705e56a48d7aa425aeb8ec3d`；重新读取main SHA、PR merged、证书Blob `950723a20551b8749870c2f5b99be20afe5a8215` 及日志Blob确认落地。合并后main push CI尚未独立确认，全仓库历史回归未执行；**Gate A=blocked**。
+
+---
+
 # Run269 — 两次连续位置丢包造成的不可消除速度后验直径（2026-11-02）
 
 ## 1. 基准与唯一问题

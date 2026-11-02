@@ -1,3 +1,7 @@
+**Run269 PR CI与main安全合并独立复核（2026-11-02 UTC）：** 研究PR #129 https://github.com/zhouxingxing1279/AcademicReaserch/pull/129 以main `7d0006ab2521d94150131100e8e8e339c97b10d6` 为基准，合并前compare ahead=7/behind=0，严格7个预期文件；PR mergeable=true，expected head `31cc2155a4e831c12411b975bfa61b5610bf0442`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41478868445 **completed/success**；完整Python3.13 checkout聚焦Run26x **83/83测试通过**，源码编译、真实配置交叉核验及Run269 Fraction归档JSON逐字比较通过。expected-head非强制squash合并到main `b2905c03022b1f46705e56a48d7aa425aeb8ec3d`，再次读取main SHA、PR merged及Run269证书/日志Blob确认落地；归档证书Blob `950723a20551b8749870c2f5b99be20afe5a8215` 与本地生成完全一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行**。第59拍不可区分性仅给特定失测历史下后验投影宽度必要下界，**不是第60拍后验界、MPC、信息终端RCI或无限递归可行证明；Gate A=blocked**。
+
+---
+
 **Run269 第45–59拍位置丢包间隙的严格信息直径下界（2026-11-02 UTC；PR/main落地待复核）：** 基准远端main `7d0006ab2521d94150131100e8e8e339c97b10d6`。在Run260冻结四状态Euler、`h=0.02,T=9.81,|r|<=3246383/1600000`、第45拍成功位置包/50与55拍miss/第60拍强制成功的合法历史下，构造同一角度观测纤维的`r=+R/-R`两条真实轨迹。任意同纤维共享的因果力矩使角运动完全一致，故第45拍起连续`q<=14`拍无位置更新时精确差分`Delta v=2qhR,Delta p=q(q-1)h²R`。第59拍`q=14`后验速度投影直径**至少1.13623405m/s**、位置至少0.1477104265m；零力矩双轨迹逐拍满足真实硬约束，非外包假阳性。**该下界只针对特定非空观测历史且仅到第59拍；第60拍成功位置测量后不可沿用。** 新增Run269 Fraction源码、7项隔离测试（本地7/7通过）、精确JSON、聚焦CI及研究日志；真实配置交叉核验与完整checkout CI待PR复核。重读Köhler/Müller/Allgöwer(2021) arXiv:2105.03427 §II/III-C/IV-B/C/V，既有论文去重不增加；其10状态四旋翼在线估计误差Tube MPC不含本项目确定性位置丢包。**没有SMF/CZ完整后验、15拍共享因果回返、MPC闭环或无限递归可行；Gate A=blocked。** 唯一下一步：对第59拍不可区分双状态纤维的第60拍强制位置成功读数建立条件化后继，再尝试15拍共享安全回返。详见`docs/research/run269_research_log.md`。
 
 ---
