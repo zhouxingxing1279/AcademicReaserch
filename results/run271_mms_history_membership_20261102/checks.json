@@ -1,0 +1,95 @@
+{
+  "allowed_disturbance_absolute_bound": "3246383/1600000",
+  "angular_pulse_tau_ticks_30_to_34": [
+    "1/25",
+    "-1/25",
+    "-1/25",
+    "1/25",
+    "0"
+  ],
+  "angular_readings": "true phi,omega each tick with zero noise; ticks31..33 are not all zero",
+  "angular_states_ticks_30_to_35": {
+    "30": [
+      "0",
+      "0"
+    ],
+    "31": [
+      "0",
+      "1/25"
+    ],
+    "32": [
+      "1/1250",
+      "0"
+    ],
+    "33": [
+      "1/1250",
+      "-1/25"
+    ],
+    "34": [
+      "0",
+      "0"
+    ],
+    "35": [
+      "0",
+      "0"
+    ]
+  },
+  "claim": "Run270 two true trajectories are members of one actual Run260 MMS-history observation fiber; not SMM",
+  "evidence": "symbolic exact cancellation, Fraction angular recurrence and per-tick constraints; existential history membership",
+  "exact_canceling_process_disturbance": "r_k=T*sin(phi_k) for k=30..44; zero otherwise until tick52",
+  "gate_A": "blocked",
+  "max_cancel_disturbance_absolute_upper_bound": "981/125000",
+  "nonzero_cancel_ticks": [
+    32,
+    33
+  ],
+  "not_certified": [
+    "all Run260 observation fibers",
+    "SMM packet branch",
+    "arbitrary causal control",
+    "15-tick feedback return",
+    "terminal information RCI",
+    "MPC solver",
+    "infinite recursive feasibility",
+    "six-state physical safety"
+  ],
+  "packet_miss_ticks": [
+    20,
+    25,
+    35,
+    40,
+    50,
+    55
+  ],
+  "packet_success_ticks": [
+    0,
+    5,
+    10,
+    15,
+    30,
+    45,
+    60
+  ],
+  "post_success_velocity_diameter_lower_bound_m_s": "22724681/40000000",
+  "run": 271,
+  "successful_position_readings": "zero at all success ticks; choose noise=-p_k; zero except tick60",
+  "true_state_tick45_both_paths": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "true_states_tick60_minus": [
+    "-68174043/4000000000",
+    "-22724681/80000000",
+    "0",
+    "0"
+  ],
+  "true_states_tick60_plus": [
+    "68174043/4000000000",
+    "22724681/80000000",
+    "0",
+    "0"
+  ],
+  "two_paths_process_disturbance_ticks_53_to_59": "opposite +/-R"
+}
