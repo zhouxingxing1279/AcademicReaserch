@@ -1,0 +1,38 @@
+name: Run254 forced-success velocity alias
+on:
+  pull_request:
+    paths:
+      - 'verification/check_forced_success_velocity_alias.py'
+      - 'verification/test_forced_success_velocity_alias.py'
+      - 'results/forced_success_velocity_alias_20261101/checks.json'
+      - '.github/workflows/run254-forced-success-alias.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_forced_success_velocity_alias.py'
+      - 'verification/test_forced_success_velocity_alias.py'
+      - 'results/forced_success_velocity_alias_20261101/checks.json'
+      - '.github/workflows/run254-forced-success-alias.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused regressions Run249-254
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge test_forced_success_velocity_alias
+      - name: Compile and compare exact certificate with real config
+        run: |
+          python -m py_compile verification/check_forced_success_velocity_alias.py verification/test_forced_success_velocity_alias.py
+          cd verification
+          PYTHONPATH=. python check_forced_success_velocity_alias.py --root .. --output /tmp/run254_checks.json
+          cmp /tmp/run254_checks.json ../results/forced_success_velocity_alias_20261101/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run254-exact-certificate
+          path: results/forced_success_velocity_alias_20261101/checks.json
