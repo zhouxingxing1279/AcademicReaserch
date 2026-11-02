@@ -1,0 +1,28 @@
+name: Run277 exact open-loop diameter obstruction
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run277_open_loop_diameter.py'
+      - 'verification/test_run277_open_loop_diameter.py'
+      - 'results/run277_open_loop_diameter_20261102/checks.json'
+      - '.github/workflows/run277-open-loop-diameter.yml'
+      - 'configs/planar_baseline.json'
+      - 'results/run271_run260_membership_20261102/checks.json'
+  workflow_dispatch:
+jobs:
+  exact-run277:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and exact tests
+        run: |
+          python -m py_compile verification/check_run277_open_loop_diameter.py verification/test_run277_open_loop_diameter.py
+          cd verification
+          python -m unittest -v test_run277_open_loop_diameter.py
+      - name: Cross-check frozen main config and Run271 original certificate
+        run: python verification/check_run277_open_loop_diameter.py --root . --output /tmp/run277-checks.json
+      - name: Compare exact archived JSON
+        run: cmp /tmp/run277-checks.json results/run277_open_loop_diameter_20261102/checks.json
