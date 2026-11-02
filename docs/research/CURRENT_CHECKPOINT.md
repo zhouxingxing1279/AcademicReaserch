@@ -1,3 +1,7 @@
+**Run263 全读数位置机会速度宽度上界（2026-11-02 UTC；PR/CI/main状态待独立核验）：** 继承Run260第45拍SMM/MMS两类历史，冻结四状态Euler、固定T=9.81、|r|<=3246383/1600000、位置半噪0.02m、每拍姿态半噪0.005rad、每5拍位置机会/最多2次miss。通过离散运动学恒等式、sin全局1-Lipschitz和11条合法50/55/60包模式的Fraction枚举，对**所有非空有噪连续位置/姿态读数**严格证明第60拍速度后验外包宽度：SMM<=105771301/60000000≈1.762855m/s；MMS<=75223219/40000000=1.880580475m/s。无需未来读数为零，也不需要假设精确CZ后验；这是宽度界，不是绝对状态安全、信息终端RCI、递归可行性或MPC实现。隔离9/9测试、源码编译、等价冻结配置交叉核验和精确JSON生成通过；完整checkout/PR/main CI待验证。分节阅读Li/Savla arXiv:2308.05265（2026 *Automatica* DOI 10.1016/j.automatica.2026.113290，终版未逐页核验），统一论文去重110→111；SMF+MPC终端集合已有先例，但论文是无噪部分交通状态、MILP，不可直接迁移四旋翼。**Gate A blocked**。下一轮唯一优先：结合第60拍绝对后验及三拍力矩时滞，构造并检验共享因果反馈安全前驱。详见 docs/research/run263_research_log.md。
+
+---
+
 **Run262 PR/main CI与安全合并独立复核（2026-11-02 UTC）：** PR #108 https://github.com/zhouxingxing1279/AcademicReaserch/pull/108 基于main `e9d53d4941f6e07c69c6aa4eb32ba8e96b3b215c`，合并前compare ahead=7/behind=0、仅7个预期文件、PR mergeable_state=clean、expected head `a935d223db525f1fc2311563827bb7369a54555a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41421411318 **completed/success**；完整Python3.13.17 checkout聚焦Run260–262 **26/26通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较和工件上传成功。使用expected-head非强制squash合并至main `f5695f5dc0f81413f7a10eb7a3fe7914a4488deb`，重新读取main SHA、PR merged和新增源码/日志Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41421478138 **completed/success**；完整job日志再次**26/26通过、无跳过**、配置/精确JSON比较和工件上传成功。**全仓库历史回归未执行**。本轮证书只排除四状态冻结模型中包含原点、速度带`|v|<=0.12`的候选RCI，不否定`|v|<=3`可生存性或任何反馈终端信息RCI；**Gate A仍blocked**。
 
 ---

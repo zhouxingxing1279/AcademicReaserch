@@ -1,3 +1,15 @@
+## Run263 — Li与Savla的状态/参数SMF＋MPC集合嵌入终端证明（2026-11-02；新增去重第111篇）
+
+- **题名/作者/出版与链接**：Zhexian Li, Ketan Savla, *Output-feedback adaptive model predictive control for ramp metering: a set-membership approach*；arXiv:2308.05265（2023初稿、2025修订）https://arxiv.org/abs/2308.05265；作者出版页 https://zhexianli-usc.github.io/publications/ 将其列为2026年 *Automatica*，DOI https://doi.org/10.1016/j.automatica.2026.113290；期刊终版未逐页核验，期刊卷期页码待核实。
+- **阅读日期/范围/状态**：2026-11-02；**arXiv开放HTML正文分节已读**§3.1、§3.3、§4.1–4.4、§5.1–5.3、§6部分实验、附录部分证明；不是期刊终版全文逐页复核，也未复现MILP。
+- **研究问题/实际模型**：交通匝道流量控制而非四旋翼。Cell Transmission Model：I个主线单元车辆数和I个匝道队列车辆数共2I维状态，I维匝道流量控制，外生交通需求及未知交通参数。使用混合单调嵌入传播状态、需求、参数区间。
+- **量测/SMF性质**：输出为部分主线单元和全部匝道队列状态的无噪直接量测；**状态SMF与参数SMF均有**，没有本仓库的有界噪声位置条带、间歇包自动机或四旋翼IMU。Lemma 1在初始化和估计更新假设下给真实状态、需求、参数的区间包含。
+- **MPC、约束与定理**：优化为混合整数线性规划MILP；有匝道流量约束、主线拥堵约束和嵌入终端盒。Propositions 2–3给初始可行与递归可行的充分条件，尤其需要嵌入终端集合正不变性。Theorem 1在恒定需求、足够预测时域、特定终端结构与无限匝道存储等条件下给队列有界/进入终端；不能转述为四旋翼无限硬安全。§6为交通仿真，无飞行实验，报告T=300时约209.6秒的平均MPC求解时间，不是无人机实时可用方案。
+- **主要结论/局限/可复用技术**：SMF+MPC和集合终端嵌入并非新的概念；可借鉴“集合预测、测量收缩、终端移位分别证明”的结构。但交通混合单调性、无噪量测和无限匝道存储的可行性机制不能直接迁移到有噪失测四旋翼及有限力矩/推力硬约束。Run263只证明测量时刻速度投影**宽度**统一有界，不是本文的递归可行性复现。
+- **待查问题**：如何把Run263的宽度界和Run262物理力矩响应时滞结合成第60拍全部非空后验的绝对状态安全前驱？对应 docs/research/run263_research_log.md。
+
+---
+
 ## 背景第15轮 — Carlos等（2020）Crazyflie实飞13坐标NMPC与执行器接口（2026-11-02；新增去重第110篇）
 
 - **真实题名/完整作者/出版/DOI**：Barbara Barros Carlos, Tommaso Sartor, Andrea Zanelli, Gianluca Frison, Wolfram Burgard, Moritz Diehl, Giuseppe Oriolo, *An Efficient Real-Time NMPC for Quadrotor Position Control under Communication Time-Delay*, **2020 16th International Conference on Control, Automation, Robotics and Vision (ICARCV)**, IEEE, pp.982–989；DOI https://doi.org/10.1109/ICARCV50220.2020.9305513 ；作者公开预印本 https://arxiv.org/abs/2010.11264 ；大学出版记录 https://www.diag.uniroma1.it/en/publication/22132 。
