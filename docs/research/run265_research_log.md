@@ -1,3 +1,7 @@
+**Run265 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #117 https://github.com/zhouxingxing1279/AcademicReaserch/pull/117 基于main `b70fe7c9063e4278f8cea595f2e696b47fec0ed6`；合并前compare ahead=7/behind=0，严格仅7个预期文件、expected head `7c0228b16144aaf331630e846d785d8d21831975`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41441776848 **completed/success**，完整Python3.13.17 checkout聚焦Run260–265 **52/52通过、无跳过**，源码编译、真实`configs/planar_baseline.json`交叉核验及精确Fraction JSON逐字比较成功。使用expected-head非强制squash合并至main `55a7d11b4f4a3f1150e641c6952af1ef40d878e6`；重新读取main SHA与6个关键文件Blob核验落地。**合并后main push CI未独立确认；全仓库历史回归未执行**。本轮只给零姿态零角速切片的绝对速度必要安全筛选，不证明Run260实际后验不可行、反馈终端信息RCI、无限递归可行或六状态安全；Gate A=blocked。
+
+---
+
 # Run265 — 三拍物理制动权限下的终端速度绝对值必要筛选（2026-11-02）
 
 ## 1. 基准、瓶颈与证据等级
