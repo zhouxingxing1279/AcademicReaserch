@@ -131,7 +131,10 @@
 
 ---
 
-**Run277 2026-11-02复读补记（不增加去重篇数）：** 复读出版社HTML§2 zonotope定义/降阶、§3 A1–A3、§4.2式(27)–(32)、§4.3式(33)–(35)、§4.4 Algorithm 8/Theorem 9、§5 CSTR和§6；强调动态输出反馈`u=C_c x_c+D_c y`和下一步可行性门控属于已有研究，**不能把继承旧控制器参数直接当作有噪位置丢包下的共同因果安全证明**。本轮冻结四状态真实MMS后验双真值证明任意测量无关开环力矩不能保证67拍硬安全，但不排除观测条件化反馈。原网页部分LMI公式缺失，未逐式重算；详见`docs/research/run277_research_log.md`。\n\n## Run267 — Ping & Sun (2015) quasi-LPV zonotope SMF＋动态输出反馈MPC正文复核（2026-11-02；既有论文，去重数不增加）
+## Run267 — Ping & Sun (2015) quasi-LPV zonotope SMF＋动态输出反馈MPC正文复核（2026-11-02；既有论文，去重数不增加）
+
+**Run277 2026-11-02复读补记（不增加去重篇数）：** 复读出版社HTML§2 zonotope定义/降阶、§3 A1–A3、§4.2式(27)–(32)、§4.3式(33)–(35)、§4.4 Algorithm 8/Theorem 9、§5 CSTR和§6；强调动态输出反馈`u=C_c x_c+D_c y`和下一步可行性门控属于已有研究，**不能把继承旧控制器参数直接当作有噪位置丢包下的共同因果安全证明**。本轮冻结四状态真实MMS后验双真值证明任意测量无关开环力矩不能保证67拍硬安全，但不排除观测条件化反馈。原网页部分LMI公式缺失，未逐式重算；详见`docs/research/run277_research_log.md`。
+
 
 - **书目/链接**：Xubin Ping, Ning Sun, *Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems*, *Journal of Applied Mathematics* 2015, Article 875850, DOI https://doi.org/10.1155/2015/875850；出版社开放全文 https://onlinelibrary.wiley.com/doi/full/10.1155/2015/875850 。
 - **阅读日期/范围/核验状态**：2026-11-02，出版社HTML正文§3假设A1–A3、§4.1式(15)–(26)、§4.2式(27)–(32)、§4.3式(33)–(35)、§4.4 Algorithm 8/Theorem 9、§5 CSTR例及§6；**正文分节已读，HTML部分公式显示不完整，未逐式核验全部LMI，也未独立复现证明**。本条补充已有Run131条目，不另计新论文。
