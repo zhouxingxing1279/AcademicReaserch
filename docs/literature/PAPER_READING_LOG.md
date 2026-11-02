@@ -1,3 +1,19 @@
+## 背景第8轮 — Rodriguez-Guevara等（2023）12状态qLPV-MPC（2026-11-01；新增去重第102篇）
+
+**题名：** *A qLPV-MPC Control Strategy for Trajectory Tracking of Quadrotors*。**作者：** Daniel Rodriguez-Guevara、Antonio Favela-Contreras、Oscar Julian Gonzalez-Villarreal。**发表：** *Machines* 11(7):755 (2023-07-19)。**DOI/原文：** https://doi.org/10.3390/machines11070755 ，https://www.mdpi.com/2075-1702/11/7/755 ，https://staging.core.mdpi.com/2075-1702/11/7/755 。
+
+**阅读日期/状态：** 2026-11-01；核对出版社公开HTML索引§2.1–2.2式(1)–(3)、§3式(6)–(8)、§4 MPC策略、§5仿真和计算时间、§6结论。原站直接打开返回429/403，**分节已读（索引文本）**，未取得PDF逐页核验，非全文精读。
+
+**研究问题/方法/模型：** 以12状态`(x,y,z,vx,vy,vz,roll,pitch,yaw,p,q,r)`描述三维位置、速度、欧拉角与机体角速；输入为四桨平方转速混控后的`U1`总推力与`U2,U3,U4`三轴力矩。§3用6个调度量`(roll,pitch,yaw,p,q,Omega_p)`构造qLPV模型，使用上次优化轨迹预测调度，滚动名义MPC采用`N_p=5`和MATLAB fmincon SQP。§3垂向动力学含`U1 cos(roll)cos(pitch)/m-g`；人为加入小`epsilon≈0.001`以改善矩阵可控性，不能视作无误差物理真值。
+
+**量测、丢包/噪声、SMF类型：** 已核验章节没有定义实际传感器测量矩阵、测量噪声界或丢包；仿真使用状态/调度量，未核验独立传感器。没有状态SMF，也没有参数SMF；调度参数轨迹预测不是集员滤波。
+
+**约束/理论/实验：** 文中MPC讨论状态/输入约束与四桨转速映射，但本轮未核验四电机饱和在任意不确定性下严格保持；未核验终端RCI、鲁棒输出反馈递归可行或硬约束全时域定理。MATLAB/Simulink R2019b、MacBook Air双核1.8GHz i5/8GB，10ms采样、直线/螺旋轨迹数值仿真；优化平均6.14ms、样本最坏8.76ms，不是形式化WCET；§6把风扰鲁棒性和实飞列为未来工作。
+
+**主要结论/局限/课题关联：** 12状态名义qLPV-MPC在作者仿真平台能快速轨迹跟踪，但不是有噪间歇位置SMF+鲁棒Tube MPC的现成证明。可复用四输入物理混控、推力方向耦合、调度预测与计算基线；不能将其6.14ms移植到本仓库20ms WCET，也不应因为12维更高而淘汰六状态平面。**待查问题：** 如果引入qLPV调度，如何认证`epsilon`建模误差、未测调度变量和有噪失测下的全部未来调度分支，且保留终端信息集合可移位闭合？**本轮独立研究证据：** `docs/research/model_selection/background_run_20261101_1735_qlpv_hover.md`。
+
+---
+
 ## Run254 — Qiu等（2020）终端RPI与有噪后验复核（2026-11-01；历史已读，不新增去重篇数）
 
 **题名：** *Output feedback model predictive control based on set-membership state estimation*；**作者：** Quanwei Qiu、Fuwen Yang、Yong Zhu、Eman Mousavinejad；**出版：** *IET Control Theory & Applications* 14(4):558–567 (2020)；**DOI：** https://doi.org/10.1049/iet-cta.2019.0881；**开放正文：** https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/iet-cta.2019.0881。**阅读日期/核验层级：** 2026-11-01再次核验出版社开放正文§2 Assumptions 1–2、§3.1 Theorem 1、§3.2式(19) minimax、§4终端RPI与稳定性条件；分节重读，非新读/非终版逐式复核。**问题/模型/方法：** 有界过程和量测噪声下的线性时变、部分状态测量、椭球状态SMF（不是参数SMF）及LMI/半定规划输出反馈MPC。**关键假设与结论：** 初始椭球和有界扰动/噪声、SMF递归包含条件；鲁棒终端正不变集合与局部反馈是稳定/可行性结论所需的额外结构，不能由一次成功量测推出。**局限：** 不含本仓库非线性正弦Euler、间歇位置包自动机及真实关联后验。**关联/可复用：** 估计集合包含、MPC预测硬约束、终端可移位条件分开检查。**本轮新独立结果：** Run254在强制成功位置包后仍构造同测量历史、不同隐藏速度的两条合法路径；参见`docs/research/run254_research_log.md`和`results/forced_success_velocity_alias_20261101/checks.json`。**待查：** 真实关联后验在所有成功读数和后续miss分支下能否形成共享因果安全前驱？**去重已读仍101篇。**
