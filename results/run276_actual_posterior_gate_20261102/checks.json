@@ -1,0 +1,100 @@
+{
+  "actual_displacement_85_90": "22724681/100000000",
+  "all_hard_state_constraints_satisfied": true,
+  "all_measurement_noises_within_bounds": true,
+  "all_packet_streaks_legal": true,
+  "gate_A": "blocked",
+  "meaning": "Run275 universal speed-gate assertion is false for a true admissible observation history; no actual hard-constraint violation is shown",
+  "not_certified": [
+    "full posterior",
+    "all histories",
+    "causal feedback impossibility",
+    "MPC closed loop",
+    "terminal information RCI",
+    "infinite safety",
+    "six-state physical safety",
+    "20ms WCET"
+  ],
+  "packet_history_5_to_90": "SSSMMSSMMSMSSSSSSS",
+  "position_noise_tick35": "-3246383/500000000",
+  "position_readings": {
+    "10": "0/1",
+    "15": "0/1",
+    "30": "0/1",
+    "35": "0/1",
+    "5": "0/1",
+    "50": "561624259/4000000000",
+    "60": "165565533/500000000",
+    "65": "1827713629/4000000000",
+    "70": "2412062569/4000000000",
+    "75": "769392771/1000000000",
+    "80": "1912119587/2000000000",
+    "85": "4652066839/4000000000",
+    "90": "5561054079/4000000000"
+  },
+  "post_pulse_disturbance": "r=R, phi=0, exact net a=R for ticks35..89",
+  "pulse_disturbance": "r=4R/5+T*sin(phi), |r|<=4R/5+T/1250<R; exact net a=4R/5",
+  "pulse_torque_30_to_34": [
+    "1/25",
+    "-1/25",
+    "-1/25",
+    "1/25",
+    "0/1"
+  ],
+  "run": 276,
+  "run275_gate_85_90": "363255181/2000000000",
+  "scope": "constructive member of Run260 SMM fixed zero-reading prefix through tick45, with legal 50/60 successes and 65..90 all successes",
+  "speed_at_90": "191536597/80000000",
+  "speed_excess": "1929059/40000000",
+  "speed_gate_G": "187678479/80000000",
+  "states": {
+    "30": [
+      "0/1",
+      "0/1",
+      "0/1",
+      "0/1"
+    ],
+    "35": [
+      "3246383/500000000",
+      "3246383/20000000",
+      "0/1",
+      "0/1"
+    ],
+    "45": [
+      "301913619/4000000000",
+      "22724681/40000000",
+      "0/1",
+      "0/1"
+    ],
+    "50": [
+      "561624259/4000000000",
+      "61681277/80000000",
+      "0/1",
+      "0/1"
+    ],
+    "60": [
+      "165565533/500000000",
+      "94145107/80000000",
+      "0/1",
+      "0/1"
+    ],
+    "75": [
+      "769392771/1000000000",
+      "35710213/20000000",
+      "0/1",
+      "0/1"
+    ],
+    "85": [
+      "4652066839/4000000000",
+      "87652341/40000000",
+      "0/1",
+      "0/1"
+    ],
+    "90": [
+      "5561054079/4000000000",
+      "191536597/80000000",
+      "0/1",
+      "0/1"
+    ]
+  }
+}

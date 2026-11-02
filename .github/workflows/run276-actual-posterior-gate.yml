@@ -1,0 +1,38 @@
+name: run276-actual-posterior-gate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run276_actual_posterior_gate.py'
+      - 'verification/test_run276_actual_posterior_gate.py'
+      - 'results/run276_actual_posterior_gate_20261102/checks.json'
+      - '.github/workflows/run276-actual-posterior-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run276_actual_posterior_gate.py'
+      - 'verification/test_run276_actual_posterior_gate.py'
+      - 'results/run276_actual_posterior_gate_20261102/checks.json'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run exact tests and archive comparison
+        run: |
+          python -m py_compile verification/check_run276_actual_posterior_gate.py verification/test_run276_actual_posterior_gate.py
+          PYTHONPATH=verification python -m unittest -v verification/test_run276_actual_posterior_gate.py
+          python verification/check_run276_actual_posterior_gate.py --output /tmp/run276_checks.json
+          cmp /tmp/run276_checks.json results/run276_actual_posterior_gate_20261102/checks.json
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          c=json.load(open('configs/planar_baseline.json'))
+          assert F(str(c['plant']['dt_s']))==F(1,50)
+          assert F(str(c['plant']['inertia_kg_m2']))==F(1,50)
+          assert F(str(c['plant']['gravity_m_s2']))==F(981,100)
+          assert F(str(c['sensing']['observed_noise_halfwidth']['px']))==F(1,50)
+          assert c['sensing']['max_consecutive_missed_packets']==2
+          PY
