@@ -1,0 +1,33 @@
+name: Run268 observation-fiber affine strip
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run268_observation_fiber_strip.py'
+      - 'verification/test_run268_observation_fiber_strip.py'
+      - 'results/run268_observation_fiber_strip_20261102/checks.json'
+      - '.github/workflows/run268-observation-fiber-strip.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run268_observation_fiber_strip.py'
+      - 'verification/test_run268_observation_fiber_strip.py'
+      - 'results/run268_observation_fiber_strip_20261102/checks.json'
+      - '.github/workflows/run268-observation-fiber-strip.yml'
+
+jobs:
+  run268:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile sources
+        run: python -m py_compile verification/check_run268_observation_fiber_strip.py verification/test_run268_observation_fiber_strip.py
+      - name: Focused regression
+        run: PYTHONPATH=verification python -m unittest discover -s verification -p 'test_run26*.py' -v
+      - name: Check frozen real configuration and exact archive
+        run: |
+          python verification/check_run268_observation_fiber_strip.py --root . --output /tmp/run268_checks.json
+          diff -u results/run268_observation_fiber_strip_20261102/checks.json /tmp/run268_checks.json
