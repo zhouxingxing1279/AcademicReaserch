@@ -336,3 +336,20 @@
 **选型状态不变，新增区分**：条件性首选**6状态平面物理模型**`(p_x,p_z,v_x,v_z,φ,ω), (F,τ)`（物理垂向/力矩闭合但未证终端）；4状态固定推力保留有限安全基线、非零倾角垂向漂移仍不闭合；2状态姿态低风险保底；8/9维六旋翼级联与本轮**12维四旋翼增广外环**仅作不同接口的对照；10/12/13完整刚体方案暂不升级。Run264的30步固定历史开环安全前缀不能外推无限递归安全；**Gate A blocked**。
 
 **下一轮唯一优先**：真正四旋翼**实飞**低维/级联MPC全文，审计姿态命令→电机/力矩的可执行性和位置/速度估计合同。
+
+---
+
+## 22. 背景第18轮：Borbolla-Burillo等(2024)真实四旋翼2+4+6分块LMPC、PWM执行接口
+
+**证据**：Patricio Borbolla-Burillo, David Sotelo, Michael Frye, Luis E. Garza-Castañón, Luis Juárez-Moreno, Carlos Sotelo, *Design and Real-Time Implementation of a Cascaded Model Predictive Control Architecture for Unmanned Aerial Vehicles*, *Mathematics* 12(5):739, pp.1–20 (2024), DOI https://doi.org/10.3390/math12050739；开放20页全文 https://www.researchgate.net/publication/378669203_Design_and_Real-Time_Implementation_of_a_Cascaded_Model_Predictive_Control_Architecture_for_Unmanned_Aerial_Vehicles，本轮已读§1–6，重点式(29)–(38),(39)–(55)、表2/4、§5.2。详见 [第18轮日志](background_run_20261102_1236_borbolla_qdrone2.md)。
+
+| 比较项 | 真实四旋翼实飞文献证据 | 课题约束与选型判断 |
+|---|---|---|
+| 状态维数/自由度 | 非线性6自由度12坐标物理模型；在线分块**高度2状态**(z,ż)、**XY 4状态**(x,ẋ,y,ẏ)、**姿态6状态**(φ,φdot,θ,θdot,ψ,ψdot) | 2+4+6分块≠单个12状态耦合MPC；与仓库平面6状态不是同一控制权限；级联可实飞但不保证硬安全 |
+| 控制输入/物理闭合 | 高度U1总推力，XY虚拟(θ_d,φ_d)，姿态U2–U4三轴力矩；±45°姿态命令后饱和；Quanser式(55)混控→PWM→电池补偿→电机 | 虚拟角命令不是即时力矩；混控和电机饱和/变化率的**联合可行域未被证明**；真实1.5kg/四电机8.5N参数不得移入仓库1kg |
+| 量测/可观测性/失测 | OptiTrack Flex13位置120Hz、IMU角状态，优化需速度/角速度；无可复用速度误差上界、状态SMF/CZ或丢包模型 | 本仓库有噪位置机会/隐藏速度的SMF须独立实现；实飞中35s通信异常不能充当丢包鲁棒理论 |
+| MPC/终端/约束 | LTI二次型滚动优化，§3式(52),(54)给**无显式预测硬约束的闭式解**，外部角度饱和；高度/XY/姿态(N,Ts)=(10,0.25s)/(10,0.05s)/(15,0.025s) | 不是带终端信息RCI的鲁棒输出反馈Tube MPC；采样≥25ms，不能证明20ms WCET |
+| 实验与局限 | QDrone 2真实螺旋/8字/风机实验；RMSE 0.17 vs0.495、0.095 vs0.315（MPC vs PIV）；没有同扰动最坏保证 | 支持分层线性MPC工程可行性，不支持无限递归安全、状态集合包含或失测恢复 |
+| 创新性/工作量 | 级联MPC、PWM映射、电池补偿已有实飞先例 | 新贡献必须落在有界状态SMF/CZ后验、实际执行器可实现集合、鲁棒收紧/终端信息不变性，而非级联本身 |
+
+**决策**：保持**6状态平面物理T/τ为条件性首选**；4状态为有限安全基线，2状态为最低风险；新增2+4+6分块真实四旋翼级联LMPC作为工程对照，**不因其分块总维数为12而直接升级全12状态**。Run246/261负例与Run265终端绝对速度必要条件未被解决；Gate A blocked。下一轮只审Bicego等真实四旋翼的**优化内执行器硬约束**。
