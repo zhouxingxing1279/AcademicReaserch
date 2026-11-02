@@ -1,0 +1,31 @@
+{
+  "diameter_at_66": "236985959/40000000",
+  "diameter_at_67": "120116171/20000000",
+  "disturbance_halfwidth_m_s2": "3246383/1600000",
+  "does_not_prove": [
+    "failure of causal observation-conditioned feedback",
+    "impossibility of robust MPC",
+    "exact full posterior",
+    "failure at tick126",
+    "terminal information RCI",
+    "six-state physical safety",
+    "20ms WCET"
+  ],
+  "duration_s": "67/50",
+  "excess_over_hard_box_diameter_at_67": "116171/20000000",
+  "gate_A": "blocked",
+  "initial_velocity_diameter": "22724681/40000000",
+  "initial_velocity_minus": "-22724681/80000000",
+  "initial_velocity_plus": "22724681/80000000",
+  "legal_future_packet_branch": "all position opportunities success, with each world using its own legal noise=0 reading; policy ignores these readings",
+  "model": "frozen discrete four-state Euler, shared thrust and torque, independent |r|<=R",
+  "parent": "Run271 genuine common-observation MMS posterior pair at tick60",
+  "parent_packet_history_5_to_60": "SSSMMSMMSMMS",
+  "proof": "For any common open-loop torque and thrust schedule, equal initial (phi,omega) imply equal future angles; subtracting v+ = v + h*(-T*sin(phi)+r) gives Delta v(n)=Delta v(0)+2*n*h*R for r+=R,r-=-R. Since both speeds cannot lie in [-3,3] if Delta v>6, at least one world violates a hard constraint no later than tick127. If angle/input constraints fail earlier, policy already fails.",
+  "quantifiers": "forall shared observation-independent torque sequences, exists one of two true initial states and bounded disturbance sequences causing hard-box failure by tick127",
+  "run": 277,
+  "sample_period_s": "1/50",
+  "strict_first_obstruction_horizon_ticks": 67,
+  "strict_first_obstruction_tick": 127,
+  "velocity_hard_limit_abs_m_s": "3"
+}
