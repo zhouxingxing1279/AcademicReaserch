@@ -1,0 +1,89 @@
+{
+  "evidence": "EXACT_RATIONAL_REPRESENTATION_SPECIFIC_BOX_SMF_WIDTH_NO_GO",
+  "first_tick_width_floor_exceeds_hard_box": 71,
+  "gate_A": "blocked",
+  "history": "Run254 SSSMMS all-zero readings through tick 30",
+  "per_step_velocity_width_floor_increment": "3246383/40000000",
+  "physical_unsafety_proved": false,
+  "quantifiers": "any causal legal torque; any nonempty direct-coordinate measurement updates; while the box step remains defined and no safety-box clipping is used",
+  "run": 256,
+  "scope": "Run249/255 independent-box recursion, fixed thrust and disturbance bound; NOT the exact correlated posterior, CZ or the physical plant",
+  "start_posterior_box": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-1/50",
+      "1/50"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "v": [
+      "-269364701/200000000",
+      "269364701/200000000"
+    ]
+  },
+  "start_tick": 30,
+  "terminal_information_invariance_proved": false,
+  "tick35_miss_zero_attitude_posterior": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-50941179/312500000",
+      "814964689/5000000000"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "v": [
+      "-3110667463/2000000000",
+      "1554705901/1000000000"
+    ]
+  },
+  "tick35_success_and_miss_velocity_identical": true,
+  "tick35_success_zero_readings_posterior": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-1/50",
+      "1/50"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "v": [
+      "-3110667463/2000000000",
+      "1554705901/1000000000"
+    ]
+  },
+  "tick35_unconditioned_prediction": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-50941179/312500000",
+      "814964689/5000000000"
+    ],
+    "phi": [
+      "-3/500",
+      "3/500"
+    ],
+    "v": [
+      "-3110667463/2000000000",
+      "1554705901/1000000000"
+    ]
+  },
+  "tick70_universal_velocity_width_floor": "594003001/100000000",
+  "tick71_universal_velocity_width_floor": "1204237917/200000000",
+  "velocity_hard_box_total_width": "6"
+}

@@ -1,3 +1,14 @@
+## Run256 — Rego等（2020）非线性CZ状态估计定向正文重读（2026-11-02；历史已读，不新增去重数）
+
+- **题名、作者、年份、出版：** Brenner S. Rego, Guilherme V. Raffo, Joseph K. Scott, Davide M. Raimondo, *Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems*, *Automatica* 111:108614 (2020)；DOI https://doi.org/10.1016/j.automatica.2019.108614；公开预印本 arXiv:1908.09950v3 https://arxiv.org/pdf/1908.09950 。
+- **核验状态及实际范围：** 2026-11-02重新阅读作者公开PDF pp.2–3 §2–3.1、pp.4–6 §4.1–4.2 Theorems 1–3、pp.8–10 §4.4–5（式(22)、Remark 10、Table 1）；未核对期刊终版逐式一致。Run179已有分节已读，Run214仅摘要复核，**本轮重读不新增文献**。
+- **研究问题/模型/输入/测量：** 一般非线性离散系统 `x_k=f(x_(k-1),u_(k-1),w_(k-1))`，`u`是已知施加输入；`y=Cx+D_u u+D_v v` 为线性有界噪声量测。论文没有特定四旋翼状态向量、推力/力矩物理输入、无人机失测自动机或执行器硬盒；研究**状态集合估计**，不是参数估计或MPC。
+- **假设、定理、结论：** 初始可靠包含、紧有界扰动/量测集合，非线性映射可微且Jacobian/Taylor余项有可靠包络；Theorems 2–3给出CZ均值/一阶Taylor预测外包，§4.4式(22)给出有界线性量测广义交集；Remark 10说明复杂度增长，必须保包含降阶。示例比较估计保守性与复杂度，**不证明**鲁棒输出反馈MPC递归可行性、无人机稳定性或20ms WCET。
+- **与本课题关系/可复用技术：** Run256严格证明Run249/255独立区间SMF的未测速度宽度在所有非空success/miss分支每拍至少增加`2hR=0.081159575m/s`，从特定Run254历史`S30`起第71拍宽度下界`6.021189585>6m/s`。该命题仅否定现有独立盒的无限时域安全**认证能力**，不是实际后验/真实物理不可生存；CZ可保留`p-v`关联，但尚未在本项目实现和比较。
+- **阅读日期/待查：** 2026-11-02；第35拍全部非空success/miss观测分支，关联H-rep/CZ后验能否严格缩小速度投影，且在同等在线预算下仍可用于终端前驱？证据与代码见 `docs/research/run256_research_log.md`。
+
+---
+
 ## 背景第9轮 — Agrawal、Panagou（2023）有界误差观测器＋鲁棒CBF（2026-11-01；新增去重第103篇）
 
 - **题名、作者、出版：** Devansh R. Agrawal; Dimitra Panagou, *Safe and Robust Observer-Controller Synthesis Using Control Barrier Functions*, *IEEE Control Systems Letters* **7**:127–132 (2023卷；2022-06-22在线发表)，DOI https://doi.org/10.1109/LCSYS.2022.3185142；作者公开期刊PDF https://dev10110.github.io/pdfs/2022-observer-controller.pdf；预印本 https://arxiv.org/abs/2211.14364 。**阅读日期/状态：** 2026-11-01；实际阅读作者公开期刊PDF pp.127–132，§I–IV，特别是(1)–(2)、Definition 5、Theorems 1–3、(16)–(18)、§IV-B/C；**正文分节已读**，未复现实验。
