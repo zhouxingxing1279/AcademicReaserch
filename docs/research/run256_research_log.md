@@ -1,3 +1,7 @@
+**Run256 PR/main CI及安全合并复核（2026-11-02 UTC）：** 研究PR #91 https://github.com/zhouxingxing1279/AcademicReaserch/pull/91 基于main `d807097e7b787bda8627e0d98d48a74b307c531d`；合并前compare ahead=7/behind=0、仅7个预期文件，PR mergeable_state=clean，expected head `7ac8ce169ec93d2884289ded8c42baed05d2db14`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41381714225 **completed/success**，读取完整checkout Python3.13 job日志确认Run249–256聚焦**70/70测试通过、无跳过**，Run249真实配置/step交叉核验、源码编译、精确JSON逐字比对及artifact上传均成功。使用expected-head非强制squash合并至main `02f7b10fd6b7359b8d608094f8e0a2c81b69229e`，重新读取main SHA、PR merged及6个源码/归档/文档Blob确认落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41381772373 **completed/success**，再次读取Python3.13完整job日志确认**70/70通过、无跳过**、配置交叉核验、证书逐字比较和artifact上传成功。**全仓库历史回归未执行**；CI成功不等于数学证明自动正确，更不意味着真实后验无解或物理系统不安全。此补记只更新核验记录，不修改算法或证书。Gate A仍blocked。
+
+---
+
 # Run256 — 独立区间SMF的速度纤维不可收缩性（2026-11-02 UTC）
 
 ## 研究问题与证据级别
