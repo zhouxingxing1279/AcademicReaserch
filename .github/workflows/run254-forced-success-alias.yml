@@ -36,3 +36,4 @@ jobs:
         with:
           name: run254-exact-certificate
           path: results/forced_success_velocity_alias_20261101/checks.json
+# Run254: PR exact-head rerun after documentation-only verification notes.
