@@ -1,0 +1,39 @@
+{
+  "constants": {
+    "G": "187678479/80000000",
+    "R": "3246383/1600000",
+    "T": "981/100",
+    "eps": "1/50",
+    "h": "1/50",
+    "omega60": "1/100",
+    "phi60": "1/125"
+  },
+  "count": 44,
+  "counts": {
+    "10,0": 7,
+    "10,10": 2,
+    "10,5": 4,
+    "15,0": 4,
+    "15,10": 1,
+    "15,5": 2,
+    "5,0": 13,
+    "5,10": 4,
+    "5,5": 7
+  },
+  "lemma": "|v90| <= |yb-ya|/((b-a)*h) + radius(a,b); if |yb-ya| <= threshold(a,b), then |v90| <= G",
+  "limitations": "sufficient only; no exact SMF posterior, information RCI, MPC or infinite safety",
+  "max_gate": "2241376601/4000000000",
+  "min_gate": "138634543/1000000000",
+  "model": "frozen four-state Euler, tau=0, position successes at 60 and selected later packets",
+  "run": "275",
+  "witness": {
+    "a": 75,
+    "b": 90,
+    "displacement": "287130639/400000000",
+    "gate": "2241376601/4000000000",
+    "p90": "1002435321/800000000",
+    "pattern": "MMSMMS",
+    "scope": "SMM outer-box only; actual Run260 posterior membership unproved",
+    "v90": "21739149/8000000"
+  }
+}
