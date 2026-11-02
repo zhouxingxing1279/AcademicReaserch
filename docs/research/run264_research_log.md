@@ -1,3 +1,7 @@
+**Run264 PR CI与安全合并复核（2026-11-02 UTC）：** 研究PR #114 https://github.com/zhouxingxing1279/AcademicReaserch/pull/114；基准main `61c2e7fb1a7cc05343c0d2ff9ac3c626048429fa`，合并前ahead=7/behind=0，7个预期文件，PR mergeable=true，expected head `c53cb6e1d441bf8bc69ee2bdc39f05ddb3702a5a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41434900755 **completed/success**，Python3.13完整checkout Run260–264聚焦**44/44通过、无跳过**，源码编译、真实配置/Run260证书交叉核验和精确JSON逐字比较成功。使用expected-head非强制squash合并main `c743679362e9a29acd5f583d277a019de1677447`；重新读取main SHA、PR merged、验证源码及证书blob确认落地。**main push CI未独立确认、全仓库历史回归未执行**。仅固定历史有限30拍共享开环安全，不是终端信息RCI、递归可行或稳定性；Gate A blocked。
+
+---
+
 # Run264 — 第60–75拍共同备份策略的有限安全证书（2026-11-02）
 
 ## 1. 本轮问题与基准
