@@ -1,3 +1,7 @@
+**Run260 PR/main CI与安全合并独立复核（2026-11-02 UTC）：** PR #103 https://github.com/zhouxingxing1279/AcademicReaserch/pull/103 基于main `f73def4339a94a6f652c3cb32a1d256929022304`，合并前compare ahead=7/behind=0、仅7个预期文件、mergeable_state=clean、expected head `f9f900373d600796bbe79716de765860bed54043`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41404636312 **completed/success**；读取完整Python3.13 job日志确认Run249–260聚焦**106/106通过、无跳过**，源码编译、真实配置交叉核验、Fraction JSON逐字比较及工件上传成功。使用expected-head非强制squash合并至main `fe706304f613057be5677efd7c28860092e9e855`，重新读取main SHA、PR merged及7个文件Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41404691057 **completed/success**；读取完整job日志再次**106/106通过、无跳过**，配置/精确JSON比较和工件上传成功。**全仓库历史回归未执行**。本轮是固定历史的有限15拍共享安全前缀，不是终端信息RCI、无限递归可行/稳定或20ms WCET；**Gate A仍blocked**。
+
+---
+
 # Run260 — 第45拍两类不利后验的15拍共享开环安全桥（2026-11-02 UTC）
 
 ## 研究问题与冻结基准
