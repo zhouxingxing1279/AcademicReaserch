@@ -1,0 +1,49 @@
+{
+  "evidence": "exact Fraction construction plus per-tick physical-hard-box checks",
+  "full_extreme_min_measurement_gap": "52174043/400000000",
+  "full_extreme_position_separation_tick60": "68174043/400000000",
+  "gate_A": "blocked",
+  "last_seven_disturbance_ticks": [
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+  ],
+  "max_common_reading_position_separation": "1/25",
+  "model": "Run260 frozen four-state defined-discrete Euler; fixed T=9.81N, tau=0",
+  "not_certified": [
+    "membership of both trajectories in actual Run260 tick45 posterior",
+    "all-fiber lower bound",
+    "optimal lower bound over all disturbances",
+    "exact SMF/CZ posterior",
+    "15-tick causal return",
+    "MPC solver",
+    "infinite recursive feasibility",
+    "six-state safety",
+    "20ms WCET"
+  ],
+  "packets": "tick45 success y=0; tick50/55 miss; tick60 forced success y=0; angular measurements zero at every tick",
+  "post_success_minus_state": [
+    "-68174043/4000000000",
+    "-22724681/80000000",
+    "0",
+    "0"
+  ],
+  "post_success_noise_minus": "68174043/4000000000",
+  "post_success_noise_plus": "-68174043/4000000000",
+  "post_success_plus_state": [
+    "68174043/4000000000",
+    "22724681/80000000",
+    "0",
+    "0"
+  ],
+  "post_success_position_diameter": "68174043/2000000000",
+  "post_success_velocity_diameter_floor": "22724681/40000000",
+  "proof": "Exact Euler recurrence with phi=omega=tau=0. Symmetric +/-R on last j ticks yields p60=+/-h^2*R*j*(j-1)/2 and v60=+/-j*h*R. For j=7, |p60|<=eps_p and both histories yield y60=0 with distinct legal noise. Earlier angular observations coincide and position packets at 50/55 are absent. Thus any guaranteed posterior for this fiber includes both v60 values. For j=15, |delta p60|>2 eps_p so the two extreme histories cannot share a successful position reading.",
+  "restricted_last_8_burst_position_separation": "22724681/500000000",
+  "run": 270,
+  "scope": "specific legal tick45..60 zero-torque, zero-angular-reading observation fiber; not all Run260 tick45 posteriors"
+}
