@@ -1,3 +1,13 @@
+## Run266 — Le et al. (2011) zonotopic SMF + Tube MPC 分节重读（2026-11-02；既有论文，不增加去重数）
+
+**文献**：Vu Tuan Hieu Le, Cristina Stoica, Didier Dumur, Teodoro Alamo, Eduardo F. Camacho (2011), *Robust Tube-Based Constrained Predictive Control via Zonotopic Set-Membership Estimation*, 50th IEEE CDC-ECC, pp.4580–4585, DOI https://doi.org/10.1109/CDC.2011.6161131 ；作者上传全文 https://www.researchgate.net/publication/254054580_Robust_Tube-Based_Constrained_Predictive_Control_via_Zonotopic_Set-Membership_Estimation 。**核验状态**：[作者上传公开正文分节已读，非IEEE终版逐页比对]。实际核验pp.4580–4585：§III式(1)，§IV Algorithm 1/2、Property 4、式(2)–(22)，§V式(23)–(32)与Assumptions 1–3，§VI Table I；阅读日期2026-11-02。
+
+**问题与方法**：离散LTI、标量每拍输出 y=cᵀx+σv、未知但有界过程扰动和测量噪声，使用zonotope预测/测量条带外包SMF；离线LMI计算估计收缩增益，在线以估计中心和双层误差管做名义Tube MPC。**重要假设与保证**：可控可观；初始估计/跟踪误差集合包含、收紧输入/状态可行、名义正不变终端集合与终端Lyapunov条件成立时，论文给出条件性约束与稳定性论证。**实验**：§VI仅2状态1输入数值系统，N=13；Table I是50个采样时刻的算法累计耗时，不是四旋翼单步WCET。
+
+**局限/关联/可复用技术**：没有四旋翼、位置丢包、非线性sin/推力相关残差或真实tau→v三拍时滞；不可把论文保证直接用于本仓库。可复用Property 4的zonotope-条带外包、S^e⊕S^co双层管束、X⊖S与U⊖KS^co收紧、终端合同。**创新性边界**：zonotope SMF+Tube MPC已存在。**待查**：在仓库15模式失测、隐藏速度、物理力矩时滞下，是否能找到共同非空终端信息RCI及20ms预算内实现。对应新数学证据见 docs/research/run266_research_log.md。原总账Le条目保留，本文只是追加实读范围和假设，不新增去重篇数。
+
+---
+
 ## Run263 — Li与Savla的状态/参数SMF＋MPC集合嵌入终端证明（2026-11-02；新增去重第111篇）
 
 - **题名/作者/出版与链接**：Zhexian Li, Ketan Savla, *Output-feedback adaptive model predictive control for ramp metering: a set-membership approach*；arXiv:2308.05265（2023初稿、2025修订）https://arxiv.org/abs/2308.05265；作者出版页 https://zhexianli-usc.github.io/publications/ 将其列为2026年 *Automatica*，DOI https://doi.org/10.1016/j.automatica.2026.113290；期刊终版未逐页核验，期刊卷期页码待核实。
