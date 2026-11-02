@@ -1,0 +1,39 @@
+name: Run271 Run260 posterior membership witness
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run271_run260_membership.py'
+      - 'verification/test_run271_run260_membership.py'
+      - 'results/run271_run260_membership_20261102/checks.json'
+      - '.github/workflows/run271-run260-membership.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run271_run260_membership.py'
+      - 'verification/test_run271_run260_membership.py'
+      - 'results/run271_run260_membership_20261102/checks.json'
+      - '.github/workflows/run271-run260-membership.yml'
+
+jobs:
+  run271:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile
+        run: python -m py_compile verification/check_run271_run260_membership.py verification/test_run271_run260_membership.py
+      - name: Relevant historical regression plus Run271
+        run: |
+          PYTHONPATH=verification python -m unittest -v \
+            test_run255_posterior_bridge \
+            test_run259_rolling_anchor \
+            test_run260_conditional_shared_bridge \
+            test_run270_recovered_packet_fiber \
+            test_run271_run260_membership
+      - name: Frozen configuration and exact archive
+        run: |
+          python verification/check_run271_run260_membership.py --root . --output /tmp/run271_checks.json
+          diff -u results/run271_run260_membership_20261102/checks.json /tmp/run271_checks.json

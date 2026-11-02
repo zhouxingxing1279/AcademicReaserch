@@ -1,3 +1,7 @@
+**Run271 MMS真实历史成员资格（2026-11-02 UTC；PR/CI/main合并待独立核验）：** 以main `701b22c02d4d6c01396b14f8c87bb630d63b8a6d`为基准，显式构造Run254零真值→Run255第30–34拍脉冲（姿态角最大1/1250）→第30–44拍合法横向扰动`r=T sin(phi)`精确抵消横向加速度→第45拍真实零状态；第35/40/45包模式为**MMS**，第50/55 miss、60 success合法；**SMM接续50/55双miss不合法**。继承Run270末7拍±R两真值，证明Run260 **MMS→MMS**同一完整观测纤维第60拍可靠后验速度直径至少`0.568117025m/s`。本轮补齐真实历史成员资格，不是所有纤维下界、精确CZ、15拍因果终端回返、MPC、无限安全或六状态证书；**Gate A=blocked**。新增Run271源码、8项隔离测试（本地8/8通过）、Fraction JSON、CI workflow及日志；真实checkout/PR CI待核验。重读Yang/Ozay(2021) DOI https://doi.org/10.1016/j.ifacol.2021.08.481 PDF pp.2–5，唯一总账不增加去重数。下一步唯一任务：针对Run260 MMS第60拍**完整后验外包**检验15拍共享因果安全回返。详见`docs/research/run271_research_log.md`。
+
+---
+
 **Run270 PR CI与main安全合并独立复核（2026-11-02 UTC）：** 研究PR #132 https://github.com/zhouxingxing1279/AcademicReaserch/pull/132 基于main `2650cfe41fab29e018a9a2f660e69ede7e43277b`，合并前compare ahead=7/behind=0、严格7个预期文件、PR mergeable=true，expected head `268b2bf2db437217b2355cc97d8e323704b64d8a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41489008989 **completed/success**；完整Python3.13 checkout聚焦Run26x/270 **91/91测试通过**，源码编译、真实冻结配置交叉核验及Run270 Fraction归档JSON逐字比较成功。expected-head非强制squash合并到main `3f6a73c2d377e54688c620f6c12fdd9fc3afa843`，重新读取main SHA、PR merged及源码/测试/证书/日志/唯一总账/检查点Blob确认落地；本地生成5个工件Git Blob SHA与远端完全一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行**。仅特定成功读数纤维的速度直径必要下界，未证明Run260实际后验成员资格、15拍信息终端RCI、MPC闭环或无限安全；**Gate A=blocked**。
 
 ---
