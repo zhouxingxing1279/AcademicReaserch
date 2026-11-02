@@ -1,0 +1,38 @@
+name: Run255 full posterior finite bridge
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run255_posterior_bridge.py'
+      - 'verification/test_run255_posterior_bridge.py'
+      - 'results/run255_posterior_bridge_20261101/checks.json'
+      - '.github/workflows/run255-posterior-bridge.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run255_posterior_bridge.py'
+      - 'verification/test_run255_posterior_bridge.py'
+      - 'results/run255_posterior_bridge_20261101/checks.json'
+      - '.github/workflows/run255-posterior-bridge.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused regressions Run249-255
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge test_forced_success_velocity_alias test_run255_posterior_bridge
+      - name: Compile and compare exact certificate with real config
+        run: |
+          python -m py_compile verification/check_run255_posterior_bridge.py verification/test_run255_posterior_bridge.py
+          cd verification
+          PYTHONPATH=. python check_run255_posterior_bridge.py --root .. --output /tmp/run255_checks.json
+          cmp /tmp/run255_checks.json ../results/run255_posterior_bridge_20261101/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run255-exact-certificate
+          path: results/run255_posterior_bridge_20261101/checks.json
