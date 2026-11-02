@@ -1,0 +1,51 @@
+{
+  "does_not_assert": [
+    "Run260 tick60 posterior contains witness",
+    "terminal information RCI exists or does not exist",
+    "six-state or variable-thrust guarantee",
+    "MPC or SMF implemented",
+    "20ms worst-case execution"
+  ],
+  "gate_A": "blocked",
+  "guard": "v0 >= -V+3hR+hT[sin(phi)+sin(phi+h*omega)+sin(phi+2h*omega-delta)] and v0 <= V-3hR+hT[sin(phi)+sin(phi+h*omega)+sin(phi+2h*omega+delta)]; rational Taylor lower/upper widen these necessary bounds",
+  "negative_tilt_necessary_interval": [
+    "-4411985862769461228425056294156400933/1502037048339843750000000000000000000",
+    "605065812730064461055523314975353831/214576721191406250000000000000000000"
+  ],
+  "parameters": {
+    "J": "1/50",
+    "R": "3246383/1600000",
+    "T": "981/100",
+    "U": "2/25",
+    "delta_phi2": "1/625",
+    "h": "1/50"
+  },
+  "proof": "phi1=phi0+h*omega0; phi2=phi0+2h*omega0+(h^2/J)*tau0; sin monotone for |phi2|<1; choose r0=r1=r2=+R or -R; bound tau0 via +/-U; bound sin by degree7 Taylor +/- |x|^9/9!",
+  "quantifiers": "for every legal torque policy and all measurement/feedback histories, one admissible three-tick disturbance sign causes failure for a state outside the necessary interval",
+  "run": 266,
+  "scope": "frozen_4state_defined_discrete_euler_fixed_T9.81_only",
+  "witness": {
+    "necessary_v0_interval": [
+      "-4411985862769461228425056294156400933/1502037048339843750000000000000000000",
+      "605065812730064461055523314975353831/214576721191406250000000000000000000"
+    ],
+    "omega": "0",
+    "p0": "0",
+    "p3_upper": "586689688135375309/3360000000000000000",
+    "phi": "-1/10",
+    "v0": "57/20",
+    "v1_bounds": [
+      "586689688135375091/201600000000000000",
+      "586689688135375309/201600000000000000"
+    ],
+    "v2_bounds": [
+      "299409688135375091/100800000000000000",
+      "299409688135375309/100800000000000000"
+    ],
+    "v3_guaranteed_lower": "650208006239662101444476685024646169/214576721191406250000000000000000000"
+  },
+  "zero_attitude_necessary_interval": [
+    "-603198330297473523633041162862731/209547579288482666015625000000000",
+    "603198330297473523633041162862731/209547579288482666015625000000000"
+  ]
+}
