@@ -1,3 +1,11 @@
+## Run258定向重读（2026-11-02；Scott等2016，既有条目不新增去重）
+
+**真实题名/作者/发表：** Joseph K. Scott、Davide M. Raimondo、Giuseppe Roberto Marseglia、Richard D. Braatz (2016), *Constrained zonotopes: A new tool for set-based estimation and fault detection*, *Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036 ，作者公开PDF https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**实际阅读：** 2026-11-02，PDF印刷pp.126–130，§2 Definitions 1–2、§3 Definition 3/Propositions 1–3/Theorem 1、§4开头；分节重读，未宣称全篇重读。
+
+**研究问题/模型/方法：** 线性离散系统未知但有界过程/测量噪声下的**状态**集员估计与故障检测，不是参数估计；线性状态转移、已知输入、线性观测，CZ约束生成元表示保留状态相关性。无四旋翼状态向量、无T/τ物理输入、无专用传感器/位置丢包机制；不是MPC/Tube MPC，亦无四旋翼硬约束、终端RCI、稳定性或无人机实飞。**重要结论/假设：** Proposition 1式(11)–(13)对线性映射、Minkowski和广义测量交集给出CZ精确运算；Proposition 2的非空/成员检查需要LP；Theorem 1给出不限复杂度时CZ与凸多胞体的表示等价；§4降阶必须保持外包包含。无20ms WCET证据。**关联/复用：** 关联状态及success读数广义交集；不能把该论文线性SMF定理冒充非线性Euler或MPC终端安全证明。**本轮独立结果：** Run258利用第30拍历史位置锚点，使第35拍miss后第40拍success零读数速度宽度可靠上界0.857482532595m/s，MM仍3.5256474675m/s；详见docs/research/run258_research_log.md。**局限/待查：** 固定复杂度CZ能否跨强制第45拍success保持全部合法测量树可靠包含、满足共享因果安全前驱和20ms预算？**去重论文总数仍105。**
+
+---
+
 ## 背景第11轮 — Niknejad等（2025）CZ误差观测器＋Tube MPC与间歇测量假设审计（2026-11-02；新增去重第105篇）
 
 - **题名/作者/年份/来源**：Nariman Niknejad, Gokul S. Sankar, Bahare Kiumarsi, Hamidreza Modares, *Robust Model Predictive Control Design for Autonomous Vehicles with Perception-based Observers*, 2025, arXiv:2509.05201, https://arxiv.org/abs/2509.05201 （2025-09-05）；**未核验正式发表场所和DOI**，仅按预印本登记。
