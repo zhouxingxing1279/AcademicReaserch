@@ -1,3 +1,7 @@
+**Run253完整checkout、PR/main CI及安全合并复核（2026-11-02 UTC）：** 研究PR #82 https://github.com/zhouxingxing1279/AcademicReaserch/pull/82 ，基准main `265a70c0bc9247d478b114e37c050aae808c794e`，合并前compare ahead=7/behind=0，7个预期文件，PR head `e6f5167128ad42bd2c6e31c8cc7a4b10baf0977a`，mergeable_state=clean。PR Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41365844668 **completed/success**，读取完整checkout Python3.13.17 job日志确认Run249–253聚焦 **44/44通过、无跳过**，Run251/252和真实配置交叉核验、`py_compile`、精确JSON逐字比对及artifact上传成功。expected-head非强制squash合并至main `4a25e389f1ab4d7d2730dc308407b22bff21f6e3`，重新读取main SHA、PR merged和新增源码/证书/日志Blob核验落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41365922605 **completed/success**，完整checkout再次**44/44通过、无跳过**，证书一致且artifact上传成功。此补记仅更新验证证据，不改变算法/数学证书；全仓库历史回归、整个SMF后验终端闭合、无限递归可行、六状态安全和20ms WCET仍未认证。Gate A仍blocked。
+
+---
+
 # Run253 — 强制位置恢复测量前的非零共享备份与双轨迹可区分性（2026-11-01）
 
 ## 基线、唯一问题和证据范围
