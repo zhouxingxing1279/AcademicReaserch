@@ -1,3 +1,7 @@
+**Run272 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #139 https://github.com/zhouxingxing1279/AcademicReaserch/pull/139 以main `e77fd13e31dd72b834eae1704cbc2245a7a8d5ac`为基准，合并前compare ahead=7/behind=0，严格7个预期文件、无删除，PR mergeable=true，expected head `d604785090a0389b3d3bc04a40b899572c3147f8`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41507301427 **completed/success**；读取Python3.13.17完整checkout job日志确认Run270/271/272聚焦回归**24/24通过**、源码编译、真实冻结配置及Run271证书交叉核验、Run272 Fraction JSON逐字比较通过。expected-head非强制squash合并至main `e4cad987b4383df43d21310941466a4ac41c4469`，再次读取main SHA、PR merged及6个关键文件Blob确认落地；本地代码、测试、JSON的Git Blob SHA与远端一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行。** 本轮仅证明特定Run260后验纤维的重复混叠与双真值15拍安全前缀，不是全后验终端信息RCI、MPC或无限递归安全；**Gate A=blocked**。
+
+---
+
 **Run272 第60–75拍双失测重复观测混叠（2026-11-02；PR/CI/main状态待独立复核）：** 继承Run271已认证属于Run260真实MMS→MMS观测历史的第60拍双真值，冻结四状态Euler、共同合法`tau=0`、未来65/70位置miss、75成功读数零。构造60–74拍对抗扰动`r^+=-R,r^- =+R`，精确Fraction证明第75拍两条真实轨迹仍共享全部观测，速度后验直径必要下界`0.6492766m/s`（60拍见证为`0.568117025m/s`）；若65或70成功，该双真值最小位置差`0.074666809m>0.04m`必被区分，故不能忽略丢包分支。共同零力矩下，仅**这两个初始真值**的全部未来有界扰动15拍安全，`|p|<=0.18747861825m,|v|<=0.892755325m/s`；不代表Run260完整后验或终端信息RCI。新增源码、8项隔离测试（本地8/8通过）、精确JSON、CI workflow、日志；真实完整checkout与PR CI待核验。新读She/Wu(2023) *IEEE Access* DOI https://doi.org/10.1109/ACCESS.2023.3324923 接受稿pp.1–7 §II–V，其Bernoulli丢包和期望LMI结论**不可当作确定性所有路径硬安全保证**；唯一论文总账新增去重1篇。**没有完整SMF/CZ、MPC求解、15拍终端回返、无限递归可行、六状态物理安全或20ms WCET；Gate A=blocked**。唯一下一步：对第60拍**完整可靠后验外包**及65/70 success/miss所有分支检验共享因果安全前驱和终端信息族回返。详见`docs/research/run272_research_log.md`。
 
 ---
