@@ -1,3 +1,14 @@
+## Run274 — de Souza等(2020)区间观测器＋MPC终端条件再核验（2026-11-02；既有DOI，不增加去重）
+
+- **书目与链接**：Alex Reis de Souza, Denis Efimov, Tarek Raïssi, Xubin Ping, *Robust Output Feedback MPC: An Interval-Observer Approach*, *59th IEEE Conference on Decision and Control* (CDC 2020), pp.2529–2534, DOI https://doi.org/10.1109/CDC42340.2020.9304070；作者公开全文 https://www.researchgate.net/publication/343994166_Robust_Output_Feedback_MPC_An_Interval-Observer_Approach 。原书目已见背景第12轮，按DOI去重。
+- **实际阅读范围/状态/日期**：2026-11-02重读公开可解析作者正文§II–V（原版面pp.2–6），重点式(5)–(16)、Theorems 1–3、Propositions 1–2、Assumptions 1–5、§V CSTR数值例；**作者全文分节重读**，未比对IEEE排版终版，论文Theorem 3证明原文省略，未独立复现LMI或仿真。
+- **研究问题/模型/控制输入**：一般离散LTI系统 `x+=Ax+Bu+w,y=Cx+v`，有界状态/量测扰动，§V为2状态CSTR浓度与温度、冷却流温度单输入、温度单输出；无四旋翼T/τ、执行器分配或间歇位置量测。
+- **状态SMF、MPC与约束**：式(5)逐拍量测区间观测器（状态而非参数估计），式(7)不依赖未来读数的区间预测器；中心二次MPC、预测域N=10、状态和输入硬盒、终端集合与局部反馈双模式切换。Theorem 1需`A-LC`非负且Schur，Proposition 1区间嵌套另需式(11)，Theorem 3在Assumptions 1–5和终端正不变、常值扰动界等条件下声称递归可行、终端中心ISS、硬约束满足。
+- **主要结论/局限/可复用技术**：CSTR数值仿真比较IO-MPC与Tube-MPC，不能证明本仓库20ms WCET或四旋翼实飞。每拍完整输出、LTI/非负观测器和终端假设均与本项目5拍位置机会及两次丢包不同；其状态区间可用于说明“后验包含→预测硬约束→终端可移位”是三个独立合同，不得用Run274的30拍共享安全代替Theorem 3。**待查**：第90拍全部合法观测纤维的隐藏速度是否进入Run274的15拍充分门槛；不满足时能否用条件化力矩反馈恢复。
+- **另核验但未阅读**：Alex dos Reis de Souza, Denis Efimov, Tarek Raïssi (2022), *Robust Output Feedback MPC for LPV Systems Using Interval Observers*, *IEEE TAC* 67(6):3188–3195, DOI https://doi.org/10.1109/TAC.2021.3099449；本轮仅出版社摘要/书目核验，**未读全文，不计入已读文献**。
+
+---
+
 ## Run273 — Qiu等(2020)状态SMF＋输出反馈MPC终端RPI条件再核验（2026-11-02；历史已读，不新增去重）
 
 - **书目**：Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad, *Output feedback model predictive control based on set-membership state estimation*, *IET Control Theory & Applications* 14(4):558–567 (2020), DOI https://doi.org/10.1049/iet-cta.2019.0881；出版社开放全文 https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。
