@@ -1,0 +1,50 @@
+{
+  "acceleration_width_increment_per_tick": "3324863/40000000",
+  "angle_observation_required_each_tick": true,
+  "branches": {
+    "MMS": {
+      "MMS": {"tick60_velocity_width_cap": "13974589/15000000"},
+      "MSM": {"tick60_velocity_width_cap": "101822123/80000000"},
+      "MSS": {"tick60_velocity_width_cap": "41974589/40000000"},
+      "SMM": {"tick60_velocity_width_cap": "75223219/40000000"},
+      "SMS": {"tick60_velocity_width_cap": "68573493/80000000"},
+      "SSM": {"tick60_velocity_width_cap": "7324863/5000000"},
+      "SSS": {"tick60_velocity_width_cap": "41974589/40000000"}
+    },
+    "SMM": {
+      "SMM": {"tick60_velocity_width_cap": "105771301/60000000"},
+      "SMS": {"tick60_velocity_width_cap": "68573493/80000000"},
+      "SSM": {"tick60_velocity_width_cap": "7324863/5000000"},
+      "SSS": {"tick60_velocity_width_cap": "41974589/40000000"}
+    }
+  },
+  "evidence": "EXACT_RATIONAL_ALL_READINGS_POSITION_EPOCH_VELOCITY_WIDTH_CAP",
+  "future_packet_patterns": {
+    "MMS": ["MMS", "MSM", "MSS", "SMM", "SMS", "SSM", "SSS"],
+    "SMM": ["SMM", "SMS", "SSM", "SSS"]
+  },
+  "gate_A": "blocked",
+  "not_certified": [
+    "absolute state safety beyond Run260 finite bridge",
+    "full H-rep/CZ posterior",
+    "MPC controller",
+    "terminal information-state RCI",
+    "recursive feasibility",
+    "closed-loop stability",
+    "20ms WCET"
+  ],
+  "position_opportunities": [50, 55, 60],
+  "proof_kind": "symbolic width-only outer bound via exact discrete position-velocity identity, 1-Lipschitz sin, packet automaton and induction; no enumeration of continuous measurement values",
+  "run": 263,
+  "scope": "Run260 SMM/MMS packet histories at tick45; fixed thrust four-state Euler; every-tick successful bounded-noise attitude readings from anchor; arbitrary nonempty position readings and legal future packets",
+  "success_velocity_width_caps": {
+    "10": "68573493/80000000",
+    "15": "13974589/15000000",
+    "5": "41974589/40000000"
+  },
+  "tick60_mode_max_velocity_width_caps": {
+    "MMS": "75223219/40000000",
+    "SMM": "105771301/60000000"
+  },
+  "tick60_uniform_velocity_width_cap": "75223219/40000000"
+}
