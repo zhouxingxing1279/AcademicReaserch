@@ -1,3 +1,17 @@
+## 背景模型选型第7轮 — Lee、Leok、McClamroch（2013）SE(3)四旋翼鲁棒跟踪（2026-11-01；新增分节已读1篇，去重100→101篇）
+
+**题名/作者/正式出版：** *Nonlinear Robust Tracking Control of a Quadrotor UAV on SE(3)*；Taeyoung Lee、Melvin Leok、N. Harris McClamroch；*Asian Journal of Control* 15(2):391–408 (2013；2012-07-05在线)，DOI https://doi.org/10.1002/asjc.567 。**公开原文：** arXiv:1109.4457v1 (2011-09-21)，https://arxiv.org/pdf/1109.4457 。**实际阅读日期/范围/状态：** 2026-11-01，核对公开预印本PDF pp.1–6 §II式(1)–(6)、§III Propositions 1–2、§IV式(20)–(39)/Propositions 3–4、§V数值例子；**分节已读**，未将2013期刊终版或附录全文冒充逐式核验。出版信息经期刊 https://onlinelibrary.wiley.com/doi/abs/10.1002/asjc.567 交叉核对。
+
+**研究问题/方法/真实模型与输入：** 四旋翼在平移/转动有界不确定性下的姿态和位置鲁棒跟踪；`(x3,v3,R∈SO(3),Ω3)`是12维**局部独立坐标**、6个物理自由度的刚体模型（旋转矩阵不是9个独立角度状态）；输入为总推力`f`与三轴力矩`M`，由四桨推力经式(1)混控。姿态模式使用`(R,Ω)`，位置模式保留`fRe3`的耦合动力学。连续时间几何非线性反馈与模式切换，**不是MPC/Tube MPC**。
+
+**测量、SMF、噪声/丢包：** 反馈直接使用`x,v,R,Ω`，论文未建立部分观测测量矩阵、速度隐藏、位置丢包/延迟、测量噪声或SMF/CZ（既非状态SMF也非参数SMF）；“output tracking”不等于output-feedback estimation。扰动假设`||Δx||≤δx,||ΔR||≤δR`，不是仓库控制相关残差界。
+
+**约束/重要定理/结论：** Propositions 2–4在姿态初始域、参考光滑性、增益及扰动界等前提下给出姿态/位置跟踪误差一致最终有界；没有证明本仓库状态/执行器硬盒的逐拍安全、饱和后递归可行、SMF可靠集合包含或MPC终端不变性。论文给四桨混控公式，但没有将仓库的`T,τ`硬饱和和控制依赖残差纳入定理。**实验：** §V数值仿真（椭圆螺旋跟踪、倒置姿态恢复），未核验实飞或20ms最坏时延。
+
+**与本课题关联/可复用与局限：** 推力方向耦合`fRe3`支持六状态平面`Tcosφ`物理闭合；姿态/位置模式支持分层方案的背景，但需独立认证内环误差与硬约束。已有鲁棒四旋翼几何跟踪不构成本课题新颖性；潜在创新在有噪间歇位置SMF/CZ与共享因果MPC安全信息状态。**待查问题：** 在原六状态hover初始盒和success/miss后验下，是否存在非空共享推力一拍前驱，并能进一步形成可移位终端信息核？**研究日志：** [背景第7轮](../research/model_selection/background_run_20261101_1634_lee_vertical_fiber.md)。
+
+---
+
 ## Run253 — Yang与Ozay（2021）强制恢复测量与共享因果前缀重读（2026-11-01；去重100篇不变）
 
 **题名/作者/出版：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay；ADHS 2021，*IFAC-PapersOnLine*，pp.97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，公开原文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**本轮实际阅读：** 2026-11-01再次核对§3式(3)–(7)、§4.2–4.4（含Proposition 4/5），此前Run248/251已分节阅读，**不新增论文去重数**。
