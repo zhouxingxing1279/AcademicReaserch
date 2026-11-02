@@ -1,3 +1,7 @@
+**Run257 PR/main CI及安全合并复核（2026-11-02 UTC）：** 研究PR #94 https://github.com/zhouxingxing1279/AcademicReaserch/pull/94 基于main `4bbe6ab7e579ae1f48f4c1dd58afaa7f6d07b5c9`，合并前compare ahead=9/behind=0，严格仅7个预期文件，PR mergeable_state=clean，expected head `09021e7f50bd1280fbe31e6f759301e3773f0f4a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41386737723 **completed/success**；读取完整Python3.13 job日志确认Run249–257聚焦**78/78通过、无跳过**，源码编译、真实Run255/256与配置交叉核验、精确JSON逐字比较和artifact上传成功。使用expected-head非强制squash合并至main `d6a7cb3ac235959880962fd57cf3d675a6750b01`，重新读取main SHA、PR merged及7个文件Blob核验落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41386789339 **completed/success**；完整Python3.13 job日志再次**78/78通过、无跳过**、配置交叉核验与JSON逐字比较成功。**全仓库历史回归未执行**，CI通过不代表关联后验已完整实现、无限时域终端核或稳定性得到证明。本补记仅记录验证状态，不改变算法、论文数量或数学证书；**Gate A仍blocked**。
+
+---
+
 # Run257 — 两次位置条带保留 p-v 关联的严格速度投影界（2026-11-02 UTC）
 
 ## 本轮瓶颈与基准
