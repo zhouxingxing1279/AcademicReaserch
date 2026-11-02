@@ -1,0 +1,44 @@
+name: Run275 two-packet velocity gate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run275_two_packet_velocity_gate.py'
+      - 'verification/test_run275_two_packet_velocity_gate.py'
+      - 'results/run275_two_packet_velocity_gate_20261102/checks.json'
+      - '.github/workflows/run275-two-packet-velocity-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run275_two_packet_velocity_gate.py'
+      - 'verification/test_run275_two_packet_velocity_gate.py'
+      - 'results/run275_two_packet_velocity_gate_20261102/checks.json'
+      - '.github/workflows/run275-two-packet-velocity-gate.yml'
+jobs:
+  exact-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile, regression and archive equality
+        run: |
+          python -m py_compile verification/check_run275_two_packet_velocity_gate.py verification/test_run275_two_packet_velocity_gate.py
+          cd verification
+          python -m unittest -v test_run275_two_packet_velocity_gate.py
+          python check_run275_two_packet_velocity_gate.py --output /tmp/run275-checks.json
+          cmp /tmp/run275-checks.json ../results/run275_two_packet_velocity_gate_20261102/checks.json
+      - name: Cross-check frozen physical and sensing parameters
+        run: |
+          python - <<'PY'
+          import json
+          from fractions import Fraction as F
+          x=json.load(open('configs/planar_baseline.json'))
+          assert F(str(x['plant']['dt_s']))==F(1,50)
+          assert F(str(x['plant']['gravity_m_s2']))==F(981,100)
+          assert F(str(x['plant']['inertia_kg_m2']))==F(1,50)
+          assert x['sensing']['position_period_ticks']==5
+          assert x['sensing']['max_consecutive_missed_packets']==2
+          assert F(str(x['sensing']['observed_noise_halfwidth']['px']))==F(1,50)
+          print('frozen config cross-check OK')
+          PY
