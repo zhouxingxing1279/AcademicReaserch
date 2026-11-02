@@ -1,3 +1,7 @@
+**Run262 PR/main CI与安全合并独立复核（2026-11-02 UTC）：** PR #108 https://github.com/zhouxingxing1279/AcademicReaserch/pull/108 基于main `e9d53d4941f6e07c69c6aa4eb32ba8e96b3b215c`，合并前compare ahead=7/behind=0、仅7个预期文件、PR mergeable_state=clean、expected head `a935d223db525f1fc2311563827bb7369a54555a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41421411318 **completed/success**；完整Python3.13.17 checkout聚焦Run260–262 **26/26通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较和工件上传成功。使用expected-head非强制squash合并至main `f5695f5dc0f81413f7a10eb7a3fe7914a4488deb`，重新读取main SHA、PR merged和新增源码/日志Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41421478138 **completed/success**；完整job日志再次**26/26通过、无跳过**、配置/精确JSON比较和工件上传成功。**全仓库历史回归未执行**。本轮证书只排除四状态冻结模型中包含原点、速度带`|v|<=0.12`的候选RCI，不否定`|v|<=3`可生存性或任何反馈终端信息RCI；**Gate A仍blocked**。
+
+---
+
 # Run262 — 悬停点三拍力矩权限时滞与终端速度带必要宽度（2026-11-02）
 
 ## 1. 远端基准、唯一瓶颈、证据级别
