@@ -1,3 +1,13 @@
+## Run253 — Yang与Ozay（2021）强制恢复测量与共享因果前缀重读（2026-11-01；去重100篇不变）
+
+**题名/作者/出版：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay；ADHS 2021，*IFAC-PapersOnLine*，pp.97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ，公开原文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**本轮实际阅读：** 2026-11-01再次核对§3式(3)–(7)、§4.2–4.4（含Proposition 4/5），此前Run248/251已分节阅读，**不新增论文去重数**。
+
+**研究问题/方法/假设/结论：** 在自动机约束的完整状态测量丢失下，利用string automaton、因果共享开环前缀及产品系统安全游戏求不变核；成功测量为完整无噪状态`y=x`，失败为无读数；其Proposition 4/5有紧集、连续性及Assumption 1等条件。**局限：** 非四旋翼、非有噪位置-only SMF/CZ、无本仓库固定推力四状态控制器、无20ms时限认证；不能直接迁移其无限时域不变核结论。
+
+**与课题关联/可复用技术：** 丢包自动机和控制前于未知success/miss的量词顺序。Run253在Run251/252特定真实双轨迹上，精确证明第25–30拍非零共享力矩有限安全及第30拍强制成功位置读数必然区分两路径（位置差至少0.29623244875m，噪声读数差至少0.25623244875m）；这是**本仓库独立数学证书，不是该论文结论**。**待查问题：** 第30拍各成功分支能否对全部SMF一致状态建立非空后继闭合终端信息集合？**日志：** [Run253](../research/run253_research_log.md)。
+
+---
+
 ## Run252 — Cosner等（2021）测量鲁棒CBF与安全备份（2026-11-01；新增分节已读1篇，去重99→100篇）
 
 **真实题名/作者：** *Measurement-Robust Control Barrier Functions: Certainty in Safety with Uncertainty in State*；Ryan K. Cosner、Andrew W. Singletary、Andrew J. Taylor、Tamás G. Molnár、Katherine L. Bouman、Aaron D. Ames。**发表：** 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2021)，DOI https://doi.org/10.1109/IROS51168.2021.9636584 ，arXiv:2104.14030，作者公开正文 https://arxiv.org/pdf/2104.14030 （v1，2021-04-28）。**阅读日期/层级：** 2026-11-01，实际核对六页预印本§II-A/B、§III-A/B（Theorems 2–3、式(13)–(17)）及§IV实验；**分节已读**，未对IEEE终版逐式比对。
