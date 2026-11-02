@@ -1,0 +1,33 @@
+name: Run270 post-success observation-fiber floor
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run270_recovered_packet_fiber.py'
+      - 'verification/test_run270_recovered_packet_fiber.py'
+      - 'results/run270_recovered_packet_fiber_20261102/checks.json'
+      - '.github/workflows/run270-recovered-packet-fiber.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run270_recovered_packet_fiber.py'
+      - 'verification/test_run270_recovered_packet_fiber.py'
+      - 'results/run270_recovered_packet_fiber_20261102/checks.json'
+      - '.github/workflows/run270-recovered-packet-fiber.yml'
+
+jobs:
+  run270:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile
+        run: python -m py_compile verification/check_run270_recovered_packet_fiber.py verification/test_run270_recovered_packet_fiber.py
+      - name: Focused Run26x/270 regression
+        run: PYTHONPATH=verification python -m unittest discover -s verification -p 'test_run2[67]*.py' -v
+      - name: Frozen config and exact rational archive
+        run: |
+          python verification/check_run270_recovered_packet_fiber.py --root . --output /tmp/run270_checks.json
+          diff -u results/run270_recovered_packet_fiber_20261102/checks.json /tmp/run270_checks.json
