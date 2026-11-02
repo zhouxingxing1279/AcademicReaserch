@@ -1,3 +1,14 @@
+## 背景第19轮 — Bicego等(2020)四旋翼逐桨推力/导数约束NMPC实飞（2026-11-02；新论文）
+
+- **题名/作者/年份/出版**：Davide Bicego, Jacopo Mazzetto, Ruggero Carli, Marcello Farina, Antonio Franchi, *Nonlinear Model Predictive Control with Enhanced Actuator Model for Multi-Rotor Aerial Vehicles with Generic Designs*, *Journal of Intelligent & Robotic Systems* 100:1213–1247 (2020; online 2020-09-26), DOI https://doi.org/10.1007/s10846-020-01250-9 。作者公开全文 arXiv:1911.08183 https://arxiv.org/abs/1911.08183 。2019初稿题名 *Nonlinear Model Predictive Control with Actuator Constraints for Multi-Rotor Aerial Vehicles* 是同一arXiv编号/同一论文，按DOI/题名合并去重；**不能误写为arXiv:1911.08175**。
+- **阅读状态/范围/日期**：2026-11-02，[作者公开正文分节已读；出版社书目已核验；未与期刊终版逐页比对]。实际核验§2.1–2.3式(1)–(13)、§3/3.1式(22)–(34)、§4.1–4.2式(35)–(40)及真实四旋翼实验、§6结论与附录G辨识；§5其他机型仿真定向浏览。非论文代码复现或飞行复现。
+- **研究问题/物理模型**：真实欠驱动四旋翼全耦合6自由度刚体控制，优化状态 `x=[p3,v3,η3,ω3,γ4]∈R16`，其中`γ=(f1,f2,f3,f4)`为逐桨推力状态，16维不等于16自由度；Euler 3-2-1姿态，固定步长RK4离散，避开俯仰奇异。式(2) Newton–Euler，式(5) `f_i=c_f w_i²`，式(6) `[F_body;τ_body]=Gγ`，UDT四旋翼`rank(G)=4`，机体系仅z方向推力；忽略陀螺、叶片挥舞及桨叶诱导阻力等气动效应。
+- **控制输入/执行器/可复用方法**：`u=dotγ`（四桨推力变化率）为直接NMPC输入；逐桨非负推力上下界与**状态相关的推力变化率**由单电机/ESC斜坡辨识、力跟踪误差阈值和插值获得；优化后`dotγ`积分成`γ`、反算`w=sqrt(f/c_f)`、经串口传机载ESC。式(26)–(27)确实将推力和推力导数限制写入OCP，优于仅在级联外环后饱和虚拟姿态；但式(33)–(34)、(40)将未来导数界按当前桨力`f_{i,k}`冻结以保持QP线性，且约束可使用slack软化。**这些是物理来源的名义约束，不构成严格鲁棒硬约束保证**。
+- **量测/不确定性**：MoCap位置与姿态、机载陀螺角速度、ESC转速；速度由MoCap位置多样本最小二乘拟合，推力由转速模型换算；加速度计因偏置未融合。控制器按全状态可测设计，无SMF/CZ、间歇位置测量、丢包自动机、速度可靠后验或明确有界误差集合；辨识阈值是经验跟踪准则，不是确定性最坏误差界。
+- **MPC结构/求解器/约束/终端**：全耦合NMPC；tracking cost含位置/速度/加速度/姿态/角速度/角加速度及终端二次惩罚，multiple-shooting、RTI单次SQP、partial sensitivity update、MATMPC/CasADi、qpOASES；预测时域1s、N=10、网格0.1s；实际控制>200Hz；四旋翼平均求解3.5ms（**地面站**i7-6700HQ，不是板载WCET）。超时取上一轮预测输入下一项作为工程备份。无可核验终端信息RCI；作者明确不提供正式闭环稳定性证明，slack工程策略不能推出严格递归硬约束可行性。
+- **实验结论/负面结果**：真实四旋翼chirp与位置阶跃实验，chirp峰值横向加速度5.85m/s²；人为放大推力导数限制系数至1.75时约84s失稳并中止，桨力值仍未饱和而导数接近界。实飞支持速率限制重要性，但不是数学上最坏扰动安全定理；另有六旋翼/可倾桨/故障仿真，不能把六旋翼状态或输入权限当四旋翼。
+- **局限/与课题关系/待查**：已证明**直接逐桨约束NMPC实飞并非创新空白**，却没有本课题有噪位置丢包SMF/CZ、共享因果输入、状态硬盒收紧或无限终端安全。平面6状态`(p_x,p_z,v_x,v_z,φ,ω)`与`(T,τ)`仍条件性首选；未来须审计`(T,τ)→γ`的非负/饱和/变化率联合可实现域和跟踪误差有界合同。待查：是否有原始四旋翼论文给出可证明的**联合分配可实现集合**及其在间歇位置量测下的鲁棒收紧/递归可行性？详细证据见 `docs/research/model_selection/background_run_20261102_1335_bicego_actuator_nmpc.md`。
+
 ## Run266 — Le et al. (2011) zonotopic SMF + Tube MPC 分节重读（2026-11-02；既有论文，不增加去重数）
 
 **文献**：Vu Tuan Hieu Le, Cristina Stoica, Didier Dumur, Teodoro Alamo, Eduardo F. Camacho (2011), *Robust Tube-Based Constrained Predictive Control via Zonotopic Set-Membership Estimation*, 50th IEEE CDC-ECC, pp.4580–4585, DOI https://doi.org/10.1109/CDC.2011.6161131 ；作者上传全文 https://www.researchgate.net/publication/254054580_Robust_Tube-Based_Constrained_Predictive_Control_via_Zonotopic_Set-Membership_Estimation 。**核验状态**：[作者上传公开正文分节已读，非IEEE终版逐页比对]。实际核验pp.4580–4585：§III式(1)，§IV Algorithm 1/2、Property 4、式(2)–(22)，§V式(23)–(32)与Assumptions 1–3，§VI Table I；阅读日期2026-11-02。
