@@ -1,3 +1,7 @@
+**Run261 PR/main CI与安全合并独立复核（2026-11-02 UTC）：** PR #106 https://github.com/zhouxingxing1279/AcademicReaserch/pull/106 基于main `f04dbc13f937164977b0801a4268156578185b23`，合并前compare ahead=7/behind=0、仅7个预期文件、PR mergeable_state=clean、expected head `3539876f22a5a5e6b5da7d8954dbfbe41cbdfffb`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41413563013 **completed/success**，完整Python3.13.17 checkout聚焦Run249–261 **115/115测试通过、无跳过**，源码编译、真实配置交叉核验、精确JSON比较和工件上传成功。使用expected-head非强制squash合并至main `458bb5d0b9a1a7f9cf04fe4f964e83a065183ac6`，重新读取main SHA、PR merged及7个文件Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41413675712 **completed/success**；完整job日志再次**115/115通过、无跳过**、精确JSON比较和工件上传成功。**全仓库历史回归未执行**。此证书只排除冻结四状态模型下**无限重复固定零力矩桥**，不证明反馈控制不存在、终端RCI不存在或Run260有限桥失效；**Gate A仍blocked**。
+
+---
+
 **Run261固定零力矩终端模板真实轨迹反例（2026-11-02 UTC；PR/CI/main状态待核验）：** 基准main `f04dbc13f937164977b0801a4268156578185b23`。继承Run254零读数历史、Run255五拍非零共享力矩、Run259第45拍SMM/MMS合法位置包模式；构造真实`x45=(p,v,phi,omega)=0`的共同非空见证：30–34拍选择合法`r_x=T sin(phi)`抵消倾角加速度（`|r_x|<=981/125000<R`），其余前缀取零残差。若把Run260的`T=mg,tau=0`无限原样重复，45拍后每拍选合法`r_x=+R=3246383/1600000`、所有位置包成功且噪声0，则`v_(45+n)=n h R`；118拍速度`2.9623244875`m/s仍合法，119拍真实速度`3.002904275>3`m/s首次违反硬约束（位置仍合法）。这是冻结**四状态定义离散Euler真值**的精确轨迹反例，不是盒外包误报；仅排除该固定零力矩无限重复模板，不排除反馈控制/终端信息RCI存在。隔离本地9/9单元测试及源码编译通过，新增验证源码、精确JSON、CI工作流、研究日志；完整仓库聚焦回归/远端CI待核验。重读Lorenzetti/Pavone(2020)公开PDF§II–V与终端移位/RPI条件，唯一论文去重数保持108。**Gate A仍blocked**。唯一下一步：对第60拍所有非空有噪success后验建立带反馈的可移位信息终端族。详见`docs/research/run261_research_log.md`。
 
 ---

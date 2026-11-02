@@ -1,3 +1,7 @@
+**Run261 PR/main CI与安全合并独立复核（2026-11-02 UTC）：** PR #106 https://github.com/zhouxingxing1279/AcademicReaserch/pull/106 基于main `f04dbc13f937164977b0801a4268156578185b23`，合并前compare ahead=7/behind=0、仅7个预期文件、PR mergeable_state=clean、expected head `3539876f22a5a5e6b5da7d8954dbfbe41cbdfffb`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41413563013 **completed/success**，完整Python3.13.17 checkout聚焦Run249–261 **115/115测试通过、无跳过**，源码编译、真实配置交叉核验、精确JSON比较和工件上传成功。使用expected-head非强制squash合并至main `458bb5d0b9a1a7f9cf04fe4f964e83a065183ac6`，重新读取main SHA、PR merged及7个文件Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41413675712 **completed/success**；完整job日志再次**115/115通过、无跳过**、精确JSON比较和工件上传成功。**全仓库历史回归未执行**。此证书只排除冻结四状态模型下**无限重复固定零力矩桥**，不证明反馈控制不存在、终端RCI不存在或Run260有限桥失效；**Gate A仍blocked**。
+
+---
+
 # Run261 — Run260共享零力矩桥的可移位性反证（2026-11-02 UTC）
 
 ## 冻结基准、问题与证据等级
