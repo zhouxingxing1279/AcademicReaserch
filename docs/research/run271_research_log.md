@@ -1,3 +1,7 @@
+**Run271 PR CI与main合并独立复核（2026-11-02 UTC）：** PR #136 https://github.com/zhouxingxing1279/AcademicReaserch/pull/136 以main `701b22c02d4d6c01396b14f8c87bb630d63b8a6d`为基准；合并前compare ahead=7/behind=0，仅7个预期文件、mergeable=true、expected head `93f2018d11d0733ba5a738820040b47030439f77`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41498761019 **completed/success**，Python3.13完整checkout聚焦回归**43/43通过**、源码编译、真实配置和Run260证书交叉核验、Run271 Fraction JSON逐字比较成功。expected-head非强制squash合并main `c1e032fced5dbb7b6e8a0d09cf384ff9e691ef10`，重新读取main SHA/PR merged及关键源码/证书/日志Blob核验落地。**main push CI未独立确认，全仓库历史回归未执行**；仅MMS固定历史成员资格证据，不证明信息终端RCI、MPC或无限安全；Gate A=blocked。
+
+---
+
 # Run271 — Run270双真值属于Run260真实MMS观测历史（2026-11-02）
 
 ## 1. 研究问题与远端基准
