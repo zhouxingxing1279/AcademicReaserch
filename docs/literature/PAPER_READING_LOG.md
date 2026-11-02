@@ -1,3 +1,14 @@
+## Run259 — Yang、Ozay（2021）有界丢包安全自动机与因果前缀重读（2026-11-02；历史已读，去重数仍106）
+
+- **真实题名、作者、出版与DOI：** Liren Yang, Necmiye Ozay, *Safety Control Synthesis for Systems with Missing Measurements*, *IFAC-PapersOnLine*（ADHS 2021），DOI https://doi.org/10.1016/j.ifacol.2021.08.481；作者公开PDF https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。
+- **本轮实际阅读状态/范围：** 2026-11-02，作者PDF pp.2–5（PDF页索引1–4）§3式(3)–(7)、Assumption 1、§4.2因果开环共享前缀、§4.3产品系统、§4.4 Propositions 4–5及§4.5式(17)；为已登记论文的**正文分节重读**，不新增去重篇数，不声称完整逐页精读。
+- **实际问题/模型/输入/量测：** 一般离散系统`x+=f(x,u,w)`，有界扰动及受约束控制输入，成功时`y=x`为**完整无噪真值**、失测时`y=∅`；丢包受有限自动机约束。§4.5部分状态可测扩展要求该部分**完美观测且动力学无扰动、不受隐藏状态影响**。论文无特定四旋翼状态、物理T/τ、SMF状态或参数估计、CZ、Tube MPC或实飞。
+- **定理、实验和限制：** Propositions 4–5在紧安全/输入集、连续动力学和自动机等条件下建立产品系统不变核/安全winning set；§5为汽车行人有限状态及线性二维算例，非无人机。无法直接迁移到仓库的有噪间歇位置、隐藏速度、真实推力/力矩饱和和20ms时限。
+- **与Run259关联/可复用技术：** Assumption 1的最多连续2包miss给出成功位置间隔至多15个控制采样步；可以为滚动位置锚点限制缓存长度，但本文**没有证明**该锚点滤波器或共享因果终端不变性。Run259仅认证一个既定历史的7个有限观测分支。阅读日志/源码见`docs/research/run259_research_log.md`。
+- **待查：** 固定15拍可靠锚点在任意有噪success/miss历史下是否足以构造非空、可移位且满足物理输入饱和的共享因果安全前驱？
+
+---
+
 ## 背景第12轮：de Souza等（2020）区间观测器输出反馈MPC（2026-11-02；新增去重第106篇）
 
 - **题名/作者/出版**：Alex Reis de Souza, Denis Efimov, Tarek Raïssi, Xubin Ping, *Robust Output Feedback MPC: An Interval-Observer Approach*, 59th IEEE Conference on Decision and Control (CDC 2020), pp.2529–2534；DOI https://doi.org/10.1109/CDC42340.2020.9304070 ；原始作者上传公开全文 https://www.researchgate.net/publication/343994166_Robust_Output_Feedback_MPC_An_Interval-Observer_Approach ；DBLP https://dblp.org/rec/conf/cdc/SouzaERP20.html 。不同于2022 IEEE TAC的LPV文章。
