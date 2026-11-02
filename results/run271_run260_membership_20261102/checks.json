@@ -1,0 +1,66 @@
+{
+  "all_required_attitude_readings_zero": true,
+  "all_success_position_readings_zero": true,
+  "all_true_states_in_hard_box": true,
+  "compatible_run260_tick45_pattern": "MMS only (35 miss,40 miss,45 success)",
+  "gate_A": "blocked",
+  "not_certified": [
+    "exact posterior",
+    "other Run260 SMM future 50/55 miss branch (illegal)",
+    "all observation fibers",
+    "all causal controls",
+    "15-tick feedback return",
+    "terminal information RCI",
+    "MPC solver",
+    "infinite recursive feasibility",
+    "six-state safety",
+    "20ms WCET"
+  ],
+  "packet_history_ticks_5_to_60": "SSSMMSMMSMMS",
+  "pre45_disturbance_abs_upper_bound": "981/125000",
+  "pre45_disturbance_limit": "3246383/1600000",
+  "pre45_disturbance_semantics": "r_k=T*sin(phi_k) on 30..44, r=0 before; |r|<=T*max|phi|<=R via |sin x|<=|x|",
+  "pre45_nonzero_torque_ticks": [
+    30,
+    31,
+    32,
+    33
+  ],
+  "pre45_omega_at_ticks_30_to_34": [
+    "0",
+    "1/25",
+    "0",
+    "-1/25",
+    "0"
+  ],
+  "pre45_phi_at_ticks_30_to_34": [
+    "0",
+    "0",
+    "1/1250",
+    "1/1250",
+    "0"
+  ],
+  "run": 271,
+  "run260_membership": "constructive consistent true trajectories for MMS zero-reading history; guaranteed included by any sound posterior",
+  "tick45_true_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "tick60_minus_state": [
+    "-68174043/4000000000",
+    "-22724681/80000000",
+    "0",
+    "0"
+  ],
+  "tick60_noise_minus": "68174043/4000000000",
+  "tick60_noise_plus": "-68174043/4000000000",
+  "tick60_plus_state": [
+    "68174043/4000000000",
+    "22724681/80000000",
+    "0",
+    "0"
+  ],
+  "tick60_velocity_diameter_lower_bound": "22724681/40000000"
+}
