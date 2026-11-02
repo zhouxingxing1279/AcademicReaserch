@@ -1,3 +1,7 @@
+**Run272 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #139 https://github.com/zhouxingxing1279/AcademicReaserch/pull/139 以main `e77fd13e31dd72b834eae1704cbc2245a7a8d5ac`为基准，合并前compare ahead=7/behind=0，严格7个预期文件、无删除，PR mergeable=true，expected head `d604785090a0389b3d3bc04a40b899572c3147f8`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41507301427 **completed/success**；读取Python3.13.17完整checkout job日志确认Run270/271/272聚焦回归**24/24通过**、源码编译、真实冻结配置及Run271证书交叉核验、Run272 Fraction JSON逐字比较通过。expected-head非强制squash合并至main `e4cad987b4383df43d21310941466a4ac41c4469`，再次读取main SHA、PR merged及6个关键文件Blob确认落地；本地代码、测试、JSON的Git Blob SHA与远端一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行。** 本轮仅证明特定Run260后验纤维的重复混叠与双真值15拍安全前缀，不是全后验终端信息RCI、MPC或无限递归安全；**Gate A=blocked**。
+
+---
+
 # Run272 — 第60–75拍双失测后的重复观测混叠：安全前缀不等于信息终端回返（2026-11-02）
 
 ## 1. 最新远端基准与唯一问题
