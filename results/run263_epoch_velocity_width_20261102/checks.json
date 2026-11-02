@@ -77,9 +77,9 @@
   "run": 263,
   "scope": "Run260 SMM/MMS packet histories at tick45; fixed thrust four-state Euler; every-tick successful bounded-noise attitude readings from anchor; arbitrary nonempty position readings and legal future packets",
   "success_velocity_width_caps": {
-    "5": "41974589/40000000",
     "10": "68573493/80000000",
-    "15": "13974589/15000000"
+    "15": "13974589/15000000",
+    "5": "41974589/40000000"
   },
   "tick60_mode_max_velocity_width_caps": {
     "MMS": "75223219/40000000",
