@@ -1,3 +1,13 @@
+## 背景第29轮 — Falanga等(2018)机载视觉感知MPC与软可见性限制（2026-11-02；新增去重）
+
+- **书目/全文/阅读状态**：Davide Falanga; Philipp Foehn; Peng Lu; Davide Scaramuzza, *PAMPC: Perception-Aware Model Predictive Control for Quadrotors*, *2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)*, pp.5200–5207, DOI https://doi.org/10.1109/IROS.2018.8593739；作者公开接受稿 https://rpg.ifi.uzh.ch/docs/IROS18_Falanga.pdf ，arXiv v2 https://arxiv.org/pdf/1804.04811v2 ，开源 https://github.com/uzh-rpg/rpg_mpc 。2026-11-02阅读8页公开稿正文§I–VII、式(1)–(13)、实验与计算章节；**正文分节全篇已读**，未对照IEEE终版、未逐式审计全部四元数投影导数、未构建源码。
+- **问题/状态/物理模型/控制权限**：6物理DOF健康四旋翼的机载视觉定位、圆周、点到点与暗光导航；10个状态坐标`x=(p3,v3,q4)`（单位四元数约束，9独立运动学状态），`dot p=v,dot v=g+R(q)(0,0,c),dot q=0.5 Lambda(omega_B)q`，优化4虚拟输入`u=(c,omega_x,omega_y,omega_z)`，其中`c=sum(f_i)/m`，**不是逐桨推力、三轴力矩或含角速度状态的完整12维刚体模型**；无显式电机RPM、推力分配、动态、实际速率硬界。
+- **量测/估计/不确定性**：420g、对角220mm、推重比约2的真实四旋翼；Snapdragon Flight、IMU、下倾45°前视全局快门相机、机载VIO输出状态点估计，兴趣点质心及图像投影速度作为感知目标。**无可靠SMF/CZ状态后验、位置机会丢包自动机、确定性有界视觉误差或延迟证明**；视觉居中/减模糊是**软代价而非硬可见性保证**。
+- **MPC结构/约束/实时性**：非线性多重打靶、RK积分、ACADO/qpOASES、SQP每100Hz控制循环一迭代warm-start；预测网格`dt=0.1s`、`th=2s`即20间隔，10ms实际更新周期。二次状态/输入/图像位置及速度成本（含终端**代价**）；`cmin<=c<=cmax,|omega_B|<=omega_max,|v|<=vmax`；**未见终端鲁棒不变集合、所有有噪失测路径硬安全定理或逐桨真实推力约束**。作者报告单迭代平均3.53ms、样本最大<5ms，非WCET。
+- **结果/局限/可复用/待查**：实飞圆周1–3m/s、hover-to-hover主动升高、低光环境保持视觉特征；非统计硬违约证明。可复用机载VIO与NMPC并行计算、虚拟输入与实际电机权限分离、视觉软成本和硬安全分离；不直接迁移为本课题间歇位置SMF/CZ/Tube终端RCI。Elokda数据 DOI https://doi.org/10.3929/ethz-b-000490768 本轮ETH页面403/域名不可达，**未下载、未审计字段，不得声称无逐桨数据**。主任务Run277仅排除共享开环模板，Gate A=blocked；6状态平面`(T,tau)`条件性首选不变。详见`docs/research/model_selection/background_run_20261102_2337_falanga_vio_data_access.md`。**待查**：`rpg_mpc`最终混控与ESC执行误差、目标机体同步台架数据、因果终端信息可行性。
+
+---
+
 ## 背景第28轮 — Elokda等(2021)真实四旋翼DeePC及8状态输出反馈MPC实飞（2026-11-02；新增去重）
 
 - **书目、作者、全文与阅读状态**：Ezzat Elokda; Jeremy Coulson; Paul N. Beuchat; John Lygeros; Florian Dörfler, *Data-enabled predictive control for quadcopters*, *International Journal of Robust and Nonlinear Control* **31**(18):8916–8936 (2021), DOI https://doi.org/10.1002/rnc.5686；出版社开放全文 https://onlinelibrary.wiley.com/doi/full/10.1002/rnc.5686 ，PMC数学公式全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC9291934/ ，原始数据集 https://doi.org/10.3929/ethz-b-000490768 。**2026-11-02实际阅读公开期刊正文§1–4及Appendix A–C，重点§2.1–2.3式(1)–(8)、§3.1–3.4式(9)–(10)、Fig.6–11、Table 1和附录参数；状态：全文正文与附录分节已读**；未重放作者数据、未实飞、未逐条核验参考文献。
