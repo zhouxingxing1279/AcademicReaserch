@@ -446,3 +446,17 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 
 **主任务接口建议（只提供合同，不开发控制器）**：冻结硬件型号、`Ω_{m,k}^i`可靠区间、`T_m`可靠区间、`K_{f,ij}`可靠区间、RPM命令幅值、ESC残差集合，使用同一命令对全部可能上一拍RPM与参数传播下一拍推力，再经四桨混控形成可靠`(T,τ)`输入域及误差包络；点估计只能做名义灵敏度分析。下一轮唯一问题：核验Eschmann开源原始日志能否构造确定性残差包络，若无则确认需要本机体采集数据。详见[第23轮日志](background_run_20261102_1747_didier_eschmann_actuator_gap.md)。
 
+
+---
+
+## 24. Nan等(2022)单桨失效全耦合NMPC：最终执行命令与求解时延证据（2026-11-02）
+
+**新增直接四旋翼MPC原始论文**：[作者接受稿9页全文已读] Fang Nan, Sihao Sun, Philipp Foehn, Davide Scaramuzza, *Nonlinear MPC for Quadrotor Fault-Tolerant Control*, *IEEE Robotics and Automation Letters* 7(2):5047–5054, DOI https://doi.org/10.1109/LRA.2022.3154033；接受稿 https://rpg.ifi.uzh.ch/docs/ICRA22_Nan.pdf 。物理**6DOF**，状态17坐标(p3,q4,v3,omega3,四桨实际推力4)，q有单位约束；优化4个**推力命令**，不是四桨推力变化率。采用一阶推力动态、四桨混控、全耦合NMPC；故障时某桨命令固定0，偏航成本权重置0；后置INDI利用RPM/角速估计外扰并通过降秩G伪逆修改命令。Vicon 400Hz＋IMU/ESC RPM 500Hz＋EKF，Jetson TX2板载150Hz；没有有噪间歇位置状态SMF/CZ。
+
+**重要约束边界**：作者接受稿§II-B式(5)对NMPC的u施加0–Tmax盒，§II-C式(12)最终执行命令为u_indi=Ghat^+ [Td;tau_d]；未见u_indi再次投影到盒的可核验保证，不能从优化约束直接推出真实电机命令硬安全。作者接受稿的式(5)只显式给u盒，网络HTML转录另有t盒版本差异，故以接受稿为准；INDI补偿也不能直接视作有界扰动/执行误差证书。0.75kg平台每桨8.5N是该实飞硬件参数，**不等于**仓库1kg机体可靠界。
+
+**计算与验证**：1s预测域、N=20网格50ms，与150Hz控制更新约6.67ms分开；Jetson TX2仿真单次SQP迭代平均6.431ms、样本最大**25.75ms**（故障时重初始化），**明确不满足将该观察最大值当作≤20ms的要求**，但不是形式化WCET。作者接受稿200组随机初始姿态仿真NMPC成功200/200、对照85/200，真实四旋翼完成单桨故障后悬停、8字轨迹及翻滚恢复；未给无限递归可行、状态SMF/终端RCI或全扰动硬约束证明。
+
+**选型决定**：六状态平面(p_x,p_z,v_x,v_z,phi,omega)＋(T,tau)仍为**条件性首选**；4状态有限安全数学基线、2状态姿态/高度备选不变。17坐标电机级NMPC仅作执行器/实时性对照，**不因有真实实飞而升级为硕士主模型**。Run246/260/261与Run270/271信息宽度及终端缺口均不被本文解决，Gate A继续blocked。主任务应审计从MPC输出到最终命令的后置修正、饱和和残差的可靠外包，而非只检查NMPC内部约束。
+
+**补充Eschmann数据可用性初查**：2026-11-02读取公开仓库 https://github.com/arplaboratory/data-driven-system-identification 的README.MD、download_cfusdlog.sh、load_ulg.py，确认sysid.ipynb及logs_crazyflie/logs_large目录存在、README给出克隆与依赖安装步骤；**尚未逐样本读取原始日志或复现辨识**，不能据此宣称可得到确定性sigma/Kf/ESC残差区间。下一轮唯一问题：对标准健康单向四旋翼，核验一个**包含最终执行命令约束/饱和残差与测量来源**的实飞MPC原始论文或开源代码，明确能否为主任务提供可复用的可靠(T,tau)输入合同。详见[第24轮日志](background_run_20261102_1833_nan2022_indi_actuator.md)。
