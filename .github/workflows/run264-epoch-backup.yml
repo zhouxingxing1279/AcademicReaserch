@@ -1,0 +1,33 @@
+name: Run264 finite epoch backup certificate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run264_epoch_backup.py'
+      - 'verification/test_run264_epoch_backup.py'
+      - 'results/run264_epoch_backup_20261102/checks.json'
+      - '.github/workflows/run264-epoch-backup.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run264_epoch_backup.py'
+      - 'verification/test_run264_epoch_backup.py'
+      - 'results/run264_epoch_backup_20261102/checks.json'
+      - '.github/workflows/run264-epoch-backup.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused Run260–264 regression
+        run: |
+          cd verification
+          python -m unittest -v test_run260_conditional_shared_bridge test_run261_zero_torque_nonterminal test_run262_actuation_delay test_run263_epoch_velocity_width test_run264_epoch_backup
+          python -m py_compile check_run264_epoch_backup.py test_run264_epoch_backup.py
+      - name: Verify frozen repository contract and exact certificate
+        run: |
+          python verification/check_run264_epoch_backup.py --root . --output /tmp/run264_checks.json
+          cmp results/run264_epoch_backup_20261102/checks.json /tmp/run264_checks.json
