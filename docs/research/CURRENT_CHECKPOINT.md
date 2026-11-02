@@ -1,3 +1,7 @@
+**Run275 PR CI与main安全合并独立复核（2026-11-02 UTC）：** PR #146 https://github.com/zhouxingxing1279/AcademicReaserch/pull/146 以main dbb5e67379ea2dd625b562d9e0ae099ecfecc6d9 为基准；合并前compare ahead=7/behind=0，严格7份预期文件、零删除，mergeable=true，expected head 739544d8af024359a9efcdf94e4e4843174e715b。GitHub Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41525788580 **completed/success**；独立读取Python3.13.17完整checkout job日志确认源码编译、Run275聚焦8/8测试通过、Fraction归档JSON逐字比较及冻结配置交叉核验成功。以expected-head非强制squash合并至main d0c894a5b87af18d020387b47a1a88f1ec05107a；再次读取main SHA、PR merged与源码/测试/JSON/日志/总账/检查点Blob均确认落地。**合并后main push CI未独立确认，全仓库历史回归未执行**。仅观测条件化速度充分门槛，不是完整SMF后验、MPC或信息终端RCI；Gate A=blocked。
+
+---
+
 **Run275 两次成功位置测量的44模式第90拍速度准入充分证书（2026-11-02；PR/CI/main待复核）：** main基准dbb5e67379ea2dd625b562d9e0ae099ecfecc6d9。继承Run274冻结四状态Euler、共同tau=0及第90拍第三块速度充分门槛G=2.3459809875m/s。全部44个合法65–90成功/丢包模式取最后两次成功拍a<b；Euler精确消元给出 |v90|<=|y_b-y_a|/((b-a)*h)+B(a,b)，故 |y_b-y_a|<=D(a,b) 为所有一致真值满足G的**充分**条件。44个D正，最小0.138634543m、最大0.56034415025m，Fraction代码与归档JSON可复核；本地8/8测试通过。SMM**无条件外包成员**x60=(0,1.5,0,0)、持续r=+R得到v90=2.717393625>G、75/90读数差0.7178265975>D；**没有证明该状态属于Run260此前固定零读数的精确后验，非实际后验反例**。新读Reis de Souza/Efimov/Raïssi(2022) DOI https://doi.org/10.1002/rnc.5874 作者全文§2–6，固定时滞线性系统每拍测量的Theorem 4不可直接移植。新增Run275源码、8测试、Fraction JSON、CI、日志及唯一论文总账。没有完整SMF/CZ后验、MPC求解器、终端信息RCI、无限递归可行或六状态物理安全；**Gate A=blocked**。下一步唯一任务：检查Run260实际后验全部44模式非空读数纤维的D准入；失败时给出真实成员见证并研究非零力矩反馈。详见docs/research/run275_research_log.md。
 
 ---
