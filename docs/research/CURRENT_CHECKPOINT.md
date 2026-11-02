@@ -1,3 +1,7 @@
+**Run277 PR #152 CI及安全合并独立复核（2026-11-02 UTC）：** PR https://github.com/zhouxingxing1279/AcademicReaserch/pull/152 基于main `5cb3a4b918b7954e027ee25769a1d8668bd95148`；合并前compare ahead=8/behind=0，仅7个预期文件、零删除、mergeable=true、expected head `c0ee409d78ada73d598e59ad89e9990bfda6e855`。GitHub Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41543297238 **completed/success**，Python3.13完整checkout、源码编译、Run277 **9/9通过**、Run271真实后验证书及冻结配置交叉核验、Fraction归档JSON逐字比较均成功，已读取job日志。使用expected-head非强制squash合并main `f0490f3f42c018a5e2659f444c964c8084c7ad2a`；再次读取main SHA、PR merged和源码/测试/JSON/日志/检查点/唯一论文总账Blob确认落地。**合并后main push CI及全仓库历史回归未独立确认**。严格结果仅排除特定真实MMS纤维的任意共享开环力矩67拍硬安全，不排除观测条件化因果反馈；**Gate A=blocked**。
+
+---
+
 **Run277 真实MMS后验双真值排除全部共享开环力矩67拍安全模板（2026-11-02；PR/CI/main待复核）：** 以main `5cb3a4b918b7954e027ee25769a1d8668bd95148`为基准，继承Run271已证明同一完整MMS→MMS观测纤维的第60拍双真值，初始速度直径`22724681/40000000=0.568117025m/s`且角状态相同。任意共享观测无关力矩/推力序列下，合法扰动`r^+=R,r^-=-R`使角运动相同且`Delta v(60+n)=Delta v60+2*n*h*R`。n=66直径`5.924648975<=6`，n=67直径`6.00580855>6`，因此**任意共享开环日程**至少存在一条真实可行世界在第127拍或更早违反硬状态盒。未来位置包可全成功且噪声零；这不是非法连续失测，也**不排除观测条件化因果反馈/MPC**。新增Run277 Fraction源码、9项本地测试（9/9通过）、精确JSON、CI工作流与日志；重读Ping/Sun(2015) DOI https://doi.org/10.1155/2015/875850 §2–6，已有DOI不增加。未完成完整SMF/CZ、因果终端RCI、MPC闭环、无限递归可行、六状态物理安全或20ms WCET；**Gate A=blocked**。唯一下一步：真实MMS第60拍全可靠后验及65/70/75 success/miss条件化非零力矩安全前驱。详见`docs/research/run277_research_log.md`。
 
 ---
