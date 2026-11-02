@@ -1,3 +1,15 @@
+## 背景第9轮 — Agrawal、Panagou（2023）有界误差观测器＋鲁棒CBF（2026-11-01；新增去重第103篇）
+
+- **题名、作者、出版：** Devansh R. Agrawal; Dimitra Panagou, *Safe and Robust Observer-Controller Synthesis Using Control Barrier Functions*, *IEEE Control Systems Letters* **7**:127–132 (2023卷；2022-06-22在线发表)，DOI https://doi.org/10.1109/LCSYS.2022.3185142；作者公开期刊PDF https://dev10110.github.io/pdfs/2022-observer-controller.pdf；预印本 https://arxiv.org/abs/2211.14364 。**阅读日期/状态：** 2026-11-01；实际阅读作者公开期刊PDF pp.127–132，§I–IV，特别是(1)–(2)、Definition 5、Theorems 1–3、(16)–(18)、§IV-B/C；**正文分节已读**，未复现实验。
+- **问题/方法：** 在有界动力学和有界量测扰动、部分状态可测时，用ISS观测器或bounded-error (BE) observer的可靠真值包含集与robust control barrier function联立求安全输入。Theorem 2要求一个共享输入落在全部可能真实状态的安全控制集合交集 `u∈∩_{x∈P(t,xhat)}K_trcbf(x)`；Theorem 3在额外下界、同号/相对阶1条件及**无界输入域 U=R^m**下将其写成QP并证明解的正则性/安全。BE集合允许interval/zonotope等，但论文并未实现本仓库离散CZ-SMF。
+- **实际平面四旋翼模型：** §IV-B为**平面3物理自由度/6状态** `x=(p1,p2,phi,v1,v2,omega)`，位置与速度在惯性系，控制 `u=(T,tau)`；`m=1 kg,J=0.25 kg·m²,g=9.81`。输出是**连续有噪的二维位置＋俯仰角**（5cm和5°界），速度与角速度隐藏；外扰加速度范数≤2m/s²。DEKF构造椭球真值包含集，基于Theorem 2/3做障碍物避碰CBF-QP、LQR期望输入。没有仓库的每5拍位置机会/最多连丢2包自动机，也没有输出反馈Tube MPC、SMF/CZ后验的递归终端集合。
+- **约束/保证/实验：** §IV-B安全集为**圆形障碍物避碰**，不是仓库的完整位置/速度/倾角/角速度与执行器硬盒；所读案例未给出与仓库相同的 `T∈[4.905,14.715], |tau|≤0.08` 认证。Theorem 2的连续时间前向安全依赖可靠BE集合、TRCBF和**每时刻非空的共享安全输入**，并不自动保证离散采样、输入饱和或MPC递归可行。§IV-C Crazyflie 2.0 实飞使用IMU、气压计和Vicon，EKF的**99.8%置信区间**是概率假设，不能等同于确定性全扰动真值包含；低层内置控制映射PWM，未核验真实输入硬约束或20ms最坏耗时。
+- **结论/局限/本项目关联：** 论文已证明“六状态平面四旋翼＋有界误差状态估计＋安全控制”并非本课题独有创新；可复用的**结构性接口**是可靠集合 `P_k` → 所有状态的共享可行输入 → 安全后继。仓库第7轮的隐藏垂向速度 `±3m/s` 无共同推力反例说明必须先筛信息纤维；Run255仅特定历史39拍安全，不能以Theorem 2直接宣称终端RCI。**重要区分：** CBF交集空不等于所有可能非CBF控制策略不可行；论文的CBF充分条件不是可生存性的必要条件。
+- **可复用技术：** BE集合（可为CZ/zonotope）与共享鲁棒安全输入交集的量词；作为主任务SMF→backup接口的文献比较基线，不另建CBF算法分支。
+- **待查问题：** 在仓库**有界物理推力/力矩**和位置success/miss后验下，是否存在非空且可移位的共享输入信息集合族？如何处理连续CBF相对阶/采样保持与硬盒差异？**专用日志：** `docs/research/model_selection/background_run_20261101_1836_agrawal_be_observer.md`。
+
+---
+
 ## Run255 — Yang、Ozay（2021）部分观测安全游戏的迁移边界重读（2026-11-02；去重102篇不变）
 
 **真实题名/作者/出版：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay；ADHS 2021，*IFAC-PapersOnLine*，pp.97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者公开PDF https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**实际阅读：** 2026-11-02重新核对PDF pp.2–5 §3、§4.2–4.5、Propositions 4–5及式(8)–(17)；**历史已读论文分节重读，不新增去重条目**。
