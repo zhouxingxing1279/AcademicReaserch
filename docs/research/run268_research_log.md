@@ -1,3 +1,7 @@
+**Run268 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #126 https://github.com/zhouxingxing1279/AcademicReaserch/pull/126 以main `a531865b494e9658a66915156e6f13186fd12877` 为基准，合并前compare ahead=7/behind=0、仅7个预期文件、mergeable=true、expected head `b957375a176d3a51eee5fad1ff022f1a5e627c43`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41471502526 **completed/success**，Python 3.13完整checkout聚焦Run26x **76/76测试通过、无跳过**；源码编译、真实配置字段交叉核验及Run268归档Fraction JSON逐字比较通过。expected-head非强制squash合并到main `085ac7fd6f42fe8e13c104269c95737d34215cb2`，重新读取main SHA、PR merged及关键源码/证书/文档Blob确认落地；归档JSON blob `d13899fc2d65d353e9bc31d63f625fe7af4c0b68` 与本地独立生成完全一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行**。本轮只证明固定历史下11分支测量条件化(v,phi,omega)仿射外包，不是精确CZ、终端信息RCI、15拍共享因果回返、无限递归可行或六状态安全；**Gate A=blocked**。
+
+---
+
 # Run268 — 第60拍全部合法包模式的测量条件化速度—姿态关联条带（2026-11-02）
 
 ## 1. 远端基准与唯一瓶颈
