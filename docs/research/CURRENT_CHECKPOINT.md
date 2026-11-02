@@ -1,3 +1,7 @@
+**Run254最终main合并与CI核验（2026-11-02 UTC）：** 研究PR #85 https://github.com/zhouxingxing1279/AcademicReaserch/pull/85 在合并前compare ahead=11/behind=0、仅7个预期文件，mergeable_state=clean；expected-head `cacaa155275f298f80fcf822dff72d887b2791a4`，非强制squash安全合并至main `5874d7f02d63d13e110e156275ddeaf3ded9a34c`。重新读取main SHA、PR merged及源码、测试、JSON、日志、统一论文记录Blob确认落地。最终PR head完整checkout CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370933756 **completed/success**，合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370977100 **completed/success**；分别读取Python3.13.17完整job日志确认Run249–254聚焦**53/53通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比对和artifact上传均成功。最初一次PR CI因JSON键序序列化失败并已修复，失败信息保留在Run254日志。**本补记仅增加验证记录，不修改控制算法或数学证书。** 全仓库历史回归、全后验终端闭合、无限递归可行、稳定性、六状态安全与20ms WCET均未认证；Gate A仍blocked。
+
+---
+
 **Run254 PR完整checkout CI复核（2026-11-02 UTC）：** PR #85 https://github.com/zhouxingxing1279/AcademicReaserch/pull/85 。首次PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370808916 **failure**：53/53单元测试全部通过，但精确JSON逐字比较在第22行失败，原因是JavaScript写入归档时整数样式键按数值排序，而Python `sort_keys=True`按字符串排序；不是数学证书失败。已将归档键顺序修正，不改变数值或算法。修复后PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370855348 **completed/success**；读取完整Python3.13.17 job日志确认Run249–254 **53/53通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较及artifact上传均成功。全仓库历史回归未执行；该CI成功不代表递归安全/稳定性证明。main合并与合并后CI仍待独立核验。
 
 ---
