@@ -1,3 +1,14 @@
+## Run267 — Ping & Sun (2015) quasi-LPV zonotope SMF＋动态输出反馈MPC正文复核（2026-11-02；既有论文，去重数不增加）
+
+- **书目/链接**：Xubin Ping, Ning Sun, *Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems*, *Journal of Applied Mathematics* 2015, Article 875850, DOI https://doi.org/10.1155/2015/875850；出版社开放全文 https://onlinelibrary.wiley.com/doi/full/10.1155/2015/875850 。
+- **阅读日期/范围/核验状态**：2026-11-02，出版社HTML正文§3假设A1–A3、§4.1式(15)–(26)、§4.2式(27)–(32)、§4.3式(33)–(35)、§4.4 Algorithm 8/Theorem 9、§5 CSTR例及§6；**正文分节已读，HTML部分公式显示不完整，未逐式核验全部LMI，也未独立复现证明**。本条补充已有Run131条目，不另计新论文。
+- **研究问题/模型/输入**：离散quasi-LPV不确定系统，当前调度矩阵已知、未来在已知多胞体内，有界扰动；动态输出反馈`u=C_c x_c+D_c y`，不假设真实状态直接可测。§5实际为两状态CSTR单输入数值仿真，**不是四旋翼、无物理总推力/力矩或执行器时滞**。
+- **量测与集合/控制结构**：当前输出反馈与动态控制器状态；zonotope表示估计误差、按式(27)–(32)传播并限制生成元阶数`N_z`，将外包顶点纳入LMI主优化；辅助式(35)预判下一步主优化可行性，Algorithm 8失败时继承上一控制器参数。该文并未建立仓库每5拍位置机会、最多连丢2包的观测自动机，且并非精确CZ后验。
+- **约束/理论/实验**：Theorem 9在初始主优化可行及文中quasi-LPV、扰动、输入/输出约束等假设下证明相应输入输出约束满足与增广状态趋于邻域；§5报告CSTR MATLAB数值比较（`N_z=2,4`），未报告四旋翼飞行或20ms WCET。定理不适用于本仓库未验证的非线性Euler、间歇位置量测与共享观测纤维终端回返。
+- **可复用技术/局限/待查**：可复用有界生成元降阶、预测下一步可行性门控和继承旧控制器的架构思想；**SMF＋MPC＋门控/回退并非创新空白**。需验证任何门控是否对所有合法success/miss读数、同一隐藏状态纤维及真实力矩饱和保持可行。Run267严格筛选Run260/264可靠外包：四盒均通过三拍**必要**速度守卫，但没有15拍共享因果终端信息RCI。详细见`docs/research/run267_research_log.md`。
+
+---
+
 ## 背景第19轮 — Bicego等(2020)四旋翼逐桨推力/导数约束NMPC实飞（2026-11-02；新论文）
 
 - **题名/作者/年份/出版**：Davide Bicego, Jacopo Mazzetto, Ruggero Carli, Marcello Farina, Antonio Franchi, *Nonlinear Model Predictive Control with Enhanced Actuator Model for Multi-Rotor Aerial Vehicles with Generic Designs*, *Journal of Intelligent & Robotic Systems* 100:1213–1247 (2020; online 2020-09-26), DOI https://doi.org/10.1007/s10846-020-01250-9 。作者公开全文 arXiv:1911.08183 https://arxiv.org/abs/1911.08183 。2019初稿题名 *Nonlinear Model Predictive Control with Actuator Constraints for Multi-Rotor Aerial Vehicles* 是同一arXiv编号/同一论文，按DOI/题名合并去重；**不能误写为arXiv:1911.08175**。
