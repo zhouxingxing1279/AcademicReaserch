@@ -1,0 +1,33 @@
+{
+  "after_success_single_posterior_position_diameter_upper_m": "1/25",
+  "bridge_nonzero_common_torque_Nm": [
+    "1/25",
+    "-1/25",
+    "-1/25",
+    "1/25",
+    "0"
+  ],
+  "caveat": "successful position packet distinguishes THESE two trajectories; does not identify velocity uniquely or certify full posterior successor/terminal invariance",
+  "evidence": "EXACT_FINITE_CAUSAL_BRIDGE_AND_FORCED_POSITION_OBSERVATION_SEPARATION",
+  "forced_success_tick30": true,
+  "gate_A": "blocked",
+  "history": "Run251 0-15 zero torque, same noisy outputs; Run252 15-25 opposite extreme lateral residuals, common arbitrary torque; loss word SSSMM",
+  "measurement_strip_pair_separation_margin_m": "204985959/800000000",
+  "model": "Run249 fixed-thrust four-state discrete Euler, exact rational conservative envelope",
+  "pair_position_gap_tick25_m": "35710213/200000000",
+  "pair_position_gap_tick30_lower_m": "236985959/800000000",
+  "pair_position_gap_tick30_upper_m": "262957023/800000000",
+  "pair_velocity_gap_tick25_m_s": "107130639/80000000",
+  "recursive_feasibility_proved": false,
+  "run": 253,
+  "safety_all_intermediate_ticks_15_to_30": true,
+  "same_success_position_reading_at_tick30_possible": false,
+  "scope": "both Run251/252 witness paths, every shared admissible torque 15..29, all admissible residuals 25..29; not all SMF-consistent states",
+  "terminal_invariant_set_proved": false,
+  "worst_abs_envelope_tick30": {
+    "omega": "6/5",
+    "p": "1383345243/8000000000",
+    "phi": "21/125",
+    "v": "32489569/32000000"
+  }
+}

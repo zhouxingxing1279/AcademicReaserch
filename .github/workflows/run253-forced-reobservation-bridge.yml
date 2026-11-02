@@ -1,0 +1,38 @@
+name: Run253 forced reobservation finite bridge
+on:
+  pull_request:
+    paths:
+      - 'verification/check_forced_reobservation_bridge.py'
+      - 'verification/test_forced_reobservation_bridge.py'
+      - 'results/forced_reobservation_bridge_20261101/checks.json'
+      - '.github/workflows/run253-forced-reobservation-bridge.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_forced_reobservation_bridge.py'
+      - 'verification/test_forced_reobservation_bridge.py'
+      - 'results/forced_reobservation_bridge_20261101/checks.json'
+      - '.github/workflows/run253-forced-reobservation-bridge.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run focused regressions (Run249-253)
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge
+      - name: Compile, regenerate, compare exact certificate and repo config
+        run: |
+          python -m py_compile verification/check_forced_reobservation_bridge.py verification/test_forced_reobservation_bridge.py
+          cd verification
+          PYTHONPATH=. python check_forced_reobservation_bridge.py --root .. --output /tmp/run253_checks.json
+          cmp /tmp/run253_checks.json ../results/forced_reobservation_bridge_20261101/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run253-exact-certificate
+          path: results/forced_reobservation_bridge_20261101/checks.json
