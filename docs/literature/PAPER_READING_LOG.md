@@ -1,3 +1,16 @@
+## 背景第12轮：de Souza等（2020）区间观测器输出反馈MPC（2026-11-02；新增去重第106篇）
+
+- **题名/作者/出版**：Alex Reis de Souza, Denis Efimov, Tarek Raïssi, Xubin Ping, *Robust Output Feedback MPC: An Interval-Observer Approach*, 59th IEEE Conference on Decision and Control (CDC 2020), pp.2529–2534；DOI https://doi.org/10.1109/CDC42340.2020.9304070 ；原始作者上传公开全文 https://www.researchgate.net/publication/343994166_Robust_Output_Feedback_MPC_An_Interval-Observer_Approach ；DBLP https://dblp.org/rec/conf/cdc/SouzaERP20.html 。不同于2022 IEEE TAC的LPV文章。
+- **实际阅读日期/范围/状态**：2026-11-02；公开可解析作者全文§II–V，Assumptions 1–5、Theorems 1–3、Propositions 1–2、式(1)–(16)与§V数值例，约原版面pp.2–6；**作者全文分节已读，未逐页核对IEEE终版PDF**。Theorem 3证明原文省略，不能称独立验证其完整证明。
+- **研究问题/真实模型/输入/量测**：离散LTI有界过程/输出噪声的鲁棒输出反馈MPC，`x+=Ax+Bu+w,y=Cx+v`，固定已知C且每拍观测。§V实际为CSTR两状态`(C_s,T)`、单输入冷却流温度`T_C`、单输出温度`T`（C=[0,1]），采样0.25min、预测N=10。无四旋翼动力学、实际推力/力矩、无人机传感器、位置丢包或实飞。
+- **状态/输入硬约束与不确定性**：§V示例`X=[-0.4,0.4]×[-25,25]`、`U=[-15,15]`、`W=[-0.02,0.02]×[-0.4,0.4]`、`V=[-0.1,0.1]`。没有执行器动态或物理T/τ饱和；过程/量测噪声按区间有界而非概率置信区间。
+- **方法/SMF性质/MPC**：式(5)区间观测器IO用于**状态**SMF（不是参数SMF）；式(7)区间预测器IP用于未来约束外包；式(13)–(16)中心轨迹二次代价MPC＋终端局部反馈。不是CZ、非线性四旋翼或间歇测量Tube MPC。
+- **重要定理/假设**：Theorem 1需`A-LC`非负且Schur；Theorem 2以LMI设计有界IP；Proposition 1的IO/IP嵌套需式(11)额外条件；Assumption 5要求终端不变及输入可行；Theorem 3在Assumptions 1–5、式(11)、常值扰动界等条件下给递归可行、终端中心ISS与硬约束满足。不可只取中心终端条件而忽略全区间包含和不变性。
+- **结论/局限/与本课题关联**：CSTR数值比较支持低复杂度与较低保守性，但无20ms WCET或无人机结果。仓库位置miss时观测矩阵仅保留姿态/角速；名义Euler线性化对任意L仍有四状态至少2个、六状态至少4个单位特征值，故论文**逐拍**Schur充分条件不能直接移植。跨5/10/15拍success的线性观测秩为4/6，不等于带扰动精确恢复。可复用IO→IP→硬约束→终端不变性合同审计。
+- **待查问题**：主任务能否用第45拍强制success的全分支可靠H-rep/CZ后验构造15拍失测自动机条件化误差管束及共享物理T/τ终端前驱？详情见`docs/research/model_selection/background_run_20261102_0536_desouza_interval_miss.md`。
+
+---
+
 ## Run258定向重读（2026-11-02；Scott等2016，既有条目不新增去重）
 
 **真实题名/作者/发表：** Joseph K. Scott、Davide M. Raimondo、Giuseppe Roberto Marseglia、Richard D. Braatz (2016), *Constrained zonotopes: A new tool for set-based estimation and fault detection*, *Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036 ，作者公开PDF https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**实际阅读：** 2026-11-02，PDF印刷pp.126–130，§2 Definitions 1–2、§3 Definition 3/Propositions 1–3/Theorem 1、§4开头；分节重读，未宣称全篇重读。
