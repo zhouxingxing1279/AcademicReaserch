@@ -1,0 +1,79 @@
+{
+  "all_nonempty_tick40_success_readings_velocity_width_upper": "107185316574375443426493/125000000000000000000000",
+  "attitude_measurements": "phi=omega=0 at ticks35..40; earlier readings consistent with Run257",
+  "branches": {
+    "MM": {
+      "tick40_position": [
+        "-3268573029/10000000000",
+        "204234803/625000000"
+      ],
+      "tick40_velocity": [
+        "-1763137649/1000000000",
+        "3525019637/2000000000"
+      ],
+      "tick40_velocity_width": "1410258987/400000000"
+    },
+    "MS": {
+      "tick40_position": [
+        "-1/50",
+        "1/50"
+      ],
+      "tick40_velocity": [
+        "-2680319603842439708277081/6250000000000000000000000",
+        "2678946224876332463047569/6250000000000000000000000"
+      ],
+      "tick40_velocity_width": "107185316574375443426493/125000000000000000000000"
+    },
+    "SM": {
+      "tick40_position": [
+        "-32333503/400000000",
+        "403949047/5000000000"
+      ],
+      "tick40_velocity": [
+        "-3665099617/5000000000",
+        "7325804421/10000000000"
+      ],
+      "tick40_velocity_width": "2931200731/2000000000"
+    },
+    "SS": {
+      "tick40_position": [
+        "-1/50",
+        "1/50"
+      ],
+      "tick40_velocity": [
+        "-2680319603842439708277081/6250000000000000000000000",
+        "2678946224876332463047569/6250000000000000000000000"
+      ],
+      "tick40_velocity_width": "107185316574375443426493/125000000000000000000000"
+    }
+  },
+  "control": "Run255 pulse ticks30-34, zero torque ticks35-39",
+  "evidence": "EXACT_RATIONAL_DELAYED_TWO_POSITION_ANCHOR_PROJECTION",
+  "full_posterior_recursive_filter": false,
+  "gate_A": "blocked",
+  "position_branches": "S=success zero reading, M=miss at ticks35 and40",
+  "recursive_feasibility_proved": false,
+  "run": 258,
+  "scope": "sound 10-step delayed p30-p40 kinematic strip for one history, no exact posterior, no complete CZ/H-rep filter or arbitrary-history terminal certificate",
+  "start": "Run254 SSSMMS all-zero readings through tick30",
+  "ten_step_acceleration_bound_count": 10,
+  "terminal_information_invariance_proved": false,
+  "zero_reading_physical_witness": {
+    "35": {
+      "omega": "0",
+      "p": [
+        "-287402313093750981/30517578125000000000000",
+        "-9196874019/976562500000000"
+      ],
+      "phi": "0"
+    },
+    "40": {
+      "omega": "0",
+      "p": [
+        "-1245410023406254251/30517578125000000000000",
+        "-39853120749/976562500000000"
+      ],
+      "phi": "0"
+    }
+  }
+}
