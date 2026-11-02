@@ -1,0 +1,33 @@
+name: Run266 tilt-aware velocity guard
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run266_tilt_aware_velocity_guard.py'
+      - 'verification/test_run266_tilt_aware_velocity_guard.py'
+      - 'results/run266_tilt_aware_velocity_guard_20261102/checks.json'
+      - '.github/workflows/run266-tilt-aware-velocity-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run266_tilt_aware_velocity_guard.py'
+      - 'verification/test_run266_tilt_aware_velocity_guard.py'
+      - 'results/run266_tilt_aware_velocity_guard_20261102/checks.json'
+      - '.github/workflows/run266-tilt-aware-velocity-guard.yml'
+
+jobs:
+  run266:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile sources
+        run: python -m py_compile verification/check_run266_tilt_aware_velocity_guard.py verification/test_run266_tilt_aware_velocity_guard.py
+      - name: Focused regression
+        run: PYTHONPATH=verification python -m unittest discover -s verification -p 'test_run26*.py' -v
+      - name: Verify real configuration and exact archived certificate
+        run: |
+          python verification/check_run266_tilt_aware_velocity_guard.py --root . --output /tmp/run266_checks.json
+          diff -u results/run266_tilt_aware_velocity_guard_20261102/checks.json /tmp/run266_checks.json
