@@ -1,0 +1,22 @@
+{
+  "adversarial_residual_ticks_0_to_2": "3246383/1600000",
+  "closed_loop_controller_implemented": false,
+  "feedback_and_observation": "bound holds even with perfect state feedback; tau0 affects v only at third successor tick",
+  "gate_A": "blocked",
+  "implication": "Any robust controlled invariant state set containing origin with |v|<=0.12 is impossible for this plant; not a statement about |v|<=3 hard constraint",
+  "p3_exact_under_plusR": "9739149/4000000000",
+  "phi2_absolute_upper": "1/625",
+  "run": 262,
+  "scope": "frozen_four_state_Euler_constant_T_9.81",
+  "starting_true_state": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "terminal_information_RCI_certified": false,
+  "torque_quantifier": "for_all_causal_tau0_tau1_tau2_in_minusU_plusU",
+  "v2_exact_under_plusR": "3246383/40000000",
+  "v3_necessary_symmetric_velocity_span": "48570177/200000000",
+  "v3_universal_lower_under_plusR": "48570177/400000000"
+}
