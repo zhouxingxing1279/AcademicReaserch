@@ -1,3 +1,7 @@
+**Run263 PR/main CI与安全合并复核（2026-11-02 UTC）：** 研究PR #111 https://github.com/zhouxingxing1279/AcademicReaserch/pull/111 以main 84937248548b4c4f1a1d48650ed03dc6559e84a0 为基准，合并前compare ahead=3/behind=0、仅7个预期文件、mergeable_state=clean、expected head b27c101e12a796c67e700931fa5847c83e61df3b。首轮PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41427063681 **失败**：35/35单元测试成功，但JSON精确逐字比较在第80行失败，原因是JavaScript JSON格式化将数字字符串键“5/10/15”排序，与Python sort_keys=True顺序不一致；保留此负面记录。修正归档键序后，PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41427264817 **completed/success**，完整Python3.13.17 checkout聚焦Run260–263 **35/35通过、无跳过**，源码编译、真实配置核验、精确JSON逐字比较、artifact上传均通过。expected-head非强制squash合并至main 3b5f9921a360fc7f30ddef46c6d4953eecda8777，重新读取main SHA、PR merged及源码/证书Blob确认落地。main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41427340573 **completed/success**，35/35、配置/JSON比较及工件上传再次通过。**全仓库历史回归未执行**。本轮仅证明第60拍全部非空有噪后验的速度投影宽度上界，不证明绝对状态安全终端RCI、无限递归可行、稳定或20ms WCET；Gate A=blocked。
+
+---
+
 # Run263 — 全有噪读数下第60拍速度宽度上界（2026-11-02 UTC）
 
 ## 1. 基准与唯一问题
