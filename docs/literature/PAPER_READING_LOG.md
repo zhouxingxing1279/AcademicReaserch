@@ -1,3 +1,15 @@
+## 背景第26轮 — Mendez/Whidborne/Chen（2023）LiDAR风预报LMPC与四旋翼逐桨分配链（2026-11-02；新增去重）
+
+- **书目/原始来源**：Arthur P. Mendez; James F. Whidborne; Lejun Chen, *Wind Preview-Based Model Predictive Control of Multi-Rotor UAVs Using LiDAR*, *Sensors* **23**(7):3711 (2023-04-03), DOI https://doi.org/10.3390/s23073711；出版社开放全文镜像 https://pmc.ncbi.nlm.nih.gov/articles/PMC10098597/ ，原文 https://www.mdpi.com/1424-8220/23/7/3711 。2026-11-02**公开期刊HTML全文§1–4及Tables 1–5已读**，重点§2.1–2.4、§3.3–3.5；HTML无稳定纸页码，未逐页核对PDF排版、未复现实验。状态：**全文HTML已读；数学/工程结论未独立复现**。
+- **任务/架构/真实模型**：Draganflyer X-Pro标准四旋翼的抗阵风定点/降落位置保持；真实6物理自由度。非线性Newton–Euler＋逐桨气动模型用于仿真，质量2.36kg、惯量diag(0.1676,0.1686,0.2974)kg m²、臂长0.45m（Table 1）；悬停零风数值线性化形成**12状态** `x=(x,y,z,u_b,v_b,w_b,φ,θ,ψ,p,q,r)`，注意前三个速度在**机体系**，不是惯性系。离散LTI `x+=Ad x+Bd u+Bw wind`，采样0.1s。无间歇测量合同、未报告可认证的逐桨电机动态/ESC最坏误差界。
+- **MPC输入与执行链**：外环**四虚拟输入** `u=(altitude demand,pitch-angle demand,roll-angle demand,yaw-angle demand)`，不是四个实际电机推力；内环四通道PID输出 `(U1 collective,U2 pitch,U3 roll,U4 yaw)`，§2.2式中的逐桨转速命令 `Ω=(U1+U2+U3+U4,U1+U2−U3−U4,U1−U2−U3+U4,U1−U2+U3−U4)`（论文标注X型）。该代数混控是论文**仿真架构**，不能据此断言有逐桨物理推力、非负RPM、饱和、速率或ESC跟踪的硬保证；未给足以移植到仓库1kg机体的实际混控辨识。
+- **量测/估计**：MPC定义输出 `y=(x,y,z,u_b,v_b,w_b,p,q,r)`（9维，§2.2）；**KF实际测量** `z=(x,y,z,u_b,v_b,w_b,φ,θ,ψ)`（9维，§2.4），由KF估计不可直接测得的三轴角速率。该文的LiDAR是**地面风速预报传感器**，不是有噪间歇位置传感器；用历史LiDAR风数据作为非线性仿真的预报输入，不能把“实测风数据”误写成四旋翼实飞。KF协方差不是有界状态SMF/CZ真值包含。
+- **MPC类型/约束/求解**：悬停线性化**增量LTI MPC**＋未来风扰预报；决策 `ΔU`，位置/输出跟踪二次项＋控制增量二次项，§2.3式(9)、线性不等式 `MΔU≤γ`，Hildreth QP算法；采样0.1s，默认预测/控制时域均1s，即10步（§3）；未报告可核验的数值逐桨RPM/推力/变化率硬界、终端鲁棒不变集合、最坏求解耗时或20ms WCET。
+- **理论/结果/局限**：§3仅**线性及非线性仿真**，用既往真实LiDAR风数据驱动；与无风预报MPC对照，非线性阵风案例位置保持偏差约±0.2m vs ±0.6m，作者报告约66%改善；论文摘要另概述约80%改善，属不同汇总/场景，不混用。风预报时差1.75s/强度120%的“鲁棒裕量”是性能退化阈值的**仿真敏感性**，不是所有有界扰动的硬安全证明。没有真实四旋翼MPC飞行、没有SMF、失测、Tube终端递归可行性定理。
+- **可复用与待查**：可复用“外环虚拟输入→PID→逐桨混控”的**接口审计清单**、状态/输出/测量严格区分、风预报与未知有界扰动的对照；与PX4开源分配代码（独立来源，**不是论文配套实现**）交叉对照。主任务须验证实际 `(T,τ)→分配器→限幅/限速→ESC→真实推力` 与后验相关的共同可实现域；不在背景任务开发控制器。待查本机体ESC/RPM/推力标定、分配残差上界、成功/丢包后的可重复终端信息集合及20ms预算。相关日志：`docs/research/model_selection/background_run_20261102_2034_mendez_px4_chain.md`。
+
+---
+
 ## Run274 — de Souza等(2020)区间观测器＋MPC终端条件再核验（2026-11-02；既有DOI，不增加去重）
 
 - **书目与链接**：Alex Reis de Souza, Denis Efimov, Tarek Raïssi, Xubin Ping, *Robust Output Feedback MPC: An Interval-Observer Approach*, *59th IEEE Conference on Decision and Control* (CDC 2020), pp.2529–2534, DOI https://doi.org/10.1109/CDC42340.2020.9304070；作者公开全文 https://www.researchgate.net/publication/343994166_Robust_Output_Feedback_MPC_An_Interval-Observer_Approach 。原书目已见背景第12轮，按DOI去重。
