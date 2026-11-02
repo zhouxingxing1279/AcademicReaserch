@@ -1,3 +1,7 @@
+**Run267 合并后独立复核（2026-11-02 UTC）：** PR #123 https://github.com/zhouxingxing1279/AcademicReaserch/pull/123 在main `c730828f42c75bba95d730f8af5e75a4c28a62ac` 上7提交ahead、0 behind、仅7个预期文件，mergeable_state=clean。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41463272428 **completed/success**；Python3.13完整checkout聚焦回归 **70/70通过**，源码编译、真实配置、Run260/264归档交叉核验与Fraction JSON逐字比较成功。expected-head `3ae16fe17809150e0952ad3d335814f0b1d04665` 非强制squash合并至main `ea7a5c0075f46d0199306c3af00d5ceffdbff0dd`，重新读取main SHA、PR merged及关键文件Blob核验落地；本地与远端代码/测试/证书blob SHA一致。**合并后main push CI未独立确认、全仓库历史回归未执行。** 必要筛选全盒通过不等于充分安全，Gate A仍blocked。
+
+---
+
 # Run267 — Run260/264 可靠外包的三拍必要守卫筛选与终端非闭合边界（2026-11-02）
 
 ## 1. 本轮基准、唯一瓶颈及证据等级
