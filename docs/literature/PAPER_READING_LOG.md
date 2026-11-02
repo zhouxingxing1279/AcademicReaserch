@@ -1866,3 +1866,13 @@
 - **实验与性能**：Asctec NEO六旋翼、ROS、Intel i7 3.1GHz；无风悬停RMSE LMPC1.84cm/NMPC2.05cm，约11m/s风中悬停2.7/2.5cm、激进轨迹10.8/7.1cm，阶跃上升1.6/1.0s。**平均**求解LMPC2.35ms/NMPC0.45ms，求解器不同，不能归因于NMPC普遍更省算力；未给20ms最坏时间上界。结果是实飞性能证据，不是SMF包含/硬约束保证。
 - **局限/可复用技术/与课题关联**：可复用外环模型辨识、姿态内环时间常数、QP/RTI性能基线及ROS代码作为结构对照；六旋翼参数不能直接移植四旋翼，虚拟倾角/推力输入不能等同本仓库`(T,τ)`物理力矩输入。四状态固定推力垂向漂移、Run246/260–263安全/时滞问题不因论文实飞消失。条件性保留六状态平面物理模型为首选，分层MPC为备选；创新空间需由有噪失测状态SMF/CZ与真实输入约束/因果安全前驱的文献对照确认。
 - **待查问题**：下一轮优先核验**真正四旋翼**分层/线性MPC实飞论文的实际电机接口、姿态内环误差与位置速度传感器合同。详细模型审计见 `docs/research/model_selection/background_run_20261102_1034_kamel_hexacopter_lmpc_nmpc.md`。
+
+
+## Run264 定向重读（2026-11-02；Qiu等2020已登记，不增加去重数）
+
+- **书目：** Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad, *Output feedback model predictive control based on set-membership state estimation*, *IET Control Theory & Applications* 14(4):558–567 (2020), DOI https://doi.org/10.1049/iet-cta.2019.0881；出版社开放全文 https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。
+- **阅读日期、范围与状态：** 2026-11-02，出版社开放HTML正文§2 Assumptions 1–2、§3.1 Theorem 1、§3.2–3.4式(19),(34),(35)–(41)、§4式(45)–(57)、§5数值例；分节重读，数学公式有图片嵌入，未声称逐式核对所有公式或PDF页码。
+- **研究问题、模型与输入：** LTV/LTI离散系统，已知矩阵，部分输出，输入向量u，紧有界过程及测量噪声；椭球**状态SMF**（非参数SMF）通过预测/测量更新与S-procedure/LMI保证真状态包含。MPC用有限时域minimax代价、椭球初始集合和状态/输入欧氏范数约束，经LMI/SDP求解；无四旋翼物理T/tau或失测自动机。
+- **关键假设、定理与结论：** Theorem 1的集合包含依赖上一步已包含及LMI可行；§4的鲁棒终端不变椭球和局部反馈是额外条件，且§4明确假设**进入终端区域时真实状态已知**以使用局部Kx。持续扰动下结论为趋向包含原点的区域而非无扰原点渐近稳定；§5只报告二阶LTI、LPV、DC-DC转换器MATLAB/YALMIP/SeDuMi数值结果，未报告四旋翼、丢包、实飞或20ms最坏耗时。
+- **局限、可复用技术与课题关联：** 可复用估计包含LMI、鲁棒预测约束和终端RPI的分层审计；**不能**把该文依赖真状态的终端局部反馈直接当作本项目隐藏速度+间歇位置输出反馈策略。Run264只延长固定历史的有限安全前缀，不构造该文终端RPI或证明递归可行。
+- **待查问题：** 能否将真状态终端Kx替换为对同一有噪位置观测纤维共享的因果集合反馈，并使所有合法success/miss后验回到可移位信息集合？相关证书见 `docs/research/run264_research_log.md`。
