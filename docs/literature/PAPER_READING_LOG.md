@@ -1,3 +1,13 @@
+## Run275 — Reis de Souza、Efimov、Raïssi（2022）时滞系统区间观测器＋输出反馈MPC（2026-11-02；新增去重）
+
+- **书目与来源**：Alex Reis de Souza; Denis Efimov; Tarek Raïssi, *Robust output feedback model predictive control of time-delayed systems using interval observers*, *International Journal of Robust and Nonlinear Control* 32(3):1180–1193 (2022), DOI https://doi.org/10.1002/rnc.5874 。作者公开全文 https://www.researchgate.net/publication/355700252_Robust_output_feedback_MPC_of_time-delayed_systems_using_interval_observers ；出版社 https://onlinelibrary.wiley.com/doi/10.1002/rnc.5874 。2021-11-08在线发表、2022卷期。核验/阅读日期2026-11-02。**状态：作者全文分节阅读§2–6（印刷pp.1182–1192），部分数学符号网页提取乱码，未逐式核验全部LMI、未复现仿真；不标记为全公式核验。**
+- **研究问题、模型与输入**：离散已知固定时滞线性系统 x[k+1]=A0*x[k]+A1*x[k-h]+B*u[k]+w[k]，y[k]=C*x[k]+v[k]；通用n状态、m输入、p输出。§6数值案例为2状态、1输入、1输出、10拍时滞，状态盒[-9,3]×[-7,4]、输入[-1,1]。不是四旋翼，未包含电机、推力或姿态动力学。
+- **量测、估计、不确定性**：Assumption 1要求初始时滞历史及过程/量测噪声已知区间；每拍输出可用。区间观测器IO每拍更新状态上下界，区间预测器IP对未来无输出预测；属于状态集合估计，不是参数辨识。合作性/非负条件与适当坐标变换是重要限制；不含位置成功/丢包混合自动机。
+- **MPC结构与约束**：Theorems 1–3离线LMI设计IO/IP及局部反馈；§4式(23)–(24)对区间中心作二次QP，预测上下界满足状态硬约束、输入位于U、终端中心在Xf；Algorithm 1按每拍观测更新→IP重置→QP→执行首控制。Theorem 4在Assumptions 1–3、初始可行、扰动包络嵌套、终端局部控制满足输入约束等条件下给出递归可行、ISS及约束满足；不可直接用于本项目间歇测量非线性模型。
+- **结果、局限与复用**：§6 MATLAB 2017a/YALMIP/quadprog，N=20、100次2状态线性时滞仿真；作者报告平均0.0042±0.0021秒/步、最大观察0.1358秒；未复现、无实飞、非20ms WCET。可复用“集合包含→预测硬约束→终端可移位”分工；Run275只新增有噪位置双成功包对隐藏速度的条件化充分界，尚非完整SMF/CZ后验或终端信息RCI。**待查**：全部成功/丢包读数纤维、终端反馈可行性、LMI完整逐式核验、可复现代码。关联docs/research/run275_research_log.md。
+
+---
+
 ## 背景第26轮 — Mendez/Whidborne/Chen（2023）LiDAR风预报LMPC与四旋翼逐桨分配链（2026-11-02；新增去重）
 
 - **书目/原始来源**：Arthur P. Mendez; James F. Whidborne; Lejun Chen, *Wind Preview-Based Model Predictive Control of Multi-Rotor UAVs Using LiDAR*, *Sensors* **23**(7):3711 (2023-04-03), DOI https://doi.org/10.3390/s23073711；出版社开放全文镜像 https://pmc.ncbi.nlm.nih.gov/articles/PMC10098597/ ，原文 https://www.mdpi.com/1424-8220/23/7/3711 。2026-11-02**公开期刊HTML全文§1–4及Tables 1–5已读**，重点§2.1–2.4、§3.3–3.5；HTML无稳定纸页码，未逐页核对PDF排版、未复现实验。状态：**全文HTML已读；数学/工程结论未独立复现**。
