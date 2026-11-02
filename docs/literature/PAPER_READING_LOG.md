@@ -1,3 +1,18 @@
+## 背景第15轮 — Carlos等（2020）Crazyflie实飞13坐标NMPC与执行器接口（2026-11-02；新增去重第110篇）
+
+- **真实题名/完整作者/出版/DOI**：Barbara Barros Carlos, Tommaso Sartor, Andrea Zanelli, Gianluca Frison, Wolfram Burgard, Moritz Diehl, Giuseppe Oriolo, *An Efficient Real-Time NMPC for Quadrotor Position Control under Communication Time-Delay*, **2020 16th International Conference on Control, Automation, Robotics and Vision (ICARCV)**, IEEE, pp.982–989；DOI https://doi.org/10.1109/ICARCV50220.2020.9305513 ；作者公开预印本 https://arxiv.org/abs/2010.11264 ；大学出版记录 https://www.diag.uniroma1.it/en/publication/22132 。
+- **实际阅读日期/版本/范围**：2026-11-02；**公开arXiv HTML原文§I–VI分节已读**，重点§II-A–E式(1)–(3)、§III-A–D式(4)–(5)、Table I、§IV-A–E、§V实飞耗时；未独立核验IEEE终版逐页排版，不声称重算原始数据。
+- **研究问题/控制任务**：在固定无线通信RTT下以低计算成本实现四旋翼位置与轨迹跟踪；Crazyflie 2.1，offboard NMPC+onboard PID级联；对比LQR、不同预测时域和延迟。
+- **真实模型/状态与输入**：§II-A非线性牛顿–欧拉，NMPC状态 ξ=(p,q,v_b,ω)∈R¹³：p为惯性系三维位置、q为4分量单位四元数、v_b为机体系三维速度、ω为三维角速率；物理刚体6自由度，四元数单位范数约束使13坐标有1冗余。**§III-A悬停LQR**才将q_w消去得到12状态。NMPC优化输入是四个电机转速Ω_i，假设转速瞬时变化；§III-C输入0–22 krpm，转速平方映射推力/力矩。§IV-C/D实机固件执行的是roll/pitch期望、yaw rate期望及公共PWM，经机载PID，而非直接执行四个最优电机转速；论文承认模型/执行接口不一致。连续模型以ERK4离散，采样15ms，选N=50（0.75s）。
+- **实际量测/不确定性/估计**：§IV-A/B动捕相机100Hz三维位置；IMU日志重构Euler角与角速率；位置经二阶离散Butterworth滤波估计速度。固定RTT≈60ms，§II-B以RK4预测补偿；**没有位置丢包、确定性有界噪声条带、SMF/CZ状态后验或参数SMF**，不应把RTT误读为丢包。
+- **MPC类型、约束、理论**：名义NMPC、direct multiple shooting、二次阶段/终端跟踪代价，式(2)显式输入盒，未提供鲁棒状态/输入Tube、终端RCI或有噪间歇观测下的递归可行/硬安全定理。acados SQP-RTI、Gauss–Newton、HPIPM、BLASFEO、partial condensing；对RTI一般稳定性条件有文献讨论，但不能视作本四旋翼SMF闭环已证。
+- **主要结论/实验平台/性能**：§III仿真对比LQR、N=10/20/30/40/50及RTT影响；§IV真实Crazyflie 2.1，ROS/C++ offboard、平滑阶跃及螺旋轨迹；§V Intel Core i5-8250U Ubuntu平均优化7.4ms、观测最大22.1ms（起飞），超过论文15ms采样，也超过仓库20ms目标；**不是WCET上界**，无全扰动硬约束证书。实验跟踪表现不是数学鲁棒安全证明。
+- **模型简化/局限**：瞬时电机转速假设；实际固件输入映射和内环PID未建模；固定RTT；无丢包与有界扰动集合；没有本仓库T/τ物理合同、推力依赖残差、终端信息RCI。该文13坐标不能直接替代本仓库6状态平面模型。
+- **本课题关联/可复用技术**：直接提供四旋翼实飞NMPC模型、输入限幅、acados实时实现及传感器/固件接口证据；可作为名义MPC性能和计算预算对照。SMF/CZ应接入有噪间歇位置状态后验、考虑共享因果输入及实际执行器映射；创新性不在“使用NMPC/RTT预测”。**未运行其开源代码、未复现飞行实验**。
+- **待查问题/下一轮唯一优先**：全文核验Kamel/Burri/Siegwart (2017) LMPC与NMPC对照的精确状态、输入、内环和计算成本；再评估降阶或分层MPC接入状态SMF的可行性。与本轮背景日志 docs/research/model_selection/background_run_20261102_0937_carlos_nmpc.md 对应。
+
+---
+
 ## Run262 — Diaconescu等（2024）弹性zonotope Tube MPC全文分节核验（2026-11-02；新增去重第109篇）
 
 - **题名、作者、出版及DOI：** Sabin Diaconescu, Florin Stoican, Bogdan D. Ciubotaru, Sorin Olaru, *Elastic Tube Model Predictive Control With Scaled Zonotopic Sets*, *IEEE Control Systems Letters* **8** (2024), 1343–1348；DOI https://doi.org/10.1109/LCSYS.2024.3408047 ；作者开放版全文可解析 https://www.researchgate.net/publication/381050260_Elastic_Tube_Model_Predictive_Control_With_Scaled_Zonotopic_Sets ；书目 https://dblp.org/rec/journals/csysl/DiaconescuSCO24 。
