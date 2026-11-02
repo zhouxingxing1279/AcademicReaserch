@@ -1,0 +1,33 @@
+name: Run265 terminal velocity guard
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run265_terminal_velocity_guard.py'
+      - 'verification/test_run265_terminal_velocity_guard.py'
+      - 'results/run265_terminal_velocity_guard_20261102/checks.json'
+      - '.github/workflows/run265-terminal-velocity-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run265_terminal_velocity_guard.py'
+      - 'verification/test_run265_terminal_velocity_guard.py'
+      - 'results/run265_terminal_velocity_guard_20261102/checks.json'
+      - '.github/workflows/run265-terminal-velocity-guard.yml'
+
+jobs:
+  run265:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile sources
+        run: python -m py_compile verification/check_run265_terminal_velocity_guard.py verification/test_run265_terminal_velocity_guard.py
+      - name: Focused regression
+        run: PYTHONPATH=verification python -m unittest discover -s verification -p 'test_run26*.py' -v
+      - name: Verify configuration and exact archived certificate
+        run: |
+          python verification/check_run265_terminal_velocity_guard.py --root . --output /tmp/run265_checks.json
+          diff -u results/run265_terminal_velocity_guard_20261102/checks.json /tmp/run265_checks.json

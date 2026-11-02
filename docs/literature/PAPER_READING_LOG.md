@@ -1888,3 +1888,16 @@
 - **仿真/计算**：§10.1 MATLAB/CasADi `h=50ms,N=20`，三轴RMSE新`[0.26,0.07,1.75]m` vs基线`[0.48,0.14,2.43]m`；平均求解3.3ms vs0.25ms。§10.2 Avular Vertex One高保真**仿真非实飞**，`h=100ms,N=20,m=2.8kg,Tmax=80N`，新vs PID RMSE`[0.17,0.086,1.41]m` vs`[0.20,0.12,1.47]m`。未报告20ms最坏执行时间或真实飞行。
 - **局限、可复用技术与创新边界**：可复用外环12维增广/三轴4维分解、时变推力内近似、精确ZOH及采样间隔约束审计；不能将其`s`虚拟输入等同本仓库`F(N),τ(Nm)`，需`F=mT`单位换算与内环误差合同。该文已有名义级联稳定性和时变推力约束贡献，本课题仍需有界间歇位置SMF/CZ＋共享因果输出反馈终端信息集合的独立证明。Run246/261负例与Run264有限桥不受该文定理直接覆盖。详细审计见 `docs/research/model_selection/background_run_20261102_1137_izadi2026_thrust_tv.md`。
 - **待查问题**：下一轮全文核验真正四旋翼实飞低维/级联MPC的实际电机/力矩接口、传感器信息权限及执行误差边界。
+
+
+---
+
+## Run265 新增全文分节核验 — Quartullo等（2025，唯一去重第113篇）
+
+- **题名、作者、正式书目**：Renato Quartullo, Gianni Bianchini, Andrea Garulli, Antonio Giannitrapani, *Robust Output Feedback Variable-Horizon MPC With Adaptive Terminal Constraints*, *IEEE Control Systems Letters* 9:883–888 (2025), DOI https://doi.org/10.1109/LCSYS.2025.3578491；作者公开PDF https://www3.diism.unisi.it/~giannibi/research/papers/ATCS_LCSS_2025.pdf 。2026-11-02实际阅读作者公开PDF pp.1–6，§II–IV、Algorithm 1、Theorems 1–2、式(1)–(26)；**公开作者稿全文已读，未逐式核对IEEE正式终版**。
+- **研究问题/模型/输入**：离散LTI `x(k+1)=Ax(k)+Bu(k)+w(k)`，`y(k)=Cx(k)+n(k)`，有界凸过程/测量噪声；输出反馈可变时域Tube MPC在已知参考轨迹上有限时刻拦截目标。§IV六状态轨道交会`x=(p_3,v_3)`，输入`u=a_3`三轴虚拟加速度；**非四旋翼、无真实T/τ或旋翼分配**。
+- **量测/估计/失测**：§IV每拍只测三维位置（噪声±0.01m），速度隐藏；固定增益Luenberger观测器，估计误差管束`S_tilde(k)`与控制偏差管束`S(k)`分离；**不是状态SMF/CZ后验逐次交集，不处理位置success/miss丢包**，不是参数SMF。假设`(A,B)`可稳定化、`(A,C)`可检测。
+- **MPC/约束/理论**：状态/输入凸硬约束经Pontryagin差收紧；优化可变预测时域`N_k`、名义输入`v_k`、自适应**目标终端集合**`Z_f,k`。Assumption 1要求初始终端等式问题存在可行时域；Theorem 1在有界噪声与`bar_lambda>0`等条件下证明优化问题递归可行和代价下降；Theorem 2证明**有限时刻进入目标附近集合**，并非完成后无限时域终端信息RCI或鲁棒渐近稳定。无SMF/CZ状态后验、无四旋翼非线性物理约束。
+- **实验/计算**：§IV HCW轨道交会仿真，采样11.7s、`N_k∈{1,...,30}`，Gurobi LP，100组Monte Carlo，平均求解约0.5s，平均最终距离约0.04m；仅数值仿真，无四旋翼/无人机实飞，**不能证明20ms WCET**。
+- **局限/可复用技术**：可复用式(5),(10),(11)的误差外包、双管束收紧与式(15),(23)的移位候选/终端目标集合扩张思路。论文假设每拍输出、LTI和直接加速度输入，无法直接迁移本仓库间歇有噪位置、Euler`tau→v`三拍时滞、物理T/τ约束。§V将SMF和非线性系统作为未来扩展。其已有的输出反馈自适应终端贡献限制本课题创新宣称。
+- **与Run265关联、阅读日期、待查问题**：2026-11-02；Run265在冻结四状态真值下证明零姿态零角速切片的三拍绝对速度必要带`|v|<=2.8785745575`，而非可移位终端RCI。下一步：是否存在覆盖Run260第60拍所有合法有噪后验、具有绝对状态/姿态关联且共享因果反馈可回返的非空信息集合？详见`docs/research/run265_research_log.md`。
