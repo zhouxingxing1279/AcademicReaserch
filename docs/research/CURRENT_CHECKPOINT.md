@@ -1,3 +1,7 @@
+**Run254 PR完整checkout CI复核（2026-11-02 UTC）：** PR #85 https://github.com/zhouxingxing1279/AcademicReaserch/pull/85 。首次PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370808916 **failure**：53/53单元测试全部通过，但精确JSON逐字比较在第22行失败，原因是JavaScript写入归档时整数样式键按数值排序，而Python `sort_keys=True`按字符串排序；不是数学证书失败。已将归档键顺序修正，不改变数值或算法。修复后PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370855348 **completed/success**；读取完整Python3.13.17 job日志确认Run249–254 **53/53通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较及artifact上传均成功。全仓库历史回归未执行；该CI成功不代表递归安全/稳定性证明。main合并与合并后CI仍待独立核验。
+
+---
+
 **Run254研究增量（2026-11-01；PR/main CI与合并状态待独立核验）：** 起点远端main `fbaacacf0410acf8c76dbdd8736e73f0c00948cf`。在Run249四状态Euler、真实残差界和`SSSMMS`合法测量时序下，精确构造两条同初态、同零力矩、所有成功位置读数及每拍角度/角速读数均为0的真实安全轨迹；第30拍强制成功位置观测后仍同位置0，但隐藏速度为`±3246383/12800000m/s`，因此该特定合法后验速度直径必要下界`3246383/6400000≈0.50724734375m/s`。Run249区间SMF对同一历史给出可靠外包`v30∈[-1.346823505,1.346823505]`，故真实后验直径仅被夹在`[0.50724734375,2.69364701]`m/s，不能把区间宽度称为精确后验。精确Fraction逐拍检查与独立本地9项测试7通过、2因隔离目录缺完整配置/归档跳过；源码`verification/check_forced_success_velocity_alias.py`、测试、JSON、日志和CI工作流见`docs/research/run254_research_log.md`。本轮重读Qiu等(2020) §2–4，去重文献数保持101。Run253极端双路径可区分与Run254另构双路径不可区分并不矛盾。无终端RCI、无限时域递归可行或稳定性证书，Gate A仍blocked。**唯一下一步：** 对第30拍所有有噪成功观测分支构造完整信息后继及共享因果备份闭合条件。
 
 ---
