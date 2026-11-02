@@ -1,3 +1,15 @@
+## Run268 — de Paula等（2024）非线性CZ＋DC规划SMF（2026-11-02；新增去重论文）
+
+- **书目**：Alesi A. de Paula, Davide M. Raimondo, Guilherme V. Raffo, Bruno O. S. Teixeira, *Set-based state estimation for discrete-time constrained nonlinear systems: An approach based on constrained zonotopes and DC programming*, *Automatica* **159** (2024), Article 111401, DOI https://doi.org/10.1016/j.automatica.2023.111401；公开作者预印本 arXiv:2211.05912v1 https://arxiv.org/pdf/2211.05912 。出版信息由DBLP和作者公开稿交叉核验，期刊终版未逐页比对。
+- **阅读日期/范围/状态**：2026-11-02；实际阅读预印本PDF pp.1–7 §2–5（问题定义、CZ表示、Lemma 1、Theorems 1–2、Corollary 1、Algorithm 1、复杂度Table 1、§5两数值案例）和p.8 §6结论；**正文分节已读**，不是仅摘要，也未独立重现作者优化或期刊最终证明。
+- **研究问题/模型与输入**：带未知但有界过程/量测噪声、状态线性不等式和非线性等式约束的离散非线性状态估计，`x_k=f(x_{k-1},u_{k-1},w_{k-1}), y_k=h(x_k,v_k)`，确定性已知输入。§5.1两状态非线性过程，§5.2四元数四状态飞行机器人**姿态估计**，陀螺仪角速输入含有界误差，输出为非线性姿态观测；并非四旋翼MPC/真实飞行、没有位置丢包或逐桨约束。
+- **方法/重要定理/假设**：CZDC按预测、量测交集、状态可行域、非线性等式一致性、复杂度约减五步递推。Assumption 1要求线性不等式约束对应紧可行集；初始状态、过程和量测噪声为有界凸多胞体。Lemma 1用DC凸/凹界给线性化余项可靠区间；Theorem 1/2分别建立CZ预测与量测更新的**外包包含**，Corollary 1处理非线性状态等式；不是闭环MPC稳定性或递归可行性定理。
+- **结果与证据**：§5报告MATLAB数值对照CZDC/CZFO/CZMV；姿态仿真Table 3中CZDC平均处理时间3.58s、CZFO 39.8s、CZMV 1.76s（作者特定旧CPU/MATLAB平台），作者同时报告更紧的区间盒面积；不能外推20ms实时性、实飞或硬安全。
+- **局限/可复用技术/课题关系**：可复用非线性余项外包、CZ广义交集、状态可行域及降阶的结构；Run268解析 `(v60,phi60,omega60)` 条带是额外的测量一致性约束候选，**不是作者算法的已实现迁移**。论文未处理有噪位置每5拍机会/连续丢2包、真实推力/力矩响应或共享观测纤维的终端信息RCI。CZ＋SMF和非线性外包已是既有技术，不能据此声称首次提出。
+- **待查**：如何在非零力矩反馈时保持条带与历史控制的依赖；如何将多时刻观测关联与CZDC合并而不丢弃扰动相关性；如何使计算预算低于20ms并证明终端回返。详见`docs/research/run268_research_log.md`。
+
+---
+
 ## Run267 — Ping & Sun (2015) quasi-LPV zonotope SMF＋动态输出反馈MPC正文复核（2026-11-02；既有论文，去重数不增加）
 
 - **书目/链接**：Xubin Ping, Ning Sun, *Dynamic Output Feedback Robust Model Predictive Control via Zonotopic Set-Membership Estimation for Constrained Quasi-LPV Systems*, *Journal of Applied Mathematics* 2015, Article 875850, DOI https://doi.org/10.1155/2015/875850；出版社开放全文 https://onlinelibrary.wiley.com/doi/full/10.1155/2015/875850 。
