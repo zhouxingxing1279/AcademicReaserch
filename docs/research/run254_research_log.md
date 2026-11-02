@@ -1,3 +1,7 @@
+**Run254 PR完整checkout CI复核（2026-11-02 UTC）：** PR #85 https://github.com/zhouxingxing1279/AcademicReaserch/pull/85 。首次PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370808916 **failure**：53/53单元测试全部通过，但精确JSON逐字比较在第22行失败，原因是JavaScript写入归档时整数样式键按数值排序，而Python `sort_keys=True`按字符串排序；不是数学证书失败。已将归档键顺序修正，不改变数值或算法。修复后PR workflow https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370855348 **completed/success**；读取完整Python3.13.17 job日志确认Run249–254 **53/53通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较及artifact上传均成功。全仓库历史回归未执行；该CI成功不代表递归安全/稳定性证明。main合并与合并后CI仍待独立核验。
+
+---
+
 # Run254 — 强制成功位置测量后的隐藏速度仍不可区分（2026-11-01）
 
 ## 基线与唯一瓶颈
