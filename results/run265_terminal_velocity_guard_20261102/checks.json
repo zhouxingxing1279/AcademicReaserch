@@ -1,0 +1,25 @@
+{
+  "does_not_assert": [
+    "these states occur in Run260 tick60 posterior",
+    "all Run264 tick75 posteriors are unsafe",
+    "terminal information RCI nonexistent",
+    "MPC/SMF closed loop implemented"
+  ],
+  "gate_A": "blocked",
+  "hard_speed_limit_m_s": "3",
+  "information_fiber_implication": "any posterior containing (p=0,v=+/-2.9,phi=0,omega=0) is not 3-step robust viable; small velocity width alone is insufficient",
+  "necessary_v0_interval_at_zero_attitude_m_s": [
+    "-1151429823/400000000",
+    "1151429823/400000000"
+  ],
+  "negative_case": "sign_symmetric_r=-R_v0=-2.9; all causal torques fail |v3|<=3",
+  "positive_adversarial_initial_v0_m_s": "29/10",
+  "positive_adversarial_p3_m": "705739149/4000000000",
+  "positive_adversarial_v1_m_s": "235246383/80000000",
+  "positive_adversarial_v2_m_s": "119246383/40000000",
+  "positive_adversarial_v3_strict_lower_m_s": "1208570177/400000000",
+  "quantifiers": "forall causal admissible tau0,tau1,tau2; exists legal r0=r1=r2=sign(v0)*R",
+  "run": 265,
+  "scope": "frozen_4state_Euler_T9.81_phi0_omega0_zero_only",
+  "three_tick_outward_speed_increment_lower_m_s": "48570177/400000000"
+}
