@@ -1,0 +1,26 @@
+name: Run274 two-block safety and conditional gate
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run274_two_block_gate.py'
+      - 'verification/test_run274_two_block_gate.py'
+      - 'results/run274_two_block_gate_20261102/checks.json'
+      - '.github/workflows/run274-two-block-gate.yml'
+  workflow_dispatch:
+jobs:
+  run274:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and test
+        run: |
+          python -m py_compile verification/check_run274_two_block_gate.py verification/test_run274_two_block_gate.py
+          cd verification
+          python -m unittest -v test_run274_two_block_gate.py
+      - name: Verify Run260, Run273, frozen config and exact archive
+        run: |
+          python verification/check_run274_two_block_gate.py --root . --output /tmp/run274-checks.json
+          cmp /tmp/run274-checks.json results/run274_two_block_gate_20261102/checks.json

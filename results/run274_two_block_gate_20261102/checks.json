@@ -1,0 +1,130 @@
+{
+  "all_legal_65_to_90_packet_sequences": [
+    "SSSSSS",
+    "SSSSSM",
+    "SSSSMS",
+    "SSSSMM",
+    "SSSMSS",
+    "SSSMSM",
+    "SSSMMS",
+    "SSMSSS",
+    "SSMSSM",
+    "SSMSMS",
+    "SSMSMM",
+    "SSMMSS",
+    "SSMMSM",
+    "SMSSSS",
+    "SMSSSM",
+    "SMSSMS",
+    "SMSSMM",
+    "SMSMSS",
+    "SMSMSM",
+    "SMSMMS",
+    "SMMSSS",
+    "SMMSSM",
+    "SMMSMS",
+    "SMMSMM",
+    "MSSSSS",
+    "MSSSSM",
+    "MSSSMS",
+    "MSSSMM",
+    "MSSMSS",
+    "MSSMSM",
+    "MSSMMS",
+    "MSMSSS",
+    "MSMSSM",
+    "MSMSMS",
+    "MSMSMM",
+    "MSMMSS",
+    "MSMMSM",
+    "MMSSSS",
+    "MMSSSM",
+    "MMSSMS",
+    "MMSSMM",
+    "MMSMSS",
+    "MMSMSM",
+    "MMSMMS"
+  ],
+  "all_legal_65_to_90_packet_sequences_count": 44,
+  "base": "Run260 reliable tick60 SMM/MMS outer boxes, Run273 exact 15-step certificate",
+  "branches": {
+    "MMS": {
+      "all_ticks_60_to_90_safe": true,
+      "first_envelope_failure_not_a_reachable_counterexample": true,
+      "first_envelope_failure_q": 45,
+      "largest_q_certified_by_this_envelope": 44,
+      "tick105_bound_if_gate_met": {
+        "omega": "1/100",
+        "p": "1654859809/800000000",
+        "phi": "17/1000",
+        "v": "3"
+      },
+      "tick105_unconditional": {
+        "omega": "1/100",
+        "p": "41546091631/20000000000",
+        "phi": "17/1000",
+        "v": "3029099401/1000000000"
+      },
+      "tick75": {
+        "omega": "1/100",
+        "p": "6643635767/10000000000",
+        "phi": "11/1000",
+        "v": "216236297/125000000"
+      },
+      "tick90": {
+        "omega": "1/100",
+        "p": "5093750189/4000000000",
+        "phi": "7/500",
+        "v": "4750160777/2000000000"
+      },
+      "tick90_conditional_gate_v": "187678479/80000000",
+      "unconditional_tick90_box_meets_gate": false
+    },
+    "SMM": {
+      "all_ticks_60_to_90_safe": true,
+      "first_envelope_failure_not_a_reachable_counterexample": true,
+      "first_envelope_failure_q": 34,
+      "largest_q_certified_by_this_envelope": 33,
+      "tick105_bound_if_gate_met": {
+        "omega": "1/100",
+        "p": "263836638761/100000000000",
+        "phi": "17/1000",
+        "v": "3"
+      },
+      "tick105_unconditional": {
+        "omega": "1/100",
+        "p": "69738602861/25000000000",
+        "phi": "17/1000",
+        "v": "35039257561/10000000000"
+      },
+      "tick75": {
+        "omega": "1/100",
+        "p": "109170729653/100000000000",
+        "phi": "11/1000",
+        "v": "22047167311/10000000000"
+      },
+      "tick90": {
+        "omega": "1/100",
+        "p": "184322917361/100000000000",
+        "phi": "7/500",
+        "v": "7124766859/2500000000"
+      },
+      "tick90_conditional_gate_v": "187678479/80000000",
+      "unconditional_tick90_box_meets_gate": false
+    }
+  },
+  "gate_A": "blocked",
+  "gate_semantics": "Sufficient for next 15 steps only when reliable tick90 posterior is inside p90 unconditional bound, velocity +/-gate, phi +/-a90, omega +/-W; not proved for all observations",
+  "model": "frozen 4-state Euler, fixed T=9.81, shared tau=0",
+  "not_certified": [
+    "all tick90 posterior fibers satisfy gate",
+    "information terminal RCI",
+    "MPC optimizer",
+    "exact SMF/CZ posterior",
+    "infinite recursive feasibility",
+    "six-state safety",
+    "20ms WCET"
+  ],
+  "run": 274,
+  "tick90_conditional_15step_velocity_gate": "187678479/80000000"
+}
