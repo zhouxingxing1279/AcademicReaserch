@@ -275,3 +275,23 @@
 
 **唯一下一轮问题：** 以主任务Run260的第60拍后验为输入，审计是否存在满足全部合法观测相位及实际(T,τ)输入收紧的**非空共同终端集合**；若无，给出明确失败约束再讨论mode-indexed候选，而不是并行新建控制器。
 
+
+---
+
+## 19. 背景第15轮：Carlos等(2020)实飞四旋翼NMPC的状态/执行器接口证据（2026-11-02）
+
+**[公开预印本正文§I–VI已读；非IEEE终版逐页复核]** Barbara Barros Carlos, Tommaso Sartor, Andrea Zanelli, Gianluca Frison, Wolfram Burgard, Moritz Diehl, Giuseppe Oriolo, *An Efficient Real-Time NMPC for Quadrotor Position Control under Communication Time-Delay*, IEEE ICARCV 2020, pp.982–989, DOI https://doi.org/10.1109/ICARCV50220.2020.9305513 ，全文 https://arxiv.org/abs/2010.11264 ，出版书目 https://www.diag.uniroma1.it/en/publication/22132 。详见本轮独立日志 [background_run_20261102_0937_carlos_nmpc.md](background_run_20261102_0937_carlos_nmpc.md)。
+
+| 对照项目 | 论文正文已核验事实 | 对本课题的约束 |
+|---|---|---|
+| 状态维数与自由度 | NMPC：p(3)惯性位置+q(4)单位四元数+v_b(3)机体系速度+ω(3)角速率=**13坐标/6刚体自由度**；悬停线性化**LQR**投影去除q_w后为12状态 | 不能把“12状态LQR”误写成“12状态NMPC”，也不能把13坐标称为13自由度 |
+| 控制输入与物理执行器 | NMPC优化四个电机转速Ω₁…Ω₄，限幅0–22 krpm；假设转速瞬时可调；实际Crazyflie固件接受roll/pitch期望、yaw-rate期望和公共PWM，经onboard PID执行 | 真实输入接口**不是**优化器的四转速；物理硬约束需要额外证明内环误差/映射/饱和，不能将优化限幅直接当真实硬安全 |
+| 实际量测 | 动捕100Hz三维位置；机载IMU日志角度/角速率；二阶Butterworth由位置估计速度；固定RTT≈60ms，NMPC 15ms采样 | 速度是滤波估计值而非直接无噪测量；**固定延迟≠位置包丢失**；无SMF/CZ状态后验 |
+| MPC与约束 | 非线性13坐标多重打靶、ERK4、阶段+终端二次代价、输入盒；acados RTI SQP/GGN、HPIPM/BLASFEO/partial condensing；N=50→0.75s | 式(2)无鲁棒状态管束或终端RCI；名义NMPC可作性能/算力参考，不可作为硬安全递归可行证书 |
+| 验证与成本 | Crazyflie 2.1真实平滑阶跃/螺旋轨迹；Intel i5-8250U平均求解7.4ms、观察最大22.1ms；采样15ms | 实飞可行性强，但观察最大耗时**超过15ms采样和仓库20ms目标**；未给最坏WCET或所有扰动安全保证 |
+
+**候选决策（保留，不盲目扩维）**：首选仍为**6状态平面物理模型(p_x,p_z,v_x,v_z,φ,ω), u=(T,τ)**，仅为条件性目标，尚未有终端信息RCI/递归可行/20ms WCET。**4状态固定T**仅横向姿态有限安全与反例基线，非零倾角会垂向漂移；**2状态姿态**是低风险闭环保底；**10/12/13坐标全模型**暂不升级，13坐标中的四元数冗余及固件输入失配表明维数不能代表安全证明成熟度；**分层/级联**有实飞支持，但必须认证内环误差到外环虚拟输入的映射。
+
+**与Run246/260/261/262关系**：Run246可生存性负例和Run260有限15拍安全桥未被新论文解决；Run261反驳固定零力矩桥无限重复；Run262给出三拍τ→v权限时滞必要界。Carlos等论文的固定RTT预测和实飞跟踪均不能替代有噪位置success/miss下的共享因果SMF后验与终端集合。**Gate A继续blocked**。
+
+**下一轮唯一优先阅读**：Kamel/Burri/Siegwart (2017), DOI https://doi.org/10.1016/j.ifacol.2017.08.849 ，对照LMPC与NMPC真实状态、执行器接口、实验算力，判断何种降阶MPC最适合作为SMF状态后验接入的可复现硕士基线。
