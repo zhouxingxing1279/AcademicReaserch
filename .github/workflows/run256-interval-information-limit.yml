@@ -1,0 +1,38 @@
+name: Run256 interval information-fiber limitation
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run256_interval_information_limit.py'
+      - 'verification/test_run256_interval_information_limit.py'
+      - 'results/run256_interval_information_limit_20261102/checks.json'
+      - '.github/workflows/run256-interval-information-limit.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run256_interval_information_limit.py'
+      - 'verification/test_run256_interval_information_limit.py'
+      - 'results/run256_interval_information_limit_20261102/checks.json'
+      - '.github/workflows/run256-interval-information-limit.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused regressions Run249-256
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge test_forced_success_velocity_alias test_run255_posterior_bridge test_run256_interval_information_limit
+      - name: Compile and compare exact certificate with real config
+        run: |
+          python -m py_compile verification/check_run256_interval_information_limit.py verification/test_run256_interval_information_limit.py
+          cd verification
+          PYTHONPATH=. python check_run256_interval_information_limit.py --root .. --output /tmp/run256_checks.json
+          cmp /tmp/run256_checks.json ../results/run256_interval_information_limit_20261102/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run256-exact-certificate
+          path: results/run256_interval_information_limit_20261102/checks.json
