@@ -1,0 +1,74 @@
+{
+  "branches": {
+    "MMS": {
+      "tick40_width": "1410258987/400000000",
+      "tick45_anchor_age_steps": 15,
+      "tick45_packet": "S",
+      "tick45_width": "43680397404924061540217/46875000000000000000000"
+    },
+    "MSM": {
+      "tick40_width": "107185316574375443426493/125000000000000000000000",
+      "tick45_anchor_age_steps": 5,
+      "tick45_packet": "M",
+      "tick45_width": "509236147/400000000"
+    },
+    "MSS": {
+      "tick40_width": "107185316574375443426493/125000000000000000000000",
+      "tick45_anchor_age_steps": 5,
+      "tick45_packet": "S",
+      "tick45_width": "33579670415200981/32000000000000000"
+    },
+    "SMM": {
+      "tick40_width": "2931200731/2000000000",
+      "tick45_anchor_age_steps": 10,
+      "tick45_packet": "M",
+      "tick45_width": "3762416401/2000000000"
+    },
+    "SMS": {
+      "tick40_width": "2931200731/2000000000",
+      "tick45_anchor_age_steps": 10,
+      "tick45_packet": "S",
+      "tick45_width": "54858791522403597/64000000000000000"
+    },
+    "SSM": {
+      "tick40_width": "33579670415200981/32000000000000000",
+      "tick45_anchor_age_steps": 5,
+      "tick45_packet": "M",
+      "tick45_width": "7324862677/5000000000"
+    },
+    "SSS": {
+      "tick40_width": "33579670415200981/32000000000000000",
+      "tick45_anchor_age_steps": 5,
+      "tick45_packet": "S",
+      "tick45_width": "33579670415200981/32000000000000000"
+    }
+  },
+  "complete_cz_or_hrep_filter": false,
+  "evidence": "EXACT_RATIONAL_ROLLING_ANCHOR_15_STEP_FORCED_SUCCESS_OUTER_PROJECTION",
+  "gate_A": "blocked",
+  "history": "Run254 SSSMMS through tick30; Run255 pulse 30..34; zero torque 35..44",
+  "max_stored_acceleration_intervals": 15,
+  "position_packet_patterns": [
+    "SSS",
+    "SSM",
+    "SMS",
+    "SMM",
+    "MSS",
+    "MSM",
+    "MMS"
+  ],
+  "recursive_feasibility_proved": false,
+  "run": 259,
+  "scope": "bounded-memory sound p-v projection for one zero-angle-readings tree; old anchors may lose tightness; general caps require phi observed each tick and fixed T",
+  "terminal_information_invariance_proved": false,
+  "uniform_post_pulse_success_width_caps_m_s": {
+    "10": "68573493/80000000",
+    "15": "13974589/15000000",
+    "5": "41974589/40000000"
+  },
+  "zero_reading_physical_witness_checked_at_ticks": [
+    35,
+    40,
+    45
+  ]
+}
