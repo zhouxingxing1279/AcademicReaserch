@@ -1,3 +1,18 @@
+## 背景第13轮：Yan、Cannon、Goulart（2022）随机间歇观测输出反馈MPC（2026-11-02；新增去重第107篇）
+
+- **题名/作者/出版**：Shuhao Yan, Mark Cannon, Paul J. Goulart, *Stochastic output feedback MPC with intermittent observations*, *Automatica* **141** (2022), article 110282；DOI https://doi.org/10.1016/j.automatica.2022.110282；作者预印本 arXiv:2009.11071v3 (2022-03-01), https://arxiv.org/pdf/2009.11071 ；牛津机构记录 https://ora.ox.ac.uk/objects/uuid%3A65493a65-7eb6-4897-9f30-bc51e091266c 。
+- **阅读日期/状态/范围**：2026-11-02；**公开PDF正文分节已读**，pp.1–4 §1–3/Assumptions 1–3、pp.5–8 §4–6/Theorem 7、pp.8–9 Theorem 9、pp.12–13 §9–10；未逐页核对期刊终版，未独立重现完整证明。
+- **研究问题与实际模型/输入**：线性离散`x+=Ax+Bu+Dw, y=Cx+v, z=gamma*y`下的随机丢包输出反馈MPC。§9数值例是**四状态双倒立摆线性化**、**两个输入**，`C=[[1,0,0,0],[0,0,1,0]]`，0.01s采样；不是四旋翼四状态、六状态或真实推力/力矩输入。
+- **量测/丢包/扰动/执行器**：每拍整个输出`y`以已知成功率`lambda`独立Bernoulli到达（例中0.6），零均值独立噪声具有有限协方差，理论允许无界分布，仿真为Gaussian；无“最多连续2次miss”硬自动机、每5拍位置机会或每拍姿态通道；无无人机执行器、T/τ饱和/执行器动态合同。
+- **估计与MPC**：固定观测器增益M的点状态估计与协方差/二阶矩递推，**不是状态SMF/CZ，也不是参数SMF**；未来控制为已接收创新量的仿射因果反馈，固定K/M、在线优化偏置与反馈增益；§5式(23)为凸随机MPC/LMI。
+- **状态/输入硬约束**：实际限制是`sum_k beta^k E(||H x_k||^2)<=epsilon`的**折扣期望二阶矩预算**，不是逐拍`x∈X,u∈U`硬约束。数值例`N=5,beta=0.8,epsilon=2`；没有本课题位置/速度/倾角/推力力矩硬盒保证。
+- **关键假设/定理**：Assumption 1要求(A,B)可稳定、(A,C)可检测；Assumption 2要求已知固定到达率；Assumption 3要求`A+BK`渐近稳定、随机误差均方稳定。Theorem 7在初始可行及预算更新下给**优化递归可行和折扣期望约束**；Theorem 9在额外有界矩及折扣条件下给长期平均期望代价有限上界。不能改写成所有丢包历史下鲁棒安全不变性或渐近稳定性。
+- **结论、实验与局限**：§9为双倒立摆Monte Carlo/LQG对照，非无人机实飞；不提供CZ状态后验、硬输入安全、确定性失测自动机或20ms WCET。论文证明“间歇观测＋输出反馈MPC”已有先例，缩小本课题的创新主张。
+- **与本课题关联/可复用技术**：可借鉴因果观测创新反馈、候选策略移位论证；**不能**把期望矩约束当成Run259的确定性硬安全证书。本轮独立精确Fraction审计：lambda=3/5时三次连续miss概率8/125>0；100组互不重叠三次机会中至少一次MMM概率约0.998658517925，故随机Bernoulli不能保证硬最多2次miss。与仓库Run259的15拍自动机/锚点估计是不同合同。
+- **待查问题**：Li/Shi (2013) DOI https://doi.org/10.1016/j.sysconle.2013.01.003 的周期丢包输出反馈MPC，是否在明确硬状态/输入和最大连续失测下建立真正的递归可行性？见 `docs/research/model_selection/background_run_20261102_0634_yan_stochastic_contract.md`。
+
+---
+
 ## Run259 — Yang、Ozay（2021）有界丢包安全自动机与因果前缀重读（2026-11-02；历史已读，去重数仍106）
 
 - **真实题名、作者、出版与DOI：** Liren Yang, Necmiye Ozay, *Safety Control Synthesis for Systems with Missing Measurements*, *IFAC-PapersOnLine*（ADHS 2021），DOI https://doi.org/10.1016/j.ifacol.2021.08.481；作者公开PDF https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。
