@@ -1,3 +1,7 @@
+**Run255完整checkout PR CI与安全合并复核（2026-11-02 UTC）：** 研究PR #88 https://github.com/zhouxingxing1279/AcademicReaserch/pull/88 基于main `b60b4ae67ac7da7fcd08ba54b0d65d80ae8dacec`，合并前compare ahead=7/behind=0、7个预期文件、PR mergeable=true，expected head `37966f9fee1b01d550050cecfbee162250276dc4`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41375839244 **completed/success**，读取Python3.13完整job日志确认Run249–255聚焦**61/61测试通过、无跳过**，源码编译、Run249/254真实代码与配置交叉核验、精确JSON逐字比对、artifact上传均成功。使用expected-head非强制squash合并至main `f49bebd5892c73f82f38e081f430e62ff1abb18a`；重新读取main SHA、PR merged及源码/证书/日志/唯一论文记录Blob确认落地。**合并后main push CI未独立取得，不宣称成功；全仓库历史回归未执行。** 本补记仅更新验证记录，不改变算法或数学证书。无限时域终端信息状态RCI、递归可行/稳定、六状态安全及20ms WCET仍未认证；Gate A继续blocked。
+
+---
+
 **Run255研究增量（2026-11-02 UTC；PR/CI及main合并以独立核验为准）：** 起点main `b60b4ae67ac7da7fcd08ba54b0d65d80ae8dacec`。继承Run254`SSSMMS`零读数历史，重算Run249可靠区间后验`S30: p±0.02, v±1.346823505, phi±0.005, omega±0.01`，不是精确关联后验。对**全部该可靠外包状态**，采用第30–34拍共享非零力矩`(+0.04,-0.04,-0.04,+0.04,0)Nm`、其后零力矩，Fraction/Taylor/1e-10向外网格逐拍认证第30–69拍（未来39步、0.78s）所有硬约束安全；后续所有噪声一致success/miss后验均为未条件化预测子集。第69拍速度外包`[-2.9970839345,2.996456104]`m/s；第70拍外包越界仅是**该区间方法证书失效**，不是真实不可生存证明。独立Linux/Python3.13.5本地8/8测试、源码编译和精确JSON生成通过；真实配置/Run249/254交叉核验须由完整checkout CI确认。分节重读Yang/Ozay(2021) §3/§4.2–4.5，去重102篇不变；其完美状态观测定理不适用有噪SMF。工件见`docs/research/run255_research_log.md`。未得到一般信息状态终端RCI、无限递归可行/稳定、六状态安全或20ms WCET，**Gate A仍blocked**。**唯一下一步：** 第35拍全部非空观测分支的可移位安全前驱与非空终端信息族。
 
 ---
