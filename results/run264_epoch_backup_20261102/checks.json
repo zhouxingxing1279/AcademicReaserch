@@ -1,0 +1,112 @@
+{
+  "backup_actual_thrust_N": "981/100",
+  "backup_torque_Nm": "0",
+  "branches": {
+    "MMS": {
+      "all_16_boxes_safe": true,
+      "min_hard_constraint_margin_60_to_75": {
+        "omega": "199/100",
+        "p": "43356364713/10000000000",
+        "phi": "439/1000",
+        "v": "1587637551/1250000000"
+      },
+      "tick60_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-2474339699/10000000000",
+          "2473900217/10000000000"
+        ],
+        "phi": [
+          "-1/125",
+          "1/125"
+        ],
+        "v": [
+          "-2187058727/2000000000",
+          "5466914349/5000000000"
+        ]
+      },
+      "tick75_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-6643635287/10000000000",
+          "6642756327/10000000000"
+        ],
+        "phi": [
+          "-11/1000",
+          "11/1000"
+        ],
+        "v": [
+          "-2162362449/1250000000",
+          "3459486931/2000000000"
+        ]
+      }
+    },
+    "SMM": {
+      "all_16_boxes_safe": true,
+      "min_hard_constraint_margin_60_to_75": {
+        "omega": "199/100",
+        "p": "7816585503/2000000000",
+        "phi": "439/1000",
+        "v": "7952836857/10000000000"
+      },
+      "tick60_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-665412229/1250000000",
+          "1330275107/2500000000"
+        ],
+        "phi": [
+          "-1/125",
+          "1/125"
+        ],
+        "v": [
+          "-7841778593/5000000000",
+          "15679162373/10000000000"
+        ]
+      },
+      "tick75_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-2183414497/2000000000",
+          "5456778319/5000000000"
+        ],
+        "phi": [
+          "-11/1000",
+          "11/1000"
+        ],
+        "v": [
+          "-22047163143/10000000000",
+          "2204276833/1000000000"
+        ]
+      }
+    }
+  },
+  "evidence": "EXACT_RATIONAL_FINITE_SHARED_BACKUP_FROM_ALL_NONEMPTY_RUN260_TICK60_POSTERIORS",
+  "future_measurement_handling": "ignored; any nonempty measurement-conditioned posterior is a subset of the unconditioned outer propagation",
+  "gate_A": "blocked",
+  "last_certified_tick": 75,
+  "not_certified": [
+    "terminal information-state RCI",
+    "feedback terminal policy",
+    "recursive feasibility",
+    "closed-loop stability",
+    "six-state quadrotor safety",
+    "20ms WCET"
+  ],
+  "run": 264,
+  "scope": "only Run260 fixed zero-reading histories SMM/MMS through tick45, frozen 4-state Euler T=9.81, and all legal future bounded-noise readings and packet outcomes; not arbitrary histories",
+  "start_tick": 60,
+  "total_fixed_history_bridge_ticks_45_to_75": 30
+}
