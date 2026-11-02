@@ -295,3 +295,24 @@
 **与Run246/260/261/262关系**：Run246可生存性负例和Run260有限15拍安全桥未被新论文解决；Run261反驳固定零力矩桥无限重复；Run262给出三拍τ→v权限时滞必要界。Carlos等论文的固定RTT预测和实飞跟踪均不能替代有噪位置success/miss下的共享因果SMF后验与终端集合。**Gate A继续blocked**。
 
 **下一轮唯一优先阅读**：Kamel/Burri/Siegwart (2017), DOI https://doi.org/10.1016/j.ifacol.2017.08.849 ，对照LMPC与NMPC真实状态、执行器接口、实验算力，判断何种降阶MPC最适合作为SMF状态后验接入的可复现硕士基线。
+
+
+---
+
+## 20. 背景第16轮：Kamel/Burri/Siegwart (2017) 六旋翼8/9状态级联LMPC/NMPC证据（2026-11-02）
+
+**[作者arXiv v2 PDF 7页已读；IFAC终版未逐页比对；实飞平台为六旋翼而非四旋翼]** Mina Kamel, Michael Burri, Roland Siegwart, *Linear vs Nonlinear MPC for Trajectory Tracking Applied to Rotary Wing Micro Aerial Vehicles*, *IFAC-PapersOnLine* **50**(1):3463–3469, 2017, DOI https://doi.org/10.1016/j.ifacol.2017.08.849 ；公开全文 https://arxiv.org/pdf/1611.09240 ；出版核验 https://www.research-collection.ethz.ch/entities/publication/0a5f376e-38a3-4d16-b6ff-643876ddbe2c 。详细证据见 [第16轮日志](background_run_20261102_1034_kamel_hexacopter_lmpc_nmpc.md)。
+
+| 维度 | 原文实际模型/证据 | 对本课题决策 |
+|---|---|---|
+| 物理平台/控制任务 | Asctec NEO **hexacopter** 六旋翼，三维位置/悬停/轨迹外环，独立低级姿态内环；不能登记为quadrotor实飞 | 多旋翼级联对照，不替代Carlos(2020)四旋翼实飞 |
+| LMPC状态与输入 | `x=(p_3,v_3,φ_I,θ_I)` **8维**；`u=(φ_I,cmd,θ_I,cmd,T_cmd)` **3维虚拟外环输入**；悬停小角度线性化，去偏航heading-free倾角 | 8维并非8自由度，也不是物理`(T,τ)`控制器；没有独立力矩权限 |
+| NMPC状态与输入 | `x=(p_3,v_3,φ,θ,ψ)` **9维**；`u=(φ_cmd,θ_cmd,T_cmd)` **3维**；非线性平移+辨识姿态一阶动态，非全刚体12状态NMPC | “full dynamics”不能理解为直接优化角速率/电机转速 |
+| 物理内环与输入约束 | 辨识`τφ=0.1901s,τθ=0.1721s`、`kφ=.91,kθ=.96`；角度命令±45°、推力命令13.5–40.3N；假设偏航速率和推力快速跟踪 | 不能将命令角度等同即时倾角，不能把六旋翼参数移入四旋翼配置；真实电机/力矩硬界需另审 |
+| 测量/SMF | IMU+Vicon融合EKF；增广外力点估计；无有界位置丢包/状态SMF/CZ | 不能直接复用其EKF结果证明本项目集合包含 |
+| MPC/终端 | LMPC CVXGEN QP，NMPC ACADO SQP/RTI；均100Hz控制、10Hz预测、N=20、2s预测；二次终端**代价**，输入盒，未构造终端RCI | 不支持“已证明鲁棒递归可行”；20ms WCET未报告 |
+| 实验/算力 | 六旋翼实飞：无风悬停RMSE LMPC1.84cm/NMPC2.05cm；风中激进轨迹10.8/7.1cm；平均求解2.35/0.45ms | 算力优势与求解器实现混杂，不可一般化为NMPC总快于LMPC；实飞不等于所有扰动安全 |
+
+**候选维数修正与结论**：现有2/4/6/10/12状态矩阵保持；新增**8/9维外环级联**对照，不把它们当完整刚体自由度。2状态姿态低风险；4状态固定T非零倾角垂向漂移，保留有限安全基线；**6状态平面`(p_x,p_z,v_x,v_z,φ,ω), (T,τ)`仍为条件性物理首选**；10/12/13状态暂不升级。8/9维六旋翼级联提供内环时间常数和实时MPC证据，但若采用该架构，需重建四旋翼`φ_cmd/T_cmd`到真实`T/τ`、噪声和丢包下的可靠接口，不能继承Run260–263四状态`τ`证书。Run246不可生存、Run260有限桥、Run261固定零力矩反例、Run262三拍响应、Run263速度宽度上界仍未形成无限终端信息RCI；**Gate A blocked**。
+
+**唯一下一轮优先**：全文核验真正四旋翼的级联/线性MPC实飞原始论文，核对内环命令→真实推力/力矩的误差合同与传感器观测；避免把六旋翼结果当四旋翼证据。
