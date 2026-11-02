@@ -1,3 +1,7 @@
+**Run270 PR CI与main安全合并独立复核（2026-11-02 UTC）：** 研究PR #132 https://github.com/zhouxingxing1279/AcademicReaserch/pull/132 基于main `2650cfe41fab29e018a9a2f660e69ede7e43277b`，合并前compare ahead=7/behind=0、严格7个预期文件、PR mergeable=true，expected head `268b2bf2db437217b2355cc97d8e323704b64d8a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41489008989 **completed/success**；完整Python3.13 checkout聚焦Run26x/270 **91/91测试通过**，源码编译、真实冻结配置交叉核验及Run270 Fraction归档JSON逐字比较成功。expected-head非强制squash合并到main `3f6a73c2d377e54688c620f6c12fdd9fc3afa843`，重新读取main SHA、PR merged及源码/测试/证书/日志/唯一总账/检查点Blob确认落地；本地生成5个工件Git Blob SHA与远端完全一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行**。仅特定成功读数纤维的速度直径必要下界，未证明Run260实际后验成员资格、15拍信息终端RCI、MPC闭环或无限安全；**Gate A=blocked**。
+
+---
+
 # Run270 — 位置恢复测量后仍存在不可消除的速度后验直径（2026-11-02）
 
 ## 1. 远端基准与唯一研究问题
