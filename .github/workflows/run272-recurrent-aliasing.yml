@@ -1,0 +1,37 @@
+name: Run272 recurrent posterior aliasing
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run272_recurrent_aliasing.py'
+      - 'verification/test_run272_recurrent_aliasing.py'
+      - 'results/run272_recurrent_aliasing_20261102/checks.json'
+      - '.github/workflows/run272-recurrent-aliasing.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run272_recurrent_aliasing.py'
+      - 'verification/test_run272_recurrent_aliasing.py'
+      - 'results/run272_recurrent_aliasing_20261102/checks.json'
+      - '.github/workflows/run272-recurrent-aliasing.yml'
+
+jobs:
+  run272:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile
+        run: python -m py_compile verification/check_run272_recurrent_aliasing.py verification/test_run272_recurrent_aliasing.py
+      - name: Historical witness regression and Run272
+        run: |
+          PYTHONPATH=verification python -m unittest -v \
+            test_run270_recovered_packet_fiber \
+            test_run271_run260_membership \
+            test_run272_recurrent_aliasing
+      - name: Real frozen configuration and exact archive
+        run: |
+          python verification/check_run272_recurrent_aliasing.py --root . --output /tmp/run272_checks.json
+          diff -u results/run272_recurrent_aliasing_20261102/checks.json /tmp/run272_checks.json
