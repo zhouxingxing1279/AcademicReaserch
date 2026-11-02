@@ -1,3 +1,15 @@
+# 当前研究检查点 — Run253（2026-11-01；PR/CI/main合并状态待独立核验）
+
+**基准远端main：** `265a70c0bc9247d478b114e37c050aae808c794e`（含Run252与模型背景PR #81）。**本轮严格正向有限证书：** 在Run251固定0–15拍零力矩共同观测历史和Run252的15–25拍双极端扰动轨迹上，所有15–29拍共享合法力矩与25–29拍任意合法独立残差均满足15–30拍硬约束；可执行非零共享桥接力矩`(+0.04,-0.04,-0.04,+0.04,0)Nm`。第30拍强制success位置测量之前，两路径位置差下界`236985959/800000000=0.29623244875m`，大于双测量噪声总宽`0.04m`，故这两条特定路径不可能继续具有相同成功位置读数。证明采用精确Fraction及`|sin(phi)|<=|phi|`安全外包。工件：`verification/check_forced_reobservation_bridge.py`、9项测试、`results/forced_reobservation_bridge_20261101/checks.json`、`docs/research/run253_research_log.md`、CI工作流。
+
+**严格局限：** 双轨迹有限桥接并非覆盖所有SMF一致状态的安全控制律；第30拍两轨迹可区分不代表隐藏速度精确可测；未获得可移位终端信息集合、不变备份、无限时域递归可行、鲁棒稳定、六状态安全或20ms WCET。**Gate A仍blocked。**
+
+**文献与测试：** Yang/Ozay (ADHS 2021, DOI 10.1016/j.ifacol.2021.08.481) §3–4分节重读，去重论文数保持100。隔离Linux/Python标准库本地9项中8通过、1项因缺完整仓库显式跳过，`py_compile`与Fraction JSON生成通过。PR完整checkout/Actions和main合并须等待真实核验。
+
+**下一轮唯一优先任务：** 在第30拍强制success的互斥观测分支上，对**全部**SMF一致状态构造后验及可移位后继，尝试证明非空输出反馈终端信息集合闭合；不能将本轮有限双轨迹证书外推为一般递归安全。
+
+---
+
 **Run252完整checkout/CI与main合并复核（2026-11-01 UTC）：** 研究PR #79 https://github.com/zhouxingxing1279/AcademicReaserch/pull/79 ，起点main `2b7daf58ca5761e261fa12a2d9fff5a19661db44`，合并前compare ahead=11/behind=0、仅7个预期文件，PR head `689e5f0b6c9c9144ed5125e96385300c157e43c1`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41361021188 **completed/success**；读取完整checkout Python3.13 job日志确认Run249–252聚焦 **35/35通过、无跳过**，Run249配置交叉项通过、py_compile、Fraction JSON逐字比对及artifact上传均成功。使用expected head非强制squash合并至main `46d7b3e1a171c385b3b5201dda27ee92e74fb53b`，重新读取main SHA及源码、证书、唯一论文阅读日志和检查点Blob确认落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41361070222 **completed/success**，job日志再次确认 **35/35通过、无跳过**，证书逐字比对及上传成功。本段仅补记验证证据，不修改算法/数学证书。全仓库历史回归、无限时域递归可行、六状态保证与20ms WCET仍未认证。Gate A仍blocked。
 
 ---
