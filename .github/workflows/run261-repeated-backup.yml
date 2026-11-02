@@ -1,0 +1,38 @@
+name: Run261 exact nonterminal repeated-backup witness
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run261_zero_torque_nonterminal.py'
+      - 'verification/test_run261_zero_torque_nonterminal.py'
+      - 'results/run261_zero_torque_nonterminal_20261102/checks.json'
+      - '.github/workflows/run261-repeated-backup.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run261_zero_torque_nonterminal.py'
+      - 'verification/test_run261_zero_torque_nonterminal.py'
+      - 'results/run261_zero_torque_nonterminal_20261102/checks.json'
+      - '.github/workflows/run261-repeated-backup.yml'
+  workflow_dispatch:
+jobs:
+  exact-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused regressions Run249-261
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge test_forced_success_velocity_alias test_run255_posterior_bridge test_run256_interval_information_limit test_run257_correlated_position_velocity test_run258_delayed_anchor test_run259_rolling_anchor test_run260_conditional_shared_bridge test_run261_zero_torque_nonterminal
+      - name: Compile, frozen-config crosscheck and exact certificate
+        run: |
+          python -m py_compile verification/check_run261_zero_torque_nonterminal.py verification/test_run261_zero_torque_nonterminal.py
+          cd verification
+          PYTHONPATH=. python check_run261_zero_torque_nonterminal.py --root .. --output /tmp/run261_checks.json
+          cmp /tmp/run261_checks.json ../results/run261_zero_torque_nonterminal_20261102/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run261-exact-witness
+          path: results/run261_zero_torque_nonterminal_20261102/checks.json

@@ -1,0 +1,32 @@
+{
+  "continuation": "from x45=(0,0,0,0), choose T=mg,tau=0,r_x=+R every tick; all position packets succeed with zero noise",
+  "evidence": "EXACT_RATIONAL_TRUE_TRAJECTORY_WITNESS_WITH_ANALYTIC_SINE_BOUND",
+  "first_unsafe_position_m": "8768480483/4000000000",
+  "first_unsafe_tick": 119,
+  "first_unsafe_velocity_m_s": "120116171/40000000",
+  "gate_A": "blocked",
+  "histories": [
+    "Run254 SSSMMS all-zero readings through 30",
+    "Run259 SMM and MMS all-zero readings through 45"
+  ],
+  "infinite_horizon_recursive_feasibility": false,
+  "last_safe_tick": 118,
+  "last_safe_velocity_m_s": "236985959/80000000",
+  "max_abs_prefix_phi_rad": "1/1250",
+  "prefix_residual_choice": "r_x=T*sin(phi) at ticks30..34, zero otherwise through tick44; admissible by |sin(phi)|<=|phi|",
+  "prefix_residual_magnitude_upper_bound": "981/125000",
+  "prefix_ticks_30_to_34_torque_Nm": [
+    "1/25",
+    "-1/25",
+    "-1/25",
+    "1/25",
+    "0"
+  ],
+  "proves_no_indefinite_repetition_of_this_fixed_backup": true,
+  "residual_halfwidth_m_s2": "3246383/1600000",
+  "rules_out_other_causal_controllers": false,
+  "rules_out_terminal_information_rci": false,
+  "run": 261,
+  "scope": "frozen four-state discrete Euler plant, additive |r_x|<=R, fixed T=mg; not six-state or real-world wind realizability",
+  "violated_constraint": "v<=3 m/s"
+}

@@ -1,3 +1,14 @@
+## Run261 — Lorenzetti、Pavone（2020）固定截面输出反馈Tube MPC终端条件重读（2026-11-02；既有108篇，不新增去重）
+
+- **题名/作者/年份/出版**：Joseph Lorenzetti, Marco Pavone, *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*, ECC 2020，DOI https://doi.org/10.23919/ECC51009.2020.9143979；arXiv:1911.07360v2 https://arxiv.org/pdf/1911.07360 。
+- **本轮阅读范围/状态/日期**：2026-11-02，公开预印本PDF印刷pp.2–5，§II、§III-A、§IV-B–F、§V-C–D，Assumptions 1–2、Propositions 1–2、Theorems 1–2及式(8)–(13)；**分节已读**，未重新精读全部8页或逐式核验会议终版。此文早已在统一总账登记，本轮只补充终端假设审计。
+- **研究问题/实际模型/输入/量测**：一般`n`维LTI离散系统`x+=Ax+Bu+w`、`y=Cx+v`，`m`维输入，逐拍带噪输出；Luenberger点估计`xhat`，不是状态/参数SMF或CZ；无丢包、无四旋翼物理`(T,tau)`模型。状态/输入及噪声以紧凸多面体约束，仿真为合成线性系统和风能系统。
+- **关键定理/假设/结论**：`(A,B)`可控、`(A,C)`可观，`A-LC`和`A+BK` Schur稳定，联合估计/跟踪误差RPI存在且初始误差属于RPI；终端集满足式(10)不变与收紧输入/状态、式(11)下降。Proposition 1在初始MPC可行等条件下给出所有有界扰动下的约束满足；Proposition 2为趋向误差集合而非精确零点。Theorems 1–2的RPI构造还依赖Assumptions 3–5。
+- **局限/与本项目关联/可复用技术**：不能直接覆盖本项目有噪间歇位置、15模式失测、非线性残差或共享因果信息状态；可复用**终端控制不变、耦合误差RPI与收紧非空**的证明义务清单。Run261证明固定零力矩桥无限重复会在第119拍真实速度越界，不能将有限安全桥冒充该论文的终端不变性；这项反例是仓库独立证明而非论文结果。
+- **待查问题**：第60拍全部非空位置success测量纤维是否存在同一因果反馈与可移位15拍终端信息族？详见`docs/research/run261_research_log.md`。
+
+---
+
 ## Run260 — Vinod、Weiss、Di Cairano（2025）CZ鲁棒可控集前驱全文分节阅读（2026-11-02；新增去重第108篇）
 
 - **真实题名/作者/年份/出版**：Abraham P. Vinod, Avishai Weiss, Stefano Di Cairano, *Projection-free computation of robust controllable sets with constrained zonotopes*, *Automatica* **175** (2025), article 112211；DOI https://doi.org/10.1016/j.automatica.2025.112211；原始作者全文PDF https://www.merl.com/publications/docs/TR2025-023.pdf ；arXiv https://arxiv.org/abs/2403.13730 。
