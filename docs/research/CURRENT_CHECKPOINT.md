@@ -1,3 +1,7 @@
+**Run253完整checkout、PR/main CI及安全合并复核（2026-11-02 UTC）：** 研究PR #82 https://github.com/zhouxingxing1279/AcademicReaserch/pull/82 ，基准main `265a70c0bc9247d478b114e37c050aae808c794e`，合并前compare ahead=7/behind=0，7个预期文件，PR head `e6f5167128ad42bd2c6e31c8cc7a4b10baf0977a`，mergeable_state=clean。PR Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41365844668 **completed/success**，读取完整checkout Python3.13.17 job日志确认Run249–253聚焦 **44/44通过、无跳过**，Run251/252和真实配置交叉核验、`py_compile`、精确JSON逐字比对及artifact上传成功。expected-head非强制squash合并至main `4a25e389f1ab4d7d2730dc308407b22bff21f6e3`，重新读取main SHA、PR merged和新增源码/证书/日志Blob核验落地。合并后main CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41365922605 **completed/success**，完整checkout再次**44/44通过、无跳过**，证书一致且artifact上传成功。此补记仅更新验证证据，不改变算法/数学证书；全仓库历史回归、整个SMF后验终端闭合、无限递归可行、六状态安全和20ms WCET仍未认证。Gate A仍blocked。
+
+---
+
 # 当前研究检查点 — Run253（2026-11-01；PR/CI/main合并状态待独立核验）
 
 **基准远端main：** `265a70c0bc9247d478b114e37c050aae808c794e`（含Run252与模型背景PR #81）。**本轮严格正向有限证书：** 在Run251固定0–15拍零力矩共同观测历史和Run252的15–25拍双极端扰动轨迹上，所有15–29拍共享合法力矩与25–29拍任意合法独立残差均满足15–30拍硬约束；可执行非零共享桥接力矩`(+0.04,-0.04,-0.04,+0.04,0)Nm`。第30拍强制success位置测量之前，两路径位置差下界`236985959/800000000=0.29623244875m`，大于双测量噪声总宽`0.04m`，故这两条特定路径不可能继续具有相同成功位置读数。证明采用精确Fraction及`|sin(phi)|<=|phi|`安全外包。工件：`verification/check_forced_reobservation_bridge.py`、9项测试、`results/forced_reobservation_bridge_20261101/checks.json`、`docs/research/run253_research_log.md`、CI工作流。
