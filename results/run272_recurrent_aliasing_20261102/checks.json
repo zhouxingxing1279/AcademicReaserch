@@ -1,0 +1,58 @@
+{
+  "all_future_disturbances_abs_p_bound": "749914473/4000000000",
+  "all_future_disturbances_abs_v_bound": "35710213/40000000",
+  "all_future_disturbances_safe_for_two_initial_states_tau_zero": true,
+  "all_true_states_hard_safe_60_to_75": true,
+  "base_history": "Run271 actual Run260 MMS->MMS tick60 zero reading pair",
+  "common_success_max_position_separation": "1/25",
+  "future_control": "tau=0, fixed T=9.81N; identical angular observations",
+  "future_disturbances": "plus=-R, minus=+R at ticks60..74",
+  "future_packets": {
+    "65": "miss",
+    "70": "miss",
+    "75": "success y=0"
+  },
+  "gate_A": "blocked",
+  "not_certified": [
+    "complete Run260 tick60 posterior",
+    "15-tick return to terminal information set",
+    "invariant information state",
+    "MPC optimization",
+    "infinite recursive feasibility",
+    "six-state safety",
+    "20ms WCET"
+  ],
+  "position_separation_lower_bound_if_success_65": "74666809/1000000000",
+  "position_separation_lower_bound_if_success_70": "74666809/1000000000",
+  "position_separation_tick75_witness": "68174043/2000000000",
+  "quantifier": "specific true tick60 pair and common tau=0; all future disturbances hard-safe, one future opposite-extreme disturbance pair aliases at tick75; not all Run260 posterior fibers or causal policies",
+  "run": 272,
+  "tick60_minus": [
+    "-68174043/4000000000",
+    "-22724681/80000000",
+    "0",
+    "0"
+  ],
+  "tick60_plus": [
+    "68174043/4000000000",
+    "22724681/80000000",
+    "0",
+    "0"
+  ],
+  "tick75_minus": [
+    "-68174043/4000000000",
+    "3246383/10000000",
+    "0",
+    "0"
+  ],
+  "tick75_noise_minus": "68174043/4000000000",
+  "tick75_noise_plus": "-68174043/4000000000",
+  "tick75_plus": [
+    "68174043/4000000000",
+    "-3246383/10000000",
+    "0",
+    "0"
+  ],
+  "velocity_diameter_tick60": "22724681/40000000",
+  "velocity_diameter_tick75": "3246383/5000000"
+}
