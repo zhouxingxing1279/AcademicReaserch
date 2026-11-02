@@ -1,3 +1,16 @@
+## Run272 — She与Wu(2023)：随机丢包输出反馈MPC，不等于路径级硬安全（2026-11-02；新增去重论文）
+
+- **书目**：Minghong She, Wenbin Wu, *Efficient Output Feedback MPC for NCS With Data Dropout and Bounded Disturbance via Adaptive Event-Triggered Control*, *IEEE Access* **11** (2023):118161–118169, DOI https://doi.org/10.1109/ACCESS.2023.3324923；作者公开接受稿 https://www.researchgate.net/publication/374963972_Efficient_Output_Feedback_MPC_for_NCS_with_Data_Dropout_and_Bounded_Disturbance_via_Adaptive_Event-triggered_Control 。接受稿正文页脚印有正确DOI；首页未编辑占位DOI不作为书目。2026-11-02核验。
+- **实际阅读范围/状态**：2026-11-02，**作者接受稿分节阅读**pp.1–7，§II–V（模型式(1)–(8)、Lemma 1–4、OP1–OP4、CSTR与三状态数值案例、结论）；参考文献未逐条核验、未逐式复核全部LMI、未复现实验；非期刊终版全文逐页核验。
+- **研究问题/模型**：通信网络中的有界扰动、多面体不确定离散线性系统 `x+=A_t x+B_t u_applied+D_t w, y=C_t x+E_t w`，`||w||_2<=1`；状态维数一般记为`n_x`，论文数值案例分别为**2状态CSTR**与**3状态通用系统**，不是四旋翼或无人机，故没有旋翼执行器、四旋翼状态/输入分配模型。
+- **量测与不确定性**：传感器输出按**Bernoulli**随机变量 `beta_t` 成功/丢包；丢包时缓存上一成功输出。Luenberger型状态估计器与椭球误差界 `e^T P_e e<=eta_t`；注意Lemma中的关键Lyapunov不等式使用**期望算子**，与对所有有界扰动和所有合法丢包路径的确定性真值包含证书不同。
+- **MPC与约束**：离线LMI求观测器增益、反馈增益和椭球不变候选，在线优化有限维自由补偿 `u=F xhat+c`（OP4）；自适应事件触发后实际输入可能保持上一命令，须区分优化输入和施加输入。论文没有本项目四旋翼的逐桨幅值/速率、间歇位置测量自动机、15拍信息终端RCI或20ms WCET证据。
+- **理论/实验结论及证据等级**：在论文给定多面体、随机丢包、LMI可行等假设下给出二次均值/期望意义的估计误差与控制性能分析，仿真展示CSTR与一般三状态系统的状态收敛趋势、触发节省通信及初始可行椭球扩大；**非四旋翼实飞、非全路径硬约束递归安全证明**。正文未给可直接迁移到本仓库的确定性SMF/CZ后验或丢包模式最坏情况保证。
+- **局限/可复用技术/本课题关联**：可借鉴估计器—MPC接口、离线/在线优化分工、明确丢包模型和最终执行输入的区别；不能直接继承其Bernoulli期望稳定性作为最多连续两次位置丢包下的硬安全结论。与Run272的确定性两轨迹后验混叠形成对照。
+- **待查**：期刊终版是否更改Lemma/OP公式；随机丢包稳定条件是否存在可验证的路径级强化版本；若用于六状态平面模型，如何加入真实姿态测量噪声和逐桨执行器误差。
+
+---
+
 ## 背景第24轮 — Nan等(2022)四旋翼电机状态NMPC＋INDI实飞（2026-11-02；新增去重论文）
 
 - **书目**：Fang Nan, Sihao Sun, Philipp Foehn, Davide Scaramuzza, *Nonlinear MPC for Quadrotor Fault-Tolerant Control*, *IEEE Robotics and Automation Letters* **7**(2):5047–5054 (2022), DOI https://doi.org/10.1109/LRA.2022.3154033；作者接受稿 https://rpg.ifi.uzh.ch/docs/ICRA22_Nan.pdf；arXiv:2109.12886 https://arxiv.org/abs/2109.12886 。2026-11-02核对作者接受稿与dblp/期刊书目。
