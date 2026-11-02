@@ -1973,3 +1973,16 @@
 - **结果/证据级别**：§4仿真激进轨迹、Bernoulli 8字、翻转和噪声/外扰；对比PID+前馈、MPC+PID；§4.2.4在9–11秒施加三轴恒定外力(2.5,2,1.5)N，表7给位置MSE，报告位置环重规划时间<0.01s。**仅仿真改善**，无真实四旋翼飞行、无统计硬约束零违约或20ms最坏耗时证书。论文参数m=0.98kg、J=diag(0.00264,0.00264,0.00496)kg·m²，不可覆盖仓库1kg/J=0.02配置。
 - **局限、可复用与创新边界**：可复用`D`混控矩阵、外环snap约束和“后置分配残差”的反例接口；不复用其LMPC名义约束作为SMF+Tube MPC硬安全证书。**新研究必须区别于**已知级联LMPC、差分平坦、加权分配及Bicego(2020)逐桨推力速率NMPC，集中验证间歇位置可靠后验、共同可实现输入、因果安全终端。背景第20轮矩阵/日志含严格的对称四桨`(T,tau_y)`可实现性代数推导；该推导是本轮研究者在论文式(3)基础上的推论，**不是论文定理**。
 - **待查问题/下一轮**：对给定四桨上一拍推力集合、每桨推力上限及正负变化率，能否形成包含跟踪误差的`(T,tau_y)`共同可实现域并传给主任务检验？缺失实际`l,f_{max},\dot f`和误差辨识，不能给数值安全认证。
+
+---
+
+## 背景第21轮：Jacquet等(2020)四旋翼逐桨动态约束感知NMPC（2026-11-02，去重新增）
+
+- **真实书目与原文**：Martin Jacquet; Gianluca Corsini; Davide Bicego; Antonio Franchi, *Perception-constrained and Motor-level Nonlinear MPC for both Underactuated and Tilted-propeller UAVs*, *2020 IEEE International Conference on Robotics and Automation (ICRA)*, pp.4301–4306, article 9197281, DOI https://doi.org/10.1109/ICRA40945.2020.9197281；研究机构公开6页会议正文 https://aerial-core.eu/wp-content/uploads/2021/01/Perception-constrained-and-Motor-level-Nonlinear-MPC-for-both-Underactuated-and-Tilted-propeller-UAVs.pdf；书目交叉核验 https://research.utwente.nl/en/publications/perception-constrained-and-motor-level-nonlinear-mpc-for-both-und/ 。**2026-11-02实际阅读公开PDF会议印刷页4301–4306（全文）**：§I–II式(1)–(11)，§III式(12)–(15)、Fig.3，§IV Fig.4–7及§V；未复现实验或逐页对照其他出版社版本。
+- **控制任务与架构**：标准欠驱动四旋翼与倾斜旋翼六旋翼的轨迹跟踪、移动特征视场保持；NMPC直接在电机力矩等效层优化，**不是级联外环虚拟加速度+姿态跟踪器**。真实四旋翼实飞存在，但§IV-C明确实飞感知传感器**仍用模拟相机**，不能记成真实视觉感知闭环实飞。
+- **状态、维数与物理模型**：式(1)–(4)刚体局部12维状态 $x_b=(p_3,v_3,\eta_3,\omega_3)$，其中Euler姿态 $\eta=(\phi,\theta,\psi)$、角速度为机体系；逐桨推力 $\gamma=(f_1,...,f_n)$ 是n维执行器状态，$\dot\gamma=u\in\mathbb R^n$ 为等效电机力矩输入（通过状态相关坐标变换）；完整优化状态另含P个视场余弦 $c_{\beta_i}$，总维数 $12+n+P$，四旋翼为 $16+P$。§II式(5)–(7)连续非线性刚体与混控 $G\gamma$；§III离散多重射击数值积分。四旋翼6物理自由度，**16+P状态不是16+P自由度**。具体机体质量、惯量、桨臂长、采样步长和预测节点N的数值**未从所读正文确认**。
+- **输入、真实约束与物理权限**：§II-B式(8)逐桨 $\underline\gamma\le\gamma\le\bar\gamma$；式(9)状态相关的 $\underline{\dot\gamma}(\gamma)\le u\le\overline{\dot\gamma}(\gamma)$，界可由电机辨识取得。标准四旋翼 $\mathrm{rank}(G)=4$，倾桨平台可为5/6，不能混为同一执行权限。§III式(14e–g)把逐桨推力、推力速率和视场 $\cos\alpha\le c_\beta$ 直接放入预测优化；不是后置饱和/加权分配。
+- **量测、估计与不确定性**：§III Fig.3为状态传感器/逐桨转速测量/特征检测预测器架构；§IV-A说明实飞地面笔记本、USB连接，论文未给可重现的IMU/GPS/Vicon逐项型号、状态噪声集合或隐藏速度状态SMF。§IV-B模拟相机60Hz、特征预测会用过时读数；§IV-C真实飞行**模拟相机**，并非真实视觉遮挡/丢包验证。无有界位置success/miss自动机、SMF/CZ状态集合或参数集合估计；特征预测器举例Kalman，但不等于集合滤波。
+- **MPC/理论**：§III式(14)输出参考误差加权二次代价，非线性预测、逐桨硬幅值/速率与视场约束；MATMPC、固定步长Runge–Kutta、RTI单次线性化、qpOASES；实验计算在Intel i7-8850H/Ubuntu 16.04地面笔记本。§IV-C报告实际控制/求解频率150–400Hz，随约束复杂度变化；**未报告可独立确认的20ms最坏求解时延、N数值、终端代价/终端不变集合、鲁棒递归可行性或SMF输出反馈稳定性证明**。RTI约束名义满足的作者描述不能升级为不确定性下真实硬安全定理。
+- **实验与局限**：§IV-B Simulink仿真：移动标记跟踪、四旋翼和倾桨六旋翼的感知悬停比较；§IV-C四旋翼真实飞行展示位置/视场指标与求解时间，安全考虑下动作不激进，且没有真实相机闭环；**未从全文确认可直接比较的RMSE统计、最坏约束违约率、SITL/HIL或公开复现代码版本**。没有位置丢包、SMF/CZ、终端信息不变集和鲁棒硬安全证书。
+- **对本课题的可复用与创新边界**：这是标准四旋翼逐桨状态与速率**在MPC内部**约束的直接实飞先例；不能声称首次把电机动态或感知约束放入四旋翼MPC。与Bicego(2020)相互印证：需要上一拍逐桨推力状态/可靠集合，才能定义下一拍共同可实现的 $(T,\tau)$。与Run268的测量条带结合仍是**待验证的接口**，不是该论文已解决。下一轮唯一待查：获得实测逐桨速率和误差界后，主任务能否在全部第60拍非空观测纤维上认证非空共同可实现输入域？见背景第21轮日志。
