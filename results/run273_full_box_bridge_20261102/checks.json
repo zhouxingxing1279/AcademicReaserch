@@ -1,0 +1,67 @@
+{
+  "base": "Run260 tick60 SMM/MMS unconditional reliable outer boxes",
+  "branches": {
+    "MMS": {
+      "all_16_ticks_hard_safe": true,
+      "tick60_outer_abs": {
+        "omega": "1/100",
+        "p": "2474339699/10000000000",
+        "phi": "1/125",
+        "v": "2187058727/2000000000"
+      },
+      "tick75_outer_abs": {
+        "omega": "1/100",
+        "p": "6643635767/10000000000",
+        "phi": "11/1000",
+        "v": "216236297/125000000"
+      },
+      "tick75_outer_v_not_subset_of_tick60_outer": true
+    },
+    "SMM": {
+      "all_16_ticks_hard_safe": true,
+      "tick60_outer_abs": {
+        "omega": "1/100",
+        "p": "665412229/1250000000",
+        "phi": "1/125",
+        "v": "7841778593/5000000000"
+      },
+      "tick75_outer_abs": {
+        "omega": "1/100",
+        "p": "109170729653/100000000000",
+        "phi": "11/1000",
+        "v": "22047167311/10000000000"
+      },
+      "tick75_outer_v_not_subset_of_tick60_outer": true
+    }
+  },
+  "future_packet_patterns_65_70_75": [
+    "SSS",
+    "SSM",
+    "SMS",
+    "SMM",
+    "MSS",
+    "MSM",
+    "MMS"
+  ],
+  "gate_A": "blocked",
+  "model": "frozen four-state Euler, fixed T, tau=0",
+  "not_certified": [
+    "terminal information RCI",
+    "15-step return to a common terminal information family",
+    "MPC optimizer",
+    "full CZ posterior",
+    "six-state physical safety",
+    "infinite recursive feasibility",
+    "20ms WCET"
+  ],
+  "quantifiers": "all states in either reliable Run260 tick60 outer box, all bounded r, all future success/miss/noise histories: tau=0 safe through tick75; zero torque not infinitely safe from a reachable tick60 true state",
+  "run": 273,
+  "zero_state_tick60_member": "constructive Run271 MMS->MMS zero-history continuation",
+  "zero_torque_counterexample": {
+    "disturbance": "+R for ticks60..133",
+    "first_speed_violation_q": 74,
+    "tick133_speed": "236985959/80000000",
+    "tick134_position": "8768480483/4000000000",
+    "tick134_speed": "120116171/40000000"
+  }
+}

@@ -1,3 +1,7 @@
+**Run273 完整第60拍可靠外包的15拍安全桥（2026-11-02；PR/CI/main状态待独立复核）：** 以main `5c153fc3a42471027cd3f71517a2048e423e25c9` 为基准，读取Run260/268/271/272证书和真实冻结配置。利用 `|sin(phi)|<=|phi|`、零力矩角运动精确关系和Fraction闭式求和，对Run260第60拍SMM/MMS两类**完整可靠无条件外包**证明共同 `tau=0` 在60–75拍、任意有界扰动及65/70/75全部7种合法success/miss分支下均满足四状态硬约束；第75拍SMM绝对 `|p|<=1.09170729653m,|v|<=2.2047167311m/s`，MMS分别 `0.6643635767m,1.729890376m/s`。另以Run271真实可达第60拍零状态和持续 `r=+R` 构造**零力矩无限重复失效反例**：第134拍 `v=3.002904275m/s>3`，但不排除其他反馈。新增Run273脚本、8项本地测试（8/8通过）、精确JSON、专用CI、日志；重读Qiu等(2020) DOI https://doi.org/10.1049/iet-cta.2019.0881 出版社开放正文§2–4，已有论文去重不增加。**未证明测量条件化后验回返、信息终端RCI、MPC闭环、无限递归可行或六状态物理安全；Gate A=blocked。** 唯一下一步：从第75拍全外包出发，检查全部7个分支读数条件化反馈的15拍终端信息安全前驱。详见 `docs/research/run273_research_log.md`。
+
+---
+
 **Run272 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #139 https://github.com/zhouxingxing1279/AcademicReaserch/pull/139 以main `e77fd13e31dd72b834eae1704cbc2245a7a8d5ac`为基准，合并前compare ahead=7/behind=0，严格7个预期文件、无删除，PR mergeable=true，expected head `d604785090a0389b3d3bc04a40b899572c3147f8`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41507301427 **completed/success**；读取Python3.13.17完整checkout job日志确认Run270/271/272聚焦回归**24/24通过**、源码编译、真实冻结配置及Run271证书交叉核验、Run272 Fraction JSON逐字比较通过。expected-head非强制squash合并至main `e4cad987b4383df43d21310941466a4ac41c4469`，再次读取main SHA、PR merged及6个关键文件Blob确认落地；本地代码、测试、JSON的Git Blob SHA与远端一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行。** 本轮仅证明特定Run260后验纤维的重复混叠与双真值15拍安全前缀，不是全后验终端信息RCI、MPC或无限递归安全；**Gate A=blocked**。
 
 ---

@@ -1,3 +1,14 @@
+## Run273 — Qiu等(2020)状态SMF＋输出反馈MPC终端RPI条件再核验（2026-11-02；历史已读，不新增去重）
+
+- **书目**：Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad, *Output feedback model predictive control based on set-membership state estimation*, *IET Control Theory & Applications* 14(4):558–567 (2020), DOI https://doi.org/10.1049/iet-cta.2019.0881；出版社开放全文 https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。
+- **本轮阅读范围/核验状态**：2026-11-02，重新阅读HTML §2 Assumptions 1–2、§3.1 Theorem 1、§3.2–3.4 minimax MPC/约束/Algorithm 1、§4终端RPI；**分节重读**，网页数学图片未逐式复核全部LMI，未运行数值仿真；与既有Run249/254条目按DOI去重，不另计篇数。
+- **研究问题/模型与输入**：有界过程及量测噪声的离散线性时变系统，通用状态 `x`、控制 `u`、输出 `y`；非四旋翼物理模型，无逐桨执行器或位置包自动机。
+- **估计/控制/约束**：椭球**状态**集员估计，先预测后当前输出更新；Theorem 1给递归真值包含的LMI充分条件。以估计椭球驱动有限时域minimax MPC，约束经S-procedure/LMI处理；§4依赖额外终端鲁棒正不变集及局部反馈假设，不能由一次15拍安全前缀推出。
+- **结论、局限、复用**：论文提供在其线性时变、多面体不确定及终端假设下的状态集合—MPC约束与稳定性结构；不含本仓库正弦Euler、位置每5拍机会、最多连续两次丢包、真实速度隐藏的因果终端合同。可复用**必须分别证明估计包含、预测硬约束、终端回返**的证明分工；Run273只证明完整外包15拍安全，另证明零力矩不能无限重复。
+- **待查问题**：如何为所有合法成功读数及丢包分支构造信息状态终端RPI；如何从四状态理论基线过渡到六状态物理输入可实现域。
+
+---
+
 ## Run272 — She与Wu(2023)：随机丢包输出反馈MPC，不等于路径级硬安全（2026-11-02；新增去重论文）
 
 - **书目**：Minghong She, Wenbin Wu, *Efficient Output Feedback MPC for NCS With Data Dropout and Bounded Disturbance via Adaptive Event-Triggered Control*, *IEEE Access* **11** (2023):118161–118169, DOI https://doi.org/10.1109/ACCESS.2023.3324923；作者公开接受稿 https://www.researchgate.net/publication/374963972_Efficient_Output_Feedback_MPC_for_NCS_with_Data_Dropout_and_Bounded_Disturbance_via_Adaptive_Event-triggered_Control 。接受稿正文页脚印有正确DOI；首页未编辑占位DOI不作为书目。2026-11-02核验。

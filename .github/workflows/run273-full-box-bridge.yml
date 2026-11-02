@@ -1,0 +1,26 @@
+name: Run273 full posterior outer-box safety
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run273_full_box_bridge.py'
+      - 'verification/test_run273_full_box_bridge.py'
+      - 'results/run273_full_box_bridge_20261102/checks.json'
+      - '.github/workflows/run273-full-box-bridge.yml'
+  workflow_dispatch:
+jobs:
+  run273:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and test
+        run: |
+          python -m py_compile verification/check_run273_full_box_bridge.py verification/test_run273_full_box_bridge.py
+          cd verification
+          python -m unittest -v test_run273_full_box_bridge.py
+      - name: Verify frozen config, previous Run260 certificate and archive
+        run: |
+          python verification/check_run273_full_box_bridge.py --root . --output /tmp/run273-checks.json
+          cmp /tmp/run273-checks.json results/run273_full_box_bridge_20261102/checks.json
