@@ -1,0 +1,77 @@
+{
+  "certified_future_steps": 39,
+  "evidence": "EXACT_OUTWARD_RATIONAL_FULL_INTERVAL_POSTERIOR_FINITE_SHARED_BRIDGE",
+  "future_measurement_branches": "all noise-consistent success/miss paths; posterior subset of unconditioned prediction",
+  "gate_A": "blocked",
+  "history": "SSSMMS; all successful position/angle/rate readings zero",
+  "infinite_horizon_terminal_invariance": false,
+  "last_certified_safe_tick": 69,
+  "recursive_feasibility": false,
+  "run": 255,
+  "scope": "one fixed Run254 observation history, its FULL sound interval posterior and all subsequent disturbance/noise/packet branches; not all histories",
+  "shared_nonzero_torque_first_five_Nm": [
+    "1/25",
+    "-1/25",
+    "-1/25",
+    "1/25",
+    "0"
+  ],
+  "starting_box": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-1/50",
+      "1/50"
+    ],
+    "phi": [
+      "-1/200",
+      "1/200"
+    ],
+    "v": [
+      "-269364701/200000000",
+      "269364701/200000000"
+    ]
+  },
+  "starting_tick": 30,
+  "subsequent_torque_Nm": "0",
+  "tick69_outer_box": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-16938481349/10000000000",
+      "8467011877/5000000000"
+    ],
+    "phi": [
+      "-8/625",
+      "8/625"
+    ],
+    "v": [
+      "-5994167869/2000000000",
+      "374557013/125000000"
+    ]
+  },
+  "tick70_actual_unsafety_proved": false,
+  "tick70_outer_box": {
+    "omega": [
+      "-1/100",
+      "1/100"
+    ],
+    "p": [
+      "-2192237267/1250000000",
+      "701332599/400000000"
+    ],
+    "phi": [
+      "-13/1000",
+      "13/1000"
+    ],
+    "v": [
+      "-6080350027/2000000000",
+      "3039547183/1000000000"
+    ]
+  },
+  "tick70_outer_box_violates_speed": true
+}

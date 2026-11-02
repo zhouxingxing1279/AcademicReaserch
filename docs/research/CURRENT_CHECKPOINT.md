@@ -1,3 +1,7 @@
+**Run255研究增量（2026-11-02 UTC；PR/CI及main合并以独立核验为准）：** 起点main `b60b4ae67ac7da7fcd08ba54b0d65d80ae8dacec`。继承Run254`SSSMMS`零读数历史，重算Run249可靠区间后验`S30: p±0.02, v±1.346823505, phi±0.005, omega±0.01`，不是精确关联后验。对**全部该可靠外包状态**，采用第30–34拍共享非零力矩`(+0.04,-0.04,-0.04,+0.04,0)Nm`、其后零力矩，Fraction/Taylor/1e-10向外网格逐拍认证第30–69拍（未来39步、0.78s）所有硬约束安全；后续所有噪声一致success/miss后验均为未条件化预测子集。第69拍速度外包`[-2.9970839345,2.996456104]`m/s；第70拍外包越界仅是**该区间方法证书失效**，不是真实不可生存证明。独立Linux/Python3.13.5本地8/8测试、源码编译和精确JSON生成通过；真实配置/Run249/254交叉核验须由完整checkout CI确认。分节重读Yang/Ozay(2021) §3/§4.2–4.5，去重102篇不变；其完美状态观测定理不适用有噪SMF。工件见`docs/research/run255_research_log.md`。未得到一般信息状态终端RCI、无限递归可行/稳定、六状态安全或20ms WCET，**Gate A仍blocked**。**唯一下一步：** 第35拍全部非空观测分支的可移位安全前驱与非空终端信息族。
+
+---
+
 **Run254最终main合并与CI核验（2026-11-02 UTC）：** 研究PR #85 https://github.com/zhouxingxing1279/AcademicReaserch/pull/85 在合并前compare ahead=11/behind=0、仅7个预期文件，mergeable_state=clean；expected-head `cacaa155275f298f80fcf822dff72d887b2791a4`，非强制squash安全合并至main `5874d7f02d63d13e110e156275ddeaf3ded9a34c`。重新读取main SHA、PR merged及源码、测试、JSON、日志、统一论文记录Blob确认落地。最终PR head完整checkout CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370933756 **completed/success**，合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41370977100 **completed/success**；分别读取Python3.13.17完整job日志确认Run249–254聚焦**53/53通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比对和artifact上传均成功。最初一次PR CI因JSON键序序列化失败并已修复，失败信息保留在Run254日志。**本补记仅增加验证记录，不修改控制算法或数学证书。** 全仓库历史回归、全后验终端闭合、无限递归可行、稳定性、六状态安全与20ms WCET均未认证；Gate A仍blocked。
 
 ---
