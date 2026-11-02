@@ -1,3 +1,17 @@
+## 背景第11轮 — Niknejad等（2025）CZ误差观测器＋Tube MPC与间歇测量假设审计（2026-11-02；新增去重第105篇）
+
+- **题名/作者/年份/来源**：Nariman Niknejad, Gokul S. Sankar, Bahare Kiumarsi, Hamidreza Modares, *Robust Model Predictive Control Design for Autonomous Vehicles with Perception-based Observers*, 2025, arXiv:2509.05201, https://arxiv.org/abs/2509.05201 （2025-09-05）；**未核验正式发表场所和DOI**，仅按预印本登记。
+- **实际阅读范围/状态**：2026-11-02阅读arXiv HTML正文§II-B/C、§III（Eq.6–15/Assumptions 1–9）、§IV（Lemmas 3–4/Theorems 1–2/Eq.16–19）、§V（Theorems 3–4/Algorithm 1）、§VI-A/B（仿真、真实实验）。**HTML正文分节已读；PDF页码/最终发表版本未核验**。
+- **研究问题、方法与模型**：有界非高斯感知误差下的离散LTI输出反馈tube MPC；一般x+=Ax+Bu+w，y=Cx+v；固定增益Luenberger点估计及CZ**估计误差外包**，非逐次量测条带交集的精确SMF后验，也不是参数SMF。收紧S_xbar=S_x⊖(S_e⊕S_xtilde)、S_ubar=S_u⊖KS_xtilde；Minkowski-Lyapunov终端代价、终端椭球及LP形式MPC。
+- **真实实验状态/输入/量测**：§VI-B Husarion ROSbot XL三状态(x,y,theta)，四轮输入、A=I3、0.35s离散采样、N=12；位置x/y由CNN相机30Hz感知，theta由SLAM提供且假设每拍精确；**没有位置丢包自动机**。§VI-A另有2状态线性仿真。**不是四旋翼T/tau物理模型**。
+- **扰动/硬约束/简化假设**：实验归一化状态盒[-1,1]^3、输入盒[-1,1]^4；初始估计误差diag(0.1,0.1,0)，状态偏差diag(0.2,0.2,0)；§VI-B设w=0，theta测量精确。假设(A,B)可控、(A,C)可观，感知误差只在局部B_rho(x_d)内有界；无推力/力矩、连续动力学或执行器饱和映射。
+- **重要定理/结论**：Theorems 1–2在有界CZ噪声及可行增益下给误差/偏差管束包含；Theorems 3–4给终端代价下降、名义终端集合不变及状态/输入收紧的条件性保证。实机展示CNN感知驱动LP-MPC，不能自动转移为本仓库有噪失测四旋翼递归安全。
+- **局限与证据级别**：§VI-B Eq.(34)的感知误差CZ由**95%数据点**拟合，无法证明确定性全样本包含；§VI-A用未截断Laplace模拟噪声，数学支持无界，与紧有界假设不同。论文每拍使用y(k)，未给失测分支；0.35s采样不支持本项目20ms WCET。以上是对正文假设与实验的独立逻辑审计，不等于论文定理被证伪。
+- **与课题关系/可复用技术**：已存在CZ误差界+Tube MPC+终端集先例，创新点需落在有噪**间歇位置**、状态关联SMF/CZ后验、物理T/tau饱和、共享因果信息状态终端安全；可复用误差/偏差分离、Pontryagin收紧与终端代价证明结构，但不能直接移植固定L。
+- **阅读日期/待查问题**：2026-11-02；在success/miss自动机下，是否存在非空的**多拍条件化**误差/终端信息集合，而非逐拍固定严格收缩？关联证据见 docs/research/model_selection/background_run_20261102_0433_niknejad_dropout_contract.md 。
+
+---
+
 ## Run256 — Rego等（2020）非线性CZ状态估计定向正文重读（2026-11-02；历史已读，不新增去重数）
 
 - **题名、作者、年份、出版：** Brenner S. Rego, Guilherme V. Raffo, Joseph K. Scott, Davide M. Raimondo, *Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems*, *Automatica* 111:108614 (2020)；DOI https://doi.org/10.1016/j.automatica.2019.108614；公开预印本 arXiv:1908.09950v3 https://arxiv.org/pdf/1908.09950 。
