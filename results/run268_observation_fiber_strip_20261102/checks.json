@@ -1,0 +1,145 @@
+{
+  "branches": {
+    "MMS": {
+      "MMS": {
+        "A": "8",
+        "B": "136/3",
+        "E": "13739149/30000000",
+        "Q": "158716099/781250000000000",
+        "omega_coefficient": "-5559/31250",
+        "phi_coefficient": "981/625",
+        "radius": "1073371491773297/2343750000000000",
+        "s": "45",
+        "t": "60"
+      },
+      "MSM": {
+        "A": "21/2",
+        "B": "129/2",
+        "E": "100174043/160000000",
+        "Q": "3436088859/12500000000000000",
+        "omega_coefficient": "-126549/500000",
+        "phi_coefficient": "20601/10000",
+        "radius": "7826100545463859/12500000000000000",
+        "s": "45",
+        "t": "55"
+      },
+      "MSS": {
+        "A": "3",
+        "B": "7",
+        "E": "41739149/80000000",
+        "Q": "373097517/6250000000000000",
+        "omega_coefficient": "-6867/250000",
+        "phi_coefficient": "2943/5000",
+        "radius": "3260871388722517/6250000000000000",
+        "s": "55",
+        "t": "60"
+      },
+      "SMM": {
+        "A": "13",
+        "B": "92",
+        "E": "74202979/80000000",
+        "Q": "1131378471/3125000000000000",
+        "omega_coefficient": "-22563/62500",
+        "phi_coefficient": "12753/5000",
+        "radius": "2898554998565971/3125000000000000",
+        "s": "45",
+        "t": "50"
+      },
+      "SMS": {
+        "A": "11/2",
+        "B": "22",
+        "E": "67710213/160000000",
+        "Q": "773214717/6250000000000000",
+        "omega_coefficient": "-10791/125000",
+        "phi_coefficient": "10791/10000",
+        "radius": "2644930968527217/6250000000000000",
+        "s": "50",
+        "t": "60"
+      },
+      "SSM": {
+        "A": "8",
+        "B": "37",
+        "E": "7246383/10000000",
+        "Q": "1173331917/6250000000000000",
+        "omega_coefficient": "-36297/250000",
+        "phi_coefficient": "981/625",
+        "radius": "4528990548331917/6250000000000000",
+        "s": "50",
+        "t": "55"
+      },
+      "SSS": {
+        "A": "3",
+        "B": "7",
+        "E": "41739149/80000000",
+        "Q": "373097517/6250000000000000",
+        "omega_coefficient": "-6867/250000",
+        "phi_coefficient": "2943/5000",
+        "radius": "3260871388722517/6250000000000000",
+        "s": "55",
+        "t": "60"
+      }
+    },
+    "SMM": {
+      "SMM": {
+        "A": "18",
+        "B": "541/3",
+        "E": "103652341/120000000",
+        "Q": "3844044467/6250000000000000",
+        "omega_coefficient": "-176907/250000",
+        "phi_coefficient": "8829/2500",
+        "radius": "16195689813383401/18750000000000000",
+        "s": "35",
+        "t": "50"
+      },
+      "SMS": {
+        "A": "11/2",
+        "B": "22",
+        "E": "67710213/160000000",
+        "Q": "773214717/6250000000000000",
+        "omega_coefficient": "-10791/125000",
+        "phi_coefficient": "10791/10000",
+        "radius": "2644930968527217/6250000000000000",
+        "s": "50",
+        "t": "60"
+      },
+      "SSM": {
+        "A": "8",
+        "B": "37",
+        "E": "7246383/10000000",
+        "Q": "1173331917/6250000000000000",
+        "omega_coefficient": "-36297/250000",
+        "phi_coefficient": "981/625",
+        "radius": "4528990548331917/6250000000000000",
+        "s": "50",
+        "t": "55"
+      },
+      "SSS": {
+        "A": "3",
+        "B": "7",
+        "E": "41739149/80000000",
+        "Q": "373097517/6250000000000000",
+        "omega_coefficient": "-6867/250000",
+        "phi_coefficient": "2943/5000",
+        "radius": "3260871388722517/6250000000000000",
+        "s": "55",
+        "t": "60"
+      }
+    }
+  },
+  "current_attitude_observation": "|phi60-y_phi60|<=0.005, |omega60-y_omega60|<=0.01; intersect strips if observed",
+  "evidence": "EXACT_RATIONAL_COEFFICIENTS_AND_ANALYTIC_SINE_REMAINDER",
+  "formula": "|v60 + phi_coefficient*phi60 + omega_coefficient*omega60 - (y_t-y_s)/((t-s)*h)| <= radius",
+  "gate_A": "blocked",
+  "not_certified": [
+    "exact SMF posterior",
+    "terminal information-state RCI",
+    "15-tick causal return",
+    "MPC solver",
+    "infinite recursive feasibility",
+    "six-state physical safety",
+    "20ms WCET"
+  ],
+  "proof": "Euler position/velocity telescoping, zero torque angular back-substitution, independent bounded position errors/disturbances, global |sin(z)-z|<=|z|^3/6",
+  "run": 268,
+  "scope": "Run260 fixed zero-reading history through45, SMM/MMS; tau=0 ticks35..59; all nonempty future measurement fibers, arbitrary bounded position/attitude readings and legal packets"
+}
