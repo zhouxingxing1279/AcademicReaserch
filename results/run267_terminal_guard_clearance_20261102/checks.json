@@ -1,0 +1,47 @@
+{
+  "branches": {
+    "60": {
+      "MMS": {
+        "every_state_in_outer_box_passes_necessary_guard": true,
+        "minimum_clearance_m_s_decimal": "1.7802187191",
+        "strict_guard_clearance_lower_m_s": "28038444825099272078759798278289037580547/15750000000000000000000000000000000000000",
+        "strict_guard_clearance_upper_m_s": "28040752100874272078759798278289037580547/15750000000000000000000000000000000000000"
+      },
+      "SMM": {
+        "every_state_in_outer_box_passes_necessary_guard": true,
+        "minimum_clearance_m_s_decimal": "1.3053923640",
+        "strict_guard_clearance_lower_m_s": "20559929732274272078759798278289037580547/15750000000000000000000000000000000000000",
+        "strict_guard_clearance_upper_m_s": "20566851562749272078759798278289037580547/15750000000000000000000000000000000000000"
+      }
+    },
+    "75": {
+      "MMS": {
+        "every_state_in_outer_box_passes_necessary_guard": true,
+        "minimum_clearance_m_s_decimal": "1.1420923985",
+        "strict_guard_clearance_lower_m_s": "1606067435448456679204678212542151163109/1406250000000000000000000000000000000000",
+        "strict_guard_clearance_upper_m_s": "1606273442214081679204678212542151163109/1406250000000000000000000000000000000000"
+      },
+      "SMM": {
+        "every_state_in_outer_box_passes_necessary_guard": true,
+        "minimum_clearance_m_s_decimal": "0.6672660434",
+        "strict_guard_clearance_lower_m_s": "938342873589081679204678212542151163109/1406250000000000000000000000000000000000",
+        "strict_guard_clearance_upper_m_s": "938960894167206679204678212542151163109/1406250000000000000000000000000000000000"
+      }
+    }
+  },
+  "gate_A": "blocked",
+  "meaning": "necessary-screen PASS for every point in each box; not sufficient for safe control",
+  "method": "monotonic sin plus exact rational degree-7 Taylor bounds with rigorous order-9 remainder",
+  "not_proved": [
+    "exact SMF posterior",
+    "existence of shared causal 15-tick return policy",
+    "information-state RCI",
+    "recursive feasibility",
+    "closed-loop stability",
+    "six-state safety",
+    "20ms WCET"
+  ],
+  "run": 267,
+  "scope": "only Run260 SMM/MMS fixed-history reliable unconditioned boxes at ticks 60 and 75",
+  "zero_torque_tick75_outer_velocity_not_subset_tick60_outer": true
+}

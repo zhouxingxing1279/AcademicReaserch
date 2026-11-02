@@ -1,0 +1,33 @@
+name: Run267 terminal necessary-guard screening
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run267_terminal_guard_clearance.py'
+      - 'verification/test_run267_terminal_guard_clearance.py'
+      - 'results/run267_terminal_guard_clearance_20261102/checks.json'
+      - '.github/workflows/run267-terminal-guard-clearance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run267_terminal_guard_clearance.py'
+      - 'verification/test_run267_terminal_guard_clearance.py'
+      - 'results/run267_terminal_guard_clearance_20261102/checks.json'
+      - '.github/workflows/run267-terminal-guard-clearance.yml'
+
+jobs:
+  run267:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile sources
+        run: python -m py_compile verification/check_run267_terminal_guard_clearance.py verification/test_run267_terminal_guard_clearance.py
+      - name: Focused regression
+        run: PYTHONPATH=verification python -m unittest discover -s verification -p 'test_run26*.py' -v
+      - name: Cross-check real config and source certificates
+        run: |
+          python verification/check_run267_terminal_guard_clearance.py --root . --output /tmp/run267_checks.json
+          diff -u results/run267_terminal_guard_clearance_20261102/checks.json /tmp/run267_checks.json
