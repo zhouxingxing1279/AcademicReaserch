@@ -1158,6 +1158,8 @@
 - Run 133 新增核查：重读 Section 3.1.2、Lemma 4、Assumptions 1--2 与 Theorem 6。确认 tracking controller/control-error tube 先吸收过程噪声与 estimation error；common `K_f,X_f` 随后作用于已经收紧的 nominal system。二者不是同一个 joint controller/RPI synthesis 问题。
 - Run 135 新增核查：重读 Definition 1、system/timing 与 Section 3.1.1。其 estimator 采用 finite/periodic equalized-recovery error tubes，未来 delay pattern 未知时对全部允许模式取 worst case；并不要求一个 time-uniform invariant estimation-error family。故本轮统一固定点只是更强、更保守的 backup 基线。
 
+- **背景第14轮复读（2026-11-02）**：再次直接核对作者PDF pp.1–6：§2.2 的LTV时间戳输出与周期有限长度语言，Definition 1的equalized recovery，§3.1的点估计+时变hyperbox误差界、Lemma 4的因果tracking tube，§3.2的Assumptions 1–3/Theorems 5–7，以及§4双积分器算例。实际算例 \`A=[[1,1],[0,1]], B=[1,1]^T, C=[1,1]\`、\`X=[-50,3]^2,U=[-3,3]\`、\`w∈[-0.05,0.05]^2,v∈[-0.01,0.01]\`、\`T_d=5,T_p=13\`；不是四旋翼或真实(T,τ)，无20ms实测。Theorem 5硬约束依赖先认证估计/跟踪误差管；Theorem 6需初始可行与跨相位共同终端 \`X_f,K_f\`；Theorem 7还需Lyapunov下降，结论是到有界集合的鲁棒指数稳定。论文已有**有限失测语言+时变tube+共同终端移位**先例；本项目必须先测试其worst-phase common-terminal baseline，不得仅凭mode-indexed声称创新。此复读不新增去重论文。详细来源及仓库差异见 \`docs/research/model_selection/background_run_20261102_0739_hassaan_terminal_audit.md\`。
+
 ## Rutledge, Yong, Ozay — Finite horizon constrained control and bounded-error estimation in the presence of missing data
 - 年份/出处：2020, *Nonlinear Analysis: Hybrid Systems*, 36:100854；DOI：https://doi.org/10.1016/j.nahs.2020.100854；作者全文：https://www.kwesirutledge.info/static/pdf/nahs2020.pdf
 - Run 132 精读：Sections 3--4、Definition 2、equalized-recovery formulation 与 synthesis。
