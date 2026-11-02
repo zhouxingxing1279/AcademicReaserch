@@ -1,3 +1,7 @@
+**Run275 PR CI与main安全合并独立复核（2026-11-02 UTC）：** PR #146 https://github.com/zhouxingxing1279/AcademicReaserch/pull/146 以main dbb5e67379ea2dd625b562d9e0ae099ecfecc6d9 为基准；合并前compare ahead=7/behind=0，严格7份预期文件、零删除，mergeable=true，expected head 739544d8af024359a9efcdf94e4e4843174e715b。GitHub Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41525788580 **completed/success**；独立读取Python3.13.17完整checkout job日志确认源码编译、Run275聚焦8/8测试通过、Fraction归档JSON逐字比较及冻结配置交叉核验成功。以expected-head非强制squash合并至main d0c894a5b87af18d020387b47a1a88f1ec05107a；再次读取main SHA、PR merged与源码/测试/JSON/日志/总账/检查点Blob均确认落地。**合并后main push CI未独立确认，全仓库历史回归未执行**。仅观测条件化速度充分门槛，不是完整SMF后验、MPC或信息终端RCI；Gate A=blocked。
+
+---
+
 # Run275 — 两次成功位置测量的第90拍速度后验充分准入条件（2026-11-02）
 
 ## 基准与唯一问题
