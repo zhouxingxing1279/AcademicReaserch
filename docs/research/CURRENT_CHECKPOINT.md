@@ -1,3 +1,7 @@
+**Run264 PR CI与合并复核（2026-11-02 UTC）：** PR #114 https://github.com/zhouxingxing1279/AcademicReaserch/pull/114 基于main `61c2e7fb1a7cc05343c0d2ff9ac3c626048429fa`，合并前compare ahead=7/behind=0、仅7个预期文件、PR mergeable=true、expected head `c53cb6e1d441bf8bc69ee2bdc39f05ddb3702a5a`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41434900755 **completed/success**，读取Python3.13完整checkout job日志确认Run260–264聚焦**44/44测试通过、无跳过**，源码编译、真实Run260证书/配置交叉核验和精确JSON逐字比较成功。expected-head非强制squash合并到main `c743679362e9a29acd5f583d277a019de1677447`，重新读取main SHA、PR merged和源码/证书blob核验落地。**合并后main push CI未独立取得确认；全仓库历史回归未执行。** 本轮仅固定历史30拍有限共享安全，不是反馈终端RCI或无限递归可行；Gate A=blocked。
+
+---
+
 **Run264 第60–75拍有限共同备份（2026-11-02 UTC；远端PR/CI/main状态待核验）：** 基准main `61c2e7fb1a7cc05343c0d2ff9ac3c626048429fa`。继承Run260 SMM/MMS第60拍两类**可靠外包**，固定四状态Euler、T=9.81N、tau=0，使用Fraction/正弦Taylor向外舍入证明第60–75拍全部16个盒满足|p|<=5、|v|<=3、|phi|<=0.45、|omega|<=2；第75拍SMM速度[-2.2047163143,2.204276833]m/s、MMS[-1.7298899592,1.7297434655]m/s，最小速度裕量分别0.7952836857/1.2701100408m/s。无条件预测包含所有未来非空有噪观测后验，因此可与Run260拼成**仅针对固定历史45–75拍30步共享开环安全前缀**。隔离9/9单元测试通过（初版舍入相等断言1项失败已修复并记录）、py_compile和精确JSON生成通过；真实配置/Run260证书交叉核验及完整checkout CI待确认。重读Qiu等(2020) IET DOI https://doi.org/10.1049/iet-cta.2019.0881 §2–5，发现其§4终端局部反馈**假设终端区域内真状态已知**，不能直接移植为本仓库隐藏速度输出反馈终端策略；论文去重数保持112。**没有反馈终端信息RCI、无限递归可行、鲁棒稳定、六状态安全或20ms WCET；Gate A=blocked。** 下一轮唯一优先：停止延长零力矩桥，构造第60拍所有非空后验的观测纤维共享因果15拍终端回返条件。详见 `docs/research/run264_research_log.md`。
 
 ---
