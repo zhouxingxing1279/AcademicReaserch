@@ -1,0 +1,38 @@
+name: Run257 correlated position velocity strip
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run257_correlated_position_velocity.py'
+      - 'verification/test_run257_correlated_position_velocity.py'
+      - 'results/run257_correlated_position_velocity_20261102/checks.json'
+      - '.github/workflows/run257-correlated-position-velocity.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run257_correlated_position_velocity.py'
+      - 'verification/test_run257_correlated_position_velocity.py'
+      - 'results/run257_correlated_position_velocity_20261102/checks.json'
+      - '.github/workflows/run257-correlated-position-velocity.yml'
+  workflow_dispatch:
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Focused regressions Run249-257
+        working-directory: verification
+        run: |
+          PYTHONPATH=. python -m unittest -v test_four_state_shielded_smf_mpc test_four_state_zero_backup_horizon test_velocity_indistinguishability test_dropout_velocity_fiber test_forced_reobservation_bridge test_forced_success_velocity_alias test_run255_posterior_bridge test_run256_interval_information_limit test_run257_correlated_position_velocity
+      - name: Compile, real-config crosscheck and exact certificate
+        run: |
+          python -m py_compile verification/check_run257_correlated_position_velocity.py verification/test_run257_correlated_position_velocity.py
+          cd verification
+          PYTHONPATH=. python check_run257_correlated_position_velocity.py --root .. --output /tmp/run257_checks.json
+          cmp /tmp/run257_checks.json ../results/run257_correlated_position_velocity_20261102/checks.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run257-exact-certificate
+          path: results/run257_correlated_position_velocity_20261102/checks.json

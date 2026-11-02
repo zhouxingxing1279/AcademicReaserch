@@ -1,0 +1,25 @@
+{
+  "evidence": "EXACT_RATIONAL_TWO_POSITION_CORRELATED_H_REP_VELOCITY_OUTER_BOUND",
+  "gate_A": "blocked",
+  "history": "Run254 SSSMMS zero readings through tick30; Run255 pulse ticks30..34",
+  "recursive_feasibility_proved": false,
+  "run": 257,
+  "scope": "sound two-position kinematic projection with acceleration enclosures, not exact full posterior/CZ; arbitrary nonempty success readings have uniform width bound; miss has no new position strip",
+  "terminal_information_invariance_proved": false,
+  "tick35_independent_box_velocity": [
+    "-3110667463/2000000000",
+    "1554705901/1000000000"
+  ],
+  "tick35_independent_box_velocity_width": "1244015853/400000000",
+  "tick35_miss_velocity_width_unimproved": "1244015853/400000000",
+  "tick35_success_zero_position_correlated_velocity": [
+    "-1641300018529811973902081/3125000000000000000000000",
+    "1639926639563704728672569/3125000000000000000000000"
+  ],
+  "tick35_success_zero_position_velocity_width": "65624533161870334051493/62500000000000000000000",
+  "uniform_upper_width_all_nonempty_success_readings": "65624533161870334051493/62500000000000000000000",
+  "zero_success_witness_position35_interval": [
+    "-287402313093750981/30517578125000000000000",
+    "-9196874019/976562500000000"
+  ]
+}
