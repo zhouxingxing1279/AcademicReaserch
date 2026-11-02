@@ -1,0 +1,112 @@
+{
+  "branches": {
+    "MMS": {
+      "all_16_boxes_safe": true,
+      "min_hard_constraint_margins": {
+        "omega": "199/100",
+        "p": "47525660301/10000000000",
+        "phi": "221/500",
+        "v": "3812941273/2000000000"
+      },
+      "tick45_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-1/50",
+          "1/50"
+        ],
+        "phi": [
+          "-1/200",
+          "1/200"
+        ],
+        "v": [
+          "-546090803746932472079557/1171875000000000000000000",
+          "136479782844042266606467/292968750000000000000000"
+        ]
+      },
+      "tick60_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-2474339699/10000000000",
+          "2473900217/10000000000"
+        ],
+        "phi": [
+          "-1/125",
+          "1/125"
+        ],
+        "v": [
+          "-2187058727/2000000000",
+          "5466914349/5000000000"
+        ]
+      }
+    },
+    "SMM": {
+      "all_16_boxes_safe": true,
+      "min_hard_constraint_margins": {
+        "omega": "199/100",
+        "p": "5584587771/1250000000",
+        "phi": "221/500",
+        "v": "7158221407/5000000000"
+      },
+      "tick45_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-406119767/2500000000",
+          "811800053/5000000000"
+        ],
+        "phi": [
+          "-1/200",
+          "1/200"
+        ],
+        "v": [
+          "-9408238409/10000000000",
+          "2350960899/2500000000"
+        ]
+      },
+      "tick60_outer": {
+        "omega": [
+          "-1/100",
+          "1/100"
+        ],
+        "p": [
+          "-665412229/1250000000",
+          "1330275107/2500000000"
+        ],
+        "phi": [
+          "-1/125",
+          "1/125"
+        ],
+        "v": [
+          "-7841778593/5000000000",
+          "15679162373/10000000000"
+        ]
+      }
+    }
+  },
+  "certified_last_tick": 60,
+  "complete_information_state_terminal_rcis": false,
+  "evidence": "EXACT_RATIONAL_FINITE_OPEN_LOOP_SHARED_SAFETY_BRIDGE",
+  "future_measurement_handling": "no updates applied; all noise-consistent future success/miss posterior branches are subsets of the unconditioned prediction",
+  "future_safe_steps": 15,
+  "gate_A": "blocked",
+  "general_arbitrary_history_safety": false,
+  "infinite_horizon_recursive_feasibility": false,
+  "run": 260,
+  "shared_control_ticks_45_to_59": {
+    "actual_thrust_N": "981/100",
+    "torque_Nm": "0"
+  },
+  "start": "Run254 SSSMMS all-zero history through 30, Run259 zero phi/omega and conditional packet history through 45",
+  "starting_packet_patterns": [
+    "SMM",
+    "MMS"
+  ]
+}
