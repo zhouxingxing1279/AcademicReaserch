@@ -1,3 +1,15 @@
+## Run262 — Diaconescu等（2024）弹性zonotope Tube MPC全文分节核验（2026-11-02；新增去重第109篇）
+
+- **题名、作者、出版及DOI：** Sabin Diaconescu, Florin Stoican, Bogdan D. Ciubotaru, Sorin Olaru, *Elastic Tube Model Predictive Control With Scaled Zonotopic Sets*, *IEEE Control Systems Letters* **8** (2024), 1343–1348；DOI https://doi.org/10.1109/LCSYS.2024.3408047 ；作者开放版全文可解析 https://www.researchgate.net/publication/381050260_Elastic_Tube_Model_Predictive_Control_With_Scaled_Zonotopic_Sets ；书目 https://dblp.org/rec/journals/csysl/DiaconescuSCO24 。
+- **阅读日期、状态、范围：** 2026-11-02；**作者开放版§II–V分节已读**，核对式(8)–(15)、Lemma 2、Propositions 2–4、§V-A/B；未逐式核验IEEE终版PDF，不声称期刊终版全文已读。
+- **研究问题、模型/输入、量测：** 已知A、B的离散LTI`x+=Ax+Bu+w`，有界加性扰动；`u=ubar+K(x-xbar)`，全状态误差反馈而非有噪位置输出反馈。双积分器示例2状态/1输入，耦合弹簧链示例2ℓ状态/2端部力输入；**没有四旋翼状态、推力力矩、真实传感器、间歇测量或丢包**。zonotope用于**MPC误差管束**，不是SMF状态估计或参数估计；没有CZ后验。
+- **方法、约束与定理：** 硬状态/输入集合X/U、终端集合；固定K下`(A+BK)Omega_k⊕W⊆Omega_{k+1}`，生成元独立缩放的弹性zonotope；Proposition 3给出保证包含的**充分**线性条件，Proposition 4以LP构造一个RPI集合。§V双积分器N=12、弹簧链N=25，MATLAB/YALMIP/MOSEK/CORA/MPT3数值实验。不能把LP可行/仿真结果当作有噪间歇四旋翼的递归安全证明。
+- **主要结论与局限：** 生成元缩放使管束形状可随预测时域变化，数值展示计算扩展性；没有物理四旋翼、真实飞行、丢包自动机、SMF/CZ后验、20ms最坏执行时间或本仓库终端信息RCI。与2025/26 Diaconescu等后续论文按题名与DOI区分，不重复计数。
+- **本课题关联/可复用技术：** 可复用线性集合包含与RPI构造作对照；“zonotope弹性Tube MPC”本身已有文献，创新须落在有噪间歇量测、关联状态SMF/CZ、共享因果控制和物理力矩约束。Run262另外给出四状态原点三拍最坏速度`|v3|>=0.1214254425`的可达必要界，证明窄终端速度带`|v|<=0.12`不可鲁棒不变；这是仓库独立推导，不是该论文定理。
+- **待查问题：** 第60拍所有非空有噪success观测纤维，能否在物理力矩三拍时滞下形成共享因果可移位终端安全前驱？详见`docs/research/run262_research_log.md`。
+
+---
+
 ## Run261 — Lorenzetti、Pavone（2020）固定截面输出反馈Tube MPC终端条件重读（2026-11-02；既有108篇，不新增去重）
 
 - **题名/作者/年份/出版**：Joseph Lorenzetti, Marco Pavone, *A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*, ECC 2020，DOI https://doi.org/10.23919/ECC51009.2020.9143979；arXiv:1911.07360v2 https://arxiv.org/pdf/1911.07360 。
