@@ -1,3 +1,7 @@
+**Run258 PR/main CI及安全合并复核（2026-11-02 UTC）：** 研究PR #97 https://github.com/zhouxingxing1279/AcademicReaserch/pull/97 基于main 357ad7de2fb46be8941fc6b00f25ca6864327242，合并前compare ahead=7/behind=0，仅7个预期文件，mergeable_state=clean，expected head 8a84e4a75e64483b9e9f9b51386f2da5da5d4f6c。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41392632341 **completed/success**；读取Python3.13完整job日志确认Run249–258聚焦**87/87通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较和artifact上传均成功。使用expected-head非强制squash合并至main 2e85c52fe2103e1d15b27b270929d41c6a82654e；重新读取main SHA、PR merged及7个文件Blob核验落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41392685927 **completed/success**，读取完整job日志再次**87/87通过、无跳过**、配置交叉核验和JSON逐字比较成功。**全仓库历史回归未执行**；该CI仅核验特定历史延迟位置锚点证书，不是完整CZ递推、终端RCI、无限时域递归可行性或稳定性证明。Gate A仍blocked。本补记仅更新验证状态，不修改算法、证书或论文去重数。
+
+---
+
 # Run258 — 失测后跨10拍位置锚点恢复隐藏速度的严格外包（2026-11-02 UTC）
 
 ## 基准与瓶颈
