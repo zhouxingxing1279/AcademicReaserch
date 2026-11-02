@@ -2026,3 +2026,21 @@
 - **结果/证据级别**：MATLAB R2020a/i9-9900K仿真，悬停/半翻滚每任务每算法200次；表4悬停最大平均步成本det.MPC 7.39、MDSMPC(M=200) 3.67，仅统计成本不是零违约证明。§6.1相对QP**构建**耗时不含求解，N=8/M=200完整SMPC约195.7×、MDSMPC约23.1×det.MPC；未报告本课题20ms端到端WCET。无已核验实飞、HIL/SITL或有界噪声硬安全证书。
 - **局限/可复用/创新性**：双向桨可负推力且过零动态特殊，不能把7N/0.2s当普通单向桨硬件参数。可复用电机动态辨识与约束线性化审计方法；不是SMF/CZ状态集合＋Tube MPC或终端信息RCI先例。独立Fraction对照仅在**假设**`l=0.166m,0≤f_i≤7N`时认证仓库`T∈[4.905,14.715]N,|τ|≤0.08Nm`的静态幅值极值`[65423/66400,260269/66400]N`；不是论文定理或真实执行器速率/误差/共享因果输入证书。
 - **待查**：标准单向四旋翼ESC/桨的实际瞬时上升下降速率与误差界、真实桨臂及上一拍桨力可靠集合，随后才能评估共同`(T,τ)`域。独立日志：`docs/research/model_selection/background_run_20261102_1637_wehbeh_motor_identification.md`。
+
+---
+
+## 背景第23轮 — Didier等(2021) 四旋翼RAMPC实飞，参数SMF≠隐藏状态SMF（2026-11-02；新增去重）
+- **书目**：Alexandre Didier, Anilkumar Parsi, Jeremy Coulson, Roy S. Smith, *Robust Adaptive Model Predictive Control of Quadrotors*, *2021 European Control Conference (ECC)*；DOI https://doi.org/10.23919/ECC54610.2021.9654893；作者稿 arXiv:2102.13544v3 https://arxiv.org/pdf/2102.13544；ETH开放档案 https://www.research-collection.ethz.ch/entities/publication/298c0646-9127-4e1a-9dbe-2601e9279ad0。IEEE最终页码**未确认**。
+- **阅读状态/日期**：2026-11-02，**公开作者6页PDF全文p.1–6已读**，§II(1)–(12)、§III(13)–(14)、§IV、§V；未对照IEEE终版、未复现实验。
+- **研究问题/实际状态输入**：四旋翼未知质量与共同旋翼效率下降时的鲁棒自适应约束控制。直接悬停线性化12状态`(Δp3,Δv3,ΔEuler3,Δ角速度3)`＋4个逐桨推力偏差输入；仅仿真。**真实27g Crazyflie实飞为2状态高度`(Δp_z,Δv_z)`、1输入总推力偏差的RAMPC**，x/y/偏航由LQR，姿态内环PID；物理四旋翼仍6DOF。仿真Euler离散0.1s，实飞MPC更新率/预测N未确认。
+- **量测与不确定性**：实飞IMU加速度/陀螺、Vicon六相机200Hz，地面计算；未知质量倒数/旋翼效率是**参数SMF**，式(12)为有界噪声下参数非否证集膨胀，**没有隐藏速度状态SMF/CZ**、间歇位置包、延迟观测。
+- **MPC结构/约束/理论**：线性仿射参数不确定、homothetic Tube RAMPC、二次阶段/终端代价、式(11g–i)管束包含与终端约束，仿真逐桨0–0.16N、位置±0.7m、姿态±π/2；递归可行/约束保证依赖有界扰动、λ收缩、初始可行及前作条件。**§II-D为性能在线更新悬停稳态输入，作者明确指出牺牲该部分鲁棒保证**。实飞OSQP求解小于5ms（非20ms全链路WCET），未核验逐桨变化率、ESC误差或实飞终端RCI。
+- **结果/局限/可复用/待查**：仿真直接12状态RAMPC，真实飞行仅高度2状态；真实30%共同旋翼效率削减后恢复，未实飞施加风，未给本项目无限时域硬安全。可复用参数集合更新、收紧、低维级联工程证据；不能把参数SMF替代有噪间歇位置状态SMF。待查：严格稳态输入误差包络是否会使六状态物理候选输入域为空？对应日志 `docs/research/model_selection/background_run_20261102_1747_didier_eschmann_actuator_gap.md`。
+
+## 背景第23轮 — Eschmann等(2024) 单向四旋翼电机动态辨识（非MPC论文；新增去重）
+- **书目**：Jonas Eschmann, Dario Albani, Giuseppe Loianno, *Data-Driven System Identification of Quadrotors Subject to Motor Delays*, *2024 IEEE/RSJ IROS*, pp.8095–8102，DOI https://doi.org/10.1109/IROS58592.2024.10801441；作者稿 arXiv:2404.07837v2 https://arxiv.org/pdf/2404.07837；代码 https://github.com/arplaboratory/data-driven-system-identification。
+- **阅读状态/日期**：2026-11-02，**公开作者8页PDF全文p.1–8已读**，§III式(1)–(16)、§IV/图表；未逐页核对IEEE终版，未运行开源代码。
+- **问题/模型/输入/量测**：标准四旋翼6DOF、位置/速度/四元数/机体系角速、逐桨真实RPM状态，目标RPM为输入；`dot ω_m=(ω_sp−ω_m)/T_m`、二次推力曲线`f_i=Σ_{j=0}^2K_{f,ij}ω_{m,i}^j`。IMU加速度、陀螺、电机命令、已知质量与桨臂；MAP/最小二乘辨识**参数**，非状态SMF/CZ。
+- **证据**：真实27g Crazyflie 2.1辨识标称`T_m=0.072s`，3.35kg四旋翼标称`T_m=0.065s`，约一分钟飞行日志，公开复现工具；真实户外控制演示是RL，**不是MPC**。未报告可移植到本仓库1kg平台的确定性逐桨上升/下降速率、时间常数置信外包、ESC误差最坏界或硬安全定理。
+- **可复用/局限/待查**：可作为辨识真实`T_m,K_f`的原始方法，不能把标称时间常数当`r_i^±`或把RPM一阶响应当推力一阶响应。20ms名义离散时转速指令差每拍缩小`1−exp(−0.02/T_m)≈0.242535/0.264859`，仅为独立模型推算。待查：开源日志是否足以构造**确定性**辨识残差和可靠`U_common`输入域？对应背景第23轮日志。
+
