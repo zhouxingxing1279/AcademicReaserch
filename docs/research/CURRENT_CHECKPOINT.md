@@ -1,3 +1,7 @@
+**Run267 PR CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR #123 https://github.com/zhouxingxing1279/AcademicReaserch/pull/123 基于main `c730828f42c75bba95d730f8af5e75a4c28a62ac`，合并前compare ahead=7/behind=0、严格7个预期文件、PR mergeable_state=clean、expected head `3ae16fe17809150e0952ad3d335814f0b1d04665`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41463272428 **completed/success**，Python3.13完整checkout聚焦Run26x **70/70测试通过**、源码编译、真实配置与Run260/264归档证书交叉核验及Fraction JSON逐字比较均成功。使用expected-head非强制squash合并到main `ea7a5c0075f46d0199306c3af00d5ceffdbff0dd`，重新读取main SHA、PR merged及关键文件Blob确认落地；本地脚本/测试/证书的Git blob SHA与远端完全一致。**合并后main push CI尚未独立确认，全仓库历史回归未执行。** 只证明四个可靠外包全盒通过三拍**必要**守卫，不是三拍充分可生存或15拍反馈终端RCI；Gate A=blocked。
+
+---
+
 **Run267 四盒三拍必要守卫全盒筛选（2026-11-02 UTC；PR/CI/main落地待独立核验）：** 以远端main `c730828f42c75bba95d730f8af5e75a4c28a62ac`为基准，交叉核验Run260第60拍与Run264第75拍SMM/MMS两类**可靠无条件外包**，用Fraction+七次Taylor严格余项、sin在(-1,1)单调性计算Run266三拍必要速度守卫的**全盒严格通过裕量**：60拍SMM 1.3053923640m/s、MMS 1.7802187191m/s；75拍SMM 0.6672660434m/s、MMS 1.1420923985m/s。全盒通过必要守卫**不是**存在安全控制的充分条件；第75拍零力矩外包速度区间不包含于第60拍对应外包，也**不能**反推真实可达集不包含。新增验证脚本、6项隔离测试（6/6通过）、Fraction JSON证书、CI workflow和Run267日志；完整checkout/PR CI尚待核验。重读Ping/Sun(2015) *Journal of Applied Mathematics* DOI https://doi.org/10.1155/2015/875850 §3–5/Algorithm 8/Theorem 9，明确SMF+MPC可行性门控和失败继承控制器已有先例；唯一论文去重数不增加。**未构造实际全读数CZ后验、15拍共享因果终端回返、MPC求解、无限递归可行/稳定、六状态安全或20ms WCET；Gate A=blocked。** 下一轮唯一任务：在第60拍所有非空有噪success/miss后验上建立`(v,phi,omega)`关联信息状态，验证15拍共享因果回返。详见`docs/research/run267_research_log.md`。
 
 ---
