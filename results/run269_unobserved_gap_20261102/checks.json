@@ -1,0 +1,49 @@
+{
+  "gaps": {
+    "1": {
+      "position": "0",
+      "velocity": "3246383/40000000"
+    },
+    "10": {
+      "position": "29217447/400000000",
+      "velocity": "3246383/4000000"
+    },
+    "14": {
+      "position": "295420853/2000000000",
+      "velocity": "22724681/20000000"
+    },
+    "4": {
+      "position": "9739149/1000000000",
+      "velocity": "3246383/10000000"
+    },
+    "5": {
+      "position": "3246383/200000000",
+      "velocity": "3246383/8000000"
+    },
+    "9": {
+      "position": "29217447/500000000",
+      "velocity": "29217447/40000000"
+    }
+  },
+  "gate_A": "blocked",
+  "history": "tick45 success; ticks50,55 missed; ticks46..59 no position readings; angular outputs every tick",
+  "model": "frozen Run260 four-state defined-discrete Euler, T=mg, tau arbitrary shared causal",
+  "proof": "Euler p_next=p+h*v, v_next=v+h*(-T*sin(phi)+r), phi_next=phi+h*omega, omega_next=omega+h*tau/J. Same angular observations imply identical tau,phi,omega. Subtract +/-R trajectories: Delta v_q=2qhR, Delta p_q=q(q-1)h^2 R. No position packets at 50,55; angular observations equal.",
+  "q14_minus_state": [
+    "-295420853/4000000000",
+    "-22724681/40000000",
+    "0",
+    "0"
+  ],
+  "q14_plus_state": [
+    "295420853/4000000000",
+    "22724681/40000000",
+    "0",
+    "0"
+  ],
+  "q14_position_difference": "295420853/2000000000",
+  "q14_velocity_difference": "22724681/20000000",
+  "quantifier": "for any common causal torque policy, two opposite legal lateral-disturbance histories with identical angular observations and no position updates have identical controls; any safe posterior covering both has at least the listed projection diameters",
+  "run": 269,
+  "scope": "necessary information-width floor for a specific nonempty observation fiber before tick60 success, not a terminal RCI, not a bound after tick60 measurement, not six-state"
+}
