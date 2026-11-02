@@ -1,3 +1,7 @@
+**Run276 PR #149 CI与安全合并独立复核（2026-11-02 UTC）：** 研究PR https://github.com/zhouxingxing1279/AcademicReaserch/pull/149 基于main `fb8a8675e5dea7175d0e7e0be134201be72f3824`，合并前compare ahead=7/behind=0，仅7个预期文件且无删除；mergeable=true，expected head `3ce055763ca21a57ce0418c63f34efa1c8bc9fbe`。GitHub Actions https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41534362938 **completed/success**，Python3.13.17完整checkout、源码编译、Run276聚焦**6/6通过**、冻结配置检查和Fraction归档JSON逐字比较成功，已独立读取job日志。使用expected-head非强制squash合并至main `fb349a5e7c2f60dc3ada5c91d6b96eb682e40e88`；重新读取main SHA、PR merged及脚本/证书/日志/检查点/唯一论文总账Blob确认落地。**合并后main push CI及全仓库历史回归未独立确认**。真实SMM后验见证仅否定第三块速度门槛自动普遍通过，不证明硬约束违约、MPC不可行或无限时域不安全；**Gate A=blocked**。
+
+---
+
 **Run276 真实SMM后验的第90拍速度门槛反例（2026-11-02；PR/CI/main待复核）：** 继承Run254零状态、Run255 30–34非零力矩脉冲及Run260 SMM固定零读数前缀，构造完整合法成功/丢包历史`SSSMMSSMMSMSSSSSSS`、35拍成功位置读数0（噪声-0.006492766m）、其余成功读数取真值。30–34拍合法扰动`r=4R/5+T*sin(phi)`使真实净加速度4R/5，35–89拍`r=R,phi=0`，全部状态/输入/测量约束满足。Fraction证明第90拍`v=2.3942074625m/s`严格大于Run274/275第三块零力矩充分准入`G=2.3459809875m/s`，85/90位置读数差0.22724681m大于对应`D=0.1816275905m`。**此见证确属Run260 SMM真实可行观测历史，非仅外包盒成员**；Run275 D充分引理仍正确，失败只说明所有真实后验不会自动通过G，**不是硬约束违约、反馈不可能性或无限安全反例**。本地6/6测试通过，首次错误断言已修复；新增Run276脚本、测试、Fraction JSON、CI及日志。重读Qiu等(2020) DOI https://doi.org/10.1049/iet-cta.2019.0881 出版社HTML§2–5，既有DOI不增加。没有完整SMF/CZ后验、MPC求解器、终端信息RCI、无限递归可行、六状态物理安全或20ms WCET；**Gate A=blocked**。唯一下一步：本SMM第60拍完整观测纤维的可靠后验及非零力矩条件化安全前驱。详见`docs/research/run276_research_log.md`。
 
 ---
