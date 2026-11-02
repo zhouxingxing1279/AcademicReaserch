@@ -1876,3 +1876,15 @@
 - **关键假设、定理与结论：** Theorem 1的集合包含依赖上一步已包含及LMI可行；§4的鲁棒终端不变椭球和局部反馈是额外条件，且§4明确假设**进入终端区域时真实状态已知**以使用局部Kx。持续扰动下结论为趋向包含原点的区域而非无扰原点渐近稳定；§5只报告二阶LTI、LPV、DC-DC转换器MATLAB/YALMIP/SeDuMi数值结果，未报告四旋翼、丢包、实飞或20ms最坏耗时。
 - **局限、可复用技术与课题关联：** 可复用估计包含LMI、鲁棒预测约束和终端RPI的分层审计；**不能**把该文依赖真状态的终端局部反馈直接当作本项目隐藏速度+间歇位置输出反馈策略。Run264只延长固定历史的有限安全前缀，不构造该文终端RPI或证明递归可行。
 - **待查问题：** 能否将真状态终端Kx替换为对同一有噪位置观测纤维共享的因果集合反馈，并使所有合法success/miss后验回到可移位信息集合？相关证书见 `docs/research/run264_research_log.md`。
+
+
+## 背景第17轮：Izadi等四旋翼级联MPC时变推力约束与12维外环增广（2026-11-02）
+
+- **书目/真实题名与版本**：Maedeh Izadi; A. T. J. R. Cobbenhagen; Ruben Sommer; A. R. P. Andriën; Erjen Lefeber; W. P. M. H. Heemels, *High-Performance Model Predictive Control for Quadcopters with Formal Stability Guarantees*, arXiv:2412.20277 (2024-12-28), https://arxiv.org/abs/2412.20277 、全文 https://arxiv.org/html/2412.20277 。正式期刊书目为 *High-performance model predictive control for quadcopters with time-varying constraints and formal stability guarantees*, *Automatica* 191:113141 (2026), DOI https://doi.org/10.1016/j.automatica.2026.113141 。**实际阅读2024 arXiv作者公开HTML，不冒称已逐页阅读2026期刊终版**。
+- **阅读状态/范围/日期**：2026-11-02，**作者全文HTML分节已读** §2–11，重点§3式(16)–(19)、§4式(21)–(27)、§5式(28)、§6式(30)–(33)、§7 Theorems 8/10、§8–9 Theorem 11、§10实验、§11局限；附录A部分核对；未标PDF页码、未独立重证定理或复现。
+- **问题与实际模型**：四旋翼三维位置/轨迹跟踪；真实刚体`(p3,v3,R∈SO(3),ω3)`、6物理自由度，真实输入质量归一化总推力`T≥0`及三轴力矩`τ3`。外环MPC**不是刚体12状态**：`x=(pbar-p,vbar-v,a_d,η)∈R12`，解耦三组4维`(p_tilde_i,v_tilde_i,a_{d,i},η_i)`，每轴优化`s_i`，虚拟加速度由动态滤波保证两次可微。几何非线性内环由`a_d`转换期望姿态/角速率并生成力矩；内环不是MPC。
+- **MPC、约束与定理**：精确ZOH，3个线性动态/时变输入约束的凸非QP MPC，非二次Lyapunov终端代价；`ρ(t)=min(Tbar(t)-δ,Tmax-Tbar(t))`、`|a_{d,i}|≤ρ(t)/sqrt(3)`是非零/最大推力的保守充分内近似。Theorem 8要求`Δ(k+1)>exp(-h/γ)(1+h/γ)Δ(k)`以保持非空输入集；Theorem 10证明有条件外环UGAS；Theorem 11结合几何内环证明有条件级联UaGAS。**不是**本项目有噪失测SMF状态后验下的硬状态约束/递归安全证明。
+- **量测/估计/丢包**：理论反馈依赖`p,v,R,ω`；§10.2高保真仿真包含电机、传感器噪声及状态估计，但正文未给可直接迁移的传感器逐项有界噪声/失测语言。无状态或参数SMF/CZ、无位置丢包/延迟自动机、无逐电机物理饱和与变化率的硬安全证明。具体IMU/GPS/Vicon传感器合同**未从公开正文确认**。
+- **仿真/计算**：§10.1 MATLAB/CasADi `h=50ms,N=20`，三轴RMSE新`[0.26,0.07,1.75]m` vs基线`[0.48,0.14,2.43]m`；平均求解3.3ms vs0.25ms。§10.2 Avular Vertex One高保真**仿真非实飞**，`h=100ms,N=20,m=2.8kg,Tmax=80N`，新vs PID RMSE`[0.17,0.086,1.41]m` vs`[0.20,0.12,1.47]m`。未报告20ms最坏执行时间或真实飞行。
+- **局限、可复用技术与创新边界**：可复用外环12维增广/三轴4维分解、时变推力内近似、精确ZOH及采样间隔约束审计；不能将其`s`虚拟输入等同本仓库`F(N),τ(Nm)`，需`F=mT`单位换算与内环误差合同。该文已有名义级联稳定性和时变推力约束贡献，本课题仍需有界间歇位置SMF/CZ＋共享因果输出反馈终端信息集合的独立证明。Run246/261负例与Run264有限桥不受该文定理直接覆盖。详细审计见 `docs/research/model_selection/background_run_20261102_1137_izadi2026_thrust_tv.md`。
+- **待查问题**：下一轮全文核验真正四旋翼实飞低维/级联MPC的实际电机/力矩接口、传感器信息权限及执行误差边界。
