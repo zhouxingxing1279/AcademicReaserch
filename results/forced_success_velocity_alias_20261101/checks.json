@@ -1,0 +1,31 @@
+{
+  "all_truth_ticks_contained_in_run249_smf": true,
+  "all_truth_ticks_safe": true,
+  "angular_and_rate_readings": "zero at every tick, with zero measurement noise",
+  "evidence": "EXACT_RATIONAL_CONSTRUCTIVE_VELOCITY_ALIAS_AT_FORCED_SUCCESS",
+  "gate_A": "blocked",
+  "lateral_residual_minus": "negative of plus path",
+  "lateral_residual_plus_ticks_15_to_19": "-3R/4",
+  "lateral_residual_plus_ticks_20_to_29": "+R",
+  "max_abs_truth_position_m": "107130639/8000000000",
+  "max_abs_truth_velocity_m_s": "3246383/12800000",
+  "model": "Run249 fixed-thrust four-state defined discrete Euler; zero common torque",
+  "necessary_true_posterior_velocity_diameter_m_s": "3246383/6400000",
+  "position_packet_word_ticks_5_to_30": "SSSMMS",
+  "r_bound_m_s2": "3246383/1600000",
+  "recursive_feasibility_proved": false,
+  "run": 254,
+  "run249_interval_smf_outer_position_diameter_m": "1/25",
+  "run249_interval_smf_outer_velocity_diameter_m_s": "269364701/100000000",
+  "scope": "one legal zero-valued measurement history; necessary lower and interval outer upper bounds, NOT exact true posterior diameter",
+  "successful_position_readings": {
+    "10": "0",
+    "15": "0",
+    "30": "0",
+    "5": "0"
+  },
+  "terminal_invariant_set_proved": false,
+  "terminal_position_both_m": "0",
+  "terminal_velocity_minus_m_s": "-3246383/12800000",
+  "terminal_velocity_plus_m_s": "3246383/12800000"
+}

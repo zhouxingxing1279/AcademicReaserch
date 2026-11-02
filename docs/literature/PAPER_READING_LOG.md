@@ -1,3 +1,9 @@
+## Run254 — Qiu等（2020）终端RPI与有噪后验复核（2026-11-01；历史已读，不新增去重篇数）
+
+**题名：** *Output feedback model predictive control based on set-membership state estimation*；**作者：** Quanwei Qiu、Fuwen Yang、Yong Zhu、Eman Mousavinejad；**出版：** *IET Control Theory & Applications* 14(4):558–567 (2020)；**DOI：** https://doi.org/10.1049/iet-cta.2019.0881；**开放正文：** https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/iet-cta.2019.0881。**阅读日期/核验层级：** 2026-11-01再次核验出版社开放正文§2 Assumptions 1–2、§3.1 Theorem 1、§3.2式(19) minimax、§4终端RPI与稳定性条件；分节重读，非新读/非终版逐式复核。**问题/模型/方法：** 有界过程和量测噪声下的线性时变、部分状态测量、椭球状态SMF（不是参数SMF）及LMI/半定规划输出反馈MPC。**关键假设与结论：** 初始椭球和有界扰动/噪声、SMF递归包含条件；鲁棒终端正不变集合与局部反馈是稳定/可行性结论所需的额外结构，不能由一次成功量测推出。**局限：** 不含本仓库非线性正弦Euler、间歇位置包自动机及真实关联后验。**关联/可复用：** 估计集合包含、MPC预测硬约束、终端可移位条件分开检查。**本轮新独立结果：** Run254在强制成功位置包后仍构造同测量历史、不同隐藏速度的两条合法路径；参见`docs/research/run254_research_log.md`和`results/forced_success_velocity_alias_20261101/checks.json`。**待查：** 真实关联后验在所有成功读数和后续miss分支下能否形成共享因果安全前驱？**去重已读仍101篇。**
+
+---
+
 ## 背景模型选型第7轮 — Lee、Leok、McClamroch（2013）SE(3)四旋翼鲁棒跟踪（2026-11-01；新增分节已读1篇，去重100→101篇）
 
 **题名/作者/正式出版：** *Nonlinear Robust Tracking Control of a Quadrotor UAV on SE(3)*；Taeyoung Lee、Melvin Leok、N. Harris McClamroch；*Asian Journal of Control* 15(2):391–408 (2013；2012-07-05在线)，DOI https://doi.org/10.1002/asjc.567 。**公开原文：** arXiv:1109.4457v1 (2011-09-21)，https://arxiv.org/pdf/1109.4457 。**实际阅读日期/范围/状态：** 2026-11-01，核对公开预印本PDF pp.1–6 §II式(1)–(6)、§III Propositions 1–2、§IV式(20)–(39)/Propositions 3–4、§V数值例子；**分节已读**，未将2013期刊终版或附录全文冒充逐式核验。出版信息经期刊 https://onlinelibrary.wiley.com/doi/abs/10.1002/asjc.567 交叉核对。
