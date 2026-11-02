@@ -1,3 +1,15 @@
+## Run255 — Yang、Ozay（2021）部分观测安全游戏的迁移边界重读（2026-11-02；去重102篇不变）
+
+**真实题名/作者/出版：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay；ADHS 2021，*IFAC-PapersOnLine*，pp.97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者公开PDF https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**实际阅读：** 2026-11-02重新核对PDF pp.2–5 §3、§4.2–4.5、Propositions 4–5及式(8)–(17)；**历史已读论文分节重读，不新增去重条目**。
+
+**研究问题、方法、模型与输入：** 离散时间一般系统`x+=f(x,u,w)`，`u`为受约束控制输入，`w`为扰动；并非特定四旋翼模型、无专用姿态/推力输入。通过有限自动机约束连续失测次数、string automaton编码未知未来丢包、共享因果开环控制前缀、产品系统鲁棒安全博弈与不变核。**量测：** §3式(4)成功时**完整无噪状态**`y=x`，失测时空读数；§4.5式(17)允许一部分状态始终**完美**可测，且要直接应用约化结构需该部分动力学无扰动且不受隐藏状态影响。没有有噪位置-only SMF/CZ（既非状态SMF也非参数SMF），没有四旋翼MPC/Tube MPC。
+
+**重要定理/假设、结论与限制：** Assumption 1要求自动机、可能success及有限最大连续miss；Proposition 4在安全集和输入集紧、动力学连续等条件下给出产品系统不变核极限；Proposition 5给出其假设下安全winning set与产品系统不变核的对应。该结论**不能**直接转用于本仓库有噪角/角速、有噪间歇位置、隐藏速度的Run249模型。实验是论文两个计算示例，不是无人机实飞，未认证本项目执行器硬约束或20ms WCET。
+
+**与本课题关联/可复用技术：** 借鉴丢包自动机、共享前缀与先验证所有扰动/读数分支的量词结构；必须另建SMF后验信息状态及可移位安全前驱。Run255独立用Fraction对Run254特定`SSSMMS`零读数历史的**完整可靠区间后验**证明非零共享力矩+零尾在第30–69拍的有限硬约束安全，非论文原定理。**待查：** 第35拍所有非空success/miss后验能否映射进统一可重复闭合的信息状态族？**日志：** `docs/research/run255_research_log.md`。
+
+---
+
 ## 背景第8轮 — Rodriguez-Guevara等（2023）12状态qLPV-MPC（2026-11-01；新增去重第102篇）
 
 **题名：** *A qLPV-MPC Control Strategy for Trajectory Tracking of Quadrotors*。**作者：** Daniel Rodriguez-Guevara、Antonio Favela-Contreras、Oscar Julian Gonzalez-Villarreal。**发表：** *Machines* 11(7):755 (2023-07-19)。**DOI/原文：** https://doi.org/10.3390/machines11070755 ，https://www.mdpi.com/2075-1702/11/7/755 ，https://staging.core.mdpi.com/2075-1702/11/7/755 。
