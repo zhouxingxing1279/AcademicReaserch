@@ -1,3 +1,7 @@
+**Run259 PR/main CI与安全合并复核（2026-11-02 UTC）：** 研究PR #100 https://github.com/zhouxingxing1279/AcademicReaserch/pull/100 基于main `d06521f62573e3aa243643bfb7b957357f13426a`，合并前compare ahead=7/behind=0，仅7个预期文件、mergeable_state=clean、expected head `0dfd34782139fa1466a737b4e69460cd6e95fb9b`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41397854305 **completed/success**，读取Python3.13.17完整job日志确认Run249–259聚焦**97/97通过、无跳过**，源码编译、真实配置交叉核验、精确JSON逐字比较及artifact上传成功。使用expected-head非强制squash合并至main `915d480d4da682b301c1c6a0577b670b2e53a008`，重新读取main SHA、PR merged及7个文件Blob确认落地。合并后main push CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41397910004 **completed/success**；完整job日志再次确认**97/97通过、无跳过**，配置、精确JSON比较与artifact上传成功。**全仓库历史回归未执行**；本轮证书仍限固定历史、7条位置分支、有限15拍，不是完整CZ、终端RCI、无限时域安全/稳定或20ms WCET。本补记不修改算法、证书或论文去重数；**Gate A仍blocked**。
+
+---
+
 # Run259 — 15拍滚动位置锚点：第45拍强制成功与有限记忆代价（2026-11-02 UTC）
 
 ## 基准、唯一瓶颈和物理合同
