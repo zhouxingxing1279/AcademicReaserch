@@ -1,3 +1,16 @@
+## 背景第28轮 — Elokda等(2021)真实四旋翼DeePC及8状态输出反馈MPC实飞（2026-11-02；新增去重）
+
+- **书目、作者、全文与阅读状态**：Ezzat Elokda; Jeremy Coulson; Paul N. Beuchat; John Lygeros; Florian Dörfler, *Data-enabled predictive control for quadcopters*, *International Journal of Robust and Nonlinear Control* **31**(18):8916–8936 (2021), DOI https://doi.org/10.1002/rnc.5686；出版社开放全文 https://onlinelibrary.wiley.com/doi/full/10.1002/rnc.5686 ，PMC数学公式全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC9291934/ ，原始数据集 https://doi.org/10.3929/ethz-b-000490768 。**2026-11-02实际阅读公开期刊正文§1–4及Appendix A–C，重点§2.1–2.3式(1)–(8)、§3.1–3.4式(9)–(10)、Fig.6–11、Table 1和附录参数；状态：全文正文与附录分节已读**；未重放作者数据、未实飞、未逐条核验参考文献。
+- **控制任务、物理状态与模型**：28g Crazyflie 2.0位置阶跃、8字轨迹；**分层**外层滚动预测优化、厂家IMU角速内环与固定偏航。§2.1连续非线性6DOF**仿真模型12状态** `(p_x,p_y,p_z,v_x,v_y,v_z,γ,β,α,ω_x,ω_y,ω_z)`，输入4个逐桨推力`f_i`；未显式包含电机动态。真实DeePC把电机电流/内环状态视为**未知黑箱状态**，不能误称实飞优化了12状态；§3.4对照模型式输出反馈MPC为悬停线性化**8状态**`(p_3,v_3,γ,β)`，忽略内环角速跟踪延迟。
+- **输入与执行器**：真实外环3个**虚拟输入**`(f_tot,ω_ref,x,ω_ref,y)`，不是逐桨推力或平面`(T,τ)`；厂家内环→Crazyflie混控/ESC的最终指令、速率、饱和及最坏误差**未报告/无法从全文确认**。Appendix A虚拟输入盒`f_tot∈[0.1597,0.4791]`N、角速参考`[-π/2,π/2]`rad/s；不能据此证明四桨硬约束。
+- **量测、估计与不确定性**：外部运动捕捉25Hz位置`p_3`和横滚/俯仰；DeePC选输出`p=3`或`p=5`，用历史I/O Hankel隐式初始状态识别（不显式Kalman/SMF/CZ）；对照MPC用位置差分估速度。仿真高斯量测噪声，实飞有噪但**没有有界噪声集合、间歇位置丢包、延迟自动机或确定性真值包含**。p=3不表示真实内环不使用IMU。
+- **优化、约束、定理与计算**：正则化DeePC`T_d=331,T_ini=6,T_f=25,h=0.04s`，1秒预测；二次跟踪/输入成本、软初值、`λ_g||g-g_r||_2`，OSQP；位置盒`p_x,p_y∈[-4,4]`m、`p_z∈[0.1,4]`m，p=5时姿态角盒`[-π/6,π/6]`。§2.3 Theorem 1是**确定性最小LTI**的轨迹Hankel表征，不证明有噪非线性四旋翼鲁棒递归可行、终端信息不变或硬安全。终端鲁棒集合、逐桨速率、20ms最坏求解时间**未报告/无法从全文确认**。
+- **真实实验/证据级别**：p=3与p=5分别28次真实飞行（各14满电+14部分电量），地面Intel i7-8550U/OSQP；Table 1积分平方跟踪误差mean/median/SD分别`75/69/21`与`93/86/23`（不是RMSE）；求解时间mean/median/SD分别`4.14/3.92/1.49ms`与`6.66/5.70/4.78ms`，**不是WCET**；25Hz=40ms周期，不能证明仓库20ms全链路预算。§3.4模型式8状态MPC真实对照，p=3性能较好是实验观察，不是失测状态可观测性定理。无硬约束零违约证书、HIL/SITL或无限安全证明。
+- **局限、可复用技术、创新边界**：可复用真实低维虚拟输入输出反馈预测控制架构、位置-only经验基线、OSQP/求解量级与原始数据链接；但无SMF/CZ可靠状态后验、共同执行器可实现域、Tube收紧、终端信息RCI。不能声称首次四旋翼输出反馈预测控制或仅位置量测必然安全。**六状态平面(T,τ)仍条件性首选**；主任务Run246/260/261/276负面证据与Gate A=blocked不变。独立审计QuadQuestions公开单向桨台架CSV前199行典型约10Hz、含PWM/电转速/推力，但不能认证20ms瞬时速率或本仓库机体硬界；见背景第28轮日志。
+- **下一轮唯一待查**：核验本论文开放数据包是否实际包含同步逐桨ESC/RPM/推力，若仅外环I/O则明确需要目标机体台架辨识。
+
+---
+
 ## 背景第27轮 — Cao/Lai/Alam（2017）四旋翼分层GP-MPC：机会约束与真实执行器边界（2026-11-02；新增去重）
 
 - **书目/链接/版本**：Gang Cao; Edmund M.-K. Lai; Fakhrul Alam, *Gaussian Process Model Predictive Control of an Unmanned Quadrotor*, *Journal of Intelligent & Robotic Systems* **88**(1):147–162 (2017), DOI https://doi.org/10.1007/s10846-017-0549-y；作者预印本 arXiv:1707.04515v1 https://arxiv.org/pdf/1707.04515 ，22页；机构稿 https://openrepository.aut.ac.nz/items/abfa201e-c3ce-4b48-927f-160b92af42d6 。**2026-11-02作者预印本§2–6 pp.3–18分节阅读**（重点§2模型、§3式(19)–(20)、§4 QP、§5仿真/计算），参考文献未逐条核验，**未对照期刊终版、未复现代码**；状态：**部分全文阅读，非仅摘要**。
