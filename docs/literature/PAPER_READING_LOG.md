@@ -1,3 +1,14 @@
+## Run271 — Yang/Ozay（2021）既有论文补充复核（2026-11-02；去重数不变）
+
+- **书目**：Liren Yang; Necmiye Ozay, *Safety Control Synthesis for Systems with Missing Measurements*, ADHS 2021 / *IFAC-PapersOnLine*, pp.97–102, DOI https://doi.org/10.1016/j.ifacol.2021.08.481；作者6页PDF https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。
+- **实际重读范围/日期/状态**：2026-11-02；PDF pp.2–5，§3式(3)–(7)/Assumption 1、§4.4 Propositions 4–5、§4.5式(17)；**部分正文重读**，不是本轮新增论文，亦未独立复现产品系统求解。
+- **问题/模型/输入**：一般离散系统 `x+=f(x,u,w)`、有界扰动、控制输入集合U和状态安全集合；不是四旋翼MPC。成功包时完整无噪状态`y=x`，失测时`y=∅`；没有本仓库位置有噪且速度隐藏的状态SMF。
+- **方法/定理/假设**：用受限丢包自动机、因果共享开环序列与产品系统不变核代替全信息幂集游戏；Proposition 5在Assumption 1及产品系统前提下给安全获胜集合等价。§4.5部分量测直接简化要求持续可测子状态的动力学不受隐藏状态影响且无扰动，不能移植为本项目的输出反馈递归可行性证明。
+- **结论/局限/复用**：可借鉴合法丢包模式、共享控制量词与信息状态前驱；原论文不是有噪四旋翼状态后验、Tube MPC或20ms实现。Run271独立证明Run270第60拍双真值确实属于Run260 **MMS**真实观测历史，且SMM接续50/55双miss非法；这**不是原论文结论**。
+- **待查问题**：能否在带噪位置条带与隐藏速度下，构造可计算的15拍信息状态安全前驱并得到真正可移位终端族？
+
+---
+
 ## Run270 — Niazi等（2023）传感器攻击/间歇传输下的zonotope集合估计（2026-11-02；新增去重论文）
 
 - **书目**：Muhammad Umar B. Niazi, Amr Alanwar, Michelle S. Chong, Karl H. Johansson, *Resilient set-based state estimation for linear time-invariant systems using zonotopes*, *European Journal of Control* **74** (2023), Article 100837, DOI https://doi.org/10.1016/j.ejcon.2023.100837 。开放全文：https://www.sciencedirect.com/science/article/pii/S0947358023000663 。
