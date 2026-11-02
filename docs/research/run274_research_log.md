@@ -1,3 +1,7 @@
+**Run274 PR CI与安全合并独立复核（2026-11-02 UTC）：** PR #143 https://github.com/zhouxingxing1279/AcademicReaserch/pull/143 基于main `2543910893184df5864c80275bb24386d309ceca`，合并前compare ahead=7/behind=0、严格7个预期文件且无删除，mergeable=true、expected head `c0492763e1ef4df040f390edd0fe665776eb4e2b`。PR CI https://github.com/zhouxingxing1279/AcademicReaserch/actions/runs/41517324215 **completed/success**；完整GitHub Actions Python3.13.17 checkout，源码编译、Run274聚焦**8/8通过**、真实配置与Run260/273历史证书交叉核验、归档Fraction JSON逐字比较均成功。expected-head非强制squash合并至main `7a256b3b954f7191f2c79d7022f38242edd45046`，重新读取main SHA、PR merged及6个关键文件Blob确认落地；归档JSON Blob `cf6bd4154948081d94a4149742a16d3d78202899`与本地生成一致。**合并后main push CI未独立确认，全仓库历史回归未执行**。有限30拍共享安全和条件化第三块门槛不是MPC或信息终端RCI；Gate A=blocked。
+
+---
+
 # Run274 — 两个15拍共享安全块与第三块后验速度门槛（2026-11-02）
 
 ## 1. 最新基准与唯一瓶颈
