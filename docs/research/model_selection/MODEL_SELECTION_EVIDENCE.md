@@ -1,3 +1,19 @@
+## 背景第26轮 — Mendez等(2023)真实四旋翼LMPC论文＋PX4固定版本控制分配源码审计（2026-11-02）
+
+**论文新增直接证据**：[期刊开放HTML全文§1–4已读] Mendez, Whidborne, Chen, *Sensors* 23(7):3711, DOI https://doi.org/10.3390/s23073711；全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC10098597/ 。12状态悬停线性化 `(x,y,z,u_b,v_b,w_b,φ,θ,ψ,p,q,r)`，6物理自由度；外环4个**虚拟**高度/俯仰/横滚/偏航输入，0.1s、1s/10步增量LTI MPC/Hildreth QP，内环PID→4桨转速代数混控；KF测量位置/机体速度/姿态角，角速度隐藏；地面LiDAR给**风预报**，不是间歇位置观测。Draganflyer X-Pro 2.36kg仿真，真实LiDAR风数据驱动**非线性仿真**，无四旋翼MPC实飞、终端信息RCI、确定性SMF或逐桨ESC硬界。12状态只说明可在仿真中采用完整姿态/速度建模，不证明仓库1kg六状态候选必须扩维。
+
+**独立开源实现审计**（不是Mendez论文配套代码）：PX4-Autopilot固定提交 `216039a12bab5a86769128f7be3e5f63dc7b4952`，源码 https://github.com/PX4/PX4-Autopilot/tree/216039a12bab5a86769128f7be3e5f63dc7b4952 。实际读取：
+1. `src/modules/control_allocator/ControlAllocator.cpp`（Blob `82bbb624fae229a54f74782b5480d961de199ab6`）：`(τ_x,τ_y,τ_z,F_x,F_y,F_z)`→`allocate()`→`updateSetpoint()`→可选`applySlewRateLimit(dt)`→`clipActuatorSetpoint()`→`actuator_motors`**归一化推力指令**；非可逆电机配置的最小归一化值0、最大1；发布`unallocated_torque/thrust`及饱和状态，表明实际分配可能偏离请求。
+2. `src/lib/control_allocation/control_allocation/ControlAllocationSequentialDesaturation.cpp`（Blob `4b28f44dacb9f4c7ffa26a5115aca0efda75a8b3`）：随MC_AIRMODE顺序消饱和并可能改变推力/力矩通道的实际分配；不等价于请求wrench原样施加。
+3. `src/lib/control_allocation/control_allocation/ControlAllocation.cpp`（Blob `7278108a8cae320cc86c196d9f717e3966df5546`）与`src/modules/control_allocator/module.yaml`（Blob `8571373930f4c4c966bee9ae2ee4e676ef9d526f`）：`CA_R{i}_SLEW`单位是**归一化输出从最小到最大所需秒数**，默认**0.0=禁用**；若配置0.10s且`dt=0.02s`、归一化范围[0,1]，静态公式给每拍最大增量`0.02/0.10=0.2`，**不是物理N/s或实际ESC跟踪误差界**。分配器对`dt`另限制0.0002–0.02s。
+4. `src/modules/control_allocator/ControlAllocator.cpp`的`publish_actuator_controls`输出`actuator_motors.control`，PX4文档说明由PWM/DSHOT/UAVCAN驱动消费；**未审查具体输出驱动、电机实测RPM、推力标定及硬件反馈**，所以仅证明“源码有归一化限幅/可选限速和分配残差诊断”，不证明真实电机满足硬推力/速率界。
+
+**对首选模型的决定**：条件性六状态平面`(p_x,p_z,v_x,v_z,φ,ω)`＋`(T,τ)`仍为首选；四状态冻结T=mg仅有限安全基线，2状态姿态保底，10/12状态与级联为外部对照。**新增门槛**：在给定上一拍逐桨推力/执行器状态可靠集合`F_{k-1}`下，对同一SMF观测纤维使用共同命令`a_k`，要求所有允许执行误差的真实`f_k`满足幅值、速率、混控物理关系，并外包`G f_k-(T_k,τ_k)`；当PX4消饱和/限速使请求wrench未完全实现时，必须将`unallocated_control`与执行误差纳入主任务扰动合同。**归一化信号盒≠实际物理推力盒；诊断残差≠确定性最坏界。** 主任务Run274的30拍四状态有限安全不包含此硬件合同；Run246可生存性反例、Run260/261终端阻塞和Gate A=blocked不变。
+
+**证据/检查**：论文原文与PX4固定版本源码静态核验；Python Fraction算术检查`0.02/0.10=0.2`、`1s/0.1s=10`。未运行PX4、SITL、ESC实测、主控制器或20ms WCET；不能宣称本轮闭环或鲁棒安全。详见`background_run_20261102_2034_mendez_px4_chain.md`。
+
+---
+
 # 四旋翼模型选型：文献证据矩阵（背景任务）
 
 > 更新：2026-11-01；第6轮增加六状态垂向权限必要筛选与Hu等(2018)10状态论文纠错；首轮基准 main d5a8cd049fd57aa9b35750551abf83f3607321cd。此文档是模型与课题可行性论证，不是控制器证书。每条证据分为 [正文核验]、[仓库已认证]、[仓库配置]、[待核验]。
