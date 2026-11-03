@@ -2216,3 +2216,26 @@
 - **理论与实验边界**：论文明确指出，多个PWA局部控制器切换不能保证原非线性系统在切换过程中的稳定性，只报告试验中未观察到稳定性问题。真实UPATcopter约1.1kg，Atom Z530 1.6GHz/2GB板载计算；实飞包括位置保持、轨迹、悬停、风阵和激进姿态。作者报告水平位置保持通常在半径0.15m以内；悬停姿态MSE在无风/风阵下分别约为φ:1.5924e−4/0.0013、θ:2.2372e−4/5.0558e−4、ψ:4.3998e−4/0.0011。属于实飞观察，不是确定性硬安全、递归可行或稳定性定理。
 - **对本课题的意义**：该期刊实飞论文直接证明12状态六自由度四旋翼plant与MPC有真实研究先例，支持将12状态非线性plant用于硕士仿真主对象；但其控制架构是三个PWA切换MPC，不支持单个12状态局部线性Tube MPC已被实飞验证。论文没有SMF/CZ、位置间歇测量或终端信息RCI。
 - **待查问题**：标准单向四旋翼上，四个电机推力f映射到wrench w=(T,τx,τy,τz)时，应使用耦合可行集 W={Gf | f_min≤f≤f_max}，而不是四个互不相关的wrench区间。若G可逆，可施加 f_min≤G^{-1}w≤f_max；若优化逐桨推力，则四输入直接受电机盒约束。下一轮优先推导本课题12状态Euler/body-rate悬停线性化A、B和有限姿态包线内的非线性离散残差集合。
+
+---
+
+## 背景第34轮新增论文 — Parsi/Iannelli/Smith (2022 online; 2025 issue) 椭球Tube MPC四旋翼算例
+
+- **书目信息/原始全文**：Anilkumar Parsi, Andrea Iannelli, Roy S. Smith, *Scalable tube model predictive control of uncertain linear systems using ellipsoidal sets*, *International Journal of Robust and Nonlinear Control*, **35(7), 2499–2520 (2025 issue)**；first published online **21 November 2022**；DOI https://doi.org/10.1002/rnc.6485 。作者公开PDF https://andreaian.github.io/pub/IJRNC22_RMPC.pdf ，出版社全文 https://onlinelibrary.wiley.com/doi/10.1002/rnc.6485 。**2026-11-03实际阅读范围**：PDF/出版社全文§2问题建模、§3.1状态管束与控制参数化、§3.4终端设计相关部分、§4.1 Theorem 1、§5.2 Quadrotor example、Appendix A.4 Proposition 6证明；**部分阅读，不声称全篇逐式读完**。
+- **控制任务/物理模型/状态输入**：Crazyflie悬停附近位置设定值调节。6物理自由度四旋翼，12状态线性化离散模型，状态按论文记号为 x=[Δs, Δdot s, ψ, dotψ]，其中位置偏差3、速度3、roll/pitch/yaw 3及其角速度/角速率3；**4个输入为四个旋翼各自推力**，不是总推力加三轴力矩。连续非线性刚体模型仅用于导出局部平衡点离散线性模型；采样 Ts=0.1 s，预测时域 N=15。
+- **不确定性/约束**：质量区间[27g,37g]，以LFT/乘性参数不确定性描述；另有有界风扰动，界限按x/y方向最大相对速度2m/s假设构造。每桨推力约束[0,0.157]N；位置被限制在以目标平衡位置为中心的超立方体，姿态/角速度也进入状态多面体约束。代价矩阵 Qx=diag(3,2,3,1,1,1,0.1,0.1,0.1,0.1,0.1,0.1)，Qu=I4；目标在10s仿真中于5s切换。
+- **量测与估计**：在线问题每拍使用可用状态测量 xhat_k 初始化管束；论文没有给出实际IMU/Vicon/GPS传感器配置，也没有输出方程、观测器、测量噪声或丢包模型。这里的state measurement是状态可用假设，不能写成已实现的输出反馈。没有状态SMF/CZ后验或参数在线估计器。
+- **MPC/终端/证明**：ETMPC用固定形状椭球的平移与缩放参数化状态管束，反馈输入为仿射形式 u=K(x-z)+v，在线求解凸SDP；离线通过SDP及标量线搜索设计椭球形状、反馈增益和终端集。终端椭球在u=Kx下满足鲁棒不变性及收缩条件，并落在状态/输入约束内。**Theorem 1**：离线设计问题(45)可行，且初始状态属于可行域 X_N(X_T)，真实系统满足论文式(1)–(5)的LFT不确定线性模型、扰动集合和状态/输入约束，则闭环轨迹留在该可行域、在线问题对所有后续时刻递归可行，并对外扰具有区域输入到状态实用稳定性（regional ISpS）。**Proposition 6**另在扰动最终变为零的附加条件下给出终端收缩后的指数收敛。作者指出Theorem 1给出的轨迹界在仿真中偏保守。该定理不是原始非线性六自由度模型、间歇观测或SMF输出反馈定理。
+- **结果/计算时间**：仅数值仿真，不是真实飞行/HIL/SITL。ETMPC与多面体PTMPC均以N=15比较：在目标xy偏移0.55m时闭环成本109.3与121.4、均未违约；ETMPC最大可行目标偏移0.68m，PTMPC在0.68m不可行。**平均在线求解时间ETMPC=0.16s、PTMPC=0.04s**；相对100ms采样，ETMPC平均已超周期，PTMPC平均低于周期但仍超过仓库20ms预算。论文未报告最坏执行时间、百分位数、计时硬件或明确实际求解器；参考文献列出YALMIP/MOSEK，但正文未明确将哪一求解器/硬件对应到该四旋翼计时，不能据参考文献反推。没有可核验的实飞数据。
+- **复现状态/局限/可迁移性**：出版社数据声明给出补充材料DOI https://doi.org/10.3929/ethz-b-000559871；2026-11-03尝试打开ETH Research Collection/bitstream，访问返回403，尚未下载或运行代码。可复用的是LFT参数不确定性、椭球管束参数化、终端椭球RPI与递归可行性证明结构；但它假设状态可用，且在线反馈使用状态误差，不能直接将SMF/CZ后验点估计代入。若实际仅有估计值xhat=x+epsilon，必须将估计误差集合及其经反馈产生的-BK epsilon项纳入误差管束，并证明后验到初始椭球管束的可靠包含关系。
+
+## 背景第34轮新增论文 — Michel等(2019) AR.Drone 2.0水平Tube MPC实飞
+
+- **书目信息/原始全文**：Nathan Michel, Sylvain Bertrand, Sorin Olaru, Giorgio Valmorbida, Didier Dumur, *Design and flight experiments of a Tube-Based Model Predictive Controller for the AR.Drone 2.0 quadrotor*, *IFAC-PapersOnLine*, **52(22), 112–117 (2019)**；1st IFAC Workshop on Robot Control；DOI https://doi.org/10.1016/j.ifacol.2019.11.058 。ONERA作者公开PDF https://w3.onera.fr/copernic/sites/default/files/2019_ifac_workshoprobotcontrol_design_flight_tube_mpc_ardrone.pdf 。**2026-11-03实际阅读：完整6页PDF pp.1–6，正文§1–6、模型、Tube约束、辨识、终端集与飞行结果；全文已读**。
+- **控制任务/模型/输入**：Parrot AR.Drone 2.0水平位置稳定与连续waypoint调节。作者假设yaw角和垂直速度为零、小roll/pitch、x/y水平运动解耦；每个水平轴单独建模为3状态 Xx=[x,vx,φ] 与1个虚拟输入 Ux=φr（另一轴对应 Xy=[y,vy,θ], Uy=θr）。这是依赖机载内环的降阶模型，不是完整12状态MPC，也不是直接四桨推力/力矩输入。AR.Drone内部控制器负责roll/pitch、yaw-rate和垂直速度调节，MPC输出归一化姿态参考。
+- **量测/扰动**：OptiTrack动捕测量位置、速度和姿态；地面ROS PC经Wi-Fi向无人机发送命令。离散扰动集合包含模型误差、外部气动力、离散化误差、动捕测量误差和通信延迟；通过辨识飞行数据计算一步预测残差，并取其凸包作为W。该集合的可信度依赖后续飞行扰动确实不超出辨识包络；无间歇测量/丢包状态SMF/CZ。
+- **MPC/约束/终端**：Ts=0.05s，N=30（1.5s horizon）；Q=diag(0.8,1.2,1), R=5；状态约束含水平位置、速度和姿态界，输入姿态参考|U|≤0.56，名义输入收紧至|Ubar|≤0.332。用K=−[0.5,0.4,1]构造误差闭环Z+=(A+BK)Z⊕W的RPI集合Z，名义状态/输入分别使用X⊖Z、U⊖KZ收紧；终端代价来自离散Riccati方程，终端集采用MOAS并按waypoint作在线线性优化调整。QP由CVXGEN生成。
+- **实验/保证边界**：真实AR.Drone 2.0飞行验证x/y两个方向，论文报告每轴最大计算时间4ms（含waypoint切换时终端集计算）。状态和输入约束满足的结论以实际扰动落在辨识得到的W内为前提；航点距离刻意选得较近以保证优化可行。该RPI tube与名义约束收紧是明确的线性系统条件保证，但不自动覆盖完整非线性六自由度、逐桨饱和/速率或任意未见扰动。
+- **可迁移内容/局限**：这是本轮三篇中最强的Tube MPC真实四旋翼飞行证据，但控制权限是φr/θr虚拟姿态指令，低层飞控封装电机，不能作为12状态四电机直接MPC的实飞证据。它说明低维分层接口、数据驱动扰动包络、RPI误差管与QP可以在约20Hz水平控制周期内运行；没有全状态SMF/CZ、输出反馈后验包含或信息终端RCI。
+
+---
