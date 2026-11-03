@@ -38,6 +38,7 @@ jobs:
               "docs/literature/PAPER_READING_LOG.md",
               "docs/literature/READ_PAPERS.md",
               "archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md",
+              "archive/legacy_planar_direct_control_20261103/README_legacy_20261103.md",
               "src/common/numerical_sets.py",
           ]
           missing = [p for p in required if not Path(p).is_file()]
@@ -59,6 +60,12 @@ jobs:
               p for p in Path(".").rglob("*.md")
               if "archive" not in p.parts and ".git" not in p.parts
           ]
+          # Validate the archive's two human entrypoints as well; historical
+          # internal documents are preserved verbatim under their original tree.
+          markdown_files.extend([
+              Path("archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md"),
+              Path("archive/legacy_planar_direct_control_20261103/README_legacy_20261103.md"),
+          ])
           missing_links = []
           for filename in markdown_files:
               source = filename.as_posix()
@@ -72,5 +79,5 @@ jobs:
                       missing_links.append(f"{source} -> {target}")
           if missing_links:
               raise SystemExit("Broken active Markdown links: " + "; ".join(missing_links))
-          print(f"Research structure and {len(markdown_files)} active Markdown files passed local-link validation.")
+          print(f"Research structure, {len(markdown_files)} active Markdown files and archive entrypoints passed local-link validation.")
           PY
