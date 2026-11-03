@@ -38,11 +38,11 @@ v1.17.0 的 ROS 2 Offboard 输入使用：
 
 - `/fmu/in/offboard_control_mode`：声明外部控制层级并持续提供 Offboard heartbeat。
 - `/fmu/in/trajectory_setpoint`：发送实际位置/速度/加速度参考。
-- 推荐首轮只测**位置参考**：`OffboardControlMode.position=true`，其余控制层级标志为 false；`TrajectorySetpoint.position` 三轴有效，`velocity` 和 `acceleration` 先设为 NaN，不引入前馈；yaw 保持固定或使用 NaN 让 PX4 保持当前 yaw。
+- 接口选择暂不冻结，首轮在相同 HTE-off 条件下比较两种独立模式：**位置-only**（`OffboardControlMode.position=true`；`TrajectorySetpoint.position` 三轴有效，velocity/acceleration 为 NaN）与**加速度-only**（`OffboardControlMode.acceleration=true`；position/velocity 为 NaN，acceleration 三轴有效）。两种模式均保持 yaw 固定或使用 NaN 让 PX4 保持当前 yaw；不能把两种控制模式混在同一条样本里。
 
-`TrajectorySetpoint` 的消息注释明确：数据采用 NED；位置/速度/加速度单位分别为 m、m/s、m/s²；NaN 表示该状态不受控；setpoint 必须运动学一致且可实现，才能平滑飞行。位置模式下，position 有效；若同时给出非 NaN velocity/acceleration，它们会作为内环前馈，而不是另一个独立控制模式。
+`TrajectorySetpoint` 的消息注释明确：数据采用 NED；位置/速度/加速度单位分别为 m、m/s、m/s²；NaN 表示该状态不受控；setpoint 必须运动学一致且可实现，才能平滑飞行。位置模式下，position 有效；若同时给出非 NaN velocity/acceleration，它们会作为内环前馈，而不是另一个独立控制模式。加速度-only 则是独立路径：position/velocity 均为 NaN，仅 acceleration 有效。
 
-**XY 成对约束：** v1.17.0 `PositionControl::_inputValid()` 检查 x/y 的 position、velocity、acceleration 有效性必须成对；每个轴至少要有一种有效 setpoint。位置 setpoint 有效时，对应位置状态估计也必须有效。因此首轮 position-only 工况应确保 x、y 同时有效，且 PX4 的 local position validity 正常。
+**XY 成对约束：** v1.17.0 `PositionControl::_inputValid()` 检查 x/y 的 position、velocity、acceleration 有效性必须成对；每个轴至少要有一种有效 setpoint。位置 setpoint 有效时，对应位置状态估计也必须有效。因此 position-only 工况应确保 x、y 同时有效，且 PX4 的 local position validity 正常；acceleration-only 工况也需 x/y 成对有效，并满足 Offboard 模式所要求的 velocity estimate。
 
 ### 2.2 Offboard heartbeat 与外环更新不是同一件事
 
@@ -50,7 +50,7 @@ v1.17.0 的 ROS 2 Offboard 输入使用：
 - ROS 2 路径中，heartbeat 由 `OffboardControlMode` 提供；保持位置时 PX4 允许只收到一次 `TrajectorySetpoint`。这意味着 PX4 会继续保持最近的有效参考。
 - **对 receding-horizon MPC 的要求不同：** 外环每次优化后仍必须发布新 `TrajectorySetpoint`，按选定 MPC 周期更新；heartbeat 应独立、持续发布。不能把“保持位置只需发一次”误读为 MPC 可以不更新控制输入。
 
-v1.17.0 文档中的加速度-only 模式要求有效 velocity estimate。该要求具有版本语境；本研究暂不选择加速度模式，也不把 rolling `main` 文档中的估计有效性表格直接套到 v1.17.0。
+v1.17.0 文档中的加速度-only 模式要求有效 velocity estimate。该要求具有版本语境；本研究必须锁定 v1.17.0 文档/源码，不把 rolling `main` 文档中的估计有效性表格直接套到该版本。
 
 ## 3. 源码揭示的真实级联控制链
 
@@ -105,6 +105,26 @@ v1.17.0 `dds_topics.yaml` 默认包含：
 
 该版本默认 DDS 列表**没有** `vehicle_local_position_setpoint` 输出。因此若要直接观测位置控制器内部修正后的速度/加速度 setpoint，首选检查 PX4 ULog 中是否记录相应 uORB topic；若需 ROS 2 实时订阅，则须明确修改 DDS topic 配置并重编固件，不能假设默认已经暴露。所有频率应实测，不应把 DDS rate limit 当成实际发布频率。
 
+### 3.5 Acceleration-only setpoint 可绕过位置/速度 PID 的有效输出路径
+
+v1.17.0 源码支持一个重要的接口对照：
+
+- 当 `TrajectorySetpoint.position` 与 `velocity` 为 NaN、`acceleration` 有效时，`PositionControl::_inputValid()` 接受加速度 setpoint；Offboard 模式层仍要求有效 velocity estimate。
+- `PositionControl::update()` 仍调用位置/速度处理函数，但在 velocity setpoint 为 NaN 的情况下，速度误差为 NaN；源码将 NaN 误差置零后再更新积分器，因此该模式不会用速度 PID 生成一个有限的加速度修正项。
+- `ControlMath::addIfNotNanVector3f()` 不会用 NaN 的速度环输出覆盖有限的外部 acceleration setpoint；随后 `_accelerationControl()` 将该加速度请求转换为姿态/推力，并继续受 HTE、倾角/推力限制和姿态/角速度内环影响。
+
+因此，**acceleration-only 在有效控制输出路径上绕过位置 P 和速度 PID 积分/导数反馈**，可能比 position-only 更容易建立低阶平移预测模型；但它不是“实际加速度被精确施加”，跟踪残差仍包含姿态/角速度瞬态、推力映射、重力补偿、风扰和饱和。v1.17.0 Offboard 文档仍要求 acceleration-only 有效 velocity estimate，不能误写成不需要速度估计。
+
+该路径没有替外环自动解决加速度平滑、jerk 限制和推力/倾角约束映射。Andriën 等的加速度参考级联控制使用动态扩展使期望加速度两次可微；PX4 的 setpoint 语义与该论文内环并不相同，但提示本课题应在外环显式约束加速度变化率/平滑性，并在 SITL 检查加速度到姿态/推力的跟踪误差。
+
+**当前接口选择应做同条件 A/B，而不是先验冻结：**
+
+| 对照 | 优点 | 主要代价/风险 |
+|---|---|---|
+| position-only | 与 Santos & Lagoa (2022) 的位置命令型 6 状态 Tube RMPC 更接近；航点/位置约束自然 | PX4 位置 P—速度 PID 含积分和滤波记忆，隐藏闭环状态较多 |
+| acceleration-only | 绕过位置/速度 PID 的有效输出路径；在 HTE-off 时更接近平移加速度输入 | 需要 velocity estimate；姿态/推力映射与饱和仍在；外环需保证加速度平滑并处理推力/倾角约束 |
+| velocity-only | 直接给速度参考 | 仍使用速度 PID 积分/滤波，未消除主要内部记忆；暂作低优先级对照 |
+
 ## 4. 外环 SMF 的量测通道必须与 PX4 内环估计器分开定义
 
 PX4 位置控制器使用自己的 `vehicle_local_position` 状态估计维持内环。研究中的“间歇/异步位置测量”首先应定义为**外环 SMF/MPC 可获得的测量通道**，不能默认意味着 PX4 内部 EKF 也同时失去位置状态。
@@ -130,10 +150,10 @@ PX4 位置控制器使用自己的 `vehicle_local_position` 状态估计维持�
 ### 5.2 分阶段输入激励
 
 1. 稳定悬停与零参考变化：估计基线噪声、漂移、时间同步误差。
-2. 位置参考逐轴小阶跃：N/E/D 三轴分别正负方向测试，先选不会触发限速/限倾角/推力饱和的小幅值；position 有效，velocity/acceleration NaN。
-3. 位置参考斜坡、三角波和低幅多频激励：识别带宽、相位滞后、轴间耦合和非线性。
-4. 改变外环 setpoint 更新率（例如 5、10、20 Hz）并记录实际应用/保持行为；Offboard heartbeat 单独持续发布。
-5. 重复相同轨迹，但改变此前的运动/参考历史与悬停时间，检查积分器/滤波状态是否造成相同 ([p,v,r_p]) 下不同的后续响应。
+2. **position-only arm：** 位置参考逐轴小阶跃与斜坡/三角波/低幅多频激励；N/E/D 三轴分别正负方向测试，先选不会触发限速/限倾角/推力饱和的小幅值；position 有效，velocity/acceleration NaN。
+3. **acceleration-only arm：** position/velocity NaN，发送有界、连续平滑的加速度斜坡/多频激励；同时约束加速度幅值和变化率，避免用不连续加速度阶跃把姿态瞬态误判为正常工作域响应。
+4. 对两种 arm 使用相同外环更新率（例如 5、10、20 Hz）和相同运行 envelope，记录实际应用/保持行为；Offboard heartbeat 单独持续发布。
+5. 重复相同轨迹，但改变此前的运动/参考历史与悬停时间，检查 position-only 的积分/滤波记忆是否造成相同 `[p,v,r_p]` 下不同的后续响应；对 acceleration-only 检查姿态/推力动态及加速度输入历史是否造成同类残差。
 6. 分别测试远离饱和的线性工作域与接近速度/倾角/推力限制的边界工况；不可把饱和数据与未饱和 LTI 模型混为一个未经分层的残差集。
 7. 再加入受控风扰与外环测量丢包；先确认闭环辨识，再研究估计器与 Tube。
 
@@ -145,11 +165,11 @@ PX4 ULog：检查并保存 `vehicle_local_position`、`vehicle_local_position_se
 
 ### 5.4 模型辨识与准入判据
 
-- 先拟合位置参考到平移输出的离散闭环模型：
+- 分别拟合 position-only 的位置参考模型与 acceleration-only 的加速度参考模型；两者均以平移输出为目标，输入延迟、零阶保持、采样时间和坐标系必须写入合同。
   [
   x_{k+1}=A_{cl}x_k+B_{cl}r_{p,k}+E_{cl}w_k,quad x_k=[p_k^T,v_k^T]^T
   ]
-  并把输入延迟、零阶保持、采样时间和坐标系写入合同。该式是待辨识结构，不是已知 PX4 方程。
+  position-only 可用 `x_{k+1}=A_p x_k+B_p r_{p,k}+E_p w_k`；acceleration-only 可用 `x_{k+1}=A_a x_k+B_a a_{c,k}+E_a w_k`。两式均为待辨识结构，不是已知 PX4 方程。若对加速度命令增加外部平滑滤波器，其已知滤波状态应显式增广进预测模型。
 - 训练与验证轨迹必须分开；至少做一步预测、多步自由运行预测、跨初始历史预测和跨激励幅值验证。
 - 报告最大/分位残差、延迟、上升时间、超调、稳态误差、轴间耦合、饱和占比和计算周期；不能只报告 RMSE。
 - 如果残差明显依赖先前参考、积分器历史、饱和或飞行模式，6 状态模型不准入：优先增广可识别的闭环滞后/积分状态，或收窄并明确工作域；必要时才把姿态/角速度加入外环预测。
@@ -163,9 +183,9 @@ Santos & Lagoa (2022), *Wayset-based guidance of multirotor aerial vehicles usin
 
 ## 7. 本轮结论与下一唯一问题
 
-**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；外环先使用 ROS 2 `TrajectorySetpoint` 位置参考，不带速度/加速度前馈。首轮受控辨识变体显式关闭 HTE 并固定 `MPC_THR_HOVER=0.60`；随后单独启用 HTE 做对照，并检验它对垂直速度积分器的联动修正。
+**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；接口选择不预先冻结。先在 HTE-off、`MPC_THR_HOVER=0.60` 的同一受控配置下比较 position-only 与 acceleration-only，再做 HTE-on 对照，并检验其对垂直速度积分器的联动修正。
 
-**下一唯一研究问题：** 在固定 hover thrust（HTE-off）的 PX4 v1.17.0 position-only 位置 P—速度 PID 级联中，六状态 `[p,v]` 预测模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下获得统一有界残差外包？若不能，最小必要增广状态是什么？在此基线之后，再判定 HTE-on 是否需要联合增广 hover-thrust estimate 与受其修正的垂直积分状态。
+**下一唯一研究问题：** 在同一 PX4 v1.17.0、X500、HTE-off 和物理 envelope 下，position-only 与 acceleration-only 哪一种接口能用更低/更可观测的外环预测阶次，对 `[p,v]` 闭环响应给出更紧且可复现的残差外包？position-only 要检验速度 PID 积分/滤波记忆；acceleration-only 要检验加速度到姿态/推力的跟踪、平滑性和饱和。选定接口后，再做 HTE-on 对照，决定是否需联合增广 hover-thrust estimate 与垂直积分状态。
 
 在回答该问题之前，不启动 Tube MPC 终端集合综合，不声称控制闭环已实现，也不把历史平面直接控制结果迁移为当前安全保证。
 
@@ -179,6 +199,7 @@ Santos & Lagoa (2022), *Wayset-based guidance of multirotor aerial vehicles usin
 - [OffboardControlMode 消息定义](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/msg/OffboardControlMode.msg)
 - [PositionControl.cpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/PositionControl.cpp)
 - [PositionControl.hpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/PositionControl.hpp)
+- [ControlMath.cpp：NaN 前馈合并语义](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/ControlMath.cpp)
 - [MulticopterPositionControl.cpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/MulticopterPositionControl.cpp)
 - [X500 airframe defaults](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/ROMFS/px4fmu_common/init.d-posix/airframes/4001_gz_x500)
 - [Position controller gain defaults](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/multicopter_position_control_gain_params.c)
