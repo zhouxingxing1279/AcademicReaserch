@@ -708,3 +708,17 @@ Parsi补充材料DOI 10.3929/ethz-b-000559871仍不可访问；本轮能下载�
 [正文分节核验] Ru/Subbarao, *Aerospace* 4(2):31, DOI https://doi.org/10.3390/aerospace4020031 ，作者开放全文§2–4、§6–7及附录A部分阅读。6物理自由度/12状态：惯性位置3、机体系速度3、Euler姿态3、机体系角速3；四桨推力为直接MPC输入，非总推力+三力矩抽象。采样0.05s、预测/控制各25步。**关键区别**：文中逐桨一阶执行器 dF/dt=50(Fcmd−F) 仅用于被控系统数值传播，明确不纳入预测模型。故即使优化输入逐桨限制在[0,mg]，也不能由此推出真实ESC推力变化率/跟踪误差硬界；0.05s采样是仓库0.02s目标的2.5倍；按论文λ_F=50 s⁻¹和零阶保持，一阶假设在50ms内完成91.8%阶跃、在20ms内仅完成63.2%，均为模型推导而非目标机实测。该文没有本仓库有噪间歇位置SMF。该文仅仿真，不是硬安全或实飞证明。全篇仿真在Fujitsu America i7笔记本（8GB RAM、2.8GHz）运行MATLAB R2016a；论文没有给逐次求解时间/WCET。
 
 **候选影响**：2状态姿态、4状态固定推力基线、6状态平面双输入、10状态虚拟体角速、12状态直接逐桨NMPC及级联方案的排序不变。6状态条件性首选需补“命令→实际施加T,τ”的有界执行器状态/残差接口；12状态更细不自动解决执行器可实现性。SMF/CZ潜在用途是联合估计隐藏速度与执行器状态、给Tube收紧与安全监测提供可靠集合；论文没有做这项结合。**Gate A=blocked**；Run278真实后验66拍开环障碍不受本轮文献改变。
+
+
+## 2026-11-03 Hu primary-source follow-up (targeted rereading)
+
+See [scoped reading record](background_run_20261103_hu_primary_followup.md) for author-PDF page/section provenance, limitations and comparison. Three targeted body reads (Hu, Didier, Falanga), plus Alexis metadata/abstract only; no new unique-paper count asserted. Existing full-reading history is preserved; this entry records only this run's partial rereading. Current model priorities remain unchanged. No controller, experiment or safety certificate added.
+
+
+## 2026-11-03 Hu model/proof-chain continuation — partial primary-source audit
+
+[Detailed provenance and reading positions](background_run_20261103_hu_printed_model_proof_chain.md). Four body sources partially verified (Hu, Didier, Bouffard technical report, Villanueva theory); Alexis remains abstract-only. No full-read or new unique-paper count asserted. Visual inspection resolves the previous OCR uncertainty: the problematic indices are printed in the author PDF. Canonical attitude coordinates require transformation before physical interpretation; author-intended correction remains unverified. Hu is not a copy-ready simulation plant. Terminal containment and observation-history compatibility require separate checks. Preserve existing model priorities and all previous evidence; this is a reproducibility qualification, not a controller result.
+
+### Hu author-version check, 2026-11-03
+
+[Version/presentation audit](background_run_20261103_hu_printed_model_proof_chain.md#author-copy-and-presentation-continuation): coauthor-hosted PDF is byte-identical, not a corrected edition; author slide 29 repeats the disputed drift indices and rate labels. Slide 31 separates 81.6 ms optimization from 20 microsecond feedback. Zero new unique papers and no full-read upgrade. Actual implementation remains unverified; model priorities and safety gates unchanged. Next: trace the acknowledged Mo Chen model provenance, rather than repeat mirror downloads.
