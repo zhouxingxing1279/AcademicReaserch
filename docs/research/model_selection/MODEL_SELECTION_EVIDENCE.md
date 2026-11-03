@@ -630,3 +630,38 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 Parsi论文数据声明给出补充材料DOI 10.3929/ethz-b-000559871；本轮检索可定位到ETH bitstream，但网页访问返回403，尚未下载/运行。**下一轮唯一优先问题：通过ETH Research Collection的替代元数据/下载入口或作者公开仓库，取得Parsi补充代码并核实实际求解器、硬件、可运行入口与计时设置；若仍不可访问，明确保留“未复现”，再以Didier的原始多面体RAMPC和Michel的CVXGEN QP作为可复核对照。**
 
 **本轮没有**开发控制器、修改验证脚本、运行新的MPC仿真、构造SMF/CZ后验、证明12状态终端RCI或进行飞行实验。
+
+
+---
+
+## 背景第35轮：直接四旋翼SMF、四桨CZ可达集与多旋翼Tube实飞证据（2026-11-03）
+
+**本轮核验量**：5篇论文来源——3篇全文已读（Ji等2022；Andrade等2024；Delansnay等2025），1篇部分全文阅读（Ping等2020），1篇仅二次数据库概要/摘要核验候选（Patel/Kaya/Subbarao，AIAA SciTech 2026）。另定向阅读Patel 2026博士论文Chapter 6和8.3，不计入论文数量。既有Ping/Sun 2015、Qiu等SMF-MPC论文沿用唯一总账，不重复登记。
+
+| 来源 | 状态/输入/量测 | SMF或集合方法 | 验证与关键边界 |
+|---|---|---|---|
+| Ji/Geng/Driggs-Campbell (CDC 2022), DOI 10.1109/CDC51059.2022.9992704 | 12状态悬停线性化四旋翼；4个虚拟wrench输入[ΔT,Mx,My,Mz]；C=I12，全状态逐拍带噪测量 | 椭球Set-Membership State Estimator；状态误差椭球进入control-error tube和约束收紧；Theorem 1给递归可行、约束满足、名义指数稳定、真实状态收敛至RPI集合 | 仿真；dt=0.2s、N=15；Euler角±π/9、总推力偏差±5；无逐桨输入约束、无电机映射、无间歇量测、无实飞/在线时间数据；代码CasADi/IPOPT但未运行 |
+| Ping等 (J Franklin Inst 2020), DOI 10.1016/j.jfranklin.2020.05.014 | 一般LPV输出反馈系统；输出逐拍可用，扰动/噪声有界 | 时变zonotope估计误差集＋最小椭球RPI外包；离线observer sub-gains＋在线RMPC增益优化；摘要声称递归可行和鲁棒稳定 | CSTR 2状态例；本轮部分阅读，全文受限；非UAV、非CZ、无间歇量测 |
+| Delansnay等 (CoDIT 2025), DOI 10.1109/CoDIT66093.2025.11321702 | DJI F550六旋翼；4状态(vx,vy,vz,yaw)闭环识别模型；期望三轴速度+yaw命令，Pixhawk负责内环/电机 | CORA/Constrained Zonotopes计算RPI误差管，收紧名义状态/输入；LQR辅助反馈 | 户外真实飞行；Ts=200ms、N=10；平均52ms、观察上限77ms；无SMF后验、无6-DOF或电机级MPC、非四旋翼 |
+| Andrade等 (IEEE Access 2024), DOI 10.1109/ACCESS.2024.3381622 | 24状态倾转旋翼＋吊载（20物理＋4积分），输入2推进器推力＋2倾转伺服力矩；HIL virtual sensor提供全状态 | LPV Tube MPC；离线zonotope RPI，CZ名义状态/输入约束 | Jetson TX2＋Gurobi；Ts=12ms；CZ求解典型20.9ms，标准polytope 29ms；HIL而非实飞，20.9ms仍超过采样周期；不是四旋翼SMF证据 |
+| Patel (2026)博士论文Chapter 8.3（非论文） | Crazyflie 2.1；12状态六自由度；4个电机转速输入，假设电机转速瞬时变化 | online zonotopic reachable-set/safe-corridor MPC；初始状态为点估计，无SMF后验 | 仿真；Ts=50ms、MPC N=5、reachable horizon=15、zonotope order=29；带slack安全约束；没有间歇量测或真实飞行 |
+
+### 对此前SMF/CZ创新判断的必要修正
+
+1. 旧矩阵中任何“尚无直接四旋翼状态SMF＋MPC先例”的宽泛表述现已被Ji等(2022)纠正：**已有12状态四旋翼椭球SMF＋输出反馈鲁棒MPC仿真先例**。其输出矩阵C=I12、每拍全状态带噪量测，4个输入为总推力/三轴力矩wrench；它不是位置-only间歇输出反馈，也不是真实四桨输入。
+2. Patel博士论文Chapter 8.3提供**12状态四旋翼＋四个电机转速＋zonotopic reachable-set MPC**的直接模型证据，但没有SMF后验，初始状态是点，电机转速无动态，且软约束含slack。不能把它描述成“SMF/CZ输出反馈四旋翼”先例。
+3. Delansnay等(2025)证明CZ Tube-MPC可在六旋翼真实户外运行，但控制对象是Pixhawk闭环4状态速度/yaw模型；不支持完整四旋翼12状态、电机级或20ms安全证明。Andrade等(2024)为24状态倾转旋翼HIL，其虚拟传感器读取仿真全状态，且求解时间超过采样周期。
+4. Ping等(2020)与已登记的Ping/Sun 2015、Qiu等工作说明一般LPV系统中zonotope/ellipsoid SMF＋output-feedback RMPC已有理论先例；不能声称“首次SMF与MPC结合”或“首次zonotope SMF-MPC”。
+5. **可辩护的窄创新空间**：在部分/间歇位置观测、速度隐藏、success/miss历史约束下，构造可靠的SMF/CZ后验；同一后验纤维上的所有真实状态共享一个因果控制命令；控制输入经四桨分配和执行器幅值/速率约束后仍物理可实现；估计误差与模型/执行误差进入同一个安全管束，并形成硬约束信息终端RCI/递归可行性证明。尚未找到一篇四旋翼原始论文同时覆盖这一整组条件。
+
+### 对模型选择的影响
+
+- 12状态六自由度非线性plant仍适合作为高保真仿真对象；Ji支持12状态虚拟wrench输出反馈MPC，Patel支持12状态四桨转速输入的可达集MPC，两者补足不同接口证据，但均未闭合本项目的部分/间歇观测和电机动态。
+- 六状态平面(T,τ)仍是条件性鲁棒证明候选；四状态保持有限安全数学基线；2状态作为低风险内环/高度保底。**不因出现12状态论文而改变模型排序，Gate A仍blocked。**
+- 不能把Ji的wrench通道硬界当作四电机可行域；必须由混控矩阵和电机幅值/速率区间推导wrench可行集。也不能把Patel的瞬时电机转速假设直接用于真实ESC动态。
+
+### 未完成与下一轮唯一问题
+
+Parsi补充材料DOI 10.3929/ethz-b-000559871仍不可访问；本轮能下载的ETH bitstream是论文正文副本（存档DOI 10.3929/ethz-b-000582916），不是supplement；作者可见GitHub仓库未找到代码镜像。**下一轮唯一优先问题：全文审计Patel (2026)博士论文Chapter 7的hybrid zonotopic SMF-KF＋MPC，核验其量测更新、混合随机/有界误差集合、终端/稳定性证明与传感器假设，并判断哪些环节能迁移到间歇位置观测的四旋翼模型。**
+
+**本轮没有**开发控制器、修改验证脚本、运行MPC仿真、运行作者代码、证明四旋翼终端RCI或进行HIL/实飞。
