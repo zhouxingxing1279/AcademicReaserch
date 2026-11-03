@@ -1,0 +1,36 @@
+name: Run278 exact posterior slice certificate
+
+on:
+  pull_request:
+    paths:
+      - 'verification/check_run278_exact_slice.py'
+      - 'verification/test_run278_exact_slice.py'
+      - 'results/run278_exact_slice_20261103/checks.json'
+      - '.github/workflows/run278-exact-slice.yml'
+      - 'configs/planar_baseline.json'
+      - 'results/run271_run260_membership_20261102/checks.json'
+      - 'results/run277_open_loop_diameter_20261102/checks.json'
+  push:
+    branches: [main]
+    paths:
+      - 'verification/check_run278_exact_slice.py'
+      - 'verification/test_run278_exact_slice.py'
+      - 'results/run278_exact_slice_20261103/checks.json'
+
+jobs:
+  exact-rational-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and run 10 focused tests
+        run: |
+          python -m py_compile verification/check_run278_exact_slice.py verification/test_run278_exact_slice.py
+          cd verification
+          python -m unittest -v test_run278_exact_slice.py
+      - name: Cross-check frozen config and historical certificates
+        run: |
+          python verification/check_run278_exact_slice.py --root . --output /tmp/run278_checks.json
+          cmp /tmp/run278_checks.json results/run278_exact_slice_20261103/checks.json
