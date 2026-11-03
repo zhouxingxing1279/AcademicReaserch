@@ -43,7 +43,7 @@ x_{out}=[p^\mathsf T,v^\mathsf T]^\mathsf T
 
 ## PX4 内部控制器记忆状态
 
-六状态 \\([p;v]\\) 是否足够取决于 PX4 内环内部记忆。v1.17.0 的 X500 airframe 设 `MPC_THR_HOVER=0.60`，但通用 `MPC_USE_HTE=1` 默认启用 HTE；HTE 根据垂直加速度和分配后的推力更新 hover-thrust estimate，并反馈给位置控制器。首轮模型辨识应先采用明确的 HTE-off 变体（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`），隔离速度积分/导数滤波的影响；再启用 HTE，判断是否需将 hover-thrust estimate 作为慢变增广状态。该设置差异必须写入实验合同。
+六状态 \\([p;v]\\) 是否足够取决于 PX4 内环内部记忆。v1.17.0 的 X500 airframe 设 `MPC_THR_HOVER=0.60`，但通用 `MPC_USE_HTE=1` 默认启用 HTE；HTE 根据垂直加速度和分配后的推力更新 hover-thrust estimate，并反馈给位置控制器；`updateHoverThrust()` 还会修正垂直速度积分状态 `_vel_int(2)`，两者在 HTE-on 时耦合。首轮模型辨识应先采用明确的 HTE-off 变体（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`），隔离速度积分/导数滤波的影响；再启用 HTE，判断是否需联合增广 hover-thrust estimate 与垂直速度积分状态。该设置差异必须写入实验合同。
 
 ## 内环估计器与外环间歇测量的边界
 
