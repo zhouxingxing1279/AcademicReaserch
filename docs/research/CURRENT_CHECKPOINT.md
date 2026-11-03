@@ -1,4 +1,4 @@
-# 当前研究检查点 — 外环 MPC + SMF/CZ（2026-11-03）
+# 当前研究检查点 — 外环 MPC + SMF/CZ（2026-11-03 更新）
 
 基准 main：eb18e857090b0babe531c13c61aea944793af428。研究方向已重置为成熟飞控内环之上的四旋翼外环 MPC；此前直接控制平面刚体/推力/力矩的研究移入历史归档。模型与接口仍是待验证候选，不宣称已完成控制闭环。
 
@@ -25,7 +25,19 @@
 3. **速度参考：对照项。** 需要辨识速度 setpoint 到位置/速度的闭环响应，不得假设实际速度等于请求速度。
 4. PX4 ROS 2 `TrajectorySetpoint` 的有效字段/NaN mask、NED 坐标和 Offboard 状态估计要求见 [PX4 外环接口证据](model_selection/PX4_INTERFACE_EVIDENCE.md)。MAVLink 与 ROS 2 路径不可不加区分地混用。
 
-目标飞控栈、固件 commit、参数集、机型、消息路径、更新频率和坐标约定尚未冻结；以上均不是已验证闭环合同。
+## 暂定可复现仿真基线（未执行 SITL）
+
+- PX4-Autopilot v1.17.0，tag 对应 commit `d6f12ad1c4f70ad3230afd7d86e971421e02fef4`。
+- Gazebo Harmonic X500，官方命令 `make px4_sitl gz_x500`，autostart 4001。
+- Ubuntu 22.04 / ROS 2 Humble / uXRCE-DDS；`px4_msgs release/1.17` commit `86d8239e962f6939e05c3737784f60c02fa884db`。
+- 外环首轮只测试 ROS 2 position-only `TrajectorySetpoint`，不带 velocity/acceleration 前馈；Offboard heartbeat 与 MPC setpoint 更新分开管理。
+- 以上是固定研究基线的建议，尚未运行 SITL；参数、频率、机体真实参数和残差界均未冻结。源码级细节见 [PX4 v1.17.0 源码审计](model_selection/PX4_V1_17_SOURCE_AUDIT.md)。
+
+## PX4 内环动态与外环测量边界
+
+v1.17.0 源码确认位置参考经过位置 P—速度 PID—加速度到姿态/推力级联，内部含速度积分 `_vel_int`、速度/导数滤波、速度/倾角/推力限幅和 failsafe。故 \\(x_{out}=[p;v]\\) 不是自动成立的 Markov 状态；必须用重复历史工况检验 6 状态残差是否统一有界，失败时增广最小必要记忆状态。
+
+PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立通道建模。首轮建议从 Gazebo 真值生成独立有界噪声位置观测并施加丢包，不把 PX4 内环 EKF 也假设为同时失测。
 
 ## SMF/CZ 与 Tube MPC 接口
 - 优先估计位置、速度；必要时才增广慢变风扰/加速度偏差。
@@ -35,7 +47,7 @@
 - 约束收紧、终端鲁棒不变集、递归可行性和硬安全均未完成。
 
 ## 当前缺口
-飞控接口核验；外环闭环模型辨识与有界残差；异步测量/噪声/相关性合同；SMF/CZ 后验可靠包含；后验到 Tube 初始集包含证明；终端条件、递归可行性、SITL 验证和最坏求解时间。
+已完成 PX4 v1.17.0 文档/源码级接口与控制链审计；仍缺实际 SITL 运行、参数冻结、位置参考闭环模型辨识、内部积分/滤波历史对 6 状态 Markov 性的检验、有依据的残差外包、外环测量噪声/异步自动机合同、SMF/CZ 后验可靠包含、后验到 Tube 初始集包含证明、终端条件、递归可行性和最坏求解时间。
 
 ## 历史证据边界
 旧四/六状态平面直接控制模型、Run246、Run260/261、Run278 及旧实验/测试见 [历史归档索引](../../archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)。它们只对各自冻结的旧模型和量词合同成立，不能直接推出新外环模型的可行性或不可行性。
@@ -43,8 +55,9 @@
 ## 当前规范化证据文档
 
 - [PX4 Offboard 外环接口与闭环模型证据](model_selection/PX4_INTERFACE_EVIDENCE.md)：合并 #188/#186/#190 的接口语义和迁移合同。
+- [PX4 v1.17.0 源码审计与 SITL 辨识协议](model_selection/PX4_V1_17_SOURCE_AUDIT.md)：固定仿真基线、源码级级联控制链、内部记忆状态与辨识试验。
 - [外环 MPC、12 状态物理 plant 与 SMF/CZ 文献证据](model_selection/OUTER_LOOP_MPC_LITERATURE.md)：整合 #184/#162/#170 的架构与论文证据。
 - [模型选型证据矩阵](model_selection/MODEL_SELECTION_EVIDENCE.md)：保留历史证据，同时明确当前 12 状态仿真 plant 与外环预测状态分层。
 
 ## 下一唯一优先问题
-冻结目标成熟飞控及外环指令接口；通过文档/源码核验和 SITL 阶跃/轨迹试验，辨识参考指令到实际位置/速度的闭环响应、延迟、限幅和可重复误差界。在此之前不启动新的 Tube MPC 控制器或终端集合综合。
+在 PX4 v1.17.0 position-only Offboard 基线下，检验 6 状态 \\([p;v]\\) 预测模型能否在不同参考历史、积分器/滤波器记忆、外环更新率和限幅工况下，对位置参考到实际平移状态的闭环响应给出统一有界残差外包；若不能，确定最小必要增广状态。完成这一 Gate 前不启动 Tube MPC 终端集合综合。
