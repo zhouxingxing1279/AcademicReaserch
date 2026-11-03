@@ -718,3 +718,7 @@ See [scoped reading record](background_run_20261103_hu_primary_followup.md) for 
 ## 2026-11-03 Hu model/proof-chain continuation — partial primary-source audit
 
 [Detailed provenance and reading positions](background_run_20261103_hu_printed_model_proof_chain.md). Four body sources partially verified (Hu, Didier, Bouffard technical report, Villanueva theory); Alexis remains abstract-only. No full-read or new unique-paper count asserted. Visual inspection resolves the previous OCR uncertainty: the problematic indices are printed in the author PDF. Canonical attitude coordinates require transformation before physical interpretation; author-intended correction remains unverified. Hu is not a copy-ready simulation plant. Terminal containment and observation-history compatibility require separate checks. Preserve existing model priorities and all previous evidence; this is a reproducibility qualification, not a controller result.
+
+### Hu author-version check, 2026-11-03
+
+[Version/presentation audit](background_run_20261103_hu_printed_model_proof_chain.md#author-copy-and-presentation-continuation): coauthor-hosted PDF is byte-identical, not a corrected edition; author slide 29 repeats the disputed drift indices and rate labels. Slide 31 separates 81.6 ms optimization from 20 microsecond feedback. Zero new unique papers and no full-read upgrade. Actual implementation remains unverified; model priorities and safety gates unchanged. Next: trace the acknowledged Mo Chen model provenance, rather than repeat mirror downloads.
