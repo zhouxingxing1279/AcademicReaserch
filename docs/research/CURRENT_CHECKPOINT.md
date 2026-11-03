@@ -31,11 +31,12 @@
 - Gazebo Harmonic X500，官方命令 `make px4_sitl gz_x500`，autostart 4001。
 - Ubuntu 22.04 / ROS 2 Humble / uXRCE-DDS；`px4_msgs release/1.17` commit `86d8239e962f6939e05c3737784f60c02fa884db`。
 - 外环首轮只测试 ROS 2 position-only `TrajectorySetpoint`，不带 velocity/acceleration 前馈；Offboard heartbeat 与 MPC setpoint 更新分开管理。
+- X500 airframe 将 `MPC_THR_HOVER` 设为 0.60，但 `MPC_USE_HTE` 通用默认值为 1。为隔离首轮位置环辨识，建议使用明确标注的 HTE-off 变体：`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`；随后做 HTE-on 对照。该变体不是 stock X500 默认配置。
 - 以上是固定研究基线的建议，尚未运行 SITL；参数、频率、机体真实参数和残差界均未冻结。源码级细节见 [PX4 v1.17.0 源码审计](model_selection/PX4_V1_17_SOURCE_AUDIT.md)。
 
 ## PX4 内环动态与外环测量边界
 
-v1.17.0 源码确认位置参考经过位置 P—速度 PID—加速度到姿态/推力级联，内部含速度积分 `_vel_int`、速度/导数滤波、速度/倾角/推力限幅和 failsafe。故 \\(x_{out}=[p;v]\\) 不是自动成立的 Markov 状态；必须用重复历史工况检验 6 状态残差是否统一有界，失败时增广最小必要记忆状态。
+v1.17.0 源码确认位置参考经过位置 P—速度 PID—加速度到姿态/推力级联，内部含速度积分 `_vel_int`、速度导数滤波、速度/倾角/推力限幅和 failsafe。X500 的 HTE 默认启用，且会在线更新 hover-thrust estimate；这是额外的慢变闭环状态。故 \\(x_{out}=[p;v]\\) 不是自动成立的 Markov 状态：先在 HTE-off 固定悬停推力基线下检验积分/滤波记忆，再做 HTE-on 对照，必要时增广最小必要记忆状态。
 
 PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立通道建模。首轮建议从 Gazebo 真值生成独立有界噪声位置观测并施加丢包，不把 PX4 内环 EKF 也假设为同时失测。
 
@@ -47,7 +48,7 @@ PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立
 - 约束收紧、终端鲁棒不变集、递归可行性和硬安全均未完成。
 
 ## 当前缺口
-已完成 PX4 v1.17.0 文档/源码级接口与控制链审计；仍缺实际 SITL 运行、参数冻结、位置参考闭环模型辨识、内部积分/滤波历史对 6 状态 Markov 性的检验、有依据的残差外包、外环测量噪声/异步自动机合同、SMF/CZ 后验可靠包含、后验到 Tube 初始集包含证明、终端条件、递归可行性和最坏求解时间。
+已完成 PX4 v1.17.0 文档/源码级接口、位置 PID 级联和 HTE 机制审计；仍缺实际 SITL 运行、参数冻结、HTE-off 位置参考闭环模型辨识、内部积分/滤波历史对 6 状态 Markov 性的检验、有依据的残差外包，以及 HTE-on 对照是否需要慢变增广状态。其后仍缺外环测量噪声/异步自动机合同、SMF/CZ 后验可靠包含、后验到 Tube 初始集包含证明、终端条件、递归可行性和最坏求解时间。
 
 ## 历史证据边界
 旧四/六状态平面直接控制模型、Run246、Run260/261、Run278 及旧实验/测试见 [历史归档索引](../../archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)。它们只对各自冻结的旧模型和量词合同成立，不能直接推出新外环模型的可行性或不可行性。
@@ -60,4 +61,4 @@ PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立
 - [模型选型证据矩阵](model_selection/MODEL_SELECTION_EVIDENCE.md)：保留历史证据，同时明确当前 12 状态仿真 plant 与外环预测状态分层。
 
 ## 下一唯一优先问题
-在 PX4 v1.17.0 position-only Offboard 基线下，检验 6 状态 \\([p;v]\\) 预测模型能否在不同参考历史、积分器/滤波器记忆、外环更新率和限幅工况下，对位置参考到实际平移状态的闭环响应给出统一有界残差外包；若不能，确定最小必要增广状态。完成这一 Gate 前不启动 Tube MPC 终端集合综合。
+在 PX4 v1.17.0 position-only Offboard、HTE-off（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`）受控基线下，检验 6 状态 \\([p;v]\\) 模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下，对位置参考到实际平移状态给出统一有界残差外包；若不能，确定最小必要增广状态。之后再启用 HTE，检验是否需要额外慢变 hover-thrust 状态。完成这一 Gate 前不启动 Tube MPC 终端集合综合。
