@@ -40,5 +40,11 @@
 ## 历史证据边界
 旧四/六状态平面直接控制模型、Run246、Run260/261、Run278 及旧实验/测试见 [历史归档索引](../../archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)。它们只对各自冻结的旧模型和量词合同成立，不能直接推出新外环模型的可行性或不可行性。
 
+## 当前规范化证据文档
+
+- [PX4 Offboard 外环接口与闭环模型证据](model_selection/PX4_INTERFACE_EVIDENCE.md)：合并 #188/#186/#190 的接口语义和迁移合同。
+- [外环 MPC、12 状态物理 plant 与 SMF/CZ 文献证据](model_selection/OUTER_LOOP_MPC_LITERATURE.md)：整合 #184/#162/#170 的架构与论文证据。
+- [模型选型证据矩阵](model_selection/MODEL_SELECTION_EVIDENCE.md)：保留历史证据，同时明确当前 12 状态仿真 plant 与外环预测状态分层。
+
 ## 下一唯一优先问题
 冻结目标成熟飞控及外环指令接口；通过文档/源码核验和 SITL 阶跃/轨迹试验，辨识参考指令到实际位置/速度的闭环响应、延迟、限幅和可重复误差界。在此之前不启动新的 Tube MPC 控制器或终端集合综合。
