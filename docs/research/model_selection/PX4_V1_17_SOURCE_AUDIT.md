@@ -87,7 +87,7 @@ v1.17.0 `PositionControl.cpp` 的实现顺序是：
 - `MPC_THR_HOVER` 在 HTE 开启时是估计器初始化值，不是整个飞行期间固定不变的悬停推力；
 - HTE 在 armed/in-air 条件下，结合垂直加速度、姿态、推力 setpoint 与控制分配器未分配推力更新 hover-thrust EKF；有效估计随后通过 `updateHoverThrust()` 写入位置控制器。
 
-因此，HTE 开启时位置—速度闭环除 `[p,v]`、速度积分和滤波记忆外，还包含一个自适应 hover-thrust 状态。它会改变垂直加速度到推力的映射。v1.17.0 默认 DDS topic 列表没有 `hover_thrust_estimate`，若保留 HTE，需通过 ULog 检查估计轨迹，或显式扩展 DDS 暴露；不能假设外环 ROS 2 节点默认能读取该状态。
+因此，HTE 开启时位置—速度闭环除 `[p,v]`、速度积分和滤波记忆外，还包含自适应 hover-thrust estimate。更重要的是，`PositionControl::updateHoverThrust()` 在更新 hover thrust 时会同步修正垂直速度积分器 `_vel_int(2)`，以补偿推力映射变化；HTE 与 z 轴积分记忆是耦合状态，不应只把它当作独立静态参数。v1.17.0 默认 DDS topic 列表没有 `hover_thrust_estimate`，若保留 HTE，需通过 ULog 检查估计轨迹，或显式扩展 DDS 暴露；不能假设外环 ROS 2 节点默认能读取该状态。
 
 **建议采用两阶段辨识，而不是直接把 HTE 混进首轮模型：**
 
@@ -125,7 +125,7 @@ PX4 位置控制器使用自己的 `vehicle_local_position` 状态估计维持�
 
 每次实验至少保存：PX4 tag/commit、Gazebo 版本、`px4_msgs` commit、ROS 2/Agent 版本、X500 airframe/autostart、完整参数导出、仿真步长/实时因子、风场设置、Offboard 消息路径、坐标变换、setpoint 发布频率、MPC 外环采样周期及初始 hover/积分器状态。
 
-位置环/速度环关键参数至少包括：`MPC_XY_P`、`MPC_Z_P`、`MPC_XY_VEL_P/I/D_ACC`、`MPC_Z_VEL_P/I/D_ACC`、`MPC_XY_VEL_MAX`、上下行速度限制、`MPC_TILTMAX_AIR`、`MPC_THR_MIN/MAX/HOVER`、`MPC_USE_HTE`、`MPC_VEL_LP`、`MPC_VEL_NF_FRQ/BW`、`MPC_VELD_LP`、hover-thrust estimator 噪声/门限参数，以及 Offboard loss 参数。首轮受控基线建议 `MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`；随后必须做 HTE-on 对照。实际值必须从运行实例导出，不能只写“PX4 默认参数”。
+位置环/速度环关键参数至少包括：`MPC_XY_P`、`MPC_Z_P`、`MPC_XY_VEL_P/I/D_ACC`、`MPC_Z_VEL_P/I/D_ACC`、`MPC_XY_VEL_MAX`、上下行速度限制、`MPC_TILTMAX_AIR`、`MPC_THR_MIN/MAX/HOVER`、`MPC_USE_HTE`、`MPC_VEL_LP`、`MPC_VEL_NF_FRQ/BW`、`MPC_VELD_LP`、hover-thrust estimator 噪声/门限参数，以及 Offboard loss 参数。首轮受控基线建议 `MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`；随后必须做 HTE-on 对照；此时需检查 `hover_thrust_estimate` 与 `_vel_int(2)` 的耦合，必要时把两者作为联合增广状态或给出联合残差外包。实际值必须从运行实例导出，不能只写“PX4 默认参数”。
 
 ### 5.2 分阶段输入激励
 
@@ -163,9 +163,9 @@ Santos & Lagoa (2022), *Wayset-based guidance of multirotor aerial vehicles usin
 
 ## 7. 本轮结论与下一唯一问题
 
-**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；外环先使用 ROS 2 `TrajectorySetpoint` 位置参考，不带速度/加速度前馈。首轮受控辨识变体显式关闭 HTE 并固定 `MPC_THR_HOVER=0.60`；随后单独启用 HTE 做对照。
+**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；外环先使用 ROS 2 `TrajectorySetpoint` 位置参考，不带速度/加速度前馈。首轮受控辨识变体显式关闭 HTE 并固定 `MPC_THR_HOVER=0.60`；随后单独启用 HTE 做对照，并检验它对垂直速度积分器的联动修正。
 
-**下一唯一研究问题：** 在固定 hover thrust（HTE-off）的 PX4 v1.17.0 position-only 位置 P—速度 PID 级联中，六状态 `[p,v]` 预测模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下获得统一有界残差外包？若不能，最小必要增广状态是什么？在此基线之后，再判定 HTE-on 是否需要额外增广一个慢变 hover-thrust 状态。
+**下一唯一研究问题：** 在固定 hover thrust（HTE-off）的 PX4 v1.17.0 position-only 位置 P—速度 PID 级联中，六状态 `[p,v]` 预测模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下获得统一有界残差外包？若不能，最小必要增广状态是什么？在此基线之后，再判定 HTE-on 是否需要联合增广 hover-thrust estimate 与受其修正的垂直积分状态。
 
 在回答该问题之前，不启动 Tube MPC 终端集合综合，不声称控制闭环已实现，也不把历史平面直接控制结果迁移为当前安全保证。
 
