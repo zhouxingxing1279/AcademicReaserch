@@ -1,6 +1,6 @@
 # PX4 Offboard 外环接口与闭环模型证据
 
-> 状态：接口语义已由官方文档核验；具体固件版本、闭环动态、跟踪残差界均未冻结。本文整合 PR #188、#186、#190 的重复审计，不替代原始研究记录，也不宣称已完成 SITL/HIL 辨识。
+> 状态：Offboard 字段语义与 v1.17.0 源码级控制链已核验；**尚未运行 SITL，也未冻结闭环矩阵、延迟或残差界**。本文整合 PR #188、#186、#190，并链接 [PX4 v1.17.0 源码审计与辨识协议](PX4_V1_17_SOURCE_AUDIT.md)。
 
 ## 1. 研究边界
 
@@ -18,9 +18,10 @@
 
 主要官方来源（滚动文档，检查日期 2026-11-03）：
 
-- [PX4 Offboard mode](https://docs.px4.io/main/en/flight_modes/offboard)
-- [PX4 TrajectorySetpoint message](https://docs.px4.io/main/en/msg_docs/TrajectorySetpoint)
-- [PX4 上游 Offboard 文档](https://github.com/PX4/PX4-Autopilot/blob/main/docs/en/flight_modes/offboard.md)
+- [PX4 v1.17.0 Offboard mode](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/docs/en/flight_modes/offboard.md)
+- [PX4 v1.17.0 TrajectorySetpoint message](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/msg/versioned/TrajectorySetpoint.msg)
+- [PX4 v1.17.0 PositionControl.cpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/PositionControl.cpp)
+- [PX4 v1.17.0 Gazebo SITL / ROS 2 指南](https://github.com/PX4/PX4-Autopilot/tree/v1.17.0/docs/en)
 
 对于多旋翼 ROS 2 `TrajectorySetpoint`，有效字段与 NaN mask 决定位置/速度/加速度控制层级：
 
@@ -35,13 +36,23 @@
 - PX4 Offboard 还依赖有效状态估计与持续 setpoint/心跳；失联 failsafe、状态估计有效性、更新率和超时属于接口安全合同的一部分。
 - ROS 2 `TrajectorySetpoint`、MAVLink `SET_POSITION_TARGET_LOCAL_NED`、全局加速度命令及姿态/推力 setpoint 不是可以互换的同一种接口。某些 MAVLink 加速度路径可能被映射为归一化推力，不能把所有标注为“acceleration”的消息视为物理加速度闭环。
 
-**边界：** 官方文档只证明字段语义与接口能力，不证明位置/速度/加速度命令能被零延迟、无饱和、无偏差地跟踪；也不提供本研究所需的确定性闭环误差界。
+**边界：** 官方文档只证明字段语义与接口能力，不证明位置/速度/加速度命令能被零延迟、无饱和、无偏差地跟踪；也不提供本研究所需的确定性闭环误差界。v1.17.0 的 acceleration-only 模式要求有效 velocity estimate；此处只把 position-only 作为首轮接口，不跨版本混用 rolling main 的估计要求。
+
+## 2.1 v1.17.0 源码级位置控制链（已核验，未做 SITL）
+
+固定版本 [PX4-Autopilot v1.17.0](https://github.com/PX4/PX4-Autopilot/releases/tag/v1.17.0) 的源码显示，position setpoint 依次经过位置 P → 速度 PID（含积分与导数反馈）→ 加速度到姿态/推力转换；速度上限、倾角/推力饱和、anti-windup 和起飞/failsafe 状态均会改变闭环响应。速度与速度导数还经过滤波，内部控制周期由 local-position sample 驱动，dt 被限制在 2–40 ms。
+
+因此，`[p;v]` 是候选预测状态而非自动成立的完整 Markov 状态。若相同 `[p,v,r_p]` 在不同参考历史/积分器状态下产生不同输出，必须增广可识别的控制器记忆/滞后状态，或在明确工作域内证明统一残差外包；不能直接假设理想双积分器。
+
+**建议的可复现基线（暂定）：** PX4 v1.17.0 + Gazebo Harmonic X500 SITL（`make px4_sitl gz_x500`）+ Ubuntu 22.04 / ROS 2 Humble / uXRCE-DDS + `px4_msgs release/1.17`。完整版本、commit、消息兼容、topic 可用性和阶跃/轨迹辨识合同见 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
+
+首轮 position-only 发送：`OffboardControlMode.position=true`；`TrajectorySetpoint.position` 三轴有效，velocity/acceleration 为 NaN；持续发送 heartbeat，并在每个外环 MPC 周期更新 setpoint。Offboard heartbeat 与 MPC setpoint 更新是两个独立速率。
 
 ## 3. 三类接口的正确预测模型
 
 ### A. 位置参考：首要辨识候选
 
-外环状态候选 \(x_{out,k}=[p_k^T,v_k^T]^T\)，输入为位置参考 \(r_{p,k}\)。应通过锁定 PX4 固件、参数、机体、仿真步长和 Offboard 消息路径后的 SITL/HIL 数据辨识：
+外环状态候选 \(x_{out,k}=[p_k^T,v_k^T]^T\)，输入为位置参考 \(r_{p,k}\)。v1.17.0 的实际输入输出链包含位置 P、速度 PID 积分/导数反馈及限幅；应通过锁定固件、参数、机体、仿真步长和 Offboard 消息路径后的 SITL/HIL 数据辨识：
 
 \[
 x_{out,k+1}=A_{p,cl}x_{out,k}+B_{p,cl}r_{p,k}+E_{p,cl}w_{p,k}.
@@ -68,17 +79,18 @@ v_{k+1}=v_k+h a_{r,k}.
 
 - SMF/CZ 预测应使用已经辨识的闭环模型及实际已应用的高层参考；不能使用未经确认的请求命令代替真实已应用输入。
 - 位置量测到达时才应用有界测量条带更新；丢包时按已验证的闭环模型传播集合。
+- 必须区分 PX4 内环 EKF 的高频状态估计与外环 SMF 的间歇测量通道。首轮建议让 PX4 内环 EKF 正常工作，外环 SMF 使用独立合成位置测量/丢包通道；若对 `vehicle_local_position` 的 ROS 2 副本施加丢包，不能误认为 PX4 内部 EKF 也丢失该数据。
 - 飞控 EKF 输出可能已经融合 IMU、GNSS、VIO 等信息。未建立信息相关性合同前，不得把 EKF 输出和同源原始 IMU 当作独立观测重复相交。
 - SMF/CZ 当前后验集合与未来 Tube 误差集合不同；必须证明真实状态在后验内，并证明后验到 Tube 初始误差集的包含关系。
 - Tube 扰动需覆盖风、闭环跟踪误差、通信/计算延迟、限幅/饱和、控制分配残差及模型失配。若无法得到确定性有界残差，相关硬安全结论必须降级，不得用概率指标替代。
 
 ## 5. 模型冻结 Gate
 
-1. 锁定 PX4 版本/commit、参数集、机型、仿真器版本、ROS 2 或 MAVLink 消息路径、NED/ENU 约定。
+1. 暂定锁定 PX4 v1.17.0 tag/commit、X500/Gazebo Harmonic、Ubuntu 22.04/ROS 2 Humble、`px4_msgs release/1.17` commit、uXRCE-DDS 和 NED/ENU 约定；完整候选见 [源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
 2. 核验 `OffboardControlMode`、`TrajectorySetpoint` 有效字段、更新率、超时、failsafe、状态估计有效性及限幅。
 3. 设计 position/velocity/acceleration 分别独立的阶跃与轨迹辨识工况；记录请求 setpoint、实际位置/速度/姿态/角速度、饱和标志、时间戳与延迟。
 4. 在声明的工作域内拟合 \(A_{cl},B_{cl}\)，验证残差集合对全部采样点和独立验证工况的覆盖；不能仅报告均方误差。
-5. 若 6 状态平移预测无法覆盖姿态瞬态和约束耦合，则增广预测状态；12 状态物理仿真 plant 保持不变。
+5. 若 6 状态平移预测的残差依赖 PX4 速度积分器/滤波器历史、姿态瞬态或约束耦合，则增广必要闭环记忆状态；不能预先指定增广维数，12 状态物理仿真 plant 保持不变。
 6. 冻结传感器噪声、丢包自动机、相关性和输入可实现性后，才进入 SMF/CZ 与 Tube MPC 设计。
 
 ## 6. 来源与整合关系
@@ -86,4 +98,5 @@ v_{k+1}=v_k+h a_{r,k}.
 - PR [#188](https://github.com/zhouxingxing1279/AcademicReaserch/pull/188)：Offboard setpoint 字段、NaN mask、NED 与控制层级。
 - PR [#186](https://github.com/zhouxingxing1279/AcademicReaserch/pull/186)：同一接口的跨论文迁移边界与 SMF/Tube 影响；与 #188 重复部分已在本文合并，不再作为两个独立接口决策。
 - PR [#190](https://github.com/zhouxingxing1279/AcademicReaserch/pull/190)：位置/速度/加速度闭环模型迁移合同、辨识与残差界要求。
-- 本文是对上述审计的规范化摘要；原 PR 分支与其原始研究记录未被修改或关闭。相关 CI 尚未提供可验证的 check-run，本文也不声称完成 SITL/HIL。
+- [PX4 v1.17.0 源码审计与 SITL 辨识协议](PX4_V1_17_SOURCE_AUDIT.md)：固定 tag/commit、位置 P—速度 PID 级联、积分/滤波/饱和、DDS topic 与外环测量通道边界。
+- 本文是对上述审计的规范化摘要；原 PR 分支与其原始研究记录未被修改或关闭。本轮仅做文档/源码核验，不声称完成 SITL/HIL。
