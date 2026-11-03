@@ -722,3 +722,21 @@ See [scoped reading record](background_run_20261103_hu_primary_followup.md) for 
 ### Hu author-version check, 2026-11-03
 
 [Version/presentation audit](background_run_20261103_hu_printed_model_proof_chain.md#author-copy-and-presentation-continuation): coauthor-hosted PDF is byte-identical, not a corrected edition; author slide 29 repeats the disputed drift indices and rate labels. Slide 31 separates 81.6 ms optimization from 20 microsecond feedback. Zero new unique papers and no full-read upgrade. Actual implementation remains unverified; model priorities and safety gates unchanged. Next: trace the acknowledged Mo Chen model provenance, rather than repeat mirror downloads.
+
+
+---
+
+## 2026-11-03 02:34 PT: Bouffard–Mo Chen–Hu 10-state model provenance and virtual-input authority (ongoing)
+
+Cross-checked original-source metadata for Bouffard's 2012 Berkeley thesis, Bouffard/Aswani/Tomlin ICRA 2012 (DOI 10.1109/ICRA.2012.6225035), and Hu/Feng/Quirynen/Villanueva/Houska ACC 2018 (DOI 10.23919/ACC.2018.8431112), and reconciled with earlier same-day partial PDF readings. **This run: 3 original quadrotor MPC sources checked, 0 newly full-read, 1 partially read from continuing source audit, 2 abstract/metadata rechecks; not three new full reads.** Mo Chen thesis §4.1.5.2 eq.(4.58) details below are inherited from earlier provenance work, not independently full-reread in this run. See [detailed run log](background_run_20261103_0234_provenance_crosspaper.md).
+
+| Model/architecture | Evidence and predictive authority | Constraint/measurement/physical gap | Selection impact |
+| --- | --- | --- | --- |
+| 10-state Bouffard near-hover LBMPC | 6DOF real aircraft but 10-state yaw-fixed outer-loop; commands pitch/roll setpoints and collective thrust; onboard flight 25ms, N=15, Vicon/EKF | proprietary 1kHz inner attitude loop; no identified deterministic per-rotor saturation/rate/error set or intermittent-position SMF | valid *cascaded virtual-input comparator*, not 12-state physical direct-rotor safety proof |
+| 10-state Mo Chen near-hover | 10D state `(px,vx,theta_x,omega_x,py,vy,theta_y,omega_y,pz,vz)`, three virtual commands `(Sx,Sy,Tz)`; inherited thesis equation/parameters `d0=10,d1=8,n0=10,kT=.91` | angular 'rate' may be companion realization coordinate rather than physical derivative; Bouffard thesis fit `d0=80,d1=8,n0=40` differs; source-specific parameters and coordinate convention require fresh full check | cannot transplant gains, gyro measurement map or physical actuator bounds unchanged |
+| 10-state Hu nonlinear ellipsoidal Tube MPC | ACC 2018 numerical example, ACADO RTI, ellipsoidal tube | printed state-index mismatch verified in prior source audit; author-intended code and erratum unknown; 81.6ms optimization distinct from 20µs feedback; no real flight or 20ms optimization WCET | no upgrade to recursive safety or online feasibility; comparator only |
+| 12-state Ji 2022 vs 12-state Parsi 2025 | Ji: full-state-per-step measured, virtual 4D wrench and ellipsoid SMF-Tube; Parsi: 4 individual rotor thrusts, state available, ellipsoid Tube | neither jointly handles intermittent position, hidden velocity, rotor-rate feasibility and terminal information-RCI | maintains 12-state full 6DOF nonlinear **simulation primary**, conditional 6-state planar proof candidate, 4-state baseline and 2-state fallback |
+
+**Coordinate check:** If `G(s)=n0/(s²+d1*s+d0)` is realized as `dot(theta)=-d1*theta+z2; dot(z2)=-d0*theta+n0*u`, then `z2=physical_theta_dot+d1*theta`; it is **not** directly the gyro rate. If instead physical `theta_dot` is the second state, the second equation must include `-d1*theta_dot`. Any transplant must first resolve which realization is used and transform measurement, constraints and tube coordinates consistently.
+
+**Safety gate:** unchanged, **Gate A blocked** (Run278 shows a legal MMS two-truth posterior diameter and shared open-loop obstruction, not impossibility of future observation-conditioned feedback). The 10-state model neither repairs four-state terminal survivability nor certifies four-rotor common causal input. **Next single priority:** establish source-verified state-coordinate and virtual-to-physical actuator contract across Bouffard/Mo/Hu, or formally retain 10-state as a comparator only.
