@@ -1,0 +1,61 @@
+{
+  "alpha_at_tick48": "28057872/35710213",
+  "diameter_after_65": "2634903421/440000000",
+  "diameter_after_66": "1335306817/220000000",
+  "exact_dual_coefficient_sum": "72/11",
+  "exact_restricted_max_abs_velocity": "39217447/110000000",
+  "first_open_loop_impossible_horizon_ticks": 66,
+  "first_open_loop_impossible_tick": 126,
+  "full_posterior_velocity_diameter_necessary_lower_bound": "39217447/55000000",
+  "gate_A": "blocked",
+  "not_proved": [
+    "full posterior exact outer enclosure",
+    "causal feedback impossibility",
+    "failure at tick125",
+    "finite horizon controller",
+    "terminal information RCI",
+    "MPC solver",
+    "infinite recursive feasibility",
+    "six-state physical safety",
+    "20ms WCET"
+  ],
+  "packet_history_ticks_5_to_60": "SSSMMSMMSMMS",
+  "parent": "Run271 genuine Run260 MMS zero-reading history and Run277 open-loop argument",
+  "positive_residual_ticks45_to59": [
+    "-3246383/1600000",
+    "-3246383/1600000",
+    "-3246383/1600000",
+    "1753617/1100000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000",
+    "3246383/1600000"
+  ],
+  "prior_run271_lower_bound": "22724681/40000000",
+  "proof": "LP primal witness r45..47=-R, r48=alpha*R, r49..59=+R, with alpha=(eps/(h²R)-16)/11; final p60=eps. Dual bound sum r <= eps/(11h²)+72R/11 is attained. Sign reversal yields same y60=0 via noises ±eps. With any shared observation-independent thrust and torque after tick60, identical initial angles imply identical angle trajectories and future velocity diameter Delta(n)=Delta(0)+2nhR under independent extreme residuals. Delta(65)<=6<Delta(66), so at least one world violates a hard constraint by tick126.",
+  "restriction": "x45=(0,0,0,0), phi=omega=0 and tau=0 on ticks45..59, T=9.81, r_k independently in [-R,R]",
+  "run": 278,
+  "scope": "exact maximum |v60| in this restricted, genuinely feasible posterior slice; lower bound on full posterior width",
+  "tick60_minus_state": [
+    "-1/50",
+    "-39217447/110000000",
+    "0",
+    "0"
+  ],
+  "tick60_noise_minus": "1/50",
+  "tick60_noise_plus": "-1/50",
+  "tick60_plus_state": [
+    "1/50",
+    "39217447/110000000",
+    "0",
+    "0"
+  ],
+  "tick60_position_reading": "0"
+}
