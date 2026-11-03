@@ -1,5 +1,7 @@
 # 已阅读/核对论文记录
 
+> **历史补充书目索引（停止追加）**：本文件保留早期研究阶段的论文阅读摘录，作为检索线索和历史阅读记录；当前唯一持续更新的论文登记入口是 [PAPER_READING_LOG.md](PAPER_READING_LOG.md)。本文中旧阶段的“当前主线”表述不定义现行控制架构，当前模型边界与研究优先级以 [CURRENT_CHECKPOINT.md](../research/CURRENT_CHECKPOINT.md) 为准。
+
 > 本文件记录为当前 SMF + Tube MPC / constrained-zonotope 主线实际核对过的文献。“已阅读”指至少核对原文/正式摘要中的模型、方法与和本项目直接相关的定理或集合运算；不等同于作者已完成逐页人工精读。新增条目前先查重。
 
 ## Athanasopoulos, Smpoukis, Jungers — Invariance in Constrained Switching Systems
