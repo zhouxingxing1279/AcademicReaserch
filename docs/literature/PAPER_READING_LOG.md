@@ -1,3 +1,14 @@
+## 背景第31轮 — Ru/Subbarao (2017) SDC-NMPC四旋翼执行器预测缺口（2026-11-03 UTC；期刊正文部分核验）
+
+- **书目**：Pengkai Ru; Kamesh Subbarao, *Nonlinear Model Predictive Control for Unmanned Aerial Vehicles*, *Aerospace* **4**(2), Article 31 (2017), 26页，DOI https://doi.org/10.3390/aerospace4020031 。出版社开放原文 https://www.mdpi.com/2226-4310/4/2/31 ；本轮MDPI访问429，实际阅读作者在ResearchGate提供的开放全文文本 https://www.researchgate.net/publication/317686529_Nonlinear_Model_Predictive_Control_for_Unmanned_Aerial_Vehicles 。**实际阅读**：2026-11-03，§2式(3)–(7)、§3式(8)–(11)、§4式(41)–(44)、§6实验描述、§7和附录A；**部分全文阅读**，其余公式及稳定性证明未逐式检查。
+- **任务、模型、输入**：标准6物理自由度四旋翼，12状态 x=[惯性位置p(3),机体系速度V_B(3),Euler姿态Θ(3),机体系角速度Ω(3)]，不是12自由度；优化输入 u=[F1,F2,F3,F4] 四桨推力(N)，式(3)线性映射总推力及三轴力矩。悬停平衡每桨mg/4；LTI MPC在悬停点线性化，NMPC使用SDC伪线性状态依赖矩阵及零阶保持离散。采样Δt=0.05s，预测/控制时域均25步，即1.25s。仿真m=0.8kg，J=diag(0.0224,0.0224,0.0436) kg m²，桨臂L=0.165m。
+- **执行器关键边界**：式(7)假定逐桨一阶推力动态 dFi/dt=λF(Fci−Fi)，λF=50 s⁻¹（附录A）；原文明确**执行器动态不进入MPC预测，仅用于真实系统数值状态传播**。故优化的逐桨推力盒不是自动的实际逐桨硬执行证书。0.05s采样对应一阶时间常数0.02s，采样/时间常数=2.5；这只是模型时间尺度计算，不能推断真实ESC最坏误差。输入仿真盒Fi∈[0,mg]；逐桨速率约束、实际电机RPM标定、分配残差可靠上界均未报告/未从本轮已读章节确认。
+- **MPC与量测**：状态依赖系数NMPC，SQP处理状态/输入/输出约束；Q=I12、R=I4。§3依赖当前状态；真实IMU/Vicon/GPS、Kalman/SMF/CZ、位置间歇测量及失测策略：**未报告/本轮已读范围无法确认**。终端集合、20ms最坏求解时间、所有扰动路径硬安全和递归可行证明：**本轮未核验，不得推断**。文中有跟踪误差有界性分析，但不能转写为本仓库有噪失测下的安全定理。
+- **结果**：螺旋、球面螺旋、分段直线轨迹的MATLAB数值仿真；对比LMPC/NMPC及扰动情形，非四旋翼实飞。可复用：12状态真实坐标定义、逐桨推力混控及执行器模型/预测模型不一致的审计范例。局限：未把一阶执行器动态放入预测；与本课题的确定性SMF+Tube MPC信息状态、共同可执行物理输入、终端信息不变集均不等价。
+- **本课题意义**：六状态平面(T,τ)仍条件性首选，四状态冻结推力仍仅数学基线。若采用逐桨/总推力预测，必须把执行器动态加入扩展状态或以实验有依据的误差集合外包；不能把论文的仿真追踪当作硬安全。**下一查**：从该文一阶执行器式(7)推导采样实际推力可达集，并与目标机体可测的ESC/RPM/推力辨识合同比较；由主研究任务实现验证，背景任务不开发控制器。
+
+---
+
 ## 背景第30轮新增论文 — Chipofya/Lee/Chong (2015) 三层Laguerre MPC（2026-11-03 UTC；正文分节已读）
 
 - **书目及原始全文**：Mapopa Chipofya, Deok Jin Lee, Kil To Chong, *Trajectory Tracking and Stabilization of a Quadrotor Using Model Predictive Control of Laguerre Functions*, *Abstract and Applied Analysis* **2015**, Article ID **916864**, **11 pages** (2015-02-19), DOI https://doi.org/10.1155/2015/916864 ，出版社开放全文 https://onlinelibrary.wiley.com/doi/10.1155/2015/916864 。**实际阅读**：2026-11-03，开放HTML正文§1–7，重点§3–4.1动力学、§5.1–5.2 MPC/观测器、§6参数和结果、表1–3。**核验状态：全文正文分节已读，但网页数学公式部分未被文本接口完整渲染；矩阵系数/数值采样周期/终端证明未逐式确认，不声称所有公式全读或复现。**
