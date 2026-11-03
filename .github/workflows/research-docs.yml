@@ -1,0 +1,83 @@
+name: Research repository structure
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "docs/**"
+      - "archive/**"
+      - "src/**"
+      - "configs/**"
+      - "tests/**"
+      - ".github/workflows/research-docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check active research navigation
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          required = [
+              "README.md",
+              "docs/research/CURRENT_CHECKPOINT.md",
+              "docs/research/MODEL_CONTRACT.md",
+              "docs/research/RESEARCH_MAP.md",
+              "docs/research/PR_TRIAGE_20261103.md",
+              "docs/research/model_selection/MODEL_SELECTION_EVIDENCE.md",
+              "docs/research/model_selection/PX4_INTERFACE_EVIDENCE.md",
+              "docs/research/model_selection/OUTER_LOOP_MPC_LITERATURE.md",
+              "docs/research/model_selection/README.md",
+              "docs/literature/PAPER_READING_LOG.md",
+              "docs/literature/READ_PAPERS.md",
+              "archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md",
+              "archive/legacy_planar_direct_control_20261103/README_legacy_20261103.md",
+              "src/common/numerical_sets.py",
+          ]
+          missing = [p for p in required if not Path(p).is_file()]
+          if missing:
+              raise SystemExit("Missing required research files: " + ", ".join(missing))
+          if Path("docs/research/current_checkpoint.md").exists():
+              raise SystemExit("Stale lowercase duplicate checkpoint remains active")
+          if Path("src/smf_mpc/plant.py").exists():
+              raise SystemExit("Legacy direct-control plant remains in active source tree")
+          if Path("configs/planar_baseline.json").exists():
+              raise SystemExit("Legacy planar direct-control config remains active")
+          if list(Path("docs/research").glob("run*_research_log.md")):
+              raise SystemExit("Legacy Run research logs must remain under archive/")
+          if list(Path(".github/workflows").glob("run*.yml")):
+              raise SystemExit("Legacy Run-specific workflows must remain under archive/")
+          # Validate local links across every active Markdown file; archived historical
+          # documents are excluded because their original relative paths are preserved.
+          markdown_files = [
+              p for p in Path(".").rglob("*.md")
+              if "archive" not in p.parts and ".git" not in p.parts
+          ]
+          # Validate the archive's two human entrypoints as well; historical
+          # internal documents are preserved verbatim under their original tree.
+          markdown_files.extend([
+              Path("archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md"),
+              Path("archive/legacy_planar_direct_control_20261103/README_legacy_20261103.md"),
+          ])
+          missing_links = []
+          for filename in markdown_files:
+              source = filename.as_posix()
+              text = filename.read_text(encoding="utf-8")
+              for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
+                  target = target.split("#", 1)[0].split("?", 1)[0].strip()
+                  if not target or target.startswith(("https://", "http://", "mailto:")):
+                      continue
+                  path = Path(target.lstrip("/")) if target.startswith("/") else filename.parent / target
+                  if not path.exists():
+                      missing_links.append(f"{source} -> {target}")
+          if missing_links:
+              raise SystemExit("Broken active Markdown links: " + "; ".join(missing_links))
+          print(f"Research structure, {len(markdown_files)} active Markdown files and archive entrypoints passed local-link validation.")
+          PY

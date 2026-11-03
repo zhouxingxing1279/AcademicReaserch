@@ -1,3 +1,67 @@
+# 当前决策更新（2026-11-04）——理论优先的外环 MPC + SMF/CZ
+
+> **本节是当前有效的研究边界与优先级，优先于下方所有历史模型矩阵和阶段性“下一步”记录。** 下方旧日志保留为文献证据与研究轨迹，不自动代表当前任务。
+
+## 规范化证据入口
+
+- [理论框架](../THEORY_FRAMEWORK.md)：CZ 估计、有限测量语言、Equalized Recovery、共同因果 Tube、终端递归可行性。
+- [当前研究检查点](../CURRENT_CHECKPOINT.md)：当前唯一优先问题与 Gate。
+- [抽象模型合同](../MODEL_CONTRACT.md)：当前状态、输入、扰动和量测边界。
+- [外环 MPC 与 SMF/CZ 文献证据](OUTER_LOOP_MPC_LITERATURE.md)：12 状态物理 plant、外环理论对象和文献边界。
+- [PX4 外环接口证据](PX4_INTERFACE_EVIDENCE.md) 与 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)：**暂缓资料**，本阶段不推进接口 A/B 或 SITL。
+
+## 1. 当前控制任务
+
+研究成熟飞控之上的四旋翼任务/轨迹层外环 MPC，底层姿态、角速度、分配和电机由成熟飞控承担。当前研究先不冻结具体飞控命令接口，而是解决间歇/异步位置量测下的可靠集合估计、因果输出反馈和 Tube MPC 安全证明。
+
+## 2. 物理对象与理论外环状态
+
+**高保真物理对象：** 12 状态六自由度四旋翼刚体 plant，作为后续仿真验证对象。
+
+**理论外环状态候选：**
+\[
+x=[p_x,p_y,p_z,v_x,v_y,v_z]^\mathsf T
+\]
+它是抽象平移预测状态，不是已确认的 PX4 闭环模型，也不是旧平面六状态直接控制模型。理论阶段先用一般离散模型 \(x^+=Ax+Bu+Gw\)，具体 \(A,B\) 和高层命令语义暂不冻结。
+
+## 3. 当前量测与信息合同
+
+- 先研究位置-only 量测 \(y=C_px+v\)，\(C_p=[I_3\;0]\)。
+- 用有限状态自动机/有限长度语言明确 success/miss/delay、最大连续失测、最大延迟和时间戳。
+- 位置-only 对速度状态的有限窗可观测性必须在所有允许测量模式下验证；无最大失测上界时不主张统一有限误差界。
+- 延迟量测按原时间戳更新并重新传播；不能当作当前新鲜量测。
+
+## 4. 当前理论主线
+
+1. CZ 预测、量测一致性交集、空集检测和可靠外包降阶。
+2. 位置-only 间歇量测下的相位相关估计误差界与 Equalized Recovery。
+3. 只依赖已收到观测历史的共同因果控制命令。
+4. 估计误差管与跟踪误差 Tube 分离，推导状态/输入 Pontryagin 收紧。
+5. 非空共同终端集合、终端 Lyapunov 下降和递归可行性。
+6. 最后证明抽象外环模型与 12 状态物理 plant 之间的残差包含关系。
+
+**当前第一优先级：** 在有限 success/miss 语言下，推导路径相关 observer + CZ 误差集合的线性递推和相位包含条件，证明 Equalized Recovery；再与精确 CZ 后验路线比较。详见 THEORY_FRAMEWORK.md。
+
+## 5. 暂缓事项与非主张
+
+- 暂停 PX4 position/velocity/acceleration 接口比较、Offboard 字段审计、HTE 参数试验和 SITL 接口辨识。
+- 不把 SMF 后验、估计误差管、跟踪 Tube、未来可达集混为一个集合。
+- 不把概率置信区间或 95% 数据拟合写成确定性包含。
+- 不宣称首次 SMF+MPC、首次 CZ Tube MPC 或项目级四旋翼硬安全已证明。
+- 条件定理必须明确模型/噪声集合、允许测量语言、初始可行性、共同因果输入、终端不变性和终端代价下降条件。
+
+---
+
+## 历史研究日志边界（当前决策以文件顶部为准）
+
+> **重要：** 本文件顶部“当前决策更新”章节是当前有效的规范化模型/接口决策摘要；从下方“背景第26轮”开始的逐轮日志、旧模型矩阵和后续专项审计，是按当时研究阶段保存的证据记录，不是当前研究指令。它们包含早期“平面六状态 + 总推力/俯仰力矩直接控制”为条件性首选、以及四桨/电机级 MPC、虚拟 wrench 等曾经探索的路线。这些历史判断已被当前分层架构取代，不得再作为当前主模型或外环输入权限的依据。
+>
+> **当前有效理论边界：** 12 状态六自由度刚体模型保留为后续高保真物理 plant；成熟飞控承担姿态/角速度、控制分配和电机执行。理论阶段先用抽象离散外环模型与位置-only 间歇量测，外环输入 \(u_k\) 暂不映射到任何具体 PX4/ArduPilot 接口。六状态 \\([p;v]\\) 只是理论候选；需先闭合 CZ 估计误差、共同因果 Tube 和终端递归可行性，再映射到 12 状态物理 plant。PX4 源码/接口审计暂作背景资料。
+>
+> **如何使用下方记录：** 保留论文原始模型、状态/输入定义、观测假设、定理条件、数值结果与失败反例，作为文献证据和方法边界；旧记录中的“首选”“下一步”“停止”等阶段性决策不再生效。当前唯一优先问题以 [CURRENT_CHECKPOINT.md](../CURRENT_CHECKPOINT.md) 为准，新发现应先更新顶部决策摘要和检查点，再追加有日期的研究记录。
+
+## 历史专项审计与旧版模型选型矩阵（仅作证据追溯）
+
 ## 背景第26轮 — Mendez等(2023)真实四旋翼LMPC论文＋PX4固定版本控制分配源码审计（2026-11-02）
 
 **论文新增直接证据**：[期刊开放HTML全文§1–4已读] Mendez, Whidborne, Chen, *Sensors* 23(7):3711, DOI https://doi.org/10.3390/s23073711；全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC10098597/ 。12状态悬停线性化 `(x,y,z,u_b,v_b,w_b,φ,θ,ψ,p,q,r)`，6物理自由度；外环4个**虚拟**高度/俯仰/横滚/偏航输入，0.1s、1s/10步增量LTI MPC/Hildreth QP，内环PID→4桨转速代数混控；KF测量位置/机体速度/姿态角，角速度隐藏；地面LiDAR给**风预报**，不是间歇位置观测。Draganflyer X-Pro 2.36kg仿真，真实LiDAR风数据驱动**非线性仿真**，无四旋翼MPC实飞、终端信息RCI、确定性SMF或逐桨ESC硬界。12状态只说明可在仿真中采用完整姿态/速度建模，不证明仓库1kg六状态候选必须扩维。
@@ -14,7 +78,7 @@
 
 ---
 
-# 四旋翼模型选型：文献证据矩阵（背景任务）
+### 旧版模型选型矩阵（2026-11-01 快照，已被当前决策取代）
 
 > 更新：2026-11-01；第6轮增加六状态垂向权限必要筛选与Hu等(2018)10状态论文纠错；首轮基准 main d5a8cd049fd57aa9b35750551abf83f3607321cd。此文档是模型与课题可行性论证，不是控制器证书。每条证据分为 [正文核验]、[仓库已认证]、[仓库配置]、[待核验]。
 
@@ -557,7 +621,7 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 | 10坐标四元数PAMPC | 实飞说明视觉/动作联合NMPC可在机载运行，但优化体角速虚拟输入，角速非状态；不能直接映射成力矩硬约束 |
 | 12状态完整刚体、分层及电机级NMPC | 增加维数不自动解决电机权限、状态可观测或失测安全；仍作工程对照 |
 
-**SMF/CZ创新边界**：已有视觉感知MPC、四旋翼参数集合RAMPC及一般状态SMF+MPC先例；PAMPC的VIO点估计与软视觉成本**不是**有界状态集合、Tube初始化或终端信息集。主任务Run277的真实纤维开环不可能性只要求继续探索**观测条件化因果反馈**，不证明MPC失败；Gate A仍blocked。背景任务仅提出接口，不新增主控制器或验证脚本。详见 [第29轮日志](docs/research/model_selection/background_run_20261102_2337_falanga_vio_data_access.md)。
+**SMF/CZ创新边界**：已有视觉感知MPC、四旋翼参数集合RAMPC及一般状态SMF+MPC先例；PAMPC的VIO点估计与软视觉成本**不是**有界状态集合、Tube初始化或终端信息集。主任务Run277的真实纤维开环不可能性只要求继续探索**观测条件化因果反馈**，不证明MPC失败；Gate A仍blocked。背景任务仅提出接口，不新增主控制器或验证脚本。详见 [第29轮日志](background_run_20261102_2337_falanga_vio_data_access.md)。
 
 **唯一下一轮问题**：固定`uzh-rpg/rpg_mpc`源码版本，沿`(c,omega_B)`→内环→混控/限幅→ESC审计是否存在可靠最终执行残差合同；若无，定义本机体最小同步台架实验合同。
 
@@ -810,5 +874,7 @@ The 10D family is a yaw-fixed near-hover outer-loop command-response model, not 
 - Bicego uses MoCap pose, gyros and ESC RPM-derived force without a dedicated observer; Nan uses EKF with IMU/Vicon and ESC RPM; LoL uses GNSS/IMU and ESC RPM feedback at a lower reported rate. These provide real measurement channels for an actuator-augmented observer, but not a set-membership guarantee.
 - A motor-force measurement derived from RPM is f_i=c_f,i*Omega_i^2; uncertainty in the force coefficient and RPM measurement must be included in the set update. For first-order motor lag, an interval for tau_m,i produces a set-valued transition for each actual thrust state.
 - Wehbeh's scenario sampling is covariance/probability-based; it is not a constrained-zonotope or set-membership observer. The direct novelty claim remains unproven until the direct quadrotor SMF/CZ literature and transferable set-valued observer literature are cross-checked.
+
+**历史优先级说明（2026-11-03 更新）**：上面的 actuator-augmented 16/17-state、RPM/ESC 测量可观测性问题是该专项审计当时提出的下一步，不再是当前主任务优先级。当前唯一优先问题是冻结成熟飞控与外环高层指令接口，并通过官方文档/源码核验及 SITL 阶跃、轨迹试验辨识参考到实际位置/速度的闭环响应、延迟、限幅和可重复残差界；详见 [当前研究检查点](../CURRENT_CHECKPOINT.md)。
 
 **Next single priority question**: for the actuator-augmented 16/17-state plant (and the proposed reduced 10-coordinate planar-plus-actuator candidate), are actual rotor-thrust states observable/set-identifiable when position updates are intermittent but IMU and ESC RPM arrive asynchronously? Compare published observer/SMF/CZ methods, derive the correct measurement maps including the RPM-to-thrust coefficient uncertainty, and determine which state set can initialize a Tube-MPC error tube without assuming full-state measurement.
