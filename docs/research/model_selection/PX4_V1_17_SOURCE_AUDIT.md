@@ -166,9 +166,9 @@ PX4 ULog：检查并保存 `vehicle_local_position`、`vehicle_local_position_se
 ### 5.4 模型辨识与准入判据
 
 - 分别拟合 position-only 的位置参考模型与 acceleration-only 的加速度参考模型；两者均以平移输出为目标，输入延迟、零阶保持、采样时间和坐标系必须写入合同。
-  [
-  x_{k+1}=A_{cl}x_k+B_{cl}r_{p,k}+E_{cl}w_k,quad x_k=[p_k^T,v_k^T]^T
-  ]
+  - position-only：`x_{k+1}=A_p x_k+B_p r_{p,k}+E_p w_k`；
+  - acceleration-only：`x_{k+1}=A_a x_k+B_a a_{c,k}+E_a w_k`；
+  两式均为待辨识结构，不是已知 PX4 方程。若对加速度命令增加外部平滑滤波器，其已知滤波状态应显式增广进预测模型。
   position-only 可用 `x_{k+1}=A_p x_k+B_p r_{p,k}+E_p w_k`；acceleration-only 可用 `x_{k+1}=A_a x_k+B_a a_{c,k}+E_a w_k`。两式均为待辨识结构，不是已知 PX4 方程。若对加速度命令增加外部平滑滤波器，其已知滤波状态应显式增广进预测模型。
 - 训练与验证轨迹必须分开；至少做一步预测、多步自由运行预测、跨初始历史预测和跨激励幅值验证。
 - 报告最大/分位残差、延迟、上升时间、超调、稳态误差、轴间耦合、饱和占比和计算周期；不能只报告 RMSE。
