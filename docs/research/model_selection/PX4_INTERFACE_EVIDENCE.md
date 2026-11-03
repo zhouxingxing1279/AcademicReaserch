@@ -40,11 +40,11 @@
 
 ## 2.1 v1.17.0 源码级位置控制链（已核验，未做 SITL）
 
-固定版本 [PX4-Autopilot v1.17.0](https://github.com/PX4/PX4-Autopilot/releases/tag/v1.17.0) 的源码显示，position setpoint 依次经过位置 P → 速度 PID（含积分与导数反馈）→ 加速度到姿态/推力转换；速度上限、倾角/推力饱和、anti-windup 和起飞/failsafe 状态均会改变闭环响应。速度与速度导数还经过滤波，内部控制周期由 local-position sample 驱动，dt 被限制在 2–40 ms。
+固定版本 [PX4-Autopilot v1.17.0](https://github.com/PX4/PX4-Autopilot/releases/tag/v1.17.0) 的源码显示，position setpoint 依次经过位置 P → 速度 PID（含积分与导数反馈）→ 加速度到姿态/推力转换；速度上限、倾角/推力饱和、anti-windup 和起飞/failsafe 状态均会改变闭环响应。速度导数默认经过 5 Hz 低通滤波（速度低通和 notch 默认关闭），内部控制周期由 local-position sample 驱动，dt 被限制在 2–40 ms。X500 还默认启用 HTE（`MPC_USE_HTE=1`），在线更新 hover-thrust estimate；X500 airframe 将初始化参数 `MPC_THR_HOVER` 设为 0.60。
 
-因此，`[p;v]` 是候选预测状态而非自动成立的完整 Markov 状态。若相同 `[p,v,r_p]` 在不同参考历史/积分器状态下产生不同输出，必须增广可识别的控制器记忆/滞后状态，或在明确工作域内证明统一残差外包；不能直接假设理想双积分器。
+因此，`[p;v]` 是候选预测状态而非自动成立的完整 Markov 状态。若相同 `[p,v,r_p]` 在不同参考历史/积分器状态下产生不同输出，必须增广可识别的控制器记忆/滞后状态，或在明确工作域内证明统一残差外包；不能直接假设理想双积分器。HTE 开启时还存在慢变 hover-thrust estimate，首轮建议 HTE-off 固定 `MPC_THR_HOVER=0.60` 隔离位置环，再做 HTE-on 对照。
 
-**建议的可复现基线（暂定）：** PX4 v1.17.0 + Gazebo Harmonic X500 SITL（`make px4_sitl gz_x500`）+ Ubuntu 22.04 / ROS 2 Humble / uXRCE-DDS + `px4_msgs release/1.17`。完整版本、commit、消息兼容、topic 可用性和阶跃/轨迹辨识合同见 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
+**建议的可复现基线（暂定）：** PX4 v1.17.0 + Gazebo Harmonic X500 SITL（`make px4_sitl gz_x500`）+ Ubuntu 22.04 / ROS 2 Humble / uXRCE-DDS + `px4_msgs release/1.17`。首轮位置环辨识使用明确标注的 HTE-off 变体（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`），随后 HTE-on 对照。完整版本、commit、消息兼容、topic 可用性和阶跃/轨迹辨识合同见 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
 
 首轮 position-only 发送：`OffboardControlMode.position=true`；`TrajectorySetpoint.position` 三轴有效，velocity/acceleration 为 NaN；持续发送 heartbeat，并在每个外环 MPC 周期更新 setpoint。Offboard heartbeat 与 MPC setpoint 更新是两个独立速率。
 
@@ -90,7 +90,7 @@ v_{k+1}=v_k+h a_{r,k}.
 2. 核验 `OffboardControlMode`、`TrajectorySetpoint` 有效字段、更新率、超时、failsafe、状态估计有效性及限幅。
 3. 设计 position/velocity/acceleration 分别独立的阶跃与轨迹辨识工况；记录请求 setpoint、实际位置/速度/姿态/角速度、饱和标志、时间戳与延迟。
 4. 在声明的工作域内拟合 \(A_{cl},B_{cl}\)，验证残差集合对全部采样点和独立验证工况的覆盖；不能仅报告均方误差。
-5. 若 6 状态平移预测的残差依赖 PX4 速度积分器/滤波器历史、姿态瞬态或约束耦合，则增广必要闭环记忆状态；不能预先指定增广维数，12 状态物理仿真 plant 保持不变。
+5. 若 6 状态平移预测的残差依赖 PX4 速度积分器/滤波器历史、HTE 慢变状态、姿态瞬态或约束耦合，则增广必要闭环记忆状态；不能预先指定增广维数，12 状态物理仿真 plant 保持不变。
 6. 冻结传感器噪声、丢包自动机、相关性和输入可实现性后，才进入 SMF/CZ 与 Tube MPC 设计。
 
 ## 6. 来源与整合关系
