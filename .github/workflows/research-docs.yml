@@ -61,7 +61,7 @@ jobs:
           missing_links = []
           for filename in markdown_files:
               text = Path(filename).read_text(encoding="utf-8")
-              for target in re.findall(r"\\[[^]]+\\]\\(([^)]+)\\)", text):
+              for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
                   target = target.split("#", 1)[0].split("?", 1)[0].strip()
                   if not target or target.startswith(("https://", "http://", "mailto:")):
                       continue
