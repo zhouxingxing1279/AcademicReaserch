@@ -36,7 +36,7 @@
 
 ## PX4 内环动态与外环测量边界
 
-v1.17.0 源码确认位置参考经过位置 P—速度 PID—加速度到姿态/推力级联，内部含速度积分 `_vel_int`、速度导数滤波、速度/倾角/推力限幅和 failsafe。X500 的 HTE 默认启用，且会在线更新 hover-thrust estimate；这是额外的慢变闭环状态。故 \\(x_{out}=[p;v]\\) 不是自动成立的 Markov 状态：先在 HTE-off 固定悬停推力基线下检验积分/滤波记忆，再做 HTE-on 对照，必要时增广最小必要记忆状态。
+v1.17.0 源码确认位置参考经过位置 P—速度 PID—加速度到姿态/推力级联，内部含速度积分 `_vel_int`、速度导数滤波、速度/倾角/推力限幅和 failsafe。X500 的 HTE 默认启用，且会在线更新 hover-thrust estimate；`updateHoverThrust()` 还会联动修正垂直速度积分器 `_vel_int(2)`，因此 HTE 与 z 轴积分记忆是耦合状态。故 \\(x_{out}=[p;v]\\) 不是自动成立的 Markov 状态：先在 HTE-off 固定悬停推力基线下检验积分/滤波记忆，再做 HTE-on 对照，必要时增广最小必要记忆状态。
 
 PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立通道建模。首轮建议从 Gazebo 真值生成独立有界噪声位置观测并施加丢包，不把 PX4 内环 EKF 也假设为同时失测。
 
@@ -61,4 +61,4 @@ PX4 内环 EKF 保持高频估计；外环 SMF 的间歇位置测量作为独立
 - [模型选型证据矩阵](model_selection/MODEL_SELECTION_EVIDENCE.md)：保留历史证据，同时明确当前 12 状态仿真 plant 与外环预测状态分层。
 
 ## 下一唯一优先问题
-在 PX4 v1.17.0 position-only Offboard、HTE-off（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`）受控基线下，检验 6 状态 \\([p;v]\\) 模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下，对位置参考到实际平移状态给出统一有界残差外包；若不能，确定最小必要增广状态。之后再启用 HTE，检验是否需要额外慢变 hover-thrust 状态。完成这一 Gate 前不启动 Tube MPC 终端集合综合。
+在 PX4 v1.17.0 position-only Offboard、HTE-off（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`）受控基线下，检验 6 状态 \\([p;v]\\) 模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下，对位置参考到实际平移状态给出统一有界残差外包；若不能，确定最小必要增广状态。之后再启用 HTE，检验是否需要联合增广 hover-thrust estimate 与受其修正的垂直积分状态。完成这一 Gate 前不启动 Tube MPC 终端集合综合。
