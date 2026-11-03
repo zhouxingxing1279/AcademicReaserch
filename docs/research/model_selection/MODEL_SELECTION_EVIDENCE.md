@@ -39,7 +39,7 @@ PX4 ROS 2 `TrajectorySetpoint` 的 NaN mask、NED 坐标和控制层级见 [PX4 
 
 这些文献支持级联外环研究，但其自定义内环不等同于现成 PX4/ArduPilot；其定理不能未经重新建模直接迁移。官方接口文档证明命令语义，不证明内环跟踪误差、延迟、带宽、饱和或确定性误差界。
 
-**新增 PX4 v1.17.0 源码证据：** position setpoint 经位置 P—速度 PID（含 `_vel_int`）—加速度到姿态/推力的级联；速度导数滤波、速度/倾角/推力限制和 failsafe 参与闭环。X500 默认启用 HTE（`MPC_USE_HTE=1`），在线更新 hover-thrust estimate；因此首轮先在 HTE-off、固定 `MPC_THR_HOVER=0.60` 的受控变体下检验 6 状态 \\( [p,v] \\) 的 Markov 性，再做 HTE-on 对照。若统一残差外包失败，增广最小必要闭环记忆状态；不得把状态维数武断设为 9 或 12。完整源码与 SITL 方案见 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
+**新增 PX4 v1.17.0 源码证据：** position setpoint 经位置 P—速度 PID（含 `_vel_int`）—加速度到姿态/推力的级联；速度导数滤波、速度/倾角/推力限制和 failsafe 参与闭环。X500 默认启用 HTE（`MPC_USE_HTE=1`），在线更新 hover-thrust estimate，并联动修正垂直速度积分器 `_vel_int(2)`；因此首轮先在 HTE-off、固定 `MPC_THR_HOVER=0.60` 的受控变体下检验 6 状态 \\( [p,v] \\) 的 Markov 性，再做 HTE-on 对照。若统一残差外包失败，增广最小必要闭环记忆状态；不得把状态维数武断设为 9 或 12。完整源码与 SITL 方案见 [PX4 v1.17.0 源码审计](PX4_V1_17_SOURCE_AUDIT.md)。
 
 ## 4. SMF/CZ 与 Tube MPC 的目标接口
 - SMF/CZ 估计位置、速度及必要的慢变扰动集合；优先处理间歇/异步位置测量。
@@ -52,7 +52,7 @@ PX4 ROS 2 `TrajectorySetpoint` 的 NaN mask、NED 坐标和控制层级见 [PX4 
 1. 暂定锁定 PX4 v1.17.0 tag/commit、X500/Gazebo Harmonic、Ubuntu 22.04/ROS 2 Humble、匹配的 `px4_msgs release/1.17`、Offboard ROS 2 路径和 NED 坐标系；尚未运行 SITL。
 2. 核验 setpoint 物理语义、更新率、限幅、failsafe 和延迟。
 3. 在 HTE-off 固定悬停推力基线下，用 SITL 阶跃/轨迹响应辨识 position-only 参考到 \\([p,v]\\) 的闭环模型、延迟、限幅与残差，并检验不同速度积分/导数滤波历史下 6 状态模型是否 Markov。
-4. 若 6 状态模型的残差依赖内部记忆或饱和，增广最小必要闭环状态；随后启用 HTE，判断 hover-thrust estimate 是否需要作为慢变增广状态。速度/加速度接口暂作后续对照，不抢占当前主线。
+4. 若 6 状态模型的残差依赖内部记忆或饱和，增广最小必要闭环状态；随后启用 HTE，判断 hover-thrust estimate 与垂直积分状态是否需要联合增广。速度/加速度接口暂作后续对照，不抢占当前主线。
 5. 区分 PX4 内环高频 EKF 与外环 SMF 的间歇测量通道；冻结噪声/丢包/相关性合同后，再进入 SMF/CZ 和 Tube MPC 设计。
 
 ---
