@@ -36,6 +36,7 @@ jobs:
               "docs/research/model_selection/OUTER_LOOP_MPC_LITERATURE.md",
               "docs/research/model_selection/README.md",
               "docs/literature/PAPER_READING_LOG.md",
+              "docs/literature/READ_PAPERS.md",
               "archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md",
               "src/common/numerical_sets.py",
           ]
@@ -46,29 +47,30 @@ jobs:
               raise SystemExit("Stale lowercase duplicate checkpoint remains active")
           if Path("src/smf_mpc/plant.py").exists():
               raise SystemExit("Legacy direct-control plant remains in active source tree")
-          # Validate local links in active navigation and current research documents.
+          if Path("configs/planar_baseline.json").exists():
+              raise SystemExit("Legacy planar direct-control config remains active")
+          if list(Path("docs/research").glob("run*_research_log.md")):
+              raise SystemExit("Legacy Run research logs must remain under archive/")
+          if list(Path(".github/workflows").glob("run*.yml")):
+              raise SystemExit("Legacy Run-specific workflows must remain under archive/")
+          # Validate local links across every active Markdown file; archived historical
+          # documents are excluded because their original relative paths are preserved.
           markdown_files = [
-              "README.md",
-              "docs/research/CURRENT_CHECKPOINT.md",
-              "docs/research/MODEL_CONTRACT.md",
-              "docs/research/RESEARCH_MAP.md",
-              "docs/research/PR_TRIAGE_20261103.md",
-              "docs/research/model_selection/README.md",
-              "docs/research/model_selection/MODEL_SELECTION_EVIDENCE.md",
-              "docs/research/model_selection/PX4_INTERFACE_EVIDENCE.md",
-              "docs/research/model_selection/OUTER_LOOP_MPC_LITERATURE.md",
+              p for p in Path(".").rglob("*.md")
+              if "archive" not in p.parts and ".git" not in p.parts
           ]
           missing_links = []
           for filename in markdown_files:
-              text = Path(filename).read_text(encoding="utf-8")
+              source = filename.as_posix()
+              text = filename.read_text(encoding="utf-8")
               for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
                   target = target.split("#", 1)[0].split("?", 1)[0].strip()
                   if not target or target.startswith(("https://", "http://", "mailto:")):
                       continue
-                  path = Path(target) if target.startswith("/") else Path(filename).parent / target
+                  path = Path(target.lstrip("/")) if target.startswith("/") else filename.parent / target
                   if not path.exists():
-                      missing_links.append(f"{filename} -> {target}")
+                      missing_links.append(f"{source} -> {target}")
           if missing_links:
-              raise SystemExit("Broken local Markdown links: " + "; ".join(missing_links))
-          print("Research structure and active Markdown links passed.")
+              raise SystemExit("Broken active Markdown links: " + "; ".join(missing_links))
+          print(f"Research structure and {len(markdown_files)} active Markdown files passed local-link validation.")
           PY
