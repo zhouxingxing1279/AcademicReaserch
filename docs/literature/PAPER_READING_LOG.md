@@ -1233,9 +1233,13 @@
 - 方法/关系：CCM + set-membership + adaptive tube，含 planar quadrotor；四旋翼阶段强近邻。
 
 ## Andrade, Normey-Rico, Raffo — Tube-Based Model Predictive Control Based on Constrained Zonotopes
-- 年份/出处：2024, *IEEE Access*, 12:50100–50113；DOI：https://doi.org/10.1109/ACCESS.2024.3381622
-- 方法/关系：CZ Tube MPC，24-state tiltrotor UAV + suspended load HIL；“CZ + Tube MPC + UAV”不是创新。
 
+- **书目信息/版本**：Richard Andrade, Julio E. Normey-Rico, Guilherme V. Raffo, *Tube-Based Model Predictive Control Based on Constrained Zonotopes*, *IEEE Access*, vol. 12, pp. 50100–50113, 2024, DOI https://doi.org/10.1109/ACCESS.2024.3381622。公开全文：https://www.researchgate.net/publication/379286185_Tube-based_Model_Predictive_Control_based_on_Constrained_Zonotopes 。**2026-11-03实际阅读**：公开PDF正文§I–V，重点核验§II LMI反馈/RPI可达集、§III CZ-MPC、§IV HIL模型和§V计算结果；全文已读。
+- **对象与模型**：对象是带悬吊载荷的**倾转旋翼（tiltrotor）UAV**，不是四旋翼/普通多旋翼。广义坐标q包含载荷位置3、Euler姿态3、载荷摆角2、左右推进器倾转角2，共10个广义坐标；物理状态xs=[qdot;q]为20维。为跟踪x/y/z/yaw，增广4个积分状态，最终控制误差模型为**24状态LPV/LTV**。输入u=[f_r,f_l,τ_r,τ_l]，即左右两个推进器推力和左右倾转伺服力矩；不是四电机独立推力。
+- **测量与估计**：论文假设离散系统全部状态可由测量和/或估计提供；但HIL中Gazebo插件的virtual sensor直接读取physics engine状态向量，未实现真实传感器噪声、观测器或丢包模型。不能将其作为输出反馈SMF/CZ证据。
+- **Tube/CZ MPC**：LPV不确定性用加性集合W表示；离线通过LMI求反馈K，基于zonotope reachability计算RPI误差集；名义状态集与输入集用constrained zonotopes表示，在线MPC直接优化CZ生成元变量。Gurobi求解；HIL平台为ProVANT/Gazebo，嵌入式计算机NVIDIA Jetson TX2。
+- **实时与实验边界**：采样时间12ms；标准多面体MPC最常见求解时间约29ms，CZ-MPC约20.9ms，约快30%，但**两者典型计算时间仍超过12ms采样周期**。实验是HIL，不是真实飞行。论文宣称鲁棒渐近稳定依赖LPV不确定集合、离线RPI集及LMI反馈设计条件，不能移植成四旋翼/SMF输出反馈定理。
+- **可迁移与局限**：可迁移的是高维LPV下离线RPI zonotope、CZ名义状态/输入集合和生成元变量优化；不能把24状态倾转旋翼＋吊载模型当作四旋翼12状态先例，也不能把virtual sensor当作状态估计。它是高阶CZ Tube MPC计算方法的对照，不改变四旋翼模型排序。
 ## Dey, Bhasin — Output Feedback MPC with Adaptive Tubes
 - 年份/出处：2026, arXiv:2605.23661
 - 方法/关系：adaptive observer 的 state/model/initial-condition estimates 联动 tightening、terminal ingredients 和 tube geometry；作者建立 recursive feasibility 与 robust exponential stability。与本项目 recenter/update gate 高度相邻，必须全文排重。
@@ -2216,3 +2220,82 @@
 - **理论与实验边界**：论文明确指出，多个PWA局部控制器切换不能保证原非线性系统在切换过程中的稳定性，只报告试验中未观察到稳定性问题。真实UPATcopter约1.1kg，Atom Z530 1.6GHz/2GB板载计算；实飞包括位置保持、轨迹、悬停、风阵和激进姿态。作者报告水平位置保持通常在半径0.15m以内；悬停姿态MSE在无风/风阵下分别约为φ:1.5924e−4/0.0013、θ:2.2372e−4/5.0558e−4、ψ:4.3998e−4/0.0011。属于实飞观察，不是确定性硬安全、递归可行或稳定性定理。
 - **对本课题的意义**：该期刊实飞论文直接证明12状态六自由度四旋翼plant与MPC有真实研究先例，支持将12状态非线性plant用于硕士仿真主对象；但其控制架构是三个PWA切换MPC，不支持单个12状态局部线性Tube MPC已被实飞验证。论文没有SMF/CZ、位置间歇测量或终端信息RCI。
 - **待查问题**：标准单向四旋翼上，四个电机推力f映射到wrench w=(T,τx,τy,τz)时，应使用耦合可行集 W={Gf | f_min≤f≤f_max}，而不是四个互不相关的wrench区间。若G可逆，可施加 f_min≤G^{-1}w≤f_max；若优化逐桨推力，则四输入直接受电机盒约束。下一轮优先推导本课题12状态Euler/body-rate悬停线性化A、B和有限姿态包线内的非线性离散残差集合。
+
+---
+
+## 背景第34轮新增论文 — Parsi/Iannelli/Smith (2022 online; 2025 issue) 椭球Tube MPC四旋翼算例
+
+- **书目信息/原始全文**：Anilkumar Parsi, Andrea Iannelli, Roy S. Smith, *Scalable tube model predictive control of uncertain linear systems using ellipsoidal sets*, *International Journal of Robust and Nonlinear Control*, **35(7), 2499–2520 (2025 issue)**；first published online **21 November 2022**；DOI https://doi.org/10.1002/rnc.6485 。作者公开PDF https://andreaian.github.io/pub/IJRNC22_RMPC.pdf ，出版社全文 https://onlinelibrary.wiley.com/doi/10.1002/rnc.6485 。**2026-11-03实际阅读范围**：PDF/出版社全文§2问题建模、§3.1状态管束与控制参数化、§3.4终端设计相关部分、§4.1 Theorem 1、§5.2 Quadrotor example、Appendix A.4 Proposition 6证明；**部分阅读，不声称全篇逐式读完**。
+- **控制任务/物理模型/状态输入**：Crazyflie悬停附近位置设定值调节。6物理自由度四旋翼，12状态线性化离散模型，状态按论文记号为 x=[Δs, Δdot s, ψ, dotψ]，其中位置偏差3、速度3、roll/pitch/yaw 3及其角速度/角速率3；**4个输入为四个旋翼各自推力**，不是总推力加三轴力矩。连续非线性刚体模型仅用于导出局部平衡点离散线性模型；采样 Ts=0.1 s，预测时域 N=15。
+- **不确定性/约束**：质量区间[27g,37g]，以LFT/乘性参数不确定性描述；另有有界风扰动，界限按x/y方向最大相对速度2m/s假设构造。每桨推力约束[0,0.157]N；位置被限制在以目标平衡位置为中心的超立方体，姿态/角速度也进入状态多面体约束。代价矩阵 Qx=diag(3,2,3,1,1,1,0.1,0.1,0.1,0.1,0.1,0.1)，Qu=I4；目标在10s仿真中于5s切换。
+- **量测与估计**：在线问题每拍使用可用状态测量 xhat_k 初始化管束；论文没有给出实际IMU/Vicon/GPS传感器配置，也没有输出方程、观测器、测量噪声或丢包模型。这里的state measurement是状态可用假设，不能写成已实现的输出反馈。没有状态SMF/CZ后验或参数在线估计器。
+- **MPC/终端/证明**：ETMPC用固定形状椭球的平移与缩放参数化状态管束，反馈输入为仿射形式 u=K(x-z)+v，在线求解凸SDP；离线通过SDP及标量线搜索设计椭球形状、反馈增益和终端集。终端椭球在u=Kx下满足鲁棒不变性及收缩条件，并落在状态/输入约束内。**Theorem 1**：离线设计问题(45)可行，且初始状态属于可行域 X_N(X_T)，真实系统满足论文式(1)–(5)的LFT不确定线性模型、扰动集合和状态/输入约束，则闭环轨迹留在该可行域、在线问题对所有后续时刻递归可行，并对外扰具有区域输入到状态实用稳定性（regional ISpS）。**Proposition 6**另在扰动最终变为零的附加条件下给出终端收缩后的指数收敛。作者指出Theorem 1给出的轨迹界在仿真中偏保守。该定理不是原始非线性六自由度模型、间歇观测或SMF输出反馈定理。
+- **结果/计算时间**：仅数值仿真，不是真实飞行/HIL/SITL。ETMPC与多面体PTMPC均以N=15比较：在目标xy偏移0.55m时闭环成本109.3与121.4、均未违约；ETMPC最大可行目标偏移0.68m，PTMPC在0.68m不可行。**平均在线求解时间ETMPC=0.16s、PTMPC=0.04s**；相对100ms采样，ETMPC平均已超周期，PTMPC平均低于周期但仍超过仓库20ms预算。正文§5.1明确说明该节SDP使用YALMIP+MOSEK，并在Intel i7-8550 1.8GHz笔记本上运行；但该段对应mass-spring-damper算例。§5.2四旋翼例报告0.16s/0.04s平均在线时间，却未再次明确是否使用相同硬件/求解器，因此不能无条件把四旋翼计时归因于该设备/软件栈。论文未报告四旋翼最坏执行时间或百分位数。没有可核验的实飞数据。
+- **复现状态/局限/可迁移性**：出版社数据声明给出补充材料DOI https://doi.org/10.3929/ethz-b-000559871；2026-11-03后续核验：可访问的ETH bitstream下载路径实际返回的是论文正文副本（其ETH存档DOI为10.3929/ethz-b-000582916），并非补充材料DOI 10.3929/ethz-b-000559871；补充材料DOI/元数据入口仍返回403。检查作者公开GitHub主页及可见仓库未找到该补充代码镜像。故补充材料仍未取得、未运行，不能声称已复现。可复用的是LFT参数不确定性、椭球管束参数化、终端椭球RPI与递归可行性证明结构；但它假设状态可用，且在线反馈使用状态误差，不能直接将SMF/CZ后验点估计代入。若实际仅有估计值xhat=x+epsilon，必须将估计误差集合及其经反馈产生的-BK epsilon项纳入误差管束，并证明后验到初始椭球管束的可靠包含关系。
+
+## 背景第34轮新增论文 — Michel等(2019) AR.Drone 2.0水平Tube MPC实飞
+
+- **书目信息/原始全文**：Nathan Michel, Sylvain Bertrand, Sorin Olaru, Giorgio Valmorbida, Didier Dumur, *Design and flight experiments of a Tube-Based Model Predictive Controller for the AR.Drone 2.0 quadrotor*, *IFAC-PapersOnLine*, **52(22), 112–117 (2019)**；1st IFAC Workshop on Robot Control；DOI https://doi.org/10.1016/j.ifacol.2019.11.058 。ONERA作者公开PDF https://w3.onera.fr/copernic/sites/default/files/2019_ifac_workshoprobotcontrol_design_flight_tube_mpc_ardrone.pdf 。**2026-11-03实际阅读：完整6页PDF pp.1–6，正文§1–6、模型、Tube约束、辨识、终端集与飞行结果；全文已读**。
+- **控制任务/模型/输入**：Parrot AR.Drone 2.0水平位置稳定与连续waypoint调节。作者假设yaw角和垂直速度为零、小roll/pitch、x/y水平运动解耦；每个水平轴单独建模为3状态 Xx=[x,vx,φ] 与1个虚拟输入 Ux=φr（另一轴对应 Xy=[y,vy,θ], Uy=θr）。这是依赖机载内环的降阶模型，不是完整12状态MPC，也不是直接四桨推力/力矩输入。AR.Drone内部控制器负责roll/pitch、yaw-rate和垂直速度调节，MPC输出归一化姿态参考。
+- **量测/扰动**：OptiTrack动捕测量位置、速度和姿态；地面ROS PC经Wi-Fi向无人机发送命令。离散扰动集合包含模型误差、外部气动力、离散化误差、动捕测量误差和通信延迟；通过辨识飞行数据计算一步预测残差，并取其凸包作为W。该集合的可信度依赖后续飞行扰动确实不超出辨识包络；无间歇测量/丢包状态SMF/CZ。
+- **MPC/约束/终端**：Ts=0.05s，N=30（1.5s horizon）；Q=diag(0.8,1.2,1), R=5；状态约束含水平位置、速度和姿态界，输入姿态参考|U|≤0.56，名义输入收紧至|Ubar|≤0.332。用K=−[0.5,0.4,1]构造误差闭环Z+=(A+BK)Z⊕W的RPI集合Z，名义状态/输入分别使用X⊖Z、U⊖KZ收紧；终端代价来自离散Riccati方程，终端集采用MOAS并按waypoint作在线线性优化调整。QP由CVXGEN生成。
+- **实验/保证边界**：真实AR.Drone 2.0飞行验证x/y两个方向，论文报告每轴最大计算时间4ms（含waypoint切换时终端集计算）。状态和输入约束满足的结论以实际扰动落在辨识得到的W内为前提；航点距离刻意选得较近以保证优化可行。该RPI tube与名义约束收紧是明确的线性系统条件保证，但不自动覆盖完整非线性六自由度、逐桨饱和/速率或任意未见扰动。
+- **可迁移内容/局限**：这是本轮三篇中最强的Tube MPC真实四旋翼飞行证据，但控制权限是φr/θr虚拟姿态指令，低层飞控封装电机，不能作为12状态四电机直接MPC的实飞证据。它说明低维分层接口、数据驱动扰动包络、RPI误差管与QP可以在约20Hz水平控制周期内运行；没有全状态SMF/CZ、输出反馈后验包含或信息终端RCI。
+
+---
+
+
+---
+
+## 背景第35轮新增论文 — Ji/Geng/Driggs-Campbell (2022) 四旋翼椭球SMF＋输出反馈鲁棒MPC
+
+- **书目信息/版本**：Tianchen Ji, Junyi Geng, Katherine Driggs-Campbell, *Robust Output Feedback MPC with Reduced Conservatism under Ellipsoidal Uncertainty*, 2022 IEEE 61st Conference on Decision and Control (CDC), pp. 1782–1789, DOI https://doi.org/10.1109/CDC51059.2022.9992704；arXiv预印本 https://arxiv.org/abs/2008.04980。作者代码：https://github.com/tianchenji/Robust-SM-MPC。**2026-11-03实际阅读**：arXiv HTML全文§II–VI、§III-B状态SMF与误差传播、§IV Assumption 1/Theorem 1、§V-B四旋翼算例、Appendix A–C；全文已读。另静态检查代码sm_mpc_qr.py、SSE.py、sm_mpc.py、README与MIT LICENSE；未执行代码。
+- **控制任务/模型/状态输入**：四旋翼悬停附近位置调节。论文先给6-DOF刚体模型 p_dot=v、m v_dot=mg e3−TR e3、R_dot=Rω^、Jω_dot=M−ω×Jω，再在Ωe=0、Te=mg附近线性化并以dt=0.2s离散。12状态，代码矩阵结构可识别为位置3、Euler角3、平移速度3、机体角速度3；**4个输入是总推力偏差ΔT与三轴力矩(Mx,My,Mz)**，不是四个电机推力/转速。没有电机分配矩阵、逐桨饱和或电机动态。
+- **量测/SMF**：C=I12，12个状态全部作为带有界噪声的输出测量；状态扰动和输出扰动均为椭球集合。代码中Q=0.03²I12、R=0.03²I12。使用经典ellipsoidal set-membership state estimator，在线更新中心xhat、形状矩阵P及残差半径δ；β、ρ通过离线网格搜索选取以减小稳态trace(P∞)。测量更新每拍执行；**没有部分传感器、位置单独量测、间歇测量/丢包或延迟模型**。
+- **MPC/约束/终端**：Tube-based robust output-feedback MPC，分解真实状态x=xbar+s，控制误差满足s⁺=(A+BK)s+w−BK e；分别传播控制误差集S和SMF估计误差集E，并直接从椭球集合计算约束收紧。代码N=15；状态约束是三个Euler角分别在[−π/9,π/9]，输入约束仅有总推力偏差T∈[−5,5]；力矩输入通道没有明确硬界，位置/速度也未作为硬约束。代码stage cost Q=I12、R=0.01I4，终端P由离散Lyapunov方程计算。
+- **定理条件与结论**：Theorem 1：若Assumption 1中的终端代价下降与终端集合正向不变条件成立，且k=0时优化问题可行，则对任意允许初始误差、状态扰动和输出扰动，在线优化递归可行，原状态/输入约束逐拍满足，名义状态指数稳定，真实状态收敛到误差闭环的最小RPI集合S∞。该定理针对论文给定的线性离散系统及有界椭球不确定性，不是原始非线性六自由度/间歇位置量测/逐桨执行器定理。
+- **求解器/复现/结果**：作者仓库为MIT License，README指定Python 3.7与CasADi 3.5；sm_mpc.py用CasADi构造NLP并调用IPOPT，椭球支持函数与MRPI相关计算也通过IPOPT优化。论文未给四旋翼算例的求解硬件、平均/最坏在线时间或实飞数据；仅数值仿真。代码静态审计完成，未运行，不能声称复现。
+- **本课题价值/边界**：这是目前核验到的**直接12状态四旋翼“状态SMF＋输出反馈鲁棒MPC”原始论文先例**，因此不能宣称首次把SMF与MPC结合用于四旋翼。其关键缺口是C=I12全状态逐拍测量、wrench虚拟输入、输入约束不完整、无电机映射、无间歇位置观测、无真实飞行/WCET；本课题若主张创新，应限定在部分/间歇位置量测下的可靠状态集合、共享因果物理输入和硬安全终端递归可行，而不是一般SMF＋MPC。
+
+## 背景第35轮新增论文 — Ping等(2020) LPV系统zonotope SMF＋输出反馈RMPC（部分阅读）
+
+- **书目信息**：Xubin Ping, Sen Yang, Baocang Ding, Tarek Raïssi, Zhiwu Li, *Observer-based output feedback robust MPC via zonotopic set-membership state estimation for LPV systems with bounded disturbances and noises*, *Journal of the Franklin Institute*, 357(11), pp. 7368–7398, July 2020, DOI https://doi.org/10.1016/j.jfranklin.2020.05.014。ScienceDirect页面：https://www.sciencedirect.com/science/article/pii/S0016003220303549。
+- **阅读等级/范围**：**部分全文阅读**；2026-11-03核验ScienceDirect可见预览的摘要、引言、LPV问题定义、后验观测器/估计误差集、算法与CSTR算例片段。出版社全文请求返回403，未取得完整PDF，故不声称全文已读。
+- **方法与数学对象**：离散LPV系统(A(θ),B(θ),D(θ))属于顶点多面体；过程扰动w与量测噪声v均未知但有界。后验观测器增益按LPV顶点离线设计；估计误差采用随时间变化的zonotope生成元矩阵传播，再用缩放的最小椭球RPI集外包未来误差集。在线准min-max输出反馈RMPC分别处理不同预测时刻的估计误差界和闭环误差界，优化控制器增益与约束收紧。
+- **保证/例子/局限**：论文摘要明确声称在相应LMI和初始可行条件下保证优化递归可行；名义估计误差系统与名义闭环观测器系统收敛到原点，实际有界扰动/噪声下分别进入时变RPI/RCI邻域。数值例为2状态CSTR，C=[0,1]，不是UAV。未找到测量丢包/间歇观测机制，未见四旋翼算例或实时硬件数据。
+- **可迁移性**：可作为“zonotope后验误差集＋椭球RPI外包＋输出反馈RMPC”的一般理论基线；但它不是Constrained Zonotope，且CSTR验证不能直接证明12状态四旋翼可实时运行。该文与已登记的Ping/Sun 2015动态输出反馈zonotope MPC、Qiu等椭球SMF-MPC共同构成一般系统方法对照，避免重复登记旧论文。
+
+## 背景第35轮新增论文 — Delansnay/Dewasme/Vande Wouwer (2025) 六旋翼CZ Tube-MPC实飞
+
+- **书目信息/版本**：Gilles Delansnay, Laurent Dewasme, Alain Vande Wouwer, *Experimental Validation of Zonotopic Tube-MPC Applied to a Hexacopter*, 2025 7th International Conference on Control, Decision and Information Technologies (CoDIT 2025), DOI https://doi.org/10.1109/CoDIT66093.2025.11321702。会议公开6页PDF：https://www.codit2025-virtual-event.com/web/content/1364?download=true&unique=38ac7e7f7fb54cda0d6a9efdec7a04e7817a09c7。**2026-11-03实际阅读**：作者会议PDF pp.1–6全文已读。
+- **平台/模型/输入**：DJI F550六旋翼，Pixhawk 4、Raspberry Pi 5；闭环对象是Pixhawk内部姿态/电机控制器。由实验数据辨识4状态模型(vx,vy,vz,ψ)，4个控制输入是北东地坐标三轴期望速度和期望yaw角；名义MPC另增3个位置积分状态以跟踪x/y/z/yaw，辅助状态反馈则回到4状态速度/yaw模型（作者称GPS位置估计精度不足）。因此它不是6-DOF或电机级MPC。
+- **传感器/估计**：Pixhawk IMU/GPS，Raspberry Pi另接LiDAR和stereo camera；模型输出是三轴速度与yaw。文章没有构造SMF状态后验、没有明确量测噪声/丢包模型，未说明Pixhawk内部状态估计器误差的确定性集合。
+- **Tube/CZ实现**：名义线性MPC＋LQR辅助反馈；误差动态e⁺=(A+BK)e+w；通过CORA/Constrained Zonotopes做可达集传播并近似RPI集合Γ，收紧名义状态/输入约束X⊖Γ、U⊖KΓ。do-mpc＋IPOPT；采样时间0.2s、预测时域10步。
+- **实验/实时结果**：户外风扰条件下重复4次实验；Raspberry Pi 5整个控制环平均计算52ms、观察到的上限77ms，均低于200ms采样周期。它是真实六旋翼飞行的CZ Tube-MPC证据，但论文未提供与一般学术定理同等完整的递归可行性证明，也未实现状态SMF。
+- **迁移边界**：支持“低维速度/yaw接口＋Pixhawk内环＋CZ RPI tube”可实飞；不支持12状态四旋翼、四电机独立命令、间歇位置SMF或20ms周期。六旋翼结果不能替代四旋翼直接证据。
+
+---
+
+## 非期刊研究来源（不计入原始论文数量）
+
+Jinaykumar Nitinkumar Patel, *Set-theoretic Reachability-informed Model Predictive Control for Mechanical and Aerospace Systems*, Ph.D. dissertation, The University of Texas at Arlington, May 2026, DOI https://doi.org/10.13140/RG.2.2.27141.51681。2026-11-03定向阅读Chapter 6.1–6.2.5及Chapter 8.3.1–8.3.4；2026-11-03后续完整阅读Chapter 7 pp.141–168。Chapter 7重印Patel与Subbarao的AIAA SciTech 2026论文（DOI 10.2514/6.2026-0111），全文通过博士论文重印章节核验，AIAA proceedings独立PDF未单独取得；Chapter 7的hybrid ZSM-KF与Chapter 6的LTV SMF-MPC、Chapter 8.3的quadrotor reachable-set MPC是不同工作，不得合并其证明结论。Chapter 6是LTV航天器相对运动中的椭球/zonotope SMF＋MPC，Chapter 8.3是独立的Crazyflie 2.1 12状态四旋翼、四桨转速输入与zonotopic reachable-set MPC；两者不是同一个四旋翼SMF/CZ闭环案例。Chapter 6明确不主张渐近稳定；Chapter 8.3无SMF后验、无间歇量测、电机动态假设为瞬时转速变化。全文：https://www.researchgate.net/publication/406045114_Set-theoretic_Reachability-informed_Model_Predictive_Control_for_Mechanical_and_Aerospace_Systems。
+
+---
+
+## 待全文核验候选（不计入已读论文数量）
+
+J. Patel, U. C. Kaya, K. Subbarao, *Real-Time Reachable Set-Based Model Predictive Control for Safe Trajectory Tracking of Quadrotors*, AIAA Science and Technology Forum and Exposition / AIAA SciTech Forum 2026, ISBN 9781624107658。当前仅核验二次数据库书目信息/概要，未取得AIAA出版方全文、页码或DOI；其与Patel 2026博士论文Chapter 8.3的重合程度未核实。来源：https://eurekamag.com/research/103/962/103962467.php。
+
+
+---
+
+## 背景第36轮新增论文 — Patel & Subbarao (2026) 航天器混合ZSM-KF＋时变MPC
+
+- **书目信息**：Jinaykumar Patel, Kamesh Subbarao, *Robust 6-DOF State Estimation for Spacecraft Proximity Operations Using Zonotopic Set Membership based Kalman Filtering*, AIAA SCITECH 2026 Forum, 2026, vol. 48, no. 1, paper 0111, Orlando, Florida, January 2026, DOI https://doi.org/10.2514/6.2026-0111。**全文核验路径**：Patel博士论文 *Set-theoretic Reachability-informed Model Predictive Control for Mechanical and Aerospace Systems*（University of Texas at Arlington, May 2026, DOI https://doi.org/10.13140/RG.2.2.27141.51681）Chapter 7 pp.141–168明确注明本章经许可重印该AIAA论文；本轮完整阅读Chapter 7 §§7.1–7.6。AIAA proceedings独立PDF未单独取得，故阅读等级写作“全文经学位论文重印本核验”，不声称直接读过独立会议PDF。
+- **任务/物理模型/状态输入**：航天器相对接近与交会。13个坐标状态：LVLH相对位置3、相对速度3、姿态四元数4、相对角速度3；物理自由度为6。平移采用Tschauner–Hempel时变相对轨道模型，旋转采用四元数/角速度动力学；组合矩阵采用分块对角形式A=diag(A_T,A_R)、B=diag(B_T,B_R)，未建模平移—姿态耦合。6个虚拟输入：3个LVLH平移推力/加速度通道＋3轴控制力矩；没有电机/推进器几何分配、执行器动态或速率状态。正文将平移输入称为加速度通道，而Table 7.1将其界限标为力(N)，单位需在迁移前澄清。
+- **量测与估计**：平移输出为相对位置，C_T=[I_3 0]，速度由模型/滤波估计；仿真噪声结构另含四元数和角速度通道。没有给出真实相机、GPS、IMU等硬件映射。filter update固定每0.025s执行，算法没有测量丢失/随机间歇更新分支；因此是周期性多速率估计，不是间歇观测滤波。
+- **混合ZSM-KF**：过程/测量不确定性分别拆为Gaussian与unknown-but-bounded (UBB)部分。非线性f、g在先验估计处一阶线性化；通过先验zonotope内Hessian范数构造二阶Lagrange remainder界，形成G_δ、G_ε；与UBB过程/测量生成矩阵G_w、G_v作zonotope精确Minkowski合并。后验集合误差生成矩阵为Ω_k=[(K_kH_k−I)G_δ,(K_kH_k−I)G_w,K_kG_ε,K_kG_v]。Kalman增益通过最小化Tr(P_k)+Tr(Ω_kΩ_k^T)选取。**边界**：Ω_k只界定UBB与线性化余项；Gaussian噪声进入协方差P_k，Gaussian分布本身无有限硬支撑。因此这不是一个对全部随机噪声实现都保证包含真实状态的纯确定性后验集合，除非另加置信水平或有界化假设。该方法用普通zonotope，不是constrained zonotope。
+- **MPC结构/约束**：离散线性时变MPC；滤波步长0.025s，MPC步长0.5s（2Hz），预测时域30步、控制时域5步，基础仿真步长0.025s、仿真60s。Table 7.1给出平移力和力矩输入界限（分别标为±1N、±1Nm）及输入变化率惩罚；未给出硬速率约束。终端部分描述为最终时刻的速度边界条件并纳入代价，没有构造终端RPI/RCI集合。Algorithm 6将状态估计点xhat作为MPC预测初值；没有把Ω_k直接用于状态约束收紧、Tube初始化或终端集合。未见递归可行性/渐近稳定性定理；本章明确不主张渐近稳定性。
+- **仿真与实时证据**：仅60s六自由度航天器仿真，50次Monte Carlo；不是四旋翼、不是HIL/实飞。平均RMSE：位置0.0763m（EKF 0.0764m）、速度0.0478m/s（0.0559m/s）、姿态0.1268°（0.1268°）、角速度0.0013rad/s（0.0068rad/s）；主要改善体现在非线性旋转角速度估计，线性Tschauner–Hempel平移估计与EKF几乎相同。ZSM-KF平均更新0.56ms，EKF 0.49ms；没有硬件说明、WCET/百分位数或MPC求解时间，不能据此宣称整个闭环满足20ms预算。
+- **可迁移内容/限制**：可迁移的是“非线性Taylor余项→zonotope外包→与UBB过程/量测误差合并→混合协方差/集合误差准则选增益”的估计结构。不能直接迁移其分块对角航天器模型、虚拟平移/力矩输入或终端条件到四旋翼。对本课题最关键的缺口是：部分/间歇位置量测的后验集合、同一后验集合上的共同因果输入、将集合误差并入Tube/约束收紧、四桨分配及电机速率、硬终端RCI/递归可行性。
+
