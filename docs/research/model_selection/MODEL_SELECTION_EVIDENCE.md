@@ -54,6 +54,16 @@ PX4 ROS 2 `TrajectorySetpoint` 的 NaN mask、NED 坐标和控制层级见 [PX4 
 
 ---
 
+## 历史研究日志边界（当前决策以文件顶部为准）
+
+> **重要：** 本文件第 1–54 行是当前有效的规范化模型/接口决策摘要；从下方“背景第26轮”开始的逐轮日志、旧模型矩阵和后续专项审计，是按当时研究阶段保存的证据记录，不是当前研究指令。它们包含早期“平面六状态 + 总推力/俯仰力矩直接控制”为条件性首选、以及四桨/电机级 MPC、虚拟 wrench 等曾经探索的路线。这些历史判断已被当前分层架构取代，不得再作为当前主模型或外环输入权限的依据。
+>
+> **当前有效架构：** 12 状态六自由度刚体模型是仿真物理 plant；成熟飞控承担姿态/角速度、控制分配和电机执行；外环 MPC 只优化已验证的位置、速度或加速度等高层参考。六状态 \([p;v]\) 仅是待验证的外环预测状态候选，必须通过 12 状态 SITL 闭环残差覆盖验证；它不是旧平面六状态模型，也不意味着物理仿真被降为六状态。
+>
+> **如何使用下方记录：** 保留论文原始模型、状态/输入定义、观测假设、定理条件、数值结果与失败反例，作为文献证据和方法边界；旧记录中的“首选”“下一步”“停止”等阶段性决策不再生效。当前唯一优先问题以 [CURRENT_CHECKPOINT.md](../CURRENT_CHECKPOINT.md) 为准，新发现应先更新顶部决策摘要和检查点，再追加有日期的研究记录。
+
+## 历史专项审计与旧版模型选型矩阵（仅作证据追溯）
+
 ## 背景第26轮 — Mendez等(2023)真实四旋翼LMPC论文＋PX4固定版本控制分配源码审计（2026-11-02）
 
 **论文新增直接证据**：[期刊开放HTML全文§1–4已读] Mendez, Whidborne, Chen, *Sensors* 23(7):3711, DOI https://doi.org/10.3390/s23073711；全文 https://pmc.ncbi.nlm.nih.gov/articles/PMC10098597/ 。12状态悬停线性化 `(x,y,z,u_b,v_b,w_b,φ,θ,ψ,p,q,r)`，6物理自由度；外环4个**虚拟**高度/俯仰/横滚/偏航输入，0.1s、1s/10步增量LTI MPC/Hildreth QP，内环PID→4桨转速代数混控；KF测量位置/机体速度/姿态角，角速度隐藏；地面LiDAR给**风预报**，不是间歇位置观测。Draganflyer X-Pro 2.36kg仿真，真实LiDAR风数据驱动**非线性仿真**，无四旋翼MPC实飞、终端信息RCI、确定性SMF或逐桨ESC硬界。12状态只说明可在仿真中采用完整姿态/速度建模，不证明仓库1kg六状态候选必须扩维。
@@ -70,7 +80,7 @@ PX4 ROS 2 `TrajectorySetpoint` 的 NaN mask、NED 坐标和控制层级见 [PX4 
 
 ---
 
-# 四旋翼模型选型：文献证据矩阵（背景任务）
+### 旧版模型选型矩阵（2026-11-01 快照，已被当前决策取代）
 
 > 更新：2026-11-01；第6轮增加六状态垂向权限必要筛选与Hu等(2018)10状态论文纠错；首轮基准 main d5a8cd049fd57aa9b35750551abf83f3607321cd。此文档是模型与课题可行性论证，不是控制器证书。每条证据分为 [正文核验]、[仓库已认证]、[仓库配置]、[待核验]。
 
@@ -866,5 +876,7 @@ The 10D family is a yaw-fixed near-hover outer-loop command-response model, not 
 - Bicego uses MoCap pose, gyros and ESC RPM-derived force without a dedicated observer; Nan uses EKF with IMU/Vicon and ESC RPM; LoL uses GNSS/IMU and ESC RPM feedback at a lower reported rate. These provide real measurement channels for an actuator-augmented observer, but not a set-membership guarantee.
 - A motor-force measurement derived from RPM is f_i=c_f,i*Omega_i^2; uncertainty in the force coefficient and RPM measurement must be included in the set update. For first-order motor lag, an interval for tau_m,i produces a set-valued transition for each actual thrust state.
 - Wehbeh's scenario sampling is covariance/probability-based; it is not a constrained-zonotope or set-membership observer. The direct novelty claim remains unproven until the direct quadrotor SMF/CZ literature and transferable set-valued observer literature are cross-checked.
+
+**历史优先级说明（2026-11-03 更新）**：上面的 actuator-augmented 16/17-state、RPM/ESC 测量可观测性问题是该专项审计当时提出的下一步，不再是当前主任务优先级。当前唯一优先问题是冻结成熟飞控与外环高层指令接口，并通过官方文档/源码核验及 SITL 阶跃、轨迹试验辨识参考到实际位置/速度的闭环响应、延迟、限幅和可重复残差界；详见 [当前研究检查点](../CURRENT_CHECKPOINT.md)。
 
 **Next single priority question**: for the actuator-augmented 16/17-state plant (and the proposed reduced 10-coordinate planar-plus-actuator candidate), are actual rotor-thrust states observable/set-identifiable when position updates are intermittent but IMU and ESC RPM arrive asynchronously? Compare published observer/SMF/CZ methods, derive the correct measurement maps including the RPM-to-thrust coefficient uncertainty, and determine which state set can initialize a Tube-MPC error tube without assuming full-state measurement.
