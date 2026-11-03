@@ -2311,3 +2311,8 @@ J. Patel, U. C. Kaya, K. Subbarao, *Real-Time Reachable Set-Based Model Predicti
 - **本课题意义**：六状态平面(T,τ)仍条件性首选，四状态冻结推力仍仅数学基线。若采用逐桨/总推力预测，必须把执行器动态加入扩展状态或以实验有依据的误差集合外包；不能把论文的仿真追踪当作硬安全。**下一查**：从该文一阶执行器式(7)推导采样实际推力可达集，并与目标机体可测的ESC/RPM/推力辨识合同比较；由主研究任务实现验证，背景任务不开发控制器。
 
 ---
+
+
+## 2026-11-03 Hu primary-source follow-up (targeted rereading)
+
+See [scoped reading record](../research/model_selection/background_run_20261103_hu_primary_followup.md) for author-PDF page/section provenance, limitations and comparison. Three targeted body reads (Hu, Didier, Falanga), plus Alexis metadata/abstract only; no new unique-paper count asserted. Existing full-reading history is preserved; this entry records only this run's partial rereading. Current model priorities remain unchanged. No controller, experiment or safety certificate added.
