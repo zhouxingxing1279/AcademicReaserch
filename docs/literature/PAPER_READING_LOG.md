@@ -2230,7 +2230,7 @@
 - **不确定性/约束**：质量区间[27g,37g]，以LFT/乘性参数不确定性描述；另有有界风扰动，界限按x/y方向最大相对速度2m/s假设构造。每桨推力约束[0,0.157]N；位置被限制在以目标平衡位置为中心的超立方体，姿态/角速度也进入状态多面体约束。代价矩阵 Qx=diag(3,2,3,1,1,1,0.1,0.1,0.1,0.1,0.1,0.1)，Qu=I4；目标在10s仿真中于5s切换。
 - **量测与估计**：在线问题每拍使用可用状态测量 xhat_k 初始化管束；论文没有给出实际IMU/Vicon/GPS传感器配置，也没有输出方程、观测器、测量噪声或丢包模型。这里的state measurement是状态可用假设，不能写成已实现的输出反馈。没有状态SMF/CZ后验或参数在线估计器。
 - **MPC/终端/证明**：ETMPC用固定形状椭球的平移与缩放参数化状态管束，反馈输入为仿射形式 u=K(x-z)+v，在线求解凸SDP；离线通过SDP及标量线搜索设计椭球形状、反馈增益和终端集。终端椭球在u=Kx下满足鲁棒不变性及收缩条件，并落在状态/输入约束内。**Theorem 1**：离线设计问题(45)可行，且初始状态属于可行域 X_N(X_T)，真实系统满足论文式(1)–(5)的LFT不确定线性模型、扰动集合和状态/输入约束，则闭环轨迹留在该可行域、在线问题对所有后续时刻递归可行，并对外扰具有区域输入到状态实用稳定性（regional ISpS）。**Proposition 6**另在扰动最终变为零的附加条件下给出终端收缩后的指数收敛。作者指出Theorem 1给出的轨迹界在仿真中偏保守。该定理不是原始非线性六自由度模型、间歇观测或SMF输出反馈定理。
-- **结果/计算时间**：仅数值仿真，不是真实飞行/HIL/SITL。ETMPC与多面体PTMPC均以N=15比较：在目标xy偏移0.55m时闭环成本109.3与121.4、均未违约；ETMPC最大可行目标偏移0.68m，PTMPC在0.68m不可行。**平均在线求解时间ETMPC=0.16s、PTMPC=0.04s**；相对100ms采样，ETMPC平均已超周期，PTMPC平均低于周期但仍超过仓库20ms预算。论文未报告最坏执行时间、百分位数、计时硬件或明确实际求解器；参考文献列出YALMIP/MOSEK，但正文未明确将哪一求解器/硬件对应到该四旋翼计时，不能据参考文献反推。没有可核验的实飞数据。
+- **结果/计算时间**：仅数值仿真，不是真实飞行/HIL/SITL。ETMPC与多面体PTMPC均以N=15比较：在目标xy偏移0.55m时闭环成本109.3与121.4、均未违约；ETMPC最大可行目标偏移0.68m，PTMPC在0.68m不可行。**平均在线求解时间ETMPC=0.16s、PTMPC=0.04s**；相对100ms采样，ETMPC平均已超周期，PTMPC平均低于周期但仍超过仓库20ms预算。正文§5.1明确说明该节SDP使用YALMIP+MOSEK，并在Intel i7-8550 1.8GHz笔记本上运行；但该段对应mass-spring-damper算例。§5.2四旋翼例报告0.16s/0.04s平均在线时间，却未再次明确是否使用相同硬件/求解器，因此不能无条件把四旋翼计时归因于该设备/软件栈。论文未报告四旋翼最坏执行时间或百分位数。没有可核验的实飞数据。
 - **复现状态/局限/可迁移性**：出版社数据声明给出补充材料DOI https://doi.org/10.3929/ethz-b-000559871；2026-11-03后续核验：可访问的ETH bitstream下载路径实际返回的是论文正文副本（其ETH存档DOI为10.3929/ethz-b-000582916），并非补充材料DOI 10.3929/ethz-b-000559871；补充材料DOI/元数据入口仍返回403。检查作者公开GitHub主页及可见仓库未找到该补充代码镜像。故补充材料仍未取得、未运行，不能声称已复现。可复用的是LFT参数不确定性、椭球管束参数化、终端椭球RPI与递归可行性证明结构；但它假设状态可用，且在线反馈使用状态误差，不能直接将SMF/CZ后验点估计代入。若实际仅有估计值xhat=x+epsilon，必须将估计误差集合及其经反馈产生的-BK epsilon项纳入误差管束，并证明后验到初始椭球管束的可靠包含关系。
 
 ## 背景第34轮新增论文 — Michel等(2019) AR.Drone 2.0水平Tube MPC实飞
@@ -2278,10 +2278,24 @@
 
 ## 非期刊研究来源（不计入原始论文数量）
 
-Jinaykumar Nitinkumar Patel, *Set-theoretic Reachability-informed Model Predictive Control for Mechanical and Aerospace Systems*, Ph.D. dissertation, The University of Texas at Arlington, May 2026, DOI https://doi.org/10.13140/RG.2.2.27141.51681。2026-11-03定向阅读Chapter 6.1–6.2.5及Chapter 8.3.1–8.3.4。Chapter 6是LTV航天器相对运动中的椭球/zonotope SMF＋MPC，Chapter 8.3是独立的Crazyflie 2.1 12状态四旋翼、四桨转速输入与zonotopic reachable-set MPC；两者不是同一个四旋翼SMF/CZ闭环案例。Chapter 6明确不主张渐近稳定；Chapter 8.3无SMF后验、无间歇量测、电机动态假设为瞬时转速变化。全文：https://www.researchgate.net/publication/406045114_Set-theoretic_Reachability-informed_Model_Predictive_Control_for_Mechanical_and_Aerospace_Systems。
+Jinaykumar Nitinkumar Patel, *Set-theoretic Reachability-informed Model Predictive Control for Mechanical and Aerospace Systems*, Ph.D. dissertation, The University of Texas at Arlington, May 2026, DOI https://doi.org/10.13140/RG.2.2.27141.51681。2026-11-03定向阅读Chapter 6.1–6.2.5及Chapter 8.3.1–8.3.4；2026-11-03后续完整阅读Chapter 7 pp.141–168。Chapter 7重印Patel与Subbarao的AIAA SciTech 2026论文（DOI 10.2514/6.2026-0111），全文通过博士论文重印章节核验，AIAA proceedings独立PDF未单独取得；Chapter 7的hybrid ZSM-KF与Chapter 6的LTV SMF-MPC、Chapter 8.3的quadrotor reachable-set MPC是不同工作，不得合并其证明结论。Chapter 6是LTV航天器相对运动中的椭球/zonotope SMF＋MPC，Chapter 8.3是独立的Crazyflie 2.1 12状态四旋翼、四桨转速输入与zonotopic reachable-set MPC；两者不是同一个四旋翼SMF/CZ闭环案例。Chapter 6明确不主张渐近稳定；Chapter 8.3无SMF后验、无间歇量测、电机动态假设为瞬时转速变化。全文：https://www.researchgate.net/publication/406045114_Set-theoretic_Reachability-informed_Model_Predictive_Control_for_Mechanical_and_Aerospace_Systems。
 
 ---
 
 ## 待全文核验候选（不计入已读论文数量）
 
 J. Patel, U. C. Kaya, K. Subbarao, *Real-Time Reachable Set-Based Model Predictive Control for Safe Trajectory Tracking of Quadrotors*, AIAA Science and Technology Forum and Exposition / AIAA SciTech Forum 2026, ISBN 9781624107658。当前仅核验二次数据库书目信息/概要，未取得AIAA出版方全文、页码或DOI；其与Patel 2026博士论文Chapter 8.3的重合程度未核实。来源：https://eurekamag.com/research/103/962/103962467.php。
+
+
+---
+
+## 背景第36轮新增论文 — Patel & Subbarao (2026) 航天器混合ZSM-KF＋时变MPC
+
+- **书目信息**：Jinaykumar Patel, Kamesh Subbarao, *Robust 6-DOF State Estimation for Spacecraft Proximity Operations Using Zonotopic Set Membership based Kalman Filtering*, AIAA SCITECH 2026 Forum, 2026, vol. 48, no. 1, paper 0111, Orlando, Florida, January 2026, DOI https://doi.org/10.2514/6.2026-0111。**全文核验路径**：Patel博士论文 *Set-theoretic Reachability-informed Model Predictive Control for Mechanical and Aerospace Systems*（University of Texas at Arlington, May 2026, DOI https://doi.org/10.13140/RG.2.2.27141.51681）Chapter 7 pp.141–168明确注明本章经许可重印该AIAA论文；本轮完整阅读Chapter 7 §§7.1–7.6。AIAA proceedings独立PDF未单独取得，故阅读等级写作“全文经学位论文重印本核验”，不声称直接读过独立会议PDF。
+- **任务/物理模型/状态输入**：航天器相对接近与交会。13个坐标状态：LVLH相对位置3、相对速度3、姿态四元数4、相对角速度3；物理自由度为6。平移采用Tschauner–Hempel时变相对轨道模型，旋转采用四元数/角速度动力学；组合矩阵采用分块对角形式A=diag(A_T,A_R)、B=diag(B_T,B_R)，未建模平移—姿态耦合。6个虚拟输入：3个LVLH平移推力/加速度通道＋3轴控制力矩；没有电机/推进器几何分配、执行器动态或速率状态。正文将平移输入称为加速度通道，而Table 7.1将其界限标为力(N)，单位需在迁移前澄清。
+- **量测与估计**：平移输出为相对位置，C_T=[I_3 0]，速度由模型/滤波估计；仿真噪声结构另含四元数和角速度通道。没有给出真实相机、GPS、IMU等硬件映射。filter update固定每0.025s执行，算法没有测量丢失/随机间歇更新分支；因此是周期性多速率估计，不是间歇观测滤波。
+- **混合ZSM-KF**：过程/测量不确定性分别拆为Gaussian与unknown-but-bounded (UBB)部分。非线性f、g在先验估计处一阶线性化；通过先验zonotope内Hessian范数构造二阶Lagrange remainder界，形成G_δ、G_ε；与UBB过程/测量生成矩阵G_w、G_v作zonotope精确Minkowski合并。后验集合误差生成矩阵为Ω_k=[(K_kH_k−I)G_δ,(K_kH_k−I)G_w,K_kG_ε,K_kG_v]。Kalman增益通过最小化Tr(P_k)+Tr(Ω_kΩ_k^T)选取。**边界**：Ω_k只界定UBB与线性化余项；Gaussian噪声进入协方差P_k，Gaussian分布本身无有限硬支撑。因此这不是一个对全部随机噪声实现都保证包含真实状态的纯确定性后验集合，除非另加置信水平或有界化假设。该方法用普通zonotope，不是constrained zonotope。
+- **MPC结构/约束**：离散线性时变MPC；滤波步长0.025s，MPC步长0.5s（2Hz），预测时域30步、控制时域5步，基础仿真步长0.025s、仿真60s。Table 7.1给出平移力和力矩输入界限（分别标为±1N、±1Nm）及输入变化率惩罚；未给出硬速率约束。终端部分描述为最终时刻的速度边界条件并纳入代价，没有构造终端RPI/RCI集合。Algorithm 6将状态估计点xhat作为MPC预测初值；没有把Ω_k直接用于状态约束收紧、Tube初始化或终端集合。未见递归可行性/渐近稳定性定理；本章明确不主张渐近稳定性。
+- **仿真与实时证据**：仅60s六自由度航天器仿真，50次Monte Carlo；不是四旋翼、不是HIL/实飞。平均RMSE：位置0.0763m（EKF 0.0764m）、速度0.0478m/s（0.0559m/s）、姿态0.1268°（0.1268°）、角速度0.0013rad/s（0.0068rad/s）；主要改善体现在非线性旋转角速度估计，线性Tschauner–Hempel平移估计与EKF几乎相同。ZSM-KF平均更新0.56ms，EKF 0.49ms；没有硬件说明、WCET/百分位数或MPC求解时间，不能据此宣称整个闭环满足20ms预算。
+- **可迁移内容/限制**：可迁移的是“非线性Taylor余项→zonotope外包→与UBB过程/量测误差合并→混合协方差/集合误差准则选增益”的估计结构。不能直接迁移其分块对角航天器模型、虚拟平移/力矩输入或终端条件到四旋翼。对本课题最关键的缺口是：部分/间歇位置量测的后验集合、同一后验集合上的共同因果输入、将集合误差并入Tube/约束收紧、四桨分配及电机速率、硬终端RCI/递归可行性。
+
