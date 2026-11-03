@@ -1,3 +1,14 @@
+## Run278 — Yan/Cannon/Goulart（2022）间歇观测随机输出反馈MPC复读（2026-11-03；既有DOI去重不增加）
+
+- **书目/版本**：Shuhao Yan, Mark Cannon, Paul J. Goulart, *Stochastic output feedback MPC with intermittent observations*, *Automatica* 141 (2022), 110282；DOI https://doi.org/10.1016/j.automatica.2022.110282；作者arXiv:2009.11071v3 https://arxiv.org/pdf/2009.11071 （2022-03-01），牛津存档 https://ora.ox.ac.uk/objects/uuid%3A65493a65-7eb6-4897-9f30-bc51e091266c 。**此前背景第13轮已登记，按DOI去重，非新增论文。**
+- **本轮实际阅读/状态**：2026-11-03重新阅读公开13页PDF pp.2–4 §2–3式(1)–(10)、Assumptions 1–3及pp.11–12 §9的四状态双倒立摆算例；**分节复读**，没有逐式重现全文证明或复现仿真。
+- **研究问题/状态/输入**：一般离散线性系统`x+=Ax+Bu+Dw,y=Cx+v,z=gamma*y`，数值案例为**4状态双倒立摆、2输入**，不是四旋翼四状态；真实电机/推力、推力分配和无人机物理约束不适用。
+- **量测/估计/不确定性**：全输出按已知成功率的i.i.d. Bernoulli随机丢包，噪声零均值、有限二阶矩，观测器使用点估计/协方差；不是有界噪声真值包含SMF/CZ，且不能保证仓库最多连续2miss的确定性自动机。
+- **MPC结构/约束/理论**：§3式(6)将未来控制表示为已接收输出创新的仿射**因果反馈**，固定K/M、在线优化偏置和创新增益；优化为凸随机MPC，约束为折扣期望二阶矩预算，不是每拍状态/输入硬盒。Theorem 7的优化递归可行、Theorem 9的长期平均代价条件，不能改写为本课题所有合法观测路径下的硬安全与终端信息不变性。§9双倒立摆数值仿真`h=0.01s,N=5,lambda=0.6`，与LQG对照，非四旋翼实飞；未报告本课题20ms WCET。
+- **关联、可复用技术与限制**：可复用未来量测条件化控制策略的因果参数化与候选策略移位思想；但Run278的`0.713044490909...m/s`速度直径和66拍开环障碍是本仓库**冻结四状态有界扰动数学证书**，不是本文结论。**待查**：能否在所有合法success/miss分支下构造可靠SMF外包和共同因果安全前驱；不能将随机期望约束当作确定性安全证书。详见`docs/research/run278_research_log.md`。
+
+---
+
 ## 背景第29轮 — Falanga等(2018)机载视觉感知MPC与软可见性限制（2026-11-02；新增去重）
 
 - **书目/全文/阅读状态**：Davide Falanga; Philipp Foehn; Peng Lu; Davide Scaramuzza, *PAMPC: Perception-Aware Model Predictive Control for Quadrotors*, *2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)*, pp.5200–5207, DOI https://doi.org/10.1109/IROS.2018.8593739；作者公开接受稿 https://rpg.ifi.uzh.ch/docs/IROS18_Falanga.pdf ，arXiv v2 https://arxiv.org/pdf/1804.04811v2 ，开源 https://github.com/uzh-rpg/rpg_mpc 。2026-11-02阅读8页公开稿正文§I–VII、式(1)–(13)、实验与计算章节；**正文分节全篇已读**，未对照IEEE终版、未逐式审计全部四元数投影导数、未构建源码。
