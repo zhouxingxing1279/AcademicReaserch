@@ -586,3 +586,21 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 **SMF/CZ可迁移性**：Chipofya的KF与Laguerre优化、PAMPC的VIO点估计均未给有界后验；本课题若采用这些架构，须对位置success/miss的状态SMF、观测纤维共享命令、内环执行残差与终端信息安全分别认证。Run278已证明特定MMS真实纤维任何观测无关开环力矩66拍不能保证安全，但**不排除因果反馈**。Gate A仍blocked；没有新控制器/仿真/定理。详见 `docs/research/model_selection/background_run_20261103_0034_laguerre_sbus.md`。
 
 **唯一下一轮问题**：查验Betaflight固定固件版本中BODY_RATES SBus→QUADX混控→DSHOT300的具体实现与是否存在公开可核验的RPM/实际推力同步残差界；若无，明确目标机体台架辨识所需测量误差/带宽合同。
+
+---
+
+## 背景第33轮：12状态六自由度plant的期刊实飞证据与Tube MPC适用边界（2026-11-03 UTC）
+
+**新增直接论文证据**：[IET Control Theory & Applications原始16页全文正文分节已读] Alexis, Nikolakopoulos, Tzes (2012), *Model predictive quadrotor control: attitude, altitude and position experimental studies*, 6(12):1812–1827, DOI https://doi.org/10.1049/iet-cta.2011.0348；全文 https://www.diva-portal.org/smash/get/diva2%3A980101/FULLTEXT01.pdf。真实UPATcopter约1.1kg实飞，6物理自由度/12状态plant，IMU+sonar+Tam2 optic-flow＋EKF，强制风阵、位置保持、轨迹和姿态实验。该证据支持用户要求的12状态完整6-DOF仿真plant，但不证明统一12状态Tube MPC。
+
+**架构纠偏**：论文将12状态非线性plant拆为10维姿态积分增广PWA、3状态高度PWA、6状态水平PWA；9个姿态工作区、2个高度工作区，Np=5/Nc=2；姿态120Hz、平移约33Hz。其SMPC是switching MPC，不是stochastic MPC。输入U=(U1,U2,U3,U4,Ωr)含总推力/三力矩相关量及四桨残余转速组合Ωr；Ωr由四个电机转速派生，不是第五物理执行器。作者明确指出PWA模型切换时不能保证原非线性系统稳定性，只报告实飞未见失稳。
+
+**主仿真plant决策更新**：尊重用户明确的毕业仿真要求，12状态完整六自由度非线性plant升级为主仿真对象；但这是课题范围/交付要求驱动，不代表它比6状态更容易证明。保留四状态冻结推力作为已认证数学基线、六状态平面模型作为降阶对照及鲁棒证明开发平台。对12状态主对象建议先在悬停附近做单工作点线性化Tube MPC，并用12状态非线性plant闭环验证；所有鲁棒保证限制在明确姿态/速度/输入包线。若改用多工作点PWA，需要另证切换一致Lyapunov/共同终端集合。
+
+**状态与输入规范**：本课题建议统一采用状态 x=(p_I[3],v_I[3],η_ZYX[3],ω_B[3])；其中ω_B为机体系角速度，必须使用 dot(η)=E(η)ω_B。悬停点为η=0、v=0、ω_B=0、T=mg、τ=0。若MPC输入用wrench (T,τx,τy,τz)，实际电机可行域必须写成 W={Gf | f_min≤f≤f_max}；若G可逆则可写 f_min≤G^{-1}w≤f_max。不得将四个wrench通道各自独立限幅当作真实四电机约束；不得将Ωr当成第五电机输入。
+
+**Tube建模的新增必要项**：非线性plant在选定包线内相对离散线性模型的残差必须并入扰动集W；W还应包括外扰、参数/惯量误差、零阶保持/离散化误差和有界执行器跟踪误差。输出反馈下若u=v+K(xhat−z)，估计误差集合S进入误差动力学 e⁺=(A+BK)e+w−BKε，需满足 (A+BK)E ⊕ W ⊕ (−BK S) ⊆ E。仅对线性化模型构造RPI tube，不足以自动覆盖原非线性plant。
+
+**候选排序说明**：12状态主仿真plant按用户毕业交付要求确定；六状态仍是目前证据更集中、证明成本更低的鲁棒安全研究基线；不能因为状态数12而把其数学安全成熟度排在六状态之前。Run246/Run260/Run261/Run278的四状态安全/失测结果不外推为12状态不可行或可行。SMF/CZ创新性仍未证明；本篇只用EKF，不是集合滤波先例。
+
+**证据缺口**：本轮没有推导12状态A/B数值矩阵、没有计算非线性残差包络、没有构造RPI/终端信息集合、没有运行仿真/求解器、没有HIL或实飞。详见 background_run_20261103_1151_alexis2012_12state_switching_mpc.md。唯一下一轮问题：推导指定坐标/旋翼布局下的12状态悬停线性模型和wrench/电机耦合可行域，并给出选定包线内的非线性残差外包合同。
