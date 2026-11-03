@@ -5,21 +5,23 @@
 ## 阶段 1：冻结仿真物理对象与飞控接口
 
 1. 选定 12 状态六自由度刚体物理 plant、机体参数、坐标系、重力方向和工作包线。
-2. 锁定 PX4/ArduPilot 固件 commit、参数集、SITL 版本、ROS 2 或 MAVLink 消息路径。
+2. 暂以 PX4-Autopilot v1.17.0（commit `d6f12ad1c4f70ad3230afd7d86e971421e02fef4`）、Gazebo Harmonic X500、Ubuntu 22.04 / ROS 2 Humble、`px4_msgs release/1.17`（commit `86d8239e962f6939e05c3737784f60c02fa884db`）作为可复现 SITL 基线候选；这不是最终硬件选型，且尚未运行 SITL。
 3. 核验 Offboard setpoint 的真实字段语义、NaN mask、NED/ENU 转换、更新率、状态估计有效性、超时和 failsafe。
 4. 先使用 PX4 ROS 2 `TrajectorySetpoint` 位置参考作为辨识候选；速度和加速度参考分别独立测试，不混用接口合同。
 
 ## 阶段 2：确定外环预测模型，而不是改变物理仿真对象
 
 1. 在 12 状态物理 plant + 成熟飞控闭环下记录 setpoint、实际位置/速度/姿态/角速度、饱和状态与时间戳。
-2. 首先检验六状态平移预测 \(x_{out}=[p;v]\)；辨识位置/速度/加速度各自的闭环 \(A_{cl},B_{cl}\)。
-3. 对独立验证工况计算残差外包，覆盖姿态瞬态、飞控跟踪误差、延迟、饱和、风扰和模型失配。
-4. 如果六状态模型不能给出约束相关瞬态的可靠外包，则增广预测状态；12 状态物理 plant 始终保留用于仿真验证。
-5. 外环输入始终是已验证的高层参考；不把电机推力、wrench 或姿态稳定命令当作当前研究输入。
+2. 首先检验六状态平移预测 \\(x_{out}=[p;v]\\)；位置 setpoint 经 PX4 位置 P—速度 PID 级联，不是理想双积分器。
+3. 通过重复历史/不同积分器初值试验检验六状态是否 Markov；若残差依赖 `_vel_int`、速度/导数滤波或饱和，增广最小必要闭环记忆状态。
+4. 辨识位置参考到 \\([p,v]\\) 的闭环 \\(A_{cl},B_{cl}\\)，并检验输入延迟和零阶保持；对独立验证工况计算残差外包，覆盖姿态瞬态、飞控跟踪误差、延迟、饱和、风扰和模型失配。
+5. 如果六状态模型不能给出约束相关瞬态的可靠外包，则增广预测状态；12 状态物理 plant 始终保留用于仿真验证。
+6. 外环输入始终是已验证的高层参考；不把电机推力、wrench 或姿态稳定命令当作当前研究输入。
 
 ## 阶段 3：冻结测量与丢包合同
 
-- 区分 GNSS、VIO、飞控 EKF、IMU 与外部真值；记录坐标、时间戳、延迟、噪声界和信息相关性。
+- 区分 Gazebo 真值、PX4 内环 EKF 的 `vehicle_local_position`、外环 SMF 测量通道；首轮保持 PX4 EKF 高频运行，单独对外环测量施加有界噪声/丢包。
+- 记录坐标、时间戳、延迟、噪声界和信息相关性；不得重复融合 EKF 已经使用的同源 IMU/GNSS/VIO。
 - 规定位置/速度测量到达时序及正式丢包自动机（初始相位、状态、转移、最大连续丢包）。
 - 不把飞控 EKF 已融合的信息与同源原始 IMU 当作独立测量重复使用。
 
@@ -48,6 +50,7 @@
 - [当前研究检查点](CURRENT_CHECKPOINT.md)
 - [临时模型与接口合同](MODEL_CONTRACT.md)
 - [PX4 外环接口证据](model_selection/PX4_INTERFACE_EVIDENCE.md)
+- [PX4 v1.17.0 源码审计与 SITL 辨识协议](model_selection/PX4_V1_17_SOURCE_AUDIT.md)
 - [外环 MPC 与 SMF/CZ 文献证据](model_selection/OUTER_LOOP_MPC_LITERATURE.md)
 - [模型选型证据矩阵](model_selection/MODEL_SELECTION_EVIDENCE.md)
 - [开放 PR 分类与依赖图](PR_TRIAGE_20261103.md)
