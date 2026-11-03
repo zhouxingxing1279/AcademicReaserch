@@ -70,3 +70,7 @@ y_k=C_px_k+v_k,\quad v_k\in\mathcal V
 ## 下一唯一优先问题
 
 **Gate T3：** 在 \(x=[p;v]\)、\(C_p=[I_3\;0]\) 的抽象离散平移模型下，给定明确的最大连续失测数、有限测量语言、有界加速度/模型残差和有界位置噪声，推导并验证位置-only CZ-SMF 的相位相关误差界；比较精确 CZ 后验与路径相关 observer + CZ 误差外包两条路线，证明至少一条路线满足 Equalized Recovery。未完成该 Gate 前不推进 PX4 接口 A/B 或具体飞控 SITL。
+
+## Run300 conditional two-timestamp acquisition (2026-11-03)
+
+Under the explicit sliding-window contract that each H+1 sampling instants contain an **eventually delivered** sample, with delivery lag <=D, two distinct original timestamps are available by k>=2(H+1)+D-1. Latest age <=H+D and the gap between the latest two received timestamps is conservatively <=2H+1+D. Proof: `docs/research/run300_two_timestamp_recovery.md`; exhaustive finite-prefix checker: `experiments/run300_two_timestamp_contract.py`. This does **not** certify the formal measurement automaton, CZ posterior, Equalized Recovery, Tube MPC or physical safety. Next sole priority: freeze and certify the reachable joint generation/loss/delay automaton against this contract.
