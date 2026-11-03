@@ -1,0 +1,48 @@
+# Background run 2026-11-03: Tube MPC guarantees versus motor-level authority
+
+**Scope:** cross-paper evidence audit, no controller implementation. Baseline main SHA `9375b7d32de20233574e602ba762d889eeab8d98`. Current research checkpoint remains **Gate A blocked**; the 12-state nonlinear 6-DOF plant is the requested simulation target, six-state planar model is a reduced proof baseline, not a certified 12-state controller. The prior background PR #166 remains separate and was not modified.
+
+## Research question
+
+Can published quadrotor Tube MPC guarantees be transferred to a standard one-direction rotor vehicle with explicit `u=(T,tau_x,tau_y,tau_z)`, individual rotor thrust bounds/rates, noisy intermittent position measurements, and SMF/CZ posterior sets?
+
+**Short answer: no direct transfer established.** The papers below provide distinct pieces, with nonidentical actuation and observation contracts.
+
+## Cross-paper source audit (2026-11-03)
+
+1. **Jad Wehbeh; Inna Sharf (2024)**, *Nonlinear scenario-based model predictive control for quadrotors with bidirectional thrust*, *International Journal of Robust and Nonlinear Control* **34**(18), 12450–12475, DOI [10.1002/rnc.7627](https://doi.org/10.1002/rnc.7627). **Publisher open full-text sections read:** §2.2–2.4, §3 introduction, Eq.(5), (23)–(29), publisher metadata and abstract. Dynamics use rigid-body translation, attitude SO(3) and angular velocity, with four **individual motor thrusts** as MPC inputs, `w=Gamma f`. Actuation is **bidirectional**, including negative rotor thrust, and nonlinear thrust-dependent motor rate limits based on a motor/propeller fit. The method is **scenario-based approximate nonlinear MPC**, using linearization and MEKF state estimates; evaluates Monte Carlo simulations, not a deterministic bounded-disturbance Tube MPC theorem. Motor model and signed thrust domain are not directly portable to conventional one-way rotors. **Not confirmed in this audit:** exact prediction horizon, sensor suite, all simulation timings, terminal robust invariant set, complete proof assumptions. The previous background ledger already records this DOI; do not count as newly read unique paper.
+
+2. **Jad Wehbeh; Inna Sharf (2022)**, *An MPC Formulation on SO(3) for a Quadrotor With Bidirectional Thrust and Nonlinear Thrust Constraints*, *IEEE Robotics and Automation Letters* **7**(2), 4945–4952, DOI [10.1109/LRA.2022.3154021](https://doi.org/10.1109/LRA.2022.3154021). **Publisher abstract/metadata verified only, not full text.** The abstract reports Lie-algebra time-varying linearization about non-equilibrium points, analytical-Hessian QP, approximate enforcement of nonlinear bidirectional motor thrust dynamics, and simulated half-flip, turnaround, barrel roll. **Not established from abstract:** full state dimension, measurements, sampling period, terminal constraints, actual hard guarantees, runtime/WCET, real flight. This paper supports a motor-level MPC architecture but **not** standard unidirectional thrust feasibility or deterministic output-feedback Tube safety.
+
+3. **Davi A. dos Santos; Constantino M. Lagoa (2022)**, *Wayset-based guidance of multirotor aerial vehicles using robust tube-based model predictive control*, *ISA Transactions* **128**, 123–135, DOI [10.1016/j.isatra.2021.12.002](https://doi.org/10.1016/j.isatra.2021.12.002). **Author institutional publication abstract verified only, not full text** (https://flavioluiz.github.io/pgeam/en/publicacoes/85122342732/). The guidance supervisor applies fixed-horizon robust **Tube MPC** to a **reduced-order closed-loop translation model**; stabilizing position/attitude inner controllers are assumed available and time-scale separation is used. The abstract states analytical recursive feasibility, robust stability and overall guidance feasibility, plus realistic quadrotor numerical evaluation. These guarantees apply to that reduced guidance architecture under its assumptions; they are **not** a 12-state motor-level output-feedback guarantee. **Not confirmed:** exact state/input vectors, terminal set construction, sensors/noise support, per-rotor constraints, time discretization, compute time. Must read original full text before invoking theorem details.
+
+4. **M. Jacquet; G. Corsini; D. Bicego; A. Franchi (2020)**, *Perception-constrained and Motor-level Nonlinear MPC for both Underactuated and Tilted-propeller UAVs*, *IEEE ICRA*, 4301–4306, DOI [10.1109/ICRA40945.2020.9197281](https://doi.org/10.1109/ICRA40945.2020.9197281). **Bibliographic secondary abstract verified only, not full text** (https://web.eurekamag.com/research/099/251/099251111.php). The abstract claims rotor speed and acceleration constraints, motor-torque-level NMPC, camera/lidar visibility constraints and both simulation and real experiments on multirotor classes including standard underactuated quadrotors. This is a promising **physical actuator authority** comparator, but its robust hard safety, precise state, estimator, solver timing and exact standard-quadrotor experiment must be verified from the primary paper. **Not Tube MPC and no SMF claim verified.**
+
+### Contract comparison
+
+| Paper | Optimized input | Rotor feasibility | Uncertainty/measurement | Safety theorem transfer |
+|---|---|---|---|---|
+| Wehbeh/Sharf 2024 | four signed rotor thrusts | bidirectional nonlinear rates | MEKF, scenario state/parameter uncertainty | no deterministic SMF/Tube guarantee |
+| Wehbeh/Sharf 2022 | bidirectional motor-level thrust (abstract) | nonlinear constraints (abstract) | not verified | not verified |
+| Santos/Lagoa 2022 | reduced translational guidance (abstract) | inner loops assumed, rotor bounds not verified | bounded disturbance/noise in reduced model (abstract) | only for reduced guidance under original assumptions |
+| Jacquet et al. 2020 | motor torque-level NMPC (abstract) | rotor speed and acceleration bounds | perception constraints; exact estimator unverified | no Tube/SMF hard theorem verified |
+
+**Evidence grading:** 1 publisher original text partial; 1 original publisher abstract; 1 institutional publication abstract; 1 secondary bibliographic abstract. **Full papers completed in this run: 0; partial original full text: 1; abstracts/metadata only: 3.** Three of the four are newly cross-checked in this run, but none should be mislabeled as newly *fully read*. Existing ledger entries must be deduplicated by DOI.
+
+## Mathematical transfer obstacle
+
+For a conventional fixed-pitch unidirectional four-rotor vehicle, define rotor thrust `f in R^4` and allocation matrix `G` with `w=[T,tau_x,tau_y,tau_z]^T=Gf`. If `G` is invertible and rotor limits are `0<=f_i<=f_i,max`, a candidate wrench is feasible **iff** `G^{-1}w` lies in the rotor box (subject to geometry and sign conventions). A rectangular box constraint on each component of `w` alone is generally **not equivalent** to this coupled polytope. If the actuator has per-step rate limits, additionally require `|f_{i,k}-f_{i,k-1}|<=Delta f_{i,max}` for every physically possible previous rotor state; if `f_{k-1}` is uncertain, the safe command condition must be checked over its entire reliable set. The bidirectional paper's negative thrust domain and nonlinear reversal rates cannot be copied into this conventional actuator contract.
+
+For Tube MPC with `x=z+e`, constraint tightening `z in X omin E` and `v in U omin K E` only ensures actual-input feasibility when the **implemented actuator command** equals the assumed `u=v+Ke` (or a separately bounded and incorporated execution residual). A mixer that saturates/desaturates `G^{-1}u` changes the applied wrench. Therefore a full safety claim requires an explicit robust bound on `G f_actual-u_requested` and a valid error tube including this residual. Intermittent position measurement adds a distinct information-state requirement: the controller must use a posterior set containing all true states consistent with the measurement history and disturbances, and its chosen command must work for every member of that set. No cited paper above jointly establishes this full contract.
+
+## Model decision and next work
+
+- **12-state rigid-body nonlinear plant:** retain as simulation and external validity target; **no proven Tube MPC closed-loop safety**.
+- **Six-state planar (T,tau):** retain conditional reduced proof candidate, but require the rotor feasibility projection and a physically credible disturbance/measurement contract.
+- **Four-state fixed-T model:** retains finite-horizon and impossibility evidence; cannot claim altitude safety for nonzero roll.
+- **Layered reduced translation Tube guidance:** useful backup architecture, but its inner-loop tracking error and allocation feasibility must be bounded before a full-vehicle hard guarantee.
+- **SMF/CZ novelty:** not established merely by combining keywords; the research gap is a *bounded state posterior + intermittent measurement + causal shared feasible actuation + terminal information viability* with real comparative evidence.
+
+**One next priority:** retrieve and read the complete Santos/Lagoa 2022 original article (methods, assumptions, theorem, terminal construction, numerical model), then compare its guidance Tube feasibility conditions against the repository's exact hard-box, intermittent measurement and rotor authority contract. If full text unavailable, continue with Jacquet et al. primary paper to establish physical actuator bounds, explicitly marking the missing original theorem.
+
+**No new theorem, controller, simulation, PX4 hardware validation, CI or 20ms WCET is claimed in this literature-only audit.** Gate A remains blocked.
