@@ -35,6 +35,12 @@ x_{out}=[p^\mathsf T,v^\mathsf T]^\mathsf T
 ### C. 速度参考
 速度参考 \(v_c\) 的响应需依据飞控模式和实测辨识，不能预设为理想一阶/二阶系统。
 
+## PX4 ROS 2 Offboard 字段语义（官方文档级证据）
+
+对于多旋翼 `TrajectorySetpoint`，position 非 NaN 时运行位置控制链，velocity/acceleration 可作为前馈；position 为 NaN 且 velocity 有效时运行速度控制链，acceleration 可作为前馈；position 与 velocity 均为 NaN、acceleration 有效时进入加速度设定路径。数据为 NED，单位分别为 m、m/s、m/s²。
+
+必须联合检查 `OffboardControlMode` 与 `TrajectorySetpoint` 有效字段/NaN mask；不同 ROS 2 与 MAVLink 消息路径不能默认等价。该接口语义不提供实际跟踪误差、延迟、带宽或饱和界。完整证据和来源见 [PX4 外环接口证据](model_selection/PX4_INTERFACE_EVIDENCE.md)。
+
 ## 测量与集合估计
 \[
 y^p_k=C_px_k+\nu^p_k,\quad C_p=[I_3\ \ 0]
