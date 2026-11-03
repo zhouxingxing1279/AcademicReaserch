@@ -4,6 +4,8 @@
 
 ## 核心文件
 - [模型证据矩阵](MODEL_SELECTION_EVIDENCE.md)：当前决策更新置于顶部，历史表格保留为证据。
+- [PX4 外环接口证据](PX4_INTERFACE_EVIDENCE.md)：整合 #188/#186/#190，明确 NaN mask、NED、三类 setpoint 与闭环辨识合同。
+- [外环 MPC 与 SMF/CZ 文献证据](OUTER_LOOP_MPC_LITERATURE.md)：整合 #184/#162/#170，区分 12 状态物理 plant、外环预测状态与优化器输入权限。
 - [唯一论文总账](../../literature/PAPER_READING_LOG.md)：按 DOI/题名去重的唯一登记处。
 - [当前模型合同](../MODEL_CONTRACT.md)：被控对象、候选输入、测量和扰动合同。
 - [当前检查点](../CURRENT_CHECKPOINT.md)：下一唯一研究问题。
