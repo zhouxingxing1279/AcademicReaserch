@@ -2316,3 +2316,8 @@ J. Patel, U. C. Kaya, K. Subbarao, *Real-Time Reachable Set-Based Model Predicti
 ## 2026-11-03 Hu primary-source follow-up (targeted rereading)
 
 See [scoped reading record](../research/model_selection/background_run_20261103_hu_primary_followup.md) for author-PDF page/section provenance, limitations and comparison. Three targeted body reads (Hu, Didier, Falanga), plus Alexis metadata/abstract only; no new unique-paper count asserted. Existing full-reading history is preserved; this entry records only this run's partial rereading. Current model priorities remain unchanged. No controller, experiment or safety certificate added.
+
+
+## 2026-11-03 Hu model/proof-chain continuation — partial primary-source audit
+
+[Detailed provenance and reading positions](../research/model_selection/background_run_20261103_hu_printed_model_proof_chain.md). Four body sources partially verified (Hu, Didier, Bouffard technical report, Villanueva theory); Alexis remains abstract-only. No full-read or new unique-paper count asserted. Visual inspection resolves the previous OCR uncertainty: the problematic indices are printed in the author PDF. Canonical attitude coordinates require transformation before physical interpretation; author-intended correction remains unverified. Hu is not a copy-ready simulation plant. Terminal containment and observation-history compatibility require separate checks. Preserve existing model priorities and all previous evidence; this is a reproducibility qualification, not a controller result.
