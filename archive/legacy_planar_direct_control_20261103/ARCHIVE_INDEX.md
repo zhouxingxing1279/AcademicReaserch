@@ -34,7 +34,7 @@
 
 ## 活动目录保留
 - docs/literature/PAPER_READING_LOG.md：唯一论文总账，未移动、未重建。
-- docs/research/model_selection/**：全部背景文献审计与模型矩阵保留；矩阵顶部新增当前外环决策说明。
+- docs/research/model_selection/**：全部背景文献审计与模型矩阵保留，作为可追溯证据库；`MODEL_SELECTION_EVIDENCE.md` 顶部是唯一当前决策摘要，其下旧矩阵/逐轮日志已显式标为历史记录，里面曾经出现的“平面六状态直接推力/力矩首选”及旧“下一步”不再生效。
 - docs/research/CURRENT_CHECKPOINT.md：新外环检查点。
 - docs/research/MODEL_CONTRACT.md：临时接口/模型合同。
 - src/common/numerical_sets.py：可复用但仅数值性的集合工具。
