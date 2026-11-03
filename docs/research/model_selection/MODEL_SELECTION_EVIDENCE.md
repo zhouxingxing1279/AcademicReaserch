@@ -740,3 +740,31 @@ Cross-checked original-source metadata for Bouffard's 2012 Berkeley thesis, Bouf
 **Coordinate check:** If `G(s)=n0/(s²+d1*s+d0)` is realized as `dot(theta)=-d1*theta+z2; dot(z2)=-d0*theta+n0*u`, then `z2=physical_theta_dot+d1*theta`; it is **not** directly the gyro rate. If instead physical `theta_dot` is the second state, the second equation must include `-d1*theta_dot`. Any transplant must first resolve which realization is used and transform measurement, constraints and tube coordinates consistently.
 
 **Safety gate:** unchanged, **Gate A blocked** (Run278 shows a legal MMS two-truth posterior diameter and shared open-loop obstruction, not impossibility of future observation-conditioned feedback). The 10-state model neither repairs four-state terminal survivability nor certifies four-rotor common causal input. **Next single priority:** establish source-verified state-coordinate and virtual-to-physical actuator contract across Bouffard/Mo/Hu, or formally retain 10-state as a comparator only.
+
+
+---
+
+## 2026-11-03 — Mo Chen model cross-check and Hu equilibrium audit
+
+| Variant | State/model | Input, measurement and evidence boundary |
+|---|---|---|
+| Bouffard UCB/EECS-2012-241 | 10-state near-hover discrete LTI, Ts=25 ms; two lateral 4-state channels plus vertical 2-state. Identified d0=80,d1=8,n0=40. | Three virtual commands: pitch reference, roll reference, collective thrust. Vicon 5-output model; proprietary 1 kHz inner AutoPilot, 40 Hz setpoints. Real onboard MPC/LBMPC, but not direct per-rotor optimization. |
+| Mo Chen et al. IEEE TAC 2018 §VII-B | 10D continuous nonlinear near-hover model, axis-grouped (px,vx,theta_x,omega_x,py,vy,theta_y,omega_y,pz,vz); 4D+4D+2D reachability decomposition. d0=10,d1=8,n0=10,kT=.91. | Virtual Sx/Sy desired pitch/roll, Tz vertical thrust; dx/dy/dz enter position derivatives. Bounds: angles ±10°, Tz [0,2g], disturbances 0.5/0.5/1 m/s. Reachability paper, not MPC or flight validation. |
+| Hu ACC 2018 Eq.(5)/Table I | 10D continuous nonlinear, reordered state (px,py,pz,vx,vy,vz,theta_x,theta_y,omega_x,omega_y); same Chen coefficients. | Virtual pitch/roll and vertical thrust; angle bounds ±pi/9, Tz [0,2g]; disturbance ellipsoid Qw=diag(.01,.09,.25). Ellipsoidal RFIT Tube MPC numerical example; no physical sensor model or flight. |
+
+### Coordinate and equation consistency
+
+- For the companion attitude realization theta_dot=-d1*theta+omega and omega_dot=-d0*theta+n0*S, omega=physical_theta_rate+d1*theta. It is not directly the gyro rate. Transform measurement matrices, constraints, disturbance sets and terminal sets if converting to physical-rate coordinates.
+- Hu Eq.(5) prints final drift terms -d0*x3 and -d0*x7, but its declared state order puts theta_x/theta_y at x7/x8. The source model after permutation requires omega_x_dot=-d0*x7+n0*u1 and omega_y_dot=-d0*x8+n0*u2.
+- With Hu Table I reference xref=(3,3,10,0,...,0), d0=n0=10 and u1 bound ±pi/9, the printed first rate equation requires u1=10 to make x9_dot=0, which is infeasible. Corrected source-model equations give u1=u2=0 and u3=g/kT (about 10.77 for g=9.8,kT=.91), within [0,2g]. This proves a printed-equation inconsistency, not that the implementation used the printed error; no code or erratum was found.
+- Bouffard's fitted (d0,n0)=(80,40) differs from Chen/Hu's (10,10); the scaling derivation is not documented in the read sections. Hu also changes Chen's angle and disturbance bounds.
+
+### Model-selection consequence
+
+The 10D family is a yaw-fixed near-hover outer-loop command-response model, not a ten-physical-DOF or full six-DOF rigid-body plant. Its coordinates are 3 positions, 3 translational velocities, 2 tilt angles and 2 companion attitude states; yaw and individual motor states are absent. Three virtual inputs do not prove a feasible common four-motor command under motor lag, yaw torque, saturation and per-motor rate limits. Bouffard has a 5-output Vicon model and state estimation; Hu specifies no physical sensor equation/observer; Mo Chen's reachability example has no estimator. None establishes intermittent-position SMF/CZ posterior inclusion.
+
+**Decision unchanged**: 10D remains a cascaded virtual-input literature comparator, not the primary plant. Keep 12-state nonlinear six-DOF as high-fidelity simulation primary, 6-state planar (T,tau) as conditional proof candidate, 4-state as finite safety baseline, 2-state as fallback. Gate A remains blocked.
+
+**Topic status**: the 10D model-provenance sub-question is stage-complete (structural lineage, source equations, virtual-input semantics, parameter mismatch and Hu print inconsistency documented). Broader 10D reproducibility/actuator closure remains in progress because Hu's implementation and virtual-to-rotor mapping are unavailable.
+
+**Next single priority**: among published 12-state full six-DOF quadrotor MPC studies, identify which actually optimize four independent rotor thrusts/RPM with actuator dynamics included in the prediction model, versus including them only in the plant simulation or hiding them behind virtual wrench/attitude commands. Compare at least three original studies, separating simulation from flight evidence.
