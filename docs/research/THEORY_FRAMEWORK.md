@@ -173,12 +173,73 @@ x_k-\hat x_k\in\mathcal E_{q_k}
 - Rego et al. (2020) 已给出非线性有界不确定系统的 CZ 预测外包和有界量测交集。
 - **本项目还没有证明：将 CZ 后验/外包降阶接入有限语言后，能得到满足 Equalized Recovery 的相位相关估计误差界。** 这就是理论第一道 Gate，不可用“CZ 可以做交集”替代。
 
-可先做两条理论路线对照：
+### 4.1 路径相关 observer + CZ 误差集合：优先证明的基线
 
-1. **CZ 后验路线：** 维护全历史一致集合，离线对全部允许测量模式与一致量测值求相位误差外包；精度潜力较高，但最坏分支和复杂度更难。
-2. **路径相关 observer + CZ 误差外包路线：** 沿用有限语言下的动态观测器结构，对误差递推使用 CZ/zonotope 外包；更容易得到线性、模式相关的误差传播和 Equalized Recovery 约束，但它不是逐次精确后验，需明确其保守性。
+先考虑无延迟、只有 success/miss 的测量自动机。使用一个可实施的预测—校正 observer：
 
-先建立一个可证明的最坏相位基线，再评估是否值得做更复杂的联合 CZ 后验。
+[
+\hat x_{k|k-1}=A\hat x_{k-1|k-1}+Bu_{k-1}
+]
+
+success 时：
+
+[
+\hat x_{k|k}=\hat x_{k|k-1}
++L_q(y_k-C_p\hat x_{k|k-1})
+]
+
+miss 时令 \(\hat x_{k|k}=\hat x_{k|k-1}\)。这里 \(q\) 是当前自动机状态/已观察到的模式前缀，允许校正增益随可观察历史变化。
+
+令预测误差集合为 \(\mathcal E^-_k\)。由 \(y_k=C_px_k+v_k\) 可直接得到：
+
+- success 校正后：
+  \[
+  \mathcal E_{k|k}\supseteq
+  (I-L_qC_p)\mathcal E^-_k\oplus(-L_q)\mathcal V
+  \]
+- miss 时：
+  \[
+  \mathcal E_{k|k}=\mathcal E^-_k
+  \]
+- 下一拍预测：
+  \[
+  \mathcal E^-_{k+1}\supseteq
+  A\mathcal E_{k|k}\oplus G\mathcal W
+  \]
+
+合并校正和预测，可写成两类线性集合递推：
+
+[
+F_q^{s}=A(I-L_qC_p),quad
+D_q^{s}=G\mathcal W\oplus(-AL_q)\mathcal V
+]
+
+[
+F^{m}=A,quad D^{m}=G\mathcal W
+]
+
+对自动机中每条允许转移 \(q\xrightarrow{\sigma}q'\)，寻找 CZ 误差集合族使：
+
+[
+\mathcal E_{q'}\supseteq
+F_{q,\sigma}\mathcal E_q\oplus D_{q,\sigma}
+]
+
+**包含引理：** 若初始误差属于对应集合，且每条允许自动机转移均满足上述包含，则由归纳法可知所有允许 success/miss 序列下真实估计误差始终落在相应 CZ 误差集合内。若还存在一个周期/恢复词使周期末集合回到初始误差集合，即可得到 Equalized Recovery 的集合版本。
+
+这个基线的优点是误差传播对给定增益是显式线性集合递推，能直接用 CZ 表示；它不是精确后验交集，必须报告其外包保守性。增益与集合同时求解时可能出现双线性/非凸包含条件，不能未经推导宣称是一个 LP/LMI。建议先固定可验证 observer gains，检查所有有限模式词的误差包含，再研究增益综合。
+
+若有延迟量测，上述简单递推不够：必须将延迟状态/历史纳入增广 observer，或采用 Hassaan 等的动态延迟观测器结构；不能把旧时间戳量测当作当前量测直接代入。
+
+### 4.2 精确 CZ 后验：作为精度改进路线
+
+在上述误差界基线成立后，再维护完整一致集合 \(\mathcal X_k\)，用第 3 节的精确量测交集更新。由可行见证选择 \(\hat x_k\)，形成 \(\mathcal E_k=\mathcal X_k-\hat x_k\)，再对所有允许量测历史求相位外包。该路线可能更紧，但最坏量测分支、集合分支数和 CZ 降阶复杂度更高。
+
+因此当前理论优先顺序为：
+
+1. 先证明路径相关 observer + CZ 误差集合的有限语言包含与 Equalized Recovery；
+2. 再比较精确 CZ 后验能否在相同信息合同和计算预算下严格缩小 \(\mathcal E_i\)；
+3. 最后才把估计误差管接入 Tube MPC。
 
 ## 5. 因果输出反馈：同一观测历史必须使用同一个控制命令
 
