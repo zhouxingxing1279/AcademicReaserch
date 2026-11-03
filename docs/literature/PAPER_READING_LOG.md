@@ -1,3 +1,14 @@
+## 背景第30轮新增论文 — Chipofya/Lee/Chong (2015) 三层Laguerre MPC（2026-11-03 UTC；正文分节已读）
+
+- **书目及原始全文**：Mapopa Chipofya, Deok Jin Lee, Kil To Chong, *Trajectory Tracking and Stabilization of a Quadrotor Using Model Predictive Control of Laguerre Functions*, *Abstract and Applied Analysis* **2015**, Article ID **916864**, **11 pages** (2015-02-19), DOI https://doi.org/10.1155/2015/916864 ，出版社开放全文 https://onlinelibrary.wiley.com/doi/10.1155/2015/916864 。**实际阅读**：2026-11-03，开放HTML正文§1–7，重点§3–4.1动力学、§5.1–5.2 MPC/观测器、§6参数和结果、表1–3。**核验状态：全文正文分节已读，但网页数学公式部分未被文本接口完整渲染；矩阵系数/数值采样周期/终端证明未逐式确认，不声称所有公式全读或复现。**
+- **控制任务/实际模型**：标准四旋翼6物理自由度，原始刚体12状态为惯性位置(x,y,z)、机体速度(u,v,w)、Euler角(φ,θ,ψ)、机体角速度(p,q,r)；小角度/近悬停线性化后采用三个分层离散Euler子模型：高度2状态(z,v_z)、水平位置4状态(x,y,v_x,v_y)、姿态6状态(φ,θ,ψ及对应角速率)。论文§3原始机体速度与§4线性子模型v_x/v_y记号转换需谨慎，不能不经坐标变换视为同一状态。**状态维数不等于物理自由度。** §4.1只给采样符号ΔT，当前可读正文**未报告可核实的数值采样周期**。
+- **输入/执行器**：物理控制抽象为总推力F和三轴力矩(τφ,τθ,τψ)；水平位置MPC输出期望(θ,φ)作为姿态MPC参考，高度MPC输出F，姿态MPC输出三轴力矩。§3有旋翼力/反扭矩与转速平方关系，但优化与验证未显式给出电机RPM状态、ESC动态、逐桨真实饱和/速率、共同可执行混控误差或实际测力。
+- **量测/估计**：§4.1各子系统选择位置/姿态角为输出；§5.1 SS-MPC一般模型假设零均值高斯过程/测量噪声并描述Kalman滤波；§5.2 Laguerre推导称采样时状态可获得，**未证明LMPC实际数值仿真如何处理不可测速度**。没有报告IMU/GPS/Vicon/视觉等真实传感器、间歇测量/丢包、带界状态SMF/CZ或真实后验包含。
+- **MPC结构/约束/求解**：小角度线性MPC；SS-MPC以二次成本及一般线性约束组成QP，LMPC以Laguerre正交基参数化增量控制轨迹，降低决策变量。§6.2取a=0.8187,N=5，对照SS-MPC控制时域N_c=25（表2）；**N_c=25不是已确认的预测时域N_p**。§6.1稳定性演示取α=1.2，展示闭环特征值，§5.2.5讨论加权LQR极限；作者亦称“great chance”，**不是有噪失测下硬约束/递归可行定理**。在线QP求解器、终端硬集合、最坏计算时间、明确逐桨输入约束：**未报告/无法从可读全文确认**。
+- **结果证据**：MATLAB仿真，m=0.7kg,l=0.275m,Jx=Jy=0.1063,Jz=0.2122 kg·m²；3D路径(0,0,0)→(5,5,10)，与SS-MPC及DLQR比较；5 Laguerre参数对照25控制步参数。**无实飞、SITL/HIL、确定性安全保证、真实测力或20ms WCET**；未提供可复现代码/随机种子和硬约束违约率。
+- **局限/关联/可复用技术**：低维分层MPC及Laguerre控制参数压缩可作为硕士实时性基线；但虚拟姿态/推力到实际电机的约束传递、间歇位置SMF和终端信息不变性均缺失，不能直接替代本仓库的6状态(T,τ)物理闭合验证。后续应核验是否能在相同硬约束/因果信息条件下保留Laguerre压缩的可行性，不预设新颖性。**待查**：PDF中具体A/B/C矩阵、数值ΔT、预测N_p、实际QP/代码、逐桨控制分配与完整闭环保证。
+
+---
 ## Run278 — Yan/Cannon/Goulart（2022）间歇观测随机输出反馈MPC复读（2026-11-03；既有DOI去重不增加）
 
 - **书目/版本**：Shuhao Yan, Mark Cannon, Paul J. Goulart, *Stochastic output feedback MPC with intermittent observations*, *Automatica* 141 (2022), 110282；DOI https://doi.org/10.1016/j.automatica.2022.110282；作者arXiv:2009.11071v3 https://arxiv.org/pdf/2009.11071 （2022-03-01），牛津存档 https://ora.ox.ac.uk/objects/uuid%3A65493a65-7eb6-4897-9f30-bc51e091266c 。**此前背景第13轮已登记，按DOI去重，非新增论文。**
