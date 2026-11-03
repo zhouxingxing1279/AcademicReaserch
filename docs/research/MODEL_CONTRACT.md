@@ -1,86 +1,149 @@
-# 外环模型与飞控接口合同（临时版）
+# 外环抽象模型与理论合同（接口未选定）
 
-> 状态：**PROVISIONAL / NOT FROZEN**。建议的复现实验基线暂定为 PX4 v1.17.0 + Gazebo Harmonic X500 SITL + Ubuntu 22.04 / ROS 2 Humble / `px4_msgs release/1.17`；尚未运行 SITL，不是已验证的 PX4 闭环模型或控制器实现。版本与源码依据见 [PX4 v1.17.0 源码审计](model_selection/PX4_V1_17_SOURCE_AUDIT.md)。
+> **状态：THEORETICAL BASELINE / NOT FROZEN.** 当前阶段只冻结理论变量和证明假设，不冻结 PX4/ArduPilot 指令接口。位置/速度/加速度 setpoint 不是本文件中的已选控制输入，也不假设其与实际状态之间存在理想映射。
 
-## 被控对象边界与物理仿真对象
-主仿真对象为完整 12 状态六自由度四旋翼刚体 plant：
+## 1. 物理仿真对象与控制权限
+
+主仿真对象仍为完整 12 状态六自由度四旋翼刚体 plant：
+
 \[
-x_{phys}=[p^\mathsf T,v^\mathsf T,\eta^\mathsf T,\omega^\mathsf T]^\mathsf T\in\mathbb R^{12}
+x_{\mathrm{phys}}=[p^\mathsf T,v^\mathsf T,\eta^\mathsf T,\omega^\mathsf T]^\mathsf T\in\mathbb R^{12}
 \]
-其中位置、速度、姿态和角速度各为三维。它在成熟 PX4/ArduPilot 飞控闭环下仿真；姿态/角速度闭环、控制分配、执行器限幅和电机仍由飞控承担。
 
-外环 MPC 只输出高层位置/速度/加速度参考，不直接输出四桨推力、总推力/力矩 wrench 或姿态稳定输入。12 状态物理 plant 不等于 12 个状态都必须由外环优化器直接控制，也不意味着优化器拥有四个电机输入。
+其中位置、速度、姿态和角速度各为三维。成熟飞控承担姿态/角速度稳定、控制分配、执行器限幅和电机控制。
 
-## 外环预测状态候选
-首个可检验的降阶预测状态为：
+外环研究的是成熟飞控之上的任务/轨迹层控制，不直接优化四桨推力、总推力/力矩 wrench 或姿态稳定输入。物理 plant 的状态维数不等于外环预测状态维数，也不决定外环命令接口。
+
+## 2. 抽象外环预测模型
+
+先用一般离散模型开展理论推导：
+
 \[
-x_{out}=[p^\mathsf T,v^\mathsf T]^\mathsf T
-=[p_x,p_y,p_z,v_x,v_y,v_z]^\mathsf T\in\mathbb R^6
+x_{k+1}=Ax_k+Bu_k+Gw_k,\qquad w_k\in\mathcal W
 \]
-它仅表示三维平移闭环状态，不是六自由度物理对象。只有在 12 状态 SITL plant 上证明姿态/角速度瞬态、飞控跟踪误差、延迟、饱和和模型失配可由统一有界残差外包时，才允许使用该降阶模型。若残差不能覆盖约束相关瞬态，应增广外环预测状态（包括姿态/角速度或必要的飞控滞后状态），而不是更改外环控制权限、转为电机级控制。
 
-## 待比较的指令接口
-### A. 位置参考
+首个状态候选为：
+
 \[
-\dot p=v,\qquad \dot v=-K_p(p-r_c)-K_vv+w_{fc}
+x=[p^\mathsf T,v^\mathsf T]^\mathsf T\in\mathbb R^6
 \]
-不得先验指定连续二阶模型为 PX4 真值。应辨识离散闭环模型 \\(x_{k+1}=A_{cl}x_k+B_{cl}r_{p,k}+E_{cl}w_k\\)，并测试输入延迟/零阶保持。PX4 v1.17.0 源码显示位置 P—速度 PID 级联，存在 `_vel_int` 积分记忆、速度导数滤波、速度/倾角/推力限制与 anti-windup；X500 的 `MPC_USE_HTE` 默认启用，在线 hover-thrust estimate 还会改变垂直控制映射。首轮建议显式关闭 HTE、固定 `MPC_THR_HOVER=0.60` 做受控辨识，随后做 HTE-on 对照；若内部历史影响不能被统一残差覆盖，必须增广可识别的控制器状态。Santos & Lagoa (2022) 提供类似位置指令型闭环模型的多旋翼 Tube RMPC 先例；论文增益和扰动界不可直接移植。
 
-### B. 加速度参考
+这里 \(u_k\) 仅表示抽象高层命令；具体物理语义暂不选择。矩阵 \(A,B,G\) 及采样时间都尚未冻结。扰动集合 \(\mathcal W\) 必须覆盖所有未建模动力学、外扰、离散化误差、命令延迟/保持和成熟飞控跟踪残差。
+
+若模型含参数不确定性或非线性，必须对状态相关余项构造可靠外包；不得仅在一个工作点线性化后就把余项当作零。
+
+## 3. 间歇位置量测合同
+
+理论基线采用：
+
 \[
-\dot p=v,\qquad \dot v=a_c+w_a
+y_k=C_px_k+v_k,\qquad C_p=[I_3\;\;0],\quad v_k\in\mathcal V
 \]
-\(w_a\) 必须覆盖加速度跟踪误差、命令延迟、风扰和限幅影响。Andriën et al. (2024) 与 Izadi et al. (2026) 提供级联外环加速度参考依据；其自定义姿态内环不等于现成飞控黑盒。
 
-### C. 速度参考
-速度参考 \(v_c\) 的响应需依据飞控模式和实测辨识，不能预设为理想一阶/二阶系统。
+量测可 success/miss，也可能带时间戳延迟。允许的模式由有限状态自动机/有限长度语言描述，至少明确：
 
-## PX4 ROS 2 Offboard 字段语义（官方文档级证据）
+- 最大连续 miss；
+- 最大量测延迟；
+- 允许的 success/miss/delay 序列；
+- 时间戳和量测噪声界；
+- 若有多传感器，记录测量相关性，禁止重复计数同源信息。
 
-对于多旋翼 `TrajectorySetpoint`，position 非 NaN 时运行位置控制链，velocity/acceleration 可作为前馈；position 为 NaN 且 velocity 有效时运行速度控制链，acceleration 可作为前馈；position 与 velocity 均为 NaN、acceleration 有效时进入加速度设定路径。数据为 NED，单位分别为 m、m/s、m/s²；NaN 表示对应状态不受控。v1.17.0 的 acceleration-only 模式在 OffboardControlMode 表中要求有效 velocity estimate。首轮采用 position-only：position 三轴有效，velocity/acceleration NaN。
+如果延迟量测到达，必须在其原时间戳对应的状态集合上施加约束，再重新传播至当前时刻。未定义最大失测或最大延迟时，不主张存在统一有限估计误差界。
 
-必须联合检查 `OffboardControlMode` 与 `TrajectorySetpoint` 有效字段/NaN mask；不同 ROS 2 与 MAVLink 消息路径不能默认等价。该接口语义不提供实际跟踪误差、延迟、带宽或饱和界。完整证据和来源见 [PX4 外环接口证据](model_selection/PX4_INTERFACE_EVIDENCE.md)。
+## 4. CZ 集员估计
 
-## PX4 内部控制器记忆状态
+CZ 表示：
 
-六状态 \\([p;v]\\) 是否足够取决于 PX4 内环内部记忆。v1.17.0 的 X500 airframe 设 `MPC_THR_HOVER=0.60`，但通用 `MPC_USE_HTE=1` 默认启用 HTE；HTE 根据垂直加速度和分配后的推力更新 hover-thrust estimate，并反馈给位置控制器；`updateHoverThrust()` 还会修正垂直速度积分状态 `_vel_int(2)`，两者在 HTE-on 时耦合。首轮模型辨识应先采用明确的 HTE-off 变体（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`），隔离速度积分/导数滤波的影响；再启用 HTE，判断是否需联合增广 hover-thrust estimate 与垂直速度积分状态。该设置差异必须写入实验合同。
-
-## 内环估计器与外环间歇测量的边界
-
-PX4 内环使用自身高频 `vehicle_local_position` 状态维持位置/速度控制。研究中的间歇/异步位置量测应先定义为外环 SMF 可获得的独立通道；首轮 SITL 可由 Gazebo 真值生成独立有界噪声观测并施加丢包，PX4 EKF 保持正常运行。若对 `vehicle_local_position` 的 ROS 2 副本施加丢包，丢包只作用于外环副本，不能写成 PX4 内环估计器同时失测。EKF 输出与其已融合的同源 IMU/GNSS/VIO 不得重复作为独立量测融合。
-
-## 测量与集合估计
 \[
-y^p_k=C_px_k+\nu^p_k,\quad C_p=[I_3\ \ 0]
+\mathcal Z=\{c+G_z\xi:\|\xi\|_\infty\le1,\ A_z\xi=b_z\}
 \]
-位置量测可间歇到达；速度可能来自飞控 EKF、VIO/GNSS 或差分估计。必须记录时间戳、延迟、噪声界、更新模式及相关性。若 EKF 输出已融合 IMU，不得把同一 IMU 数据作为独立观测重复融合。
 
-集合预测/更新抽象接口：
+预测：
+
 \[
-\mathcal X_{k+1|k}=A_d\mathcal X_{k|k}\oplus B_du_k\oplus E_d\mathcal W_k
+\mathcal X_{k+1|k}=A\mathcal X_{k|k}\oplus Bu_k\oplus G\mathcal W
 \]
+
+success 时以位置量测一致性集合与预测集合求交；miss 时只做预测；delay 时回到原时间戳更新并重新传播。每一步必须保证真实状态包含。复杂度控制只能采用可验证的外包降阶；内近似不允许用于硬安全证明。
+
+空后验表示信息合同与真实系统不一致，应触发诊断/安全降级，不可静默修改噪声界继续宣称原保证。
+
+## 5. 估计误差、跟踪误差与 Tube 的分离
+
+从 CZ 后验中选取可验证的可行代表点 \(\hat x_k\)，定义：
+
 \[
-\mathcal X_{k+1}=\mathcal X_{k+1|k}\cap\{x:y_{k+1}-Cx\in\mathcal V_{k+1}\}
+\mathcal E_k=\mathcal X_k-\hat x_k
 \]
-实际矩阵、噪声集合和异步模式必须在接口选定后确定。
 
-## Tube MPC 接口
-SMF/CZ 后验 \(\mathcal X_k\) 不是未来 Tube。需构造估计误差集合 \(\mathcal E_k\)，证明其可靠包含真实初始误差，再传播未来 Tube。名义约束收紧可写为：
+名义状态为 \(\bar x_k\)，真实跟踪误差为：
+
 \[
-\bar{\mathcal X}_k\subseteq\mathcal X_{\mathrm{safe}}\ominus\mathcal E_k
+e_k=x_k-\bar x_k,\qquad
+\tilde x_k=x_k-\hat x_k,\qquad
+\hat x_k-\bar x_k=e_k-\tilde x_k
 \]
-只有在 \(\mathcal E_k\) 是有效误差外包且控制接口/约束映射闭合时才有安全意义。
 
-## 不确定性与约束
-风扰与模型残差；飞控跟踪误差、延迟和通信抖动；速度/加速度/倾角/推力限幅及分配饱和的外环等效影响；测量噪声、时间戳误差和异步更新；安全位置区域、速度上限及可实现参考约束。
+\(\mathcal X_k\) 是当前真实状态的一致集合；\(\mathcal E_k\) 是当前估计误差外包；未来 Tube 是真实轨迹相对名义轨迹的传播集合。三者不是同一个对象。
 
-## 模型冻结准入条件
-1. 暂定指定 PX4 v1.17.0 tag/commit、X500/Gazebo Harmonic、Ubuntu 22.04/ROS 2 Humble、匹配的 `px4_msgs release/1.17`、Offboard ROS 2 路径和 NED 坐标系；完整 pin 见 [源码审计](model_selection/PX4_V1_17_SOURCE_AUDIT.md)。
-2. 核验外环指令字段物理语义、频率、时间戳、failsafe 与限幅。
-3. SITL 记录参考输入与真实位置/速度响应，辨识延迟、带宽、饱和和误差界。
-4. 在拟用工作域验证闭环模型残差的有界外包。
-5. 冻结传感器量测方程、异步模式、噪声/相关性合同。
-6. 在 HTE-off 基线下检验 \\(x_{out}=[p;v]\\) 六状态模型对速度积分/导数滤波历史的残差覆盖；若失败先增广最小必要闭环记忆状态。
-7. 做 HTE-on 对照，检验 hover-thrust estimate 与垂直速度积分状态是否必须联合增广。
-8. 再设计 SMF/CZ、Tube MPC 与终端安全条件。
+必须先证明有限测量语言下的相位相关估计误差管 \(\mathcal E_i\)，再合成跟踪误差管 \(\mathcal S_i^c\)。
 
+## 6. 因果控制与约束收紧
+
+控制器只允许使用已收到的观测历史、CZ 代表点和名义轨迹。对同一观测历史下的所有可能真实状态，实际命令必须相同。
+
+一个候选路径相关控制律为：
+
+\[
+u_k=\bar u_k+\lambda_i+
+\sum_jK_{i,j}(\hat x_{k-j}-\bar x_{k-j})
+\]
+
+其中 \(i\) 为测量自动机状态/周期相位。若 \(\tilde x\in\mathcal E\)、\(e\in\mathcal S^c\)，则：
+
+\[
+\bar x_k\in\mathcal X\ominus\mathcal S_i^c
+\]
+
+\[
+\bar u_k\in
+\mathcal U\ominus
+\left(\{\lambda_i\}\oplus
+\bigoplus_jK_{i,j}(\mathcal S_j^c\oplus(-\mathcal E_j))\right)
+\]
+
+这是安全但可能保守的独立集合外包。若要利用 \(e\) 与 \(\tilde x\) 的相关性，必须维护联合集合并证明投影包含。
+
+## 7. 终端与递归可行性合同
+
+需要非空共同终端集合 \(\mathcal X_f\) 和终端反馈 \(K_f\)，至少满足：
+
+\[
+\mathcal X_f\subseteq\bigcap_i(\mathcal X\ominus\mathcal S_i^c)
+\]
+
+\[
+(A+BK_f)\mathcal X_f\subseteq\mathcal X_f
+\]
+
+\[
+K_f\mathcal X_f\subseteq\bigcap_i\mathcal U_i
+\]
+
+并要求终端代价下降条件和初始名义问题可行。递归可行性依赖移位旧解并追加终端反馈，不是由有限时域约束满足自动推出。
+
+持续有界扰动和持续有界估计误差下，目标是鲁棒实用稳定到误差管邻域；除非另有条件，不宣称渐近收敛到原点。
+
+## 8. 理论冻结准入条件
+
+1. 冻结抽象状态、输入、扰动和位置量测噪声集合。
+2. 冻结 success/miss/delay 有限语言、最大连续失测和最大延迟。
+3. 证明 CZ 预测/量测更新/降阶的真实状态包含。
+4. 证明位置-only 间歇量测下的相位相关估计误差界/Equalized Recovery。
+5. 证明共同因果输出反馈和跟踪 Tube 包含。
+6. 证明收紧约束、非空终端集合、初始可行性和递归可行性。
+7. 再把抽象模型及残差映射到 12 状态物理 plant；最后才选具体飞控接口并做 SITL/HIL。
+
+## 9. 暂缓资料
+
+PX4 ROS 2 Offboard 字段、PX4 v1.17.0 位置控制器源码、HTE 和 DDS topic 审计分别保留在 model_selection/PX4_INTERFACE_EVIDENCE.md 与 model_selection/PX4_V1_17_SOURCE_AUDIT.md，仅供后续接口映射，不属于当前理论合同。
