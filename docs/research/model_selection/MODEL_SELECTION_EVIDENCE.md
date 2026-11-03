@@ -560,3 +560,29 @@ $(T/4-\tau/(2l),T/4,T/4+\tau/(2l),T/4)$，将其四分量逐一限制于$[L_i,U_
 **SMF/CZ创新边界**：已有视觉感知MPC、四旋翼参数集合RAMPC及一般状态SMF+MPC先例；PAMPC的VIO点估计与软视觉成本**不是**有界状态集合、Tube初始化或终端信息集。主任务Run277的真实纤维开环不可能性只要求继续探索**观测条件化因果反馈**，不证明MPC失败；Gate A仍blocked。背景任务仅提出接口，不新增主控制器或验证脚本。详见 [第29轮日志](docs/research/model_selection/background_run_20261102_2337_falanga_vio_data_access.md)。
 
 **唯一下一轮问题**：固定`uzh-rpg/rpg_mpc`源码版本，沿`(c,omega_B)`→内环→混控/限幅→ESC审计是否存在可靠最终执行残差合同；若无，定义本机体最小同步台架实验合同。
+
+---
+
+## 30. Chipofya等(2015)三层Laguerre MPC与RPG开源执行接口（2026-11-03 UTC）
+
+**新增四旋翼原始论文 [期刊开放正文§1–7分节已读；网页公式矩阵未完整渲染]**：Mapopa Chipofya、Deok Jin Lee、Kil To Chong，*Trajectory Tracking and Stabilization of a Quadrotor Using Model Predictive Control of Laguerre Functions*, *Abstract and Applied Analysis* 2015, 916864, 11页，DOI https://doi.org/10.1155/2015/916864 ，全文 https://onlinelibrary.wiley.com/doi/10.1155/2015/916864 。原始四旋翼12状态、6物理自由度，线性化后分层高度2、水平位置4、姿态6状态：外环位置输出期望俯仰/横滚，姿态MPC输出力矩，高度MPC输出总推力；非统一12状态MPC。§6.2 Laguerre N=5、a=0.8187，对照SS-MPC控制时域N_c=25，属于**控制轨迹参数化压缩**，不能称为五状态模型、也不能将N_c误记为预测时域N_p。仅MATLAB仿真、无真实传感器/失测/SMF/ESC/终端信息RCI/20ms WCET；§5.1 KF为高斯点估计，不是确定性SMF。论文§5.2.5的LQR极限与仿真特征值不是本课题间歇量测下的递归安全证明。
+
+**源码版本固定**：`uzh-rpg/rpg_mpc` master `33263db209105f716e204acc6481834fbd9bc778`；`uzh-rpg/rpg_quadrotor_control` master `22b55b085546a3322c302a68c2b67108a092a298`。核验原始文件：
+
+1. `rpg_mpc/model/quadrotor_model_thrustrates.cpp`：优化10坐标 `(p3,q4,v3)`，4输入 `(T,ωx,ωy,ωz)`，动力学 `dot(v_z)=(1-2q_x²-2q_y²)T-g` **没有除以质量m**；因此代码中的T按物理方程是**质量归一化推力/加速度m/s²**，尽管同文件 `T_min/T_max` 注释写[N]。数值默认T∈[2,20]需先核对物理单位，不能把注释直接当成总推力牛顿域。
+2. `rpg_mpc/src/mpc_controller.cpp` §`updateControlCommand`：对T和体角速度作限幅，输出 `ControlMode::BODY_RATES`、`collective_thrust=T`、`bodyrates=ω_B`，**不是直接(τx,τy,τz)或逐桨力矩命令**。
+3. `rpg_quadrotor_control/bridges/sbus_bridge/src/sbus_bridge.cpp` §`generateSBusMessageFromControlCommand`：在BODY_RATES模式将 `collective_thrust*mass_` 输入 `inverseThrustMapping`，将ω按最大角速映射到SBus通道，并调用 `limitAllChannelsFeasible`；`thrust_mapping.cpp` 为带可选电压补偿的静态二次逆映射，非动态可靠残差证书。
+4. `bridges/sbus_bridge/parameters/default.yaml`：默认质量0.865kg、标称二次映射系数、电压补偿；`sbus_msg.h` 通道范围192–1792；`fc_settings/lumenier_f4_aio_betaflight_rpg.txt` 记录 `mixer QUADX`、`motor_pwm_protocol=DSHOT300`。这只是某公开Betaflight配置，不能证明所有实飞平台配置相同，也未获得ESC转速、实际推力和逐桨变化率测量。
+5. **独立单位算术**：悬停T=9.8066m/s²、m=0.865kg时静态标称总推力 `m*T=8.482709N`；若错误地把T当8.482709N再乘m将二次缩放，导致模型/执行接口不一致。原代码有静态映射、限幅、watchdog和飞控内部混控，**无公开确定性ESC→RPM→实际推力误差/时延上界**。未编译ROS、Betaflight或执行台架测试。
+
+| 候选模型 | 本轮证据与影响 |
+|---|---|
+| 2状态姿态 | Chipofya姿态内环是6状态姿态角/角速率的三个轴；2状态只能做单轴内环保底，不足以支持位置/高度硬安全 |
+| 4状态固定推力 | 非零倾角垂向漂移与Run246/260/261、Run278真实后验开环障碍不变；继续有限数学基线 |
+| **6状态平面(T,τ)** | **条件性首选不变**；必须确保 `T_N=m*c`、力矩/体角速转换与共同可执行逐桨域，SMF使用实际施加输入 |
+| 10坐标PAMPC | 已验证的开源外环优化 `(c,ω_B)` 通过SBus/BetaFlight低层闭环实现；控制权限**不等于**本仓库直接(T,τ)，须引入有界内环误差合同 |
+| 12状态/级联 | Chipofya说明6DOF可由2+4+6分层MPC处理，但层间饱和、估计误差与时尺度需证明；不因12状态更真实而自动升级 |
+
+**SMF/CZ可迁移性**：Chipofya的KF与Laguerre优化、PAMPC的VIO点估计均未给有界后验；本课题若采用这些架构，须对位置success/miss的状态SMF、观测纤维共享命令、内环执行残差与终端信息安全分别认证。Run278已证明特定MMS真实纤维任何观测无关开环力矩66拍不能保证安全，但**不排除因果反馈**。Gate A仍blocked；没有新控制器/仿真/定理。详见 `docs/research/model_selection/background_run_20261103_0034_laguerre_sbus.md`。
+
+**唯一下一轮问题**：查验Betaflight固定固件版本中BODY_RATES SBus→QUADX混控→DSHOT300的具体实现与是否存在公开可核验的RPM/实际推力同步残差界；若无，明确目标机体台架辨识所需测量误差/带宽合同。
