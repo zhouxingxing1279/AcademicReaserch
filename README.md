@@ -24,8 +24,9 @@
 6. [外环 MPC 与 SMF/CZ 文献证据](docs/research/model_selection/OUTER_LOOP_MPC_LITERATURE.md)
 7. [模型选型文档导航](docs/research/model_selection/README.md)
 8. [唯一论文登记总账](docs/literature/PAPER_READING_LOG.md)
-9. [历史归档索引](archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)
-10. [开放 PR 分类与依赖图](docs/research/PR_TRIAGE_20261103.md)
+9. [历史补充书目索引（停止追加）](docs/literature/READ_PAPERS.md)
+10. [历史归档索引](archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)
+11. [开放 PR 分类与依赖图](docs/research/PR_TRIAGE_20261103.md)
 
 ## 关键文献锚点
 - Santos & Lagoa (2022), ISA Transactions：位置指令型外环 Tube MPC。[DOI](https://doi.org/10.1016/j.isatra.2021.12.002)
