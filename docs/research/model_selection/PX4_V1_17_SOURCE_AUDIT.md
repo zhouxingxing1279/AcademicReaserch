@@ -1,6 +1,6 @@
 # PX4 v1.17.0 源码审计与外环辨识方案（2026-11-03）
 
-> **证据状态：** 已核对 PX4 v1.17.0 官方文档、消息定义、DDS topic 配置和控制器源码；尚未运行 SITL，未辨识任何数值闭环矩阵/延迟/残差界。本文给出可复现的候选环境与实验合同，不把源码审计冒充仿真结果。
+> **证据状态：** 已核对 PX4 v1.17.0 官方文档、消息定义、DDS topic 配置、位置控制器源码、X500 airframe 脚本及 hover-thrust estimator；尚未运行 SITL，未辨识任何数值闭环矩阵/延迟/残差界。本文给出可复现的候选环境与实验合同，不把源码审计冒充仿真结果。
 
 ## 1. 建议的可复现基线（暂定，不等于最终硬件选型）
 
@@ -78,7 +78,25 @@ v1.17.0 `PositionControl.cpp` 的实现顺序是：
 
 **直接后果：** ([p,v]\in\mathbb R^6) 仍是首个待检验的外环预测状态，但并未因 PX4 采用位置控制链而自动成为完整 Markov 状态。位置 PID 积分和滤波记忆可能需要作为增广状态，或在明确初始化/工作域内由统一有界残差集合覆盖。不能预先武断地把预测模型定为 6、9 或 12 维；模型阶次应由输入—输出辨识、历史依赖检验和残差覆盖决定。
 
-### 3.3 DDS 默认观测/命令 topic 的边界
+### 3.3 Hover Thrust Estimator 是额外的慢变内部状态
+
+本轮继续检查 X500 airframe 和 v1.17.0 参数定义，发现一个会影响模型阶次的关键默认项：
+
+- X500 airframe `4001_gz_x500` 显式设置 `MPC_THR_HOVER=0.60`；
+- 通用参数定义中 `MPC_USE_HTE=1`，即默认启用 Hover Thrust Estimator（HTE）；
+- `MPC_THR_HOVER` 在 HTE 开启时是估计器初始化值，不是整个飞行期间固定不变的悬停推力；
+- HTE 在 armed/in-air 条件下，结合垂直加速度、姿态、推力 setpoint 与控制分配器未分配推力更新 hover-thrust EKF；有效估计随后通过 `updateHoverThrust()` 写入位置控制器。
+
+因此，HTE 开启时位置—速度闭环除 `[p,v]`、速度积分和滤波记忆外，还包含一个自适应 hover-thrust 状态。它会改变垂直加速度到推力的映射。v1.17.0 默认 DDS topic 列表没有 `hover_thrust_estimate`，若保留 HTE，需通过 ULog 检查估计轨迹，或显式扩展 DDS 暴露；不能假设外环 ROS 2 节点默认能读取该状态。
+
+**建议采用两阶段辨识，而不是直接把 HTE 混进首轮模型：**
+
+1. **基线辨识配置：** 显式设 `MPC_USE_HTE=0`，并保留 X500 airframe 的 `MPC_THR_HOVER=0.60`，固定悬停推力参数。此配置是用于隔离控制器动态的研究基线变体，不是 X500 的 stock 默认运行配置；必须在实验配置文件和论文中明示。
+2. **HTE-on 对照：** 恢复 `MPC_USE_HTE=1`，记录 hover-thrust estimate 与方差，比较相同位置参考轨迹下的响应差异；若其影响不能由统一残差外包，则将 hover thrust estimate 作为有界慢变增广状态，或明确把研究工作域限制在 HTE 未显著变化的阶段。
+
+v1.17.0 相关参数定义还给出：`MPC_XY_P=0.95`、`MPC_Z_P=1.0`；水平速度 PID 为 P/I/D = 1.8/0.4/0.2，垂直为 4.0/2.0/0；水平速度上限 12 m/s，垂直上升/下降上限 3/1.5 m/s，空中最大倾角 45°，推力最小/最大 0.12/1.0。滤波参数默认 `MPC_VEL_LP=0`、`MPC_VEL_NF_FRQ=0`（关闭），`MPC_VELD_LP=5 Hz`（开启）。这些是参数源码默认值；X500 airframe 另有覆盖项，运行时还可能被参数文件覆盖，必须导出实际参数，不能直接把表中值当作实验值。
+
+### 3.4 DDS 默认观测/命令 topic 的边界
 
 v1.17.0 `dds_topics.yaml` 默认包含：
 
@@ -107,7 +125,7 @@ PX4 位置控制器使用自己的 `vehicle_local_position` 状态估计维持�
 
 每次实验至少保存：PX4 tag/commit、Gazebo 版本、`px4_msgs` commit、ROS 2/Agent 版本、X500 airframe/autostart、完整参数导出、仿真步长/实时因子、风场设置、Offboard 消息路径、坐标变换、setpoint 发布频率、MPC 外环采样周期及初始 hover/积分器状态。
 
-位置环/速度环关键参数至少包括：`MPC_XY_P`、`MPC_Z_P`、`MPC_XY_VEL_P/I/D`、`MPC_Z_VEL_P/I/D`、`MPC_XY_VEL_MAX`、上下行速度限制、`MPC_TILTMAX_AIR`、`MPC_THR_MIN/MAX/HOVER`、hover-thrust estimator 开关，以及 Offboard loss 参数。实际值必须从运行实例导出，不能只写“PX4 默认参数”。
+位置环/速度环关键参数至少包括：`MPC_XY_P`、`MPC_Z_P`、`MPC_XY_VEL_P/I/D_ACC`、`MPC_Z_VEL_P/I/D_ACC`、`MPC_XY_VEL_MAX`、上下行速度限制、`MPC_TILTMAX_AIR`、`MPC_THR_MIN/MAX/HOVER`、`MPC_USE_HTE`、`MPC_VEL_LP`、`MPC_VEL_NF_FRQ/BW`、`MPC_VELD_LP`、hover-thrust estimator 噪声/门限参数，以及 Offboard loss 参数。首轮受控基线建议 `MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`；随后必须做 HTE-on 对照。实际值必须从运行实例导出，不能只写“PX4 默认参数”。
 
 ### 5.2 分阶段输入激励
 
@@ -145,9 +163,9 @@ Santos & Lagoa (2022), *Wayset-based guidance of multirotor aerial vehicles usin
 
 ## 7. 本轮结论与下一唯一问题
 
-**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；外环先使用 ROS 2 `TrajectorySetpoint` 位置参考，不带速度/加速度前馈。
+**暂定仿真基线：** PX4-Autopilot v1.17.0 + Gazebo Harmonic X500 SITL + ROS 2 Humble/uXRCE-DDS + `px4_msgs release/1.17`；外环先使用 ROS 2 `TrajectorySetpoint` 位置参考，不带速度/加速度前馈。首轮受控辨识变体显式关闭 HTE 并固定 `MPC_THR_HOVER=0.60`；随后单独启用 HTE 做对照。
 
-**下一唯一研究问题：** 在 PX4 v1.17.0 位置 P—速度 PID 级联、积分器/滤波器记忆和限幅存在的条件下，六状态 ([p,v]) 预测模型能否在明确的未饱和工作域与外环更新率下获得统一有界残差外包？若不能，最小必要增广状态是什么？
+**下一唯一研究问题：** 在固定 hover thrust（HTE-off）的 PX4 v1.17.0 position-only 位置 P—速度 PID 级联中，六状态 `[p,v]` 预测模型能否在不同参考历史、速度积分/导数滤波记忆、外环更新率和限幅工况下获得统一有界残差外包？若不能，最小必要增广状态是什么？在此基线之后，再判定 HTE-on 是否需要额外增广一个慢变 hover-thrust 状态。
 
 在回答该问题之前，不启动 Tube MPC 终端集合综合，不声称控制闭环已实现，也不把历史平面直接控制结果迁移为当前安全保证。
 
@@ -162,6 +180,10 @@ Santos & Lagoa (2022), *Wayset-based guidance of multirotor aerial vehicles usin
 - [PositionControl.cpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/PositionControl.cpp)
 - [PositionControl.hpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/PositionControl/PositionControl.hpp)
 - [MulticopterPositionControl.cpp](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/MulticopterPositionControl.cpp)
+- [X500 airframe defaults](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/ROMFS/px4fmu_common/init.d-posix/airframes/4001_gz_x500)
+- [Position controller gain defaults](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/multicopter_position_control_gain_params.c)
+- [Position controller limits/defaults](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_pos_control/multicopter_position_control_limits_params.c)
+- [Hover-thrust estimator](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/mc_hover_thrust_estimator/MulticopterHoverThrustEstimator.cpp)
 - [uXRCE-DDS topic 配置](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/src/modules/uxrce_dds_client/dds_topics.yaml)
 - [v1.17.0 Gazebo SITL 指南](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/docs/en/sim_gazebo_gz/index.md)
 - [v1.17.0 ROS 2 用户指南](https://github.com/PX4/PX4-Autopilot/blob/v1.17.0/docs/en/ros2/user_guide.md)
