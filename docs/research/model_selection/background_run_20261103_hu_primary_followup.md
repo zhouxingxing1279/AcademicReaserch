@@ -48,3 +48,8 @@ Topic remains **in progress**. Next single priority: resolve Hu equation (5) aga
 
 ## Validation boundary
 Documentation only; no controller or validation script developed. Static Markdown checks and exact changed-file diff are required before PR. GitHub CI status is reported separately; absence of checks is not success. Shared ledger/matrix receive only links to this scoped rereading record, preserving existing content.
+
+
+## Subsequent correction checkpoint
+
+The [continuation audit](background_run_20261103_hu_printed_model_proof_chain.md) supersedes this run's unresolved OCR hypothesis and unqualified attitude-rate labels. The original reading scope above is historical; do not interpret it as the latest model verification status.
