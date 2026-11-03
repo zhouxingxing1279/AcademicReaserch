@@ -2357,3 +2357,35 @@ See [scoped reading record](../research/model_selection/background_run_20261103_
 ### 2026-11-03 source-reading accounting
 
 Four paper/report sources received targeted body reading this run: Hu (2018), Bouffard (2012) report, Didier (2021), and Mo Chen et al. (2018). **0 full-text-complete upgrades, 4 partial body reads, 0 abstract-only reads**. The Mo Chen 2017 dissertation was an additional partial supporting-document cross-check, not counted as a separate MPC paper. Three sources are direct quadrotor MPC sources (Hu, Bouffard report, Didier); the Mo Chen TAC paper is model-provenance/reachability evidence only.
+
+
+---
+
+## 2026-11-03 — actuator-state and physical command-interface audit
+
+### Parakh M. Gupta, Ondřej Procházka, Jan Hřebec, Matej Novosad, Robert Pěnička, Martin Saska (2025), LoL-NMPC
+
+- **Bibliography**: “LoL-NMPC: Low-Level Dynamics Integration in Nonlinear Model Predictive Control for Unmanned Aerial Vehicles,” 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2025), pp. 1186–1193. DOI: https://doi.org/10.1109/IROS60139.2025.11246583 . Author preprint: https://arxiv.org/abs/2506.02169 . Public implementation: https://github.com/ctu-mrs/lol_nmpc .
+- **Reading status/date**: 2026-11-03, **partial primary-source body reading**, Sections III–V and conclusion, including the low-level controller/motor model, actuator constraints, implementation and experiments. Also inspected the public Acados model and configuration at repository commit 4526fe9443464bf7f33f942577e18ed3f6b78cee; files packages/controller_module/src/nmpc_acados/quadrotor_model.py and base_config.yaml. Not read cover-to-cover.
+- **Model/state**: 20 coordinates: position (3), unit quaternion (4), translational velocity (3), body angular velocity (3), low-level rate-controller integral state (3), and four normalized motor-speed/throttle states (4). The quaternion is constrained to unit norm; 20 coordinates are not 20 independent physical degrees of freedom.
+- **OCP input/interface**: four high-level inputs, collective throttle plus three desired body rates, not four independent motor commands. The low-level controller converts rate error and integral state into torque; the mixer maps collective throttle and torque to four motor commands. Linear constraints are imposed on the mixed per-motor commands.
+- **Actuator model**: normalized motor-speed state follows a first-order lag, \(\dot r=(r_c-r)/\tau_m\). The public configuration sets \(\tau_m=0.05\) s, controller step 0.01 s, and prediction horizon 1.0 s. Thus the model explicitly carries motor lag and mixer feasibility, but it is a cascade-integrated high-level interface rather than direct rotor-command optimization.
+- **Code/model consistency note**: the paper describes the low-level block as PID-type. In the inspected public Acados model, the predicted torque is \(\tau_c=K_p(\omega_c-\omega)+K_i z\); the derivative term is commented out. The released prediction model is therefore PI in this expression. This is a code observation, not a claim about every component of the PX4 firmware.
+- **Platform/measurements/results**: real custom quadrotor, approximately 1.2 kg, Cube Orange+/PX4, Khadas VIM3 Pro ARM computer, GNSS RTK and IMU state estimation, ESC RPM feedback reported around 65 Hz. The paper reports real-time operation at 100 Hz, flight speeds up to 98.57 km/h and accelerations up to 3.5 g, with average trajectory-error reduction of 21.97% relative to the standard NMPC formulation.
+- **Limitations/reuse**: this is the strongest recent real-flight example of including low-level controller, mixer and motor dynamics together in the prediction. It does not optimize four independent rotor commands at the OCP interface; the interface is collective throttle/body-rate references. Its 20-coordinate model is hardware-stack-specific and materially more complex than a 12-state rigid-body plant. It does not provide the SMF/CZ intermittent-measurement or robust Tube-MPC recursive-feasibility guarantee sought here.
+
+### Bin Wang, Chuixu Kong, Mutian Yu, Chang Liu (2026), abstract-only candidate
+
+- **Bibliography**: “Meta-Learning Augmented Model Predictive Control for Quadrotor UAV Flight in Strong Wind,” Drones, 10(10), 731 (2026), DOI: https://doi.org/10.3390/drones10100731 .
+- **Reading status/date**: 2026-11-03, **metadata/abstract only**. The publisher full-text route returned an access/rate-limit error during this run; search-index excerpts are not treated as full-text evidence.
+- **Reproducibility check**: inspected https://github.com/BW-AerialRobotics/ML-MPC at main commit 14ecd14c489324034088a092bf73920d7bf5bb8f. The visible tree contains baseline controllers, rotor-model test data, PX4 parameters and plotting utilities, but no clearly identifiable core implementation of the paper's meta-learning MPC. Do not use its model/input details in the evidence matrix until the author PDF or implementation is independently inspected.
+- **Status**: retain as an abstract-only candidate for a later full-text retrieval; not counted among this run's body-read papers and not used to change model selection.
+
+### 2026-11-03 targeted re-reading accounting (existing ledger records, no duplicate entries)
+
+- **Ru & Subbarao (2017)**, DOI 10.3390/aerospace4020031: re-read the rigid-body equations, rotor allocation, actuator equation (7), prediction statement and Appendix A. The paper explicitly says the first-order actuator dynamics are ignored in prediction and used only for state propagation.
+- **Bicego et al. (2020)**, DOI 10.1007/s10846-020-01250-9: re-read the actuator-force state/input definition, OCP constraints, state-dependent force-rate limits, approximation used to keep those constraints linear, stability/recursive-feasibility remarks and quadrotor implementation.
+- **Nan, Sun, Foehn & Scaramuzza (2022)**, DOI 10.1109/LRA.2022.3154033: re-read the quaternion rigid-body model, first-order rotor-thrust lag, four-command OCP, INDI post-processing and real-flight instrumentation.
+- **Wehbeh & Sharf (2024)**, DOI 10.1002/rnc.7627: re-read the SO(3) local error model, bidirectional thrust/rate constraints, scenario uncertainty treatment, sensor assumptions and simulation/timing tables.
+- **Gupta et al. (2025)**, DOI 10.1109/IROS60139.2025.11246583: new partial body-read record above, plus public model-code review.
+- **Count**: 5 original quadrotor/multirotor MPC papers received targeted body reading from primary full-text sources; 0 were read cover-to-cover; 5 are partial body reads; 1 additional 2026 candidate is metadata/abstract-only. Existing Ru/Bicego/Nan/Wehbeh entries are cross-referenced, not duplicated. The 2026 candidate is not used as evidence until full text is obtained.
