@@ -1,3 +1,9 @@
+# 唯一论文阅读总账
+
+> 本文件是当前唯一持续追加的论文登记总账，按研究轮次保留书目、阅读范围、模型/输入/观测假设、定理条件和迁移限制。论文证据记录不自动构成当前模型决策或控制器设计指令。
+>
+> 当前研究架构、模型分层和下一优先问题以 [当前研究检查点](../research/CURRENT_CHECKPOINT.md) 与 [模型选型证据矩阵顶部摘要](../research/model_selection/MODEL_SELECTION_EVIDENCE.md) 为准。历史 Run 日志已移入 [历史归档](../../archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)，本总账中的链接已指向归档原件；不得将旧 Run 的证明/仿真结果直接迁移为新 PX4 外环合同的保证。
+
 ## 背景第30轮新增论文 — Chipofya/Lee/Chong (2015) 三层Laguerre MPC（2026-11-03 UTC；正文分节已读）
 
 - **书目及原始全文**：Mapopa Chipofya, Deok Jin Lee, Kil To Chong, *Trajectory Tracking and Stabilization of a Quadrotor Using Model Predictive Control of Laguerre Functions*, *Abstract and Applied Analysis* **2015**, Article ID **916864**, **11 pages** (2015-02-19), DOI https://doi.org/10.1155/2015/916864 ，出版社开放全文 https://onlinelibrary.wiley.com/doi/10.1155/2015/916864 。**实际阅读**：2026-11-03，开放HTML正文§1–7，重点§3–4.1动力学、§5.1–5.2 MPC/观测器、§6参数和结果、表1–3。**核验状态：全文正文分节已读，但网页数学公式部分未被文本接口完整渲染；矩阵系数/数值采样周期/终端证明未逐式确认，不声称所有公式全读或复现。**
@@ -399,7 +405,7 @@
 
 **研究问题/方法/假设/结论：** 在自动机约束的完整状态测量丢失下，利用string automaton、因果共享开环前缀及产品系统安全游戏求不变核；成功测量为完整无噪状态`y=x`，失败为无读数；其Proposition 4/5有紧集、连续性及Assumption 1等条件。**局限：** 非四旋翼、非有噪位置-only SMF/CZ、无本仓库固定推力四状态控制器、无20ms时限认证；不能直接迁移其无限时域不变核结论。
 
-**与课题关联/可复用技术：** 丢包自动机和控制前于未知success/miss的量词顺序。Run253在Run251/252特定真实双轨迹上，精确证明第25–30拍非零共享力矩有限安全及第30拍强制成功位置读数必然区分两路径（位置差至少0.29623244875m，噪声读数差至少0.25623244875m）；这是**本仓库独立数学证书，不是该论文结论**。**待查问题：** 第30拍各成功分支能否对全部SMF一致状态建立非空后继闭合终端信息集合？**日志：** [Run253](../research/run253_research_log.md)。
+**与课题关联/可复用技术：** 丢包自动机和控制前于未知success/miss的量词顺序。Run253在Run251/252特定真实双轨迹上，精确证明第25–30拍非零共享力矩有限安全及第30拍强制成功位置读数必然区分两路径（位置差至少0.29623244875m，噪声读数差至少0.25623244875m）；这是**本仓库独立数学证书，不是该论文结论**。**待查问题：** 第30拍各成功分支能否对全部SMF一致状态建立非空后继闭合终端信息集合？**日志：** [Run253](../../archive/legacy_planar_direct_control_20261103/docs/research/run253_research_log.md)。
 
 ---
 
@@ -413,7 +419,7 @@
 
 **主要结论与局限：** 给出基于误差界收紧的测量鲁棒安全备份SOCP，Segway实验对比无鲁棒性的BS-QP；其安全结论有明确的备份不变集、正则性及优化可行性前提，不含有界独立外扰下的四旋翼终端信息状态后继闭合证明。
 
-**本课题关联/可复用：** 可借鉴“先认证非空不变备份集、再扩张安全域”的论证顺序与误差界收紧；不能用有限55拍零尾充当论文的无限不变备份集。Run252针对特定Run251零力矩前缀及合法 `SSSMM` 观测串，精确得到第25拍速度投影必要直径1.3391329875m/s；这是仓库独立证书，**不是Cosner等论文结果**。**待查问题：** 能否在该真实双速度纤维上构造共享因果非零备份、并认证下一次必成功位置测量之前及其后继的安全集合闭合？**研究日志：** [Run252](../research/run252_research_log.md)。
+**本课题关联/可复用：** 可借鉴“先认证非空不变备份集、再扩张安全域”的论证顺序与误差界收紧；不能用有限55拍零尾充当论文的无限不变备份集。Run252针对特定Run251零力矩前缀及合法 `SSSMM` 观测串，精确得到第25拍速度投影必要直径1.3391329875m/s；这是仓库独立证书，**不是Cosner等论文结果**。**待查问题：** 能否在该真实双速度纤维上构造共享因果非零备份、并认证下一次必成功位置测量之前及其后继的安全集合闭合？**研究日志：** [Run252](../../archive/legacy_planar_direct_control_20261103/docs/research/run252_research_log.md)。
 
 ---
 
@@ -433,7 +439,7 @@
 
 **题名/作者：** *Safety Control Synthesis for Systems with Missing Measurements*；Liren Yang、Necmiye Ozay。**正式发表：** ADHS 2021，*IFAC-PapersOnLine*，pp.97–102；DOI https://doi.org/10.1016/j.ifacol.2021.08.481 ；作者公开正文 https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf 。**阅读状态：** 2026-11-01重新阅读§3式(3)–(7)、§4.2–4.4及Proposition 4/5；历史Run248已分节阅读，故不新增去重数，未宣称逐式复核全文。
 
-**研究问题/方法：** 具有自动机约束的完整状态测量丢失时，如何利用string automaton和因果控制承诺将部分信息安全问题转换为产品系统安全游戏。成功时观测`y=x`、失测时`y=∅`；无本仓库的成功位置有界噪声、隐藏速度和每拍姿态有噪SMF。**主要理论条件与结论：** 在论文Assumption 1的测量模式、产品系统紧性和连续性条件下，Proposition 4/5建立不变核与winning set联系；不能直接替代有噪位置SMF的终端递归可行性证明。**局限/课题关联：** 控制不能预知下一次测量何时成功，真实共享观测历史下必须施加相同因果动作。Run251独立推导15拍两条不可区分真实扰动路径的速度投影直径必要下界0.5275372375m/s，**不是Yang/Ozay原文结果**。可复用：丢包自动机、因果量词、信息状态安全游戏。待查：如何将共享观测速度纤维与四状态非零备份的后继闭合检验结合？详见[Run251日志](../research/run251_research_log.md)。
+**研究问题/方法：** 具有自动机约束的完整状态测量丢失时，如何利用string automaton和因果控制承诺将部分信息安全问题转换为产品系统安全游戏。成功时观测`y=x`、失测时`y=∅`；无本仓库的成功位置有界噪声、隐藏速度和每拍姿态有噪SMF。**主要理论条件与结论：** 在论文Assumption 1的测量模式、产品系统紧性和连续性条件下，Proposition 4/5建立不变核与winning set联系；不能直接替代有噪位置SMF的终端递归可行性证明。**局限/课题关联：** 控制不能预知下一次测量何时成功，真实共享观测历史下必须施加相同因果动作。Run251独立推导15拍两条不可区分真实扰动路径的速度投影直径必要下界0.5275372375m/s，**不是Yang/Ozay原文结果**。可复用：丢包自动机、因果量词、信息状态安全游戏。待查：如何将共享观测速度纤维与四状态非零备份的后继闭合检验结合？详见[Run251日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run251_research_log.md)。
 
 ---
 
@@ -469,7 +475,7 @@
 
 **与课题关联：** Run249的55拍零尾只是固定截止时间合同；Run250精确证明固定零备份对全初始盒最多67拍，68拍有真实角点越界。文献强调终端安全集必须存在后继闭合控制，Run249尚无这一条件。**可复用技术：** 终端控制律与安全集合证明清单、PSF旧计划移位、将不可行恢复与硬安全保证分开评价。**待查问题：** 在真实5拍success/miss和SMF后验信息状态上，能否构造非空共享因果终端控制集合？软约束恢复应如何作为非安全诊断通道而非硬安全证明？
 
-**本轮独立数学证据：** [Run250研究日志](../research/run250_research_log.md)；精确Fraction真实角点第68拍反例。去重计数从96增加至97；历史Wabersich与Zeilinger（2021）*A predictive safety filter...*仍为不同论文的仅摘要核验记录，不在本轮升级已读。
+**本轮独立数学证据：** [Run250研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run250_research_log.md)；精确Fraction真实角点第68拍反例。去重计数从96增加至97；历史Wabersich与Zeilinger（2021）*A predictive safety filter...*仍为不同论文的仅摘要核验记录，不在本轮升级已读。
 
 ---
 
@@ -491,7 +497,7 @@
 
 **题名/作者/出版：** *Output feedback model predictive control based on set-membership state estimation*；Quanwei Qiu、Fuwen Yang、Yong Zhu、Eman Mousavinejad；*IET Control Theory & Applications* 14(4):558–567 (2020)。**DOI与原文：** https://doi.org/10.1049/iet-cta.2019.0881 ；https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-cta.2019.0881 。**阅读日期/核验状态：** 2026-11-01，重新分节阅读开放正文§2、§3.1–3.2（Theorem 1、式(19)）、§4（终端RPI条件）与§6；历史已读，**不是新读一篇，也不是逐式全文核验**。
 
-**研究问题：** 有界过程/量测噪声下不可测状态的约束预测控制。**方法/模型：** 线性时变/多面体不确定系统，椭球集员状态估计（先预测后量测更新）、基于后验椭球的有限时域minimax/LMI MPC。**关键定理与假设：** Theorem 1给出在适当LMI条件下的估计椭球包含；§4的稳定/可行性论证需要鲁棒正不变终端集合、终端反馈及相应附加约束，不是有限安全管自动成立。**结论：** 论文在相应假设下给出估计—控制—约束一体化框架及数值/DC-DC变换器案例。**局限：** 没有本仓库四旋翼有噪位置-only丢包自动机、非线性正弦和独立极端残差；LMI框架也不能直接赋予Run249的55拍回退无限安全。**关联/可复用：** 状态SMF后验驱动优化、估计集合包含与终端RPI条件分离。**待查问题：** 如何把Run249固定截止时域的零尾安全合同转化为一个非空、对所有success/miss边闭合的共享因果信息状态终端合同？参考 [Run249日志](../research/run249_research_log.md)。
+**研究问题：** 有界过程/量测噪声下不可测状态的约束预测控制。**方法/模型：** 线性时变/多面体不确定系统，椭球集员状态估计（先预测后量测更新）、基于后验椭球的有限时域minimax/LMI MPC。**关键定理与假设：** Theorem 1给出在适当LMI条件下的估计椭球包含；§4的稳定/可行性论证需要鲁棒正不变终端集合、终端反馈及相应附加约束，不是有限安全管自动成立。**结论：** 论文在相应假设下给出估计—控制—约束一体化框架及数值/DC-DC变换器案例。**局限：** 没有本仓库四旋翼有噪位置-only丢包自动机、非线性正弦和独立极端残差；LMI框架也不能直接赋予Run249的55拍回退无限安全。**关联/可复用：** 状态SMF后验驱动优化、估计集合包含与终端RPI条件分离。**待查问题：** 如何把Run249固定截止时域的零尾安全合同转化为一个非空、对所有success/miss边闭合的共享因果信息状态终端合同？参考 [Run249日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run249_research_log.md)。
 
 ---
 
@@ -541,7 +547,7 @@
 
 **题名：** *Robust Safety-Critical Control for Systems with Sporadic Measurements and Dwell Time Constraints*。**作者：** Joseph Breeden; Luca Zaccarian; Dimitra Panagou。**年份/出版：** 2024，arXiv预印本v3（2024-06-04），arXiv:2403.03663；公开正文 https://arxiv.org/html/2403.03663v3 ；摘要与版本 https://arxiv.org/abs/2403.03663 ；arXiv DOI https://doi.org/10.48550/arXiv.2403.03663 。未独立核验正式期刊版本，暂不填写期刊DOI。**阅读日期/状态：** 2026-11-01，实际分节阅读§II-C Rule 4、Lemma 1与Assumption 2、§III Theorem 1、§IV Lemma 3/Definition 2/Theorem 2、§V案例；**分节已读，非全文逐式精读**。**研究问题：** 在扰动、稀疏量测及执行器/量测间隔约束下，如何使真实系统始终满足安全集合。**方法/模型：** 连续时间/混合动力学，open-loop observer及误差半径上界，impulsive/continuous actuator两类robust timed control barrier functions（RIT-CBF/RT-CBF）；非四旋翼，算例为卫星交会和轨道保持。**重要假设/定理：** Rule 4每次量测提供带已知误差界的状态估计及下次量测时间界；Assumption 2要求新估计球包含于预测球；Lemma 1/3给出误差包含，Theorem 1/2在CBF可行及相关正则/时序条件下证明安全集合正向不变；不是本项目的离散有噪位置success/miss假设。**主要结论：** 通过控制时机和估计误差预测界联合构造安全过滤条件，满足相应CBF条件可得到严格安全保证。**局限：** 需要可验证的CBF存在性、误差增长界及量测时序；未解决本项目四状态非线性Euler、位置SMF后验与随机/对抗丢包的共享控制前驱。**与本课题关联：** Run247的双向速度可生存必要guard说明仅检查当前状态硬约束不足，且在第25拍位置包可能缺失时需要预测未来安全；与该文的timed uncertainty tube思想相容但不等价。**可复用技术：** 量测之间的误差半径预测、定时安全过滤器结构、CBF存在性与在线可行性条件的分离。**待查问题：** 能否把当前Fraction必要guard提升为带精确关联SMF后验的充分控制前驱，并在5拍success/miss自动机上闭合；是否存在满足该文CBF正则条件的非空安全域？
 
-**本轮独立数学证据：** [Run247研究日志](../research/run247_research_log.md)、精确两侧必要速度guard及第26拍不可恢复反例。论文与Run246新增Kaynama等2015不同，不重复计数。去重已读总数从92增至93；此前只核对摘要/书目的论文不计入已读。
+**本轮独立数学证据：** [Run247研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run247_research_log.md)、精确两侧必要速度guard及第26拍不可恢复反例。论文与Run246新增Kaynama等2015不同，不重复计数。去重已读总数从92增至93；此前只核对摘要/书目的论文不计入已读。
 
 ---
 
@@ -551,7 +557,7 @@
 
 **既有书目未升级：** Franco Blanchini (1999), *Set invariance in control*, *Automatica* 35(11):1747–1767，DOI https://doi.org/10.1016/S0005-1098(99)00113-2 ，本轮再次核验DBLP元数据，但未阅读正文，仍**不计入已读**。
 
-**本轮独立数学证据：** [Run246研究日志](../research/run246_research_log.md)、精确有理数非可生存终点证书。新增论文分节阅读计入去重已读总数92篇；未将Blanchini书目核验或数值sanity计为全文阅读。
+**本轮独立数学证据：** [Run246研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run246_research_log.md)、精确有理数非可生存终点证书。新增论文分节阅读计入去重已读总数92篇；未将Blanchini书目核验或数值sanity计为全文阅读。
 
 ---
 
@@ -561,7 +567,7 @@
 
 **Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 ；作者PDF https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf 。**阅读日期/核验状态：** 2026-11-01复核引言、§II-A Assumption 1及§III/IV框架；历史已读，非新增全文阅读。**研究问题：** 非线性有界扰动与有噪输出下的鲁棒MPC。**方法/模型：** 在线估计误差界、δ-IOSS/SMF/MHE、homothetic Tube MPC。**重要假设/定理：** 有界噪声与扰动、检测性/增量可稳定性及可靠当前/未来估计误差和估计器偏差界，结合MPC终端/移位条件。**主要结论：** 在完整假设下保证递归可行及约束，10状态四旋翼算例展示保守性改善。**局限：** Run245仅有30拍开放环可靠外包和粗区间SMF，没有在线优化与终端证书；论文保证不可直接移植。**关联/可复用：** 将双向控制权限、SMF后验可靠界与Tube收紧接口分开验证。**待查问题：** 在真实5/10/15拍失测序列和未知角度下如何构造共同终端移位证书？
 
-**本轮独立证据：** [Run245研究日志](../research/run245_research_log.md)、精确Fraction外包和零力矩基线的负面权衡。两文历史已登记，不增加91篇去重计数。
+**本轮独立证据：** [Run245研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run245_research_log.md)、精确Fraction外包和零力矩基线的负面权衡。两文历史已登记，不增加91篇去重计数。
 
 ---
 
@@ -571,7 +577,7 @@
 
 **Liren Yang; Necmiye Ozay (2021)**，*Safety Control Synthesis for Systems with Missing Measurements*，*IFAC-PapersOnLine* 54(5):97–102，DOI https://doi.org/10.1016/j.ifacol.2021.08.481 。**阅读日期/核验状态：** 2026-11-01对照历史Run240–242原文分节笔记，本轮未重新阅读全文。**研究问题：** 受约束丢包语言下的因果安全控制。**方法/假设：** 丢包自动机、product安全游戏，成功包提供无噪完整状态。**主要结论：** 在相应假设下可进行无限时域安全策略综合。**局限：** 不直接覆盖有噪部分位置测量。**关联/可复用：** Run244使用合法all-success路径反证Run243固定脉冲族的全模式安全；不能将选中使用的20/25/30拍误写为连续实际成功包间隔。**待查：** 带CZ后验的可实现product信息状态如何建立逐边闭合？
 
-**本轮独立证据：** [Run244研究日志](../research/run244_research_log.md)，严格Fraction反例及单独标记的浮点sanity。两文历史已登记，唯一论文阅读记录去重91篇不变。
+**本轮独立证据：** [Run244研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run244_research_log.md)，严格Fraction反例及单独标记的浮点sanity。两文历史已登记，唯一论文阅读记录去重91篇不变。
 
 ---
 
@@ -581,7 +587,7 @@
 
 **D.Q. Mayne; S.V. Raković; R. Findeisen; F. Allgöwer (2006)**，*Robust output feedback model predictive control of constrained linear systems*，*Automatica* 42(7):1217–1222，DOI https://doi.org/10.1016/j.automatica.2006.03.005 。**阅读日期/核验：** 2026-11-01核对书目与公开摘要，未阅读全文；历史已登记不重复计数。**研究问题：** 有界过程与输出扰动下的线性约束MPC。**方法/模型：** 稳定观测器、估计误差RPI、Tube MPC和名义约束收紧。**关键假设/主要结论：** 误差与控制管束在相应不变性假设下保证硬约束。**局限：** 线性且要求误差集合不变；不覆盖本项目非线性角度、丢包模式。**关联/可复用：** 估计误差与控制误差分离的终端收紧合同。**待查：** 如何为带有噪角观测的冻结四状态系统构造共享因果估计误差RPI？
 
-**独立验证：** [Run243研究日志](../research/run243_research_log.md)；精确Fraction Jury和两包速度区间证书、单条无扰数值闭环。固定模式局部Schur不等于任意切换鲁棒安全。已读去重仍91篇。
+**独立验证：** [Run243研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run243_research_log.md)；精确Fraction Jury和两包速度区间证书、单条无扰数值闭环。固定模式局部Schur不等于任意切换鲁棒安全。已读去重仍91篇。
 
 ---
 
@@ -591,7 +597,7 @@
 
 **Johannes Köhler; Matthias A. Müller; Frank Allgöwer (2021)**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 。**核验状态/日期：** 2026-11-01实际阅读公开正文Introduction、§III-C集合估计、§IV输出反馈MPC概述；已有历史登记，去重已读仍91篇，不声称全文逐式验证。**研究问题：** 非线性受扰系统有噪输出下鲁棒约束满足。**方法：** 在线估计误差界、可预测估计偏差、homothetic tube MPC与MHE。**重要假设/结论：** 依赖检测性/估计误差有效性及适当递归可行条件；报告10状态四旋翼算例和减少保守性。**局限：** 未直接覆盖本项目5/10/15成功/丢包模式及控制相关扰动；无法直接借用其结论当本项目证明。**关联/复用：** 下一轮将SMF后验中心与半宽引入可实现阻尼控制，分别验证估计误差界与终端移位条件。**待查：** 固定复杂度集合降阶能否保持递归可行和20ms预算？
 
-**项目独立证据：** [Run242日志](../research/run242_research_log.md)；精确Fraction Jacobian和判别式证明原样重复Run241脉冲的悬停平衡点局部不稳定，但不否定一般RCI或输出反馈控制。
+**项目独立证据：** [Run242日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run242_research_log.md)；精确Fraction Jacobian和判别式证明原样重复Run241脉冲的悬停平衡点局部不稳定，但不否定一般RCI或输出反馈控制。
 
 ---
 ## Run241 观测条件化非零力矩备份与文献复核（2026-11-01；去重已读仍91篇）
@@ -600,7 +606,7 @@
 
 **Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136，DOI https://doi.org/10.1016/j.automatica.2016.02.036 ，全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/核验：** 2026-11-01复核公开摘要及Run239既有Definition 3/Proposition 1–2笔记，未重读全文。**研究问题：** 有界误差下关联集合估计。**方法/假设：** 线性映射、CZ精确交集与已知有界噪声。**主要结论：** CZ可保留位置—速度相关性，代价是表示复杂度增长。**局限：** 不直接给出非线性输出反馈递归MPC。**关联/可复用：** Run241利用Run240关联生成元直接计算可见位置脉冲对速度/位置的可靠支持，而不是将隐藏状态当成可测。**待查：** 将该支持证书嵌入可降阶、可重复的SMF信息状态。两文均为既有文献，去重91篇不变。
 
-**本轮独立结果：** [Run241研究日志](../research/run241_research_log.md)。10/15拍全部成功观测下，一次性15拍共享非零力矩脉冲的严格终端上界优于零力矩精确基线；5拍的同一上界方法不能认证收益。没有一般SMF-MPC递归可行性。
+**本轮独立结果：** [Run241研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run241_research_log.md)。10/15拍全部成功观测下，一次性15拍共享非零力矩脉冲的严格终端上界优于零力矩精确基线；5拍的同一上界方法不能认证收益。没有一般SMF-MPC递归可行性。
 
 ---
 
@@ -610,7 +616,7 @@
 
 **Scott, Joseph K.; Raimondo, Davide M.; Marseglia, Giuseppe Roberto; Braatz, Richard D. (2016)**，*Constrained zonotopes: A new tool for set-based estimation and fault detection*，*Automatica* 69:126–136；DOI https://doi.org/10.1016/j.automatica.2016.02.036；作者公开全文 https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf 。**阅读日期/状态：** 2026-11-01复核摘要、Proposition 1和Run239历史精读笔记，未重新阅读全文；已登记，不重复计数。**研究问题：** 如何以有限集合表示精确实现有界噪声下的线性预测、交集与支持计算。**方法/假设：** 线性映射、CZ的约束生成元表示及精确交运算，需有界过程/测量误差。**结论/局限：** 保留位置—速度相关性，但在线复杂度会增长；不直接给出有丢包非线性SMF＋MPC递归安全。**关联/可复用：** Run240的各初始分支是带测量条带的CZ，先计算一维支持再对两支取并，不能把非凸并集当成一个CZ。**待查：** 有界复杂度降阶能否保持共享恢复控制的可行性证书？
 
-**本轮自有结果：** [Run240日志](../research/run240_research_log.md)。对所有成功观测值的5/10/15拍速度区间最大半宽分别0.2464585125、0.3188500014、0.3681367927m/s；仅限Run236两点纤维，不能推广为一般后验或MPC闭环。**去重已读仍91篇。**
+**本轮自有结果：** [Run240日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run240_research_log.md)。对所有成功观测值的5/10/15拍速度区间最大半宽分别0.2464585125、0.3188500014、0.3681367927m/s；仅限Run236两点纤维，不能推广为一般后验或MPC闭环。**去重已读仍91篇。**
 
 ---
 
@@ -620,7 +626,7 @@
 
 **研究问题：** 有界过程和量测误差下如何保留状态集合的关联、交集和映射。**方法/模型：** 线性离散动力学，CZ表示{Gξ+c:||ξ||∞≤1,Aξ=b}；用线性等式与新增噪声变量实现量测条带交集。**关键定理/假设：** Proposition 1给出精确广义交及线性映射；§5(31)–(33)假设初始状态、过程扰动和量测噪声有已知紧致集合；Proposition 2给出CZ非空/成员资格LP判据。**结论：** 保留约束可以避免过早盒外包的相关性损失。**局限：** 生成元和等式随时间增长，在线降阶需另行保证外包；原论文未证明本仓库非线性、丢包、控制相关残差下的递归可行性。**与课题关联/可复用：** Run239对两初始符号分支分别引入15个扰动系数和一个位置测量噪声松弛，使用精确原始—对偶分数证书计算y=0时速度支持；单个CZ不能精确表示非凸两分支并集。**待查：** 全观测值及5/10/15拍模式下的有界复杂度后验、因果备份律与递归终端是否存在？
 
-**本轮自有证据：** [Run239研究日志](../research/run239_research_log.md)。给定y=0的速度半宽0.3681367927m/s是限定子系统的精确Fraction结果，不是原论文直接提供的数值；不能推广为所有y均收缩。**去重已读仍91篇。**
+**本轮自有证据：** [Run239研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run239_research_log.md)。给定y=0的速度半宽0.3681367927m/s是限定子系统的精确Fraction结果，不是原论文直接提供的数值；不能推广为所有y均收缩。**去重已读仍91篇。**
 
 ---
 
@@ -630,7 +636,7 @@
 
 **Qiu, Quanwei; Yang, Fuwen; Zhu, Yong; Mousavinejad, Eman (2020)**，*Output feedback model predictive control based on set-membership state estimation*，*IET Control Theory & Applications* 14(4):558–567，DOI https://doi.org/10.1049/iet-cta.2019.0881 。**阅读日期与核验：** 2026-11-01，重新阅读出版社开放正文§3.1–3.2、§4，未重建图片形式的全部LMI。**研究问题/方法：** 椭球SMF预测与量测更新、LMI/SDP鲁棒MPC、终端约束。**关键条件与结论：** 初始估计包含与初始优化可行、终端不变约束对可行性/稳定性分析重要；不能仅凭有限时域无违约推断无限递归可行。**局限：** 本项目冻结非线性、观测丢包与控制依赖残差未覆盖。**关联/可复用：** 估计集合必须进入未来控制决策。**待查：** Z15的后验测量收缩是否可与可执行终端备份形成闭合。此文此前已登记，不重复计数。
 
-**本轮自有证据：** [Run238研究日志](../research/run238_research_log.md)。指定两状态纤维在共同零力矩下15拍安全的精确Fraction归纳，不是以上论文定理的直接应用。**统一已读计数仍91篇。**
+**本轮自有证据：** [Run238研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run238_research_log.md)。指定两状态纤维在共同零力矩下15拍安全的精确Fraction归纳，不是以上论文定理的直接应用。**统一已读计数仍91篇。**
 
 ---
 
@@ -640,7 +646,7 @@
 
 **研究问题：** 有界过程/观测扰动、状态不可直接测量时如何同时保证MPC约束与状态估计包含。**模型/方法：** 线性离散系统，椭球SMF预测+测量更新，估计集合参与minimax MPC，以S-procedure/Schur补和LMI/SDP处理约束，终端鲁棒正不变椭球。**重要定理/假设：** §2 Assumptions 1–2要求噪声与初始状态由已知椭球包围；§3 Theorem 1为递推估计包含的充分LMI条件；§4终端约束及初始可行是稳定/可行分析的重要条件（公式图片未逐式核实）。**主要结论：** 提出SMF+MPC统一设计及数值/电源变换器例子。**局限：** 椭球外包可能保守，SDP计算开销未达到本项目20ms认证，且不直接适用非线性sin、连续位置丢包和控制依赖扰动。**与本课题关联/可复用：** 信息状态集合而非单点估计必须进入终端控制；Run237严格证明原4000生成元F不适用于一个合法共享观测纤维。**待查：** 能否构造含估计误差/观测历史的非空输出反馈终端RPI与递归可行性证书？
 
-**本轮项目自有证据：** [Run237研究日志](../research/run237_research_log.md)。严格支持超平面反例独立推导，不冒充Qiu等文献定理。
+**本轮项目自有证据：** [Run237研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run237_research_log.md)。严格支持超平面反例独立推导，不冒充Qiu等文献定理。
 
 ---
 
@@ -650,7 +656,7 @@
 
 **Lucia, Ernesto, Castelan (2023)**，*Set-theoretic output feedback control: A bilinear programming approach*，*Automatica* **153:111004**，DOI https://doi.org/10.1016/j.automatica.2023.111004 。**本轮阅读/核验层级：** DBLP书目及公开资料复核，纠正本日志历史错误卷号/DOI，未重新精读原文；历史Run141已读状态保留。**研究问题/方法：** 输出反馈控制器及受控不变多面体的双线性联合综合。**假设/结论/局限：** 历史Run141的分节笔记讨论静态输出反馈与嵌套集合；该线性方法不能直接证明本项目非线性、失测及推力相关扰动下的安全性。**可复用：** 把观测等价类上统一控制作为合成约束。**待查：** 能否以更小维的模式依赖多面体替代4000生成元F？书目 https://dblp.org/rec/journals/automatica/LuciaEC23.html 。
 
-**本轮自有证据：** [Run236研究日志](../research/run236_research_log.md)。去重已读仍91篇；不将仅核对书目的文献重复计入已读。
+**本轮自有证据：** [Run236研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run236_research_log.md)。去重已读仍91篇；不将仅核对书目的文献重复计入已读。
 
 ---
 
@@ -664,7 +670,7 @@
 **重要假设/定理：** 稳定线性动力学、紧致扰动集合；具体定理编号和原文完整条件本轮未核实，不将其直接套用非线性无人机。
 **主要结论：** 有限外近似可用于可靠约束验证；本轮项目自行以W=eps[-1,1]^4、rho=||A^800||∞构造有限4000生成元RPI，严格证明后继闭合。
 **局限：** 原论文不解决间歇量测共享控制、控制依赖气动扰动、输出反馈Tube MPC及在线计算预算。
-**与本课题关联及可复用技术：** 可将无限zonotope替换为有限生成元矩阵G和LP成员资格接口，但必须另证观测纤维上的单一因果控制；本轮的非线性正弦余项嵌入及有理数证明见 [Run235研究日志](../research/run235_research_log.md)。
+**与本课题关联及可复用技术：** 可将无限zonotope替换为有限生成元矩阵G和LP成员资格接口，但必须另证观测纤维上的单一因果控制；本轮的非线性正弦余项嵌入及有理数证明见 [Run235研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run235_research_log.md)。
 **待查问题：** 如何降阶4000生成元而保持RCI，及在SMF后验纤维上建立共享控制和终端移位条件？
 
 ## Run234 定向复核：mRPI无限和与可证尾项（2026-10-31；去重仍91篇）
@@ -678,7 +684,7 @@
 **主要结论：** 经典mRPI可用有限可达和及可验证的尾项界近似；Run234使用精确有理数自行构造相应证书。
 **局限：** 原论文线性条件不直接推出本项目非线性推力调度、间歇量测或输出反馈安全；本轮仅对固定推力、完整状态反馈、冻结四状态Euler模型独立证明。
 **与本课题关联/可复用技术：** Run234定义无限zonotope S、用800步精确有理数矩阵幂和几何尾项证明S包含于物理硬约束、力矩不饱和，并以sin Taylor余项将真实非线性闭环嵌入稳定线性扰动包络。
-**待查问题：** 如何得到可在线判定成员资格的有限RCI表示，并在SMF后验状态纤维上实现共享因果控制？参见 [Run234研究日志](../research/run234_research_log.md)。
+**待查问题：** 如何得到可在线判定成员资格的有限RCI表示，并在SMF后验状态纤维上实现共享因果控制？参见 [Run234研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run234_research_log.md)。
 
 ## Run233 新增分节原文阅读：非线性鲁棒不变集的图方法（2026-10-31；去重90→91篇）
 
@@ -696,17 +702,17 @@
 
 ## Run232 定向原文复核：中央桥多拍阻塞（2026-10-31；去重仍90篇）
 
-**Yinan Li; Jun Liu (2018)**, *Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*, *IEEE Transactions on Automatic Control* 63(7):2206–2211。DOI https://doi.org/10.1109/TAC.2017.2760106；作者原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**阅读日期/层级：** 2026-10-31，重读§II–III Definition 1、Propositions 2–3、Definition 3、Theorem 1及其前提；历史Run227–231已计入，非新增全文精读。**研究问题：** 有限模式非线性离散系统的不变控制合成。**方法/模型：** 区间前驱、分支定界、有限模式标记与内近似。**重要定理/假设：** Proposition 2给出自身前驱包含判据；Theorem 1的有限终止/鲁棒内近似依赖有限模式、Lipschitz与正鲁棒裕度。**主要结论：** 满足前提可生成分区不变控制内近似。**局限：** 不覆盖本项目连续推力、控制后可选的推力相关对抗残差及SMF间歇测量。**与本课题关联：** Run232独立证明单一小倾角桥候选在速度半宽b<0.4060367...时非RCI；不能直接套用该文定理。**可复用技术：** 严格区分必要反证、未认证后继与充分闭合条件。**待查问题：** 多个小倾角位置—速度相关单元能否形成真正闭合循环并提升到部分观测信息状态。**研究工件：** [Run232研究日志](../research/run232_research_log.md)。
+**Yinan Li; Jun Liu (2018)**, *Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*, *IEEE Transactions on Automatic Control* 63(7):2206–2211。DOI https://doi.org/10.1109/TAC.2017.2760106；作者原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**阅读日期/层级：** 2026-10-31，重读§II–III Definition 1、Propositions 2–3、Definition 3、Theorem 1及其前提；历史Run227–231已计入，非新增全文精读。**研究问题：** 有限模式非线性离散系统的不变控制合成。**方法/模型：** 区间前驱、分支定界、有限模式标记与内近似。**重要定理/假设：** Proposition 2给出自身前驱包含判据；Theorem 1的有限终止/鲁棒内近似依赖有限模式、Lipschitz与正鲁棒裕度。**主要结论：** 满足前提可生成分区不变控制内近似。**局限：** 不覆盖本项目连续推力、控制后可选的推力相关对抗残差及SMF间歇测量。**与本课题关联：** Run232独立证明单一小倾角桥候选在速度半宽b<0.4060367...时非RCI；不能直接套用该文定理。**可复用技术：** 严格区分必要反证、未认证后继与充分闭合条件。**待查问题：** 多个小倾角位置—速度相关单元能否形成真正闭合循环并提升到部分观测信息状态。**研究工件：** [Run232研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run232_research_log.md)。
 
 ## Run231 文献定向复核：严格剪枝与闭合终端集合（2026-10-31；去重仍90篇）
 
-**Yinan Li; Jun Liu (2018)**, *Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*, *IEEE Transactions on Automatic Control* 63(7):2206–2211，DOI https://doi.org/10.1109/TAC.2017.2760106，原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**核验日期与层级：** 2026-10-31，重新阅读正式版§II–III、Definition 1、Proposition 2及Theorem 1的假设与结论；已于Run227/228计入，**不新增去重已读篇数**。**研究问题：** 有限模式离散非线性系统的受控不变内近似和分区控制合成。**方法：** 区间包含、分支定界、前驱固定点与控制模式标记。**重要假设：** 模式集合有限、各映射连续；Theorem 1的有限终止/内近似结论需要正鲁棒裕度与相应精度条件。**结论：** 符合条件时可构造分区不变控制内近似。**局限：** 文中鲁棒裕度与本项目不可见的逐拍控制依赖对抗残差不是同一个假设；不能直接套用论文定理。**与本课题关联：** Run231以独立的有理数对抗轨迹证明正体积四状态盒不属于无限时域安全核，作为候选终端图的严格剪枝，尚未找到闭合循环。**可复用技术：** 区间单元分类、正确区分必要排除与充分后继闭合、控制标签。**待查：** 中央区域能否构造非空闭合终端图；能否将其提升至SMF信息状态。**研究工件：** [Run231研究日志](../research/run231_research_log.md)。
+**Yinan Li; Jun Liu (2018)**, *Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*, *IEEE Transactions on Automatic Control* 63(7):2206–2211，DOI https://doi.org/10.1109/TAC.2017.2760106，原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**核验日期与层级：** 2026-10-31，重新阅读正式版§II–III、Definition 1、Proposition 2及Theorem 1的假设与结论；已于Run227/228计入，**不新增去重已读篇数**。**研究问题：** 有限模式离散非线性系统的受控不变内近似和分区控制合成。**方法：** 区间包含、分支定界、前驱固定点与控制模式标记。**重要假设：** 模式集合有限、各映射连续；Theorem 1的有限终止/内近似结论需要正鲁棒裕度与相应精度条件。**结论：** 符合条件时可构造分区不变控制内近似。**局限：** 文中鲁棒裕度与本项目不可见的逐拍控制依赖对抗残差不是同一个假设；不能直接套用论文定理。**与本课题关联：** Run231以独立的有理数对抗轨迹证明正体积四状态盒不属于无限时域安全核，作为候选终端图的严格剪枝，尚未找到闭合循环。**可复用技术：** 区间单元分类、正确区分必要排除与充分后继闭合、控制标签。**待查：** 中央区域能否构造非空闭合终端图；能否将其提升至SMF信息状态。**研究工件：** [Run231研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run231_research_log.md)。
 
 ## Run230 新增分节原文阅读：输入延迟RCI与有限前驱排除（2026-10-31；去重90篇）
 
 **Zexiang Liu; Liren Yang; Necmiye Ozay (2020)**，*Scalable Computation of Controlled Invariant Sets for Discrete-Time Linear Systems with Input Delays*，American Control Conference (ACC 2020), pp. 4722–4728，DOI https://doi.org/10.23919/ACC45564.2020.9147731；arXiv:2003.04953 https://arxiv.org/abs/2003.04953；作者公开原文 https://web.eecs.umich.edu/~necmiye/pubs/LiuYO_acc20.pdf 。**阅读日期/核验级别：** 2026-10-31，直接阅读arXiv原文§I、§II-A/B、§III至Theorem 1及其证明关键段；分节阅读，非全文逐页精读。核对旧日志及READ_PAPERS中题名/arXiv编号未重复，去重已读89→90。**研究问题：** 输入纯延迟、不可测有界扰动下如何可扩展计算最大鲁棒受控不变集。**方法/模型：** 离散线性系统 x+=Ax+Bu(t-τ)+Fd，预测辅助状态与扰动集合的Pontryagin差，低维RCI重建。**重要假设/定理：** §II式(2)的量词为先选u后对所有d；式(4)给出有限前驱外近似；Theorem 1在其线性、纯输入延迟、固定多面体扰动等假设下证明辅助系统重建的C_ext是增广系统最大RCI。**主要结论：** 利用结构化状态预测，避免直接在n+mτ维增广空间求最大RCI；还可扩展扰动预见信息。**局限：** 非线性sin姿态动力学、控制依赖R(T)及SMF间歇观测均不满足其定理的直接适用条件；本轮Run230的姿态积分链也不是论文意义上的纯输入延迟。**与本课题关联：** Run230利用控制影响姿态的有限传播速度，得到25拍位置边界必要排除证书；该论文的有限前驱逻辑可作为安全语义参照，但Run230数学证书由本仓库模型独立推导。**可复用技术：** 正确的因果控制—扰动量词、有限步安全外近似、预测状态与可达误差分解。**待查：** 能否将状态相关控制权限与输入依赖扰动纳入可计算非空四状态RCI；如何提升至SMF信息状态并保持递归可行？
 
-**本轮证据：** [Run230研究日志](../research/run230_research_log.md)；`verification/check_four_state_position_guard.py`。未声称论文证明本项目终端不变性。
+**本轮证据：** [Run230研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run230_research_log.md)；`verification/check_four_state_position_guard.py`。未声称论文证明本项目终端不变性。
 
 ## Run229 定向原文复核：有限后继图与无限时域不变性边界（2026-10-31；去重仍89篇）
 
@@ -716,31 +722,31 @@
 
 **Yinan Li; Jun Liu（2018）**，*Invariance Control Synthesis for Switched Nonlinear Systems: An Interval Analysis Approach*，*IEEE Transactions on Automatic Control* 63(7):2206–2211，DOI https://doi.org/10.1109/TAC.2017.2760106，正式版原文 https://www.math.uwaterloo.ca/~j49liu/papers/2018/li2018invariance.pdf 。**阅读日期/状态：** 2026-10-31，直接复核正式版§II–III、Definition 1、Propositions 2–3、Algorithm 2、Assumption 1及Theorem 1附近段落；分节阅读，非全文精读。**去重：** 与Run227已读的2016 arXiv:1608.08683为同一研究工作的预印本/正式版，2018正式版题名增加“Nonlinear”，更新版本关联但**不新增已读篇数**。**研究问题：** 离散切换非线性系统中如何计算受控不变内近似和分区控制器。**方法/模型：** 有限控制模式、连续映射、区间包含函数、前驱与细分固定点。**重要定理/假设：** Proposition 2为受控不变的前驱包含判据；Assumption 1为Lipschitz条件；Theorem 1的有限终止/内近似保证有额外鲁棒裕度与精度条件，不能省略。**主要结论：** 在其有限切换模式及鲁棒不变性前提下，可通过区间细分计算具有控制器的内近似。**局限：** 本课题连续推力、控制依赖的逐拍不可见残差、部分观测SMF，不能直接照搬。**与课题关联：** Run228为四状态冻结模型实现严格区间后继与并集覆盖的保守充分认证；仅对狭窄桥给出独立严格反例。**可复用技术：** 区间外包、细分、单元策略与鲁棒裕度审计。**待查：** 连续输入细分及扰动量词如何得到可认证非空四状态RCI，如何提升至SMF信息纤维与MPC递归可行性？
 
-**本轮工件：** [Run228研究日志](../research/run228_research_log.md)；`verification/check_four_state_bridge_graph.py`。未将算法失败视作RCI不存在证明。
+**本轮工件：** [Run228研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run228_research_log.md)；`verification/check_four_state_bridge_graph.py`。未将算法失败视作RCI不存在证明。
 
 ## Run227 新增分节原文阅读：区间分区不变控制（2026-10-31；去重已读89篇）
 
 **Yinan Li; Jun Liu（2016）**，*Invariance Control Synthesis for Switched Systems: An Interval Analysis Approach*；arXiv:1608.08683，https://arxiv.org/abs/1608.08683 ，原文 https://arxiv.org/pdf/1608.08683 。**阅读日期/核验层级：** 2026-10-31，直接阅读§I–III、§IV Algorithm 2/3及Theorems 1/2、§V Theorem 4与Proposition 8；分节阅读，非全文逐页精读；在统一日志与READ_PAPERS中核对题名及编号未重复，去重已读88→89。**研究问题：** 如何计算离散切换非线性系统的受控不变集并合成分区控制器。**方法/模型：** 有限模式、连续子系统映射、区间包含函数、细分及前驱内外近似。**重要假设/定理：** Proposition 2给出Omega⊂Pre(Omega)判据；Theorem 1在紧且full集合与Assumption 1的区间宽度界下给出前驱内外包；Theorem 2给出指定假设下外近似有限终止；Theorem 4在额外正裕度鲁棒受控不变条件下给出有限分区控制器，Proposition 8验证算法输出非空时的策略。**主要结论：** 在论文有限模式框架中可用区间细分合成受控不变集近似及分区策略；内近似需要额外鲁棒性条件。**局限：** 本仓库连续推力、控制依赖对抗残差、间歇位置观测与SMF信息纤维不满足论文的直接应用条件。**与课题关联：** Run227证明终端集合必须允许跨越小倾角桥。**可复用技术：** 区间外包、分区、后继闭合和控制模式记录；需独立处理forall r。**待查问题：** 如何为四状态模型构造经认证的非空闭合单元策略图，并进一步提升至输出反馈信息结构？
 
-**本轮自有证据：** [Run227研究日志](../research/run227_research_log.md)。双模式候选与轴对齐终端盒均严格失败，不是该论文原有定理。
+**本轮自有证据：** [Run227研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run227_research_log.md)。双模式候选与轴对齐终端盒均严格失败，不是该论文原有定理。
 
 ## Run226 新增分节原文阅读：隐式鲁棒受控不变集（2026-10-31；去重已读88篇）
 
 **Zexiang Liu、Tzanis Anevlavis、Necmiye Ozay、Paulo Tabuada（2021）**，*Automaton-based Implicit Controlled Invariant Set Computation for Discrete-Time Linear Systems*；arXiv:2109.12378，https://arxiv.org/abs/2109.12378 。**阅读日期/核验层级：** 2026-10-31，直接阅读arXiv HTML原文§II–IV-A、Definitions 2–3、Assumptions 1–3、Proposition 2、Theorems 1–2及相关说明；不是全文逐页精读。此前唯一日志及READ_PAPERS均未包含此题名/编号，本轮新增一篇去重分节已读，计数87→88。**研究问题：** 如何为受约束离散线性系统构造可用于安全监督的鲁棒受控不变集合，避免显式高维投影的计算负担。**方法/模型：** 线性系统 `x+=Ax+Bu+d`，多面体安全集/扰动集，参数化有限自动机扰动反馈，先在增广状态求鲁棒正不变集，再投影/取凸包得到隐式RCIS。**关键定义、定理及假设：** Definition 2规定扰动当前不可见时 `forall x in C, exists u, forall d`；Definition 3在扰动可见时交换为 `forall x, forall d, exists u`，两者不能混淆。Assumptions 1–3包括（可通过状态反馈处理的）幂零A、多面体S/D及有限扰动顶点；Theorem 1将增广RPIS投影凸包联系到RCIS；Theorem 2在指定幂零/有限自动机条件下给出有限可达集闭式表示。**主要结论：** 特定线性系统可得到隐式不变集和控制器参数约束，减少显式求核的复杂度。**局限：** 本仓库的推力调度非线性、控制依赖残差界、位置间歇观测不自动满足论文假设；不能据此声称四状态/六状态RCI存在。**与课题关联/可复用技术：** 非可见扰动的量词、增广策略状态和隐式终端证书的设计框架；本轮Run226三步证书独立推导，不属于该论文结果。**待查：** 能否对冻结四状态模型构造经严格外包的分区线性策略图、保留正确输出反馈信息纤维并实现可核验的终端不变性？
 
-**本轮自有证据：** [Run226研究日志](../research/run226_research_log.md)。两点属于Pre³(X)，另两点属于Pre²(X)但严格不属于Pre³(X)；未证明非空RCI核。
+**本轮自有证据：** [Run226研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run226_research_log.md)。两点属于Pre³(X)，另两点属于Pre²(X)但严格不属于Pre³(X)；未证明非空RCI核。
 
 ## Run225 二步鲁棒前驱与文献复核（2026-10-31；去重已读仍87篇）
 
 **Ilya Kolmanovsky; Elmer G. Gilbert (1998)**, *Theory and computation of disturbance invariant sets for discrete-time linear systems*, *Mathematical Problems in Engineering* 4(4):317–367；DOI https://doi.org/10.1155/S1024123X98000866；出版商 https://onlinelibrary.wiley.com/doi/10.1155/S1024123X98000866 。**核验日期/层级：** 2026-10-31，重新核对出版商摘要、作者、出版信息；**未阅读正文，不新增已读计数**。**研究问题：** 有界扰动 LTI 系统在状态约束域中的最大扰动不变集。**方法/模型：** 摘要指出 Pontryagin 差、最大不变集生成算法、有限确定性条件及 Lyapunov 稳定系统扩展。**重要定理/假设：** 正文具体定理编号与适用条件未核验，不能引用为本轮非线性模型证明。**主要结论：** 摘要称可生成最大不变集的计算表示并给出数值示例。**局限：** LTI/扰动不变性框架，不能直接代替本仓库非线性推力调度和因果控制策略分析。**本课题关联/可复用：** 前驱迭代、集合差与终端核的理论背景；本轮二步包含/排除证书独立推导。**待查：** 受控不变与纯扰动不变的量词区别、非线性/部分观测情形的可计算内核、有限终止性。
 
-**本轮自有结果：** [Run225研究日志](../research/run225_research_log.md)；两个二步可行见证、两个一步可行但二步严格排除状态。不是完整鲁棒终端核；去重已读仍87篇。
+**本轮自有结果：** [Run225研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run225_research_log.md)；两个二步可行见证、两个一步可行但二步严格排除状态。不是完整鲁棒终端核；去重已读仍87篇。
 
 ## Run224 四状态一步鲁棒前驱与文献核验（2026-10-31；去重已读仍87篇）
 
 **Ilya Kolmanovsky；Elmer G. Gilbert（1998）**，*Theory and computation of disturbance invariant sets for discrete-time linear systems*，*Mathematical Problems in Engineering* 4(4):317–367；DOI https://doi.org/10.1155/S1024123X98000866；出版商 https://onlinelibrary.wiley.com/doi/10.1155/S1024123X98000866 。**核验日期/层级：** 2026-10-31，出版商摘要及书目复核，**未阅读正文、不新增已读计数**。**研究问题：** 有界扰动离散LTI系统在约束域中的最大扰动不变集。**模型/方法：** 摘要说明Pontryagin差、最大不变集生成算法及有限确定性条件。**重要假设/定理：** 具体编号及条件未核验，不能直接迁移至非线性推力调度模型。**主要结论：** 摘要指出给出计算表示、Lyapunov稳定系统扩展及数值例子。**局限：** 主要研究LTI系统，本仓库需要独立证明非线性、控制—扰动量词和输出反馈条件。**关联/可复用：** 鲁棒前驱与终端不变集的概念参考；Run224的一步Taylor区间证书是自行推导，不是该文定理。**待查：** 正文中有限终止条件、控制不变与扰动不变的区别、如何形成可计算内核。
 
-**本轮自有结果：** [Run224研究日志](../research/run224_research_log.md)。安全盒第一轮前驱有两个严格可行见证和两个严格排除点；不构成非空RCI核证明。去重已读87篇不变。
+**本轮自有结果：** [Run224研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run224_research_log.md)。安全盒第一轮前驱有两个严格可行见证和两个严格排除点；不构成非空RCI核证明。去重已读87篇不变。
 
 ## Run223 双侧倾角必要条件与文献核验（2026-10-31；去重已读仍87篇）
 
@@ -748,7 +754,7 @@
 
 **Franco Blanchini（1999）**，*Set invariance in control*，*Automatica* 35(11):1747–1767；DOI https://doi.org/10.1016/S0005-1098(99)00113-2 。**核验日期/层级：** 2026-10-31，DBLP书目核验，**未阅读正文，不计入新增已读篇数**。**研究问题：** 控制集合不变性。**方法、重要定理/假设、主要结论、局限：** 未见原文，待核验。**关联/可复用：** 四状态终端受控不变性理论背景。**待查：** 非线性受控不变集的适用条件与前驱算子。
 
-**本轮自有结果：** [Run223研究日志](../research/run223_research_log.md)，使用有理数Taylor上界证明任意非空RCI集合必须具有双侧倾角投影。不是上述论文定理。统一去重已读数仍87篇。
+**本轮自有结果：** [Run223研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run223_research_log.md)，使用有理数Taylor上界证明任意非空RCI集合必须具有双侧倾角投影。不是上述论文定理。统一去重已读数仍87篇。
 
 ## Run222 终端不变集阻塞与文献核验（2026-10-31；去重已读仍87篇）
 
@@ -756,7 +762,7 @@
 
 **Franco Blanchini（1999）**，*Set invariance in control*，*Automatica* 35(11):1747–1767；DOI https://doi.org/10.1016/S0005-1098(99)00113-2；书目 https://dblp.org/rec/journals/automatica/Blanchini99.html 。**核验日期/状态：** 2026-10-31，仅DBLP书目元数据核验，**未阅读正文，不计入已读篇数**。**研究问题：** 控制不变性理论综述（仅根据题名/书目定位）。**方法、具体定理假设、主要结论、局限：** 待原文阅读核验，不编造。**本课题关联/可复用：** 后续审计四状态鲁棒受控不变核的基础参考。**待查：** 具体鲁棒可生存核算法与适用假设。
 
-**本轮自有结果：** [Run222研究日志](../research/run222_research_log.md)，严格有理数漂移反证，仅适用于冻结横向残差不确定性合同，不是文献原定理。论文去重已读数仍87篇。
+**本轮自有结果：** [Run222研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run222_research_log.md)，严格有理数漂移反证，仅适用于冻结横向残差不确定性合同，不是文献原定理。论文去重已读数仍87篇。
 
 ## Run221 定向原文阅读与终端安全基线（2026-10-31；去重仍87篇）
 
@@ -764,7 +770,7 @@
 
 **Lorenzetti, Pavone（2020）**，*A Simple and Efficient Tube-based Robust Output Feedback Model Predictive Control Scheme*，ECC 2020，DOI https://doi.org/10.23919/ECC51009.2020.9143979；arXiv https://arxiv.org/abs/1911.07360；原文 https://stanfordasl.github.io/wp-content/papercite-data/pdf/Lorenzetti.Pavone.ECC20.pdf 。**阅读日期/层级：** 2026-10-31，直接阅读§II–IV-D式(7)–(11)，非全文重读。**问题/方法：** 有界测量/过程噪声下的LTI输出反馈Tube MPC，以固定误差截面和收紧名义优化控制复杂度。**关键假设：** 线性模型、可稳定化/观测性及有界噪声，存在RPI与终端控制/代价下降条件。**结论：** 在其条件下可构造高效的Tube MPC。**局限：** 不包含本仓库推力调度和缺测信息状态；固定截面可能保守。**关联/可复用：** Run221复用其固定截面、名义终端/移位设计思想，但没有完整终端下降或20ms最坏运行时间证据。**待查：** 相同终端保证和计算预算下，测量条件化SMF/CZ能否改善四状态控制可行域？
 
-**本轮自有证据：** [Run221研究日志](../research/run221_research_log.md)；32条48拍确定性闭环、精确不变性与移位证书。上述两篇均已在历史阅读记录中出现，不增加去重篇数；不把本轮工程实现写成文献原定理或新的理论创新。
+**本轮自有证据：** [Run221研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run221_research_log.md)；32条48拍确定性闭环、精确不变性与移位证书。上述两篇均已在历史阅读记录中出现，不增加去重篇数；不把本轮工程实现写成文献原定理或新的理论创新。
 
 ## Run220 文献核验与双约束支持算法（2026-10-31；去重仍87篇）
 
@@ -772,7 +778,7 @@
 
 **Köhler、Müller、Allgöwer（2021）**，*Robust output feedback model predictive control using online estimation bounds*，arXiv:2105.03427，https://arxiv.org/abs/2105.03427 。本轮阅读层级：公开摘要与仓库既有定理条件笔记交叉核验，非全文重读。研究问题：噪声输出和扰动下的鲁棒MPC；方法：在线估计误差界结合homothetic tube。关键前提：可靠在线界、检测性/增量可稳定性及相应终端条件。结论：可在这些假设下改善保守性并实现鲁棒约束满足，含10状态四旋翼示例。局限：不自动适用于仓库四状态有限Backup。关联/可复用：将可证上界用于MPC收紧；待查：终端受控不变集、递归可行性及实际运行时间。
 
-**本轮自有算法与证据：** [Run220研究日志](../research/run220_research_log.md)。合成双约束支持从1降至0；GitHub Actions完整checkout实际第193拍12个候选第二半空间的额外可认证增益为0，不能由此证明完整后验无收益。不得将本轮标成新增已读论文。
+**本轮自有算法与证据：** [Run220研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run220_research_log.md)。合成双约束支持从1降至0；GitHub Actions完整checkout实际第193拍12个候选第二半空间的额外可认证增益为0，不能由此证明完整后验无收益。不得将本轮标成新增已读论文。
 
 # PAPER_READING_LOG — 无人机 MPC + SMF 论文阅读记录
 
@@ -791,7 +797,7 @@
 - **与课题关联及可复用技术：** Run219证明对位置包135、165、180先合并共享扰动再取支持，可排除Run218旧关键支持极大面，精确改善 `5212367/450000000`；然而五拍速度约束仍阻塞。该单条H半空间**不是完整CZ后验**。
 - **待查问题：** 如何以有限条共享扰动约束和可验证降阶实现连续SMF更新；是否能在同等测量信息、控制策略与计算预算下恢复鲁棒MPC准入并补齐终端不变性？
 
-**本轮自有证据（非文献结论）：** [Run219研究日志](../research/run219_research_log.md)；原极大面排除裕度 `5212367/500000000`，控制相关支持改善 `5212367/450000000`，剩余单行裕度约 `-0.02473733102`。去重87篇不变。
+**本轮自有证据（非文献结论）：** [Run219研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run219_research_log.md)；原极大面排除裕度 `5212367/500000000`，控制相关支持改善 `5212367/450000000`，剩余单行裕度约 `-0.02473733102`。去重87篇不变。
 
 ## Run218 定向阅读：跨块历史约束的零增益支持证书（2026-10-31；去重87篇不变）
 
@@ -811,7 +817,7 @@
 - **局限/课题关联/可复用技术：** 本轮只证明一条有限时域安全审计行在六条历史必要约束下未改善，不是MPC递归可行性结果。在线可靠支持界可作为未来Tube MPC约束收紧的候选接口。
 - **待查问题：** 何种紧凑历史一致集合能在20ms预算内提供真正的控制相关支持改善，并连接可验证终端安全集？
 
-**本轮自有负面证据（非论文定理）：** [Run218研究日志](../research/run218_research_log.md)；关键方向6条跨块H-strip联合支持增益精确为0，五步负速度行仍严格阻塞；完整仓库集成尚未执行。去重87篇不变。
+**本轮自有负面证据（非论文定理）：** [Run218研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run218_research_log.md)；关键方向6条跨块H-strip联合支持增益精确为0，五步负速度行仍严格阻塞；完整仓库集成尚未执行。去重87篇不变。
 
 ## Run217 定向核对：跨块历史相关性与控制相关支持（2026-10-31；去重87篇不变）
 
@@ -843,7 +849,7 @@
 - **与课题关联/可复用技术：** 控制相关支持函数可用于局部鲁棒约束审计；仍须补齐终端不变性及真正滚动MPC。
 - **待查问题：** 能否构造一个范围适中、计算可行的终端安全基线，再公平比较CZ与区间SMF？
 
-**本轮自有负面证据（非文献定理）：** [Run216研究日志](../research/run216_research_log.md)；第193拍联合H外包五拍Backup仍拒绝，精确临界行裕度约-0.03632037，原型中位计算约99ms，超出20ms。去重文献仍87篇。
+**本轮自有负面证据（非文献定理）：** [Run216研究日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run216_research_log.md)；第193拍联合H外包五拍Backup仍拒绝，精确临界行裕度约-0.03632037，原型中位计算约99ms，超出20ms。去重文献仍87篇。
 
 ## Run214 定向复核：滚动历史线性约束与 CZ 联合相关性（2026-10-31；已计数去重87篇不变）
 
@@ -865,7 +871,7 @@
 - **与课题关联及可复用技术：** 六状态/非线性扩展的候选估计基线；当前先实现可验证线性联合 CZ 与复杂度控制。
 - **待查问题：** 对四状态离散动力学，如何实现精确线性 CZ 预测/交，再决定是否有必要采用非线性扩展？
 
-**本轮自有负面结果：** 第193拍最近6个位置包的20组精确支持函数将速度下界提高 `57617501/1440000000 m/s`，但两层因果 Backup 仍拒绝；保留为外包证书阻塞，不推断物理不可生存。参见 [Run214日志](../research/run214_research_log.md)。
+**本轮自有负面结果：** 第193拍最近6个位置包的20组精确支持函数将速度下界提高 `57617501/1440000000 m/s`，但两层因果 Backup 仍拒绝；保留为外包证书阻塞，不推断物理不可生存。参见 [Run214日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run214_research_log.md)。
 
 ## Run213 定向核验：历史一致外包能否转化为控制准入（2026-10-31；去重87篇不变）
 
@@ -887,7 +893,7 @@
 - **课题关联/可复用：** 估计界改善须通过控制准入与终端可行性双重检验，不能仅用集合宽度代表控制性能。
 - **待查问题：** 如何为15-mode推力调度与间歇测量建立可计算终端安全策略？
 
-**本轮自有证据：** [Run213日志](../research/run213_research_log.md)；第192拍恢复准入，但第193拍仍拒绝；去重论文数保持87。
+**本轮自有证据：** [Run213日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run213_research_log.md)；第192拍恢复准入，但第193拍仍拒绝；去重论文数保持87。
 
 ## Run212 定向正文复核：历史一致集员估计与 CZ 集合运算（2026-10-30；去重87篇不变）
 
@@ -904,7 +910,7 @@
 - **与本课题关联/可复用：** Run212通过三次位置返包和连续姿态观测，精确排除Run211独立盒的旧速度下端；后续可将多包支持界/历史线性约束接入CZ信息状态和控制相关支持函数。Run212目前只实现严格支持外包，**不是**完整CZ后验。
 - **待查问题：** 同一信息、同一控制过滤器、可比较计算预算下，保留完整历史相关性是否能让第192拍首力矩backup非空？如何限制CZ约束规模而不丢失安全证书？
 
-**本轮自有证据（非文献定理）：** 精确三包支持界把第192拍速度下端由-2.4931037251954926收紧至-2.419767402278826 m/s，严格改善7040287/96000000 m/s；不声称已实现鲁棒MPC递归可行。详见[Run212日志](../research/run212_research_log.md)。
+**本轮自有证据（非文献定理）：** 精确三包支持界把第192拍速度下端由-2.4931037251954926收紧至-2.419767402278826 m/s，严格改善7040287/96000000 m/s；不声称已实现鲁棒MPC递归可行。详见[Run212日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run212_research_log.md)。
 
 ## Run211 定向复核：有限候选名义 MPC 与终端安全条件（2026-10-30；去重87篇不变）
 
@@ -932,7 +938,7 @@
 - **与课题关联/可复用：** 作为安全过滤的成熟方法基线；比较“名义计划可行”和“有终端备份的递归安全证书”的差异。
 - **待查问题：** 全文中安全终端和备份可行性条件是否能在15-mode信息状态上构造；需要先核验正文而非推断。
 
-**本轮自有证据（非文献定理）：** Run211有限候选8拍名义MPC在指定确定性轨迹中未改善Run210准入（191/200/200 → 133/200/81），并严格发现第192拍独立区间外包盒存在5拍速度不可认证角点；角点未证实与完整观测历史联合相容，不能称为物理不可生存。参见 [Run211日志](../research/run211_research_log.md)。
+**本轮自有证据（非文献定理）：** Run211有限候选8拍名义MPC在指定确定性轨迹中未改善Run210准入（191/200/200 → 133/200/81），并严格发现第192拍独立区间外包盒存在5拍速度不可认证角点；角点未证实与完整观测历史联合相容，不能称为物理不可生存。参见 [Run211日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run211_research_log.md)。
 
 ## Run210 新增定向正文阅读：SMF 与终端安全集的严格区分
 
@@ -985,7 +991,7 @@
 
 **本轮复核的历史文献：** Köhler、Müller、Allgöwer（2021），*Robust output feedback model predictive control using online estimation bounds*，https://arxiv.org/abs/2105.03427；本轮只核对摘要及Run206/207已有定理阅读笔记，没有重新阅读全文。它要求的终端及递归可行性前提尚未由Run208满足。
 
-**Run208 自有结果（不是上述论文定理）：** 四状态精确有理数两层 backup 允许下一拍非零力矩，在合法可达交变历史第95拍将Run207空准入区间严格扩展为非空；第96拍仍拒绝。新策略不使用下一测量数值，尚未证明测量条件化增益或无限时域安全。见 [Run208日志](../research/run208_research_log.md)。
+**Run208 自有结果（不是上述论文定理）：** 四状态精确有理数两层 backup 允许下一拍非零力矩，在合法可达交变历史第95拍将Run207空准入区间严格扩展为非空；第96拍仍拒绝。新策略不使用下一测量数值，尚未证明测量条件化增益或无限时域安全。见 [Run208日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run208_research_log.md)。
 
 **去重计数：历史84篇 + 本轮新增Bertsimas–Goyal 1篇 = 85篇；阅读层级严格区分。**
 
@@ -1003,7 +1009,7 @@
 - **问题/方法/结论：** 离散线性系统中以固定截面 tube 和 RPI 误差集进行输出反馈鲁棒 MPC 设计，降低在线复杂度。
 - **局限/课题关系/可复用/待查：** RPI 终端及误差管束不能由 Run207 的五拍盒重置安全约束替代。下一步可借鉴其终端设计和误差耦合思路，但需要在本仓库四状态调度与观测图上独立建立不变性。
 
-**Run207 自有结论：** 260项精确有理约束可保证同一当前力矩之后，任意合法下一观测后验均有四拍零力矩备份；交变扰动可达场景第95拍该更强桥条件拒绝，而四拍零力矩备份仍可行。这是特定控制模板的一步条件性充分保证，不是上述论文的定理，也不是终端 RCI。详见 [Run207 日志](../research/run207_research_log.md)。
+**Run207 自有结论：** 260项精确有理约束可保证同一当前力矩之后，任意合法下一观测后验均有四拍零力矩备份；交变扰动可达场景第95拍该更强桥条件拒绝，而四拍零力矩备份仍可行。这是特定控制模板的一步条件性充分保证，不是上述论文的定理，也不是终端 RCI。详见 [Run207 日志](../../archive/legacy_planar_direct_control_20261103/docs/research/run207_research_log.md)。
 
 ## Run206 定向复核：真实可达后验与有限时域 backup 的区别（仍为历史84篇）
 
