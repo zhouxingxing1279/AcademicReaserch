@@ -72,3 +72,11 @@ The prior run's ETH bitstream result is corrected: the direct /bitstreams/{uuid}
 ## Next single priority
 
 Read Patel (2026) dissertation Chapter 7 in full (hybrid zonotopic set-membership Kalman filter plus MPC for 6-DOF spacecraft) and audit its measurement assumptions, set update, terminal constraints and robustness claims. Determine which parts transfer to intermittent position-only quadrotor measurements, and which require new proofs. Keep the AIAA 2026 quadrotor paper abstract-only until the publisher full text is obtained.
+
+
+## PR and verification status
+
+- PR #176: https://github.com/zhouxingxing1279/AcademicReaserch/pull/176
+- Base main SHA at PR creation: 0601ab7e571c200543a43fcc60651380dda94705. GitHub reports the PR branch clean/mergeable against main; 4 files changed, +272/−4.
+- CI/check-runs: 0 check-runs and 0 commit statuses were reported. No controller or script changed, so no code test was applicable. Markdown static checks passed: zero trailing-whitespace lines across the updated ledger, matrix and this log; headings and DOI uniqueness checks passed for the newly added paper records.
+- **Not merged**: PR #158 is still open and independently modifies the same unique paper ledger and model evidence matrix. Its base is older and its mergeability is unknown. To avoid overwriting or forcing a conflict into the concurrent research update, PR #176 remains open pending reconciliation. No force push or blind merge was performed.
