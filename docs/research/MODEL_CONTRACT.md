@@ -24,7 +24,7 @@ x_{out}=[p^\mathsf T,v^\mathsf T]^\mathsf T
 \[
 \dot p=v,\qquad \dot v=-K_p(p-r_c)-K_vv+w_{fc}
 \]
-不得先验指定连续二阶模型为 PX4 真值。应辨识离散闭环模型 \\(x_{k+1}=A_{cl}x_k+B_{cl}r_{p,k}+E_{cl}w_k\\)，并测试输入延迟/零阶保持。PX4 v1.17.0 源码显示位置 P—速度 PID 级联，存在 `_vel_int` 积分记忆、速度/导数滤波、速度/倾角/推力限制与 anti-windup；若其历史影响不能被统一残差覆盖，必须增广可识别的控制器状态。Santos & Lagoa (2022) 提供类似位置指令型闭环模型的多旋翼 Tube RMPC 先例；论文增益和扰动界不可直接移植。
+不得先验指定连续二阶模型为 PX4 真值。应辨识离散闭环模型 \\(x_{k+1}=A_{cl}x_k+B_{cl}r_{p,k}+E_{cl}w_k\\)，并测试输入延迟/零阶保持。PX4 v1.17.0 源码显示位置 P—速度 PID 级联，存在 `_vel_int` 积分记忆、速度导数滤波、速度/倾角/推力限制与 anti-windup；X500 的 `MPC_USE_HTE` 默认启用，在线 hover-thrust estimate 还会改变垂直控制映射。首轮建议显式关闭 HTE、固定 `MPC_THR_HOVER=0.60` 做受控辨识，随后做 HTE-on 对照；若内部历史影响不能被统一残差覆盖，必须增广可识别的控制器状态。Santos & Lagoa (2022) 提供类似位置指令型闭环模型的多旋翼 Tube RMPC 先例；论文增益和扰动界不可直接移植。
 
 ### B. 加速度参考
 \[
@@ -40,6 +40,10 @@ x_{out}=[p^\mathsf T,v^\mathsf T]^\mathsf T
 对于多旋翼 `TrajectorySetpoint`，position 非 NaN 时运行位置控制链，velocity/acceleration 可作为前馈；position 为 NaN 且 velocity 有效时运行速度控制链，acceleration 可作为前馈；position 与 velocity 均为 NaN、acceleration 有效时进入加速度设定路径。数据为 NED，单位分别为 m、m/s、m/s²；NaN 表示对应状态不受控。v1.17.0 的 acceleration-only 模式在 OffboardControlMode 表中要求有效 velocity estimate。首轮采用 position-only：position 三轴有效，velocity/acceleration NaN。
 
 必须联合检查 `OffboardControlMode` 与 `TrajectorySetpoint` 有效字段/NaN mask；不同 ROS 2 与 MAVLink 消息路径不能默认等价。该接口语义不提供实际跟踪误差、延迟、带宽或饱和界。完整证据和来源见 [PX4 外环接口证据](model_selection/PX4_INTERFACE_EVIDENCE.md)。
+
+## PX4 内部控制器记忆状态
+
+六状态 \\([p;v]\\) 是否足够取决于 PX4 内环内部记忆。v1.17.0 的 X500 airframe 设 `MPC_THR_HOVER=0.60`，但通用 `MPC_USE_HTE=1` 默认启用 HTE；HTE 根据垂直加速度和分配后的推力更新 hover-thrust estimate，并反馈给位置控制器。首轮模型辨识应先采用明确的 HTE-off 变体（`MPC_USE_HTE=0`、`MPC_THR_HOVER=0.60`），隔离速度积分/导数滤波的影响；再启用 HTE，判断是否需将 hover-thrust estimate 作为慢变增广状态。该设置差异必须写入实验合同。
 
 ## 内环估计器与外环间歇测量的边界
 
@@ -76,5 +80,7 @@ SMF/CZ 后验 \(\mathcal X_k\) 不是未来 Tube。需构造估计误差集合 \
 3. SITL 记录参考输入与真实位置/速度响应，辨识延迟、带宽、饱和和误差界。
 4. 在拟用工作域验证闭环模型残差的有界外包。
 5. 冻结传感器量测方程、异步模式、噪声/相关性合同。
-6. 检验 \\(x_{out}=[p;v]\\) 六状态模型对积分器/滤波器历史的残差覆盖；若失败先增广最小必要闭环记忆状态。
-7. 再设计 SMF/CZ、Tube MPC 与终端安全条件。
+6. 在 HTE-off 基线下检验 \\(x_{out}=[p;v]\\) 六状态模型对速度积分/导数滤波历史的残差覆盖；若失败先增广最小必要闭环记忆状态。
+7. 做 HTE-on 对照，检验 hover-thrust estimate 是否必须作为额外慢变状态。
+8. 再设计 SMF/CZ、Tube MPC 与终端安全条件。
+
