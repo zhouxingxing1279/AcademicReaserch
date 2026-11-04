@@ -90,9 +90,9 @@ def exact_fd_position_velocity():
                     vhat0 = (y1 - y0) / (d * T)
                     vhat1 = vhat0  # known input u=0 for this exact vertex test
                     phat = y1 + h * T * vhat1
-                    beta_d = 2 * N / (d * T) + F(d - 1, 2) * T * A
-                    beta_v = beta_d + (d + h) * T * A
-                    beta_p = N + h*T*(beta_d + d*T*A) + F(h*(h-1), 2)*T*T*A
+                    gamma = 2 * N / (d * T) + F(d + 1, 2) * T * A
+                    beta_v = gamma + h * T * A
+                    beta_p = N + h*T*gamma + F(h*(h-1), 2)*T*T*A
                     worst_v, worst_p = max(worst_v, abs(v-vhat1)), max(worst_p, abs(p-phat))
                     assert abs(v-vhat1) <= beta_v
                     assert abs(p-phat) <= beta_p
@@ -132,7 +132,7 @@ def main() -> None:
     print(f"automaton: pairs={len(rows)} states={states} transitions={edges}")
     print(f"finite-difference exact vertices: velocity={nv} position_velocity={npv}")
     print("PASS: timestamp automaton and exact rational finite-difference checks")
-    
+
 
 if __name__ == "__main__":
     main()
