@@ -140,43 +140,64 @@ p_{s_1}-p_{s_0}
 \frac{2\bar\nu}{dT}+\frac{(d-1)T}{2}\bar w.
 \]
 
-将已知命令从 \(s_0\) 前推到当前 \(k\)，未知残差最多作用 \(d+h\le D_{\rm span}+H_{\rm age}\) 步，得到
+为避免把同一段过程残差在“差分误差”和“前推误差”中重复计数，直接将差分估计前推到较新时间戳 \(s_1\)。令
+
+\[
+\hat v_{s_1}=\hat v_{s_0}+T\sum_{j=s_0}^{s_1-1}u_j.
+\]
+
+将上式与真实递推 \(v_{s_1}=v_{s_0}+T\sum_{j=s_0}^{s_1-1}(u_j+w_j)\) 相减，前 \(d-1\) 个残差的系数由差分项和前推项合并为 \(-T(j+1)/d\)，最后一个残差系数为 \(-T\)。故
+
+\[
+\|\hat v_{s_1}-v_{s_1}\|_\infty
+\le \gamma(d):=
+\frac{2\bar\nu}{dT}+\frac{(d+1)T}{2}\bar w.
+\]
+
+再从 \(s_1\) 前推 \(h=k-s_1\) 步到当前时刻：
 
 \[
 \boxed{
 \|e^v_k\|_\infty
-\le
-\max_{1\le d\le D_{\rm span}}\beta(d)
-+(D_{\rm span}+H_{\rm age})T\bar w
+\le \gamma(d)+hT\bar w
 }.
 \]
 
-因为 \(\beta(d)\) 对实数 \(d>0\) 是凸函数，区间最大值可由两个端点给出：
+由于 \(\gamma(d)\) 对实数 \(d>0\) 是凸函数、上式对 \(h\) 单调不减，均匀速度界可取
 
 \[
-\max_{1\le d\le D}\beta(d)
-=
-\max\left\{
-\frac{2\bar\nu}{T},
-\frac{2\bar\nu}{DT}+\frac{(D-1)T}{2}\bar w
-\right\}.
+\boxed{
+\beta_v=
+\max_{d\in\{1,D_{\rm span}\}}\gamma(d)
++H_{\rm age}T\bar w
+}.
 \]
 
-用最新测量 \(y_{s_1}\) 和由 \(s_0\) 前推得到的 \(\hat v_{s_1}\) 估计当前位置，Euler 模型下可取
+使用最新位置量测 \(y_{s_1}\) 和 \(\hat v_{s_1}\) 前推 \(h\) 步，Euler 模型下的位置误差满足
 
 \[
 \|e^p_k\|_\infty
-\le
-\max_{\substack{1\le d\le D\\0\le h\le H}}
-\left[
-\bar\nu+hT\big(\beta(d)+dT\bar w\big)
-+\frac{h(h-1)}{2}T^2\bar w
-\right].
+\le \bar\nu+hT\gamma(d)
++\frac{h(h-1)}{2}T^2\bar w.
 \]
 
-于是可得到一个**均匀的后预热有限差分误差盒** \(\mathcal E_{\rm FD}=[-\beta_p,\beta_p]^3\times[-\beta_v,\beta_v]^3\)。这是一个由时间戳历史构造的因果点估计误差外包，不是精确 CZ 后验，也不是递归 CZ 观测器，更不是 Equalized Recovery 或闭环安全定理。若使用 \(p^+=p+Tv+\frac12T^2(u+w)\) 的常加速度离散合同，差分加速度项应改为 \(dT\bar w/2\)，不得与本 Euler 公式混用。
+该式对 \(h\) 单调不减、对 \(d\) 的不确定项为凸函数，因此可取均匀位置界
 
-有限顶点复核：\(T=1/10,\bar w=1/5,\bar\nu=1/20\)，对 \(d=1,\ldots,6\) 枚举 504 个加速度盒/噪声端点组合；用 Fraction 精确有理数运算，实测最大误差逐个等于 \(\beta(d)\)。另对 \(d=1,\ldots,4\)、\(h=0,\ldots,3\) 枚举 1,800 个加速度/噪声顶点组合，位置与速度外包均通过。两组数据保存于 experiments/results/run304_finite_difference_vertices.csv。此为有限顶点算例，不替代对全部时间戳路径的自动机证明。
+\[
+\boxed{
+\beta_p=
+\max_{d\in\{1,D_{\rm span}\}}
+\left[
+\bar\nu+H_{\rm age}T\gamma(d)
++\frac{H_{\rm age}(H_{\rm age}-1)}{2}T^2\bar w
+\right]
+}.
+\]
+
+于是得到后预热有限差分误差盒
+\(\mathcal E_{\rm FD}=[-\beta_p,\beta_p]^3\times[-\beta_v,\beta_v]^3\)。这是一个由时间戳历史构造的因果点估计误差外包，不是精确 CZ 后验，也不是递归 CZ 观测器，更不是 Equalized Recovery 或闭环安全定理。若使用 \(p^+=p+Tv+\frac12T^2(u+w)\) 的常加速度离散合同，差分加速度项应改为 \(dT\bar w/2\)，不得与本 Euler 公式混用。
+
+有限顶点复核：\(T=1/10,\bar w=1/5,\bar\nu=1/20\)，对 \(d=1,\ldots,6\) 枚举 504 个加速度盒/噪声端点组合；用 Fraction 精确有理数运算，实测最大误差逐个等于 \(\beta(d)\)。另对 \(d=1,\ldots,4\)、\(h=0,\ldots,3\) 枚举 1,800 个加速度/噪声顶点组合，采用合并残差系数后的 \(\gamma(d)\) 速度界和位置界；每个 \((d,h)\) 的实测最大位置/速度误差均不超过相应解析界。两组数据保存于 experiments/results/run304_finite_difference_vertices.csv。此为有限顶点算例，不替代对全部时间戳路径的自动机证明。
 
 ### 无延迟 observer 递推的索引边界
 
