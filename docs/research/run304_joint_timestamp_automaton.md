@@ -178,6 +178,38 @@ p_{s_1}-p_{s_0}
 
 有限顶点复核：\(T=1/10,\bar w=1/5,\bar\nu=1/20\)，对 \(d=1,\ldots,6\) 枚举 504 个加速度盒/噪声端点组合；用 Fraction 精确有理数运算，实测最大误差逐个等于 \(\beta(d)\)。另对 \(d=1,\ldots,4\)、\(h=0,\ldots,3\) 枚举 1,800 个加速度/噪声顶点组合，位置与速度外包均通过。两组数据保存于 experiments/results/run304_finite_difference_vertices.csv。此为有限顶点算例，不替代对全部时间戳路径的自动机证明。
 
+### 无延迟 observer 递推的索引边界
+
+若在时刻 \(k\) 收到的是时间戳恰为 \(k\) 的当前量测，先对 \(\hat x_k^-\) 做更新、再传播到 \(k+1\)，则
+
+\[
+e_{k+1}=
+A(I-LC)e_k+Gw_k-ALv_k
+\]
+
+因此对应的外包递推是
+
+\[
+\mathcal E_{k+1}^{\rm succ}\supseteq
+A(I-LC)\mathcal E_k\oplus G\mathcal W\oplus(-AL)\mathcal V,
+\qquad
+\mathcal E_{k+1}^{\rm miss}\supseteq
+A\mathcal E_k\oplus G\mathcal W.
+\]
+
+这两个式子只适用于当前时间戳量测的 update-then-predict 索引。若收到的是时间戳 \(s<k\) 的迟到包，不能把它代入当前 \(C x_k\) 更新；必须按上一节对历史状态施加约束并重放/增广。否则矩阵递推的索引和真实信息集不一致。
+
+### All-edge Equalized-Recovery 量词
+
+令有限自动机边为 \(q\xrightarrow{\sigma}q'\)，每条边的误差传播映射及扰动集合记为 \(\Phi_{q,\sigma}\) 与 \(\mathcal D_{q,\sigma}\)。基本包含义务是对**每一条可达合法边**均有
+
+\[
+\Phi_{q,\sigma}(\mathcal E_q)\oplus\mathcal D_{q,\sigma}
+\subseteq \mathcal E_{q'}.
+\]
+
+若恢复块长为 \(R\)，则必须对每个可达起始相位、每个合法长度 \(R\) 的事件词 \(w\) 证明相应复合映射把整个起始误差集送入规定的恢复集合，并同时验证块内每个中间相位的误差界。仅证明“存在一个有利恢复词”不满足 Equalized Recovery 的全路径量词。
+
 ## 5. 延迟 CZ 后验的必要数据结构
 
 带时间戳的旧包必须约束其**生成时刻**的状态，而不是把旧位置直接当作当前位置量测。时刻 \(k\) 的精确信息集可写成所有轨迹变量满足动力学、已知输入、扰动盒和全部已收到历史量测条带约束后的当前状态投影：
