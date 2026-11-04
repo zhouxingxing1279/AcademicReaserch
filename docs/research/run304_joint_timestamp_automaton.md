@@ -195,7 +195,7 @@ p_{s_1}-p_{s_0}
 \]
 
 于是得到后预热有限差分误差盒
-\(\mathcal E_{\rm FD}=[-\beta_p,\beta_p]^3\times[-\beta_v,\beta_v]^3\)。这是一个由时间戳历史构造的因果点估计误差外包，不是精确 CZ 后验，也不是递归 CZ 观测器，更不是 Equalized Recovery 或闭环安全定理。若使用 \(p^+=p+Tv+\frac12T^2(u+w)\) 的常加速度离散合同，差分加速度项应改为 \(dT\bar w/2\)，不得与本 Euler 公式混用。
+\(\mathcal E_{\rm FD}=[-\beta_p,\beta_p]^3\times[-\beta_v,\beta_v]^3\)。同一接收历史和同一实际命令历史只产生一个 \hat v_k、\hat p_k，因而该基线估计器本身是共同因果的。它是一个由时间戳历史构造的点估计误差外包，不是精确 CZ 后验，也不是递归 CZ 观测器，更不是 Equalized Recovery 或闭环安全定理。若使用 \(p^+=p+Tv+\frac12T^2(u+w)\) 的常加速度离散合同，差分加速度项应改为 \(dT\bar w/2\)，不得与本 Euler 公式混用。
 
 有限顶点复核：\(T=1/10,\bar w=1/5,\bar\nu=1/20\)，对 \(d=1,\ldots,6\) 枚举 504 个加速度盒/噪声端点组合；用 Fraction 精确有理数运算，实测最大误差逐个等于 \(\beta(d)\)。另对 \(d=1,\ldots,4\)、\(h=0,\ldots,3\) 枚举 1,800 个加速度/噪声顶点组合，采用合并残差系数后的 \(\gamma(d)\) 速度界和位置界；每个 \((d,h)\) 的实测最大位置/速度误差均不超过相应解析界。两组数据保存于 experiments/results/run304_finite_difference_vertices.csv。此为有限顶点算例，不替代对全部时间戳路径的自动机证明。
 
