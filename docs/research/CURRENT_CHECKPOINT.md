@@ -70,3 +70,8 @@ y_k=C_px_k+v_k,\quad v_k\in\mathcal V
 ## 下一唯一优先问题
 
 **Gate T3：** 在 \(x=[p;v]\)、\(C_p=[I_3\;0]\) 的抽象离散平移模型下，给定明确的最大连续失测数、有限测量语言、有界加速度/模型残差和有界位置噪声，推导并验证位置-only CZ-SMF 的相位相关误差界；比较精确 CZ 后验与路径相关 observer + CZ 误差外包两条路线，证明至少一条路线满足 Equalized Recovery。未完成该 Gate 前不推进 PX4 接口 A/B 或具体飞控 SITL。
+
+
+## Run303 startup gate (2026-11-04)
+
+Run302's initial-information obstruction now has an exact one-step robust feasibility test for a 1D symmetric bounded information box: common causal command exists iff `P+TV+T²A/2<=Xp` and `V+TA<=Xv`. See [derivation](run303_startup_one_step_gate.md) and `experiments/run303_startup_one_step_gate.py`. Exact rational vertex tests passed locally for three V values, including an infeasible case. This does NOT prove all-time safety, CZ recovery or MPC feasibility. **Next unique obligation:** 6D coupled initial-CZ common-input robust predecessor, then only if feasible proceed to tube initialization.
