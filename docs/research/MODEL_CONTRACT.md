@@ -147,3 +147,70 @@ K_f\mathcal X_f\subseteq\bigcap_i\mathcal U_i
 ## 9. 暂缓资料
 
 PX4 ROS 2 Offboard 字段、PX4 v1.17.0 位置控制器源码、HTE 和 DDS topic 审计分别保留在 model_selection/PX4_INTERFACE_EVIDENCE.md 与 model_selection/PX4_V1_17_SOURCE_AUDIT.md，仅供后续接口映射，不属于当前理论合同。
+
+
+## 10. 候选有限生成/交付与时间戳合同（Run304；尚非物理冻结）
+
+为避免符号冲突，定义 \(M\) 为最大连续未生成测量数，\(L\) 为每个已生成样本的最大交付延迟。success 表示时间戳为当前生成时刻的样本已生成且保证在 \(0,\ldots,L\) 拍内交付；miss 表示该拍没有生成样本。允许乱序和同一接收拍多包。若 success 包可能永久丢失，则本合同不适用。
+
+候选自动机的联合结论为：
+
+\[
+K_{\rm warm}=2(M+1)+L-1,\quad
+H_{\rm age}=M+L,\quad
+D_{\rm span}=M+\max\{1,L\}.
+\]
+
+从 \(k\ge K_{\rm warm}\) 起，最近两个不同已交付时间戳 \(s_1>s_0\) 存在，且 \(k-s_1\le H_{\rm age}\)、\(s_1-s_0\le D_{\rm span}\)。Run304 的有限状态监测器对 \(M,L\in\{0,\ldots,5\}\) 的全部可达状态闭包做了穷举；解析证明覆盖任意非负整数 \(M,L\)。真实传感器是否满足该合同仍需实测/设备规范证据。
+
+在前向 Euler 平移模型 \(p^+=p+Tv,\ v^+=v+T(u+w)\) 下，若已知并扣除实际施加的命令 \(u\)，且每坐标 \(|w|\le\bar w, |\nu|\le\bar\nu\)，则两个时间戳间隔 \(d\) 的有限差分速度估计满足
+
+\[
+\beta(d)=\frac{2\bar\nu}{dT}+\frac{(d-1)T}{2}\bar w.
+\]
+
+设 \(s_0<s_1\)、\(d=s_1-s_0\)、\(h=k-s_1\)。扣除 \(s_0\) 到 \(s_1\) 的已知输入位置响应后，定义
+
+\[
+\hat v_{s_0}=
+\frac{y_{s_1}-y_{s_0}
+-T^2\sum_{j=s_0}^{s_1-2}(s_1-1-j)u_j}{dT},
+\qquad
+\hat v_{s_1}=\hat v_{s_0}+T\sum_{j=s_0}^{s_1-1}u_j.
+\]
+
+再定义当前估计
+
+\[
+\hat v_k=\hat v_{s_1}+T\sum_{j=s_1}^{k-1}u_j,\qquad
+\hat p_k=y_{s_1}+hT\hat v_{s_1}
++T^2\sum_{j=s_1}^{k-2}(k-1-j)u_j.
+\]
+
+将该历史速度估计前推到当前时刻后，可取
+
+\[
+\gamma(d)=\frac{2\bar\nu}{dT}+\frac{(d+1)T}{2}\bar w.
+\]
+
+其中 \(\beta(d)\) 是对较旧时间戳 \(s_0\) 的差分速度误差；将差分项与 \(s_0\to s_1\) 的过程残差前推项合并后，较新时间戳 \(s_1\) 的误差界为 \(\gamma(d)\)，避免重复计数同一过程残差。当前时刻 \(k=s_1+h\) 的均匀速度界可取
+
+\[
+\|e^v_k\|_\infty\le
+\max_{d\in\{1,D_{\rm span}\}}\gamma(d)
++H_{\rm age}T\bar w.
+\]
+
+相应 Euler 位置界为
+
+\[
+\beta_p=\max_{d\in\{1,D_{\rm span}\}}
+\left[\bar\nu+H_{\rm age}T\gamma(d)
++\frac{H_{\rm age}(H_{\rm age}-1)}{2}T^2\bar w\right].
+\]
+
+该式是后预热有限差分误差外包；不能替代精确 CZ 后验、固定滞后历史相关性或全路径 Equalized Recovery。若采用含半步加速度项的另一种离散模型，必须重新推导误差系数。
+
+延迟 CZ 后验需将每个迟到观测施加在其生成时间戳对应的历史状态上，并保留历史状态与当前状态的相关性。候选实现为固定滞后联合轨迹 CZ 或时间戳回退重放；当前边缘集合的直接旧包更新不构成精确后验。
+
+**启动限制：** \(K_{\rm warm}\) 只保证两个时间戳最终到齐，不提供启动期间安全。初始速度无界时，一笔位置量测不能界定隐藏速度；必须另行给定有界初始六维 CZ 集并验证共同因果首步可行性，或证明独立安全采集策略。

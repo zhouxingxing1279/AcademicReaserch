@@ -878,3 +878,16 @@ The 10D family is a yaw-fixed near-hover outer-loop command-response model, not 
 **历史优先级说明（2026-11-03 更新）**：上面的 actuator-augmented 16/17-state、RPM/ESC 测量可观测性问题是该专项审计当时提出的下一步，不再是当前主任务优先级。当前唯一优先问题是冻结成熟飞控与外环高层指令接口，并通过官方文档/源码核验及 SITL 阶跃、轨迹试验辨识参考到实际位置/速度的闭环响应、延迟、限幅和可重复残差界；详见 [当前研究检查点](../CURRENT_CHECKPOINT.md)。
 
 **Next single priority question**: for the actuator-augmented 16/17-state plant (and the proposed reduced 10-coordinate planar-plus-actuator candidate), are actual rotor-thrust states observable/set-identifiable when position updates are intermittent but IMU and ESC RPM arrive asynchronously? Compare published observer/SMF/CZ methods, derive the correct measurement maps including the RPM-to-thrust coefficient uncertainty, and determine which state set can initialize a Tube-MPC error tube without assuming full-state measurement.
+
+
+## 2026-11-04 — 当前理论证据分层与优先级校正
+
+本轮重新核验的三篇原始论文对当前问题的证据层级如下：
+
+- **Scott et al. (2016), T1**：一般 CZ 集合代数与线性有界误差 set-membership 估计；精确广义交集/投影/Minkowski 运算有直接数学支持，不含迟到时间戳或 MPC。
+- **Rego et al. (2020), D2**：12 状态六自由度四旋翼非线性 plant 的 CZ 状态估计案例，使用 GPS 的 x/y、barometer 的 z、IMU 姿态/角速度，速度未直接测量；但论文脚注说明仿真控制动作由真实状态计算，故不能作为位置-only CZ 输出反馈 Tube-MPC 证据。其若干 CZ 估计平均运行时间超过 0.01 s 采样周期，需认真考虑历史增广与约束降阶的计算成本。
+- **Hassaan et al. (2021), T1**：一般线性时变系统、周期有限长度 delayed/missing language、时间变化 Equalized-Recovery 误差管及输出反馈 Tube-MPC；其定理依赖可行估计器/跟踪器、共同终端反馈与终端集合、初始 MPC 可行及代价下降条件。二维示例的量测矩阵为 [1 1]，并非三轴位置-only。
+
+这些来源分别支撑 CZ 数学、四旋翼 set-valued estimation 背景和 delayed-data Tube-MPC 架构，但尚未共同证明本课题要求的六状态位置-only + 乱序时间戳 + 联合 CZ 历史更新 + all-edge ER + 共同因果终端 MPC。此组合仍是待验证研究问题，不能据此宣称首次或绝对研究空白。
+
+本阶段模型主线仍为成熟飞控之上的抽象六状态外环；旧 actuator-augmented/具体飞控接口优先级不属于当前研究任务。
