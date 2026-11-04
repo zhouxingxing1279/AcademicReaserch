@@ -9,7 +9,10 @@ on:
       - "src/**"
       - "configs/**"
       - "tests/**"
+      - "experiments/**"
       - ".github/workflows/research-docs.yml"
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - name: Check active research navigation
         run: |
           python - <<'PY'
@@ -44,7 +50,7 @@ jobs:
           missing = [p for p in required if not Path(p).is_file()]
           if missing:
               raise SystemExit("Missing required research files: " + ", ".join(missing))
-          if Path("docs/research/current_checkpoint.md").exists():
+          if any(p.name == "current_checkpoint.md" for p in Path("docs/research").iterdir()):
               raise SystemExit("Stale lowercase duplicate checkpoint remains active")
           if Path("src/smf_mpc/plant.py").exists():
               raise SystemExit("Legacy direct-control plant remains in active source tree")
@@ -81,3 +87,7 @@ jobs:
               raise SystemExit("Broken active Markdown links: " + "; ".join(missing_links))
           print(f"Research structure, {len(markdown_files)} active Markdown files and archive entrypoints passed local-link validation.")
           PY
+      - name: Exact startup gate unit and integration tests
+        run: python -m unittest discover -s tests -v
+      - name: Recompute exact startup experiment certificate
+        run: python -m experiments.cz_startup_predecessor --check

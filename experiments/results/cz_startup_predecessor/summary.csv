@@ -1,0 +1,65 @@
+id,status,model,T,W,Xp,Xv,U,command,state_vertices,disturbance_vertices,verified_joint_vertices,minimum_state_margin
+pr210_v_1_10,feasible,zoh,1/10,1/2,1/4,1,2,"['0', '0', '0']",64,8,512,3/80
+pr210_v_2_5,feasible,zoh,1/10,1/2,1/4,1,2,"['0', '0', '0']",64,8,512,3/400
+pr210_v_1,infeasible,zoh,1/10,1/2,1/4,1,2,,64,8,0,
+correlated_cz,feasible,zoh,1,1/10,1,2,1,"['0', '0', '0']",8,8,64,9/10
+coordinate_hull,infeasible,zoh,1,1/10,1,2,1,,64,8,0,
+causality_gap,infeasible,zoh,1,1/4,2,1,1,,8,8,0,
+saturation_boundary,feasible,zoh,1,1/4,2,1,1/4,"['-1/4', '-1/4', '-1/4']",1,8,8,0
+saturation_insufficient,infeasible,zoh,1,1/4,2,1,1/5,,1,8,0,
+euler_boundary,feasible,euler,1,1,1/4,2,1,"['0', '0', '0']",1,8,8,1/4
+zoh_boundary,infeasible,zoh,1,1,1/4,2,1,,1,8,0,
+grid_00,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,29/100
+grid_01,feasible,zoh,1/10,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,579/2000
+grid_02,feasible,zoh,1/10,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,23/80
+grid_03,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,13/50
+grid_04,feasible,zoh,1/10,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,519/2000
+grid_05,feasible,zoh,1/10,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,103/400
+grid_06,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,0
+grid_07,infeasible,zoh,1/10,1/10,1/2,1,2,,64,8,0,
+grid_08,infeasible,zoh,1/10,1/2,1/2,1,2,,64,8,0,
+grid_09,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,9/100
+grid_10,feasible,zoh,1/10,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,179/2000
+grid_11,feasible,zoh,1/10,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,7/80
+grid_12,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,3/50
+grid_13,feasible,zoh,1/10,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,119/2000
+grid_14,feasible,zoh,1/10,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,23/400
+grid_15,feasible,zoh,1/10,0,1/2,1,2,"['0', '0', '0']",64,1,64,0
+grid_16,infeasible,zoh,1/10,1/10,1/2,1,2,,64,8,0,
+grid_17,infeasible,zoh,1/10,1/2,1/2,1,2,,64,8,0,
+grid_18,feasible,zoh,1/2,0,1/2,1,2,"['0', '0', '0']",64,1,64,1/4
+grid_19,feasible,zoh,1/2,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,19/80
+grid_20,feasible,zoh,1/2,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,3/16
+grid_21,feasible,zoh,1/2,0,1/2,1,2,"['0', '0', '0']",64,1,64,1/10
+grid_22,feasible,zoh,1/2,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,7/80
+grid_23,feasible,zoh,1/2,1/2,1/2,1,2,"['0', '0', '0']",64,8,512,3/80
+grid_24,infeasible,zoh,1/2,0,1/2,1,2,,64,1,0,
+grid_25,infeasible,zoh,1/2,1/10,1/2,1,2,,64,8,0,
+grid_26,infeasible,zoh,1/2,1/2,1/2,1,2,,64,8,0,
+grid_27,feasible,zoh,1/2,0,1/2,1,2,"['0', '0', '0']",64,1,64,1/20
+grid_28,feasible,zoh,1/2,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,3/80
+grid_29,infeasible,zoh,1/2,1/2,1/2,1,2,,64,8,0,
+grid_30,infeasible,zoh,1/2,0,1/2,1,2,,64,1,0,
+grid_31,infeasible,zoh,1/2,1/10,1/2,1,2,,64,8,0,
+grid_32,infeasible,zoh,1/2,1/2,1/2,1,2,,64,8,0,
+grid_33,infeasible,zoh,1/2,0,1/2,1,2,,64,1,0,
+grid_34,infeasible,zoh,1/2,1/10,1/2,1,2,,64,8,0,
+grid_35,infeasible,zoh,1/2,1/2,1/2,1,2,,64,8,0,
+grid_36,feasible,zoh,1,0,1/2,1,2,"['0', '0', '0']",64,1,64,1/5
+grid_37,feasible,zoh,1,1/10,1/2,1,2,"['0', '0', '0']",64,8,512,3/20
+grid_38,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,
+grid_39,infeasible,zoh,1,0,1/2,1,2,,64,1,0,
+grid_40,infeasible,zoh,1,1/10,1/2,1,2,,64,8,0,
+grid_41,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,
+grid_42,infeasible,zoh,1,0,1/2,1,2,,64,1,0,
+grid_43,infeasible,zoh,1,1/10,1/2,1,2,,64,8,0,
+grid_44,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,
+grid_45,feasible,zoh,1,0,1/2,1,2,"['0', '0', '0']",64,1,64,0
+grid_46,infeasible,zoh,1,1/10,1/2,1,2,,64,8,0,
+grid_47,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,
+grid_48,infeasible,zoh,1,0,1/2,1,2,,64,1,0,
+grid_49,infeasible,zoh,1,1/10,1/2,1,2,,64,8,0,
+grid_50,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,
+grid_51,infeasible,zoh,1,0,1/2,1,2,,64,1,0,
+grid_52,infeasible,zoh,1,1/10,1/2,1,2,,64,8,0,
+grid_53,infeasible,zoh,1,1/2,1/2,1,2,,64,8,0,

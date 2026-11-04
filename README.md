@@ -41,7 +41,9 @@
 
 ## 活动代码边界
 
-目前活动源码只保留通用数值集合工具 [numerical_sets.py](src/common/numerical_sets.py)。它实现 float64 Box/Zonotope 运算，不是 Constrained Zonotope，也不是向外舍入的形式化证书。旧平面 plant、滤波器、脚本、测试和实验已完整移入归档。
+活动源码包含通用数值集合工具 [numerical_sets.py](src/common/numerical_sets.py) 和 [六维 CZ 一步共同输入验证器](src/outerloop/startup_gate.py)。前者是 float64 Box/Zonotope 工具；后者用精确有理数验证小规模信息集的首步可行性，不是在线 CZ 滤波器或完整 MPC。旧平面 plant、滤波器、脚本、测试和实验已完整移入归档。
+
+从仓库根目录运行 `python -m experiments.cz_startup_predecessor --check`，可复核64个登记实例和精确证书；`python -m unittest discover -s tests -v` 运行活动测试。只需Python≥3.11标准库。模型、量词、负面结果和研究边界见 [专题证明与实验](docs/research/cz_startup_predecessor.md)。
 
 ## 暂缓资料
 

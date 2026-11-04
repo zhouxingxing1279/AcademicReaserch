@@ -1,5 +1,15 @@
 # 唯一论文阅读总账
 
+## 2026-11-04 — 六维CZ启动共同输入专题定向复核（既有DOI，不新增计数）
+
+本轮围绕[一步共同输入证明](../research/cz_startup_predecessor.md)复读以下原始正文；阅读等级为相关章节精读，未声称本轮三篇全文精读。定理核验卡、量词、输入/状态/噪声、终端条件及迁移限制集中在专题第6节。
+
+- Scott等2016，DOI [10.1016/j.automatica.2016.02.036](https://doi.org/10.1016/j.automatica.2016.02.036)，[作者正式稿](https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf) pp.128–129：Definition3、Eq.(10)、Propositions1–2、Theorem1。T1；R1支持LP独立重推，R2限定为CZ表示/支持原语。Eq.(10)三角形顶点精确复算通过；原文未给顶点数值表，因此无“原表数值误差”可报。不计为滤波实验R3。
+- Rego等2020，DOI [10.1016/j.automatica.2019.108614](https://doi.org/10.1016/j.automatica.2019.108614)，[arXiv1908.09950v3](https://arxiv.org/pdf/1908.09950) PDF pp.3–4、8–9：Property1、Proposition1、§4.4–4.5。复核LP支持/可行代表点与外包方向；所用方法属T1，既有四旋翼估计背景属D2。本轮不复现非线性滤波实验，不提升R3。
+- Hassaan等2021，DOI [10.1016/j.ifacol.2021.08.482](https://doi.org/10.1016/j.ifacol.2021.08.482)，[作者稿](https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf) PDF pp.4–5：Assumptions1–3、Theorems5–7及移位证明。T1；确认初始整段MPC可行/共同终端等前提独立于首步门，本轮无论文数值复现。
+
+本轮原创算例与论文复现分开：64个有理数实例和8,976个联合顶点验证属于项目独立实验，不冒充上述论文图表。标准支持函数鲁棒对应式不作新颖性声明；延迟CZ、全路径恢复和共同终端仍未闭合。
+
 > 本文件是当前唯一持续追加的论文登记总账，按研究轮次保留书目、阅读范围、模型/输入/观测假设、定理条件和迁移限制。论文证据记录不自动构成当前模型决策或控制器设计指令。
 >
 > 当前研究架构、模型分层和下一优先问题以 [当前研究检查点](../research/CURRENT_CHECKPOINT.md) 与 [模型选型证据矩阵顶部摘要](../research/model_selection/MODEL_SELECTION_EVIDENCE.md) 为准。历史 Run 日志已移入 [历史归档](../../archive/legacy_planar_direct_control_20261103/ARCHIVE_INDEX.md)，本总账中的链接已指向归档原件；不得将旧 Run 的证明/仿真结果直接迁移为新 PX4 外环合同的保证。

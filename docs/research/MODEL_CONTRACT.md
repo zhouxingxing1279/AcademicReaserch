@@ -147,3 +147,9 @@ K_f\mathcal X_f\subseteq\bigcap_i\mathcal U_i
 ## 9. 暂缓资料
 
 PX4 ROS 2 Offboard 字段、PX4 v1.17.0 位置控制器源码、HTE 和 DDS topic 审计分别保留在 model_selection/PX4_INTERFACE_EVIDENCE.md 与 model_selection/PX4_V1_17_SOURCE_AUDIT.md，仅供后续接口映射，不属于当前理论合同。
+
+## 10. 已冻结的局部数学验证合同（2026-11-04）
+
+[一步共同输入专题](cz_startup_predecessor.md)分别使用六维ZOH \(B=G=[T^2I/2;TI]\) 和Euler \(B=G=[0;TI]\)，共享 \(A=[I,TI;0,I]\)。参数、初始CZ、噪声、约束由统一实验入口显式给出，只是人为冻结的抽象算例，不证明真实飞控响应或物理残差满足这些界。PR208的Euler时间戳公式不得与PR210的ZOH首步条件混用。
+
+门的输入是截至当前接收历史的一个非空可靠信息集合；状态—未来一步扰动按笛卡尔积合同处理。门不得访问真实隐藏状态或尚未到达的包。当前安全、下一拍安全、整个预热期安全、终端递归可行是不同义务；本轮仅闭合前两者的给定集合条件。
