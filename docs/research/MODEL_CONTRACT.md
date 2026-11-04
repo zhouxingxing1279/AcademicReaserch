@@ -172,9 +172,23 @@ D_{\rm span}=M+\max\{1,L\}.
 将该历史速度估计前推到当前时刻后，可取
 
 \[
+\gamma(d)=\frac{2\bar\nu}{dT}+\frac{(d+1)T}{2}\bar w.
+\]
+
+其中 \(\beta(d)\) 是对较旧时间戳 \(s_0\) 的差分速度误差；将差分项与 \(s_0\to s_1\) 的过程残差前推项合并后，较新时间戳 \(s_1\) 的误差界为 \(\gamma(d)\)，避免重复计数同一过程残差。当前时刻 \(k=s_1+h\) 的均匀速度界可取
+
+\[
 \|e^v_k\|_\infty\le
-\max_{1\le d\le D_{\rm span}}\beta(d)
-+(H_{\rm age}+D_{\rm span})T\bar w.
+\max_{d\in\{1,D_{\rm span}\}}\gamma(d)
++H_{\rm age}T\bar w.
+\]
+
+相应 Euler 位置界为
+
+\[
+\beta_p=\max_{d\in\{1,D_{\rm span}\}}
+\left[\bar\nu+H_{\rm age}T\gamma(d)
++\frac{H_{\rm age}(H_{\rm age}-1)}{2}T^2\bar w\right].
 \]
 
 该式是后预热有限差分误差外包；不能替代精确 CZ 后验、固定滞后历史相关性或全路径 Equalized Recovery。若采用含半步加速度项的另一种离散模型，必须重新推导误差系数。
