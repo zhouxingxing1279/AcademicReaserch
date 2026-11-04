@@ -1,0 +1,269 @@
+{
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+  "solver": "none; fractions.Fraction exact vertex enumeration",
+  "random_seed": null,
+  "mean_seconds": 0.08377873593803997,
+  "p95_seconds": 0.1048369000054663,
+  "maximum_seconds": 0.11289089999627322,
+  "timings": [
+    {
+      "id": "pr210_v_1_10",
+      "gate_seconds": 0.088198099998408
+    },
+    {
+      "id": "pr210_v_2_5",
+      "gate_seconds": 0.08649309999600518
+    },
+    {
+      "id": "pr210_v_1",
+      "gate_seconds": 0.10243269999045879
+    },
+    {
+      "id": "correlated_cz",
+      "gate_seconds": 0.026107500001671724
+    },
+    {
+      "id": "coordinate_hull",
+      "gate_seconds": 0.10444399999687448
+    },
+    {
+      "id": "causality_gap",
+      "gate_seconds": 0.04987329999858048
+    },
+    {
+      "id": "saturation_boundary",
+      "gate_seconds": 0.03391110000666231
+    },
+    {
+      "id": "saturation_insufficient",
+      "gate_seconds": 0.04112030001124367
+    },
+    {
+      "id": "euler_boundary",
+      "gate_seconds": 0.009643099998356774
+    },
+    {
+      "id": "zoh_boundary",
+      "gate_seconds": 0.029887299999245442
+    },
+    {
+      "id": "grid_00",
+      "gate_seconds": 0.0705253000051016
+    },
+    {
+      "id": "grid_01",
+      "gate_seconds": 0.07733510000980459
+    },
+    {
+      "id": "grid_02",
+      "gate_seconds": 0.07784949999768287
+    },
+    {
+      "id": "grid_03",
+      "gate_seconds": 0.07448280000244267
+    },
+    {
+      "id": "grid_04",
+      "gate_seconds": 0.0766414999961853
+    },
+    {
+      "id": "grid_05",
+      "gate_seconds": 0.07813219999661669
+    },
+    {
+      "id": "grid_06",
+      "gate_seconds": 0.07268759999715257
+    },
+    {
+      "id": "grid_07",
+      "gate_seconds": 0.10610219999216497
+    },
+    {
+      "id": "grid_08",
+      "gate_seconds": 0.10287499999685679
+    },
+    {
+      "id": "grid_09",
+      "gate_seconds": 0.07287760000326671
+    },
+    {
+      "id": "grid_10",
+      "gate_seconds": 0.07604169999831356
+    },
+    {
+      "id": "grid_11",
+      "gate_seconds": 0.08305749999999534
+    },
+    {
+      "id": "grid_12",
+      "gate_seconds": 0.07901060000585858
+    },
+    {
+      "id": "grid_13",
+      "gate_seconds": 0.08082539998576976
+    },
+    {
+      "id": "grid_14",
+      "gate_seconds": 0.0811072999931639
+    },
+    {
+      "id": "grid_15",
+      "gate_seconds": 0.07904389999748673
+    },
+    {
+      "id": "grid_16",
+      "gate_seconds": 0.10030730000289623
+    },
+    {
+      "id": "grid_17",
+      "gate_seconds": 0.10071469999093097
+    },
+    {
+      "id": "grid_18",
+      "gate_seconds": 0.07379370000853669
+    },
+    {
+      "id": "grid_19",
+      "gate_seconds": 0.07898460001160856
+    },
+    {
+      "id": "grid_20",
+      "gate_seconds": 0.0823409000004176
+    },
+    {
+      "id": "grid_21",
+      "gate_seconds": 0.07879530001082458
+    },
+    {
+      "id": "grid_22",
+      "gate_seconds": 0.09632800001418218
+    },
+    {
+      "id": "grid_23",
+      "gate_seconds": 0.08558680000714958
+    },
+    {
+      "id": "grid_24",
+      "gate_seconds": 0.09382840000034776
+    },
+    {
+      "id": "grid_25",
+      "gate_seconds": 0.09623510000528768
+    },
+    {
+      "id": "grid_26",
+      "gate_seconds": 0.10112490000028629
+    },
+    {
+      "id": "grid_27",
+      "gate_seconds": 0.07336140000552405
+    },
+    {
+      "id": "grid_28",
+      "gate_seconds": 0.07536889999755658
+    },
+    {
+      "id": "grid_29",
+      "gate_seconds": 0.09469209999952
+    },
+    {
+      "id": "grid_30",
+      "gate_seconds": 0.11289089999627322
+    },
+    {
+      "id": "grid_31",
+      "gate_seconds": 0.10510829999111593
+    },
+    {
+      "id": "grid_32",
+      "gate_seconds": 0.10498240000742953
+    },
+    {
+      "id": "grid_33",
+      "gate_seconds": 0.09215589999803342
+    },
+    {
+      "id": "grid_34",
+      "gate_seconds": 0.09833139998954721
+    },
+    {
+      "id": "grid_35",
+      "gate_seconds": 0.09461789998749737
+    },
+    {
+      "id": "grid_36",
+      "gate_seconds": 0.0718409000110114
+    },
+    {
+      "id": "grid_37",
+      "gate_seconds": 0.07360229999176227
+    },
+    {
+      "id": "grid_38",
+      "gate_seconds": 0.09141750000708271
+    },
+    {
+      "id": "grid_39",
+      "gate_seconds": 0.09012670000083745
+    },
+    {
+      "id": "grid_40",
+      "gate_seconds": 0.09515019999525975
+    },
+    {
+      "id": "grid_41",
+      "gate_seconds": 0.09421830000064801
+    },
+    {
+      "id": "grid_42",
+      "gate_seconds": 0.09006290000979789
+    },
+    {
+      "id": "grid_43",
+      "gate_seconds": 0.09663810000347439
+    },
+    {
+      "id": "grid_44",
+      "gate_seconds": 0.0950040000025183
+    },
+    {
+      "id": "grid_45",
+      "gate_seconds": 0.07414799999969546
+    },
+    {
+      "id": "grid_46",
+      "gate_seconds": 0.09848040000360925
+    },
+    {
+      "id": "grid_47",
+      "gate_seconds": 0.09598110000661109
+    },
+    {
+      "id": "grid_48",
+      "gate_seconds": 0.0983181999908993
+    },
+    {
+      "id": "grid_49",
+      "gate_seconds": 0.1048369000054663
+    },
+    {
+      "id": "grid_50",
+      "gate_seconds": 0.10031629999866709
+    },
+    {
+      "id": "grid_51",
+      "gate_seconds": 0.09846630001266021
+    },
+    {
+      "id": "grid_52",
+      "gate_seconds": 0.09538009999960195
+    },
+    {
+      "id": "grid_53",
+      "gate_seconds": 0.0975962999946205
+    }
+  ],
+  "note": "Observed timings, not WCET or a real-time claim."
+}
