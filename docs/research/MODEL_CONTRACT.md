@@ -169,6 +169,24 @@ D_{\rm span}=M+\max\{1,L\}.
 \beta(d)=\frac{2\bar\nu}{dT}+\frac{(d-1)T}{2}\bar w.
 \]
 
+设 \(s_0<s_1\)、\(d=s_1-s_0\)、\(h=k-s_1\)。扣除 \(s_0\) 到 \(s_1\) 的已知输入位置响应后，定义
+
+\[
+\hat v_{s_0}=
+\frac{y_{s_1}-y_{s_0}
+-T^2\sum_{j=s_0}^{s_1-2}(s_1-1-j)u_j}{dT},
+\qquad
+\hat v_{s_1}=\hat v_{s_0}+T\sum_{j=s_0}^{s_1-1}u_j.
+\]
+
+再定义当前估计
+
+\[
+\hat v_k=\hat v_{s_1}+T\sum_{j=s_1}^{k-1}u_j,\qquad
+\hat p_k=y_{s_1}+hT\hat v_{s_1}
++T^2\sum_{j=s_1}^{k-2}(k-1-j)u_j.
+\]
+
 将该历史速度估计前推到当前时刻后，可取
 
 \[
