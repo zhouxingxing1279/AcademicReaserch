@@ -67,3 +67,8 @@
 ## 禁止捷径
 
 不把概率置信区间改写为确定性包含；不把 CZ 后验、估计误差管、跟踪 Tube 和未来可达集混为一谈；不允许控制器对同一观测历史下的隐藏状态分别选择不同输入；不把名义约束满足写成真实硬安全；不把初始可行性、终端不变性或递归可行性当成自动成立；不将旧平面直接控制实验结果移植到当前外环模型。
+
+
+## Run303 — required integrated simulation deliverable and startup gate
+
+The final deliverable remains a unified abstract outer-loop end-to-end plant/measurement/SMF/CZ/causal Tube MPC simulation with unit, integration and regression tests (stages A–E); none is yet certified as complete. Prior to any hard-safety claim, certify initial information-set common-input feasibility. Run303 provides only a 1D exact one-step feasibility lemma and executable rational boundary test; see `run303_startup_one_step_gate.md`. Next: extend the common-input robust predecessor to 6D initial CZ and tightened constraints.
