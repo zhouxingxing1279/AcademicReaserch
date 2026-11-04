@@ -397,3 +397,8 @@ V_f((A+BK_f)\bar x)-V_f(\bar x)
 - Delansnay et al. (2025): https://doi.org/10.1109/CoDIT66093.2025.11321702
 
 以上论文阅读等级、逐篇假设和未核验项以唯一总账 docs/literature/PAPER_READING_LOG.md 为准；本文是理论综合，不新增“全文已读”计数。
+
+
+## Run303 — startup information set versus one-step robust predecessor
+
+Before claiming safety from k=0, require `exists u_0 measurable w.r.t. received history, forall x_0 in X_0(y_0), forall w_0 in W: Ax_0+Bu_0+Gw_0 in X`. This is a common-input robust predecessor condition, stronger than pointwise `forall x_0 exists u_0`. For a symmetric 1D double-integrator information box, the exact iff and a failing numerical example are in [Run303](run303_startup_one_step_gate.md). This is an initial necessary gate, not recursive feasibility or a terminal set.
