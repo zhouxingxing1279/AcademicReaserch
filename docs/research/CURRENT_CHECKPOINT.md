@@ -70,3 +70,8 @@ y_k=C_px_k+v_k,\quad v_k\in\mathcal V
 ## 下一唯一优先问题
 
 **Gate T3：** 在 \(x=[p;v]\)、\(C_p=[I_3\;0]\) 的抽象离散平移模型下，给定明确的最大连续失测数、有限测量语言、有界加速度/模型残差和有界位置噪声，推导并验证位置-only CZ-SMF 的相位相关误差界；比较精确 CZ 后验与路径相关 observer + CZ 误差外包两条路线，证明至少一条路线满足 Equalized Recovery。未完成该 Gate 前不推进 PX4 接口 A/B 或具体飞控 SITL。
+
+
+## Run301 增量（候选合同，非正式自动机）
+
+已新增 `run301_finite_delivery_monitor.md` 与 `experiments/run301_finite_delivery_monitor.py`：将最终交付样本生成间隔 H、最大延迟 D、永久丢包、乱序到达及时间戳更新组成有限状态监测器。解析证明 `k>=H+D` 后信息年龄 `a_k<=H+D`；有限状态探索仅为实现核对。**正式 success/miss/delay 自动机尚未冻结；两时间戳恢复和 Equalized Recovery 仍未闭合。** 下一唯一优先问题：增广监测器保存最近两个不同时间戳并认证最坏间隔/新鲜度。
