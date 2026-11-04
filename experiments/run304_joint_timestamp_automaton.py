@@ -1,119 +1,138 @@
 #!/usr/bin/env python3
-"""Exhaustive finite-state check of joint timestamp age/span bounds.
-
-Candidate contract:
-- At most M consecutive sample-generation misses.
-- Every generated sample is delivered after an arbitrary integer delay in [0, L].
-- Delivery may be out of order and multiple samples may arrive in one step.
-- A miss means no sample is generated; a generated sample is not permanently lost.
-"""
+"""Run304 exhaustive timestamp automaton and exact finite-difference vertex checks."""
 from collections import deque
+from fractions import Fraction as F
+from itertools import product
 import csv
 import sys
 from pathlib import Path
 
 
-def explore(max_misses: int, max_delay: int) -> dict:
-    M, L = max_misses, max_delay
-    warmup = 2 * (M + 1) + L - 1
-    age_bound = M + L
-    span_bound = M + max(1, L)
-
-    # (consecutive misses, pending sample ages, newest age, second-newest age, phase)
-    initial = (0, (), None, None, 0)
-    seen = {initial}
-    queue = deque([initial])
-    edges = 0
-    max_age = 0
-    max_span = 0
-
+def explore(M: int, L: int) -> dict:
+    K, H, D = 2 * (M + 1) + L - 1, M + L, M + max(1, L)
+    initial = (0, (), None, None, 0)  # misses, pending ages, newest, second-newest, phase
+    seen, queue = {initial}, deque([initial])
+    edges = max_age = max_span = 0
     while queue:
-        miss, pending, age1, age2, phase = queue.popleft()
+        miss, pending, a1, a2, phase = queue.popleft()
         for success in (False, True):
             if not success and miss >= M:
                 continue
-
-            # Move to the current receive instant, then optionally generate a new sample.
-            samples = tuple(age + 1 for age in pending) + ((0,) if success else ())
-            old_received = [age + 1 for age in (age1, age2) if age is not None]
-
-            # Enumerate every delivery subset; samples reaching age L must be delivered.
+            samples = tuple(a + 1 for a in pending) + ((0,) if success else ())
+            old = [a + 1 for a in (a1, a2) if a is not None]
             for mask in range(1 << len(samples)):
-                if any(age >= L and not ((mask >> i) & 1)
-                       for i, age in enumerate(samples)):
+                if any(a >= L and not ((mask >> i) & 1) for i, a in enumerate(samples)):
                     continue
-
-                delivered = [age for i, age in enumerate(samples) if (mask >> i) & 1]
-                remains = tuple(sorted(
-                    age for i, age in enumerate(samples) if not ((mask >> i) & 1)
-                ))
-
-                # Ages are unique because each generated timestamp is unique.
-                received = sorted(set(old_received + delivered))
-                new_age1 = received[0] if len(received) >= 1 else None
-                new_age2 = received[1] if len(received) >= 2 else None
-
-                if phase >= warmup:
-                    assert new_age1 is not None and new_age2 is not None, (
-                        M, L, phase, miss, pending, age1, age2, success, mask
-                    )
-                    assert new_age1 <= age_bound, (M, L, new_age1, age_bound)
-                    span = new_age2 - new_age1
-                    assert span <= span_bound, (M, L, span, span_bound)
-                    max_age = max(max_age, new_age1)
-                    max_span = max(max_span, span)
-
-                new_phase = min(phase + 1, warmup + 1)
-                new_state = (
-                    0 if success else miss + 1,
-                    remains,
-                    new_age1,
-                    new_age2,
-                    new_phase,
-                )
+                delivered = [a for i, a in enumerate(samples) if (mask >> i) & 1]
+                remains = tuple(sorted(a for i, a in enumerate(samples) if not ((mask >> i) & 1)))
+                received = sorted(set(old + delivered))
+                n1 = received[0] if received else None
+                n2 = received[1] if len(received) > 1 else None
+                if phase >= K:
+                    assert n1 is not None and n2 is not None
+                    assert n1 <= H
+                    span = n2 - n1
+                    assert span <= D
+                    max_age, max_span = max(max_age, n1), max(max_span, span)
+                ns = (0 if success else miss + 1, remains, n1, n2, min(phase + 1, K + 1))
                 edges += 1
-                if new_state not in seen:
-                    seen.add(new_state)
-                    queue.append(new_state)
-
-    return {
-        "M": M,
-        "L": L,
-        "warmup_K": warmup,
-        "H_age_bound": age_bound,
-        "D_span_bound": span_bound,
-        "reachable_states": len(seen),
-        "transitions": edges,
-        "max_observed_age": max_age,
-        "max_observed_span": max_span,
-    }
+                if ns not in seen:
+                    seen.add(ns)
+                    queue.append(ns)
+    return dict(M=M, L=L, warmup_K=K, H_age_bound=H, D_span_bound=D,
+                reachable_states=len(seen), transitions=edges,
+                max_observed_age=max_age, max_observed_span=max_span)
 
 
-def main() -> None:
-    rows = [explore(M, L) for M in range(6) for L in range(6)]
-    for row in rows:
-        # Equality is a finite-range tightness check, not the proof for all M,L.
-        assert row["max_observed_age"] == row["H_age_bound"], row
-        assert row["max_observed_span"] == row["D_span_bound"], row
+def exact_fd_velocity():
+    T, A, N = F(1, 10), F(1, 5), F(1, 20)
+    rows, total = [], 0
+    for d in range(1, 7):
+        worst = F(0)
+        count = 0
+        for acc in product((-A, A), repeat=d):
+            for n0, n1 in product((-N, N), repeat=2):
+                p = v = F(0)
+                for a in acc:
+                    p += T * v
+                    v += T * a
+                worst = max(worst, abs((p + n1 - n0) / (d * T)))
+                count += 1
+        bound = 2 * N / (d * T) + F(d - 1, 2) * T * A
+        assert worst == bound
+        rows.append(dict(test="velocity_at_oldest_timestamp", d=d, h="",
+                         vertex_cases=count, max_exact_error=str(worst),
+                         analytic_bound=str(bound)))
+        total += count
+    return rows, total
 
-    total_states = sum(row["reachable_states"] for row in rows)
-    total_edges = sum(row["transitions"] for row in rows)
-    assert total_states == 53580
-    assert total_edges == 572957
 
-    root = Path(__file__).resolve().parents[1]
-    output = root / "experiments" / "results" / "run304_joint_timestamp_automaton.csv"
-    output.parent.mkdir(parents=True, exist_ok=True)
-    with output.open("w", newline="", encoding="utf-8") as f:
+def exact_fd_position_velocity():
+    T, A, N = F(1, 10), F(1, 5), F(1, 20)
+    rows, total = [], 0
+    for d in range(1, 5):
+        for h in range(4):
+            worst_v = worst_p = F(0)
+            count = 0
+            for ws in product((-A, A), repeat=d+h):
+                for n0, n1 in product((-N, N), repeat=2):
+                    p = v = F(0)
+                    y0 = p + n0
+                    pd = None
+                    for i, w in enumerate(ws):
+                        if i == d:
+                            pd = p
+                        p += T * v
+                        v += T * w
+                    if pd is None:
+                        pd = p
+                    y1 = pd + n1
+                    vhat0 = (y1 - y0) / (d * T)
+                    vhat1 = vhat0  # known input u=0 for this exact vertex test
+                    phat = y1 + h * T * vhat1
+                    beta_d = 2 * N / (d * T) + F(d - 1, 2) * T * A
+                    beta_v = beta_d + (d + h) * T * A
+                    beta_p = N + h*T*(beta_d + d*T*A) + F(h*(h-1), 2)*T*T*A
+                    worst_v, worst_p = max(worst_v, abs(v-vhat1)), max(worst_p, abs(p-phat))
+                    assert abs(v-vhat1) <= beta_v
+                    assert abs(p-phat) <= beta_p
+                    count += 1
+            rows.append(dict(test="current_position_velocity_box", d=d, h=h,
+                             vertex_cases=count, max_exact_error=f"v={worst_v};p={worst_p}",
+                             analytic_bound=f"v={beta_v};p={beta_p}"))
+            total += count
+    assert total == 1800
+    return rows, total
+
+
+def write_csv(path: Path, rows: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"Python {sys.version.split()[0]}; standard library only; no solver or RNG")
-    print(f"parameter_pairs={len(rows)} reachable_states={total_states} transitions={total_edges}")
-    print(f"result_csv={output.relative_to(root)}")
-    print("PASS: every reachable transition satisfies the derived age/span bounds for M,L=0..5")
 
+def main() -> None:
+    rows = [explore(M, L) for M in range(6) for L in range(6)]
+    for r in rows:
+        assert r["max_observed_age"] == r["H_age_bound"]
+        assert r["max_observed_span"] == r["D_span_bound"]
+    states = sum(r["reachable_states"] for r in rows)
+    edges = sum(r["transitions"] for r in rows)
+    assert (states, edges) == (53580, 572957)
+    fdv, nv = exact_fd_velocity()
+    fdp, npv = exact_fd_position_velocity()
+    assert nv == 504 and npv == 1800
+
+    root = Path(__file__).resolve().parents[1]
+    write_csv(root / "experiments/results/run304_joint_timestamp_automaton.csv", rows)
+    write_csv(root / "experiments/results/run304_finite_difference_vertices.csv", fdv + fdp)
+    print(f"Python {sys.version.split()[0]}; standard library only; no solver or RNG")
+    print(f"automaton: pairs={len(rows)} states={states} transitions={edges}")
+    print(f"finite-difference exact vertices: velocity={nv} position_velocity={npv}")
+    print("PASS: timestamp automaton and exact rational finite-difference checks")
+    
 
 if __name__ == "__main__":
     main()
