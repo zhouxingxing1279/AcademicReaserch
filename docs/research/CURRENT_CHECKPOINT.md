@@ -82,7 +82,7 @@ y_k=C_px_k+v_k,\quad v_k\in\mathcal V
 - 统一区分最大连续 miss 数 \(M\) 与最大交付延迟 \(L\)，避免旧 Run300/301 中 \(H,D\) 与 PR211 的时间戳跨度/信息年龄同名混用。
 - 对“每个 success 样本必在 \(0,\ldots,L\) 拍交付、允许乱序/同拍多包、miss 表示未生成样本”的候选合同，解析得到：预热 \(K_{\rm warm}=2(M+1)+L-1\)，最新时间戳年龄 \(H_{\rm age}=M+L\)，最近两个不同已收时间戳跨度 \(D_{\rm span}=M+\max\{1,L\}\)。Run300 的跨度界 \(2M+1+L\) 安全但更松。
 - 新增 Run304 有限状态自动机，枚举 \(M,L=0,\ldots,5\) 的全部可达状态闭包：53,580 个状态、572,957 条合法转移；每组的最大年龄/跨度均达到解析界。数据和运行入口见 run304_joint_timestamp_automaton.md、experiments/run304_joint_timestamp_automaton.py、experiments/results/run304_joint_timestamp_automaton.csv 和 experiments/results/run304_finite_difference_vertices.csv。
-- 对前向 Euler 平移模型，新增两时间戳有限差分速度/位置误差盒推导；它是后预热因果点估计外包，不是精确 CZ 后验或 Equalized Recovery。
+- 对前向 Euler 平移模型，新增两时间戳有限差分速度/位置误差盒推导；进一步合并差分与前推中共享的过程残差系数，得到较新时间戳误差项 gamma(d)，避免重复计数。它是后预热因果点估计外包，不是精确 CZ 后验或 Equalized Recovery。
 - 延迟 CZ 更新必须保留时间戳对应历史状态与当前状态的联合相关性（固定滞后联合轨迹 CZ 或回退重放）；仅将旧位置包当作当前量测更新当前边缘集合是不正确的。
 - 证明状态：时间戳合同及界已解析证明；有限参数自动机闭包已穷举；有限差分公式已解析推导并做精确有理数顶点核对；延迟联合 CZ、所有边的误差包含、Equalized Recovery、Tube 和终端递归可行性仍未证明。真实传感器是否满足 \(M,L\) 合同也未验证。
 
