@@ -884,3 +884,20 @@ The 10D family is a yaw-fixed near-hover outer-loop command-response model, not 
 **历史优先级说明（2026-11-03 更新）**：上面的 actuator-augmented 16/17-state、RPM/ESC 测量可观测性问题是该专项审计当时提出的下一步，不再是当前主任务优先级。当前唯一优先问题是冻结成熟飞控与外环高层指令接口，并通过官方文档/源码核验及 SITL 阶跃、轨迹试验辨识参考到实际位置/速度的闭环响应、延迟、限幅和可重复残差界；详见 [当前研究检查点](../CURRENT_CHECKPOINT.md)。
 
 **Next single priority question**: for the actuator-augmented 16/17-state plant (and the proposed reduced 10-coordinate planar-plus-actuator candidate), are actual rotor-thrust states observable/set-identifiable when position updates are intermittent but IMU and ESC RPM arrive asynchronously? Compare published observer/SMF/CZ methods, derive the correct measurement maps including the RPM-to-thrust coefficient uncertainty, and determine which state set can initialize a Tube-MPC error tube without assuming full-state measurement.
+
+
+## 2026-11-03 外环任务范围修订（不删除旧实验结论）
+
+**适用范围提醒**：上文将平面六状态 `[px,pz,vx,vz,phi,omega]` 与 `[T,tau]` 标为“首选”的章节是**原先直接控制总推力/力矩的主研究配置**，并非本独立任务新确立的“成熟飞控内环＋外环MPC”首选。两种控制权限的定理、实验、约束与终端集合不能直接复用。旧章节保留用于追溯，不代表当前外环模型决策。
+
+| 新外环候选 | MPC真正输出 | 飞控内部职责 | 必须验证的闭环模型/约束 | 目前决策 |
+|---|---|---|---|---|
+| 3D六状态 `[p3,v3]` | `p_ref,3` | PX4位置/速度/姿态/执行器级联跟踪 | 辨识闭环 `Acl,Bcl`，测量延迟、命令限幅、残差集合、失测后验 | **条件性首选** |
+| 3D六状态 `[p3,v3]` | `a_ref,3` | PX4速度/姿态与执行器跟踪加速度参考 | 双积分器的加速度误差集合、jerk、倾角/推力可实现域 | **备选** |
+| 3D六状态 `[p3,v3]` | `v_ref,3` | PX4速度/姿态/执行器闭环 | 速度闭环响应、参考变化率和饱和 | **待比较** |
+| 平面六状态 `[px,pz,vx,vz,phi,omega]` | `T,tau` | 不符合成熟内环控制权限；原仓库实验plant | 仅作历史理论/反例对照 | **不作为新外环首选** |
+| 12状态刚体、16/17/20执行器增强 | 力矩/推力/逐桨输入 | 会重做飞控内环或执行器 | 复杂度不符合当前任务边界 | **暂缓** |
+
+**原始文献核验等级**：Andriën et al. (2024), IEEE TAC 69(8):5216–5230, DOI 10.1109/TAC.2023.3349098，正式PDF pp.5216–5220 部分正文核验，式(7)与(15)显示6维平移误差、三维加速度虚拟输入；其**四阶外环模型**服务于可微加速度参考，不得误认为“仅四个状态”或简单六状态双积分器。其内环为作者专门设计的非线性姿态控制器，不是PX4黑盒。Santos & Lagoa (2022), ISA Transactions 128:123–135, DOI 10.1016/j.isatra.2021.12.002，本轮**摘要核验**：wayset指导＋预稳定位置/姿态内环＋降阶平移Tube MPC；确切优化输入、A/B、终端集合仍待全文核验，**不能断言其优化输入已确定为位置参考**。
+
+详见 [本轮证据日志](background_run_20261103_0734_interface_model_audit.md)。模型选型尚未收敛，SMF/CZ及Tube硬安全均未获得针对PX4的证书。
