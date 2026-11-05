@@ -1,6 +1,8 @@
 # AcademicReaserch — 四旋翼外环 MPC 与 SMF/CZ
 
-**当前主线（2026-11-04）：** 先完成间歇/异步位置量测下的 CZ 集员估计、Equalized Recovery、因果输出反馈 Tube MPC 和终端递归可行性理论；具体 PX4/ArduPilot 指令接口与 SITL 暂缓。
+> **2026-11-05 工作入口：** [统一检查点](docs/research/CURRENT_CHECKPOINT.md)是唯一阶段状态；[阶段 0 审查报告](docs/research/STAGE_0_AUDIT_20261105.md)区分 main、本地草稿与未合并 PR；[AGENTS.md](AGENTS.md)规定验收顺序。下方旧日期的优先级仅为历史背景。
+
+**当前主线（2026-11-04）：** 间歇/异步位置量测下的CZ集员估计与因果输出反馈Tube MPC。限定数学基线已形成；按用户要求先行开展PX4/Gazebo验证，实际接入成功，但现有模型/误差界未通过验证，下一步修复执行动态与残差覆盖。
 
 ## 当前状态
 
@@ -8,7 +10,15 @@
 - 高保真物理对象仍是 12 状态六自由度四旋翼刚体 plant，成熟飞控承担姿态、角速度、控制分配和电机执行。
 - 外环理论先用抽象离散模型 \(x^+=Ax+Bu+Gw\)，位置-only 量测 \(y=C_px+v\)，有限 success/miss/delay 语言；具体命令接口不冻结。
 - 理论研究重点：可靠 CZ 后验 → 相位相关估计误差界 → Equalized Recovery → 共同因果输出反馈 → Tube 约束收紧 → 共同终端集合与递归可行性。
-- 目前尚未实现新外环控制器或 CZ-SMF，也未运行新 SITL/HIL；理论框架文档给出的是条件定理模板和待证明 Gate，不是已完成的项目级安全证明。
+- 已实现有限记忆 CZ 与输出反馈 Tube MPC 的 ZOH 六状态数学基线：有限窗包含、统一误差界、启动准入和显式终端的限定模型证明已形成，原26组本地闭环验证完成。一般模型、相位优化与12状态物理映射仍未完成；后续算法级SITL已运行但未通过，HIL未开展。
+
+**最新交付：** [完整课题方案](docs/research/proposal/RESEARCH_PROPOSAL.md) · [理论证明](docs/research/proposal/FINITE_MEMORY_THEORY.md) · [验证与局限](docs/research/proposal/VALIDATION.md)。方案包含研究假设、文献差异、实验矩阵、已证基线与后续验收标准。
+
+**抗扰验证更新：** 主要目标是扰动下的约束保持与鲁棒可行性，跟踪精度为辅助。新增226条压力/随机轨迹，136条合同内轨迹全部通过数值检查；合同外包含失败、空后验和输入越界均保留。16组解析预算及50组随机成对比较见[抗扰结果](docs/research/proposal/ROBUSTNESS_RESULTS.md)。当前CZ与pair共享统一Tube，尚未证明额外抗扰优势或相对普通MPC的提升。
+
+**首次Gazebo结果：** 4次正式算法接入已实际运行。连续测量下出现空后验，失测组出现速度越界，均已正常降落上锁。原算法未调参，不能声称SITL通过。见[结果、残差图与ULog](docs/simulation/CZ_SITL_RESULTS.md)。
+
+**接口诊断更新：** 四个旧场景已逐轴重放，连续测量的空后验定位到垂直轴；新增两次独立启动、9个分轴激励块完成。初步辨识水平有效滞后与垂直增益失配，留出短窗预测改善但长期漂移和原CZ失败仍在。见[辨识结果与下一步](docs/simulation/INTERFACE_IDENTIFICATION_RESULTS.md)。
 
 ## 控制边界
 
@@ -41,9 +51,9 @@
 
 ## 活动代码边界
 
-活动源码包含通用数值集合工具 [numerical_sets.py](src/common/numerical_sets.py) 和 [六维 CZ 一步共同输入验证器](src/outerloop/startup_gate.py)。前者是 float64 Box/Zonotope 工具；后者用精确有理数验证小规模信息集的首步可行性，不是在线 CZ 滤波器或完整 MPC。旧平面 plant、滤波器、脚本、测试和实验已完整移入归档。
+活动源码包含通用数值工具、[精确有理数一步门](src/outerloop/startup_gate.py)、[有限记忆CZ估计](src/outerloop/finite_memory.py)和[输出反馈Tube MPC](src/outerloop/tube_mpc.py)。新增LP/QP原型使用float64，不是向外舍入认证；[独立证书](experiments/finite_memory_certificate.py)只检查其声明的代数恒等式和端点支持。旧平面控制器保留在归档中。
 
-从仓库根目录运行 `python -m experiments.cz_startup_predecessor --check`，可复核64个登记实例和精确证书；`python -m unittest discover -s tests -v` 运行活动测试。只需Python≥3.11标准库。模型、量词、负面结果和研究边界见 [专题证明与实验](docs/research/cz_startup_predecessor.md)。
+旧启动门证书仍可用Python标准库运行 `python -m experiments.cz_startup_predecessor --check`。新增基线先安装 [固定依赖](requirements-research.txt)，再用虚拟环境运行活动测试和实验；完整命令见[课题方案](docs/research/proposal/RESEARCH_PROPOSAL.md)。
 
 ## 暂缓资料
 

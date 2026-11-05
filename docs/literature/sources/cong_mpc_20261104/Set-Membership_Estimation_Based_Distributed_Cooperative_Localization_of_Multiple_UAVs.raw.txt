@@ -1,0 +1,1653 @@
+248 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+Set-Membership Estimation Based Distributed
+Cooperative Localization of Multiple UAVs
+Yu Ding , Xujie Qin, Yirui Cong , Member, IEEE, and Xiangke Wang , Senior Member, IEEE
+Abstract—This paper investigates the distributed cooperative
+localization problem for mobile multi-UAV systems using set-
+membership estimation (SME). Unlike existing SME approaches
+relying on prior-known anchors or beacons, we consider a fully
+autonomous scenario where UAVs need to collaboratively derive
+guaranteed positional sets using only absolute measurements and
+relative range measurements from neighboring agents. To handle
+this problem, we first propose a law-of-total-range method to rig-
+orously quantify the estimated sets from relative measurements,
+which fits the general form of relative measurements between
+pairwise UAVs. Based on this new method, a novel distributed SME
+framework is developed, where each UAV can obtain the guaran-
+teed set containing its true state with only local measurements and
+communications. In addition, a distributed localization algorithm
+based on extended constrained zonotopes (ECZ) is designed with
+a proposed framework. Simulation results and field experiments
+verify that our proposed method efficiently improves the coopera-
+tive localization accuracy and outperforms the linearization-based
+extended SME method.
+Index Terms—Set-membership estimation, multi-UAV system,
+cooperative localization.
+I. INTRODUCTION
+IN RECENT years, the cooperative localization problem
+of multi-agent systems has received considerable research
+attention [1], [2], [3]. Various estimation methods have been
+widely used in the cooperative localization problem.
+For observer-based methods, a distributed self-localization
+algorithm was developed for multi-agent systems by using rel-
+ative position measurements in [4]. The results were extended
+to the distributed localization problem of sources with bearing
+angle measurements in [5]. In [6], distributed consensus filters
+were developed for a set of targets to utilize relative velocity
+and distance measurements to estimate the relative positions
+between UAVs. For stochastic methods, distributed localization
+algorithms are often designed based on Bayesian theory [7], [8].
+WhentheprocessandmeasurementnoisecomplywiththeGaus-
+sian distribution, the distributed Kalman filter has been proposed
+Received 24 May 2025; revised 30 September 2025 and 8 January 2026;
+accepted 13 January 2026. Date of publication 11 February 2026; date of
+current version 25 February 2026. This work was supported by the National
+Natural Science Foundation of China under Grant T2521006, Grant U23B2032,
+Grant U2241214 and Grant T2521006. The associate editor coordinating the
+review of this article and approving it for publication was Prof. Gang Wang.
+(Corresponding author: Xiangke Wang.)
+The authors are with the College of Intelligence Science and Technol-
+ogy, National University of Defense Technology, Changsha 410073, China
+(e-mail: dingyu17d@163.com; qinxujie@nudt.edu.cn; congyirui11@nudt.edu.
+cn; xkwang@nudt.edu.cn).
+Digital Object Identifier 10.1109/TSIPN.2026.3663852
+to deal with the problem, which has attracted significant atten-
+tion. In [9] and [10], the authors designed distributed Kalman fil-
+ters for a multi-agent system with linear relative measurements,
+and transformed the covariance update into a sparse-constrained
+matrix trace minimization problem. In [11], the author designed
+a distributed Kalman filter for the cooperative localization prob-
+lem with integrated absolute and relative measurements. In [12],
+a new adaptive extended Kalman filter is proposed to solve the
+problem of unknown noise covariance matrices inherent in the
+cooperative localization of autonomous underwater vehicles.
+In [13], nonlinear relative measurements have been considered,
+where a recursive quadratic filter has been proposed to compute
+the exact value of the variance explicitly. To deal with energy-
+bounded noise, authors have proposed an H∞-filter-based
+method in [14] to realize cooperative localization. In [15], a ro-
+bust approach is proposed to obtain optimal multi-robot relative
+observations using the Metric-based Iterative Closest Point algo-
+rithm, which enables robots to utilize the surrounding environ-
+ment information directly instead of placing a localization mark
+on the robots. It is worth mentioning that the aforementioned
+methods have limitations when facing unknown but bounded
+(UBB) noises. To the best of our knowledge, the unknown-input
+observer (UIO) [16] and the set-membership estimation (SME)
+are two effective ways to deal with the UBB noise.
+In this paper, we focus on the guaranteed method, i.e., set-
+membership estimation (SME), to address the cooperative lo-
+calization problem in multi-agent systems. Based on our current
+information, only a few articles have focused on studying the
+SME based cooperative localization problem. In [17], the au-
+thor considered a multi-agent system with both absolute and
+relative position measurements. A constrained zonotope [18]
+based algorithm was developed to enable distributed cooperative
+localization. In [19], the indoor localization problem based on
+the received signal strength indicator (RSSI) is considered.
+The author proposed a distributed set-membership estimation
+method in which the state of the localization system is uncertain
+and constrained by a given ellipsoid. In [20], Silvestre investi-
+gated the set-membership-based localization problem of relative
+range and bearing measurement with a fixed beacon. A new tool
+of set description, w.r.t., theconstrainedconvexgenerator (CCG)
+is proposed as a generalization of the constrained zonotope
+and applied in the localization problem to derive the estimated
+guaranteed set. Qin et al. considered the same localization prob-
+lem [21], and proposed a moving-horizon extended constrained
+zonotopic algorithm to accelerate calculations. References [22]
+and [23] studied the SME-based localization problem using GPS
+2373-776X © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artificial intelligence and similar technologies.
+Personal use is permitted, but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 249
+and UWB range measurements, which is similar to this work.
+The authors introduced a novel Iterated Extended Set Member-
+shipFilter(IESMF)thatgeneratesellipsoidalregionsguaranteed
+to contain the position of another aircraft. However, these two
+articles focused on relative localization between agents, whereas
+we are more interested in the problem where each UAV estimates
+its own position.
+It should be pointed out that existing works on SME-based
+localization rely on prior knowledge of anchors or beacons,
+which may be unrealistic in practical applications, particularly in
+outdoor environments. Moreover, most works handle nonlinear
+relative measurements by linearizing simultaneous equations.
+This is because the state coupling caused by relative measure-
+ments is difficult to decouple and form distributed frameworks.
+Thus, in this article, we study the SME-based distributed
+cooperative localization problem of a multi-UAV system, where
+each UAV aims to generate a guaranteed set that contains its own
+position. The main contributions of this paper are summarized
+as follows:
+r By analyzing uncertain variables, we accurately describe
+the uncertain range determined by general relative mea-
+surements between two agents, which forms the basis for
+establishing the distributed SME framework.
+r A distributed SME framework is developed that can handle
+kinematic scenarios without prior knowledge of anchors.
+With the proposed framework, each UAV can obtain the
+guaranteed set that contains its true state using only local
+measurements and communications.
+r An extended constrained zonotopic distributed localiza-
+tion algorithm is designed based on the proposed SME
+framework. Simulations verify that the designed algorithm
+can effectively improve accuracy with cooperative infor-
+mation from relative measurements, and outperforms the
+linearization-based extended SME method in [23].
+The rest of the paper is organized as follows: Section II
+presents the system model and problem description. Main results
+are provided in Section III, with the distributed SMFing frame-
+work analyzed in Section III-B and the constrained zonotopic
+algorithm designed in Section IV. Section V presents simulation
+results that corroborate the effectiveness of our methods. Finally,
+Section VI provides the concluding remarks of the paper.
+Notations: For an uncertain variable x, its realization is
+defined by x(ω) = x. The set of all the realizations of an
+uncertain variable is called the uncertain range: [[x]] = {x(ω) :
+ω ∈ Ω} [24]. N0 is the set of natural number. Rn
+denotes
+the n-dimensional Euclidean space. For arbitrary sets S1, S2,
+their Minkowski sum is denoted by S1 ⊕ S2 = {s1 + s2 :
+s1 ∈ S1, s2 ∈ S2}. The interval hull of a bounded set S 
+s = (s(1)
+, . . . , s(n)
+) is IH(S) =
+n
+i=1[s(i)
+, s(i)
+], where s(i)
+=
+infs(i) {s ∈ S} and s(i)
+= sups(i) {s ∈ S}.
+II. SYSTEM MODEL AND PROBLEM DESCRIPTION
+Consider a system composed of N UAVs, each with the
+discrete-time second-order model
+xi,k+1 = Aixi,k + Bi(ui,k + wi,k), (1)
+Fig. 1. Graphical Illustration.
+where the state xi,k = [pT
+i,k, νT
+i,k]T
+includes the position pi,k and
+velocity νi,k of UAV i at time instant k, and
+Ai =
+
+1 T
+0 1
+
+, B =
+
+T 2
+2
+T
+
+. (2)
+ui,k denotes the input of UAV i at step k, which is assumed as
+a known signal to i itself in this article. wi,k ∈ [[wi,k]] ⊆ Rni
+is
+the process noise.
+In this work, two types of measurements in the cooperation
+problems [11], [13], i.e., absolute measurements and relative
+measurements are considered.
+Absolute measurement: each UAV i takes an observation on
+its state directly, i.e., with the following form:
+yi,k = Cixi,k + vi,k, (3)
+yi,k ∈ Rmi
+is the measurement at time instant k; Ci = I2 is the
+measurement matrix; vi,k is the bounded measurement noise,
+i.e., vi,k ∈ [[vi,k]].
+Relative measurements: each UAV utilizes the Ultra Wide
+Band (UWB) sensor to take relative range measurements with
+its neighbors:
+yr
+i,j,k = pi,k − pj,k2 + ri,j,k, j ∈ Ni, (4)
+where  · 2 is the 2-norm of a vector, and yr
+i,j,k ∈ Rpi
+is the
+relative distance between agent i and its in-neighborhood agent
+j at time instant k; ri,j,k is the bounded range measurement
+noise, with ri,j,k ∈ [[ri,j,k]] = [ri,j,k, ri,j,k].
+Unless otherwise stated, we assume the unrelatedness of the
+initial state of each UAV and the uncertain variables of noise
+at each time are assumed to guarantee the non-stochastic Hid-
+den Markov Model [25], i.e., ∀k ∈ N0, wi,0:k, vi,0:k, ri,j,0:k,
+xi,0, ∀i, j = 1, . . . , N are unrelated.
+In this paper, we study the cooperative localization problem
+where UAVs utilize the absolute measurement and relative mea-
+surements with neighbors to realize cooperative localization (see
+Fig. 1). Specially, the aim of each UAV is to utilize all the local
+information yi,k and yr
+i,j,k, j ∈ Ni up to k to derive an estimated
+set Si,k, such that xi,k ∈ Si,k, ∀k ∈ N0.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+250 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+III. UNCERTAIN RANGE ANALYSIS AND DISTRIBUTED SME
+FRAMEWORK
+In this section, the uncertain range corresponding to general
+relative measurements is first derived Section III-A as a basis.
+Based on this, a distributed SME framework is established in
+Section III-B.
+A. Uncertain Range Determined by Relative Measurements
+Consider UAV i and its neighbor j ∈ Ni, with the following
+relative measurement equation,
+zi,j,k = gi,j(xi,k, xj,k) + ri,j,k, (5)
+when the uncertain range of UAV j, Sj,k is given, we focus on
+how to obtain an uncertain range Si,k such that xi,k ∈ Si,k, and
+have the following lemma.
+Lemma 1: For any given estimated set Sj,k  xj,k, the es-
+timated set Sr
+i,k derived by the relative measurement (5) is
+presented by
+Sr
+i,j,k = g−1
+i,j,1({zi,j,k} ⊕ [[−ri,j,k]], Sj,k). (6)
+where g−1
+i,j denotes the the preimage of {zi,j,k − r0
+i,j,k} under
+mapping gi,j(·, x0
+j,k),
+g−1
+i,j
+
+{zi,j,k − r0
+i,j,k}, x0
+j,k
+
+= {xi,k : gi,j(xi,k, x0
+j,k) + r0
+i,j,k = zi,j,k}. (7)
+Proof: See Appendix A. 
+For the relative range measurement (4), Lemma 1 can be
+specialized as the following proposition.
+Proposition 1: The estimated set Sr
+i,k derived by the relative
+range measurement (4) satisfies:
+Sr
+i,j,k = Sj,k ⊕ Y r
+i,j,k, (8)
+Y r
+i,j,k is a geometrical ring defined by
+Y r
+i,j,k = {s : Ri,j,k ≤ s2 ≤ Ri,j,k}, (9)
+where Ri,j,k = yr
+i,j,k − ri,j,k and Ri,j,k = yr
+i,j,k − ri,j,k.
+Proof: See Appendix B. 
+B. Distributed SME Framework
+For the multi-UAVs system with dynamics (1) and measure-
+ments (3), (4), the distributed SME process can be expressed by
+the following iterative framework, i.e., Algorithm 1.
+A line-by-line explanation of Algorithm 1 is provided below.
+Line 1 initializes the algorithm. Lines 2-7 give the estimation
+process at each k ∈ N0. Line 3 predicts the prior estimated set
+Si,k when the posterior estimated set of the last instant Si,k−1 is
+given. Line 4 describes the process of measurements and com-
+munications. The information of the estimated set Sj,k ∩ Sy
+j,k
+can be transmitted from j to i through communications. Line 5
+updates the posterior estimated set Si,k, which is the intersection
+of prior set Si,k and the measurement set Sy
+i,k, Sr
+i,j,k, j ∈ Ni.
+Theorem 1: When the initial state satisfies xi,0 ∈ Si,0, ∀i ∈
+V, the posterior range Si,k of each UAV generated by Algo-
+rithm 1 contains the true state xi,k for any k ∈ N0.
+Algorithm 1: Distributed SME Framework.
+1: Initialization. The initial uncertain range of each UAV i
+is settled as Si,0.
+2: loop
+3: Prediction. The predicted prior range Si,k is given
+by
+Si,k = Ai(Si,k−1) ⊕ {Biui,k−1} ⊕ Bi[[wi,k−1]],
+(10)
+where Si,k−1 is the posterior range at step k − 1.
+4: Measurement and communications. Each UAV
+takes an absolute measurement yi,k. UAV i takes
+relative range measurements yr
+i,j,k, and receives
+information from neighbor UAV j.
+5: Update. The posterior estimated set Si,k is
+presented by
+Si,k = Sabs
+i,k ∩
+
+j∈Ni
+[Sabs
+j,k ⊕ Y r
+i,j,k], (11)
+where Sabs
+i,k = Si,k ∩ Sy
+i,k, and
+Sy
+i,k = {xi,k : yi,k = Cixi,k + vi,k, vi,k ∈ [[vi,k]]}.
+6: k = k + 1;
+7: end loop
+Proof: See Appendix C. 
+IV. EXTENDED CONSTRAINED ZONOTOPE BASED
+LOCALIZATION ALGORITHM DESIGN
+Since the calculations under general set descriptions are chal-
+lenging, geometric figures such as ellipsoids and zonotopes are
+often used to outer bound Si,k. Generally speaking, the con-
+strained zonotopic algorithm has less over-estimation conserva-
+tiveness than ellipsoid-based algorithms, which implies its better
+accuracy [26]. Thus, in this section, we design a distributed co-
+operative localization algorithm based on Algorithm 1, utilizing
+the extended constrained zonotope. Specifically, our goal is to
+find extended constrained zonotopes Zi,k such that Zi,k ⊇ Si,k.
+The definition of an extended constrained zonotope is presented
+as follows.
+Definition 1: (Extended Constrained Zonotope [27]) An
+extended constrained zonotope Z ⊆ Rn
+is described by
+a quintuple (G, c, A, b, h) ∈ Rn×ng
+× Rn
+× Rnc×ng
+× Rnc
+×
+[0, ∞]ng
+:
+Z(G, c, A, b, h) =
+⎧
+⎨
+⎩
+Gξ + c : Aξ = b, ξ ∈
+ng
+j=1
+−h(j)
+, h(j)
+⎫
+⎬
+⎭
+,
+(12)
+where h(j)
+is the jth
+component of h1
+.
+Compared to the polytope or zonotope, the extended con-
+strained zonotope is sufficient to describe arbitrary convex
+1When h(j) = 1, j = 1, . . . , ng, Definition 1 becomes the classical con-
+strained zonotope in [18].
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 251
+Fig. 2. The green hexagon denotes the posterior extended constrained zono-
+tope of UAV i at step k − 1, Zi,k−1; the purple octagon denotes the prior set
+Zi,k; Zabs
+i,k is presented by the blue irregular polygon. According to Proposi-
+tion 2, the calculation of Zabs
+j,k ⊕ Y r
+i,j,k is divided into two steps, which are
+detailed in Proposition 3 and Theorem 2, respectively.
+polygons, and permits the computation of exact projections,
+intersections, and Minkowski sums.
+Lemma 2: For every Z = (Gz, cz, Az, bz, hz) ⊂ Rn
+, W =
+(Gw, cw, Aw, bw, hw) ⊂ Rn
+, Y = (Gy, cy, Ay, by, hy) ⊂ Rk
+and T ∈ Rk×n
+, the three identities hold:
+TZ = (TGz, Tcz, Az, bz, hz) , (13)
+Z ⊕ W =
+
+[Gz Gw], cz + cw,
+
+Az 0
+0 Aw
+
+,
+
+bz
+bw
+
+,
+
+hz
+hw
+
+,
+(14)
+Z ∩T Y =
+⎛
+⎜
+⎝[Gz 0], cz,
+⎡
+⎢
+⎣
+Az 0
+0 Ay
+TGz −Gy
+⎤
+⎥
+⎦ ,
+⎡
+⎢
+⎣
+bz
+by
+cy − Tcz
+⎤
+⎥
+⎦ ,
+
+hz
+hy
+
+⎞
+⎟
+⎠.
+(15)
+Lemma 2 implies the extended constrained zonotope is closed
+under linear transformation, Minkowski sum and intersection
+operations. As a result, all items in Line 5 of Algorithm 1, except
+Sabs
+j,k ⊕ Y r
+i,j,k, can be directly obtained with Lemma 2. There-
+fore, in the following analysis, we will focus on the calculation
+of Sabs
+j,k ⊕ Y r
+i,j,k, which is inspired by the following proposition.
+Proposition 2: Let R =
+
+q∈I
+Rq
+, the following equation holds
+S1 ⊕ R =
+s∈S1q∈I
+({s} ⊕ Rq
+) . (16)
+Proof: This conclusion comes directly from the commuta-
+tivity of set union and Minkowski sum, i.e., (S1 ⊕
+
+q∈I
+Rq
+) =
+
+q∈I
+(S1 ⊕ Rq
+). 
+According to Proposition 2, the derivation of Sa
+j,k ⊕ Y r
+i,j,k is
+performed in two steps, as shown in Fig. 2. In the first step, we
+select a fixed point p0
+j,k ∈ Sj,k ∩ Sy
+j,k, and a segmented sector
+Y r,q
+i,j,k is outer bounded by an extended constrained zonotope
+Fig. 3. The diagram of proof of Proposition 3.
+Zr,q
+i,j,k, as presented in Proposition 3. Building on this, Theorem 2
+calculates the union of
+
+pj,k
+{pj,k} ⊕
+
+q∈I
+Y r,q
+i,j,k.
+For the fixed point p0
+j,k ∈ Zabs
+j,k , we divide the ring Y r
+i,j,k into
+M parts. Each part Y r,q
+i,j,k has a minimum angle value of 2πq
+M and
+a maximum angle value 2π(q+1)
+M , q = 1, . . . , M. We have the
+following proposition (see Fig. 3).
+Proposition 3: The sector, w.r.t., {p0
+j,k} ⊕ Y r,q
+i,j,k is outer
+bounded by the following extended constrained zonotope
+Zr,q
+i,j,k =
+!
+z : z = [Gr,q 0]
+
+ξ1
+ξ2
+
++ cr,q,
+Hr,qGr,q (σr,q,1 − σr,q,2)
+
+ξ1
+ξ2
+
+= σr,q,1 − Hr,qcr,q,
+
+ξ1
+ξ2
+
+∈ hr,q × [0, 1]
+"
+, (17)
+where
+Gr,q =
+⎡
+⎣
+cos
+#
+2π(q+1)
+M
+$
+cos
+#
+2π(q)
+M
+$
+sin
+#
+2π(q+1)
+M
+$
+sin
+#
+2π(q)
+M
+$
+⎤
+⎦ ,
+cr,q = p0
+j,k,
+Hr,q = cos
+#
+π(2q+1)
+M
+$
+sin
+#
+π(2q+1)
+M
+$
+,
+σr,q,1 = Ri,j,kcos
+%
+2π(q + 1)
+M
+&
++ Hr,qcr,q,
+σr,q,2 = Ri,j,k + Hr,qcr,q,
+hr,q =
+
+0,
+Ri,j,k
+cos
+πq
+M
+
+
+×
+
+0,
+Ri,j,k
+cos
+πq
+M
+
+
+. (18)
+Proof: See Appendix D. 
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+252 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+Remark 1: Based on Proposition 3, each set Z1,r
+i,j,k, . . . , ZM,r
+i,j,k
+can be intersected with Zabs
+i,k , and discarded if Zq,r
+i,j,k ∩ Zabs
+i,k = ∅
+to reduce computation burden.
+To generalize the one-point-scene to the union
+
+pj,k∈Zabs
+j,k
+, we
+make the following assumption.
+Assumption 1: The diameter of Zabs
+j,k satisfies d(Zabs
+i,k ) 
+Ri,j,k < δ(p0
+j,k, Zabs
+i,k ), ∀i ∈ V, j ∈ Ni, where δ(p0
+j,k, Zabs
+i,k ) =
+inf
+pi∈Zabs
+i,k
+p0
+j,k − pi2 represents the distance between p0
+j,k and set
+Zabs
+i,k .
+Remark 2: Assumption 1 implies the position of UAV j is
+far from UAV i. This assumption is reasonable, as the relative
+distance between UAVs is typically much larger than the uncer-
+tainty introduced by noise.
+Based on Proposition 3 and Assumption 1, an extended
+constrained zonotope can be derived to outer bound (Zabs
+j,k ⊕
+Y r
+i,j,k) ∩ Zabs
+i,k .
+Theorem 2: Under Assumption 1, there holds (Zabs
+j,k ⊕
+Y r
+i,j,k) ∩ Zabs
+i,k ⊆ '
+Zr
+i,j,k, where
+'
+Zr
+i,j,k =
+!
+z : z = [ '
+Gr 0]
+
+ξ1
+ξ2
+
++ '
+cr,
+'
+Hr
+'
+Gr ('
+σr,1 − '
+σr,2)
+
+ξ1
+ξ2
+
+= '
+σr,1 − '
+Hr'
+cr,
+
+ξ1
+ξ2
+
+∈ '
+hr
+"
+,
+(19)
+with parameters defined as follows,
+'
+Gr =
+⎡
+⎣
+cos
+#
+2π(
+q2+1)
+M
+$
+cos
+#
+2π
+q1
+M
+$
+sin
+#
+2π(
+q2+1)
+M
+$
+sin
+#
+2π
+q1
+M
+$
+⎤
+⎦ ;
+'
+cr = ∀p∗
+j,k ∈ Zabs
+j,k ,
+'
+σr,1 =
+#
+'
+Ri,j,k
+$
+cos
+%
+('
+q2 − '
+q1 + 1)π
+M
+&
++ '
+Hr'
+cr,
+'
+σr,2 = '
+Ri,j,k + '
+Hr'
+cr,
+'
+Hr = cos
+#
+π(
+q1+
+q2+1)
+M
+$
+sin
+#
+π(
+q1+
+q2+1)
+M
+$
+,
+'
+hr =
+⎡
+⎣0,
+'
+Ri,j,k
+cos
+#
+(
+q2−
+q1+1)π
+M
+$
+⎤
+⎦ ×
+⎡
+⎣0,
+'
+Ri,j,k
+cos
+#
+(
+q2−
+q1+1)π
+M
+$
+⎤
+⎦
+× [0, 1]
+'
+Ri,j,k = d(Zabs
+j,k ) + Ri,j,k,
+'
+Ri,j,k = Ri,j,k − d(Zabs
+j,k )
+'
+q1 = inf
+q
+Zq,r
+i,j,k ∩ Zabs
+i,k = ∅,
+'
+q2 = sup
+q
+Zq,r
+i,j,k ∩ Zabs
+i,k = ∅. (20)
+Proof: See Appendix E. 
+To summarize, the process of extended constrained zonotope-
+based distributed cooperative localization is shown as in
+Algorithm 2.
+Algorithm 2: Extended Constrained Zonotope Based Dis-
+tributed Cooperative Localization.
+1: Initialization. Set the initial extended constrained
+zonotope of each UAV i, Zi,0.
+2: loop
+3: Prediction. The predicted extended constrained
+zonotope Zi,k is given by
+Zi,k = AiZi,k−1 ⊕ {Biui,k−1} ⊕ BiZwi
+, (21)
+where Zi,k−1 is the posterior range at step k − 1.
+4: Measurement and communications. Each UAV
+takes absolute measurement yi,k, and calculates
+Zabs
+i,k = Zi,k ∩ Zy
+i,k. UAV i takes relative range
+measurements yr
+i,j,k, and receives information from
+neighbor UAV j.
+5: Update. The posterior extended constrained
+zonotope Zi,k is calculated as in Lines 6-15.
+6: Let p∗
+j,k = cabs
+j,k , the diameter of Zabs
+j,k is given by
+d(Zabs
+j,k ) = sup
+ξ≤1
+Gabs
+j,k ξ∞ ≤ Gabs
+j,k ∞.
+7: The equivalent relative range measurement set is
+given by the ring
+'
+Y r
+i,j,k = {s : '
+Ri,j,k ≤ s2 ≤ '
+Ri,j,k}, where
+'
+Ri,j,k = yr
+i,j,k − ri,j,k − d(Zabs
+j,k ) and
+'
+Ri,j,k = yr
+i,j,k − ri,j,k + d(Zabs
+j,k ).
+8: Segment '
+Y r
+i,j,k into M parts. Each part is outer
+bounded by the extended constrained zonotope
+'
+Zq,r
+i,j,k as in (18).
+9: loop
+10: Calculate '
+Zq,r
+i,j,k ∩ Zabs
+i,k , q ∈ [1, M].
+11: q = q + 1.
+12: end loop
+13: Let q1 = inf
+q
+'
+Zq,r
+i,j,k ∩ Zabs
+i,k = ∅ and
+q2 = sup
+q
+'
+Zq,r
+i,j,k ∩ Zabs
+i,k = ∅. Then the extended
+constrained zonotope '
+Zr
+i,j,k given by the relative
+range measurement yr
+i,j,k can be represented as (19)
+and (20).
+14: Calculate Z0
+i,k = Zi,k ∩ '
+Zr
+i,j,k ∩ Zy
+i,k with (13).
+15: Calculate the interval hull as the posterior estimated
+set of UAV i, i.e., Zi,k = IH(Z0
+i,k).
+16: k = k + 1;
+17: end loop
+Remark 3: To illustrate the calculation of '
+q1 and '
+q2, we
+consider the example in Fig. 4. The geometrical ring is dev-
+ided into M parts. Each part is labeled with 1, . . . , M in an
+anti-clockwise order, and can be outer bounded by an extended
+constrained zonotope Zr,q
+i,j,k as in (17) and (18). Notice that
+the intersections Zr,1
+i,j,k ∩ Zabs
+i,k and Zr,2
+i,j,k ∩ Zabs
+i,k are not empty,
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 253
+Fig. 4. The diagram of the calculation of '
+q1 and '
+q2. Only the first and second
+segmented sector have non-empty intersections with Zabs
+i,k , thus the other sectors
+can be discarded. We have '
+q1 = 1 and '
+q2 = 2.
+Fig. 5. Illustration of different estimation results when choosing different
+M (M1 < M2). When M = M1, the posterior estimated set generated by
+Algorithm 2 is the intersection of '
+Zr,M1
+i,j,k
+(the pink dash trapezoid) with Zabs
+i,k .
+When M increases to M2, the posterior estimated set is the intersection of
+'
+Zr,M2
+i,j,k
+(the purple trapezoid) with Zabs
+i,k . It can be observed that the latter
+has less over-estimation error, which implies the improvement of estimation
+accuracy as M increases.
+from the definition of '
+q1 and '
+q2 (see (20)), we have '
+q1 = 1 and
+'
+q2 = 2.
+Remark 4: The choice of M has a trade-off on estimation
+accuracy and computational efficiency.
+On one hand, the estimation accuracy increases as M in-
+creases. Algorithm 2 is to utilize the union of several extended
+constrained zonotope to cover the intersection of Zabs
+i,k and the
+geometrical ring. Thus, the over-estimation error is unavoidable
+since some part of the cones are redundant. When M increases,
+each cone gets thinner, which implies the area of redundant part
+decreases. As shown in Fig. 5, when the ring is segmented into
+M1 parts. The cone generated by each part is represented by
+the blue dash line. Notice the two cones in Fig. 5 has non-empty
+intersections with Zabs
+i,k , thus the posterior extended constrained
+zonotope is presented by the intersection of '
+Zr,M1
+i,j,k (the pink
+dash trapezoid in Fig. 5 and Zabs
+i,k . When the segmented number
+increases to M2, the cone generated by each part is represented
+by the green line. The posterior estimated set is presented by the
+intersection of '
+Zr,M2
+i,j,k (the purple trapezoid in Fig. 5 and Zabs
+i,k .
+Fig. 6. System measurement topology.
+Apparently, the purple trapezoid introduces less over-estimation
+error than the pink dash trapezoid, which implies better estima-
+tion accuracy for M2 > M1.
+On the other hand, Algorithm 2 needs to judge whether
+each segmented part has empty intersections with Zabs
+i,k , which
+implies its contains M times set-intersection calculations and
+empty set judgements. Thus, its computational efficiency de-
+creases as M increases.
+Remark 5: When UAV i takes relative bearing and range
+measurements simultaneously with its neighbor j, where the
+relative bearing measurement equation is as follows,
+yb
+i,j,k = ang(xi,k − xj,k) + rb
+i,j,k, (22)
+the posterior extended constrained zonotope of UAV is pre-
+sented by Zabs
+i,k ∩ (Zabs
+j,k ⊕ Zr,b
+i,j,k), where Zr,b
+i,j,k can be obtained
+by replacing 2π(q+1)
+M and 2πq
+M in (18) with yb
+i,j,k − rb
+i,j,k and
+yb
+i,j,k − rb
+i,j,k, respectively.
+V. SIMULATION AND FIELD EXPERIMENT
+A. Simulation Example
+In this subsection, a 2-D plane localization simulation is
+used to demonstrate the efficiency of the proposed method.
+System measurement topology is shown as in Fig. 6. Simulation
+parameters are set as T = 0.25, Ci = I4. The process noise wi,k
+and absolute measurement noise vi,k are set as
+w1,k =
+1
+4(1 + e−kT )
+·
+
+1
+1
+
++
+
+2cos(k
+4  · π
+2 )
+2sin(k
+4  · π
+2 )
+
+,
+w2,k =
+1
+4(1 + e−kT )
+·
+
+1
+1
+
++
+
+2sin(k
+4  · π
+2 )
+2cos(k
+4  · π
+2 )
+
+,
+w3,k =
+1
+4(1 + e−kT )
+·
+
+1
+1
+
++
+
+2cos((k
+4  + 1) · π
+2 )
+2sin((k
+4  − 1) · π
+2 )
+
+,
+w4,k =
+1
+4(1 + e−kT )
+·
+
+1
+1
+
++
+
+2sin((k
+4  − 1) · π
+2 )
+2cos((k
+4  − 1) · π
+2 )
+
+,
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+254 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+Fig. 7. Simulation to verify the effectiveness of Algorithm 2. The estimated sets (rectangles) generated by Algorithm 2 contain the true positions of UAVs (dots)
+in each step, which verifies the effectiveness of Algorithm 2.
+w5,k =
+1
+4(1 + e−kT )
+·
+
+1
+1
+
++
+
+2sin(k
+4  · π
+2 )
+2cos(k
+4  · π
+2 )
+
+,
+vi,k = 0.25 · sin
+#
+0.5kT +
+π
+4
+$
+·
+
+1
+T
+
+⊗
+
+1
+1
+
+, (23)
+where · rounds down a real number. One can verify that wi,k ∈
+[[wi,k]] and vi,k ∈ [[vi,k]], where
+[[wi,k]] = {z : z = 2.25I2ξ, ξ∞ ≤ 1},
+[[vi,k]] = {z : z = 0.25 · I4ξ, ξ∞ ≤ 1}. (24)
+Thus, wi,k and vi,k are bounded noise, with wi,k ≤ 2.25 and
+vi,k ≤ 1. The range of the relative measurement noise ri,j,k
+is set as [[ri,j,k]] = [−0.1, 0.1]. The simulation results for the
+localization estimation of UAVs are presented in Fig. 7. The line
+represents the real trajectory, and the true positions at different
+time steps are marked with dots. The rectangles are the estimated
+interval hulls generated by Algorithm 2 (M = 80). As demon-
+strated in Fig. 7(a)–(e), the proposed algorithm consistently
+ensures that the true system state is contained within the interval
+hull boundaries of the posterior extended constrained zonotopes
+at all time steps. This indicates the effectiveness of our method.
+To quantify the conservativeness of the SME, we adjust the
+uncertain range of absolute measurement noise as [[vi,k]] = {z :
+z = I4ξ, ξ∞ ≤ 1}, and utilize the diameter of the estimated
+set d(S) as a measure of uncertainty, which represents the
+maximum estimation error of the estimated set. Specifically,
+d(S) is defined as:
+d(S) = sup
+s1,s2∈S
+s1 − s2∞. (25)
+For an interval hull in the 2-D plane, d(S) corresponds to the
+maximum edge length, which is twice the infinite norm of the
+generator matrix G. Therefore, we define the following index to
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 255
+Fig. 8. The scenario and equipment for cooperative localization.
+TABLE I
+CONSERVATIVENESS COMPARISON OF DIFFERENT ALGORITHMS
+reflect the average of interval hull diameters:
+di =
+1
+K
+K
+(
+k=1
+Gi,k∞. (26)
+Using this index, we compare our method with the non-
+cooperative localization method [28], the extended set-
+membership estimation (ESME) [23] and the distributed
+particle-filter based SME (DPF-SME, see Algorithm 3 in
+Appendix A). The index di for different methods is shown
+in Table I. In Table I, we can observe that the index di of
+Algorithm 2 is smaller than that of the non-cooperative SME
+method. This indicates that our proposed method effectively
+utilizes cooperation information from relative measurements,
+thereby improving estimation accuracy.
+Furthermore, the di of Algorithm 2 is lower than the
+ESME method in reference [23]. This is because in
+the linearization method, i.e., the ESME, the linearized
+residuals contains a quadratic item i,k = ('
+xi,k − xi,k)T
+∂2
+h(
+xi,k)
+∂
+x2
+i,k
+|
+xi,k=xi,k
+('
+xi,k − xi,k), where xi,k is the central point
+of the prior extended constrained zonotope of UAV i at step
+k, and '
+xi,k ∈ Zi,k is an arbitrary point in Zi,k. To guarantee
+the posterior extended constrained zonotope Zi,k contain all
+possible xi,k, the range of i,k should be zero to its maximum,
+which is quadratic to '
+xi,k − xi,k, i.e., the radius of Zi,k. On the
+other hand, the over-estimation of our proposed method mainly
+comes from the outer approximation of Y r,q
+i,j,k with Zr,q
+i,j,k. Thus,
+compared to ESME, our proposed method does not suffer from
+the over-estimation caused by the quadratic item i,k, and has
+less conservativeness in estimation.
+It should be noticed that the DPF-SME outperforms our
+proposed algorithm in estimation accuracy. However, an im-
+portant limitation of Algorithm 3 is that it can not guarantee its
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+256 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+Fig. 9. (a)The true and estimated trajectories of UAV1. (b)The true and estimated trajectories of UAV2. (c)The true and estimated trajectories of UAV3.
+Fig. 10. (a) Estimation error of different methods under GPS undenied scene. (b) Estimation error of different methods under GPS denied scene.
+TABLE II
+TIME NODE OF FIELD FLIGHT
+estimated set contains the true state. Notice that each feasible
+point generated in Algorithm 3 is an interior point of the true
+uncertain range, which implies the estimated set generated by
+Algorithm 3 is still an inner approximation even if the number
+of generated particles M tends to infinity. Thus, the estimated
+set generated by Algorithm 3 can not guarantee containing all
+possible states, which violates the fundamental purpose of SME.
+B. Field Flight Experiment
+To further verify the effectiveness of Algorithm 2, a field
+experiment was conducted. Three UAVs are tasked with flying
+along the trajectories shown in Fig. 8(c). The time node of the
+field flight experiment is shown in Table II. After taking off,
+each UAV utilizes GPS to take absolute measurements of its
+own position. The localization accuracy of GPS measurement is
+1 m.
+After about 5 minutes, the UAVs enter the GPS-denied region
+and utilize the image-matching method as its absolute measure-
+ment with an accuracy of 21 m.
+In the whole flight process, UAVs take relative range measure-
+ments with the UWB sensor customized by the Sinomap Field
+Company, with a measurement noise ri,j,k ∈ [−10 m, −10 m].
+The relative distance between UAVs and their neighbors is
+shown in Fig. 8(d).
+Algorithm 2 is utilized to realize measurement fusion, and is
+considered to be effective if its localization accuracy is better
+than the image-matching method.
+The flight process is divided into two stages. In the first stage,
+each UAV uses both GPS and a UWB sensor for localization.
+In the second stage, the GPS signal is denied, and UAVs utilize
+visual and UWB sensors to localize themselves. The true po-
+sitions and estimated trajectories of the UAVs are presented in
+Fig. 9.
+Moreover, we calculate the absolute value of pointwise es-
+timation error ei,k = |)
+pi,k − pi,k| of Algorithm 2, and make
+a comparison with the non-cooperative method, and the EKF
+method (see Fig. 10). In the box plot Fig. 10, it can be observed
+that both the mean error and maximum error of the proposed
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 257
+Algorithm 2 are lower, indicating that our method also performs
+well in pointwise estimation.
+VI. CONCLUSION
+In this article, we have studied the distributed cooperative
+localization problem of a multi-UAV system with absolute and
+relative range measurements based on set-membership estima-
+tion (SME). Each kinematic UAV needs to realize SME-based
+localization with its absolute measurement of itself and relative
+range measurements of its neighbors. Firstly, to deal with the
+general form of relative measurements between pairwise UAVs,
+we have proposed a new method to derive the uncertain range
+of uncertain variables with the law of total range. Based on
+this, a novel distributed SME framework has been developed,
+where each UAV can obtain the guaranteed set containing its
+true state with only local measurements and communications.
+Furthermore, we have designed an extended constrained zono-
+topic localization algorithm as a realization of the proposed
+distributed SME framework. Finally, several simulation results
+have corroborated the effectiveness of our proposed method,
+and our designed algorithm can effectively improve accuracy
+with cooperative information from relative measurements, and
+has less conservativeness than the linearization-based estimation
+method (ESMF and EKF).
+For future works, we aim to study the rigid-graph-based
+cooperative localization problem of dense with SME, which
+can be applied in dense UAV formations. We also consider
+the data-driven unknown-input-observer with SME, which can
+present reliable guaranteed sets and the convergent pointwise
+estimations simultaneously; when the model contains dynamic
+level uncertainties, the data-driven unknown-input observer can
+deal with the model mismatch, and the presented SME method
+can be applied to realize cooperative localization of each UAV.
+APPENDIX A
+PROOF OF LEMMA 1
+Proof: For the uncertain variable xi,k, we aim to obtain the
+conditional marginal range Sr
+i,k = [[xi,k|zi,j,k]], which can be
+derived by the law of total range [21],
+[[xi,k|zi,j,k]] =
+ri,j,k∈[[ri,j,k]]
+[[xi,k|ri,j,k, zi,j,k]]
+=
+ri,j,k∈[[ri,j,k]]xj,k∈Sj,k
+[[xi,k|xj,k, ri,j,k, zi,j,k]].
+(27)
+Noting that for each fixed r0
+i,j,k ∈ [[ri,j,k]] and x0
+j,k ∈ Sj,k, we
+have
+[[xi,k|xj,k, ri,j,k, zi,j,k]]
+= {xi,k : gi,j(xi,k, x0
+j,k) + r0
+i,j,k = zi,j,k}. (28)
+The right hand side (RHS) of (28) is the definition of the
+preimage {zi,j,k − r0
+i,j,k} under mapping gi,j(·, x0
+j,k) (see (7)).
+By substituting (28) into (27), we can obtain
+Sr
+i,j,k = ∪
+xj,k∈Sj,k
+∪
+ri,j,k∈[[ri,j,k]]
+g−1
+i,j ({zi,j,k − ri,j,k}, xj,k)
+= g−1
+i,j,1({zi,j,k} ⊕ [[−ri,j,k]], Sj,k). (29)
+Thus, Lemma 1 has been proved. 
+APPENDIX B
+PROOF OF PROPOSITION 1
+Proof: According to Lemma 1, we have
+Sr
+i,j,k =
+xj,k∈Sj,kri,j,k∈[[ri,j,k]]
+g−1
+i,j ({zi,j,k − r0
+i,j,k}, x0
+j,k),
+(30)
+where
+g−1
+i,j ({zi,j,k − r0
+i,j,k}, x0
+j,k)
+= {xi,k : xi,k = x0
+j,k + s0, s02 = zi,j,k − r0
+i,j,k} (31)
+for each given ri,j,k ≤ r0
+i,j,k ≤ ri,j,k and x0
+j,k ∈ Sj,k.
+Noting that the union
+
+ri,j,k∈[[ri,j,k]]
+of the RHS of (31) corre-
+sponds to the geometric ring (9). Thus, (30) can be written as
+Sr
+i,j,k = {xi,k : xi,k = xj,k + s, xj,k ∈ Sj,k, s ∈ Y r
+i,j,k}.
+(32)
+From the definition of Minkowski sum, Proposition 1 can be
+proved. 
+APPENDIX C
+PROOF OF THEOREM 1
+Proof: When xi,k−1 ∈ Si,k−1 holds, from the dynamics (1),
+we have
+xi,k = Aixi,k−1 + Biui,k−1 + Biwi,k−1
+∈ AiSi,k−1 ⊕ {Biui,k−1} ⊕ Bi[[wi,k−1]] = Si,k. (33)
+Moreover, from the definition of Sy
+i,k, we know that xi,k ∈ Sy
+i,k.
+Thus, xi,k ∈ Sabs
+i,k = Si,k ∩ Sy
+i,k holds for any i ∈ V and k ∈
+N0. Hence, xj,k ∈ Sabs
+j,k . Together with Proposition 1, we can
+obtain
+xi,k ∈ Sabs
+i,k ∩ [Sabs
+j,k ⊕ Y r
+i,j,k], ∀j ∈ Ni. (34)
+Theorem 1 has been proved. 
+APPENDIX D
+PROOF OF PROPOSITION 3
+Proof: According to the geometrical significance, the seg-
+mented sector Y r,q
+i,j,k is outer bounded by the trapezoid
+ABCD, which is the intersection of triangle {z : z ∈ COD}
+and hyperplane {z : Hr,qz ∈ [σr,q,1, σr,q,2]}, where Hr,q =
+cos
+#
+π(2q+1)
+M
+$
+sin
+#
+π(2q+1)
+M
+$
+.
+For the triangle COD, each point can be covered by the
+linear combination of
+
+OC
+ ˜
+OD
+and
+
+OD
+OD , hence COD can be
+expressed by the following zonotope:
+ZCOD =
+!
+z : z = Gr,qξ1 + cr,q,
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+258 IEEE TRANSACTIONS ON SIGNAL AND INFORMATION PROCESSING OVER NETWORKS, VOL. 12, 2026
+Algorithm 3: Particle-Filter Based Distributed SME
+Algorithm.
+1: Initialization. For each agent i, set the initial prior
+range Si,0 = [ai,x,0, bi,x,0] × [ai,y,0, bi,y,0].
+M = 10000;{Comments: M is the number of random
+samples for Si,k (k ∈ N+).}
+2: loop
+3: while k ∈ N
+4: for i = 1 : N
+5: for m = 1 : M
+6: for j ∈ Ni
+7: Generate random particles
+xi(j),k−1 ← U([ai(j),x,k−1, bi(j),x,k−1] ×
+[ai(j),y,k−1, bi(j),y,k−1]) and
+wi(j),k−1 ← [[wi(j),k−1]]; {Comments: x ← U(a, b)
+means x is a realization of a random variable
+uniformly distributed in [a, b]. }
+8:
+xi,k = Aixi,k−1 + Bi(ui,k−1 + wi,k−1)
+xj,k = Ajxj,k−1 + Bj(uj,k−1 + wj,k−1)
+9: if yi,k − xi,k ∈ [[vi,k]] && yj,k − xj,k ∈
+[[vj,k]] && zi,j,k − pi,k − pj,k2 ∈ [[ri,j,k]] then
+x
+(m)
+i,k ← xi,k.
+10: end if
+11: end for
+12: end for
+13: The posterior estimated set of the position of UAV i is
+given by
+ai,x,k = min{p
+(m)
+i,x,k}, bi,x,k = max{p
+(m)
+i,x,k};
+ai,y,k = min{p
+(m)
+i,y,k}, bi,y,k = max{p
+(m)
+i,y,k}.
+14: end for
+15: k = k + 1;
+16: end loop
+ξ1 ∈
+
+0,
+Ri,j,k
+cos
+πq
+M
+
+
+×
+
+0,
+Ri,j,k
+cos
+πq
+M
+
+"
+. (35)
+Notice that point A = p0
+j,k + Ri,j,k
+⎡
+⎣
+cos
+#
+2π(q+1)
+M
+$
+sin
+#
+2π(q+1)
+M
+$
+⎤
+⎦ and
+the middle point of CD can be represented by p0
+j,k +
+Ri,j,k
+⎡
+⎣
+cos
+#
+π(2q+1)
+M
+$
+sin
+#
+π(2q+1)
+M
+$
+⎤
+⎦, σr,q,1 and σr,q,2 can be obtained by
+A ∈ {z : Hr,qz = σr,q,1} and C ∈ {z : Hr,qz = σr,q,2}.
+Write [σr,q,1, σr,q,2] as
+Zσ = {σ = (σr,q,2 − σr,q,1)ξ2 + σr,q,1, ξ2 ∈ [0, 1]}. (36)
+Thus, (17) can be obtained by Zr,q
+i,j,k = ZCOD ∩Hr,q
+Zσ with
+Lemma 2. 
+APPENDIX E
+PROOF OF THEOREM 2
+Proof: For a fixed point p∗
+j,k ∈ Zabs
+j,k , the following two in-
+equalities hold for ∀pi,k ∈ Zabs
+i,k ,
+p∗
+j,k − pi,k2 ≤ p∗
+j,k − pj,k2 + pj,k − pi,k2
+≤ d(Zabs
+j,k ) + Ri,j,k = '
+Ri,j,k. (37)
+p∗
+j,k − pi,k2 ≥ pj,k − pi,k2 − p∗
+j,k − pj,k2
+≥ Ri,j,k − d(Zabs
+j,k ) = '
+Ri,j,k. (38)
+Hence, pi,k ∈ {s : '
+Ri,j,k ≤ s2 ≤ '
+Ri,j,k}, which implies the
+proof of Theorem 2 has been transformed into the one-fixed-
+point scene as in Proposition 3. Thus, the rest of the proof is the
+same as Proposition 3. 
+APPENDIX F
+DISTRIBUTED PARTICLE FILTER BASED SME ALGORITHM
+The particle-filter-based distributed SME algorithm is pre-
+sented as in Algorithm 3:
+REFERENCES
+[1] C. Zhou, S. Chen, and H. Liu, “State estimation for discrete-time complex
+networks with time-varying outer coupling and uncertain inner coupling:
+A distributed method,” IEEE Trans. Signal Inf. Process. Netw., vol. 11,
+pp. 592–603, 2025.
+[2] L. Shi, S. Yao, N. Ning, and Y. Zhou, “Barycentric coordinate-based
+distributed localization over 3-D underwater wireless sensor networks,”
+IEEE Trans. Signal Inf. Process. Netw., vol. 10, pp. 640–649, 2024.
+[3] W.S.Rossi,P.Frasca,and F.Fagnani,“Distributed estimation from relative
+and absolute measurements,” IEEE Trans. Autom. Control, vol. 62, no. 12,
+pp. 6385–6391, Dec. 2017.
+[4] Z. Lin, M. Fu, and Y. Diao, “Distributed self localization for relative
+position sensing networks in 2D space,” IEEE Trans. Signal Process.,
+vol. 63, no. 14, pp. 3751–3761, Jul. 2015.
+[5] C. Lin, Z. Lin, R. Zheng, G. Yan, and G. Mao, “Distributed source
+localization of multi-agent systems with bearing angle measurements,”
+IEEE Trans. Autom. Control, vol. 61, no. 4, pp. 1105–1110, Apr. 2016.
+[6] Z. Han, K. Guo, L. Xie, and Z. Lin, “Integrated relative localization and
+leader–follower formation control,” IEEE Trans. Autom. Control, vol. 64,
+no. 1, pp. 20–34, Jan. 2019.
+[7] F. Meyer, O. Hlinka, H. Wymeersch, E. Riegler, and F. Hlawatsch, “Dis-
+tributed localization and tracking of mobile networks including nonco-
+operative objects,” IEEE Trans. Signal Inf. Process. Netw., vol. 2, no. 1,
+pp. 57–71, Mar. 2016.
+[8] H. Naseri and V. Koivunen, “A Bayesian algorithm for distributed network
+localization using distance and direction data,” IEEE Trans. Signal Inf.
+Process. Netw., vol. 5, no. 2, pp. 290–304, Jun. 2019.
+[9] D. Viegas, P. Batista, P. Oliveira, and C. Silvestre, “Discrete-time dis-
+tributed Kalman filter design for formations of autonomous vehicles,”
+Control Eng. Pract., vol. 75, pp. 55–68, 2018.
+[10] D. Viegas, P. Batista, P. Oliveira, and C. Silvestre, “Discrete-time dis-
+tributed Kalman filter design for multi-vehicle systems,” in Proc. 2017
+Amer. Control Conf., 2017, pp. 5538–5543.
+[11] W. Li, Y. Jia, and J. Du, “Distributed Kalman filter for cooperative
+localization with integrated measurements,” IEEE Trans. Aerosp. Electron.
+Syst., vol. 56, no. 4, pp. 3302–3310, Aug. 2020.
+[12] Y. Huang, Y. Zhang, B. Xu, Z. Wu, and J. A. Chambers, “A new adaptive
+extended Kalman filter for cooperative localization,” IEEE Trans. Aerosp.
+Electron. Syst., vol. 54, no. 1, pp. 353–368, Feb. 2018.
+[13] S. Battilotti, F. Cacace, M. D’Angelo, and A. Germani, “Cooperative
+filtering with absolute and relative measurements,” in Proc. 2018 IEEE
+Conf. Decis. Control, 2018, pp. 7182–7187.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+DING et al.: SET-MEMBERSHIP ESTIMATION BASED DISTRIBUTED COOPERATIVE LOCALIZATION OF MULTIPLE UAVs 259
+[14] G. Yang, J. Zeng, D. Wei, Y. Liu, and H. Wang, “H∞ filter based coop-
+erative localization for multi-robot system,” in Proc. 43rd Chin. Control
+Conf., 2024, pp. 4493–4497.
+[15] Y. Zhuang, Z. Wang, H. Yu, W. Wang, and S. Lauria, “A robust extended
+H∞ filtering approach to multi-robot cooperative localization in dynamic
+indoor environments,” Control Eng. Pract., vol. 21, no. 7, pp. 953–961,
+2013.
+[16] Y. Wei, G. Disarò, W. Liu, J. Sun, M. E. Valcher, and G. Wang, “Dis-
+tributed data-driven unknown-input observers,” Automatica, vol. 183,
+2026, Art. no. 112614.
+[17] Y. Ding, Y. Cong, and X. Wang, “Set-membership filtering-based coopera-
+tive state estimation for multi-agent systems,” in Proc. 42nd Chin. Control
+Conf., 2023, pp. 5791–5796.
+[18] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz, “Con-
+strained zonotopes: A new tool for set-based estimation and fault detec-
+tion,” Automatica, vol. 69, pp. 126–136, 2016.
+[19] B. Yang, Q. Qiu, Q.-L. Han, and F. Yang, “Received signal strength
+indicator-based indoor localization using distributed set-membership
+filtering,” IEEE Trans. Cybern., vol. 52, no. 2, pp. 727–737, Feb. 2022.
+[20] D. Silvestre, “Constrained convex generators: A tool suitable for set-based
+estimation with range and bearing measurements,” IEEE Contr. Syst. Lett.,
+vol. 6, pp. 1610–1615, 2022.
+[21] X. Qin, Y. Cong, J. Lai, J. Yang, and X. Wang, “Single-beacon localization
+for mobile robot: A set membership filtering approach,” IEEE Robot.
+Autom. Lett., vol. 9, no. 11, pp. 9899–9906, Nov. 2024.
+[22] J. Bolting and S. Fergani, “Ellipsoidal set membership filtering with
+reduced conservatism applied to relative localization between aircraft
+based on GNSS and UWB ranging,” in Proc. 18th Eur. Control Conf.,
+2019, pp. 1810–1815.
+[23] J. Bolting and S. Fergani, “The iterated extended set membership filter
+applied to relative localization between autonomous vehicles based on
+GNSS and UWB ranging,” Asian J. Control, vol. 21, no. 4, pp. 1556–1565,
+2019.
+[24] G. N. Nair, “A nonstochastic information theory for communication
+and state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6,
+pp. 1497–1510, Jun. 2013.
+[25] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical framework
+and optimality of set-membership filtering,” IEEE Trans. Autom. Control,
+vol. 67, no. 5, pp. 2544–2551, May 2022.
+[26] M. Althoff and J. J. Rath, “Comparison of guaranteed state estima-
+tors for linear time-invariant systems,” Automatica, vol. 130, 2021,
+Art. no. 109662.
+[27] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-membership filters
+withrespecttoinitialconditions:Anobservation-informationperspective,”
+Automatica, vol. 172, 2025, Art. no. 111993.
+[28] Y. Xiao, Y. Ding, Y. Cong, and X. Wang, “Multi-agent formation con-
+trol based on set-membership filtering,” in Proc. 2023 IEEE Int. Conf.
+Unmanned Syst., 2023, pp. 1136–1141.
+Yu Ding received the bachelor’s degree in automa-
+tion from the Harbin Institute of Technology, Harbin,
+China, in 2017, and the M.S. degree in control science
+and engineering in 2019 from the National University
+of Defense Technology, Changsha, China, where he
+is currently working toward the Ph.D. degree in con-
+trol science and engineering. His research interests
+include formation control, multi-agent systems, and
+distributed filtering theory.
+Xujie Qin received the bachelor’s degree in target en-
+gineering (operations research) in 2022 and the M.S.
+degree in control science and engineering in 2024
+from the National University of Defense Technology,
+Changsha, China, where he is currently working to-
+ward the Ph.D. degree in control science and engi-
+neering. His research interests include control theory,
+localization and navigation, and filtering theory.
+YiruiCong (Member,IEEE) received theB.E.degree
+(outstanding graduates) in automation from North-
+eastern University, Shenyang, China, in 2011, the
+M.Sc. degree (graduated in advance) in control sci-
+ence and engineering from the National University of
+Defense Technology, Changsha, China, in 2013, and
+the Ph.D. degree from Australian National University,
+Canberra, Australia, in 2018. He joined the faculty
+with the College of Intelligence Science and Tech-
+nology, National University of Defense Technology,
+in 2018. He is currently an Associate Professor with
+the National University of Defense Technology. His research interests include
+control theory, communication theory, and filtering theory.
+Xiangke Wang (Senior Member, IEEE) received the
+B.S., M.S., and Ph.D. degrees in control science and
+engineering from the National University of Defense
+Technology, Changsha, China, in 2004, 2006 and
+2012, respectively. In 2012, he was a Lecturer, As-
+sociate Professor, and Professor with the College of
+Intelligence Science and Technology, National Uni-
+versity of Defense Technology. He was a Visiting Stu-
+dent with the Research School of Engineering, The
+Australian National University, Canberra, Australia,
+from 2009 to 2011. He has authored or coauthored
+three books and more than 100 publications in peer-reviewed journals and
+international conferences including IEEE Transactions, IJRNC, CDC, IFAC,
+and ICRA. His current research interests include control of multi-agent systems
+and their applications in Uncrewed Aerial Vehicles.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:44 UTC from IEEE Xplore. Restrictions apply.
+

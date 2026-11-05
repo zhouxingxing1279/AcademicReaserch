@@ -1,0 +1,96 @@
+[
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 4,
+    "text": "Preflight Fail: No connection to the GCS",
+    "id": 0,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "[logger] ./log/2026-11-04/12_38_17.ulg\t",
+    "id": 1,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "COMMAND_ACK",
+    "command": 400,
+    "result": 0,
+    "progress": 0,
+    "result_param2": 0,
+    "target_system": 255,
+    "target_component": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "Armed by external command\t",
+    "id": 2,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "COMMAND_ACK",
+    "command": 22,
+    "result": 0,
+    "progress": 0,
+    "result_param2": 0,
+    "target_system": 255,
+    "target_component": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "Takeoff detected\t",
+    "id": 3,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "COMMAND_ACK",
+    "command": 176,
+    "result": 0,
+    "progress": 0,
+    "result_param2": 0,
+    "target_system": 255,
+    "target_component": 0
+  },
+  {
+    "mavpackettype": "COMMAND_ACK",
+    "command": 176,
+    "result": 0,
+    "progress": 0,
+    "result_param2": 0,
+    "target_system": 255,
+    "target_component": 0
+  },
+  {
+    "mavpackettype": "COMMAND_ACK",
+    "command": 21,
+    "result": 0,
+    "progress": 0,
+    "result_param2": 0,
+    "target_system": 255,
+    "target_component": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "Landing at current position\t",
+    "id": 4,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "Landing detected\t",
+    "id": 5,
+    "chunk_seq": 0
+  },
+  {
+    "mavpackettype": "STATUSTEXT",
+    "severity": 6,
+    "text": "Disarmed by landing\t",
+    "id": 6,
+    "chunk_seq": 0
+  }
+]

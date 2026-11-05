@@ -1,0 +1,55 @@
+[
+  {
+    "doi": "10.1109/TAC.2026.3712691",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "doi": "10.1109/LRA.2024.3406190",
+    "title": [
+      "Single-Beacon Localization for Mobile Robot: A Set Membership Filtering Approach"
+    ],
+    "abstract": null,
+    "link": [
+      {
+        "URL": "http://xplorestaging.ieee.org/ielx7/7083369/10683798/10540277.pdf?arnumber=10540277",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  {
+    "doi": "10.1109/TSIPN.2026.3663852",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "doi": "10.1109/FASTA61401.2024.10595218",
+    "title": [
+      "An INS/GNSS Localization Method Based on Set-Membership Filter for Unmanned Aerial Vehicles"
+    ],
+    "abstract": null,
+    "link": [
+      {
+        "URL": "http://xplorestaging.ieee.org/ielx8/10595059/10595098/10595218.pdf?arnumber=10595218",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  {
+    "doi": "10.1109/ICUS58632.2023.10318289",
+    "title": [
+      "Multi-Agent Formation Control Based on Set-Membership Filtering"
+    ],
+    "abstract": null,
+    "link": [
+      {
+        "URL": "http://xplorestaging.ieee.org/ielx7/10318219/10318220/10318289.pdf?arnumber=10318289",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  }
+]

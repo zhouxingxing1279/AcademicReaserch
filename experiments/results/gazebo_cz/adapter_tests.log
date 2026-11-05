@@ -1,0 +1,9 @@
+test_acceleration_only_mask_and_values (__main__.AdapterTests.test_acceleration_only_mask_and_values) ... ok
+test_containment_log_is_native_json_boolean (__main__.AdapterTests.test_containment_log_is_native_json_boolean) ... ok
+test_scene_pose_uses_only_x500_model (__main__.AdapterTests.test_scene_pose_uses_only_x500_model) ... ok
+test_world_position_difference_transforms_enu_to_ned (__main__.AdapterTests.test_world_position_difference_transforms_enu_to_ned) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.019s
+
+OK

@@ -1,0 +1,755 @@
+# 阶段 2 逐篇阅读卡
+
+每张卡的依据见“定位”。理论承诺与本文对本课题的解释分栏保存。完整元数据及持久编号见[主库](database.json)。
+
+## D1 · Data‐enabled predictive control for quadcopters
+
+Ezzat Elokda, Jeremy Coulson, Paul N. Beuchat, John Lygeros, Florian Dörfler，2021，International Journal of Robust and Nonlinear Control。[出版或预印本记录](https://doi.org/10.1002/rnc.5686)
+
+**既有正文笔记**　§§2.1–2.3、3.4、表1，模型与真实内环。[来源](../../research/model_selection/OUTER_LOOP_MPC_LITERATURE.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 四旋翼仅根据历史输入输出如何跟踪参考 |
+| 动力学模型 | 十二状态非线性刚体用于仿真，实机带厂商内环 |
+| 状态维度 | 物理12，模型式对照8，DeePC使用轨迹数据 |
+| 控制输入 | 实机合推力与两个角速度参考 |
+| 状态估计 | 历史输入输出隐式初始化，模型式对照用位置差分 |
+| 不确定性与量测 | 测量有噪，正则化处理数据误差 |
+| MPC 结构 | DeePC及模型式输出反馈MPC |
+| 理论保证 | 无噪LTI的轨迹表征有条件成立，实机性能由跟踪实验支持 |
+| 仿真与实验 | Crazyflie实飞，位置输出与附加姿态输出对照 |
+| 局限与待核 | 物理输入映射与有限失测硬保证需另证 |
+| 与本课题的关系 | 分清物理维数、外部输入和优化器信息 |
+
+## D2 · Output feedback stochastic MPC for tracking control of quadrotors with disturbances
+
+Ruochen Xue, Li Dai, Peizhan Wang, Zhongqi Sun, Yuanqing Xia，2024，IET Control Theory & Applications。[出版或预印本记录](https://doi.org/10.1049/cth2.12588)
+
+**既有正文笔记**　§2 式(2.3)、(2.11)，§3 Thms.1–2，§5。[来源](../../research/model_selection/background_run_20261101_1136_xue_output.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 有风扰的级联四旋翼输出反馈轨迹跟踪 |
+| 动力学模型 | 外环平移和风滤波器，姿态ADRC内环 |
+| 状态维度 | 平移6加风3，外环9 |
+| 控制输入 | 三轴虚拟加速度 |
+| 状态估计 | 固定增益观测器，每拍含位置和速度 |
+| 不确定性与量测 | 有界支撑及分布条件，算例截断高斯 |
+| MPC 结构 | 随机MPC，分位数收紧和终端条件 |
+| 理论保证 | 论文条件下的机会约束与期望平均代价界 |
+| 仿真与实验 | MATLAB数值轨迹，100组扰动 |
+| 局限与待核 | 使用每拍速度，概率约束允许违约 |
+| 与本课题的关系 | 对照观测缺失与确定性约束的额外要求 |
+
+## D3 · Robust Output Feedback MPC with Reduced Conservatism under Ellipsoidal Uncertainty
+
+Tianchen Ji, Junyi Geng, Katherine Driggs-Campbell，2022，2022 IEEE 61st Conference on Decision and Control (CDC)。[出版或预印本记录](https://doi.org/10.1109/cdc51059.2022.9992704)
+
+**在线正文与既有笔记**　Thm.1；§V-A/B、式(34)，单位输出矩阵。[来源](https://arxiv.org/pdf/2008.04980)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 降低椭球不确定性下输出反馈收紧的保守性 |
+| 动力学模型 | LTI；四旋翼平衡点线性化 |
+| 状态维度 | 双积分2，四旋翼12 |
+| 控制输入 | 四旋翼合推力偏差与三轴力矩 |
+| 状态估计 | 椭球状态集员估计，每拍全维有噪输出 |
+| 不确定性与量测 | 过程和输出误差在椭球内 |
+| MPC 结构 | Tube型输出反馈鲁棒MPC |
+| 理论保证 | 终端代价/集合假设与初始可行下保持约束和递归可行，真状态收敛至集合 |
+| 仿真与实验 | 双积分与12状态四旋翼调节仿真 |
+| 局限与待核 | 四旋翼算例C为单位阵，输入权限不同 |
+| 与本课题的关系 | 确定“集员估计+四旋翼MPC”已有直接先例 |
+
+## D4 · Wayset-based guidance of multirotor aerial vehicles using robust tube-based model predictive control
+
+Davi A. Santos, Constantino M. Lagoa，2022，ISA Transactions。[出版或预印本记录](https://doi.org/10.1016/j.isatra.2021.12.002)
+
+**作者机构摘要**　机构摘要、模型降阶和扰动描述；OpenAlex无开放正文记录。[来源](https://pure.psu.edu/en/publications/wayset-based-guidance-of-multirotor-aerial-vehicles-using-robust-/)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 多旋翼经过给定waysets的上层引导 |
+| 动力学模型 | 稳定位置/姿态闭环下的平移降阶模型与时间尺度分离 |
+| 状态维度 | 摘要未给矩阵维数 |
+| 控制输入 | 上层引导命令，精确分量待核 |
+| 状态估计 | 受有界测量噪声影响，滤波结构待核 |
+| 不确定性与量测 | 离散加性有界扰动与测量误差 |
+| MPC 结构 | 固定时域鲁棒Tube引导 |
+| 理论保证 | 摘要支持鲁棒引导架构，终端与可行定理条件待核 |
+| 仿真与实验 | 验证细节待原文核对 |
+| 局限与待核 | 具体C矩阵、延迟合同和终端条件缺正文 |
+| 与本课题的关系 | 直接支撑成熟内环之上的外环建模边界 |
+
+## D5 · PAMPC: Perception-Aware Model Predictive Control for Quadrotors
+
+Davide Falanga, Philipp Foehn, Peng Lu, Davide Scaramuzza，2018，2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)。[出版或预印本记录](https://doi.org/10.1109/iros.2018.8593739)
+
+**既有正文笔记**　§§I–VII，式(1)–(13)，机载实验。[来源](../../research/model_selection/background_run_20261102_2337_falanga_vio_data_access.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 兼顾轨迹和视觉特征可见性 |
+| 动力学模型 | 平移、单位四元数动力学 |
+| 状态维度 | 10个坐标含四元数约束 |
+| 控制输入 | 集体推力与机体角速度 |
+| 状态估计 | 视觉惯性里程计提供点估计 |
+| 不确定性与量测 | 感知与实测噪声，未核到确定性误差管 |
+| MPC 结构 | 非线性滚动优化，视线和投影速度进入软代价 |
+| 理论保证 | 数值优化与实飞支持跟踪和感知效果 |
+| 仿真与实验 | 机载圆周及低光轨迹 |
+| 局限与待核 | 软感知代价不能提供最大连续失测或硬包含界 |
+| 与本课题的关系 | 提供跟踪性能与信息可用性之间的应用参照 |
+
+Crossref 页码 1–8 与本地作者版本笔记 5200–5207 不同。BibTeX 省略页码，保留 DOI。
+
+## D6 · Scalable tube model predictive control of uncertain linear systems using ellipsoidal sets
+
+Anilkumar Parsi, Andrea Iannelli, Roy S. Smith，2025，International Journal of Robust and Nonlinear Control。[出版或预印本记录](https://doi.org/10.1002/rnc.6485)
+
+**既有分节笔记**　Thm.1、§5.2，四旋翼算例。[来源](../../research/model_selection/background_run_20261103_1240_threepaper_tube_mpc_audit.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 不确定线性系统中构造可扩展的椭球Tube |
+| 动力学模型 | 近悬停离散模型，参数不确定性 |
+| 状态维度 | 四旋翼12 |
+| 控制输入 | 四个旋翼推力 |
+| 状态估计 | 可用状态测量驱动辅助反馈，传感器细节待核 |
+| 不确定性与量测 | 质量范围及有界风 |
+| MPC 结构 | 同形椭球管、离线设计反馈和终端，在线平移缩放 |
+| 理论保证 | 初始在可行域并满足离线设计条件，递归可行与区域实用稳定 |
+| 仿真与实验 | Crazyflie参数的仿真 |
+| 局限与待核 | 四桨权限、状态测量与本课题不同 |
+| 与本课题的关系 | 比较椭球几何及非空收紧的代价 |
+
+## M1 · Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data
+
+Syed M. Hassaan, Tarun Pati, Qiang Shen, Sze Zheng Yong，2021，IFAC-PapersOnLine。[出版或预印本记录](https://doi.org/10.1016/j.ifacol.2021.08.482)
+
+**本轮在线正文**　Def.3、式(12)(18)(19)、Assumptions 1–3、Thms.5–7、§4。[来源](https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 周期有限语言中迟到/缺测时如何保证约束 |
+| 动力学模型 | 离散线性时变模型，已知测量时戳及周期语言 |
+| 状态维度 | 一般n；算例2 |
+| 控制输入 | 算例1个标量输入 |
+| 状态估计 | 动态点估计，按相位给估计误差盒 |
+| 不确定性与量测 | 持续有界过程/量测误差，模式属于给定语言 |
+| MPC 结构 | 名义MPC加可实施的辅助控制；估计误差管与跟踪管分开 |
+| 理论保证 | A1误差恢复和A2共同终端支持约束链；Thm.6由A2和初始可行给出名义移位，Thm.7另需下降条件 |
+| 仿真与实验 | 二状态双积分，C=[1,1]，周期5、预测13 |
+| 局限与待核 | 论文的输出及块边界与任意在途队列不同 |
+| 与本课题的关系 | 全链最接近的闭环先例；阶段3须逐条比对其假设 |
+
+## M2 · Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation
+
+Florian D. Brunner, Matthias A. Müller, Frank Allgöwer，2018，IEEE Transactions on Automatic Control。[出版或预印本记录](https://doi.org/10.1109/tac.2018.2791899)
+
+**作者机构摘要**　摘要第1–3段，2018期刊版；Crossref和OpenAlex分别核对。[来源](https://research.uni-hannover.de/en/publications/enhancing-output-feedback-mpc-with-set-valued-moving-horizon-esti/)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 用有限历史扩展硬约束输出反馈的可行集合 |
+| 动力学模型 | 有界加性扰动和测量噪声的离散线性系统 |
+| 状态维度 | 一般维数；算例维数未核 |
+| 控制输入 | 受约束控制输入，维数未核 |
+| 状态估计 | 集值移动窗估计，远预测步使用较少过去量测 |
+| 不确定性与量测 | 有界过程/量测误差；收包时间语言待核 |
+| MPC 结构 | 随预测步调整估计窗的输出反馈MPC |
+| 理论保证 | 作者将历史量测数的选择与递归可行关联；在额外条件下为有界复杂度凸优化；具体引理待核 |
+| 仿真与实验 | 数值例相对仅用线性估计器扩大可行集 |
+| 局限与待核 | 窗口端点、后继包含式、终端反馈和延迟情形均缺期刊正文 |
+| 与本课题的关系 | 约束本项目关于移动窗和移位的新颖性论断 |
+
+## M3 · Stochastic output feedback MPC with intermittent observations
+
+Shuhao Yan, Mark Cannon, Paul J. Goulart，2022，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2022.110282)
+
+**既有正文笔记**　§§2–6、式(6)、Thms.7、9，§9。[来源](../../research/model_selection/background_run_20261102_0634_yan_stochastic_contract.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 有随机丢包时抑制长期风险和控制代价 |
+| 动力学模型 | 离散LTI及随机整包到达 |
+| 状态维度 | 双倒立摆算例4 |
+| 控制输入 | 算例2输入 |
+| 状态估计 | 增益观测器和创新的因果反馈 |
+| 不确定性与量测 | 已知成功率的Bernoulli到达、零均值有限二阶矩 |
+| MPC 结构 | 折扣期望预算的随机MPC |
+| 理论保证 | 可稳定、可检测、均方稳定等条件下优化递归可行，约束及长期性能以期望计 |
+| 仿真与实验 | 双倒立摆仿真与LQG对照 |
+| 局限与待核 | 概率合同允许任意长失测串，保证量词不同 |
+| 与本课题的关系 | 对照控制策略因果性和风险指标 |
+
+## M4 · A Fast and Accurate Linear Constrained Zonotopic Set-membership Filter
+
+Xujie Qin, Yirui Cong, Xiangke Wang, Tengfei Liu，2026，IEEE Transactions on Automatic Control。[出版或预印本记录](https://doi.org/10.1109/tac.2026.3712691)
+
+**本地原文**　Thms.1–2、式(14)(18)、§V-A。[来源](../sources/cong_mpc_20261104/A_Fast_and_Accurate_Linear_Constrained_Zonotopic_Set-membership_Filter.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 减少线性CZ滤波的计算开销并保持有界性 |
+| 动力学模型 | 离散线性可检测系统、固定窗 |
+| 状态维度 | 一般n；车辆算例6 |
+| 控制输入 | 已知模型激励；用于状态估计 |
+| 状态估计 | SPIN-SMF、有限窗CZ和结构复用 |
+| 不确定性与量测 | 过程和测量误差范数有界 |
+| MPC 结构 | 不适用，估计论文 |
+| 理论保证 | Thm.1在可检测及足够窗长条件下给一致有界；Thm.2刻画参数相似性 |
+| 仿真与实验 | 车辆模型，对比集员估计器精度和计算 |
+| 局限与待核 | 连续测量窗条件外推至乱序稀疏窗需要新的判据 |
+| 与本课题的关系 | 有限内存与计算基线 |
+
+2026 在线刊出题录，1–8 为临时页码，后续补卷期。
+
+## M5 · Optimal Set-Membership Smoothing
+
+Yudong Li, Yirui Cong, Xiangyun Zhou, Jiuxiang Dong，2026，IEEE Transactions on Automatic Control。[出版或预印本记录](https://doi.org/10.1109/tac.2025.3632158)
+
+**本地原文**　Thm.1 式(8)、Cor.1、算法1及数值比较。[来源](../sources/cong_mpc_20261104/2410.09857.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 求给定后续观测资料的历史相容状态范围 |
+| 动力学模型 | 非随机HMM，另给线性与部分非线性方法 |
+| 状态维度 | 一般n；线性比较2 |
+| 控制输入 | 已知动力学中的驱动；输入控制非研究对象 |
+| 状态估计 | 前向滤波加后向集员平滑 |
+| 不确定性与量测 | 有界噪声、非随机Markov条件 |
+| MPC 结构 | 不适用，平滑论文 |
+| 理论保证 | 后向递推描述给定数据的最优条件值域，平滑集包含于原滤波集 |
+| 仿真与实验 | 与前向SMF、平滑器数值比较 |
+| 局限与待核 | 离线后验使用的未来已知信息不能倒灌到历史决策 |
+| 与本课题的关系 | 澄清迟到包到达后可以重算什么 |
+
+## M6 · Experimental validation of zonotopic Tube-MPC applied to a Hexacopter
+
+Gilles Delansnay, Laurent Dewasme, Alain Vande Wouwer，2025，2025 11th International Conference on Control, Decision and Information Technologies (CoDIT)。[出版或预印本记录](https://doi.org/10.1109/codit66093.2025.11321702)
+
+**在线摘要与既有正文笔记**　§§模型、RPI、室外实验；作者署名对照会议程序。[来源](../../research/model_selection/background_run_20261103_1510_smf_zonotope_quadrotor_audit.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 验证有扰动多旋翼的Tube-MPC |
+| 动力学模型 | 辨识的闭环速度–偏航动力学，名义模型增广位置 |
+| 状态维度 | 辅助模型4 |
+| 控制输入 | 三轴速度与偏航参考 |
+| 状态估计 | 辅助状态反馈，未报告时间戳SMF后验 |
+| 不确定性与量测 | 有界外扰设计，室外风扰验证 |
+| MPC 结构 | 名义MPC加辅助反馈，zonotopic可达性构造鲁棒管 |
+| 理论保证 | 在给定管和扰动界下收紧，公开记录未建立完整项目式递归可行定理 |
+| 仿真与实验 | 四次六旋翼室外实验，200 ms采样 |
+| 局限与待核 | 六旋翼平台、速度/偏航反馈，实时数据为观测值 |
+| 与本课题的关系 | 实验证据说明飞控分层，与仅位置估计分开 |
+
+Crossref 拆分的人名与会议程序有出入，BibTeX 采用会议程序的 Gilles Delansnay、Alain Vande Wouwer。https://www.codit2025.org/CoDIT2025-Program.pdf 会议届次采用出版记录的第11届。
+
+## M7 · Set-Valued State Estimator With Sparse and Delayed Measurements for Uncertain Discrete-Time Linear Systems
+
+Nacim Meslem, Ahmad Hably, Zhenhua Wang, Tarek Raïssi，2024，IEEE Control Systems Letters。[出版或预印本记录](https://doi.org/10.1109/lcsys.2024.3405376)
+
+**本轮在线正文节选**　式(8)–(15)(19)(21)–(23)、Assumption 1、Alg.2、Fig.2。[来源](https://css.paperplaza.net/images/temp/CDC/files/2323.pdf#page=1)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 稀疏且固定延迟的输出怎样给当前状态区间 |
+| 动力学模型 | 已知输入离散LTI，系统与量测有不同时间尺度 |
+| 状态维度 | 一般n，算例维数待核 |
+| 控制输入 | 已知u，未综合控制器 |
+| 状态估计 | 点观测器用过去输出残差校正；两个误差盒相交 |
+| 不确定性与量测 | 扰动、量测误差、初值有已知盒界 |
+| MPC 结构 | 不适用，估计论文 |
+| 理论保证 | 在采样后的可检测性和增益条件下给误差包络与收敛特性；式(21)取预测和校正的区间交 |
+| 仿真与实验 | 数值算例，较稀情形Fig.2说明预测扩大、校正限界 |
+| 局限与待核 | 固定稀疏指数且固定延迟；输入/终端约束未研究 |
+| 与本课题的关系 | 给本项目的周期延迟子语言一个可复核的外包对照 |
+
+会议展示稿文本可由检索服务定位到指定公式，直接下载返回404，HAL原文入口返回HTML。
+
+## M8 · Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations
+
+Syed M. Hassaan, Qiang Shen, Sze Zheng Yong，2022，IEEE Control Systems Letters。[出版或预印本记录](https://doi.org/10.1109/lcsys.2021.3050300)
+
+**本轮作者稿正文**　Def.1、Defs.2–4、6、Problem 1，数值例批反应器。[来源](https://arxiv.org/pdf/2101.03389)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 对所有允许的缺测/延迟词设计有限误差恢复估计器 |
+| 动力学模型 | 离散线性时变，有限长度的延迟字及可见事件序列 |
+| 状态维度 | 一般n；批反应器4 |
+| 控制输入 | 已知模型输入，决策对象为估计器增益 |
+| 状态估计 | 动态状态估计器，以已见事件前缀适配 |
+| 不确定性与量测 | 给定初始误差界、过程/量测误差界及允许词 |
+| MPC 结构 | 不适用，估计器合成 |
+| 理论保证 | 初误差≤μ1，整块≤μ2,k，末拍≤μ1；同前缀保持可实现性 |
+| 仿真与实验 | 批反应器0.05 s离散等数值比较 |
+| 局限与待核 | 给定语言、块长和初始准入，返回量是估计误差 |
+| 与本课题的关系 | 指定恢复水平的定义与共同前缀基线 |
+
+## M9 · Path-dependent controller and estimator synthesis with robustness to delayed and missing data
+
+Syed M. Hassaan, Qiang Shen, Sze Zheng Yong，2021，Proceedings of the 24th International Conference on Hybrid Systems: Computation and Control。[出版或预印本记录](https://doi.org/10.1145/3447928.3456655)
+
+**在线正文分节**　Thm.3.2 式(26)、数值例。[来源](https://qiangs.github.io/Papers/Conf_HSCC2021Hassaan.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 对迟到/缺测同时合成路径相关估计与控制 |
+| 动力学模型 | 有限长度语言约束下的离散仿射模型 |
+| 状态维度 | 一般n；估计数值例4 |
+| 控制输入 | 受约束的仿射输出反馈或输出误差反馈 |
+| 状态估计 | 按观测事件前缀综合的估计器 |
+| 不确定性与量测 | 紧多面体初值及有界噪声 |
+| MPC 结构 | 有限时域策略综合；滚动终端MPC需另建 |
+| 理论保证 | 式(26)可行时，按全词和所有允许外生量满足输入/中间误差与末端界 |
+| 仿真与实验 | 给定词21210等估计仿真 |
+| 局限与待核 | 有限时域合成不直接给出本项目的无限移位计划 |
+| 与本课题的关系 | 共同信息下命令一致的合成先例 |
+
+## F1 · Constrained zonotopes: A new tool for set-based estimation and fault detection
+
+Joseph K. Scott, Davide M. Raimondo, Giuseppe Roberto Marseglia, Richard D. Braatz，2016，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2016.02.036)
+
+**在线正文分节**　Def.3、Prop.1 式(11)–(13)、§5。[来源](https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 在估计/故障检测中保留多面体相关性 |
+| 动力学模型 | 线性像、Minkowski和及广义交集；线性有界误差系统 |
+| 状态维度 | 集合维数任意 |
+| 控制输入 | 已知输入平移预测集 |
+| 状态估计 | 等式约束生成元，测量求交与外包降阶 |
+| 不确定性与量测 | 初始集、噪声集和外包成立 |
+| MPC 结构 | 不适用，集合运算基础 |
+| 理论保证 | 在无复杂度截断时上述运算精确；降阶需保持外包方向 |
+| 仿真与实验 | 集合、状态估计与故障检测数值例 |
+| 局限与待核 | 运算恒等式不提供窗口恢复或闭环可行性 |
+| 与本课题的关系 | 支持带历史关联的状态轨迹切片 |
+
+## F2 · Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems
+
+Brenner S. Rego, Guilherme V. Raffo, Joseph K. Scott, Davide M. Raimondo，2020，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2019.108614)
+
+**在线作者稿及既有正文笔记**　§2 式(1)、§4 均值及Taylor扩展。[来源](https://arxiv.org/pdf/1908.09950)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 非线性预测后怎样维持有界状态估计 |
+| 动力学模型 | 光滑离散非线性过程与线性量测 |
+| 状态维度 | 一般n |
+| 控制输入 | 已知u进入非线性映射，含已知直接通道 |
+| 状态估计 | CZ非线性预测外包与有界量测相交 |
+| 不确定性与量测 | 有界过程和量测误差，导数/余项可包络 |
+| MPC 结构 | 不适用，集合状态估计 |
+| 理论保证 | 在论文光滑性和集合条件下预测外包包含全部相容状态 |
+| 仿真与实验 | 非线性数值算例、估计精度/计算对照 |
+| 局限与待核 | 没有给出实机飞控对抽象输入的残差支撑 |
+| 与本课题的关系 | 为高保真映射提出必需的余项界 |
+
+## F3 · Rethinking the Mathematical Framework and Optimality of Set-Membership Filtering
+
+Yirui Cong, Xiangke Wang, Xiangyun Zhou，2022，IEEE Transactions on Automatic Control。[出版或预印本记录](https://doi.org/10.1109/tac.2021.3082508)
+
+**本地作者稿正文**　Thms.1–2、式(13)–(16)、§IV-A。[来源](../sources/cong_mpc_20261104/2004.04524.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 普通集员递推何时给最小相容集 |
+| 动力学模型 | 一般离散不确定变量系统，非随机Markov特例 |
+| 状态维度 | 一般n；相关噪声例1 |
+| 控制输入 | 已知系统映射；标量示例无受控输入 |
+| 状态估计 | 条件值域递推；在无关联条件下简化为经典预测/更新 |
+| 不确定性与量测 | 允许初值与噪声相关，简化需额外无关联条件 |
+| MPC 结构 | 不适用，滤波理论 |
+| 理论保证 | Thm.1 给最优条件范围；Thm.2 的乘积化有额外前提 |
+| 仿真与实验 | 过程噪声与乘性测量噪声相关的标量算例等 |
+| 局限与待核 | 把相关噪声当独立边际会丢失信息 |
+| 与本课题的关系 | 限定跨历史重复使用扰动变量时的最优性与外包 |
+
+## F4 · Stability of linear set-membership filters with respect to initial conditions: An observation-information perspective
+
+Yirui Cong, Xiangke Wang, Xiangyun Zhou，2025，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2024.111993)
+
+**本地作者稿正文**　Thm.1 式(16)、Thms.2–3、§7.1。[来源](../sources/cong_mpc_20261104/2203.13966.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 错误或不同初始先验如何影响SMF稳定性 |
+| 动力学模型 | 离散线性系统，观察信息塔OIT |
+| 状态维度 | 一般n；可观例2 |
+| 控制输入 | 输入项按已知动力学处理 |
+| 状态估计 | 从近窗量测的OIT给直径界，设计稳定滤波 |
+| 不确定性与量测 | 有界噪声；Thm.1需可观且A非奇异、足够窗长 |
+| MPC 结构 | 不适用，估计稳定性 |
+| 理论保证 | 在相应观测窗条件下OIT直径一致有界；其他可检测情形另有条件 |
+| 仿真与实验 | 对可观/可检测示例改变初始信息 |
+| 局限与待核 | 使用时需重查稀疏时间戳下的观测矩阵；直径界不指定块末目标 |
+| 与本课题的关系 | 把有界性与ER分开检验 |
+
+## F5 · Robust output feedback model predictive control of constrained linear systems
+
+D.Q. Mayne, S.V. Raković, R. Findeisen, F. Allgöwer，2006，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2006.03.005)
+
+**既有正文笔记**　总账 Run221 对 §§2–4、Props.1–3、Thms.1–2 的记录。[来源](../PAPER_READING_LOG.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 有界扰动和测量误差下保持线性系统的硬约束 |
+| 动力学模型 | 离散LTI，逐拍线性输出 |
+| 状态维度 | 一般n |
+| 控制输入 | 名义输入与估计状态辅助反馈 |
+| 状态估计 | Luenberger观测器、估计误差不变集 |
+| 不确定性与量测 | 有界加性状态、输出扰动及初始误差准入 |
+| MPC 结构 | 固定截面输出反馈Tube MPC |
+| 理论保证 | 误差系统稳定、管和终端条件及初始可行支持约束满足与集合稳定结论 |
+| 仿真与实验 | 数值例；复现细节未核 |
+| 局限与待核 | 连续输出及不变管需适配间歇时序 |
+| 与本课题的关系 | 跟踪误差和估计误差分工的基础基线 |
+
+## F6 · Invariant approximations of the minimal robust positively Invariant set
+
+S.V. Rakovic, E.C. Kerrigan, K.I. Kouramas, D.Q. Mayne，2005，IEEE Transactions on Automatic Control。[出版或预印本记录](https://doi.org/10.1109/tac.2005.843854)
+
+**既有正文笔记**　总账 Run234/235 和本地尾项审计 §3。[来源](../../research/proposal/OIT_MRPI_THEORY_AUDIT.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 用有限可达和可靠外逼近最小RPI |
+| 动力学模型 | Schur稳定离散线性误差系统 |
+| 状态维度 | 一般n |
+| 控制输入 | 无控制决策，驱动为有界扰动 |
+| 状态估计 | 不适用，几何不变性分析 |
+| 不确定性与量测 | 已知紧扰动集合及缩放包含条件 |
+| MPC 结构 | 作为Tube尾部计算原语 |
+| 理论保证 | 满足缩放包含时可给出RPI外逼近与误差界 |
+| 仿真与实验 | 有限和与外包数值验证，原例参数待查 |
+| 局限与待核 | 低维扰动像需单独检查缩放条件 |
+| 与本课题的关系 | 用于证明共同尾管，不能替代估计误差传播 |
+
+## N1 · Robust tube-based constrained predictive control via zonotopic set-membership estimation
+
+V.T.H. Le, C. Stoica, D. Dumur, T. Alamo, E.F. Camacho，2011，IEEE Conference on Decision and Control and European Control Conference。[出版或预印本记录](https://doi.org/10.1109/cdc.2011.6161131)
+
+**本轮在线正文**　§§III–VI，式(1)(24)–(26)，Alg.2。[来源](https://centralesupelec.hal.science/hal-00629658/document)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | zonotope状态SMF与约束输出反馈MPC如何相接 |
+| 动力学模型 | 可控可观离散LTI，标量有噪量测 |
+| 状态维度 | 一般n |
+| 控制输入 | 已知u；名义命令加估计值到名义中心的反馈 |
+| 状态估计 | zonotope与量测带相交的外包，离线选参数 |
+| 不确定性与量测 | 初值zonotope、有界加性过程/测量误差 |
+| MPC 结构 | 估计中心动态与辅助Tube，收紧名义约束 |
+| 理论保证 | 在紧约束/有界误差等前提下，把真实轨迹限制在管内并调节至原点附近 |
+| 仿真与实验 | §VI 数值例 |
+| 局限与待核 | 逐拍使用有噪量测，论文未建立乱序位置包的ER |
+| 与本课题的关系 | 直接对照标准zonotope估计到Tube的既有接口 |
+
+## N2 · Robust output feedback model predictive control using online estimation bounds
+
+Johannes Köhler, Matthias A. Müller, Frank Allgöwer，2021，arXiv。[出版或预印本记录](https://doi.org/10.48550/arxiv.2105.03427)
+
+**本轮在线作者稿**　§III、Thm.4及证明第一部分、(26)(27)、§V；记录按arXiv v1。[来源](https://arxiv.org/pdf/2105.03427)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 在线估计界能否减小非线性输出反馈MPC的保守性 |
+| 动力学模型 | 可检测且增量可稳定的离散非线性系统 |
+| 状态维度 | 示例10，测量5 |
+| 控制输入 | 俯仰/横滚命令与垂向推力，3输入 |
+| 状态估计 | 在线验证的误差界，支持观测器、集员估计或MHE |
+| 不确定性与量测 | 有界扰动，输出含位置和两姿态，需增量稳定/可检测函数 |
+| MPC 结构 | 含误差尺度的同形Tube和增广终端条件 |
+| 理论保证 | Thm.4给定初始估计准入、初始可行与终端条件，利用新误差界≤旧预测界完成移位和原约束保证 |
+| 仿真与实验 | 10状态非线性四旋翼数值算例 |
+| 局限与待核 | 示例逐拍5输出；没有在该例引入仅位置、有界乱序到达 |
+| 与本课题的关系 | 最接近在线界→可移位收紧的四旋翼对照；按作者稿引用 |
+
+此条按 arXiv:2105.03427v1 引用，DataCite DOI 标识预印本。
+
+## N3 · Output-feedback predictive control of constrained linear systems via set-membership state estimation
+
+A. Bemporad, A. Garulli，2000，International Journal of Control。[出版或预印本记录](https://doi.org/10.1080/002071700403420)
+
+**本轮在线正文**　§§2–4，平行多面体SM与式(29)–(31)逐初态/扰动约束。[来源](https://cse.lab.imtlucca.it/~bemporad/publications/papers/ijc_sm-mpc.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 部分状态信息下对所有相容状态执行约束预测控制 |
+| 动力学模型 | 受扰离散线性系统、部分状态测量 |
+| 状态维度 | 一般n |
+| 控制输入 | 受硬约束的控制序列 |
+| 状态估计 | 最小体积平行多面体外包当前相容集 |
+| 不确定性与量测 | 初值、输入扰动及观测噪声在给定界内 |
+| MPC 结构 | 对相容状态和未来扰动取最坏情况的MPC-SM |
+| 理论保证 | 对信息一致状态与允许扰动保证约束，需其可行性与系统假设 |
+| 仿真与实验 | 文中报告仿真，算例参数本轮未提取 |
+| 局限与待核 | 共享初态集合鲁棒约束本身已有长期先例 |
+| 与本课题的关系 | 为一步共同输入和反馈量词提供基础对照 |
+
+## N4 · Output feedback predictive control for constrained linear systems with intermittent measurements
+
+Huiping Li, Yang Shi，2013，Systems & Control Letters。[出版或预印本记录](https://doi.org/10.1016/j.sysconle.2013.01.003)
+
+**出版社摘要及既有笔记**　期刊摘要、既有背景记录 §2。[来源](../../research/model_selection/background_run_20261102_0739_hassaan_terminal_audit.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 周期量测丢失时的约束预测控制 |
+| 动力学模型 | 离散约束线性系统，周期性丢测 |
+| 状态维度 | 一般线性，算例维数待核 |
+| 控制输入 | 受约束控制输入 |
+| 状态估计 | 可处理丢测的鲁棒观测器 |
+| 不确定性与量测 | 外扰及周期丢测；具体界待原文 |
+| MPC 结构 | 由估计误差界和外扰扩大再收紧约束 |
+| 理论保证 | 摘要报告迭代可行与稳定；终端式、初始化条件待核 |
+| 仿真与实验 | 具体算例待原文 |
+| 局限与待核 | 固定周期丢失和任意时间戳重排的合同不同 |
+| 与本课题的关系 | 周期性失测的输出反馈对照 |
+
+## N5 · Robust Output Feedback Variable-Horizon MPC With Adaptive Terminal Constraints
+
+Renato Quartullo, Gianni Bianchini, Andrea Garulli, Antonio Giannitrapani，2025，IEEE Control Systems Letters。[出版或预印本记录](https://doi.org/10.1109/lcsys.2025.3578491)
+
+**本轮在线正文**　§II、式(12)–(14)、Alg.1，终端更新分支。[来源](https://www3.diism.unisi.it/~giannibi/research/papers/ATCS_LCSS_2025.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 有噪输出和运动目标时如何更新终端约束 |
+| 动力学模型 | 离散线性模型，已知目标轨迹 |
+| 状态维度 | 一般n；轨道算例维数待核 |
+| 控制输入 | 估计状态下的滚动命令 |
+| 状态估计 | 逐拍Luenberger观测器 |
+| 不确定性与量测 | 有界过程扰动和测量误差 |
+| MPC 结构 | 变时域Tube输出反馈MPC，自适应终端 |
+| 理论保证 | 论文条件下递归可行、约束满足和有限时间接近目标 |
+| 仿真与实验 | 航天器交会仿真 |
+| 局限与待核 | 目标拦截和可变终端与共同不变终端的调节任务不同 |
+| 与本课题的关系 | 说明重置名义中心需要相应后继设计 |
+
+## N6 · Tube-Based Model Predictive Control Based on Constrained Zonotopes
+
+Richard Andrade, Julio E. Normey-Rico, Guilherme V. Raffo，2024，IEEE Access。[出版或预印本记录](https://doi.org/10.1109/access.2024.3381622)
+
+**既有正文笔记**　模型选型审计 D 段，HIL对象与测量权限。[来源](../../research/model_selection/background_run_20261103_1510_smf_zonotope_quadrotor_audit.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 用CZ实现不确定系统的Tube MPC |
+| 动力学模型 | 倾转旋翼机带吊载，虚拟传感器读仿真状态 |
+| 状态维度 | 20物理状态加4积分器 |
+| 控制输入 | 两旋翼推力与两倾转力矩 |
+| 状态估计 | 仿真全状态反馈 |
+| 不确定性与量测 | 有界扰动下的可达误差包络 |
+| MPC 结构 | CZ管和约束处理 |
+| 理论保证 | 本轮沿用HIL及几何构造证据，正式递归可行定理条件待核 |
+| 仿真与实验 | Jetson TX2 HIL与多面体计算对照 |
+| 局限与待核 | 平台、输入和量测合同不同 |
+| 与本课题的关系 | 反映CZ作为控制管与作为状态后验的区别 |
+
+## N7 · Minimum-Volume Set-Membership State Estimation of LTV Constrained Systems with Sporadic Measurements
+
+Yasmina Becis-Aubry, Nacim Ramdani，2023，2023 62nd IEEE Conference on Decision and Control (CDC)。[出版或预印本记录](https://doi.org/10.1109/cdc49753.2023.10383257)
+
+**索引转录作者摘要和作者HAL题录**　CDC 2023期刊库题录与摘要，非期刊扩展版。[来源](https://doi.org/10.1109/CDC49753.2023.10383257)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 间发观测及状态等式约束下估计集如何保持紧致 |
+| 动力学模型 | 离散LTV、线性等式/不等式及稀疏观测 |
+| 状态维度 | 一般n；算例维数待核 |
+| 控制输入 | 控制分量未在摘要说明 |
+| 状态估计 | 可能退化的椭球SMF，以伪体积为准则 |
+| 不确定性与量测 | 加性有界扰动 |
+| MPC 结构 | 不适用，估计论文 |
+| 理论保证 | 作者摘要给出预测与校正中的伪体积最小化；长期恢复条件待正文 |
+| 仿真与实验 | 摘要未核到实验参数 |
+| 局限与待核 | 间发测量不直接说明有乱序交付；零体积可由等式导致 |
+| 与本课题的关系 | 对照集合宽度和活跃方向，避免把体积变零当作完全确定 |
+
+## N8 · Impulsive set-membership state estimators for continuous-time linear systems based on delayed discrete-time periodic measurements
+
+Nacim Meslem, Zhenhua Wang, Tarek Raïssi，2025，European Journal of Control。[出版或预印本记录](https://doi.org/10.1016/j.ejcon.2025.101232)
+
+**出版社摘要与作者题录**　2025 European Journal of Control 摘要。[来源](https://doi.org/10.1016/j.ejcon.2025.101232)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 延迟的周期离散读数如何估计连续系统 |
+| 动力学模型 | 连续时间线性流与离散量测事件 |
+| 状态维度 | 一般n；算例维数待核 |
+| 控制输入 | 公开摘要未定量说明 |
+| 状态估计 | 脉冲式集员状态估计 |
+| 不确定性与量测 | 有界误差；周期采样及迟到 |
+| MPC 结构 | 不适用，估计论文 |
+| 理论保证 | 在所给离散形式可检测等假设下得到实际收敛性质；精确界待原文 |
+| 仿真与实验 | 算例细节待核 |
+| 局限与待核 | 混合时间模型及周期采样限制迁移 |
+| 与本课题的关系 | 与离散M7成对，分离采样稀疏和传输延迟 |
+
+## N9 · Trajectory Tracking Control of Quadrotor UAV with Tube-Based Model Predictive Control
+
+Huifan Lin, Langwen Zhang, Wei Xie，2025，2025 37th Chinese Control and Decision Conference (CCDC)。[出版或预印本记录](https://doi.org/10.1109/ccdc65474.2025.11090705)
+
+**索引转录作者摘要及出版社题录**　CCDC 2025；OpenAlex 转录作者摘要，出版社网页本轮需要浏览器验证。[来源](https://doi.org/10.1109/CCDC65474.2025.11090705)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 四旋翼轨迹跟踪中的轴向抗扰 |
+| 动力学模型 | 级联模型分为转动和x/y/z三个方向子系统 |
+| 状态维度 | 摘要未给精确维数 |
+| 控制输入 | 三个平移通道的控制，物理接口待核 |
+| 状态估计 | 传感器及观测器待正文 |
+| 不确定性与量测 | 外部扰动；定量范围待正文 |
+| MPC 结构 | 三个方向各自设计Tube MPC |
+| 理论保证 | 摘要报告相对传统MPC的抗扰实验改善；无足够材料核对硬约束定理 |
+| 仿真与实验 | 文中比较实验，平台与实飞性质待核 |
+| 局限与待核 | 仅摘要，不能推断速度信息或递归可行性 |
+| 与本课题的关系 | 同轴分解下的直接四旋翼Tube基线 |
+
+## N10 · Finite horizon constrained control and bounded-error estimation in the presence of missing data
+
+Kwesi Rutledge, Sze Zheng Yong, Necmiye Ozay，2020，Nonlinear Analysis: Hybrid Systems。[出版或预印本记录](https://doi.org/10.1016/j.nahs.2020.100854)
+
+**本轮在线正文**　Def.3、Rem.3、§4，时间或前缀策略。[来源](https://www.kwesirutledge.info/static/pdf/nahs2020.e9da54cb0758.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 有限缺测期间约束控制和估计误差怎样返回初始水平 |
+| 动力学模型 | 带模式的离散仿射模型，有限时域 |
+| 状态维度 | 一般n |
+| 控制输入 | 有限时域仿射策略，受约束输入 |
+| 状态估计 | 可依赖时间或已实现缺测前缀的估计器 |
+| 不确定性与量测 | 有界外生量及规定的缺测模式 |
+| MPC 结构 | 鲁棒有限时域合成；滚动MPC终端另需证明 |
+| 理论保证 | Def.3区分中间M2与恢复M1；在合成可行时满足规定全路径要求 |
+| 仿真与实验 | 作者数值演示；本轮重点为定义和合成 |
+| 局限与待核 | 处理缺测为主，物理控制、CZ后验及一般迟到重算需单独连接 |
+| 与本课题的关系 | 给出ER早期来源与量词 |
+
+## N11 · Output feedback model predictive control based on set‐membership state estimation
+
+Quanwei Qiu, Fuwen Yang, Yong Zhu, Eman Mousavinejad，2020，IET Control Theory & Applications。[出版或预印本记录](https://doi.org/10.1049/iet-cta.2019.0881)
+
+**既有正文笔记及出版社摘要**　§2 假设1–2、§3.1 Thm.1、式(19)、§4。[来源](../PAPER_READING_LOG.md)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 受扰部分状态测量时怎样结合椭球估计与MPC |
+| 动力学模型 | 线性时变，部分输出 |
+| 状态维度 | 一般n；算例维数待核 |
+| 控制输入 | 最小最大优化下的受约束控制 |
+| 状态估计 | 椭球SMF |
+| 不确定性与量测 | 过程与量测未知但有界、初值椭球包含 |
+| MPC 结构 | 椭球SMF加LMI/SDP输出反馈MPC |
+| 理论保证 | 在估计包含及终端RPI等条件下递归调节至含原点的域 |
+| 仿真与实验 | 仿真例 |
+| 局限与待核 | 估计集合与终端RPI各有前提，间歇语言需另加 |
+| 与本课题的关系 | 椭球作为CZ的同信息估计–控制基线 |
+
+## N12 · Robust model predictive control of constrained linear systems with bounded disturbances
+
+D.Q. Mayne, M.M. Seron, S.V. Raković，2005，Automatica。[出版或预印本记录](https://doi.org/10.1016/j.automatica.2004.08.019)
+
+**出版社摘要与既有理论线索**　Automatica摘要，初始名义状态与扰动不变集。[来源](https://doi.org/10.1016/j.automatica.2004.08.019)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 已知状态时怎样保证有界扰动下的MPC约束 |
+| 动力学模型 | 约束离散LTI |
+| 状态维度 | 一般n |
+| 控制输入 | 名义输入和辅助反馈 |
+| 状态估计 | 状态反馈，状态估计不适用 |
+| 不确定性与量测 | 有界加性扰动及可行初值 |
+| MPC 结构 | Tube MPC，名义初始状态为决策变量 |
+| 理论保证 | 在论文设定下值函数在扰动不变集上为零，据此讨论集合稳定性 |
+| 仿真与实验 | 算例设置未核 |
+| 局限与待核 | 控制器能使用状态；到输出反馈须额外处理估计误差 |
+| 与本课题的关系 | 区分固定名义记忆与受约束的名义初值优化 |
+
+## N13 · Combined control and communication scheduling for constrained system using robust output feedback MPC
+
+Markus Kogel, Daniel Quevedo, Rolf Findeisen，2019，2019 18th European Control Conference (ECC)。[出版或预印本记录](https://doi.org/10.23919/ecc.2019.8796135)
+
+**索引转录作者摘要及出版题录**　OpenAlex 作者摘要转录，筛选号 30；详细定理待原文。[来源](evidence/abstract_30.json)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 如何共同选择传感时刻与控制输入 |
+| 动力学模型 | 有通信调度的受约束线性系统 |
+| 状态维度 | 一般n；算例维数待核 |
+| 控制输入 | 控制输入与下一通信时刻同时决策 |
+| 状态估计 | 根据可用状态估计评价多个调度序列 |
+| 不确定性与量测 | 受扰系统；确切噪声支撑待核 |
+| MPC 结构 | 每个候选通信日程求凸鲁棒控制问题并择优 |
+| 理论保证 | 摘要给出鲁棒约束满足、递归可行和稳定的条件，终端构造待全文 |
+| 仿真与实验 | 数值算例 |
+| 局限与待核 | 量测时刻可由控制器选择 |
+| 与本课题的关系 | 主动调度构成信息更强的对照，需与外生失测分开 |
+
+## N14 · Robust output feedback MPC with reduced conservatism for linear uncertain systems using time varying tubes
+
+Markus Kogel, Rolf Findeisen，2021，2021 60th IEEE Conference on Decision and Control (CDC)。[出版或预印本记录](https://doi.org/10.1109/cdc45484.2021.9682948)
+
+**索引转录作者摘要及出版题录**　OpenAlex 作者摘要转录，筛选号 43；详细定理待原文。[来源](evidence/abstract_43.json)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 减少输出反馈Tube的保守性 |
+| 动力学模型 | 受扰线性系统和随预测步传播的误差管 |
+| 状态维度 | 一般n；算例维数待核 |
+| 控制输入 | 从当前估计状态规划的约束控制 |
+| 状态估计 | 观测器，误差进入未来预测Tube |
+| 不确定性与量测 | 有界扰动；精确噪声支撑待核 |
+| MPC 结构 | 时变Tube输出反馈MPC |
+| 理论保证 | 论文摘要报告鲁棒稳定和约束满足条件，移位公式待正文 |
+| 仿真与实验 | 数值仿真对照 |
+| 局限与待核 | 时变Tube不能单凭题名等同于按时间戳相位分支 |
+| 与本课题的关系 | 同样在估计与预测误差同时入管，应控制此基线效应 |
+
+## N15 · Set-membership filtering for generator dynamic state estimation with delayed measurements
+
+Cheng Cheng, Xingzhen Bai, Qingqing Zhang, Congyang Huang，2018，Systems Science & Control Engineering。[出版或预印本记录](https://doi.org/10.1080/21642583.2018.1531794)
+
+**索引转录作者摘要及出版题录**　OpenAlex 作者摘要转录，筛选号 156；详细定理待原文。[来源](evidence/abstract_156.json)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 同步发电机输出迟到时如何保留真实状态 |
+| 动力学模型 | 非线性发电机动力学，线性化和延迟选择矩阵 |
+| 状态维度 | 单机无穷大母线系统；精确维数待全文 |
+| 控制输入 | 发电机模型激励，非MPC决策 |
+| 状态估计 | 优化椭球包含，约束拟牛顿法处理线性化误差 |
+| 不确定性与量测 | 过程/测量噪声为有界椭球，延迟驱动变量取0或1 |
+| MPC 结构 | 不适用，估计论文 |
+| 理论保证 | 论文摘要给出凸优化外包相容状态椭球的构造；精确假设待核 |
+| 仿真与实验 | 单机无穷大母线数值例 |
+| 局限与待核 | 二值延迟机制与一般多包乱序不同，未接入MPC |
+| 与本课题的关系 | 提示应同时审计模型线性化余项与迟到测量误差 |
+
+## N16 · 线性离散系统的自适应集员滤波方法
+
+Yudong Li, Jiuxiang Dong, Yirui Cong，2026，导航定位与授时。[出版或预印本记录](https://doi.org/10.19306/j.cnki.2095-8110.2026.03.003)
+
+**本轮正式PDF版面核读与既有正文笔记**　正式版印刷页32（PDF第8页），式(42)、(43)、图7版面核读；式(8)–(10)、算法2–3及定理1另见既有阅读记录。[来源](../sources/cong_mpc_20261104/线性离散系统的自适应集员滤波方法.pdf)
+
+| 提取项 | 本文证据 |
+|---|---|
+| 研究问题 | 测量噪声边界未知时如何在线估计状态与噪声界 |
+| 动力学模型 | 线性离散系统；含无人机三维平移数值例 |
+| 状态维度 | 无人机位置–速度6，观测噪声3 |
+| 控制输入 | 估计任务，未合成控制输入 |
+| 状态估计 | ASMF；从量测序列学习测量噪声边界并更新约束集合 |
+| 不确定性与量测 | 在正文所给过程噪声界等条件下学习未知量测噪声界 |
+| MPC 结构 | 不适用，状态估计论文 |
+| 理论保证 | 所述稳定性是估计域非空及渐近有界跟踪；每拍硬真值包含需另证 |
+| 仿真与实验 | 式(42)–(43)及图7，三维运动、1秒采样、1000次Monte Carlo平均对照 |
+| 局限与待核 | 式(42)的Kronecker矩阵按[p;v]排列，式(43)的列向量逐轴交错，复用需要置换；原仿真内部顺序待作者代码。在线学得的界用于硬约束前还需逐拍覆盖证明。 |
+| 与本课题的关系 | 与本项目六状态平移估计的结构接近；说明状态维数与无人机背景也已有先例 |
+
+中文正式版由用户提供，按首页中英文署名登记；期刊网页本轮返回验证页。

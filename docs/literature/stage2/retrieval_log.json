@@ -1,0 +1,665 @@
+{
+  "Q1_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=quadrotor+model+predictive+control+outer+loop+position+velocity+trajectory&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q1_CR.json",
+    "sha256": "99b7f8a530eb1eee48bc8ef3989a38986f462348f1daff8cd2bd33b686edfb3d",
+    "prior_failures": []
+  },
+  "Q1_OA": {
+    "url": "https://api.openalex.org/works?search=quadrotor+model+predictive+control+outer+loop+position+velocity+trajectory&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "Q2_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=multirotor+robust+tube+model+predictive+control+bounded+disturbances&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q2_CR.json",
+    "sha256": "2ef72dd72d6b870694f5eced90072e3c49072176cbe1b89352b71a7ae7506cac",
+    "prior_failures": []
+  },
+  "Q2_OA": {
+    "url": "https://api.openalex.org/works?search=multirotor+robust+tube+model+predictive+control+bounded+disturbances&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "Q3_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=robust+output+feedback+model+predictive+control+constraint+tightening+recursive+feasibility+terminal+set&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q3_CR.json",
+    "sha256": "d4a90de8ac71f76e8a5472d16db2240ad232e2516a0464ccf5c6721bcce9e460",
+    "prior_failures": []
+  },
+  "Q3_OA": {
+    "url": "https://api.openalex.org/works?search=robust+output+feedback+model+predictive+control+constraint+tightening+recursive+feasibility+terminal+set&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "Q4_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=set+membership+state+estimation+constrained+zonotopes+bounded+noise&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q4_CR.json",
+    "sha256": "61882adeac872986b91bc72bbc291c3fac8e6e6d54f1c4c08da1f620b52ce4ee",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q4_OA": {
+    "url": "https://api.openalex.org/works?search=set+membership+state+estimation+constrained+zonotopes+bounded+noise&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q4_OA.json",
+    "sha256": "9b6093ced2b30cb479b47a8fbb2dcf2fe2cf1bbb009b9783546a10da08b5eac1",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q5_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=set+valued+moving+horizon+estimation+output+feedback+predictive+control&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q5_CR.json",
+    "sha256": "17e13ffb8be09d7f231aa7469b28b310acbbfa51184c968a9b662887e9ebb876",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q5_OA": {
+    "url": "https://api.openalex.org/works?search=set+valued+moving+horizon+estimation+output+feedback+predictive+control&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q5_OA.json",
+    "sha256": "d821da9b796ffc13e0d193b2896bc099dd8ba7a2426368540ae95b8a0262a732",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q6_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=equalized+recovery+missing+delayed+observations+output+feedback+predictive+control&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q6_CR.json",
+    "sha256": "ed20e28f8df12ea7e15f752a0ba0eabd9be0b0b10a61e2b002a9ec4f0cabbbea",
+    "prior_failures": []
+  },
+  "Q6_OA": {
+    "url": "https://api.openalex.org/works?search=equalized+recovery+missing+delayed+observations+output+feedback+predictive+control&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q6_OA.json",
+    "sha256": "fe90f8c8658ea182be3fd5a95aa6d40808a449e04be10809c0da84139839c6b1",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q7_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=set+membership+state+estimation+sparse+delayed+measurements&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/Q7_CR.json",
+    "sha256": "6e7ef6f46003cec1997080ac5f08a24fdd012ae7f8fee824e5e2e9033cc40dea",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q7_OA": {
+    "url": "https://api.openalex.org/works?search=set+membership+state+estimation+sparse+delayed+measurements&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "Q8_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=constrained+zonotope+tube+model+predictive+control+constraint+tightening&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05%2Cfrom-pub-date%3A2024-01-01",
+    "status": 200,
+    "file": "evidence/Q8_CR.json",
+    "sha256": "e2c5a030299493fd5913ef0b6f2cc1f007f3ba3210264dcdef649007e130dd81",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "Q8_OA": {
+    "url": "https://api.openalex.org/works?search=constrained+zonotope+tube+model+predictive+control+constraint+tightening&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05%2Cfrom_publication_date%3A2024-01-01",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "Q9_CR": {
+    "url": "https://api.crossref.org/works?query.bibliographic=bounded+error+state+estimation+intermittent+delayed+measurements+zonotope&rows=10&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05%2Cfrom-pub-date%3A2024-01-01",
+    "status": 200,
+    "file": "evidence/Q9_CR.json",
+    "sha256": "12a5f1cf8fd7841ce32696c6357361727ae8555e031e1457a25f1326c7f8f2a0",
+    "prior_failures": []
+  },
+  "Q9_OA": {
+    "url": "https://api.openalex.org/works?search=bounded+error+state+estimation+intermittent+delayed+measurements+zonotope&per_page=10&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works&filter=to_publication_date%3A2026-11-05%2Cfrom_publication_date%3A2024-01-01",
+    "status": 429,
+    "file": null,
+    "sha256": null,
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      },
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ],
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "D1": {
+    "url": "https://api.crossref.org/works/10.1002/rnc.5686",
+    "status": 200,
+    "file": "evidence/D1.json",
+    "sha256": "5008654ae108e87de997072a07991f1841fc779a9ea7e4690aada24e75b310b4",
+    "prior_failures": []
+  },
+  "D2": {
+    "url": "https://api.crossref.org/works/10.1049/cth2.12588",
+    "status": 200,
+    "file": "evidence/D2.json",
+    "sha256": "e859d690996e0f3c235d3ff43e8add2cc4d99a62fc5c49f6c256c88ead6b8cfc",
+    "prior_failures": []
+  },
+  "D3": {
+    "url": "https://api.crossref.org/works/10.1109/CDC51059.2022.9992704",
+    "status": 200,
+    "file": "evidence/D3.json",
+    "sha256": "1136cde73d1c51d7fc3b4a2d7a8bc7bbec732a3731bc1bb28c570836d3264f06",
+    "prior_failures": []
+  },
+  "D4": {
+    "url": "https://api.crossref.org/works/10.1016/j.isatra.2021.12.002",
+    "status": 200,
+    "file": "evidence/D4.json",
+    "sha256": "559cb0f726a855a94b4bf17503c5ff7c39b60046c2fca1de5d3a32b81b4b28fb",
+    "prior_failures": []
+  },
+  "D5": {
+    "url": "https://api.crossref.org/works/10.1109/IROS.2018.8593739",
+    "status": 200,
+    "file": "evidence/D5.json",
+    "sha256": "ed27e4d8987aa73aa2b1ac3dfa7aa255f46aa6022a525158a9ab945d2eec9172",
+    "prior_failures": []
+  },
+  "D6": {
+    "url": "https://api.crossref.org/works/10.1002/rnc.6485",
+    "status": 200,
+    "file": "evidence/D6.json",
+    "sha256": "5c53a6e0c36324ec62e2c5ae4d8d068c9575b2f424fa1371b95db4428204af85",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "M1": {
+    "url": "https://api.crossref.org/works/10.1016/j.ifacol.2021.08.482",
+    "status": 200,
+    "file": "evidence/M1.json",
+    "sha256": "e383905c37a7f1043733efa870dd2303c121b722a922602e12ddcf86762af898",
+    "prior_failures": []
+  },
+  "M2": {
+    "url": "https://api.crossref.org/works/10.1109/TAC.2018.2791899",
+    "status": 200,
+    "file": "evidence/M2.json",
+    "sha256": "4867e6511abd36325f3d77081a5374e2ab8660de394f18f80e024d1d5689003a",
+    "prior_failures": []
+  },
+  "M3": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2022.110282",
+    "status": 200,
+    "file": "evidence/M3.json",
+    "sha256": "8920a89876a11c8366a0db8f4fe841e604374b2fb7c783ae3fb2f1817c6364f2",
+    "prior_failures": []
+  },
+  "M4": {
+    "url": "https://api.crossref.org/works/10.1109/TAC.2026.3712691",
+    "status": 200,
+    "file": "evidence/M4.json",
+    "sha256": "3dd666b0ca1a5559300d7778d55643159bc7b09db6a75464c1751e278fac926e",
+    "prior_failures": []
+  },
+  "M5": {
+    "url": "https://api.crossref.org/works/10.1109/TAC.2025.3632158",
+    "status": 200,
+    "file": "evidence/M5.json",
+    "sha256": "af54977a9b8c9362fafc157cdb0e36603c4a12ddcdd2aab1806ecccd088dccc5",
+    "prior_failures": []
+  },
+  "M6": {
+    "url": "https://api.crossref.org/works/10.1109/CoDIT66093.2025.11321702",
+    "status": 200,
+    "file": "evidence/M6.json",
+    "sha256": "83316ba1722e4ba53973c29b4a5c825f59272585fc267c3fddf0896947e041b0",
+    "prior_failures": []
+  },
+  "M7": {
+    "url": "https://api.crossref.org/works/10.1109/LCSYS.2024.3405376",
+    "status": 200,
+    "file": "evidence/M7.json",
+    "sha256": "c408087cd01dd85fe701233adbc130653350b031400860da0b9bce8d49317a74",
+    "prior_failures": []
+  },
+  "M8": {
+    "url": "https://api.crossref.org/works/10.1109/LCSYS.2021.3050300",
+    "status": 200,
+    "file": "evidence/M8.json",
+    "sha256": "0d1c58d8bed09ad0b879d040f7079116798559f42d08338b217d19d7d1af1316",
+    "prior_failures": []
+  },
+  "M9": {
+    "url": "https://api.crossref.org/works/10.1145/3447928.3456655",
+    "status": 200,
+    "file": "evidence/M9.json",
+    "sha256": "73c7f710f37420f40a41cd738a6c1deffc0275fe9c74f811f031b5c9f9197eed",
+    "prior_failures": []
+  },
+  "F1": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2016.02.036",
+    "status": 200,
+    "file": "evidence/F1.json",
+    "sha256": "04ab3cd2148d18b17e2329f44ed7156f68227508c32e883f9b8eb62de13de951",
+    "prior_failures": []
+  },
+  "F2": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2019.108614",
+    "status": 200,
+    "file": "evidence/F2.json",
+    "sha256": "6fe446b423ddecf9d107041903b6b293c9d7c29befbea71ba991661036d0b1c7",
+    "prior_failures": []
+  },
+  "F3": {
+    "url": "https://api.crossref.org/works/10.1109/TAC.2021.3082508",
+    "status": 200,
+    "file": "evidence/F3.json",
+    "sha256": "b373da792da1d55030c8ef099c5e3e4b1e97e9e83a9bbc3557de6b770bf579f3",
+    "prior_failures": [
+      {
+        "status": 429,
+        "error": "HTTP Error 429: Too Many Requests"
+      }
+    ]
+  },
+  "F4": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2024.111993",
+    "status": 200,
+    "file": "evidence/F4.json",
+    "sha256": "249870a05ca9c810466f96023970ffd0aa6f6ca016ccc70cf94ccdf3fb1b3338",
+    "prior_failures": []
+  },
+  "F5": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2006.03.005",
+    "status": 200,
+    "file": "evidence/F5.json",
+    "sha256": "3929a696211969cc8aeb2a821f2079baa88b0df4bd0878fc5165874165e649b6",
+    "prior_failures": []
+  },
+  "F6": {
+    "url": "https://api.crossref.org/works/10.1109/TAC.2005.843854",
+    "status": 200,
+    "file": "evidence/F6.json",
+    "sha256": "be1b5f85599b3a0ec7d677b267959471481906f3dab2337bee22dfb69439a274",
+    "prior_failures": []
+  },
+  "D4_OA": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1016/j.isatra.2021.12.002",
+    "status": 200,
+    "file": "evidence/D4_OA.json",
+    "sha256": "103fd30cbee9aa2a2419893edce78b424ca841691eb322c6efad0de35aa0613d",
+    "prior_failures": []
+  },
+  "M1_OA": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1016/j.ifacol.2021.08.482",
+    "status": 200,
+    "file": "evidence/M1_OA.json",
+    "sha256": "5f965af597f1742a78192b26bbb959d7638441ffea16faf84261905d811bb5ae",
+    "prior_failures": []
+  },
+  "M2_OA": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/TAC.2018.2791899",
+    "status": 200,
+    "file": "evidence/M2_OA.json",
+    "sha256": "4f3bbc75ffb37ac7b480a74961f994f1bd07fec89a7782bbf5be47c03e812d21",
+    "prior_failures": []
+  },
+  "M1_citing": {
+    "url": "https://api.openalex.org/works?filter=cites%3AW3199190049%2Cto_publication_date%3A2026-11-05&per_page=100&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works",
+    "status": 200,
+    "file": "evidence/M1_citing.json",
+    "sha256": "a9ed0d86e9ce2c4b1c8f52b3a78f59929a36af8f56821267b6a2916ad4642e92",
+    "prior_failures": []
+  },
+  "M1_refs0": {
+    "url": "https://api.openalex.org/works?filter=openalex%3AW1979400452%7CW1981723834%7CW2001428612%7CW2014549826%7CW2062132646%7CW2080256219%7CW2134702196%7CW2149276643%7CW2164522996%7CW2749680651%7CW2783564984%7CW2889409099%7CW2897447733%7CW2963860791%7CW3004154432%7CW3120171281%7CW3120487673&per_page=40&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works",
+    "status": 200,
+    "file": "evidence/M1_refs0.json",
+    "sha256": "5688d7743a8f3e423a52e4bdcbd1963a7fda7b6e42b78e425e6d09a3efbebcc2",
+    "prior_failures": []
+  },
+  "M2_citing": {
+    "url": "https://api.openalex.org/works?filter=cites%3AW2783405923%2Cto_publication_date%3A2026-11-05&per_page=100&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works",
+    "status": 200,
+    "file": "evidence/M2_citing.json",
+    "sha256": "182aa0742bf52ef02ece0b15853a4abc7820c2aa2c2d1c66fad80a20c7d454f7",
+    "prior_failures": []
+  },
+  "M2_refs0": {
+    "url": "https://api.openalex.org/works?filter=openalex%3AW1524886571%7CW1880805667%7CW1963615439%7CW1964913370%7CW1978956894%7CW1979400452%7CW2014549826%7CW2023315473%7CW2037450006%7CW2064215724%7CW2072977891%7CW2078150235%7CW2095233962%7CW2097361146%7CW2103988321%7CW2111405881%7CW2119974577%7CW2138410957%7CW2291087442%7CW2504115777%7CW2536620281%7CW2568098848%7CW2568490041%7CW4285719527&per_page=40&select=id%2Cdoi%2Cdisplay_name%2Cpublication_year%2Cpublication_date%2Copen_access%2Clocations%2Creferenced_works",
+    "status": 200,
+    "file": "evidence/M2_refs0.json",
+    "sha256": "99962e0f2181235878e976bd6446e6da7bcedc7ed16fc7d599304ab7dfd7eafc",
+    "prior_failures": []
+  },
+  "N1": {
+    "url": "https://api.crossref.org/works/10.1109/CDC.2011.6161131",
+    "status": 200,
+    "file": "evidence/N1.json",
+    "sha256": "72b3ef5af575db562d5c16a2935235a8372d93bbbae8fe3986b9e6f45a327f68",
+    "prior_failures": []
+  },
+  "N3": {
+    "url": "https://api.crossref.org/works/10.1080/002071700403420",
+    "status": 200,
+    "file": "evidence/N3.json",
+    "sha256": "834e0c760ca096e6a54feb7a37d7a952e5b305a9652007fdfa2d7c117405d748",
+    "prior_failures": []
+  },
+  "N4": {
+    "url": "https://api.crossref.org/works/10.1016/j.sysconle.2013.01.003",
+    "status": 200,
+    "file": "evidence/N4.json",
+    "sha256": "64e82508737d23f6f88c869c9628ca2433a85904c5251d6c63c50454ba3c2a74",
+    "prior_failures": []
+  },
+  "N5": {
+    "url": "https://api.crossref.org/works/10.1109/LCSYS.2025.3578491",
+    "status": 200,
+    "file": "evidence/N5.json",
+    "sha256": "2f0480693d3500b8b25bba75bff209e107be3bc384db2e4865def8a0a2835bab",
+    "prior_failures": []
+  },
+  "N6": {
+    "url": "https://api.crossref.org/works/10.1109/ACCESS.2024.3381622",
+    "status": 200,
+    "file": "evidence/N6.json",
+    "sha256": "4bb7bc9814601fdfa82697f00b46443024a0c9bcf873b6503d4dfd6db23c4195",
+    "prior_failures": []
+  },
+  "N7": {
+    "url": "https://api.crossref.org/works/10.1109/CDC49753.2023.10383257",
+    "status": 200,
+    "file": "evidence/N7.json",
+    "sha256": "7b879d4c4ac2f9f3aaebf1330cd9fcb6dee19e420109ea7d4bf57b7b05349d75",
+    "prior_failures": []
+  },
+  "N8": {
+    "url": "https://api.crossref.org/works/10.1016/j.ejcon.2025.101232",
+    "status": 200,
+    "file": "evidence/N8.json",
+    "sha256": "c9cb6530c07ac2658ec78e1a28942f5701cfac1264d6361fda258167ca1eaa13",
+    "prior_failures": []
+  },
+  "N9": {
+    "url": "https://api.crossref.org/works/10.1109/CCDC65474.2025.11090705",
+    "status": 200,
+    "file": "evidence/N9.json",
+    "sha256": "c3ba5703875cc6efb4ee218d3911bed7693e93db3b31fb979382c738c99ea21f",
+    "prior_failures": []
+  },
+  "N10": {
+    "url": "https://api.crossref.org/works/10.1016/j.nahs.2020.100854",
+    "status": 200,
+    "file": "evidence/N10.json",
+    "sha256": "0276032e0ae0b89675ef6f0dea4b10006476ef2ea6a0408b5a8950b68fd75d9e",
+    "prior_failures": []
+  },
+  "N11": {
+    "url": "https://api.crossref.org/works/10.1049/iet-cta.2019.0881",
+    "status": 200,
+    "file": "evidence/N11.json",
+    "sha256": "cb119e86ea2e3ed45efa868b1f068c2cfe722fc5eddf978cd5b2811fce340e2e",
+    "prior_failures": []
+  },
+  "N12": {
+    "url": "https://api.crossref.org/works/10.1016/j.automatica.2004.08.019",
+    "status": 200,
+    "file": "evidence/N12.json",
+    "sha256": "c6a8866ab9ee18ac3ee63ac636aa8ce82a23d9c9e92df18ef617bf3d4faf9a50",
+    "prior_failures": []
+  },
+  "N2": {
+    "url": "https://api.datacite.org/dois/10.48550/arxiv.2105.03427",
+    "status": 200,
+    "file": "evidence/N2.json",
+    "sha256": "4595f511b388ca86153944250275d60ab60f1b8614ce2a2068f920c99a3f7916"
+  },
+  "abstract_24": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1016/j.automatica.2021.109951",
+    "status": 200,
+    "file": "evidence/abstract_24.json",
+    "sha256": "25bdff288aee4019cf8d1ae9740c5312054580b7cbc926942c23422c5bbff60a"
+  },
+  "abstract_30": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.23919/ecc.2019.8796135",
+    "status": 200,
+    "file": "evidence/abstract_30.json",
+    "sha256": "725fba1d912dca5a4c978e110fd7bb460dcab3e192b3054e9eae4834e9a65cf5"
+  },
+  "abstract_38": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/tac.2020.3004348",
+    "status": 200,
+    "file": "evidence/abstract_38.json",
+    "sha256": "251ef7ca67c136683e49d57050375459f265acc10253f90f1ba2855e1029089e"
+  },
+  "abstract_41": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/cdc45484.2021.9683384",
+    "status": 200,
+    "file": "evidence/abstract_41.json",
+    "sha256": "fbfa9a22ef8d564ea6008b5595182108bab4c9f90eb0c07e0d305f1261ee04be"
+  },
+  "abstract_43": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/cdc45484.2021.9682948",
+    "status": 200,
+    "file": "evidence/abstract_43.json",
+    "sha256": "787318ae5bb3628f0ef15ab9d02b588a25f17b3077fe2752368136e08c3228cb"
+  },
+  "abstract_44": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.23919/ecc.2019.8795680",
+    "status": 200,
+    "file": "evidence/abstract_44.json",
+    "sha256": "471f857c703e5c9c6138c6df26c5469535e3f41749842b7a9e90725817a1824b"
+  },
+  "abstract_45": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.23919/ecc54610.2021.9655072",
+    "status": 200,
+    "file": "evidence/abstract_45.json",
+    "sha256": "af331d7157871001db6057558aff05ad054d0f390d7d5a4c64aef4a1ab472198"
+  },
+  "abstract_46": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/lcsys.2025.3560531",
+    "status": 200,
+    "file": "evidence/abstract_46.json",
+    "sha256": "d89cb437b36bf2fa2169976060500f338a2e60d49b12cceb4b2d6066d18922df"
+  },
+  "abstract_50": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1007/978-3-031-26474-0_8",
+    "status": 200,
+    "file": "evidence/abstract_50.json",
+    "sha256": "c9f0076b3f72dc872169cba0fef2ff274ee7e6511bfcdf727b798caa4d555c02"
+  },
+  "abstract_53": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1002/oca.70056",
+    "status": 200,
+    "file": "evidence/abstract_53.json",
+    "sha256": "61f121e3be4bb577b8bcabb88cf789453f2ef1975f7392fe4b77af2361ebbbc6"
+  },
+  "abstract_67": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1145/1755952.1755959",
+    "status": 200,
+    "file": "evidence/abstract_67.json",
+    "sha256": "69d14fa2a06521d91077a71db37cc3e84e038106535e3b0a64c84203ffd575dd"
+  },
+  "abstract_69": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/cdc.2015.7403079",
+    "status": 200,
+    "file": "evidence/abstract_69.json",
+    "sha256": "093b5583bd32ef07e5a000f3cbbfdc58488925d959d3fe7443d2032856bfbcbc"
+  },
+  "abstract_156": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1080/21642583.2018.1531794",
+    "status": 200,
+    "file": "evidence/abstract_156.json",
+    "sha256": "1cc1adf64c2ecf026520e91d6cc6ad25782f94e55faa92b780222532106206e5"
+  },
+  "abstract_163": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.3182/20110828-6-it-1002.03793",
+    "status": 200,
+    "file": "evidence/abstract_163.json",
+    "sha256": "11caae364f9c6ca958b030ec1e2d6d873186547f3612975b1c8e80547a0a54e8"
+  },
+  "abstract_N7": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/cdc49753.2023.10383257",
+    "status": 200,
+    "file": "evidence/abstract_N7.json",
+    "sha256": "d29530b7aff919e00b97fb1679d4ca58681aec53a2dee3e05b60021b5c8707ea"
+  },
+  "abstract_N8": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1016/j.ejcon.2025.101232",
+    "status": 200,
+    "file": "evidence/abstract_N8.json",
+    "sha256": "0d502787fd60db3761f515e748a41aa5430306a5c10b2b2caaf947ec37c358a7"
+  },
+  "abstract_N9": {
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/ccdc65474.2025.11090705",
+    "status": 200,
+    "file": "evidence/abstract_N9.json",
+    "sha256": "d9b3238314fdd91c136847c81006e8f56ba89eff81bc7dcfa85ea57505c527e0"
+  },
+  "N13": {
+    "url": "https://api.crossref.org/works/10.23919/ECC.2019.8796135",
+    "status": 200,
+    "file": "evidence/N13.json",
+    "sha256": "de3598a098603760f3d44934baa063c82a504c6be4a22c7e92599c3d3a5ee413",
+    "prior_failures": []
+  },
+  "N14": {
+    "url": "https://api.crossref.org/works/10.1109/CDC45484.2021.9682948",
+    "status": 200,
+    "file": "evidence/N14.json",
+    "sha256": "bb580bbada962cbabfcaa47f8e9e63245fc7bcb31812c52889d95d92e45d226e",
+    "prior_failures": []
+  },
+  "N15": {
+    "url": "https://api.crossref.org/works/10.1080/21642583.2018.1531794",
+    "status": 200,
+    "file": "evidence/N15.json",
+    "sha256": "95c9105bdf5bc0d72ef91b3323d8f15e069f8ac2cfa37b665c391ff1fb5efeae",
+    "prior_failures": []
+  },
+  "A1a": {
+    "url": "https://api.crossref.org/works?query.title=constrained+zonotopes+set-based+estimation+fault+detection&rows=5&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/A1a.json",
+    "sha256": "3007d63186e07a6e3af5f30fc129fd38928f76c6c1a82507d0cba3174eda199c"
+  },
+  "A1b": {
+    "url": "https://api.crossref.org/works?query.title=set-valued+state+estimator+sparse+delayed+measurements+linear+systems&rows=5&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/A1b.json",
+    "sha256": "a32fea927483cf60426942f21a966e5df57158608b76e6b3a2188fbfad4d2e32"
+  },
+  "A1c": {
+    "url": "https://api.crossref.org/works?query.title=output+feedback+predictive+control+ellipsoidal+uncertainty&rows=5&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/A1c.json",
+    "sha256": "c650c2528556ad69214b876b63b5463e7db9d1720876169d8c9371d5ab823c88"
+  },
+  "A1d": {
+    "url": "https://api.crossref.org/works?query.title=set-membership+filter+stability+initial+conditions+observation+information&rows=5&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/A1d.json",
+    "sha256": "eddcb5e7833e4c4db6fe7df2ddc6ac3ec6716bd151626d6c22c9e845bbd87d69"
+  },
+  "A1e": {
+    "url": "https://api.crossref.org/works?query.title=%E9%9B%86%E5%91%98%E6%BB%A4%E6%B3%A2+%E7%BA%BF%E6%80%A7%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F+%E8%87%AA%E9%80%82%E5%BA%94&rows=5&select=DOI%2Ctitle%2Cpublished%2Cauthor%2Ccontainer-title%2Ctype&filter=until-pub-date%3A2026-11-05",
+    "status": 200,
+    "file": "evidence/A1e.json",
+    "sha256": "8c9c79a5af5472e3705115639506554e7d0daea893dd909ab2599129809d62d3"
+  }
+}

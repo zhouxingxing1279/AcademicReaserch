@@ -1,0 +1,1139 @@
+{
+  "upstream": {
+    "exit_code": 0,
+    "output": {
+      "direction": "",
+      "n_candidates": 1,
+      "collision": {
+        "per_idea": [
+          {
+            "id": "A",
+            "idea": "Position-only set-membership recovery across block boundaries with delayed measurements Characterize repeatable attainab",
+            "most_similar": [
+              {
+                "similarity": 0.193,
+                "title": "Set-membership filtering for generator dynamic state estimation with delayed measurements",
+                "year": 2018,
+                "doi": "10.1080/21642583.2018.1531794",
+                "facet_overlap_slots": {
+                  "application_domain": "",
+                  "purpose": "",
+                  "mechanism": "",
+                  "evaluation": ""
+                }
+              },
+              {
+                "similarity": 0.157,
+                "title": "Impulsive set-membership state estimators for continuous-time linear systems based on delayed discre",
+                "year": 2025,
+                "doi": "10.1016/j.ejcon.2025.101232",
+                "facet_overlap_slots": {
+                  "application_domain": "",
+                  "purpose": "",
+                  "mechanism": "",
+                  "evaluation": ""
+                }
+              },
+              {
+                "similarity": 0.144,
+                "title": "Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations",
+                "year": 2022,
+                "doi": "10.1109/lcsys.2021.3050300",
+                "facet_overlap_slots": {
+                  "application_domain": "",
+                  "purpose": "",
+                  "mechanism": "",
+                  "evaluation": ""
+                }
+              }
+            ]
+          }
+        ],
+        "sim_mode": "offline",
+        "note": "相似度为语义相似启发式;**最像≠撞车**,novel/not-novel 判决归 idea-critique(target/background 分解)。facet 槽位留下游拆 delta。"
+      },
+      "dedup": {
+        "n": 1,
+        "mode": "semantic_sim-offline",
+        "n_pairs": 0,
+        "mean_sim": 0.0,
+        "std_sim": 0.0,
+        "threshold": 0.0,
+        "suspected_variants": [],
+        "note": "_shared/semantic_sim 离线档(字符3gram余弦+词干Jaccard+语序惩罚，识别倒装/中文按字)；仍是字面/词形匹配，纯同义/跨语言需 embedding 档。 标'疑似变体'是提示人工合并，不自动删。阈值=批内 mean+1σ（相对差）。"
+      },
+      "coverage": null,
+      "findings": {
+        "schema": "light.findings.v1",
+        "producer": "idea-generation",
+        "target": "",
+        "verdict": "warn",
+        "gates": [
+          {
+            "gate": "idea_collision",
+            "status": "warn",
+            "severity": "major",
+            "findings": [
+              {
+                "loc": "A→10.1080/21642583.2018.1531794",
+                "issue": "候选「A」最像前作:「Set-membership filtering for generator dynamic state estimation with delayed measurements」(2018) 语义相似=0.193",
+                "fix": "提出时即带'最像前作+delta':沿 application_domain/purpose/mechanism/evaluation 拆;撞车一票否决判决归 idea-critique,本门只预警。",
+                "evidence": "sim_mode=offline; facet 槽位见 collision.per_idea",
+                "rule": "collision.semantic_sim"
+              }
+            ],
+            "note": "撞车前置自查(warn):每候选的最像前作+facet 槽位喂 idea-critique;novel 判决归下游,本门不阻断。"
+          },
+          {
+            "gate": "pseudo_diversity",
+            "status": "pass",
+            "severity": "info",
+            "findings": [],
+            "note": "无显著高于均值的相似对(mode=semantic_sim-offline):候选多样性 OK。"
+          },
+          {
+            "gate": "frame_lock",
+            "status": "skip",
+            "severity": "info",
+            "findings": [],
+            "note": "候选未带 angle 标签:反 frame-lock 覆盖自查跳过。"
+          }
+        ],
+        "summary": "idea-generation 自查门:撞车前置自查(warn)+防伪多样(warn)+反 frame-lock(warn);critical 撞车/无创新一票否决归 idea-critique(stage 4)。",
+        "fresh_evidence": true
+      },
+      "findings_available": true
+    }
+  },
+  "density": {
+    "novelty_prior": 33.33,
+    "mode": "text-degraded",
+    "n_neighbors": 6,
+    "k": 5,
+    "idea_density": 0.9107,
+    "interpretation": "偏低新颖先验(略扎堆)",
+    "note": "⚠ 文本降级档(semantic_sim 离线档=字符 n-gram，非句向量)：仅供管线连通，新颖分不可当嵌入版数值用，真用须按 m01 口径传句向量嵌入。"
+  },
+  "narrow": {
+    "exit_code": 0,
+    "input": {
+      "id": "A",
+      "idea": "Position-only set-membership recovery across block boundaries with delayed measurements Characterize repeatable attainable prescribed recovery budgets for causal estimators and finite memory, against exact delay augmentation, then test shift-compatible tube MPC tightening.",
+      "direction": "prescribed finite-memory recovery budget",
+      "scores": {
+        "originality": 52,
+        "soundness": 68,
+        "data": 77,
+        "experiment": 65,
+        "contribution": 55,
+        "delta": 52,
+        "feasibility": 73,
+        "impact": 61
+      },
+      "most_similar": [
+        {
+          "title": "Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data",
+          "doi": "10.1016/j.ifacol.2021.08.482",
+          "year": 2021,
+          "stance": "supporting",
+          "level": "extension",
+          "delta": "Cross-horizon treated as missing in the cited model; terminal shift already exists.",
+          "target_equivalent": false
+        },
+        {
+          "title": "Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations",
+          "doi": "10.1109/lcsys.2021.3050300",
+          "year": 2022,
+          "stance": "supporting",
+          "level": "extension",
+          "delta": "Finite language ER already synthesized; the same visible history lifetime and augmented information benchmark must be aligned.",
+          "target_equivalent": false
+        },
+        {
+          "title": "System-Level Recurrent State Estimators for Affine Systems Subject to Data Losses Modeled by Automata",
+          "doi": "10.1109/cdc51059.2022.9992499",
+          "year": 2022,
+          "url": "https://openalex.org/W4315472208",
+          "stance": "supporting",
+          "level": null,
+          "delta": "Recurrence at loss-automaton nodes is established. Need to test reducibility after delay augmentation."
+        },
+        {
+          "title": "Optimal Set-Membership Smoothing",
+          "doi": "10.1109/tac.2025.3632158",
+          "year": 2026,
+          "stance": "supporting",
+          "level": "extension",
+          "delta": "Exact conditioned ranges for bounded-noise smoothing; no verified whole-language recurrent budget result.",
+          "target_equivalent": false
+        },
+        {
+          "title": "Differentiator for Noisy Sampled Signals With Best Worst-Case Accuracy",
+          "doi": "10.1109/lcsys.2021.3087542",
+          "year": 2022,
+          "stance": "supporting",
+          "level": "extension",
+          "delta": "Minimax differentiation on a fixed sampling grid; irregular delivered histories differ.",
+          "target_equivalent": false
+        },
+        {
+          "title": "Robust output feedback model predictive control using online estimation bounds",
+          "doi": "10.48550/arxiv.2105.03427",
+          "year": 2021,
+          "stance": "supporting",
+          "level": "extension",
+          "delta": "Online estimation budgets compatible with MPC shift; no matching delayed position-only contract verified.",
+          "target_equivalent": false
+        }
+      ],
+      "evidence_sources": [
+        "OpenAlex",
+        "Crossref"
+      ],
+      "declared_novelty": "extension",
+      "unresolved_critical": true,
+      "rebuttals": [],
+      "novelty_prior": 33.33
+    },
+    "findings": {
+      "schema": "light.findings.v1",
+      "producer": "idea-critique",
+      "target": "A",
+      "verdict": "warn",
+      "gates": [
+        {
+          "gate": "collision",
+          "status": "pass",
+          "severity": "info",
+          "findings": [],
+          "note": "target/background 分解未命中 same 撞车(overall=novel)；sim_mode=offline。"
+        },
+        {
+          "gate": "fatal_flaw",
+          "status": "warn",
+          "severity": "major",
+          "findings": [
+            {
+              "loc": "A",
+              "issue": "判决=有条件通过（重大）(Weighted=62.6)",
+              "fix": "按 Revision_Roadmap 化解后再放行",
+              "rule": "score_aggregate.decide"
+            }
+          ],
+          "note": "score_aggregate 判决=有条件通过（重大）；border_review=无"
+        },
+        {
+          "gate": "anti_sycophancy",
+          "status": "skip",
+          "severity": "info",
+          "findings": [],
+          "note": "无反驳应答记录：反谄媚门跳过(单轮严审无须)。"
+        }
+      ],
+      "summary": "idea-critique critical 否决门：撞车(critical)+无创新(critical)+反谄媚(warn)；撞车/无创新一票否决 → run_checkpoint --stage 4 聚合 exit 1 → reroute 4→3。",
+      "fresh_evidence": true
+    }
+  },
+  "broad": {
+    "exit_code": 1,
+    "input": {
+      "id": "A-ER-to-MPC-only",
+      "idea": "Use equalized recovery and a time-varying output-feedback tube with tightening and common terminal conditions to obtain recursive feasibility under intermittent delayed data.",
+      "direction": "prescribed finite-memory recovery budget",
+      "scores": {
+        "originality": 52,
+        "soundness": 68,
+        "data": 77,
+        "experiment": 65,
+        "contribution": 55,
+        "delta": 52,
+        "feasibility": 73,
+        "impact": 61
+      },
+      "most_similar": [
+        {
+          "title": "Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data",
+          "doi": "10.1016/j.ifacol.2021.08.482",
+          "year": 2021,
+          "target_equivalent": true,
+          "stance": "supporting",
+          "level": "same",
+          "delta": "Same generic recovery-to-MPC target, no claim about cross-block packet reuse in this subclaim."
+        }
+      ],
+      "evidence_sources": [
+        "OpenAlex",
+        "Crossref"
+      ],
+      "declared_novelty": "novel",
+      "unresolved_critical": true,
+      "rebuttals": []
+    },
+    "findings": {
+      "schema": "light.findings.v1",
+      "producer": "idea-critique",
+      "target": "A-ER-to-MPC-only",
+      "verdict": "fail",
+      "gates": [
+        {
+          "gate": "collision",
+          "status": "fail",
+          "severity": "critical",
+          "findings": [
+            {
+              "loc": "A-ER-to-MPC-only→10.1016/j.ifacol.2021.08.482",
+              "issue": "撞车一票否决：「A-ER-to-MPC-only」最像前作「Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermitte」(gen_sim=None, 复核 sim=0.285) target 层等价+supporting → same 撞车，创新性<45 block。",
+              "fix": "回 idea-generation(4→3)带具体缺口重提：换 target(解决的新问题)/换 mechanism，或据 contrasting 立场把 delta 拆到方法层(非仅换数据集)。",
+              "evidence": "sim_mode=offline; novelty_audit target/background 分解(GraphMind); flags=['NOVELTY-OVERCLAIM', 'COLLISION-SAME-BLOCK']",
+              "rule": "collision.same.block"
+            }
+          ],
+          "note": "撞车可追溯判定(GraphMind target/background)：same 撞车=fatal flaw 一票否决。"
+        },
+        {
+          "gate": "fatal_flaw",
+          "status": "fail",
+          "severity": "critical",
+          "findings": [
+            {
+              "loc": "A-ER-to-MPC-only",
+              "issue": "无创新/fatal flaw 一票否决：Weighted=60.2 Overall=6 → 不通过。",
+              "fix": "回 idea-generation 据否决理由定向重提(非微调)。",
+              "evidence": "否决:创新性<45(套壳/无检索)->直接不通过; 否决:存在未化解CRITICAL->最高有条件通过; decision-mapping:Weighted=60.2->有条件通过（重大）; 取更严:gate(不通过)覆盖mapping(有条件通过（重大）)",
+              "rule": "score_aggregate.veto"
+            }
+          ],
+          "note": "确定性否决闸门：一个 fatal flaw 不被其他高维度平均救回。"
+        },
+        {
+          "gate": "anti_sycophancy",
+          "status": "skip",
+          "severity": "info",
+          "findings": [],
+          "note": "无反驳应答记录：反谄媚门跳过(单轮严审无须)。"
+        }
+      ],
+      "summary": "idea-critique critical 否决门：撞车(critical)+无创新(critical)+反谄媚(warn)；撞车/无创新一票否决 → run_checkpoint --stage 4 聚合 exit 1 → reroute 4→3。",
+      "fresh_evidence": true
+    }
+  },
+  "novelty": {
+    "exit_code": 1,
+    "input": {
+      "schema": "light.novelty_evidence.v1",
+      "as_of": "2026-11-05",
+      "idea_id": "A-narrow",
+      "protocol": {
+        "mode": "FINAL_NOVELTY",
+        "source_boundedness": "HIGH",
+        "required_channels": [
+          "LEXICAL_ENTITY",
+          "CITATION_GRAPH",
+          "SEMANTIC",
+          "HELD_OUT_PRIOR_ART"
+        ]
+      },
+      "evidence_runs": [
+        {
+          "run_id": "Q1-crossref",
+          "channel": "LEXICAL_ENTITY",
+          "status": "SEARCHED",
+          "locator": "https://api.crossref.org/works?query.bibliographic=Equalized+recovery+state+estimators+delayed+and+missing+observations&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:25+00:00",
+          "result_count": 7,
+          "generator_visible": true,
+          "raw_sha256": "sha256:dba914b5b900fa03c8e540b786075cd2f8c48778be85c247d523d0647fe47ef0"
+        },
+        {
+          "run_id": "Q1-openalex",
+          "channel": "LEXICAL_ENTITY",
+          "status": "SEARCHED",
+          "locator": "https://api.openalex.org/works?search=Equalized+recovery+state+estimators+delayed+and+missing+observations&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:22+00:00",
+          "result_count": 7,
+          "generator_visible": true,
+          "raw_sha256": "sha256:c9a5839563ba83208d8ae2fe22d8d12ead75ef26348e154b958f916a86962341"
+        },
+        {
+          "run_id": "Q2-crossref",
+          "channel": "LEXICAL_ENTITY",
+          "status": "SEARCHED",
+          "locator": "https://api.crossref.org/works?query.bibliographic=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:22+00:00",
+          "result_count": 7,
+          "generator_visible": true,
+          "raw_sha256": "sha256:22a080ccfb48ddc19d547f2e3625d48b5879b5a72332fb0277aad2c289164ffd"
+        },
+        {
+          "run_id": "Q2-openalex",
+          "channel": "LEXICAL_ENTITY",
+          "status": "UNAVAILABLE",
+          "locator": "https://api.openalex.org/works?search=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:41+00:00",
+          "result_count": 0,
+          "generator_visible": true,
+          "failure": "HTTP 429 after built-in retries"
+        },
+        {
+          "run_id": "Q3-crossref",
+          "channel": "LEXICAL_ENTITY",
+          "status": "SEARCHED",
+          "locator": "https://api.crossref.org/works?query.bibliographic=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:25+00:00",
+          "result_count": 7,
+          "generator_visible": true,
+          "raw_sha256": "sha256:3d76bcf9e581098ab2862eaa92c6f65fba53567f6481d04954a89fa070c1d66a"
+        },
+        {
+          "run_id": "Q3-openalex",
+          "channel": "LEXICAL_ENTITY",
+          "status": "SEARCHED",
+          "locator": "https://api.openalex.org/works?search=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+          "retrieved_at": "2026-11-05T07:44:42+00:00",
+          "result_count": 7,
+          "generator_visible": true,
+          "raw_sha256": "sha256:372902c7e54359376faa77ee2f29ed937f4d199da470d96d8cf73ea23a98268b"
+        },
+        {
+          "run_id": "G1",
+          "channel": "CITATION_GRAPH",
+          "status": "SEARCHED",
+          "locator": "https://api.openalex.org/works?filter=cites%3AW3120171281&sort=cited_by_count%3Adesc&per-page=15&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Ctype",
+          "retrieved_at": "2026-11-05T07:44:27+00:00",
+          "result_count": 3,
+          "generator_visible": true,
+          "raw_sha256": "sha256:c024ce3c0445b358bc76747a20f95cb48b578813be882e831736f881b36c040a"
+        },
+        {
+          "run_id": "S0",
+          "channel": "SEMANTIC",
+          "status": "UNAVAILABLE",
+          "failure": "Text similarity only. No separately calibrated embedding search evidence."
+        },
+        {
+          "run_id": "H0",
+          "channel": "HELD_OUT_PRIOR_ART",
+          "status": "UNAVAILABLE",
+          "failure": "No pre-separated, documented generator-blind search view."
+        },
+        {
+          "run_id": "P-M1",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+          "retrieved_at": "2026-11-05T07:46:20+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2",
+          "generator_visible": true
+        },
+        {
+          "run_id": "P-M8",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://arxiv.org/pdf/2101.03389",
+          "retrieved_at": "2026-11-05T07:46:19+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66",
+          "generator_visible": true
+        },
+        {
+          "run_id": "P-M5",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://arxiv.org/pdf/2410.09857",
+          "retrieved_at": "2026-11-05T07:46:19+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:1aaa0ff95b5c0caaf67ef19a04685accaa525b4a51c35245b009243f6ce9bd3a",
+          "generator_visible": true
+        },
+        {
+          "run_id": "P-RR",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://par.nsf.gov/servlets/purl/10411809",
+          "retrieved_at": "2026-11-05T07:46:23+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+          "generator_visible": true
+        },
+        {
+          "run_id": "P-DIF",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://arxiv.org/pdf/2106.05320",
+          "retrieved_at": "2026-11-05T07:46:21+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:3198679f149fc42c8832d7655d1c084805aa330514f2873a47e26bdd533ac425",
+          "generator_visible": true
+        },
+        {
+          "run_id": "P-N2",
+          "channel": "OTHER_DECLARED",
+          "status": "SEARCHED",
+          "locator": "https://arxiv.org/pdf/2105.03427",
+          "retrieved_at": "2026-11-05T07:46:23+00:00",
+          "result_count": 1,
+          "raw_sha256": "sha256:2dcdc404e2929fa1fe00e96e53f5450127d20a6faffce7f58498b2109215b68a",
+          "generator_visible": true
+        }
+      ],
+      "collisions": [
+        {
+          "prior_art_id": "M1",
+          "target_relation": "PARTIAL",
+          "stance": "SUPPORTING",
+          "locator": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+          "mechanism_delta": "Cross-horizon treated as missing in the cited model; terminal shift already exists.",
+          "source_run_ids": [
+            "P-M1",
+            "G1"
+          ]
+        },
+        {
+          "prior_art_id": "M8",
+          "target_relation": "PARTIAL",
+          "stance": "SUPPORTING",
+          "locator": "https://arxiv.org/pdf/2101.03389",
+          "mechanism_delta": "Finite language ER already synthesized; the same visible history lifetime and augmented information benchmark must be aligned.",
+          "source_run_ids": [
+            "P-M8"
+          ]
+        },
+        {
+          "prior_art_id": "RR",
+          "target_relation": "UNKNOWN",
+          "stance": "SUPPORTING",
+          "locator": "https://par.nsf.gov/servlets/purl/10411809",
+          "mechanism_delta": "Recurrence at loss-automaton nodes is established. Need to test reducibility after delay augmentation.",
+          "source_run_ids": [
+            "P-RR",
+            "G1"
+          ]
+        },
+        {
+          "prior_art_id": "M5",
+          "target_relation": "PARTIAL",
+          "stance": "SUPPORTING",
+          "locator": "https://arxiv.org/pdf/2410.09857",
+          "mechanism_delta": "Exact conditioned ranges for bounded-noise smoothing; no verified whole-language recurrent budget result.",
+          "source_run_ids": [
+            "P-M5"
+          ]
+        },
+        {
+          "prior_art_id": "DIF",
+          "target_relation": "PARTIAL",
+          "stance": "SUPPORTING",
+          "locator": "https://arxiv.org/pdf/2106.05320",
+          "mechanism_delta": "Minimax differentiation on a fixed sampling grid; irregular delivered histories differ.",
+          "source_run_ids": [
+            "P-DIF"
+          ]
+        },
+        {
+          "prior_art_id": "N2",
+          "target_relation": "PARTIAL",
+          "stance": "SUPPORTING",
+          "locator": "https://arxiv.org/pdf/2105.03427",
+          "mechanism_delta": "Online estimation budgets compatible with MPC shift; no matching delayed position-only contract verified.",
+          "source_run_ids": [
+            "P-N2"
+          ]
+        }
+      ],
+      "judge_signals": [],
+      "human_domain_verdict": {
+        "status": "NOT_REVIEWED",
+        "reviewer_count": 0,
+        "locators": []
+      },
+      "pareto": {
+        "NOVELTY": {
+          "level": "UNKNOWN",
+          "evidence": [
+            {
+              "locator": "https://par.nsf.gov/servlets/purl/10411809",
+              "sha256": "sha256:023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+              "captured_at": "2026-11-05T07:46:23+00:00"
+            }
+          ],
+          "assessment": "Reduction after augmenting the loss automaton still open."
+        },
+        "VALUE": {
+          "level": "MEDIUM",
+          "evidence": [
+            {
+              "locator": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+              "sha256": "sha256:c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2",
+              "captured_at": "2026-11-05T07:46:20+00:00"
+            }
+          ],
+          "assessment": "Budgets enter control tightenings; no demonstrated control-side gain here."
+        },
+        "FEASIBILITY": {
+          "level": "MEDIUM",
+          "evidence": [
+            {
+              "locator": "https://arxiv.org/pdf/2410.09857",
+              "sha256": "sha256:1aaa0ff95b5c0caaf67ef19a04685accaa525b4a51c35245b009243f6ce9bd3a",
+              "captured_at": "2026-11-05T07:46:19+00:00"
+            }
+          ],
+          "assessment": "Linear bounded-noise conditioning is tractable on short paths; single-axis probe supplies local evidence."
+        },
+        "TRACTABILITY": {
+          "level": "UNKNOWN",
+          "evidence": [
+            {
+              "locator": "https://par.nsf.gov/servlets/purl/10411809",
+              "sha256": "sha256:023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+              "captured_at": "2026-11-05T07:46:23+00:00"
+            }
+          ],
+          "assessment": "Uniform boundary memory closure for this delayed system is unproven."
+        },
+        "TESTABILITY": {
+          "level": "HIGH",
+          "evidence": [
+            {
+              "locator": "https://arxiv.org/pdf/2106.05320",
+              "sha256": "sha256:3198679f149fc42c8832d7655d1c084805aa330514f2873a47e26bdd533ac425",
+              "captured_at": "2026-11-05T07:46:21+00:00"
+            }
+          ],
+          "assessment": "Attainable lower/upper bounds provide falsifiable tests."
+        },
+        "ETHICAL_COST": {
+          "level": "LOW",
+          "evidence": [
+            {
+              "locator": "https://arxiv.org/pdf/2101.03389",
+              "sha256": "sha256:f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66",
+              "captured_at": "2026-11-05T07:46:19+00:00"
+            }
+          ],
+          "assessment": "Evaluation restricted to synthetic bounded-state models; no flight or human data."
+        }
+      },
+      "fatal_flaws": [
+        {
+          "status": "UNKNOWN",
+          "description": "Whether standard exact augmentation plus the recurrent observer directly implies the remaining theory.",
+          "evidence": [
+            {
+              "locator": "https://par.nsf.gov/servlets/purl/10411809",
+              "sha256": "sha256:023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+              "captured_at": "2026-11-05T07:46:23+00:00"
+            },
+            {
+              "locator": "https://arxiv.org/pdf/2101.03389",
+              "sha256": "sha256:f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66",
+              "captured_at": "2026-11-05T07:46:19+00:00"
+            }
+          ]
+        }
+      ],
+      "decision": {
+        "verdict": "REVISE",
+        "rationale": "One fixed event word has a sharp worst-case scalar information advantage over discarding, not a uniform all-word algorithmic gain. Need adversarial full-language certificate, equal-information baseline and independent review.",
+        "evidence": [
+          {
+            "locator": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+            "sha256": "sha256:c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2",
+            "captured_at": "2026-11-05T07:46:20+00:00"
+          },
+          {
+            "locator": "https://par.nsf.gov/servlets/purl/10411809",
+            "sha256": "sha256:023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+            "captured_at": "2026-11-05T07:46:23+00:00"
+          },
+          {
+            "locator": "https://arxiv.org/pdf/2410.09857",
+            "sha256": "sha256:1aaa0ff95b5c0caaf67ef19a04685accaa525b4a51c35245b009243f6ce9bd3a",
+            "captured_at": "2026-11-05T07:46:19+00:00"
+          }
+        ]
+      }
+    },
+    "findings": {
+      "schema": "light.findings.v1",
+      "producer": "idea-critique",
+      "target": "A-narrow",
+      "verdict": "fail",
+      "gates": [
+        {
+          "gate": "novelty_evidence",
+          "status": "fail",
+          "severity": "critical",
+          "findings": [
+            {
+              "loc": "protocol",
+              "issue": "source_boundedness=HIGH，不能据窄检索视图判 novel",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "NOVELTY_MIRAGE_RISK"
+            },
+            {
+              "loc": "run:Q2-openalex",
+              "issue": "LEXICAL_ENTITY unavailable；不得改写为未发现前作",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "REQUIRED_SOURCE_UNAVAILABLE"
+            },
+            {
+              "loc": "run:S0",
+              "issue": "SEMANTIC unavailable；不得改写为未发现前作",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "REQUIRED_SOURCE_UNAVAILABLE"
+            },
+            {
+              "loc": "run:H0",
+              "issue": "HELD_OUT_PRIOR_ART unavailable；不得改写为未发现前作",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "REQUIRED_SOURCE_UNAVAILABLE"
+            },
+            {
+              "loc": "coverage",
+              "issue": "required channel SEMANTIC 未成功检索",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "REQUIRED_CHANNEL_UNRESOLVED"
+            },
+            {
+              "loc": "coverage",
+              "issue": "required channel HELD_OUT_PRIOR_ART 未成功检索",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "REQUIRED_CHANNEL_UNRESOLVED"
+            },
+            {
+              "loc": "coverage",
+              "issue": "最终判断缺与 generator 隔离的 held-out prior art",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "HELD_OUT_PRIOR_ART_GAP"
+            },
+            {
+              "loc": "collision:2",
+              "issue": "target/stance 未判定",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "COLLISION_UNRESOLVED"
+            },
+            {
+              "loc": "human",
+              "issue": "human verdict=NOT_REVIEWED",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "HUMAN_VERDICT_UNRESOLVED"
+            },
+            {
+              "loc": "pareto:TRACTABILITY",
+              "issue": "TRACTABILITY=UNKNOWN",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "PARETO_UNRESOLVED"
+            },
+            {
+              "loc": "pareto:NOVELTY",
+              "issue": "NOVELTY=UNKNOWN",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "PARETO_UNRESOLVED"
+            },
+            {
+              "loc": "fatal_flaws",
+              "issue": "fatal flaw 尚未排除",
+              "fix": "补检索/held-out/领域判断或据 hard blocker 回 idea-generation 重提。",
+              "rule": "FATAL_FLAW_UNKNOWN"
+            }
+          ],
+          "note": "novelty evidence status=FAIL；UNKNOWN 也阻止 stage 4 推进。"
+        }
+      ],
+      "summary": "新颖性 held-out、覆盖、人类判断与 Pareto 证据门。",
+      "fresh_evidence": true
+    },
+    "evaluation": {
+      "schema": "light.novelty_evidence_report.v1",
+      "status": "FAIL",
+      "advancement": "BLOCK",
+      "searched_channels": [
+        "CITATION_GRAPH",
+        "LEXICAL_ENTITY",
+        "OTHER_DECLARED"
+      ],
+      "judge_independence_groups": 0,
+      "judge_calibration_status": "NOT_USED",
+      "as_of": "2026-11-05",
+      "issues": [
+        {
+          "code": "NOVELTY_MIRAGE_RISK",
+          "loc": "protocol",
+          "severity": "unresolved",
+          "message": "source_boundedness=HIGH，不能据窄检索视图判 novel"
+        },
+        {
+          "code": "REQUIRED_SOURCE_UNAVAILABLE",
+          "loc": "run:Q2-openalex",
+          "severity": "unresolved",
+          "message": "LEXICAL_ENTITY unavailable；不得改写为未发现前作"
+        },
+        {
+          "code": "REQUIRED_SOURCE_UNAVAILABLE",
+          "loc": "run:S0",
+          "severity": "unresolved",
+          "message": "SEMANTIC unavailable；不得改写为未发现前作"
+        },
+        {
+          "code": "REQUIRED_SOURCE_UNAVAILABLE",
+          "loc": "run:H0",
+          "severity": "unresolved",
+          "message": "HELD_OUT_PRIOR_ART unavailable；不得改写为未发现前作"
+        },
+        {
+          "code": "REQUIRED_CHANNEL_UNRESOLVED",
+          "loc": "coverage",
+          "severity": "unresolved",
+          "message": "required channel SEMANTIC 未成功检索"
+        },
+        {
+          "code": "REQUIRED_CHANNEL_UNRESOLVED",
+          "loc": "coverage",
+          "severity": "unresolved",
+          "message": "required channel HELD_OUT_PRIOR_ART 未成功检索"
+        },
+        {
+          "code": "HELD_OUT_PRIOR_ART_GAP",
+          "loc": "coverage",
+          "severity": "error",
+          "message": "最终判断缺与 generator 隔离的 held-out prior art"
+        },
+        {
+          "code": "COLLISION_UNRESOLVED",
+          "loc": "collision:2",
+          "severity": "unresolved",
+          "message": "target/stance 未判定"
+        },
+        {
+          "code": "HUMAN_VERDICT_UNRESOLVED",
+          "loc": "human",
+          "severity": "unresolved",
+          "message": "human verdict=NOT_REVIEWED"
+        },
+        {
+          "code": "PARETO_UNRESOLVED",
+          "loc": "pareto:TRACTABILITY",
+          "severity": "unresolved",
+          "message": "TRACTABILITY=UNKNOWN"
+        },
+        {
+          "code": "PARETO_UNRESOLVED",
+          "loc": "pareto:NOVELTY",
+          "severity": "unresolved",
+          "message": "NOVELTY=UNKNOWN"
+        },
+        {
+          "code": "FATAL_FLAW_UNKNOWN",
+          "loc": "fatal_flaws",
+          "severity": "unresolved",
+          "message": "fatal flaw 尚未排除"
+        }
+      ],
+      "honesty": "PASS 只表示声明的检索视图、held-out 隔离、人类判断与 Pareto 证据闭合；不证明客观新颖性、未来价值或成功概率。多个 LLM 的一致不等于多个独立专家。"
+    }
+  },
+  "rehearsal": {
+    "exit_code": 0,
+    "corpus": {
+      "schema": "light.critique_corpus.v1",
+      "producer": "idea-critique",
+      "verdict_id": "A-20261105",
+      "top3_reject_reasons": [
+        {
+          "reason": "Added data rather than a new mechanism",
+          "rebuttable": false,
+          "evidence_gap": "No improvement over the same-information exact augmentation, nor a resource-matched structural bound."
+        },
+        {
+          "reason": "A finite record does not prove repeatable recovery",
+          "rebuttable": false,
+          "evidence_gap": "Missing all-prefix upper certificate, augmented recurrent baseline and boundary admission."
+        },
+        {
+          "reason": "Estimation separation need not change the control problem",
+          "rebuttable": false,
+          "evidence_gap": "No reachable active row and all-successor shift proof for A."
+        }
+      ],
+      "reviewer_corpus_refs": [],
+      "collision_summary": "",
+      "rehearsal_advisory": {
+        "n_reasons": 3,
+        "n_unrehearsed": 0,
+        "n_unresolved": 3,
+        "flags": [
+          {
+            "code": "REHEARSAL-UNRESOLVED",
+            "msg": "3 条拒稿点预演不出有效反驳(rebuttable=False)：['Added data rather than a', 'A finite record does not', 'Estimation separation ne']——按 NEVER#4 这是『未化解』风险，应停下走 ASK 回炉决策，不当通过(本 advisory 只提示不替你判/不阻断；真否决在 collision/fatal_flaw)。"
+          }
+        ],
+        "note": "拒稿预演完整性 advisory（warn-only）：只检 NEVER#4 做没做齐，不语义判反驳是否有效；rebuttable 可被糊弄，真 critical 阻断归 collision/fatal_flaw。"
+      },
+      "consumers": {
+        "paper-writing": "related-work/动机段预反驳 top3_reject_reasons",
+        "review-rebuttal": "reviewer_corpus_refs 作 rebuttal 语料",
+        "delivery-gate": "总控交付门复查 top3_reject_reasons 是否已化解"
+      },
+      "note": "判决语料下沉，兑现 idea-critique→paper-writing/review-rebuttal 跨技能反哺。落 memory-pm 台账(.light/ decision_log) 由 SKILL 协议负责。"
+    },
+    "findings": {
+      "schema": "light.findings.v1",
+      "producer": "idea-critique",
+      "target": "critique:A-20261105",
+      "verdict": "warn",
+      "gates": [
+        {
+          "gate": "rehearsal_completeness",
+          "status": "warn",
+          "severity": "minor",
+          "findings": [
+            {
+              "loc": "critique:A-20261105",
+              "issue": "3 条拒稿点预演不出有效反驳(rebuttable=False)：['Added data rather than a', 'A finite record does not', 'Estimation separation ne']——按 NEVER#4 这是『未化解』风险，应停下走 ASK 回炉决策，不当通过(本 advisory 只提示不替你判/不阻断；真否决在 collision/fatal_flaw)。",
+              "fix": "",
+              "rule": "REHEARSAL-UNRESOLVED"
+            }
+          ]
+        }
+      ],
+      "summary": "idea-critique 拒稿预演完整性 advisory(借 paperjury two-sided trial，warn-only)",
+      "fresh_evidence": true
+    }
+  },
+  "self_audit": {
+    "exit_code": 0,
+    "output": {
+      "schema": "light.findings.v1",
+      "producer": "idea-critique",
+      "target": "critique_verdict.md",
+      "verdict": "pass",
+      "gates": [
+        {
+          "gate": "prism_self_audit",
+          "status": "pass",
+          "severity": "info",
+          "findings": []
+        }
+      ],
+      "summary": "idea-critique PRISM 式评审自审(constructiveness/surface/过度背书)",
+      "fresh_evidence": true
+    }
+  },
+  "aggregate": {
+    "exit_code": 1,
+    "output": "# Checkpoint 聚合报告 — stage 4\n\n- 整体裁定：**⛔ FAIL**  |  闸门数：3\n- 本阶段应覆盖闸门：collision/fatal_flaw/anti_sycophancy（checkpoints.md §各阶段闸门对照）\n\n| gate | status | severity | findings | note |\n| --- | --- | --- | --- | --- |\n| narrow.json | warn | major | 1 | 源自 idea-critique 的 1 条 finding |\n| novelty.json | **fail** | critical | 12 | 源自 idea-critique 的 12 条 finding |\n| rehearsal.json | warn | minor | 1 | 源自 idea-critique 的 1 条 finding |\n\n\n> ⛔ 存在 critical fail：确认点**默认阻断推进**（退出码 1）。修复闸门项或经用户显式 FAIL→PASS 决策并记 notes 后方可继续。\n",
+    "passport_exists": false,
+    "scope": "A narrow target only; rejected broad claim recorded separately"
+  },
+  "skill_revision": "6b44f57d1274eb38a6c79dc29c2d21e5e0a225a9",
+  "upstream_card": {
+    "id": "A",
+    "title": "Position-only set-membership recovery across block boundaries with delayed measurements",
+    "claim": "Characterize repeatable attainable prescribed recovery budgets for causal estimators and finite memory, against exact delay augmentation, then test shift-compatible tube MPC tightening."
+  },
+  "upstream_pool": [
+    {
+      "title": "Data‐enabled predictive control for quadcopters",
+      "year": 2021,
+      "doi": "10.1002/rnc.5686"
+    },
+    {
+      "title": "Output feedback stochastic MPC for tracking control of quadrotors with disturbances",
+      "year": 2024,
+      "doi": "10.1049/cth2.12588"
+    },
+    {
+      "title": "Robust Output Feedback MPC with Reduced Conservatism under Ellipsoidal Uncertainty",
+      "year": 2022,
+      "doi": "10.1109/cdc51059.2022.9992704"
+    },
+    {
+      "title": "Wayset-based guidance of multirotor aerial vehicles using robust tube-based model predictive control",
+      "year": 2022,
+      "doi": "10.1016/j.isatra.2021.12.002"
+    },
+    {
+      "title": "PAMPC: Perception-Aware Model Predictive Control for Quadrotors",
+      "year": 2018,
+      "doi": "10.1109/iros.2018.8593739"
+    },
+    {
+      "title": "Scalable tube model predictive control of uncertain linear systems using ellipsoidal sets",
+      "year": 2025,
+      "doi": "10.1002/rnc.6485"
+    },
+    {
+      "title": "Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data",
+      "year": 2021,
+      "doi": "10.1016/j.ifacol.2021.08.482"
+    },
+    {
+      "title": "Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation",
+      "year": 2018,
+      "doi": "10.1109/tac.2018.2791899"
+    },
+    {
+      "title": "Stochastic output feedback MPC with intermittent observations",
+      "year": 2022,
+      "doi": "10.1016/j.automatica.2022.110282"
+    },
+    {
+      "title": "A Fast and Accurate Linear Constrained Zonotopic Set-membership Filter",
+      "year": 2026,
+      "doi": "10.1109/tac.2026.3712691"
+    },
+    {
+      "title": "Optimal Set-Membership Smoothing",
+      "year": 2026,
+      "doi": "10.1109/tac.2025.3632158"
+    },
+    {
+      "title": "Experimental validation of zonotopic Tube-MPC applied to a Hexacopter",
+      "year": 2025,
+      "doi": "10.1109/codit66093.2025.11321702"
+    },
+    {
+      "title": "Set-Valued State Estimator With Sparse and Delayed Measurements for Uncertain Discrete-Time Linear Systems",
+      "year": 2024,
+      "doi": "10.1109/lcsys.2024.3405376"
+    },
+    {
+      "title": "Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations",
+      "year": 2022,
+      "doi": "10.1109/lcsys.2021.3050300"
+    },
+    {
+      "title": "Path-dependent controller and estimator synthesis with robustness to delayed and missing data",
+      "year": 2021,
+      "doi": "10.1145/3447928.3456655"
+    },
+    {
+      "title": "Constrained zonotopes: A new tool for set-based estimation and fault detection",
+      "year": 2016,
+      "doi": "10.1016/j.automatica.2016.02.036"
+    },
+    {
+      "title": "Guaranteed methods based on constrained zonotopes for set-valued state estimation of nonlinear discrete-time systems",
+      "year": 2020,
+      "doi": "10.1016/j.automatica.2019.108614"
+    },
+    {
+      "title": "Rethinking the Mathematical Framework and Optimality of Set-Membership Filtering",
+      "year": 2022,
+      "doi": "10.1109/tac.2021.3082508"
+    },
+    {
+      "title": "Stability of linear set-membership filters with respect to initial conditions: An observation-information perspective",
+      "year": 2025,
+      "doi": "10.1016/j.automatica.2024.111993"
+    },
+    {
+      "title": "Robust output feedback model predictive control of constrained linear systems",
+      "year": 2006,
+      "doi": "10.1016/j.automatica.2006.03.005"
+    },
+    {
+      "title": "Invariant approximations of the minimal robust positively Invariant set",
+      "year": 2005,
+      "doi": "10.1109/tac.2005.843854"
+    },
+    {
+      "title": "Robust tube-based constrained predictive control via zonotopic set-membership estimation",
+      "year": 2011,
+      "doi": "10.1109/cdc.2011.6161131"
+    },
+    {
+      "title": "Robust output feedback model predictive control using online estimation bounds",
+      "year": 2021,
+      "doi": "10.48550/arxiv.2105.03427"
+    },
+    {
+      "title": "Output-feedback predictive control of constrained linear systems via set-membership state estimation",
+      "year": 2000,
+      "doi": "10.1080/002071700403420"
+    },
+    {
+      "title": "Output feedback predictive control for constrained linear systems with intermittent measurements",
+      "year": 2013,
+      "doi": "10.1016/j.sysconle.2013.01.003"
+    },
+    {
+      "title": "Robust Output Feedback Variable-Horizon MPC With Adaptive Terminal Constraints",
+      "year": 2025,
+      "doi": "10.1109/lcsys.2025.3578491"
+    },
+    {
+      "title": "Tube-Based Model Predictive Control Based on Constrained Zonotopes",
+      "year": 2024,
+      "doi": "10.1109/access.2024.3381622"
+    },
+    {
+      "title": "Minimum-Volume Set-Membership State Estimation of LTV Constrained Systems with Sporadic Measurements",
+      "year": 2023,
+      "doi": "10.1109/cdc49753.2023.10383257"
+    },
+    {
+      "title": "Impulsive set-membership state estimators for continuous-time linear systems based on delayed discrete-time periodic measurements",
+      "year": 2025,
+      "doi": "10.1016/j.ejcon.2025.101232"
+    },
+    {
+      "title": "Trajectory Tracking Control of Quadrotor UAV with Tube-Based Model Predictive Control",
+      "year": 2025,
+      "doi": "10.1109/ccdc65474.2025.11090705"
+    },
+    {
+      "title": "Finite horizon constrained control and bounded-error estimation in the presence of missing data",
+      "year": 2020,
+      "doi": "10.1016/j.nahs.2020.100854"
+    },
+    {
+      "title": "Output feedback model predictive control based on set‐membership state estimation",
+      "year": 2020,
+      "doi": "10.1049/iet-cta.2019.0881"
+    },
+    {
+      "title": "Robust model predictive control of constrained linear systems with bounded disturbances",
+      "year": 2005,
+      "doi": "10.1016/j.automatica.2004.08.019"
+    },
+    {
+      "title": "Combined control and communication scheduling for constrained system using robust output feedback MPC",
+      "year": 2019,
+      "doi": "10.23919/ecc.2019.8796135"
+    },
+    {
+      "title": "Robust output feedback MPC with reduced conservatism for linear uncertain systems using time varying tubes",
+      "year": 2021,
+      "doi": "10.1109/cdc45484.2021.9682948"
+    },
+    {
+      "title": "Set-membership filtering for generator dynamic state estimation with delayed measurements",
+      "year": 2018,
+      "doi": "10.1080/21642583.2018.1531794"
+    },
+    {
+      "title": "线性离散系统的自适应集员滤波方法",
+      "year": 2026,
+      "doi": "10.19306/j.cnki.2095-8110.2026.03.003"
+    },
+    {
+      "title": "Differentiator for Noisy Sampled Signals With Best Worst-Case Accuracy",
+      "doi": "10.1109/lcsys.2021.3087542",
+      "year": 2022
+    }
+  ],
+  "probe_sha256": "ee15f4f818a3c52d29efd080eb0e0f4a4c392300ae14c704ee2de4046c96a9aa",
+  "python": "3.11.9",
+  "scalar_probe": {
+    "stdout": "4 drop (1,) 1/20 0.050000\n4 keep (1,) 1/20 0.050000\n5 drop (1,) 3/50 0.060000\n5 keep (1, 3) 1/25 0.040000\n8 drop (1, 5) 11/200 0.055000\n8 keep (1, 3, 5) 1/20 0.050000\n",
+    "exit_code": 0,
+    "scipy": "1.17.1",
+    "numpy": "2.4.6",
+    "random_seed": "not applicable"
+  },
+  "review_sha256": "8e3e745ad4c6a59bf4cd5c6461016870e173e70bdb6769f0f27cb6d7de73d407",
+  "as_of": "2026-11-05"
+}

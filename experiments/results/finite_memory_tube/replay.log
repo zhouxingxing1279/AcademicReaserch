@@ -1,0 +1,1 @@
+{"axis_steps_replayed": 6240, "cases": 26, "stimuli": 13, "maximum_transition_residual": 0.0, "maximum_estimate_replay_residual": 0.0, "tolerance": 2e-07, "source_hash_check": "passed", "all_checks": "passed", "scope": "Numerical replay, not directed-rounding certification or independent peer review"}

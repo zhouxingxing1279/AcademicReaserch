@@ -1,0 +1,27 @@
+{
+  "date_local": "2026-11-05",
+  "scope": "Stage 4 evidence, startup through decisions 4 and 8 only. Fixed before exhaustive enumeration. The velocity threshold was exploratory on the earlier one-word audit; this wider check is not a blind novelty review.",
+  "axis": "one-axis ZOH, known zero inputs; [p;v], p in m, v in m/s",
+  "sample_period": "1/2",
+  "initial_radii": [
+    "1/200",
+    "1/100"
+  ],
+  "process_radius": "1/50",
+  "position_noise_radius": "1/200",
+  "block": 4,
+  "decisions": [
+    4,
+    8
+  ],
+  "target_radii": [
+    "7/100",
+    "21/400"
+  ],
+  "language": "For s=0..k, from empty queue and zero initial consecutive misses, use absent generation or delay 0,1,2 with no consecutive absent generations. Exogenous. Every generated packet eventually delivered; prefixes admitting later deliveries extend by on-time generation thereafter.",
+  "policies": {
+    "keep": "Use all packets delivered through decision k before acting.",
+    "drop": "Use the same delivery record but discard value of s if receipt exceeds 4*(floor(s/4)+1); retain deliveries exactly on boundary. Keep every other available constraint."
+  },
+  "outcomes": "Worst over all compatible continuous values and all allowed prefixes for each coordinate. Accept at each tested boundary only if the same feasible posterior point can meet both radii. Include a no-strict-crossing control and the original one-word witness. No change of thresholds after enumeration. No infinite-horizon conclusion."
+}

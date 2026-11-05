@@ -1,0 +1,882 @@
+{
+  "trajectories": 10000,
+  "steps": 30,
+  "state_transitions": 300000,
+  "constraint_failures": 0,
+  "max_constraint_violation": -0.1956889295962797,
+  "max_plan_residual": -0.0002522642664434249,
+  "max_shift_residual": -0.4049020044416393,
+  "max_joint_dynamics_residual": 2.0122792321330962e-16,
+  "runtime": 1.2472165999997742,
+  "exact_unconstrained_shortcuts": 300000,
+  "online_QP_solves": 0,
+  "adaptive_tube_computations": 1,
+  "explicit_adaptive_branches": [
+    {
+      "trajectory": 20,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26916266021198776
+    },
+    {
+      "trajectory": 64,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25994890487543953
+    },
+    {
+      "trajectory": 69,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25335918804465163
+    },
+    {
+      "trajectory": 158,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26806717564345806
+    },
+    {
+      "trajectory": 170,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21454833617467817
+    },
+    {
+      "trajectory": 264,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21540606801304185
+    },
+    {
+      "trajectory": 299,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26540482117431385
+    },
+    {
+      "trajectory": 330,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23189146471400124
+    },
+    {
+      "trajectory": 408,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2606570038874688
+    },
+    {
+      "trajectory": 576,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26445862506606466
+    },
+    {
+      "trajectory": 719,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2698621966465772
+    },
+    {
+      "trajectory": 737,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25056406761100136
+    },
+    {
+      "trajectory": 850,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2619701303896579
+    },
+    {
+      "trajectory": 869,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25289235042824243
+    },
+    {
+      "trajectory": 887,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.272226579158072
+    },
+    {
+      "trajectory": 958,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2586888983648855
+    },
+    {
+      "trajectory": 1143,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24280595583292852
+    },
+    {
+      "trajectory": 1272,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2565868956914753
+    },
+    {
+      "trajectory": 1385,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2658055535346818
+    },
+    {
+      "trajectory": 1395,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27029703709050323
+    },
+    {
+      "trajectory": 1402,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2659008392041675
+    },
+    {
+      "trajectory": 1424,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2513464006170285
+    },
+    {
+      "trajectory": 1532,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2339761944997769
+    },
+    {
+      "trajectory": 1562,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2769022425778169
+    },
+    {
+      "trajectory": 1789,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24385176770579453
+    },
+    {
+      "trajectory": 1792,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2725339983127154
+    },
+    {
+      "trajectory": 1870,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23150417865803619
+    },
+    {
+      "trajectory": 1929,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2654524797290191
+    },
+    {
+      "trajectory": 1954,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.267120410010649
+    },
+    {
+      "trajectory": 1974,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21795650065448124
+    },
+    {
+      "trajectory": 2020,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26137960132478466
+    },
+    {
+      "trajectory": 2056,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25224945192243775
+    },
+    {
+      "trajectory": 2058,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2676464983137171
+    },
+    {
+      "trajectory": 2077,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2753215733766261
+    },
+    {
+      "trajectory": 2160,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2416007561015755
+    },
+    {
+      "trajectory": 2165,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22117165207936718
+    },
+    {
+      "trajectory": 2210,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25816526860120026
+    },
+    {
+      "trajectory": 2317,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22641261307418226
+    },
+    {
+      "trajectory": 2474,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26612802290338733
+    },
+    {
+      "trajectory": 2517,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22077264222876203
+    },
+    {
+      "trajectory": 2642,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.28031800971662635
+    },
+    {
+      "trajectory": 2679,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2775202376455186
+    },
+    {
+      "trajectory": 2701,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2566601636159348
+    },
+    {
+      "trajectory": 2831,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2525002661888097
+    },
+    {
+      "trajectory": 2849,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2337632628378402
+    },
+    {
+      "trajectory": 2968,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24078592241540997
+    },
+    {
+      "trajectory": 3009,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27170569564278935
+    },
+    {
+      "trajectory": 3088,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27350217703478275
+    },
+    {
+      "trajectory": 3097,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2607342866011637
+    },
+    {
+      "trajectory": 3108,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2610304663390369
+    },
+    {
+      "trajectory": 3187,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26481116017079387
+    },
+    {
+      "trajectory": 3327,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2696231601616417
+    },
+    {
+      "trajectory": 3369,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24609205890654484
+    },
+    {
+      "trajectory": 3395,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2685698367835282
+    },
+    {
+      "trajectory": 3550,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2799774826414938
+    },
+    {
+      "trajectory": 3609,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24865385869558887
+    },
+    {
+      "trajectory": 3637,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22482543204235417
+    },
+    {
+      "trajectory": 3753,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22892326398076668
+    },
+    {
+      "trajectory": 3799,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23945105475606399
+    },
+    {
+      "trajectory": 3919,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23308839286356853
+    },
+    {
+      "trajectory": 3924,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2729169687610127
+    },
+    {
+      "trajectory": 3936,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22112020447339065
+    },
+    {
+      "trajectory": 4126,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2619063592500306
+    },
+    {
+      "trajectory": 4280,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2686263508665816
+    },
+    {
+      "trajectory": 4319,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.20865548675851153
+    },
+    {
+      "trajectory": 4322,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25745047524963416
+    },
+    {
+      "trajectory": 4475,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2715290673161199
+    },
+    {
+      "trajectory": 4621,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2254513549761179
+    },
+    {
+      "trajectory": 4662,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26908973624639987
+    },
+    {
+      "trajectory": 4793,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2771182331797276
+    },
+    {
+      "trajectory": 4998,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24657759259692769
+    },
+    {
+      "trajectory": 5074,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23430855584762833
+    },
+    {
+      "trajectory": 5079,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2466145986769006
+    },
+    {
+      "trajectory": 5090,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2693753190801952
+    },
+    {
+      "trajectory": 5198,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27617165173855407
+    },
+    {
+      "trajectory": 5256,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27811462466225756
+    },
+    {
+      "trajectory": 5319,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26695595613787315
+    },
+    {
+      "trajectory": 5367,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26248754913013705
+    },
+    {
+      "trajectory": 5440,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25512575852350095
+    },
+    {
+      "trajectory": 5454,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24747255042993122
+    },
+    {
+      "trajectory": 5478,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2320522870011995
+    },
+    {
+      "trajectory": 5503,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22406334327444344
+    },
+    {
+      "trajectory": 5523,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24928876268880773
+    },
+    {
+      "trajectory": 5531,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24695556371047667
+    },
+    {
+      "trajectory": 5631,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.19568892094461188
+    },
+    {
+      "trajectory": 5760,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25664829113753396
+    },
+    {
+      "trajectory": 5902,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24456248385517676
+    },
+    {
+      "trajectory": 5956,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2742541366163418
+    },
+    {
+      "trajectory": 5970,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22568093392307564
+    },
+    {
+      "trajectory": 6000,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2532703482847213
+    },
+    {
+      "trajectory": 6129,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26366004731729054
+    },
+    {
+      "trajectory": 6303,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23943191286962695
+    },
+    {
+      "trajectory": 6364,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21456350537573876
+    },
+    {
+      "trajectory": 6431,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21858870407059072
+    },
+    {
+      "trajectory": 6601,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24592591706888667
+    },
+    {
+      "trajectory": 6718,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22189490126891975
+    },
+    {
+      "trajectory": 6783,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2800361317196086
+    },
+    {
+      "trajectory": 6967,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.273043489294736
+    },
+    {
+      "trajectory": 7031,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2695187657889331
+    },
+    {
+      "trajectory": 7043,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23404810709077073
+    },
+    {
+      "trajectory": 7052,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2719718198121204
+    },
+    {
+      "trajectory": 7216,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2704013420917276
+    },
+    {
+      "trajectory": 7227,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2759796606096311
+    },
+    {
+      "trajectory": 7328,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2613869433746816
+    },
+    {
+      "trajectory": 7337,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2715670241691476
+    },
+    {
+      "trajectory": 7526,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2440237687416772
+    },
+    {
+      "trajectory": 7575,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27347422548967915
+    },
+    {
+      "trajectory": 7625,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24392680834845326
+    },
+    {
+      "trajectory": 7629,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2281777527403107
+    },
+    {
+      "trajectory": 7649,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2637168980336354
+    },
+    {
+      "trajectory": 7697,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26405600994155687
+    },
+    {
+      "trajectory": 7881,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2473905974973063
+    },
+    {
+      "trajectory": 7884,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24815847740862118
+    },
+    {
+      "trajectory": 7924,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24991903009926497
+    },
+    {
+      "trajectory": 7948,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23345946697433073
+    },
+    {
+      "trajectory": 8114,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2602774606948809
+    },
+    {
+      "trajectory": 8131,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21988565226618006
+    },
+    {
+      "trajectory": 8158,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2164587635342351
+    },
+    {
+      "trajectory": 8247,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.25794973003262534
+    },
+    {
+      "trajectory": 8341,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.23613778789781958
+    },
+    {
+      "trajectory": 8374,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2574233419974723
+    },
+    {
+      "trajectory": 8479,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2719325602659416
+    },
+    {
+      "trajectory": 8583,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27532762139413813
+    },
+    {
+      "trajectory": 8655,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.250451051682129
+    },
+    {
+      "trajectory": 8695,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26711256602068667
+    },
+    {
+      "trajectory": 8812,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22006326786027974
+    },
+    {
+      "trajectory": 8901,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.26060632565934283
+    },
+    {
+      "trajectory": 9014,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.21324516019248096
+    },
+    {
+      "trajectory": 9024,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2691542905677696
+    },
+    {
+      "trajectory": 9069,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2381765371209107
+    },
+    {
+      "trajectory": 9131,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2796408686993944
+    },
+    {
+      "trajectory": 9136,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2779312151974729
+    },
+    {
+      "trajectory": 9222,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24044124857636628
+    },
+    {
+      "trajectory": 9254,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.22826800883107412
+    },
+    {
+      "trajectory": 9276,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2557546003953438
+    },
+    {
+      "trajectory": 9353,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2681778847702576
+    },
+    {
+      "trajectory": 9435,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2495198320002825
+    },
+    {
+      "trajectory": 9799,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.27483699220199553
+    },
+    {
+      "trajectory": 9816,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.24216722435499272
+    },
+    {
+      "trajectory": 9906,
+      "k": 0,
+      "branch": "exact_unconstrained",
+      "residual": -0.2384483809276836
+    }
+  ],
+  "initial_error": "zero; robust disturbance/sensor noise independent and uniformly sampled",
+  "set_storage": "lossless reconstruction: stored S, innovation prefix, d=hat_x-z prefix, window; see reconstruct_mc_sets",
+  "scope": "adaptive MPC; exact unconstrained shortcut after fixed-envelope feasibility; actual adaptive QP otherwise",
+  "wall_seconds": 1.281706000000213,
+  "source_hashes_at_run": {
+    "src\\oit_mrpi\\control.py": "7155d16e7e3e164e6e7787436873ab60afbf0e622831aac4168352efbde44fec",
+    "src\\oit_mrpi\\estimation.py": "de6e9c82815ac73ee080b5d51a1c54355c706ffd54ab027b4201ba592ae0a019",
+    "src\\oit_mrpi\\rpi.py": "d19b981ce2b569720db88d4b1c5dc3d2b04f2eaef9dc20f44ef836f53751f374",
+    "src\\oit_mrpi\\sets.py": "aa00e87f403ab269a7ef96f4cdf4558049296baea47c497963d0dc1d23a01561",
+    "src\\oit_mrpi\\__init__.py": "a784ed9fcb932b839e3cd910e53d0a680f2378746540c4ad2843beacbaf0acdd",
+    "experiments\\oit_mrpi_benchmarks.py": "5a68016448dda4f200a3454e2eac340fdc1320a57861ed402c2ac441e3b819d0",
+    "experiments\\oit_mrpi_closedloop.py": "281eb39dbc10829de1a21708ec27c4b36afe7145f37f6765a895c6264d0c5ee9",
+    "experiments\\oit_mrpi_plots.py": "48e4597b3680ddb00a18a7a6d830e33f84cba6dc8dd50077047a1d7dfd2fe0c1",
+    "experiments\\oit_mrpi_theory.py": "833c91ee619c04c6f2791e30124b1922d1036f937e1692fb1863a78c685840b1",
+    "experiments\\oit_mrpi_verify.py": "a86415f53376a9291695fecd9651ac7bb421567dbf28c7e733a3065b422c823a",
+    "tests\\test_oit_mrpi.py": "8e15c3b552238d4eff0bc9f722d4408154e9d926ee7b0200cdb1ecf7dc98fbbd",
+    "docs\\research\\proposal\\OIT_MRPI_VALIDATION_PLAN.md": "2415aea71fff79c72ed40d43623abe3f6de62e5673472c8478ffd1edd6ec25bf"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "osqp": "1.1.3",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "arithmetic": "float64 LP/QP with residual checks; analytical proofs separate; not outward-rounded formal verification"
+}

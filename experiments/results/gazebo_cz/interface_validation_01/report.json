@@ -1,0 +1,34 @@
+{
+  "name": "interface_validation_01",
+  "delivery": "fresh",
+  "force_newtons": 0.0,
+  "contract": {
+    "T": 0.5,
+    "acceleration": 0.02,
+    "noise": 0.005,
+    "missing": 1,
+    "delay": 1,
+    "initial_p": 0.005,
+    "initial_v": 0.01
+  },
+  "completed": true,
+  "landed": true,
+  "scope": "Open-loop acceleration-interface identification; not MPC validation",
+  "instrumented_model": false,
+  "split": "validation",
+  "anchor_ned": [
+    -0.06770352582802265,
+    -0.02074814209069044,
+    -2.738452044054206
+  ],
+  "computed_steps": 0,
+  "source_hashes": {
+    "scripts/simulation/cz_sitl.py": "55d94a7f76861a0950f90aea85a40bc79e33fa70c0832f30165dfeb88a41d227",
+    "src/outerloop/finite_memory.py": "efb978a40f824f2c40c79323857c7291dbba321f3ba9a7395b4a34f688dd2ed0",
+    "src/outerloop/tube_mpc.py": "37c65b56dafda6a30e12ee64b95520f9b301096cfce54776e88a84ec3d0ebf71"
+  },
+  "px4_commit": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4",
+  "identification_source_sha256": "a276bd3b2cf0c329aa711724d3ab2a865d9b96262c59320f6ecc7a54f0168abb",
+  "completed_blocks": 3,
+  "logger_config_restored": true
+}

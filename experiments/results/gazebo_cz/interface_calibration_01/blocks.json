@@ -1,0 +1,362 @@
+[
+  {
+    "index": 0,
+    "axis": 0,
+    "sign": 1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 46.632,
+        "start": 46.632,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 47.032,
+        "start": 47.048,
+        "command": [
+          0.4,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 47.831999999999994,
+        "start": 47.84,
+        "command": [
+          -0.4,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 49.431999999999995,
+        "start": 49.436,
+        "command": [
+          0.4,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 50.23199999999999,
+        "start": 50.232,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 46.632,
+    "end": 50.64
+  },
+  {
+    "index": 1,
+    "axis": 2,
+    "sign": -1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 56.656,
+        "start": 56.656,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 57.056,
+        "start": 57.06,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.4
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 57.855999999999995,
+        "start": 57.86,
+        "command": [
+          0.0,
+          0.0,
+          0.4
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 59.455999999999996,
+        "start": 59.46,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.4
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 60.25599999999999,
+        "start": 60.26,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 56.656,
+    "end": 60.66
+  },
+  {
+    "index": 2,
+    "axis": 1,
+    "sign": -1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 66.688,
+        "start": 66.688,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 67.08800000000001,
+        "start": 67.104,
+        "command": [
+          -0.0,
+          -0.4,
+          -0.0
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 67.888,
+        "start": 67.9,
+        "command": [
+          0.0,
+          0.4,
+          0.0
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 69.488,
+        "start": 69.492,
+        "command": [
+          -0.0,
+          -0.4,
+          -0.0
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 70.288,
+        "start": 70.288,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 66.688,
+    "end": 70.688
+  },
+  {
+    "index": 3,
+    "axis": 1,
+    "sign": 1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 76.692,
+        "start": 76.692,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 77.092,
+        "start": 77.1,
+        "command": [
+          0.0,
+          0.4,
+          0.0
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 77.892,
+        "start": 77.9,
+        "command": [
+          -0.0,
+          -0.4,
+          -0.0
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 79.49199999999999,
+        "start": 79.492,
+        "command": [
+          0.0,
+          0.4,
+          0.0
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 80.29199999999999,
+        "start": 80.3,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 76.692,
+    "end": 80.696
+  },
+  {
+    "index": 4,
+    "axis": 2,
+    "sign": 1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 86.732,
+        "start": 86.732,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 87.132,
+        "start": 87.148,
+        "command": [
+          0.0,
+          0.0,
+          0.4
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 87.932,
+        "start": 87.944,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.4
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 89.532,
+        "start": 89.532,
+        "command": [
+          0.0,
+          0.0,
+          0.4
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 90.332,
+        "start": 90.34,
+        "command": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 86.732,
+    "end": 90.736
+  },
+  {
+    "index": 5,
+    "axis": 0,
+    "sign": -1,
+    "phases": [
+      {
+        "index": 0,
+        "planned": 96.768,
+        "start": 96.768,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 1,
+        "planned": 97.168,
+        "start": 97.184,
+        "command": [
+          -0.4,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 2,
+        "planned": 97.968,
+        "start": 97.972,
+        "command": [
+          0.4,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "index": 3,
+        "planned": 99.568,
+        "start": 99.568,
+        "command": [
+          -0.4,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "index": 4,
+        "planned": 100.368,
+        "start": 100.384,
+        "command": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      }
+    ],
+    "completed": true,
+    "start": 96.768,
+    "end": 100.776
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-04",
+  "scope": "equal persistent facet cap, not equal runtime or bytes; 2D stable LTI",
+  "models": {
+    "fast": {
+      "A": [
+        [
+          0.75,
+          0.2
+        ],
+        [
+          -0.1,
+          0.7
+        ]
+      ],
+      "N": 6,
+      "template_directions": 42,
+      "terminal_residual": -0.007500000000000007
+    },
+    "slow": {
+      "A": [
+        [
+          0.91,
+          0.06
+        ],
+        [
+          -0.04,
+          0.92
+        ]
+      ],
+      "N": 10,
+      "template_directions": 66,
+      "terminal_residual": -0.0025000000000000022
+    }
+  },
+  "budgets": [
+    6,
+    8,
+    12
+  ],
+  "steps": 30,
+  "cases": 1056,
+  "control_steps": 31680,
+  "static_comparisons": 2592,
+  "all_runtime_assertions_passed": true,
+  "independent_audits": 24,
+  "elapsed_s": 516.922684,
+  "python": "3.11.9",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "osqp": "1.1.3",
+  "source_sha256": {
+    "experiments\\cong_mpc_validate.py": "ca2edf8fac078bb26c85684bd7406d8875952b3bcbd594ff31e01fe368ebd232",
+    "experiments\\cong_mpc_screen.py": "19a743d853bcf92b18355eb9a1f4cef96e3dded3ec36f5de2c369529fa6542c2",
+    "src\\outerloop\\finite_memory.py": "efb978a40f824f2c40c79323857c7291dbba321f3ba9a7395b4a34f688dd2ed0",
+    "docs\\research\\proposal\\CONG_MPC_VALIDATION_PLAN.md": "bb791bd0b5d406e13dd64f990326f959a3769cb96b206b143a705873781d686b"
+  },
+  "artifact_sha256": {
+    "cases.csv": "26c5c568cb07353fb2451ca7f7f8c35b5987434ed27326b59350cbd68a6908b1",
+    "independent_audit.json": "4ca73e3413d0d6189c01a58370ce21a571fb74f57b135c8bece01a8c7075f54e",
+    "static.csv": "90ed56290228921c2d5860770b1811443b801d3ed910eb4dcb74a9cad3ee4b78",
+    "steps.csv": "f05cbcd01270c6d08b746123d4290ec1d039e24437ef93685bae5437db1eaa82"
+  }
+}

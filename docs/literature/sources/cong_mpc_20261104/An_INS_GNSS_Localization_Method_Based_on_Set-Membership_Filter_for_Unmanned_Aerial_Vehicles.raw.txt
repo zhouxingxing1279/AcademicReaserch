@@ -1,0 +1,1025 @@
+An INS/GNSS Localization Method Based on Set-Membership
+Filter for Unmanned Aerial Vehicles
+Xujie Qin1
+, Jun Lai1
+, Yirui Cong1
+, Xiangke Wang1
+1. College of Intelligence Science and Technology, National University of Defense Technology, Changsha 410073, P. R. China
+E-mail: laijun@nudt.edu.cn
+Abstract: This paper studies a set-membership filter-based inertial integrated localization problem, where the inertial navigation
+system (INS) error and Global Navigation Satellite System (GNSS) measurement error are unknown-but-bounded (UBB) noises.
+To solve this problem, we establish a strapdown INS error model and a GNSS measurement model with UBB noises. Based
+on the optimal set-membership filtering framework, we propose a constrained zonotopic fast resurisive localization method.
+Compared with the existing probabilistic integrated navigation methods, the proposed method does not need to know the specific
+noise distribution and has better versatility and robustness. Finally, the numerical simulation results of the INS/GNSS navigation
+corroborate the effectiveness of this method.
+Key Words: INS/GNSS, Constrained Zonotope, Set-Membership Filter
+1 Introduction
+Nowadays, unmanned aerial vehicles (UAVs) have been
+widely used in various aspects of real life. However, the task
+of determining the position of a UAV poses many challenges.
+To localize themselves under unknown environments, UAVs
+extensively utilize the Global Navigation Satellite System
+(GNSS) and inertial navigation system (INS) integrated nav-
+igation to obtain high-precision navigation position informa-
+tion.
+GNSS can provide high-precision three-dimensional po-
+sitioning information, with accuracy reaching the centimeter
+level [1]. However, its performance is influenced by exter-
+nal environmental factors and satellite visibility, leading to
+situations where update frequency is low and signal inter-
+ruptions occur in certain cases [2]. On the contrary, INS is
+an autonomous system that continuously integrates real an-
+gular rates and specific forces measured by gyroscopes and
+accelerometers to obtain position, velocity, and attitude in-
+formation. However, gyro drift and accelerometer errors of
+the INS tend to increase over time [3].
+Combining INS and GNSS can compensate for the indi-
+vidual shortcomings of each system, ultimately enhancing
+the precision of the navigation system. Traditionally, proba-
+bilistic approaches are employed for data fusion of these two
+sensors such as UKF [4] or EKF [5].
+However, when GNSS measurement information deterio-
+rates due to interference, and environmental vibrations affect
+the inertial navigation devices in complex high-dynamic en-
+vironments, accurately representing their noise probability
+distribution becomes challenging. In such scenarios, these
+probabilistic methods have limitations [6]. Therefore, ad-
+dressing combined navigation in the presence of unknown
+noise distributions of INS/GNSS sensors is crucial for en-
+hancing the adaptability and robustness of integrated navi-
+gation systems.
+Set-Membership Filter [7] as a set-based filtering theory,
+treats noise as unknown-but-bounded noise, and can effec-
+tively address situations where the noise distribution of INS
+This work was supported by the National Natural Science Foundation
+of China under Grant 62001494 and U23B2032 and U2241214.
+and GNSS is unknown. In [8], a comprehensive set-based
+GNSS positioning method is proposed. This method named
+Lane Boundary Cooperative Augmented Set-membership
+GNSS Positioning. In [8], an approach to three-dimensional
+map-aided GNSS positioning method based on set-valued
+estimation is presented. The authors propose zonotope
+shadow matching (ZSM) as a set-valued three-dimensional
+map-aided GNSS positioning method. The strapdown INS
+error model is provided in [9], depicting how errors in the
+INS accumulate over time.
+Building on existing work, we aim to develop a
+set-membership filter combined navigation method for
+INS/GNSS based on unknown-but-bounded noise descrip-
+tion, with the purpose of estimating the UAV position. Our
+primary contributions are as follows:
+• We first present the strapdown INS error model based
+on unknown-but-bounded errors. The errors in the in-
+ertial navigation accumulate over time in the form of
+unknown-but-bounded noise.
+• Most importantly, within the set-membership filter
+framework, we propose an INS/GNSS integrated nav-
+igation method based on unknown-but-bounded noise.
+This approach allows for obtaining the UAV position,
+which is represented in a set-valued form.
+The remainder of this paper is structured as follows.
+Section II introduces tools for describing set, Section III
+describes the notation and the system model, Section IV
+presents the method, Section V describes the experiment and
+results, Section VI is the conclusion.
+2 Preliminaries
+In this paper, constrained zonotopes are adopted to accu-
+rately describe a set’s convex inclusion. They are used to
+describe the uncertainty range of the INS error. Constrained
+zonotopes are an extension of zonotopes, more specifically
+proposed in [10].
+Definition 1 (Constrained Zonotope): A set Z ⊂ Rn
+is a constrained zonotope if there exists (Gz, cz, Az, bz) ∈
+Rn×ng
+× Rn
+× Rnc×ng
+× Rnc
+such that
+Z = {Gzξ + cz : ∥ξ∥∞ ≤ 1, Azξ = bz} , (1)
+Proceedings of the 3rd Conference on Fully Actuated System Theory and Applications
+May 10-12, 2024, Shenzhen, China
+775
+2024
+3rd
+Conference
+on
+Fully
+Actuated
+System
+Theory
+and
+Applications
+(FASTA)
+|
+979-8-3503-7369-1/24/$31.00
+©2024
+IEEE
+|
+DOI:
+10.1109/FASTA61401.2024.10595218
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+written as Z(Gz, cz, Az, bz).
+Apart from being able to describe sets exactly, constrained
+zonotope is also closed with respect to basic operations
+on sets. More specifically, the operations are indicated in
+Proposition 1.
+Proposition 1 (The basic set operations [10]): The con-
+strained zonotope Z = Z(Gz, cz, Az, bz) ∈ Rn
+, W =
+Z(Gw, cw, Aw, bw) ∈ Rn
+, Y = Z(Gy, cy, Ay, by) ∈ Rk
+and R ∈ Rk×n
+.
+RZ = Z(RGz, Rcz, Az, bz)
+Z ⊕ W = Z([Gz Gw] , cz + cw,
+
+Az 0
+0 Aw
+
+,
+
+bz
+bw
+
+)
+Z ∩R Y = Z([Gz 0] , cz,
+
+
+Az 0
+0 Ay
+RGz −Gy
+
+ ,
+
+
+bz
+by
+cy − Rcz
+
+)
+(2)
+In this work, the interval hull □Z of a constrained zono-
+tope is computed using linear programming (LP).
+Proposition 2 (Interval Hull): A constrained zonotope can
+be bounded by a interval hull as follow:
+Z(G, c, A, b) ⊆ □Z(p, H)
+
+
+
+
+
+
+
+p =
+Qn
+i=1 mid([ρi−
+, ρi+
+])
+H =
+Qn
+i=1 diag(rad([ρi−
+, ρi+
+]))
+ρi−
+= min{Gi
+ξ + ci
+: Aξ = b, ∥ξ∥∞ ⩽ 1}
+ρi+
+= max{Gi
+ξ + ci
+: Aξ = b, ∥ξ∥∞ ⩽ 1}
+(3)
+where mid(s, t) := 1
+2 (s + t), rad(s, t) := 1
+2 |s − t|.
+In this work, we use uncertain variables to describe the
+variables:
+Definition 2 (Uncertain Variables [7]): Unlike random
+variables, which can be described by probability distribu-
+tions, uncertain variables lack any information about prob-
+ability but can be described by their range of values.
+JxK := {x(ω) : ω ∈ Ω}, (4)
+where x is referred to as an uncertain variable, and JxK is
+referred to as the range of the uncertain variable.
+3 System Model
+In practical unmanned aerial systems, inertial navigation
+estimation is commonly employed to estimate the position,
+velocity, and attitude of the unmanned aerial vehicle. How-
+ever, the errors in navigation estimation tend to increase over
+time. This paper proposes an analysis of the uncertain range
+of navigation estimation errors using uncertainty variables.
+The UAV state and inertial measurements [11] can be ex-
+pressed by:
+
+
+ϕ̃
+ν̃n
+p̃
+
+ =
+
+
+ϕ
+νn
+p
+
+ +
+
+
+δϕ
+δνn
+δp
+
+ , (5)
+
+ω̃b
+ib
+˜
+fb
+
+=
+
+ωb
+ib
+fb
+
++
+
+δωb
+ib
+δfb
+
+, (6)
+where ϕ̃, ν̃n
+and p̃ are output state of attitude and speed and
+position, ϕ, νn
+and p are the ground-truth state, δϕ, δνn
+and
+δp are state errors. ω̃b
+ib and ˜
+fb
+are measurements of angular
+velocity and specific force, ωb
+ib and fb
+are truth-value, δωb
+ib
+and δfb
+are errors. More specifically, the errors are indicated
+in Lemma 1.
+Lemma 1 (unknown-but-bounded errors): The UAV state
+and IMU errors can be approximated by uncertain variable
+in Definition 2 as
+δϕ = [δθ, δγ, δφ] ∈ JδϕK,
+δνn
+= [δνE, δνN , δνU ] ∈ Jδνn
+K,
+δp = [δL, δλ, δh] ∈ JδpK,
+δωb
+ib = [δωb
+ibx, δωb
+iby, δωb
+ibz] ∈ Jδωb
+ibK,
+δfb
+= [δfb
+x, δfb
+y, δfb
+z ] ∈ Jδfb
+K.
+(7)
+Remark 1: It is usually assumed that the noise belongs to
+a Gaussian distribution in previous methods [11]. In fact, the
+error distribution of the UAV state and IMU is difficult to be
+described by a deterministic distribution. However, based on
+UAV parameters and IMU sensor information and statistics,
+the magnitude of the error regions can be obtained.
+To establish the INS/GNSS integrated navigation model,
+we choose the strapdown INS error model [12]. The func-
+tional relation is given in Lemma 2.
+Lemma 2 (Strapdown INS error model): The strapdown
+INS error model for x = [δϕ, δνn
+, δp] and w = [δωb
+ib, δfb
+]
+are as follows:
+ẋ = Fx + Gw, (8)
+where
+F =
+
+
+Maa Maν Map
+Mνa Mνν Mνp
+Mpa Mpν Mpp
+
+ , G =
+
+
+−Cn
+b 03×3
+03×3 Cn
+b
+03×3 03×3
+
+ ,
+and the details can be found in Appendix A.
+By discretizing the strapdown INS error model (8), one
+can obtain the discrete-time model
+xk+1 = Akxk + Bkwk, (9)
+where Ak = eF ∆t
+and Bk =
+R F ∆t
+0
+eF τ
+dτG; ∆t denotes
+the time duration from tk−1 to tk.
+Equation (9) represents the uncertainty error range of the
+inertial navigation estimation results. In order to correct
+this accumulating error, unmanned aerial vehicles require
+additional measurement information. This paper considers
+GNSS measurement information. However, measurement
+information also entails an error range, which we describe
+and analyze in the form of uncertainty variables. The GNSS
+measurement error is given by:
+zk = p̃n
+INS − p̃n
+GNSS = Hkxk + vk, (10)
+where
+Hk =
+
+03×3 03×3 I3×3
+
+.
+Hk represents the measurement matrix, zk represents the
+measurement output, p̃n
+INS denotes the estimation results of
+the inertial navigation system, p̃n
+GNSS denotes the estimation
+results of the Global Navigation Satellite System, and vk
+represents the uncertainty of measurement errors.
+To achieve more accurate estimation of UAV states, it is
+necessary to fuse the system error uncertainty and measure-
+ment error uncertainty in Equation (9) and Equation (10)
+776
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+through filtering, in order to eliminate the cumulative errors
+of the Inertial Navigation System. For the uncertainty vari-
+able description of error uncertainty filtering, this paper de-
+signs a combined navigation method based on the optimal
+set membership filtering framework.
+For any k ⩾ 0, let X̂k denote the set of all states JxkK ∈
+X̂k that are consistent with (9) the discrete time model, the
+measured output sequence up to time k, (z0, z1, . . . , zk),
+and the unknownbut-bounded uncertain state Jx0K ⊆ X̂0,
+JwkK ⊆ W k and JvkK ⊆ V k. X̂k is given recursively by
+the SMFing is indicated in Lemma 2.
+Lemma 3 (SMFing framework): Based on the optimal
+SMFing framework [7], the general scheme is given by the
+following recursion:
+• Initialization. Set the initial prior set Jx0K ⊆ X̂0.
+• Prediction. For k ⩾ 0, given X̂k, the prior set X̄k+1
+is predicted by the equation (9) is
+X̄k+1 ⊇ {Akxk + Bkwk : xk ∈ JxkK, wk ∈ JwkK}.
+(11)
+• Update. For k ⩾ 0, given the measured output zk+1,
+the posterior set X̂k+1 is
+X̂k+1 ⊇ {xk+1 ∈ X̄k+1 :
+Hk+1xk+1 + vk+1 = zk+1, vk+1 ∈ JvkK}.
+(12)
+The new estimated state Jxk+1K ⊆ X̂k+1.
+To ensure the optimality of the filtering, this paper makes
+the following assumptions:
+Assumption 1 (Unrelated Noises and Initial State): ∀k ∈
+N0, wk, vk, x0 are unrelated.
+In the remainder of the paper, our goal is to compute these
+two steps (11)-(12) using SMFing.
+4 Method
+The combined INS/GNSS navigation method with the set-
+membership filter of IMU data is derived in this section, and
+the process is shown in Fig. 1.
+Fig. 1: Procedure of SMF Method.
+JwkK ⊆ W k and JvkK ⊆ V k are respectively the state
+and measurement error which satisfy the following equa-
+tions:
+JwkK ⊆ W k = Z(Ĝw
+k , ĉw
+k , Âw
+k , b̂w
+k ), (13)
+JvkK ⊆ V k = Z(Ĝv
+k, ĉv
+k, Âv
+k, b̂v
+k). (14)
+The initial state of system satisfies the equation (9) and
+Lemma 3:
+Jx0K ⊆ X̂0 = Z(Ĝx
+0, ĉx
+0, Âx
+0, b̂x
+0). (15)
+On the basis of the INS error discrete time model, the pre-
+diction system’s state satisfy the following equations:
+X̄k+1 = AkX̂k ⊕ BkW k. (16)
+Equation (16) demonstrates that prediction state set, Ak ∈
+R and Bk ∈ R are approximation matrices.
+The specific calculation of Ak and Bk are as follows:
+Ak = eF ∆t
+=
+∞
+X
+i=0
+(F∆t)
+i
+i!
+≈ I + F∆t +
+1
+2
+(F∆t)
+2
+,
+(17)
+Bk =
+Z F ∆t
+0
+eF τ
+dτG =
+∞
+X
+i=0
+Fi
+∆ti+1
+
+(i + 1)!
+G (18)
+≈ (∆t +
+1
+2
+F∆t2
++
+1
+6
+∆t3
+F2
+)G.
+Finally, the prediction system’s state as following equa-
+tion:
+X̄k+1 = (1 + F∆t + 1
+2 (F∆t)
+2
+)Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k)
+⊕((∆t + 1
+2 F∆t2
++ 1
+6 ∆t3
+F2
+)G)Z(Ĝw
+k , ĉw
+k , Âw
+k , b̂w
+k ).
+(19)
+The function of update step is to revise the prediction
+set X̄k+1 by measured output (10). Measurement set Y
+is also represented by constrained zonotope like the predic-
+tion set, the measurement uncertain set is represented by
+Z(Ĝy
+, ĉy
+, Ây
+, b̂y
+).
+Then the estimated state set X̂k+1 given by the following
+equation:
+{xk+1 ∈ X̄k+1 : Hk+1xk+1 + vk+1 = zk+1, vk+1 ∈ V k+1}
+⊆ X̂k+1 = X̄k+1 ∩R Y k+1,
+(20)
+where R = Hk+1, and Y k+1 = zk ⊕ V k+1.
+Through Equation (20), we can obtain the estimation re-
+sult of one iteration. However, as the number of iterations
+increases, the dimension of constrained zonotope will con-
+tinuously increase, leading to a decrease in computational
+efficiency.
+To handle this problem, we propose a fast iteration method
+(see Algorithm 1) based on OIT heuristic in [13], and we
+provide a line by line explanation as follows:
+Algorithm 1 Fast Recursive Method
+1: Initialization:Bounded Jx0K ⊆ X̂0 = Z(Ĝx
+0 , ĉx
+0 , Âx
+0 , b̂x
+0 ), select
+slide window size δ.
+2: loop
+3: □Z(p̂k, Ĥk) ← Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k) by (3);
+4: if k ⩽ δ then
+5: Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k) ← X̂k−1 by (19) and (20);
+6: else if k > δ then
+7: Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k) ← □Z(p̂k−δ−1, Ĥk−δ−1) by (19)
+and (20);
+8: end if
+9: X̂k = Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k);
+10: k + +
+11: end loop
+• Line 1 is the initialization of Algorithm 1, where δ rep-
+resents the chosen window size of Algorithm 1. The
+777
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+dimension of X̂k will be constrained based on the size
+of δ, with a larger δ resulting in more accurate results
+and a smaller δ leading to faster algorithm execution.
+• Line 3 involves storing the estimation results of each
+iteration in Interval Hull.
+• Line 5 is for k ⩽ δ, which is the same as the classical
+constrained zonotope SMF algorithm.
+• Line 7 is for k > δ, which involves obtaining the es-
+timation result for Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k) after k iterations
+using □Z(p̂k−δ−1, Ĥk−δ−1) as the initial state over the
+time window [k − δ, k]. It is a simplified version of the
+OIT inspired constrained zonotopic SMF in [13].
+5 Simulation and Result
+In the experimental study, we respectively use the position
+and velocity and attitude errors of UAV as the state and the
+angular velocity and acceleration errors were simulated in
+the time scale model of the inertial measuring unit, using the
+equations
+xk ∈ X̂k =
+
+δϕ̂k, δν̂n
+k , δp̂k
+
+= Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k),
+(21)
+wk ∈ W k = [δωb
+ib,k, δfb
+k] = Z(Gw
+k , cw
+k , Aw
+k , bw
+k ). (22)
+IMU and their characteristics for clarity are given in the
+Table 1 below.
+Table 1: Sensor Parameters of The Simulation
+Specification Value
+Gyroscope constant bias (deg/h) 0.03
+Accelerometer constant bias (ug) 100
+Angular random walk 0.001
+Velocity random walk 5
+GNSS error(m) 10
+IMU rate (Hz) 10
+GNSS rate(Hz) 10
+Simulation step size 540
+From Fig. 2 which displays the interval estimation results
+for the unmanned aerial vehicle’s position. The interval esti-
+mation represents the range of estimates for each component
+derived from the ensemble filtering estimation. Fig. 3 shows
+the position estimation results of the UAV in the simulation.
+The point estimation result is obtained as the median of the
+interval estimation result derived from the ensemble filtering
+position estimation.
+6 Conclusion
+In this paper, combining with the INS and GNSS by Set-
+Membership Filter. Aiming at the situation that the error dis-
+tribution of INS and GNSS is unknown in the actual system,
+the bound of unknown-but-bounded noise inclusion estima-
+tion is used, which is a powerful supplement to the INS inte-
+grated navigation method based on probability. Apart from
+inertial integrated navigation with GNSS as measurement,
+there are other more practical integrated navigation meth-
+ods, such as visual-inertial odometry (VIO). Therefore, we
+will carry out in-depth research on SMF-based, more reli-
+able and more general integrated navigation methods in the
+future. In future work, we will address the role of the INS
+linearization error in the SMF prediction equation.
+Fig. 2: The interval estimation results of state.The results
+indicate that the proposed Algorithm 1 is able to enclose the
+true position state of the unmanned aerial vehicle.
+Fig. 3: The point estimation results of state.The red line is
+the true state and the green line is the estimated state.
+A INS Error propagation formula
+The following content demonstrates the specific form of
+F in the strapdown INS error model. i represents the iner-
+tial coordinate system; e represents the earth coordinate sys-
+tem; n represents the navigation coordinate system; b rep-
+resents the body coordinate system. RM and RM represent
+the Earth’s radii parameters.
+Maa ≜ − ωn
+in×
+
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Maa (1, 1) = Maa (2, 2) = Maa (3, 3) = 0
+Maa (1, 2) = ωie sin L +
+νE
+RN + h
+tan L
+Maa (1, 3) = −ωie cos L −
+νE
+RN + h
+Maa (2, 1) = −ωie sin L −
+νE
+RN + h
+tan L
+Maa (2, 3) = −
+νN
+RM + h
+Maa (3, 1) = ωie cos L +
+νE
+RN + h
+Maa (3, 2) =
+νN
+RM + h
+.
+778
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+Maν =
+
+
+
+
+
+
+
+
+
+
+
+0 −
+1
+RM + h
+0
+1
+RN + h
+0 0
+tan L
+RN + h
+0 0
+
+
+
+
+
+
+
+
+
+
+
+,
+Map =
+
+
+
+
+
+
+
+0 0 νN
+(RM +h)2
+−ωie sin L 0 − νE
+(RN +h)2
+ωie cos L + νE sec2
+L
+RN +h 0 − νE tan L
+(RN +h)2
+
+
+
+
+
+
+
+,
+Mνa ≜ (fn
+×) =
+
+
+0 −fn
+U fn
+N
+fn
+U 0 −fn
+E
+−fn
+N fn
+E 0
+
+ ,
+Mνν :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mνν (1, 1) =
+νN tan L − νU
+RN + h
+Mνν (1, 2) = 2ωie sin L +
+νE tan L
+RN + h
+Mνν (1, 3) = −2ωie cos L −
+νE
+RN + h
+Mνν (2, 1) = −2ωie sin L −
+2νE tan L
+RN + h
+Mνν 2, 2
+
+= −
+νU
+RM + h
+Mνν (2, 3) = −
+νN
+RM + h
+Mνν (3, 1) = 2ωie cos L +
+2νE
+RN + h
+Mνν (3, 2) =
+2νN
+RM + h
+Mνν (3, 3) = 0
+Mνp :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mνp (1, 1) =
+νEνN sec2
+L
+RN + h
++ 2νN ωie cos L + 2νU ωie sin L
+Mνp (1, 2) = 0
+Mνp (1, 3) =
+νEνU − νEνN tan L
+(RN + h)
+2
+Mνp (2, 1) = −2νEωie cos L −
+ν2
+E sec2
+L
+RN + h
+Mνp 2, 2
+
+= 0
+Mνp (2, 3) =
+ν2
+E tan L
+(RN + h)
+2 +
+νN νU
+(RM + h)
+2
+Mνp (3, 1) = −2νEωie sin L
+Mνp (3, 2) = 0
+Mνp (3, 3) = −
+ν2
+E
+(RN + h)
+2 −
+ν2
+N
+(RM + h)
+2
+Mpa =
+
+
+0 0 0
+0 0 0
+0 0 0
+
+ ,
+Mpν
+=
+
+
+
+
+
+
+0 1
+RM +h 0
+sec L
+RN +h 0 0
+0 0 1
+
+
+
+
+
+
+,
+Mpp =
+
+
+
+
+
+
+0 0 − νN
+(RM +h)2
+νE tan L sec L
+RN +h 0 − νE sec L
+(RN +h)2
+0 0 0
+
+
+
+
+
+
+References
+[1] L. C. Bento, P. Bonnifait, and U. J. Nunes, “Set-membership
+position estimation with gnss pseudorange error mitigation us-
+ing lane-boundary measurements,” IEEE Transactions on In-
+telligent Transportation Systems, vol. 20, no. 1, pp. 185–194,
+2018.
+[2] C. Zhang, C. Guo, and D. Zhang, “Ship navigation via
+gps/imu/log integration using adaptive fission particle filter,”
+Ocean Engineering, vol. 156, pp. 435–445, 2018.
+[3] S. Sasani, J. Asgari, and A. Amiri-Simkooei, “Improving
+mems-imu/gps integrated systems for land vehicle navigation
+applications,” GPS solutions, vol. 20, pp. 89–100, 2016.
+[4] M. Shalaby, C. C. Cossette, J. Le Ny, and J. R. Forbes, “Cas-
+caded filtering using the sigma point transformation,” IEEE
+Robotics and Automation Letters, vol. 6, no. 3, pp. 4758–4765,
+2021.
+[5] J. Li, Y. Bi, K. Li, K. Wang, F. Lin, and B. M. Chen, “Accu-
+rate 3d localization for mav swarms by uwb and imu fusion,”
+in 2018 IEEE 14th International Conference on Control and
+Automation (ICCA). IEEE, 2018, pp. 100–105.
+[6] R. E. Kalman, “A new approach to linear filtering and predic-
+tion problems,”1960.
+[7] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical
+framework and optimality of set-membership filtering,” IEEE
+Transactions on Automatic Control, vol. 67, no. 5, pp. 2544–
+2551, 2021.
+[8] L. C. Bento, P. Bonnifait, and U. J. Nunes, “Cooperative
+gnss positioning aided by road-features measurements,” Trans-
+portation Research Part C: Emerging Technologies, vol. 79,
+pp. 42–57, 2017.
+[9] D. Titterton and J. L. Weston, Strapdown inertial navigation
+technology. IET, 2004, vol. 17.
+[10] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D.
+Braatz, “Constrained zonotopes: A new tool for set-based esti-
+mation and fault detection,” Automatica, vol. 69, pp. 126–136,
+Jul. 2016.
+[11] J. Yang, M. Wu, Y. Cong, Y. Guo, X. Zhou, and K. Tang,
+“A novel single-beacon positioning with inertial measurement
+optimization,” IEEE Robotics and Automation Letters, 2023.
+[12] D. Chung, J. G. Lee, C. G. Park, and H. W. Park, “Strapdown
+ins error model for multiposition alignment,” IEEE Transac-
+tions on Aerospace and Electronic systems, vol. 32, no. 4, pp.
+1362–1366, 1996.
+[13] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-
+membership filters,” arXiv preprint arXiv:2203.13966, 2022.
+779
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+

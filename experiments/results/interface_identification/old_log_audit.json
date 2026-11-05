@@ -1,0 +1,2088 @@
+[
+  {
+    "name": "fresh_nominal_04",
+    "t0": 40.14,
+    "rates": {
+      "hover_thrust_estimate": {
+        "count": 238,
+        "median_dt": 0.096
+      },
+      "offboard_control_mode": {
+        "count": 59,
+        "median_dt": 0.11199999999999999
+      },
+      "trajectory_setpoint": {
+        "count": 220,
+        "median_dt": 0.19999999999999998
+      },
+      "vehicle_angular_velocity_groundtruth": {
+        "count": 2198,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_groundtruth": {
+        "count": 2198,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_setpoint": {
+        "count": 877,
+        "median_dt": 0.048
+      },
+      "vehicle_local_position": {
+        "count": 5476,
+        "median_dt": 0.008
+      },
+      "vehicle_local_position_groundtruth": {
+        "count": 2191,
+        "median_dt": 0.02
+      },
+      "vehicle_status": {
+        "count": 96,
+        "median_dt": 0.504
+      }
+    },
+    "clock_position_max_difference": [
+      1.418956369070301e-09,
+      1.3759712258476497e-09,
+      6.878044489511126e-08
+    ],
+    "finite_difference_velocity_max_difference": [
+      6.774680871846073e-09,
+      2.0306763770516767e-09,
+      3.0602305967075694e-09
+    ],
+    "prior_to_first_sample_difference": [
+      [
+        -0.00047450081943556377,
+        0.0010108125723484983
+      ],
+      [
+        -0.0018756792355410362,
+        0.0055121076028134125
+      ],
+      [
+        0.0004683080489615854,
+        -0.0007722774402947677
+      ]
+    ],
+    "initial_truth_velocity": [
+      -0.02372504025697708,
+      -0.09378395974636078,
+      0.023415401577949524
+    ],
+    "initial_rpy_deg": [
+      1.3267228380354834,
+      -0.11726491100272277,
+      -5.430225082673305
+    ],
+    "initial_angular_velocity": [
+      -0.008808448910713196,
+      0.007540802471339703,
+      -0.11203400790691376
+    ],
+    "prehandoff_velocity_absmax": [
+      0.05829160660505295,
+      0.23607011139392853,
+      0.20922113955020905
+    ],
+    "hover_thrust_at_handoff": 0.7234925627708435,
+    "hover_thrust_valid": true,
+    "residuals_using_logged_truth_velocity": [
+      {
+        "k": 0,
+        "dt": 0.4799999999999969,
+        "equivalent_velocity": [
+          -0.21860825465178332,
+          -0.007904022974574099,
+          0.04030691149797177
+        ],
+        "equivalent_position": [
+          -0.3419785951596757,
+          0.012979837861592652,
+          0.02924652201483161
+        ]
+      },
+      {
+        "k": 1,
+        "dt": 0.5160000000000053,
+        "equivalent_velocity": [
+          0.02843484912668054,
+          0.04790702218377569,
+          0.08736844592047274
+        ],
+        "equivalent_position": [
+          0.08948992194583572,
+          0.12254568835105302,
+          0.08155104330219952
+        ]
+      }
+    ],
+    "replay": {
+      "original_fixed_T": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.20871987455204022,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.20871987455204022,
+            0.002502468579266337,
+            0.03737415364301844
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.19686356374407382,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.19686356374407382,
+            0.007435849147408789,
+            0.03188364450958877
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt_oracle_initial": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.20107528577384395,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.20107528577384395,
+            0.0,
+            0.03188364450958877
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    "original_finite_memory_replay": [
+      {
+        "axis": 0,
+        "first_containment_failure": 1,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 1,
+        "first_containment_failure": null,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 2,
+        "first_containment_failure": 2,
+        "first_empty_posterior": 2
+      }
+    ],
+    "first_three_position_consistency": {
+      "fixed_T": {
+        "residual": [
+          -0.0049846509997071575,
+          0.014364086201827643,
+          0.029343538410754606
+        ],
+        "allowed_abs": 0.025,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      },
+      "actual_dt": {
+        "residual": [
+          -0.006900412882330842,
+          0.016213945466198323,
+          0.028943076362340295
+        ],
+        "allowed_abs": 0.025889360000000246,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      }
+    },
+    "scope": "Groundtruth interpolated on PX4/Gazebo simulation clock; replay is float64 LP and full-prefix diagnosis, not finite-window proof."
+  },
+  {
+    "name": "fresh_force_01",
+    "t0": 40.008,
+    "rates": {
+      "hover_thrust_estimate": {
+        "count": 238,
+        "median_dt": 0.096
+      },
+      "offboard_control_mode": {
+        "count": 60,
+        "median_dt": 0.104
+      },
+      "trajectory_setpoint": {
+        "count": 220,
+        "median_dt": 0.19999999999999998
+      },
+      "vehicle_angular_velocity_groundtruth": {
+        "count": 2194,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_groundtruth": {
+        "count": 2194,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_setpoint": {
+        "count": 878,
+        "median_dt": 0.048
+      },
+      "vehicle_local_position": {
+        "count": 5481,
+        "median_dt": 0.008
+      },
+      "vehicle_local_position_groundtruth": {
+        "count": 2194,
+        "median_dt": 0.02
+      },
+      "vehicle_status": {
+        "count": 96,
+        "median_dt": 0.504
+      }
+    },
+    "clock_position_max_difference": [
+      1.4786820379253385e-09,
+      9.023246594352941e-10,
+      1.0671360906044924e-07
+    ],
+    "finite_difference_velocity_max_difference": [
+      1.3430419887328071e-08,
+      2.5241700812861367e-09,
+      1.1272858202460156e-09
+    ],
+    "prior_to_first_sample_difference": [
+      [
+        -0.0009975163424898459,
+        0.00364992799188376
+      ],
+      [
+        -0.0024897065253874622,
+        0.005716452789638782
+      ],
+      [
+        0.00033012836278301094,
+        -0.0005358257386294009
+      ]
+    ],
+    "initial_truth_velocity": [
+      -0.049875818192957666,
+      -0.12448532879352374,
+      0.01650641858577708
+    ],
+    "initial_rpy_deg": [
+      1.3142344658544227,
+      -0.833440213138459,
+      -5.473158497287224
+    ],
+    "initial_angular_velocity": [
+      0.020324438810347012,
+      -0.007143942639232014,
+      -0.11239387094974244
+    ],
+    "prehandoff_velocity_absmax": [
+      0.12471257150173187,
+      0.24892662465572357,
+      0.21836590766906738
+    ],
+    "hover_thrust_at_handoff": 0.723629891872406,
+    "hover_thrust_valid": true,
+    "residuals_using_logged_truth_velocity": [
+      {
+        "k": 0,
+        "dt": 0.4799999999999969,
+        "equivalent_velocity": [
+          -0.1648754520210941,
+          -0.025022680132636477,
+          0.04327231141307407
+        ],
+        "equivalent_position": [
+          -0.25834702004715665,
+          -0.012081924986337866,
+          0.031618599600711096
+        ]
+      },
+      {
+        "k": 1,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.12562095111754074,
+          0.06818318926754527,
+          0.08785013269610877
+        ],
+        "equivalent_position": [
+          0.23941654449846878,
+          0.15010718769419126,
+          0.0850204021853971
+        ]
+      }
+    ],
+    "replay": {
+      "original_fixed_T": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.12169476657800815,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.12169476657800815,
+            0.0,
+            0.03624535788503133
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.10223564283384459,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.10223564283384459,
+            0.003854704536566524,
+            0.034129061114002913
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt_oracle_initial": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.11744367168138875,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.11744367168138875,
+            0.0,
+            0.034129061114002913
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    "original_finite_memory_replay": [
+      {
+        "axis": 0,
+        "first_containment_failure": 1,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 1,
+        "first_containment_failure": null,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 2,
+        "first_containment_failure": 1,
+        "first_empty_posterior": 2
+      }
+    ],
+    "first_three_position_consistency": {
+      "fixed_T": {
+        "residual": [
+          0.012112637480407779,
+          0.014883035666522812,
+          0.029061339471257837
+        ],
+        "allowed_abs": 0.025,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      },
+      "actual_dt": {
+        "residual": [
+          0.014386566760925396,
+          0.017589644578948252,
+          0.028778286639597417
+        ],
+        "allowed_abs": 0.025316666666666716,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      }
+    },
+    "scope": "Groundtruth interpolated on PX4/Gazebo simulation clock; replay is float64 LP and full-prefix diagnosis, not finite-window proof."
+  },
+  {
+    "name": "fresh_force_02",
+    "t0": 40.708,
+    "rates": {
+      "hover_thrust_estimate": {
+        "count": 245,
+        "median_dt": 0.096
+      },
+      "offboard_control_mode": {
+        "count": 59,
+        "median_dt": 0.106
+      },
+      "trajectory_setpoint": {
+        "count": 224,
+        "median_dt": 0.19999999999999998
+      },
+      "vehicle_angular_velocity_groundtruth": {
+        "count": 2246,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_groundtruth": {
+        "count": 2246,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_setpoint": {
+        "count": 898,
+        "median_dt": 0.048
+      },
+      "vehicle_local_position": {
+        "count": 5606,
+        "median_dt": 0.008
+      },
+      "vehicle_local_position_groundtruth": {
+        "count": 2243,
+        "median_dt": 0.02
+      },
+      "vehicle_status": {
+        "count": 98,
+        "median_dt": 0.504
+      }
+    },
+    "clock_position_max_difference": [
+      1.4790836640243832e-05,
+      7.569596420533425e-06,
+      2.6603457472518244e-06
+    ],
+    "finite_difference_velocity_max_difference": [
+      1.1705537693307289e-05,
+      1.2471908911008966e-05,
+      1.5127660203707871e-06
+    ],
+    "prior_to_first_sample_difference": [
+      [
+        -0.0009178270731805827,
+        0.0026148893887529487
+      ],
+      [
+        -0.001413773013875328,
+        0.00471736811492561
+      ],
+      [
+        1.4581003316749275e-05,
+        -0.0003367936151740462
+      ]
+    ],
+    "initial_truth_velocity": [
+      -0.04589261412620526,
+      -0.07068937718868222,
+      0.0007305629318579796
+    ],
+    "initial_rpy_deg": [
+      1.1442927089987391,
+      -0.5703710294310936,
+      -5.421000532813867
+    ],
+    "initial_angular_velocity": [
+      0.0004491582512853114,
+      -0.003586513921618439,
+      -0.10418578982353156
+    ],
+    "prehandoff_velocity_absmax": [
+      0.1050524041056633,
+      0.25091248750686646,
+      0.21733933687210083
+    ],
+    "hover_thrust_at_handoff": 0.7237066626548767,
+    "hover_thrust_valid": true,
+    "residuals_using_logged_truth_velocity": [
+      {
+        "k": 0,
+        "dt": 0.480000000000004,
+        "equivalent_velocity": [
+          -0.1953419089004399,
+          0.010137377497663275,
+          0.056497225114437534
+        ],
+        "equivalent_position": [
+          -0.3003011143919076,
+          0.039341124896814794,
+          0.04170913532547826
+        ]
+      },
+      {
+        "k": 1,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.08012943685881563,
+          0.051526804231070866,
+          0.08851215680962925
+        ],
+        "equivalent_position": [
+          0.17387692452303827,
+          0.11541281189765863,
+          0.09142548283463744
+        ]
+      }
+    ],
+    "replay": {
+      "original_fixed_T": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.16439159995343533,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.16439159995343533,
+            0.011789918285190895,
+            0.04621696043673426
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.1485994784193396,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.1485994784193396,
+            0.016150689161936297,
+            0.04542249289303873
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "actual_dt_oracle_initial": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.15948959892594836,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.15948959892594836,
+            0.0094532602361375,
+            0.04542249289303873
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    "original_finite_memory_replay": [
+      {
+        "axis": 0,
+        "first_containment_failure": 1,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 1,
+        "first_containment_failure": null,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 2,
+        "first_containment_failure": 1,
+        "first_empty_posterior": 2
+      }
+    ],
+    "first_three_position_consistency": {
+      "fixed_T": {
+        "residual": [
+          0.0015415093741389524,
+          0.014162795215725714,
+          0.03155424010918357
+        ],
+        "allowed_abs": 0.025,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      },
+      "actual_dt": {
+        "residual": [
+          0.003935464417382489,
+          0.015523244986050075,
+          0.03154517742546111
+        ],
+        "allowed_abs": 0.0253166666666666,
+        "inconsistent": [
+          false,
+          false,
+          true
+        ]
+      }
+    },
+    "scope": "Groundtruth interpolated on PX4/Gazebo simulation clock; replay is float64 LP and full-prefix diagnosis, not finite-window proof."
+  },
+  {
+    "name": "max_gap_force_01",
+    "t0": 40.704,
+    "rates": {
+      "hover_thrust_estimate": {
+        "count": 345,
+        "median_dt": 0.096
+      },
+      "offboard_control_mode": {
+        "count": 165,
+        "median_dt": 0.104
+      },
+      "trajectory_setpoint": {
+        "count": 274,
+        "median_dt": 0.19999999999999998
+      },
+      "vehicle_angular_velocity_groundtruth": {
+        "count": 2745,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_groundtruth": {
+        "count": 2745,
+        "median_dt": 0.02
+      },
+      "vehicle_attitude_setpoint": {
+        "count": 1098,
+        "median_dt": 0.048
+      },
+      "vehicle_local_position": {
+        "count": 6856,
+        "median_dt": 0.008
+      },
+      "vehicle_local_position_groundtruth": {
+        "count": 2744,
+        "median_dt": 0.02
+      },
+      "vehicle_status": {
+        "count": 119,
+        "median_dt": 0.504
+      }
+    },
+    "clock_position_max_difference": [
+      1.4298747297303294e-08,
+      3.916474450305074e-09,
+      1.0960718732633268e-07
+    ],
+    "finite_difference_velocity_max_difference": [
+      4.6850891777250325e-09,
+      7.308229077462869e-09,
+      8.138384144373845e-08
+    ],
+    "prior_to_first_sample_difference": [
+      [
+        -0.0009409500197450626,
+        0.001583559882992136
+      ],
+      [
+        -0.0020947004209038514,
+        0.005265544813957024
+      ],
+      [
+        0.0007703045464602098,
+        -0.00013681364753587166
+      ]
+    ],
+    "initial_truth_velocity": [
+      -0.04704749956727028,
+      -0.10473502427339554,
+      0.038515228778123856
+    ],
+    "initial_rpy_deg": [
+      1.3150877226624726,
+      -0.2743612651405356,
+      -5.1881228441005005
+    ],
+    "initial_angular_velocity": [
+      0.0068041495978832245,
+      0.006083305925130844,
+      -0.12010037899017334
+    ],
+    "prehandoff_velocity_absmax": [
+      0.09009676426649094,
+      0.2349517047405243,
+      0.20723511278629303
+    ],
+    "hover_thrust_at_handoff": 0.7237047553062439,
+    "hover_thrust_valid": true,
+    "residuals_using_logged_truth_velocity": [
+      {
+        "k": 0,
+        "dt": 0.4799999999999969,
+        "equivalent_velocity": [
+          -0.2324944283415432,
+          -0.0012266367848710047,
+          0.02811791964361874
+        ],
+        "equivalent_position": [
+          -0.3615657725167654,
+          0.01920236950130033,
+          0.02604045912178729
+        ]
+      },
+      {
+        "k": 1,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.27799259217617067,
+          0.07488537456151981,
+          0.06713592205013981
+        ],
+        "equivalent_position": [
+          0.4792578974568561,
+          0.13704745906648177,
+          0.054786221494934464
+        ]
+      },
+      {
+        "k": 2,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.012369721191026306,
+          0.02406937402098227,
+          0.09141130567849928
+        ],
+        "equivalent_position": [
+          0.021945073263742065,
+          0.03704071749358225,
+          0.09281349749625975
+        ]
+      },
+      {
+        "k": 3,
+        "dt": 0.5120000000000005,
+        "equivalent_velocity": [
+          -0.03372565351570124,
+          0.011460229179461066,
+          0.09044014333423972
+        ],
+        "equivalent_position": [
+          -0.05872871970028269,
+          0.011903886990394314,
+          0.09429052189600425
+        ]
+      },
+      {
+        "k": 4,
+        "dt": 0.4960000000000022,
+        "equivalent_velocity": [
+          -0.06862767447848518,
+          0.2030923974768275,
+          -0.1094106370736957
+        ],
+        "equivalent_position": [
+          -0.09101988543321382,
+          0.3261834086279626,
+          -0.06594525236608156
+        ]
+      },
+      {
+        "k": 5,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.04845796374454875,
+          -0.34399082263781594,
+          0.09471724785166519
+        ],
+        "equivalent_position": [
+          0.052592447379974316,
+          -0.5805325818605618,
+          -0.03636726879281266
+        ]
+      },
+      {
+        "k": 6,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.13841694735775445,
+          0.4221712508383577,
+          -0.24393083964033202
+        ],
+        "equivalent_position": [
+          -0.19822558530459855,
+          0.7290399083081072,
+          -0.12889967177553252
+        ]
+      },
+      {
+        "k": 7,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.16653126891565567,
+          -0.46247317918498293,
+          0.1610842850748312
+        ],
+        "equivalent_position": [
+          0.24426898028564697,
+          -0.7989185331102111,
+          -0.021453084355233965
+        ]
+      },
+      {
+        "k": 8,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.14711771370302493,
+          0.16245481954008661,
+          0.30928841461954826
+        ],
+        "equivalent_position": [
+          -0.2417472212148791,
+          0.3012973221489819,
+          0.37361512561856025
+        ]
+      },
+      {
+        "k": 9,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.16084403394377,
+          0.06361370462075179,
+          0.0007697447717451289
+        ],
+        "equivalent_position": [
+          0.27562969772732027,
+          0.10143835398450797,
+          0.06795657719972364
+        ]
+      },
+      {
+        "k": 10,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.08379767494550135,
+          -0.3867862631110369,
+          -0.004687943706168423
+        ],
+        "equivalent_position": [
+          -0.1808644946133175,
+          -0.6153935209391533,
+          -0.05279428626026083
+        ]
+      },
+      {
+        "k": 11,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.06998141793160123,
+          0.5632532721472432,
+          0.04515128205231057
+        ],
+        "equivalent_position": [
+          0.15326797155289335,
+          0.9648816322994878,
+          0.04374082754066812
+        ]
+      },
+      {
+        "k": 12,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.0687167817493578,
+          -0.32772347005826985,
+          -0.6591881562070236
+        ],
+        "equivalent_position": [
+          0.12797738106452428,
+          -0.5736776036284641,
+          -0.5303829360799179
+        ]
+      },
+      {
+        "k": 13,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.2624285569768781,
+          0.08557210837182919,
+          0.20886695094826502
+        ],
+        "equivalent_position": [
+          -0.433872689900958,
+          0.15455532048520962,
+          -0.14421546749350744
+        ]
+      },
+      {
+        "k": 14,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.23905113172333703,
+          0.2908022871542951,
+          0.43096380654319444
+        ],
+        "equivalent_position": [
+          0.414117945549898,
+          0.4229778295684835,
+          0.5360764187906615
+        ]
+      },
+      {
+        "k": 15,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.22506295757791034,
+          -0.4687993239721938,
+          -0.06003502564726276
+        ],
+        "equivalent_position": [
+          -0.4201583029558324,
+          -0.8051293205580398,
+          0.04535361571015911
+        ]
+      },
+      {
+        "k": 16,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.16817708001780007,
+          0.37522837893458655,
+          0.41306631226934476
+        ],
+        "equivalent_position": [
+          -0.18791018487262223,
+          0.6321181096264963,
+          0.20190428157247586
+        ]
+      },
+      {
+        "k": 17,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.36168267257956493,
+          -0.26256497721192706,
+          -0.28680559444484355
+        ],
+        "equivalent_position": [
+          0.6004530345693015,
+          -0.48581050853249896,
+          -0.024920338869663494
+        ]
+      },
+      {
+        "k": 18,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.41642328390514416,
+          -0.033347112531255885,
+          -1.2491955021723369
+        ],
+        "equivalent_position": [
+          -0.808799915403481,
+          -0.06363855063397805,
+          -1.2432823935850719
+        ]
+      },
+      {
+        "k": 19,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          0.6540213137505965,
+          0.3982861765490912,
+          0.21596048705637316
+        ],
+        "equivalent_position": [
+          1.0951123147843793,
+          0.6389649637805366,
+          -0.2844658649677052
+        ]
+      },
+      {
+        "k": 20,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.27167696648222495,
+          -0.34243719117119537,
+          0.5559716824962343
+        ],
+        "equivalent_position": [
+          -0.48168581121546317,
+          -0.5595132692284845,
+          0.7221818496062006
+        ]
+      },
+      {
+        "k": 21,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          -0.001743600618950434,
+          0.2690294490858847,
+          -0.008913759643859154
+        ],
+        "equivalent_position": [
+          0.0242875656961283,
+          0.47130184934585634,
+          0.10434682989614558
+        ]
+      },
+      {
+        "k": 22,
+        "dt": 0.5,
+        "equivalent_velocity": [
+          1.0454716546762546,
+          0.5530302378509504,
+          0.644721460039118
+        ],
+        "equivalent_position": [
+          1.358470888279732,
+          0.6158652830098135,
+          0.19942782490918942
+        ]
+      }
+    ],
+    "replay": {
+      "original_fixed_T": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.2269944155032173,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 3,
+          "minimum_a": [
+            0.2269944155032173,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 4,
+          "minimum_a": [
+            0.2553402396810191,
+            0.018002545013688434,
+            0.025288440959626457
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "k": 5,
+          "minimum_a": [
+            0.2553402396810191,
+            0.018002545013688434,
+            0.025288440959626457
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "k": 6,
+          "minimum_a": [
+            0.2563217542474981,
+            0.03934146524352138,
+            0.06421867786928417
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 7,
+          "minimum_a": [
+            0.2563217542474981,
+            0.03934146524352138,
+            0.06421867786928417
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 8,
+          "minimum_a": [
+            0.2563217542474981,
+            0.03934146524352138,
+            0.0698146513119581
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 9,
+          "minimum_a": [
+            0.2563217542474981,
+            0.03934146524352138,
+            0.0698146513119581
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 10,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05298627693527681,
+            0.0698146513119581
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 11,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05298627693527681,
+            0.0698146513119581
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 12,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05298627693527681,
+            0.13962790128182892
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 13,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05298627693527681,
+            0.13962790128182892
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 14,
+          "minimum_a": [
+            0.2563217542474981,
+            0.054544655194027084,
+            0.15241353289708617
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 15,
+          "minimum_a": [
+            0.2563217542474981,
+            0.054544655194027084,
+            0.15241353289708617
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 16,
+          "minimum_a": [
+            0.2563217542474981,
+            0.054544655194027084,
+            0.15343608143527865
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 17,
+          "minimum_a": [
+            0.2563217542474981,
+            0.054544655194027084,
+            0.15343608143527865
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 18,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05485593092464583,
+            0.25009683582587644
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 19,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05485593092464583,
+            0.25009683582587644
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 20,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05485593092464583,
+            0.2641121621659448
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 21,
+          "minimum_a": [
+            0.2563217542474981,
+            0.05485593092464583,
+            0.2641121621659448
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 22,
+          "minimum_a": [
+            0.2563217542474981,
+            0.07048199433779641,
+            0.413143121075942
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 23,
+          "minimum_a": [
+            0.2563217542474981,
+            0.07048199433779641,
+            0.413143121075942
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        }
+      ],
+      "actual_dt": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.21652701519476156,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 3,
+          "minimum_a": [
+            0.21652701519476156,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 4,
+          "minimum_a": [
+            0.254999558784653,
+            0.023134383200968313,
+            0.02413040108174223
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 5,
+          "minimum_a": [
+            0.254999558784653,
+            0.023134383200968313,
+            0.02413040108174223
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 6,
+          "minimum_a": [
+            0.25509012735688846,
+            0.039948522542202484,
+            0.06217180841175181
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 7,
+          "minimum_a": [
+            0.25509012735688846,
+            0.039948522542202484,
+            0.06217180841175181
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 8,
+          "minimum_a": [
+            0.25509012735688846,
+            0.039948522542202484,
+            0.06770339127390146
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 9,
+          "minimum_a": [
+            0.25509012735688846,
+            0.039948522542202484,
+            0.06770339127390146
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 10,
+          "minimum_a": [
+            0.25509012735688846,
+            0.052315189534795865,
+            0.06770339127390146
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 11,
+          "minimum_a": [
+            0.25509012735688846,
+            0.052315189534795865,
+            0.06770339127390146
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 12,
+          "minimum_a": [
+            0.25509012735688846,
+            0.052315189534795865,
+            0.13962790128182978
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 13,
+          "minimum_a": [
+            0.25509012735688846,
+            0.052315189534795865,
+            0.13962790128182978
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 14,
+          "minimum_a": [
+            0.25509012735688846,
+            0.054544655194026896,
+            0.15241353289708592
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 15,
+          "minimum_a": [
+            0.25509012735688846,
+            0.054544655194026896,
+            0.15241353289708592
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 16,
+          "minimum_a": [
+            0.25509012735688846,
+            0.054544655194026896,
+            0.15343608143527826
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 17,
+          "minimum_a": [
+            0.25509012735688846,
+            0.054544655194026896,
+            0.15343608143527826
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 18,
+          "minimum_a": [
+            0.25509012735688846,
+            0.05485593092464577,
+            0.2500968358258757
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 19,
+          "minimum_a": [
+            0.25509012735688846,
+            0.05485593092464577,
+            0.2500968358258757
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 20,
+          "minimum_a": [
+            0.25509012735688846,
+            0.05485593092464577,
+            0.2641121621659444
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 21,
+          "minimum_a": [
+            0.25509012735688846,
+            0.05485593092464577,
+            0.2641121621659444
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 22,
+          "minimum_a": [
+            0.25509012735688846,
+            0.07048199433779644,
+            0.4131431210759433
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 23,
+          "minimum_a": [
+            0.25509012735688846,
+            0.07048199433779644,
+            0.4131431210759433
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        }
+      ],
+      "actual_dt_oracle_initial": [
+        {
+          "k": 1,
+          "minimum_a": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 2,
+          "minimum_a": [
+            0.21495721979951238,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 3,
+          "minimum_a": [
+            0.21495721979951238,
+            0.0,
+            0.0
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "k": 4,
+          "minimum_a": [
+            0.2503254325992767,
+            0.017768569238679855,
+            0.02427000535971825
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "k": 5,
+          "minimum_a": [
+            0.2503254325992767,
+            0.017768569238679855,
+            0.02427000535971825
+          ],
+          "compatible_a_002": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "k": 6,
+          "minimum_a": [
+            0.2504284323581753,
+            0.03804668198380655,
+            0.06219061679571474
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 7,
+          "minimum_a": [
+            0.2504284323581753,
+            0.03804668198380655,
+            0.06219061679571474
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 8,
+          "minimum_a": [
+            0.2504284323581753,
+            0.03804668198380655,
+            0.06770339127390139
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 9,
+          "minimum_a": [
+            0.2504284323581753,
+            0.03804668198380655,
+            0.06770339127390139
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 10,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05231518953479578,
+            0.06770339127390139
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 11,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05231518953479578,
+            0.06770339127390139
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 12,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05231518953479578,
+            0.13962790128182914
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 13,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05231518953479578,
+            0.13962790128182914
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 14,
+          "minimum_a": [
+            0.2504284323581753,
+            0.05454465519402669,
+            0.1524135328970858
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 15,
+          "minimum_a": [
+            0.2504284323581753,
+            0.05454465519402669,
+            0.1524135328970858
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 16,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05454465519402687,
+            0.15343608143527823
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 17,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05454465519402687,
+            0.15343608143527823
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 18,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05485593092464574,
+            0.25009683582587533
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 19,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05485593092464574,
+            0.25009683582587533
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 20,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05485593092464574,
+            0.2641121621659443
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 21,
+          "minimum_a": [
+            0.25042843235817536,
+            0.05485593092464574,
+            0.2641121621659443
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 22,
+          "minimum_a": [
+            0.25042843235817536,
+            0.0704819943377963,
+            0.413143121075942
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "k": 23,
+          "minimum_a": [
+            0.25042843235817536,
+            0.0704819943377963,
+            0.413143121075942
+          ],
+          "compatible_a_002": [
+            false,
+            false,
+            false
+          ]
+        }
+      ]
+    },
+    "original_finite_memory_replay": [
+      {
+        "axis": 0,
+        "first_containment_failure": 1,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 1,
+        "first_containment_failure": 2,
+        "first_empty_posterior": null
+      },
+      {
+        "axis": 2,
+        "first_containment_failure": 2,
+        "first_empty_posterior": null
+      }
+    ],
+    "first_three_position_consistency": {},
+    "scope": "Groundtruth interpolated on PX4/Gazebo simulation clock; replay is float64 LP and full-prefix diagnosis, not finite-window proof."
+  }
+]

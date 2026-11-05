@@ -1,0 +1,3713 @@
+Stability of Linear Set-Membership Filters With Respect to
+Initial Conditions: An Observation-Information Perspective ⋆
+Yirui Cong a
+, Xiangke Wang a
+, Xiangyun Zhou b
+a
+College of Intelligence Science and Technology, National University of Defense Technology
+b
+School of Engineering, The Australian National University
+Abstract
+The issue of filter stability with respect to (w.r.t.) the initial condition refers to the unreliable filtering process caused by
+improper prior information of the initial state. This paper focuses on analyzing and resolving the stability issue w.r.t. the
+initial condition of the classical Set-Membership Filters (SMFs) for linear time-invariance systems, which has not yet been
+well understood in the literature. To this end, we propose a new concept – the Observation-Information Tower (OIT), which
+describes how the measurements affect the estimate in a set-intersection manner without relying on the initial condition.
+The proposed OIT enables a rigorous stability analysis, a new SMFing framework, as well as an efficient filtering algorithm.
+Specifically, based on the OIT, explicit necessary and sufficient conditions for stability w.r.t. the initial condition are provided
+for the classical SMFing framework. Furthermore, the OIT inspires a stability-guaranteed SMFing framework, which fully
+handles the stability issue w.r.t. the initial condition. Finally, with the OIT-inspired framework, we develop a fast and stable
+constrained zonotopic SMF, which significantly overcomes the wrapping effect.
+Key words: Set-membership filter, Stability w.r.t. initial condition, Observation-information tower, Constrained zonotope.
+1 Introduction
+Set-Membership Filter (SMF) is a very important class
+of non-stochastic filters, which gives the optimal so-
+lution to the filtering problems with bounded noises
+whose probability distributions are unknown. It is fun-
+damentally equivalent to the Bayes filter [23] under the
+non-stochastic Markov condition (caused by unrelated
+noises) [10]. For linear systems, it can be regarded as a
+non-stochastic counterpart of the well-known Kalman
+filter. Therefore, the SMF has great potentials in many
+important fields like control systems, telecommunica-
+tions, and navigation, as the Bayes filter does. However,
+the linear SMFing has not drawn an adequate amount
+of attention to realize its full potential. One important
+issue is stability w.r.t. the initial condition 1
+, which
+characterizes whether the resulting estimate, as time
+elapses, remains reliable when the filter is improperly
+initialized [22,26].
+⋆ Corresponding author: X. Wang.
+Email addresses: congyirui11@nudt.edu.cn
+(Yirui Cong), xkwang@nudt.edu.cn (Xiangke Wang),
+xiangyun.zhou@anu.edu.au (Xiangyun Zhou).
+1
+Similarly to the true initial distribution/measure and the
+initial condition for stochastic filters [22,26], in this article:
+the term true initial set refers to the set of all possible initial
+states (objectively determined by the system), which could
+be a singleton when we focus on one trial; the term initial
+condition (for SMFs) represents the initial set subjectively
+chosen in the design of a filter.
+For Kalman filters, stability w.r.t. the initial condition is
+a central feature and well-established in an asymptotic
+manner: the posterior distribution, under some simple
+system assumptions, converges to the true conditional
+distribution of the system state (given all observed mea-
+surements) regardless of initial conditions [12, 13, 15].
+This means measurements in stable filters can help cor-
+rect/forget the information from the initial condition.
+For linear SMFs, in contrast, there is very limited knowl-
+edge of the stability w.r.t. the initial condition. The most
+related work is on the uniform boundedness of the es-
+timate, which guarantees that the size of estimate does
+not increase unboundedly with time. In the literature,
+the uniform boundedness analysis is considered for two
+types of SMFs, i.e., the ellipsoidal and polytopic SMFs. 2
+For ellipsoidal SMFs, [4] proposed an input-to-state sta-
+ble algorithm that ensures the uniform boundedness of
+the estimate; since in [4] the input-to-state stability re-
+quired to solve a time-inefficient polynomial equation at
+each time step, [16] developed an SMF with increased ef-
+ficiency based on minimizing an important upper bound;
+then, [25] provided a parallelotope-bounding technique
+to reduce the complexity, which was further improved
+by [3]. For polytopic SMFs, [8] proposed a zonotopic
+Kalman filter, where a sufficient condition (called ro-
+bust detectability) for the uniform boundedness of the
+2
+The uniform boundedness of interval observers [18, 29] is
+not included since their basic structures are linear observers.
+arXiv:2203.13966v2
+[eess.SY]
+14
+Mar
+2024
+estimate was given; in [28], a zonotopic SMF was de-
+signed for linear parameter-varying systems, and an up-
+per bound on the radius of the estimate was derived by
+solving linear matrix inequalities (LMIs); based on [28],
+the article [11] proposed a zonotopic SMF for switched
+linear systems, where an LMI-based upper bound was
+obtained for the radius of the estimate.
+It is important to note that the uniform boundedness of
+the estimate does not imply reliable estimates when the
+initial condition is improperly chosen. Therefore, exist-
+ing linear SMFs still face the issue of stability w.r.t. the
+initial condition, reflected in two aspects 3
+:
+• Ill-posedenss: In the literature, the initial condition
+of an SMF should include the true initial set of the
+system state. But if the initial condition does not con-
+tain the true initial set, the resulting estimate at some
+time steps can be an empty set; in this case, we say
+the SMF is ill-posed 4
+or not well-posed, which is a
+key different feature from the stability of Kalman fil-
+ters. Unfortunately, ill-posedness widely exists, which
+means the initial condition must be carefully chosen
+to guarantee non-empty estimates.
+• Unbounded estimation gap: Even if the estimate
+is non-empty, perturbations of the initial condition
+can gradually amplify the difference (called the esti-
+mation gap) between the estimate and the true set
+of the system states. Consequently, the estimation
+gap can go unbounded with time: inherently, the clas-
+sical SMFing framework cannot always ensure the
+bounded estimation gap (the boundedness condition
+is unknown); extrinsically, approximation/reduction
+methods result in the wrapping effect [14] so that the
+estimation gap is unboundedly accumulated.
+To directly tackle the stability issue, we should analyze
+when the classical linear SMFing framework is stable
+w.r.t. the initial condition, i.e., well-posed and with a
+bounded estimation gap; then, it is necessary to propose
+a new SMFing framework with guaranteed stability.
+In addition to the stability, a linear SMF should be fast
+and accurate, which is also a challenging issue arising
+from the computational intractability of the optimal es-
+timate. In general, to improve the time efficiency of an
+existing SMF, one has to sacrifice the estimation accu-
+racy, and vice versa.
+A recent study in [2] showed that the constrained zono-
+topic SMF proposed by [24] can give tighter estimates
+than other types of modern SMFs (e.g., ellipsoidal
+SMFs [16,17] and zonotopic SMFs [8,27]), which sheds
+new light on balancing the efficiency and the accuracy.
+This is largely because constrained zonotopes are closed
+under Minkowski sums and set intersections in the pre-
+diction and update steps, respectively. Nevertheless, the
+constrained zonotopic SMF still has a relatively large
+3
+Note that stability of SMFs w.r.t. their initial conditions is
+different from stability of control systems with estimation [5,
+6, 19, 20]; for an unstable system, an stable SMF w.r.t. the
+initial condition can still be designed.
+4
+In the SMF community, the ill-posedness is a case of the
+falsification of a priori assumption. To the best of our knowl-
+edge, this issue has not been studied in the literature.
+computation time due to the limitation of the existing
+approximation techniques. Specifically, the reduction re-
+lies on the geometric properties of the constrained zono-
+topes at each single time step (i.e., without considering
+the “time correlation”). As a result, overestimation cu-
+mulates over time, which means maintaining accuracy
+would lead to an unnecessary increase of complexity.
+The situation would be even worse for high-dimensional
+systems.
+Taking the above discussions into account, it is of great
+theoretical and practical interest to develop a fast con-
+strained zonotopic SMF with guaranteed stability, which
+is also efficient for high-dimensional systems.
+In this work, we focus on understanding and analyzing
+the stability w.r.t. the initial condition of SMFing for
+linear time-invariant systems and establish a stability-
+guaranteed filtering framework to develop a new SMF.
+The main contribution is to put forward a concept of
+Observation-Information Tower (OIT). It reflects the
+impact of the measurements on the estimate, indepen-
+dent of any reliance on the initial condition. The OIT
+enables to provide a rigorous stability analysis, resolve
+the ill-posedness issue, and develop an efficient filtering
+algorithm. More specifically:
+• Applying the OIT to a projected system, we analyze
+the stability of the classical linear SMFing framework.
+An explicit stability criterion (sufficient condition) is
+given, which turns out to be surprisingly close to the
+necessity w.r.t. the bounded estimation gap.
+• The OIT inspires a new SMFing framework, through
+a rigorously proven invariance property. This frame-
+work completely fixes the ill-posedness problem of the
+existing linear SMFing, without relying on any infor-
+mation of the true initial set.
+• With this new framework, we design a stable and fast
+constrained zonotopic SMF with uniform bounded-
+ness; different from the existing reduction methods
+based on geometric properties of constrained zono-
+topes, our method utilizes the properties of system
+dynamics via the OIT, which has high efficiency and
+significantly overcomes the wrapping effect.
+In Section 2, the system model is given and three prob-
+lems (on stability of classical linear SMFing framework,
+new framework with guaranteed stability, and stable and
+fast constrained zonotopic SMF) are described. We pro-
+pose the OIT in Section 3 which is the key to solving
+those three problems, and the solutions are provided in
+Sections 4–6, respectively. Section 7 gives the simulation
+examples to corroborate our theoretical results. Finally,
+the concluding remarks are given in Section 8.
+Notation: Throughout this paper, R, N0, and Z+ de-
+note the sets of real numbers, non-negative integers,
+and positive integers, respectively. Rn
+stands for the
+n-dimensional Euclidean space. For an uncertain vari-
+able x defined on a sample space Ω, its range is JxK =
+{x(ω): ω ∈ Ω} and its realization is x = x(ω) [10, 21].
+For multiple uncertain variables with consecutive in-
+dices, we define xk1:k2
+= xk1
+, . . . , xk2
+(with their real-
+izations xk1:k2 = xk1 , . . . , xk2 ) where k2 ≥ k1. Given
+two sets S1 and S2 in a Euclidean space, the opera-
+tion ⊕ stands for the Minkowski sum of S1 and S2, i.e.,
+S1 ⊕ S2 = {s1 + s2 : s1 ∈ S1, s2 ∈ S2}. The summa-
+tion
+Pb
+i=a Si represents Sa ⊕ Sa+1 ⊕ · · · ⊕ Sb for a ≤ b,
+but returns {0} for a > b. 5
+We use ∥ · ∥ to represent
+the Euclidean norm (of a vector) or the spectral norm
+(of a matrix). The set Sk is uniformly bounded 6
+(w.r.t.
+k ∈ K) if there exists ¯
+d > 0 such that d(Sk) ≤ ¯
+d
+for all k ∈ K, where d(Sk) = sups,s′∈Sk
+∥s − s′
+∥ is
+the diameter of Sk. The interval hull of a bounded set
+S ∋ s = (s(1)
+, . . . , s(n)
+) is IH(S) =
+Qn
+i=1[s(i)
+, s(i)
+],
+where s(i)
+= infs(i) {s ∈ S} and s(i)
+= sups(i) {s ∈ S}.
+The limit superior is denoted by lim. Given a matrix
+M ∈ Rm×n
+, the Moore-Penrose inverse is M+
+; the range
+space and the kernel (null space) are denoted by ran(M)
+and ker(M), respectively. The notation ◦ stands for the
+composition of two maps.
+2 System Model and Problem Description
+2.1 Linear SMF with Inaccurate Initial Condition
+Consider the following discrete-time linear system de-
+scribed by uncertain variables:
+xk+1 = Axk + Bwk, (1)
+yk = Cxk + vk, (2)
+at time k ∈ N0, where (1) and (2) are called the state and
+measurement equations, respectively, where A ∈ Rn×n
+,
+B ∈ Rn×p
+, and C ∈ Rm×n
+. The state equation describes
+how the system state xk (with its realization xk ∈ JxkK ⊆
+Rn
+) changes over time, where the true initial set Jx0K is
+non-empty and bounded; wk is the process/dynamical
+noise (with its realization wk ∈ JwkK ⊆ Rp
+), and there
+exists a constant dw > 0 such that d(JwkK) ≤ dw for all
+k ∈ N0. The measurement equation gives how the system
+state is measured from the measurement yk (with its
+realization, called observed measurement, yk ∈ JykK ⊆
+Rm
+); vk (with its realization vk ∈ JvkK ⊆ Rm
+) stands
+for the measurement noise, and there exists a constant
+dv > 0 such that d(JvkK) ≤ dv for all k ∈ N0. The process
+noises, the measurement noises, and the initial state are
+unrelated [21], given in Assumption 1. This makes the
+system satisfy a non-stochastic hidden Markov model,
+which guarantees the optimality of the classical SMFing
+framework [10].
+Assumption 1 (Unrelated Noises and Initial
+State) ∀k ∈ N0, w0:k, v0:k, x0 are unrelated.
+Unless otherwise stated, the results and discussions in
+the rest of this paper are under Assumption 1.
+The classical linear SMFing framework [10] is given in
+Algorithm 1, where an initial condition Jx̂0K is required.
+The existing linear SMFs are based on this framework.
+We highlight the prediction and update steps in (3)
+5
+This is different from the mathematical convention, but
+can keep many expressions compact in this paper.
+6
+A mathematically rigorous statement should be “the in-
+dexed family (Sk)k∈K is uniformly bounded”. However, this
+minor abuse of notation considerably simplifies the presen-
+tation.
+and (4), respectively:
+Jx̂k|y0:k−1K = AJx̂k−1|y0:k−1K ⊕ BJwk−1K, (3)
+Jx̂k|y0:kK = Xk(C, yk, JvkK)
+\
+Jx̂k|y0:k−1K, (4)
+where we define Jx̂0K =: Jx̂0|y0:−1K for consistency, and
+Xk(C, yk, JvkK) = {xk : yk = Cxk + vk, vk ∈ JvkK}
+= ker(C) ⊕ C+
+({yk} ⊕ J−vkK).
+(5)
+Algorithm 1 Classical Linear SMFing Framework
+1: Initialization: Jx̂0K ⊂ Rn
+;
+2: if k > 0 then
+3: Prediction: Jx̂k|y0:k−1K ← (3); % Returns the prior
+set.
+4: Update: Jx̂k|y0:kK ← (4); % Returns the estimate/the
+posterior set.
+If the true initial set Jx0K can be perfectly known, i.e.,
+Jx̂0K = Jx0K, Algorithm 1 returns the true set Jxk|y0:kK
+as the estimate Jx̂k|y0:kK. In this case, Algorithm 1 is op-
+timal 7
+. Under this classical SMFing framework, exist-
+ing SMFs employ different set-based descriptions to rep-
+resent or outer bound Jx̂k|y0:kK, as pointed out in [10];
+that means the estimate Zk of a linear SMF, at k ∈ N0,
+satisfies Zk ⊇ Jx̂k|y0:kK.
+However, the initial condition is usually not accurate in
+practice, i.e., Jx̂0K ̸= Jx0K, which can cause stability is-
+sue as stated in Section 1. To rigorously derive the the-
+oretical results in the sequel of this paper, we introduce
+the filtering map as follows.
+Definition 1 (Filtering Map) At time k ∈ Z+, the
+prediction-update map under Jwk−1K and JvkK is
+fk : S 7→ Xk(C, yk, JvkK)
+\
+(AS ⊕ BJwk−1K), (6)
+where S ⊆ Rn
+. The filtering map from time i ∈ Z+ to
+k ≥ i is Fk,i with the following form (where 0 ≤ i ≤ k)
+Fk,i(S)=
+
+fk ◦ · · · ◦fi+1(Xi(C, yi, JviK)
+T
+S), k > i,
+Xi(C, yi, JviK)
+T
+S, k = i.
+(7)
+By Definition 1, Algorithm 1 can be described by a com-
+pact form by the filtering map:
+Jx̂k|y0:kK = Fk,0(Jx̂0K), k ∈ N0. (8)
+2.2 Problem Description: Analysis and Synthesis of
+Stability w.r.t. Initial Condition
+In this work, we focus on understanding and handling
+the stability issue of linear SMFs, which includes three
+parts: (i) analyzing the stability of the classical linear
+SMFing framework (see Problem 1), (ii) establishing a
+new linear SMFing framework with guaranteed stability
+(see Problem 2), (iii) designing an efficient linear SMF
+under the proposed framework (see Problem 3).
+To analyze the stability of existing linear SMFs, we
+define the stability in Definition 4, based on the well-
+posedness and the bounded estimation gap.
+7
+The optimality is in the sense that no filters can give a
+smaller set containing all possible states [10].
+Definition 2 (Well-Posedness) An SMF with the ini-
+tial condition Jx̂0K is well-posed, if Zk ̸= ∅ for all k ∈ N0.
+Definition 3 (Bounded Estimation Gap) At k ∈
+N0, the estimation gap is the Hausdorff distance between
+the estimate Zk and the true set Jxk|y0:kK
+dg
+k(Zk) := dH(Zk, Jxk|y0:kK), (9)
+where
+dH(S, T ) = max
+n
+sup
+s∈S
+inf
+t∈T
+∥s−t∥, sup
+t∈T
+inf
+s∈S
+∥s−t∥
+o
+. (10)
+The estimation gap is bounded, if there exists a ¯
+d > 0
+such that dg
+k(Zk) ≤ ¯
+d for all k ∈ N0.
+Definition 4 (Stability of SMF) An SMF is stable
+w.r.t. its initial condition, if for all bounded Jx̂0K ⊂ Rn
+,
+the SMF is well-posed and the estimation gap is bounded.
+Remark 1 The stability of an SMF reflects the insensi-
+tivity of Zk to the initial conditions. Note that the well-
+posedness is a necessary condition for the stability, which
+is different from that of Kalman filters.
+With Definition 4, we are ready to study the stability of
+the classical linear SMFing framework (that the exist-
+ing linear SMFs are based on). For the framework de-
+scribed in Algorithm 1: the initial condition Jx̂0K must be
+carefully chosen in case of ill-posedness; 8
+furthermore,
+the estimation gap dg
+k(Jx̂k|y0:kK) can go unbounded as
+k → ∞. Thus, it is necessary to analyze the stability
+condition of Algorithm 1; see Problem 1.
+Problem 1 (Stability of Classical Linear SMFing
+Framework) Under what condition is the framework in
+Algorithm 1 stable w.r.t. the initial condition?
+Since the well-posedness is sensitive to initial conditions,
+the classical framework faces the ill-posedness issue. This
+motivates us to propose a new SMFing framework always
+with guaranteed stability (regardless of perturbations
+w.r.t. the initial condition); see Problem 2.
+Problem 2 (Stability-Guaranteed Framework)
+How to establish a new SMFing framework such that for
+any bounded Jx̂0K ⊆ Rn
+, the stability is guaranteed?
+Under the new framework, one should develop a filter-
+ing algorithm with low complexity and high accuracy.
+Inspired by prior work (e.g., [24]), we consider a con-
+strained zonotopic SMF for the filter design as follows.
+Problem 3 (Stable and Fast Constrained Zono-
+topic SMF) How to design a constrained zonotopic SMF
+satisfying the stability-guaranteed framework while the
+complexity and accuracy can be well handled?
+To solve these three problems, we propose the concept
+of Observation-Information Tower (OIT) in Section 3. It
+8
+For example, consider the linear system with parameters
+A = 1, B = 1, C = 1, JwkK = [−1, 1], and JvkK = [0, 1].
+If Jx0K = [−1, 1] and Jx̂0K = [0, 2], with (4) we have
+Jx0|y0K = X0(C, y0, Jv0K)
+T
+Jx0K = [−2, −1]
+T
+[−1, 1] = {−1}
+while Jx̂0|y0K = X0(C, y0, Jv0K)
+T
+Jx̂0K = [−2, −1]
+T
+[0, 2] =
+∅. From (3), we know that Jx̂1|y0K = ∅ and thus (4) gives
+Jx̂1|y0:1K = ∅. Proceeding forward, we have Jx̂k|y0:kK = ∅ for
+k ≥ 0.
+plays a pivotal role in understanding the stability of lin-
+ear SMFing and inspiring stability-guaranteed designs.
+Then, the solutions to Problems 1-3 are studied in Sec-
+tions 4–6, respectively.
+3 The Observation-Information Tower
+Before defining the OIT, let us first analyze how a sin-
+gle observed measurement affects the estimate as time
+elapses. 9
+At k = 0, from the update step (4) in Algo-
+rithm 1 we know that the estimate Jx̂0|y0K is the inter-
+section of X0(C, y0, Jv0K) =: O0,0 and Jx̂0K =: E0, which
+describes how the observed measurement y0 affects the
+estimate at k = 0. When we ignore all the successive ob-
+served measurements (like the impulse response does),
+only the prediction step in Algorithm 1 works for k ≥ 1.
+Based on “set intersection under Minkowski sum”: for
+sets S1, . . . , SI, and T , we have 10
+ I
+\
+i=1
+Si
+
+⊕ T ⊆
+I
+\
+i=1
+(Si ⊕ T ), (11)
+and hence the estimate at k = 1 is outer bounded by the
+intersection of the following two sets:
+AO0,0 ⊕ BJw0K = AX0(C, y0, Jv0K) ⊕ BJw0K =: O1,0,
+AE0 ⊕ BJw0K = AJx̂0K ⊕ BJw0K =: E1,
+i.e., Jx̂1|y0K ⊆ O1,0
+T
+E1, which indicates how y0 affects
+the estimate at k = 1. As such, we can analyze the effect
+of yi on the estimate at time k. It defines the observation-
+information and state-evolution sets as follows.
+Definition 5 (Observation-Information and State-
+Evolution Sets) The observation-information set at
+time k ≥ i contributed by yi (i.e, the observed measure-
+ment at time i) is
+Ok,i := Ak−i
+Xi(C, yi, JviK) ⊕
+k−1
+X
+r=i
+Ak−1−r
+BJwrK. (12)
+The state-evolution set at time k is
+Ek := Ak
+Jx̂0K ⊕
+k−1
+X
+r=0
+Ak−1−r
+BJwrK. (13)
+Remark 2 If we consider all the observed measurements
+y0:k, the intersection of the observation-information sets
+and the state-evolution set forms an outer bound on the
+estimate (see Proposition 1), where the conservativeness
+comes from the converse of (11) is not true in general.
+Proposition 1 (Set-Intersection-Based Outer B-
+ound) At k ∈ N0, an outer bound on Jx̂k|y0:kK in Algo-
+rithm 1 is
+Jx̂k|y0:kK = Fk,0(Jx̂0K) ⊆
+k
+\
+i=0
+Ok,i
+\
+Ek, ∀Jx̂0K ⊆ Rn
+,
+(14)
+9
+This is quite similar to analyzing the impulse response of
+a control system.
+10
+The proof is as follows. ∀l ∈
+TI
+i=1 Si
+
+⊕ T , ∃s ∈
+TI
+i=1 Si
+and t ∈ T such that l = s + t. Since s ∈
+TI
+i=1 Si, we have
+s ∈ Si for all i ∈ {1, . . . , I}. Thus, ∀i ∈ {1, . . . , I}, l = s+t ∈
+Si ⊕ T , which implies l ∈
+TI
+i=1(Si ⊕ T ), and we get (11).
+which means Jx̂k|y0:kK ⊆
+Tk
+i=0 Ok,i and Jx̂k|y0:kK ⊆ Ek.
+Proof: See Appendix A. □
+A pictorial illustration of Proposition 1 is given in Fig. 1.
+1
+k =
+0
+k =
+0
+0,0
+1
+1,0
+1,1
+^
+x1jy0:1 µO1;1 O1;0 E1
+^
+x0jy0 =O0;0 E0
+Fig. 1. Illustration of set-intersection-based outer bound.
+For k = 0, the only observation-information set is O0,0; the
+state-evolution set is E0; the intersection of O0,0 and E0 gives
+the estimate Jx̂0|y0K. For k = 1, O0,0 and E0 become O1,0 and
+E1, respectively; the new observation-information set is O1,1;
+the intersection of O1,1, O1,0, and E1 forms an outer bound
+on the estimate Jx̂1|y0:1K as presented in Proposition 1.
+Note that
+k
+\
+i=0
+Ok,i ⊆
+k
+\
+i=k−δ
+Ok,i (15)
+holds for any integer δ ∈ [0, k], 11
+we define the Right-
+Hand Side (RHS) of (15) as the OIT (see Definition 6).
+Definition 6 (Observation-Information Tower)
+The OIT at time k ∈ N0 is the intersection of the
+observation-information sets over [k−δ, k]:
+Tk
+i=k−δ Ok,i.
+Now, we provide a sufficient condition for the uniform
+boundedness (see Section 1) of the OIT as follows, which
+is fundamental to the results derived in the rest of this
+paper.
+Theorem 1 (Uniform Boundedness of OIT) The
+OIT defined by Definition 6 is uniformly bounded w.r.t.
+k ∈ {k ≥ δ: δ ≥ µ−1} (or simply k ≥ δ ≥ µ−1), where
+µ is the observability index (see Chapter 6.3.1 in [5]), if
+the pair (A, C) is observable and A is non-singular. Fur-
+thermore, the diameter of the OIT is upper bounded by
+d
+ k
+\
+i=k−δ
+Ok,i
+
+≤
+v
+u
+u
+t
+δ
+X
+j=0
+
+dv +
+δ−j
+X
+l=1
+∥CA−l
+B∥dw
+2
+σmin(Oδ)
+=: ¯
+dδ(A, B, C),
+(16)
+where σmin(Oδ) returns the smallest singular value of
+Oδ = [(A−δ
+)T
+CT
+. . . CT
+]T
+.
+Proof: See Appendix B. □
+Note that the uniform boundedness of the OIT indicates
+the diameter of
+Tk
+i=k−δ Ok,i (∀δ ≥ µ − 1) cannot go
+unbounded as k → ∞, which is upper bounded by (16).
+11
+In this paper, when an integer is in an interval [a, b], this
+interval denotes {i ∈ Z: a ≤ i ≤ b}.
+4 Stability Analysis of Classical Linear Set-
+Membership Filtering Framework
+In this section, we study the stability issue w.r.t. the ini-
+tial condition of the classical linear SMFing framework
+to address Problem 1, based on the OIT.
+Since the uniform boundedness of the OIT requires ob-
+servability, for general (A, C) we introduce the observ-
+ability decomposition: there exists a nonsingular P ∈
+Rn×n
+such that the equivalence transformation x̃k =
+[(x̃o
+k)T
+(x̃ō
+k)T
+]T
+= Pxk transforms (1) and (2) into 12
+"
+x̃o
+k+1
+x̃ō
+k+1
+#
+=
+"
+Ão 0
+Ã21 Ãō
+# "
+x̃o
+k
+x̃ō
+k
+#
++
+"
+B̃o
+B̃ō
+#
+wk,
+yk = C̃ox̃o
+k + vk,
+(17)
+where x̃o
+k ∈ Rno
+and x̃ō
+k ∈ Rnō
+; the pair (Ão, C̃o) is
+observable with the observability index µo; it is well-
+known that (A, C) is detectable if and only if ρ(Ãō) < 1,
+where ρ(·) returns the spectral radius of a matrix.
+Now, we propose a stability condition of the classical
+linear SMFing framework as follows, where we define
+Jˆ
+x̃o
+0K and Jˆ
+x̃ō
+0K as the projections of Jˆ
+x̃0K = JPx̂0K to the
+subspaces w.r.t. x̃o
+0 and x̃ō
+0, respectively.
+Theorem 2 (Stability Criterion) The classical SM-
+Fing framework in Algorithm 1 is stable w.r.t. its initial
+condition, if the following conditions hold:
+(i) Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K;
+(ii) limk→∞ Ãk
+ō +
+Pk−1
+i=0 Ãk−1−i
+ō Ã21
+
+< ∞.
+Proof: See Appendix C. □
+Remark 3 Theorem 2 tells that when conditions (i)
+and (ii) hold, the classical SMFing framework is stable,
+which solves Problem 1. More precisely, these two condi-
+tions ensure the well-posedness and the bounded estima-
+tion gap, respectively. However, under condition (i), we
+cannot always keep Jx̂k|y0:kK ⊇ Jxk|y0:kK (which is dif-
+ferent from Proposition 4 in Appendix C for observable
+systems), i.e., the outer boundedness breaks.
+As mentioned in Remark 3, condition (ii) in Theorem 2
+is a sufficient condition for the boundedness of the esti-
+mation gap. To evaluate the difference between the suf-
+ficiency and the necessity, we provide a necessary condi-
+tion for the bounded estimation gap in Proposition 2.
+Proposition 2 (Necessary Condition for Bounded
+Estimation Gap) For all bounded Jx̂0K ⊂ Rn
+with
+Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K, if the estimation gap dg
+k(Jx̂k|y0:kK) of Algo-
+rithm 1 is bounded, Ãō must be marginally stable 13
+.
+12
+The observability decomposition follows Theorem 6.O6
+in [5]: P = [PT
+o PT
+ō ]T
+and U = P−1
+= [Uo Uō], where Po ∈
+Rno×n
+, Pō ∈ Rnō×n
+, Uo ∈ Rn×no
+, and Uō ∈ Rn×nō
+, such
+that Ão = PoAUo, Ã21 = PōAUo, Ãō = PōAUō, B̃o = PoB,
+B̃ō = PōB, and C̃o = CUo. Note that the eigenvalues of Ãō
+only depends on (A, C) but independent of P.
+13
+In this paper, it refers to that Ãō is the system matrix of
+a marginally stable discrete-time system, i.e., all eigenvalues
+of Ãō have magnitudes less or equal to one and those equal
+to one are non-defective [5].
+Proof: See Appendix D. □
+Remark 4 For all bounded Jx̂0K ⊂ Rn
+with Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K,
+the proposed sufficient condition for the bounded estima-
+tion gap [i.e., condition (ii) in Theorem 2] is very close
+to the necessary condition given in Proposition 2. When
+Ã21 = 0, condition (ii) means Ãō is marginally stable;
+in that case, it becomes a necessary and sufficient con-
+dition. When Ã21 ̸= 0, in general we need ρ(Ãō) < 1
+(which is close to marginal stability of Ãō), i.e., (A, C) is
+detectable, to provide the bounded-input bounded-output
+stability to guarantee the bounded estimation gap.
+The following corollary gives a sufficient condition for si-
+multaneously guaranteeing the stability w.r.t. the initial
+condition and the uniform boundedness of the estimate.
+Corollary 1 (Egregium) For bounded Jx̂0K ⊂ Rn
+with
+Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K, the classical SMFing framework is stable
+w.r.t. the initial condition and has the uniformly bounded
+estimate w.r.t. k ∈ N0 if (A, C) is detectable.
+Proof: See Appendix E. □
+Remark 5 Corollary 1 provides an explicit condition
+for the stability and the uniform boundedness 14
+. This
+result is consistent with the discrete-time Kalman filter
+that detectable (A, C) implies a stable 15
+filter [15]. Thus,
+it builds an important bridge between stochastic and non-
+stochastic linear filters on their stability w.r.t. initial con-
+ditions. It should also be highlighted that our result is in-
+dependent of the types of the noises; while for stochastic
+filtering very few results are on the stability of discrete-
+time linear optimal filters with non-Gaussian noises.
+Remark 6 (Instability Caused by Improper Ini-
+tial Conditions) Different from Kalman filtering, the
+classical linear SMFing framework is not stable for all
+bounded initial conditions. If the designer has little in-
+formation on Jx0K, it would be hard to choose a proper
+Jx̂0K to guarantee the stability w.r.t. the initial condition
+(see Theorem 2). This motivates us to propose a stability-
+guaranteed filtering framework without using the knowl-
+edge of Jx0K, presented in Section 5.
+5 Stability-Guaranteed Filtering Framework
+In this section, we establish a stability-guaranteed filter-
+ing framework, called OIT-inspired filtering (see Algo-
+rithm 2), to solve Problem 2.
+From Theorem 2, we know that the initial condition Jx̂0K
+should satisfy Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K to ensure the stability of Al-
+gorithm 1 w.r.t. the initial condition. This motivates us
+to choose a sufficiently large Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K so that the ill-
+posedness can be fully handled. However, it is difficult
+to choose such Jˆ
+x̃o
+0K due to the following two issues:
+14
+Even though the detectability is usually assumed for the
+uniform boundedness [7], to be best of our knowledge, there
+are no existing results on rigorously proving it.
+15
+For Kalman filters, to achieve asymptotic stability w.r.t.
+the initial condition needs an additional condition on the
+reachability w.r.t. process noises. For linear SMFs, even
+though the numerical results in Section 7.1 show the asymp-
+totic stability, proving it requires to introduce probability
+measures, which is beyond the scope of this work.
+• Since Jx̃o
+0K is unlikely to know exactly, we can hardly
+100% guarantee Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K.
+• Larger Jˆ
+x̃o
+0K can increase the possibility of the inclusion
+but brings more conservativeness.
+In the existing SMFing framework, these two issues can-
+not be effectively resolved. Thus, we propose a new SMF-
+ing framework inspired by OIT, with the help of the fol-
+lowing lemma.
+Lemma 1 (OIT-Inspired Invariance) For all k ≥
+max{µo − 1 + nλo
+0
+, 1} =: k∗, where nλo
+0
+is the in-
+dex of eigenvalue 0 of Ão (if Ão does not contain 0
+eigenvalues, nλo
+0
+= 0), define the family of nested sets
+{B∞
+θk
+[ĉo
+0]}θk∈[0,∞), in which B∞
+θk
+[ĉo
+0] is a closed no-cube
+of edge length 2θk centered at ĉo
+0 ∈ Rno
+. Then, ∃θ̄k ≥ 0
+s.t. ∀θ′
+k ≤ θ̄k ≤ θ′′
+k , (18) holds, where Po is a submatrix
+formed by the first no rows of P.
+Proof: See Appendix F, which is inspired by OIT. □
+Remark 7 From Lemma 1, we know that even with-
+out the information of Jˆ
+x̃o
+0K, we can enlarge θk until
+PoFk,0(P−1
+(B∞
+θk
+[ĉo
+0]×Jˆ
+x̃ō
+0K)) becomes unchanged for θk ≥
+θ̄k. As a result,
+PoFk,0(P−1
+(Jx̃o
+0K×Jˆ
+x̃ō
+0K)) ⊆ PoFk,0(P−1
+(B∞
+θ̄k
+[ĉo
+0]×Jˆ
+x̃ō
+0K)),
+which means B∞
+θ̄k
+[ĉo
+0] ⊇ Jx̃o
+0K always holds for k ≥ k∗.
+Based on this inspiration, we propose the OIT-inspired
+filtering framework in Algorithm 2.
+Algorithm 2 OIT-Inspired Filtering
+1: Initialization: Bounded Jx̂0K ⊂ Rn
+;
+2: if k < max{µo − 1 + nλo
+0
+, 1} = k∗ then
+3: Jx̂k|y0:kK ← Algorithm 1;
+4: if Jx̂k|y0:kK = ∅ then
+5: Choose a T̂ o
+0 such that Jx̂k|y0:kK = Fk,0(P−1
+(T̂ o
+0 ×
+Jˆ
+x̃ō
+0K)) is non-empty and bounded;
+6: else
+7: Jx̂k|y0:kK=Fk,0(P−1
+(B∞
+θ̄k
+[ĉo
+0] × Jˆ
+x̃ō
+0K)); % Recursively
+A line-by-line explanation of Algorithm 2 is as follows.
+Line 1 initializes the algorithm. Lines 2-7 give the fil-
+tering process at each k ∈ N0. For k < k∗, the esti-
+mate Jx̂k|y0:kK is identical to that of Algorithm 1 (see
+Line 3 of Algorithm 2), if it is not an empty set; other-
+wise, it will be reset by Line 5. In Line 5, we can choose
+T̂ o
+0 = B∞
+θ [0no
+] with sufficiently large θ, which is used in
+Algorithm 3. For k ≥ k∗, the estimate Jx̂k|y0:kK is deter-
+mined by Line 7. Note that Line 7 can be implemented
+in a recursive manner by its definition in (7). 16
+Theorem 3 (Stability of OIT-Inspired Filtering)
+If condition (ii) in Theorem 2 holds, the filtering frame-
+work in Algorithm 2 is stable w.r.t. the initial condition.
+Proof: See Appendix G. □
+16
+Generally speaking, reduction methods are required to bal-
+ance the accuracy and the complexity in Line 7 for specific
+filter designs. But it is also possible to reduce the complexity
+without any accuracy loss (see the cases in Section 7.1).
+PoFk,0(P−1
+(B∞
+θ′
+k
+[ĉo
+0] × Jˆ
+x̃ō
+0K)) ⊆ PoFk,0(P−1
+(B∞
+θ̄k
+[ĉo
+0] × Jˆ
+x̃ō
+0K)) = PoFk,0(P−1
+(B∞
+θ′′
+k
+[ĉo
+0] × Jˆ
+x̃ō
+0K)). (18)
+Theorem 3 indicates that the OIT-inspired filtering
+framework given in Algorithm 2 does not rely on any
+information about Jx0K to guarantee the well-posedness.
+For Algorithm 2, similar results in Proposition 2 and
+Corollary 1 can also be derived, where the condition
+Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K is not needed any more.
+6 Stable and Fast Constrained Zonotopic SMF
+In this section, we develop a constrained zonotopic SMF
+under the new framework described in Algorithm 2,
+where the OIT plays the pivotal role. This SMF is not
+only with guaranteed stability but also with high effi-
+ciency and good accuracy. We call it the OIT-inspired
+Constrained Zonotopic SMF (OIT-CZ SMF).
+Before presenting the SMF, we introduce the constrained
+zonotope [24] in Definition 7 with a small extension.
+Definition 7 (Extended Constrained Zonotope)
+A set Z ⊆ Rn
+is an (extended) constrained zonotope if
+there exists a quintuple (Ĝ, ĉ, Â, b̂, ĥ) ∈ Rn×ng
+× Rn
+×
+Rnc×ng
+× Rnc
+× [0, ∞]ng
+such that Z is expressed by
+
+Ĝξ+ĉ: Âξ = b̂, ξ ∈
+ng
+Y
+j=1
+
+−ĥ(j)
+, ĥ(j)
+
+
+=: Z(Ĝ, ĉ, Â, b̂, ĥ),
+where ĥ(j)
+is the jth
+component of ĥ.
+In Definition 7, we slightly generalize the constrained
+zonotope in [24] by replacing ∥ξ∥∞ ≤ 1, i.e., ξ ∈
+[−1, 1]ng
+, with ξ ∈
+Qng
+j=1
+
+− ĥ(j)
+, ĥ(j)
+
+. The benefit is
+twofold: (i) we allow ĥ(j)
+to be infinity such that the
+posterior sets induced by unbounded prior sets (which
+is required by the SMFing framework in Algorithm 2)
+can be fully described; (ii) the numerical stability of our
+proposed algorithm is improved.
+Based on Definition 7, if Jx̂0K, JwkK, and JvkK are
+constrained zonotopes, the resulting Jx̂k|y0:k−1K and
+Jx̂k|y0:kK in Algorithm 1 are also constrained zonotopes
+without any approximations. Specifically, by defining
+Jx̂k|y0:k−1K = Z(Ĝ−
+k , ĉ−
+k , Â−
+k , b̂−
+k , ĥ−
+k ),
+Jx̂k|y0:kK = Z(Ĝk, ĉk, Âk, b̂k, ĥk),
+JwkK = Z(Ĝwk
+, ĉwk
+, Âwk
+, b̂wk
+, ĥwk
+),
+JvkK = Z(Ĝvk
+, ĉvk
+, Âvk
+, b̂vk
+, ĥvk
+),
+(19)
+the prediction step (3) gives the exact Jx̂k|y0:k−1K with
+Ĝ−
+k =
+h
+AĜk−1 BĜwk−1
+i
+, ĉ−
+k = Aĉk−1 + Bĉwk−1
+,
+Â−
+k =
+"
+Âk−1 0
+0 Âwk−1
+#
+, b̂−
+k =
+"
+b̂k−1
+b̂wk−1
+#
+, ĥ−
+k =
+"
+ĥk−1
+ĥwk−1
+#
+,
+(20)
+and the update step (4) returns the exact Jx̂k|y0:kK with
+Ĝk =
+h
+Ĝ−
+k 0
+i
+, ĉk = ĉ−
+k , ĥk =
+"
+ĥ−
+k
+ĥvk
+#
+,
+Âk =
+
+
+
+
+Â−
+k 0
+0 Âvk
+CĜ−
+k Ĝvk
+
+
+
+ , b̂k =
+
+
+
+
+b̂−
+k
+b̂vk
+yk − ĉvk
+− Cĉ−
+k
+
+
+
+ .
+(21)
+The proof of (20) and (21) is straightforward from [24],
+by rewriting (4) as Jxk|y0:kK = {xk ∈ Jxk|y0:k−1K: Cxk ∈
+{yk} + J−vkK}.
+Now, we are ready to design the OIT-CZ SMF (see Algo-
+rithm 3), where Proposition 3 plays an important role.
+Proposition 3 The image of a constrained zonotope
+Ẑ−
+i = Z(Ĝ−
+i , ĉ−
+i , Â−
+i , b̂−
+i , ĥ−
+i ) under the filtering map
+Fk,i is
+Zk = Fk,i(Ẑ−
+i ) = Z(Ĝk, ĉk, Âk, b̂k, ĥk), (22)
+where the parameters are given in (23) with b̂yl
+= yl −
+ĉvl
+− Cĉ−
+l and ĉ−
+l = Al−i
+ĉ−
+i +
+Pl−1
+r=i Al−1−r
+Bĉwr for
+i ≤ l ≤ k.
+Proof: By setting Ẑ−
+i = Jx̂i|y0:i−1K and recursively
+using the prediction and update steps [i.e., (20) and (21)]
+according to (7), equation (22) can be derived. □
+Algorithm 3 OIT-Inspired Constrained Zonotopic
+SMF (OIT-CZ SMF)
+1: Initialization: Bounded constrained zonotope Jx̂0K =
+Z(Ĝ−
+0 , ĉ−
+0 , Â−
+0 , b̂−
+0 , ĥ−
+0 ) ⊂ Rn
+, δ̄ ≥ max{µo − 1 + nλo
+0
+, 1},
+ε > 0, Υ∞ = infγ∈(ρ(Ãō),1)
+max{γ−k
+∥Ãk
+ō ∥∞ : k∈N0}
+1−γ
+;
+2: if k < δ̄ then
+3: Zk = Jx̂k|y0:kK ← Algorithm 1 with (19)-(21);
+4: if Zk = ∅ then
+5: Zk ← (22) with i = 0 and Z−
+0 = P−1
+B∞
+θ [0no ] ×
+Jˆ
+x̃ō
+0K
+
+, where θ > 0 is sufficiently large such that Zk ̸= ∅;
+6: T̂ ō
+k ← Z(Ino , cō
+k, [ ], [ ], G
+ō
+k1no ) = IH( e
+Z−,ō
+k );
+7: else
+8: Zk ← (22) with i = k−δ̄ and Ẑ−
+i = P−1
+T̂ o
+k−δ̄×T̂ ō
+k−δ̄
+
+,
+where T̂ o
+k−δ̄ = B∞
+θ̄k
+
+center PoIH(Z−
+k−δ̄
+)
+
+for k − δ̄ < δ̄
+and T̂ o
+k−δ̄ = PoIH(Z−
+k−δ̄
+) for k − δ̄ ≥ δ̄;
+9: Z(Ino , ĉin
+k , [ ], [ ], Ĝin
+k 1no ) = IH(Ã21
+e
+Zo
+k ⊕ B̃ōJwkK);
+10: ℓk = max{∥Ĝin
+k ∥∞, ℓk−1}, with ℓδ̄−1 = 0;
+11: ĉō
+k+1 = Ãōĉō
+k + ĉin
+k , with ĉō
+δ̄ = center IH( e
+Zō
+δ̄ )
+
+;
+12: T̂ ō
+k = B∞
+αk
+[ĉō
+k] with αk = 1
+2
+∥Ak−δ̄
+ō ∥∞d∞( e
+Zō
+δ̄ ) +
+Υ∞ℓk−1 +ε;
+Algorithm 3 is under the framework of Algorithm 2, and
+we provide the line-by-line explanation as follows.
+• Line 1 initializes Algorithm 3, with the additional
+parameters δ̄ ≥ max{µo − 1 + nλo
+0
+, 1} and ε > 0
+that: a larger δ̄ leads to higher accuracy but increases
+the complexity (determined by Line 8); a smaller ε
+Ĝk =
+h
+Ak−i
+Ĝ−
+i 0 Ak−i−1
+BĜwi
+0 . . . BĜwk−1
+0
+i
+, ĉk = Ak−i
+ĉ−
+i +
+k−1
+X
+r=i
+Ak−1−r
+Bĉwr
+,
+Âk =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Â−
+i 0 0 0 . . . 0 0
+0 Âvi 0 0 . . . 0 0
+CĜ−
+i Ĝvi
+0 0 . . . 0 0
+0 0 Âwi
+0 . . . 0 0
+0 0 0 Âvi+1 . . . 0 0
+CAĜ−
+i 0 CBĜwi
+Ĝvi+1
+. . . 0 0
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+0 0 0 0 . . . Âwk−1
+0
+0 0 0 0 . . . 0 Âvk
+CAk−i
+Ĝ−
+i 0 CAk−i−1
+BĜwi
+0 . . . CBĜwk−1
+Ĝvk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, b̂k =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b̂−
+i
+b̂vi
+b̂yi
+b̂wi
+b̂vi+1
+b̂yi+1
+.
+.
+.
+b̂wk−1
+b̂vk
+b̂yk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, ĥk =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ĥ−
+i
+ĥvi
+ĥwi
+ĥvi+1
+.
+.
+.
+ĥwk−1
+ĥvk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+(23)
+makes the estimate corresponding to the unobservable
+system more accurate but brings slower convergence
+of (24) [indicated by Line 12 and (H.16)]. Line 1 also
+gives an important constant Υ∞ in estimating the un-
+observable state (see Line 8 with Line 12). 17
+• Lines 3-6 are for k < δ̄. Similarly to Lines 3 and 5 of
+Algorithm 2, Lines 3 and 5 of Algorithm 3 give the
+estimate Zk: Line 3 gives the estimate returned by
+the constrained zonotopic version of Algorithm 1, i.e.,
+with (19)-(21); in Line 5, B∞
+θ [0no
+] can be expressed by
+Z(Ino
+, 0no
+, [ ], [ ], α1no
+) for improving the numerical
+stability, where Ino
+is the identity matrix of size no and
+1no
+is the no-dimensional all-ones column vector; one
+can double θ from θ = 1 until Zk ̸= ∅, and this can be
+done in finite steps. Line 6 calculates the interval hull
+of e
+Z−,ō
+k by simply solving 2no linear programmings,
+where G
+ō
+k and cō
+k are the generator matrix and the
+center of the resulting interval hull, respectively, and
+Z(Ino
+, cō
+k, [ ], [ ], G
+ō
+k1no
+) is employed to improve the
+numerical stability; note that e
+Z−,ō
+k is the projection
+of e
+Z−
+k = PZ−
+k to the subspace w.r.t. x̃ō
+k, where Z−
+k
+is derived during the processing of calculating Zk in
+Line 3 or Line 5.
+• Lines 8-12 are for k ≥ δ̄, where Z̃o
+k and Z̃ō
+k are the
+projections of e
+Zk = PZk to the subspaces w.r.t. x̃o
+k
+and x̃ō
+k, respectively. Line 8 of Algorithm 3 gives the
+estimate Zk, which is a finite-horizon version of Line 7
+of Algorithm 2 over the time window [k − δ̄, k]. In
+Line 8, θ̄k is derived based on Lemma 1, 18
+and from
+Algorithm 3 we can observe that T̂ ō
+k−δ̄
+is calculated by
+17
+Note that max{γ−k
+∥Ãk
+ō ∥∞ : k ∈ N0} can be calculated
+within finite steps (implied by the proof of Lemma 4). Thus,
+Υ∞ can be computed by searching γ over (ρ(Ãō), 1).
+18
+When utilizing Lemma 1, one should regard k − δ̄,
+B∞
+θ̄k
+
+center PoIH(Z−
+k−δ̄
+)
+
+, and T̂ ō
+k−δ̄ as 0, B∞
+θ̄k
+[ĉo
+0], and Jˆ
+x̃ō
+0K,
+respectively. For θ̄k, one can double θk from θk = 1 until the
+equality in (18) holds, where the equality can be checked by
+calculating interval hulls.
+Line 6 (for k−δ̄ < δ̄) and Lines 9-12 (for k−δ̄ ≥ δ̄). 19
+Line 9 gives the interval hull of the “input” of the un-
+observable subsystem, where ĉin
+k is the center of the
+resulting interval hull and Ĝin
+k is diagonal and posi-
+tive semi-definite. In Line 10, ∥Ĝin
+k ∥∞ represents the
+maximum half-edge length of the interval hull derived
+by Line 9. Thus, ℓk records the greatest maximum
+half-edge length up to k, which determines the radius
+(in the sense of ∞-norm) of T̂ ō
+k−δ̄
+[see Line 12, where
+d∞(S) := sups,s′∈S ∥s − s′
+∥∞]; for the center of T̂ ō
+k−δ̄
+,
+it is calculated by Line 11.
+The following theorem describes not only the stability
+w.r.t. the initial condition but also two important prop-
+erties of Algorithm 3. More specifically, for detectable
+(A, C): the finite-time inclusion property fixes the “outer
+boundedness breaking” problem in the classical linear
+SMFing framework (see Remark 3); the uniform bound-
+edness of Zk is guaranteed, i.e., the estimate cannot go
+unbounded as time elapses – to the best of our knowledge
+it is the first time to propose a constrained-zonotopic
+SMF with rigorously proven uniform boundedness.
+Theorem 4 (Properties of OIT-CZ SMF) If (A, C)
+is detectable, the OIT-CZ SMF in Algorithm 3 is stable
+w.r.t. the initial condition. Furthermore, there exists a
+k ≥ 2δ̄ such that
+Zk ⊇ Jxk|y0:kK, k ≥ k, (24)
+which is the finite-time inclusion property of Algorithm 3.
+Finally, Zk is uniformly bounded w.r.t. k ∈ N0.
+Proof: See Appendix H. □
+Furthermore, Algorithm 3 has low computational com-
+plexity per step, especially when the system is observ-
+able: the averaged complexity for k → ∞ is determined
+by the case with k ≥ δ̄ (i.e., Lines 8-12 in Algorithm 3);
+for observable (A, C), only Line 8 remains, and we can
+19
+In Line 8, we can replace Z−
+k−δ̄
+with Zk−δ̄ to improve the
+efficiency when IH(Zk−δ̄) is calculated (see Section 7.2).
+also set Z−
+k−δ̄
+= Rn
+= B∞
+∞[0n]; from (23) we know that In
+Section 7.2.2, we show that Algorithm 3 has higher time
+efficiency compared with two most efficient constrained
+zonotopic SMFs in the toolbox CORA 2024 [1].
+In terms of the accuracy, Algorithm 3 can be regarded
+as a reduction on the optimal estimate in Algorithm 1
+with constrained zonotopic descriptions. Different from
+the existing reduction methods (e.g., [24]) based on
+geometric properties of constrained zonotopes, Algo-
+rithm 3 utilizes the properties of the dynamical system.
+Thus, the reduction is in a long-term manner instead of
+a greedy/instanetous manner, which greatly overcomes
+the wrapping effect. Therefore, the proposed OIT-CZ
+SMF has the desired performance improvement in terms
+of both complexity and accuracy.
+7 Numerical Examples
+7.1 Classical and Stability-Guaranteed Frameworks
+In this subsection, we consider observable and detectable
+dynamical systems as illustrative examples to validate
+the theoretical results in Section 4 and Section 5.
+Observable (A, C): Consider a discretized second-order
+system described by (1) and (2), with parameters
+A =
+"
+1 1
+0 1
+#
+, B =
+"
+0.5
+1
+#
+, C =
+h
+1 0
+i
+,
+JwkK = [−1, 1], JvkK = [−1, 1], (25)
+which means A is not Schur stable and (A, C) is ob-
+servable with µ = 2. The true initial set is Jx0K =
+[1, 3] × [1, 3]. 20
+Assume that there are four designers Alice, Bob, Carol,
+and David to design SMFs for (25), and the true ini-
+tial set Jx0K is unknown to them. Alice, Bob, and David
+employ the classical filtering framework in Algorithm 1,
+while Carol uses the OIT-inspired filtering framework in
+Algorithm 2, where P = I2. 21
+From Fig. 2, we can see
+that the difference of the initial conditions chosen by the
+first three designers are corrected by the measurements
+y0:6, and the estimates converge to Jx6|y0:6K; thus, the
+estimation gaps of these three filters are 0 for k ≥ 6;
+this implies the estimation gaps are bounded for k ∈ N0
+which corroborates the results in Theorem 2 and Theo-
+rem 3. In contrast, the initial condition chosen by David
+does not satisfy condition (i) in Theorem 2, and the re-
+sulting estimate becomes empty as time elapses.
+20
+The probability distributions of uncertain variables
+x0, w0:k, v0:k can be arbitrary for simulations. In Section 7,
+these uncertain variables are set to be uniformly distributed
+in their ranges. The Matlab codes for all results in this paper
+are provided at https://github.com/congyirui/Stability-of-
+Linear-SMF-2024.
+21
+Note that the exact solutions of Algorithm 1 and
+Algorithm 2 can be derived by employing halfspace-
+representation-based method with acceptable computational
+complexities.
+Detectable (A, C): Consider the system with
+A =
+"
+0.5 1
+0 1
+#
+, B =
+"
+0.5
+1
+#
+, C =
+h
+0 1
+i
+,
+JwkK = [−1, 1], JvkK = [−1, 1], (26)
+which implies A is not Schur stable and (A, C) is de-
+tectable with µo = 1. The true initial set is Jx0K =
+[1, 3] × [1, 3].
+The initial conditions chosen by Alice, Bob, Carol, and
+David are identical to those in Fig. 2(a), where Algo-
+rithm 2 is with P =
+ 0 1
+−1 0
+
+. Fig. 3 corroborates the the-
+oretical results in Theorem 2 and Theorem 3, where the
+estimation gaps corresponding to non-empty estimates
+are bounded; more specifically, they converge to 0 expo-
+nentially fast.
+7.2 The Stable and Fast Constrained Zonotopic SMF
+Firstly, we use Monte Carlo simulation to test the OIT-
+CZ SMF in Section 7.2.1; then, we show the time effi-
+ciency of the OIT-CZ SMF in Section 7.2.2.
+7.2.1 Interval hull of the estimate
+In this part, we employ the OIT-CZ SMF to derive the
+interval hull of the estimate.
+First, consider the randomly generated (A, B, C) (by
+using drss function in MATLAB) with observable
+(A, C). The process and measurement noises are with
+JwkK = [−1, 1]p
+and JvkK = [−1, 1]m
+. The true initial
+set is Jx0K = [−10, 10]n
+, and the initial condition is
+Jx̂0K = [−10, 10]n
+⊕ {c}, where c is randomly gener-
+ated in [−1, 1]n
+for testing Algorithm 3. In the sim-
+ulations, we set n = 10, p = m ∈ {5, . . . , 10}, and
+δ̄ = n − rank(C) + 3 > µ − 1 (in Algorithm 3); for each
+p = m, the simulations are conducted 1000 times. The
+results are shown in Fig. 4(a), where one of the simu-
+lation runs is highlighted by the (yellow) dash-dotted
+lines with the (purple) stars representing: Zk = ∅ holds
+in Line 4 of Algorithm 3 and Line 5 derives a non-empty
+Zk by resetting Z−
+0 . We can see that the proposed
+OIT-CZ SMF is stable and uniformly bounded, which
+corroborates the theoretical results in Theorem 4.
+Second, consider the randomly generated (A, B, C)
+(by using drss function in MATLAB) with detectable
+(A, C). For the unobservable subsystem, Ãō is a ran-
+domly created matrix with ρ(Ãō) ≤ 0.5; each element
+in Ã21 and B̃ō is randomly selected from [0, 1]. The
+transformation matrix P is a randomly derived or-
+thogonal matrix such that by (17): A = P−1
+ÃP,
+B = P−1
+B̃, C = [C̃o 0]P are finally obtained. The sets
+JwkK, JvkK, Jx0K, and Jx̂0K the same as those in the
+simulations for observable (A, C). Also, we set n = 10,
+no = p = m ∈ {7, 8, 9}, δ̄ = no − rank(C̃o) + 3 > µo − 1,
+and ε = 0.001. for each no = p = m, the simulations
+are conducted 1000 times. The results are shown in
+Fig. 4(b), which validates the results in Theorem 4.
+-4 -3 -2 -1 0 1 2 3 4
+x(1)
+-axis
+-4
+-3
+-2
+-1
+0
+1
+2
+3
+4
+x
+(2)
+-axis
+True
+Alice
+Bob
+Carol
+David
+(a)
+3.5 4 4.5 5 5.5 6
+x(1)
+-axis
+1
+2
+3
+4
+5
+6
+7
+x
+(2)
+-axis
+True
+Alice
+Bob
+Carol
+David
+(b)
+25.5 26 26.5 27 27.5 28 28.5
+x(1)
+-axis
+2
+3
+4
+5
+6
+7
+x
+(2)
+-axis
+True
+Alice
+Bob
+Carol
+David (empty)
+OIT
+(c)
+Fig. 2. Illustrative example for observable (A, C): (a) initial conditions and the true initial set at k = 0, (b) posterior sets
+and the true set Jx1|y0:1K at k = 1, (c) posterior sets, the true set Jx6|y0:6K, and the OIT (see Definition 6) at k = 6. Alice
+and Bob know that by Proposition 4, the initial condition should include Jx0K to safely make Algorithm 1 stable w.r.t. the
+initial condition: Alice has a good knowledge of Jx0K and she chooses Jx̂a
+0K = [0, 4] × [0, 4] as the initial condition; Bob does
+not know as much as Alice, but he can make sure that Jx0K is within [−4, 4] × [−4, 4] = Jx̂b
+0K [see (a)]. Carol knows that
+by Theorem 3, Algorithm 2 is always stable w.r.t. the initial condition, and thus Carol chooses Jx̂c
+0K = [−1, 1] × [−1, 1] as
+the initial condition [in fact, Jx̂c
+0K ̸⊇ Jx0K, see (a)]. David chooses Jx̂d
+0K = [−2, 2] × [−2, 2] as the initial condition while using
+Algorithm 1 [note that Jx̂d
+0K ̸⊇ Jx0K, see (a)]. At k = 1, the estimates given by Alice, Bob, and Carol contain the true set, with
+Jx̂c
+1|y0:1K ⊃ Jx̂b
+1|y0:1K ⊃ Jx̂a
+1|y0:1K ⊃ Jx1|y0:1K; David provides the smallest estimate, but Jx̂d
+1|y0:1K is inside Jx1|y0:1K (actually,
+the estimate becomes empty at k = 2, i.e., Jx̂d
+2|y0:2K = ∅). At k = 6, except for Jx̂d
+6|y0:6K = ∅, all the posterior sets become the
+same (i.e., the estimation gap is 0), and equal the OIT with δ = 2 which gives a tight bound on the posterior sets.
+0 10 20 30 40
+Time Step
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Diameter
+True
+Alice
+Bob
+Carol
+David
+0 10 20 30 40
+Time Step
+10-10
+10-5
+100
+Estimation
+Gap
+Alice
+Bob
+Carol
+Fig. 3. Diameters and estimation gaps for detectable
+(A, C) in one simulation run. For the first three designers,
+d(Jx̂a
+k|y0:kK), d(Jx̂b
+k|y0:kK), and d(Jx̂c
+k|y0:kK) are bounded and
+converge to d(Jxk|y0:kK); the estimation gaps converge to 0
+exponentially fast. For the last designer, d(Jx̂d
+k|y0:kK) = 0
+from k = 2 (due to Jx̂d
+2|y0:2K = ∅).
+7.2.2 Time Efficiency
+In this part, we set 22
+Jx̂0K = Jx0K and compare the
+computation time (w.r.t. the constrained zonotopic de-
+scription) of the proposed OIT-CZ SMF and two clas-
+sical constrained zonotopic SMFs; these two classical
+SMFs are with the reduction methods girard and com-
+bastel in CORA 2024 [1], respectively. Consider the ran-
+domly generated observable systems same as those in
+Section 7.2.1, but with n = p = m ∈ {10, 20, 30}. We
+also set δ̄ = n − rank(C) + 3 in Algorithm 3. For these
+two classical SMFs, we set nc = 1 and the degrees-of-
+freedom order [24] od = (ng − nc)/n = 1. The simu-
+lations are conducted for 100 runs over the time win-
+22
+If Jx̂0K ̸= Jx0K, the classical algorithm can return an error
+due to the ill-posedness.
+0 20 40 60 80 100
+Time Step
+0
+20
+40
+60
+Diameter
+Diameter range
+Averaged diameter
+One trial
+Activated Line 5
+0 20 40 60 80 100
+Time Step
+0
+20
+40
+Estimation
+Gap
+Bound
+Bound range
+Averaged bound
+One trial
+Activated Line 5
+(a)
+0 20 40 60 80 100
+Time Step
+0
+20
+40
+60
+Diameter
+Diameter range
+Averaged diameter
+One trial
+Activated Line 5
+0 20 40 60 80 100
+Time Step
+0
+20
+40
+Estimation
+Gap
+Bound
+Bound range
+Averaged bound
+One trial
+Activated Line 5
+(b)
+Fig. 4. The diameter of the estimate Zk and a bound on
+the estimation gap dg
+k(Zk) for OIT-CZ SMF, in the sense of
+∞-norm. (a) observable (A, C), (b) detectable (A, C). The
+bound on dg
+k(Zk) is d∞
+H (Zk, {xk}) := supx̂k∈Zk
+∥x̂k − xk∥∞,
+which can be easily calculated by supx̂k∈IH(Zk) ∥x̂k − xk∥∞.
+Table 1
+Computation Time (per Time Step) for the Constrained
+Zonotopic Description
+n = 10 n = 20 n = 30
+SMF (girard) 0.5822s 3.8103s 11.9702s
+SMF (combastel) 0.5809s 3.8014s 11.9546s
+OIT-CZ SMF 0.0004s 0.0006s 0.0011s
+dow [0, 100] by using Matlab 2019b on a laptop with
+Intel Core i7-11800H@2.30GHz CPU, and the averaged
+computation time (per time step) is shown in Table 1.
+Note that the diameters in the sense of ∞-norm for SMF
+(girard), SMF (combastel), and OIT-CZ SMF are re-
+spectively: 14.8902, 14.8902, and 3.6878 (when n = 10);
+29.3098, 29.1371, and 4.7596 (when n = 20); 37.2301,
+37.2301, and 5.0911 (when n = 30). These results show
+that the OIT-CZ SMF achieves significantly higher ac-
+curacy with several orders of magnitude reduction in
+computation time, as compared to the classical SMFs.
+8 Conclusion
+In this paper, the stability of the SMFs w.r.t. the ini-
+tial condition has been studied for linear time-invariant
+systems. Specifically, the stability is given by the well-
+posedness and the bounded estimation gap. Based on
+our proposed OIT, we have analyzed the stability of the
+classical linear SMFing framework, where an explicit suf-
+ficient condition has been given. Then, we have provided
+a good necessary condition for the bounded estimation
+gap, which is very close to the sufficient condition. To
+avoid unstable filter design resulted from improper ini-
+tial conditions, the OIT-inspired filtering framework has
+been established to guaranteed the stability. Under this
+new framework, we have developed the OIT-CZ SMF
+with guaranteed stability, uniform boundedness, high ef-
+ficiency, and good accuracy.
+References
+[1] Althoff, M., Kochdumper, N., & Wetzlinger, M. CORA 2024
+manual. 2024.
+[2] Althoff, M. & Rath, J.J. Comparison of guaranteed state
+estimators for linear time-invariant systems. Automatica,
+130:109662, Aug. 2021.
+[3] Becis-Aubry, Y. Ellipsoidal constrained state estimation in
+presence of bounded disturbances. arXiv:2012.03267, 2021.
+[4] Becis-Aubry, Y., Boutayeb, M., & Darouach, M.. State
+estimation in the presence of bounded disturbances.
+Automatica, 44(7):1867–1873, Jul. 2008.
+[5] Chen, C.T. Linear System Theory and Design. New York,
+NY, USA: Oxford University Press, 3rd edition, 1999.
+[6] Chen, J. & Gu, G. Control-oriented system identification:
+an H∞ approach. New York, NY, USA: John Wiley & Sons,
+2000.
+[7] Combastel, C. A state bounding observer based on zonotopes.
+In Proc. Eur. Control Conf. (ECC), pages 2589–2594, Sep.
+2003.
+[8] Combastel, C. Zonotopes and kalman observers: Gain
+optimality under distinct uncertainty paradigms and robust
+convergence. Automatica, 55:265–273, May 2015.
+[9] Cong, Y., Zhou, X., & Kennedy, R.A. Finite blocklength
+entropy-achieving coding for linear system stabilization.
+IEEE Trans. Autom. Control, 66:153–167, Jan. 2021.
+[10] Cong, Y., Wang, X., & Zhou, X. Rethinking the
+mathematical framework and optimality of set-membership
+filtering. IEEE Trans. Autom. Control, 67(5):2544–2551, May
+2022.
+[11] Fei, Z., Yang, L., Sun, X., & Ren, S. Zonotopic set-
+membership state estimation for switched systems with
+restricted switching. IEEE Trans. Autom. Control,
+67(11):6127-6134, Nov. 2021.
+[12] Jazwinski, A.H. Stochastic Processes and Filtering Theory.
+New York, USA: Academic Press, New York, NY, USA, 1970.
+[13] Kalman, R.E. & Bucy, R.S. New results in linear filtering
+and prediction theory. J. Basic Eng., 83(1):95–108, 1961.
+[14] Kühn, W. Rigorously computed orbits of dynamical systems
+without the wrapping effect. Computing, 61(1):47–67, Mar.
+1998.
+[15] Lewis, F., Xie, L., & Popa, D. Optimal and robust estimation:
+with an introduction to stochastic control theory. CRC Press,
+Boca Raton, FL, USA, 2ed. edition, 2007.
+[16] Liu, Y., Zhao, Y., & Wu, F. Ellipsoidal state-bounding-based
+set-membership estimation for linear system with unknown-
+but-bounded disturbances. IET Control Theory & Appl.,
+10(4):431–442, Feb. 2016.
+[17] Loukkas, N., Martinez, J.J., & Meslem, N. Set-membership
+observer design based on ellipsoidal invariant sets. IFAC-
+PapersOnLine, 50(1):6471–6476, Jul. 2017.
+[18] Mazenc, F. & Bernard, O. Interval observers for linear time-
+invariant systems with disturbances. Automatica, 47(1):140–
+147, Jan. 2011.
+[19] Milanese, M., Norton, J., Piet-Lahanier, H., & Walter, É.
+Bounding Approaches to System Identification. New York,
+NY, USA: Plenum Press, 1996.
+[20] Milanese, M., Tempo, R., & Vicino, A. Robustness in
+Identification and Control. New York, NY, USA: Plenum
+Press, 1989.
+[21] Nair, G.N. A nonstochastic information theory for
+communication and state estimation. IEEE Trans. Autom.
+Control, 58(6):1497–1510, Jun. 2013.
+[22] Ocone, D. & Pardoux, E. Asymptotic stability of the optimal
+filter with respect to its initial condition. SIAM J. Control
+Optim., 34(1):226–243, 1996.
+[23] Särkkä, S. Bayesian filtering and smoothing. Cambridge
+University Press, New York, NY, USA, 2013.
+[24] Scott, J.K., Raimondo, D.M., Marseglia, G.R., & Braatz,
+R.D. Constrained zonotopes: A new tool for set-based
+estimation and fault detection. Automatica, 69:126–136, Jul.
+2016.
+[25] Shen, Q., Liu, J., Zhou, X., Zhao, Q., & Wang, Q. Low-
+complexity ISS state estimation approach with bounded
+disturbances. Int. J. Adaptive Control and Signal Process.,
+32(10):1473–1488, Aug. 2018.
+[26] Handel, R. Filtering, stability, and robustness. PhD thesis,
+California Institute of Technology, 2006.
+[27] Wang, Y., Puig, V., & Cembrano, G. Set-membership
+approach and kalman observer based on zonotopes for
+discrete-time descriptor systems. Automatica, 93:435–443,
+Jul. 2018.
+[28] Wang, Y., Wang, Z., Puig, V., & Cembrano, G. Zonotopic
+set-membership state estimation for discrete-time descriptor
+LPV systems. IEEE Trans. Autom. Control, 64(5):2092–
+2099, Aug. 2019.
+[29] Xu, F., Tan, J., Raı̈ssi, T., & Liang, B. Design of optimal
+interval observers using set-theoretic methods for robust state
+estimation. Int. J. Robust and Nonlinear Control, 30(9):3692–
+3705, Jun. 2020.
+A Proof of Proposition 1
+We prove Proposition 1 by induction.
+Base case: For k = 0, it follows from (4), (12), and (13)
+that Jx̂k|y0:kK = O0,0
+T
+E0, i.e., (14) holds for k = 0.
+Inductive step: Assume (14) holds for any k = k′
+∈ N0.
+For k = k′
++ 1, the prior set is derived by (3) that
+Jx̂k′+1|y0:k′ K = AJxk′ |y0:k′ K ⊕ BJwk′ K
+⊆ A
+ k′
+\
+i=0
+Ok′,i
+\
+Ek′
+
+⊕ BJwk′ K
+(a)
+⊆
+k′
+\
+i=0
+(AOk′,i ⊕ BJwk′ K)
+\
+(AEk′ ⊕ BJwk′ K)
+(b)
+=
+k′
+\
+i=0
+Ok′+1,i
+\
+Ek′+1,
+(A.1)
+where (a) is established by (11), and (b) is from the
+following two equations:
+AOk′,i ⊕ BJwk′ K
+(c)
+= Ok′+1,i, (A.2)
+AEk′ ⊕ BJwk′ K
+(d)
+= Ek′+1, (A.3)
+where (c) and (d) follow from h∗
+P
+i∈I Si
+
+=
+P
+i∈I h∗
+(Si)
+for any linear map h∗
+. By (A.1) and (4), the posterior
+set is outer bounded by
+Jx̂k′+1|y0:k′+1K = Xk′+1(C, yk′+1, Jvk′+1K)
+\
+Jx̂k′+1|y0:k′ K
+= Ok′+1,k′+1
+\
+Jxk′+1|y0:k′ K ⊆
+k′
++1
+\
+i=0
+Ok′+1,i
+\
+Ek′+1,
+which implies (14) holds for k = k′
++ 1. Thus, Proposi-
+tion 1 is proven by induction. □
+B Proof of Theorem 1
+To start with, we provide two lemmas as follows.
+Lemma 2 (Uniform Boundedness Invariance Un-
+der Linear Map) ∀l ∈ I, let the set Tl,k ⊂ Rn
+be uni-
+formly bounded w.r.t. k ∈ N0, and the linear map h∗
+l
+be independent of k. Then,
+P
+l∈I h∗
+l (Tl,k) is uniformly
+bounded w.r.t. k ∈ N0.
+Proof: Since ∀l ∈ I, Tl,k is uniformly bounded w.r.t.
+k ∈ N0, there exists a ¯
+dl such that d(Tl,k) ≤ ¯
+dl, ∀k ∈
+N0. Thus, ∀l ∈ I, the following holds for all k ∈ N0
+d(h∗
+l (Tl,k)) = sup
+t,t′∈Tl,k
+∥h∗
+l (t) − h∗
+l (t′
+)∥
+≤ ∥h∗
+l ∥ sup
+t,t′∈Tl,k
+∥t − t′
+∥ ≤ ∥h∗
+l ∥ ¯
+dl,
+(B.1)
+where ∥h∗
+l ∥ is the operator norm of h∗
+l . Now, we have
+k ∈ N0,
+d
+ X
+l∈I
+h∗
+l (Tl,k)
+ (e)
+≤
+X
+l∈I
+d(h∗
+l (Tl,k)) ≤
+X
+l∈I
+∥h∗
+l ∥ ¯
+dl, (B.2)
+where inequality (e) can be easily obtained by using the
+following triangle inequality: for the sets Rl (l ∈ I),
+d
+ X
+l∈I
+Rl
+
+= sup
+rl,r′
+l
+∈Rl,l∈I
+∥
+X
+l∈I
+(rl − r′
+l)∥
+≤
+X
+l∈I
+sup
+rl,r′
+l
+∥rl − r′
+l∥ =
+X
+l∈I
+d(Rl). (B.3)
+By (B.2),
+P
+l∈I h∗
+l (Tl,k) is uniformly bounded. □
+Lemma 3 (Uniformly Bounded Intersection)
+∀j ∈ {0, . . . , δ} (δ ≥ 0), let Sj,k ⊂ Rn
+be any uniformly
+bounded set w.r.t. k ∈ N0. Then,
+δ
+\
+j=0
+
+ran(D̄j) ⊕ Sj,k
+
+(B.4)
+is uniformly bounded w.r.t. k ∈ N0 [recall that ran(D̄j)
+returns the range space of matrix D̄j ∈ Rn×(n−m)
+], if
+rank DT
+
+= n, (B.5)
+where D = [D0 . . . Dδ], and Dj ∈ Rn×m
+(j ∈ {0, . . . , δ})
+satisfies ker(DT
+j ) = ran(D̄j).
+Proof: This proof has three steps. In the first step, we
+prove the following equality holds:
+δ
+\
+j=0
+
+ran(D̄j)⊕Sj,k
+
+=
+[
+sk∈Sk
+δ
+\
+j=0
+
+ran(D̄j)⊕{sj,k}
+
+, (B.6)
+where sk = [sT
+0,k . . . sT
+δ,k]T
+and Sk := S0,k ×· · ·×Sδ,k and
+× stands for the Cartesian product. In the second step,
+we analyze
+Tδ
+j=0
+
+ran(D̄j)⊕{sj,k}
+
+from the perspective
+of solving linear equations. Afterwards, we complete this
+proof in the third step.
+Step 1: Since ran(D̄j) ⊕ Sj,k =
+S
+sj,k∈Sj,k
+[ran(D̄j) ⊕
+{sj,k}] =:
+S
+sj,k∈Sj,k
+Tj,sj,k
+, we are readily to use dis-
+tributive law of sets to get (B.6). Specifically, we have 23
+δ
+\
+j=0
+[
+sj,k∈Sj,k
+Tj,sj,k
+=
+[
+(s0,k,...,sδ,k)∈Sk
+δ
+\
+j=0
+Tj,sj,k
+, (B.7)
+which means (B.6) holds.
+Step 2: ∀sk ∈ Sk, with ker(DT
+j ) = ran(D̄j) we have
+ran(D̄j)⊕{sj,k} =
+
+x: DT
+j x = DT
+j sj,k , j ∈ {0, . . . , δ},
+which is the solution space of the linear equation DT
+j x =
+DT
+j sj,k. Thus, we get
+δ
+\
+j=0
+
+ran(D̄j) ⊕ {sj,k}
+
+=
+
+x: DT
+x = s̄k , (B.8)
+where s̄k = [sT
+0,kD0 . . . sT
+δ,kDδ]T
+. With (B.5), we know
+that DT
+x = s̄k has either a unique solution (DT
+)+
+s̄k or
+23
+The readers can use mathematical induction to derive a
+rigorous proof. Due to the page limit, we omit it here.
+no solution, i.e.,
+Tδ
+j=0
+
+ran(D̄j) ⊕ {sj,k}
+
+at most con-
+tains one element. Hence, we have
+δ
+\
+j=0
+
+ran(D̄j) ⊕ {sj,k}
+
+=
+( n
+DT
++
+s̄k
+o
+sk ∈ S̸=∅
+k ,
+∅ otherwise,
+(B.9)
+where S̸=∅
+k =
+
+sk ∈ Sk :
+
+x: DT
+x = s̄k ̸= ∅ .
+Step 3: With (B.9), we can rewrite (B.6) as follows
+δ
+\
+j=0
+
+ran(D̄j) ⊕ Sj,k
+
+=
+[
+sk∈S̸=∅
+k
+n
+DT
++
+s̄k
+o
+=
+[
+sk∈S̸=∅
+k
+{Hsk} = HS̸=∅
+k ,
+(B.10)
+where H = DT
++
+diag{DT
+0 , . . . , DT
+δ }. As S̸=∅
+k ⊆ Sk is
+uniformly bounded 24
+and H is a linear map independent
+of k,
+Tδ
+j=0
+
+ran(D̄j) ⊕ Sj,k
+
+is uniformly bounded. □
+Now, we prove Theorem 1. With (5), the observation-
+information set in (12) can be rewritten as
+Ok,i = Ak−i
+ker(C) ⊕ Ak−i
+C+
+({yi} ⊕ J−viK)
+⊕
+k−1
+X
+r=i
+Ak−1−r
+BJwrK. (B.11)
+Thus, with (B.11), j = i − k + δ, and l = r − i + 1, we
+can rewrite the OIT in Definition 6 as
+k
+\
+i=k−δ
+Ok,i =
+δ
+\
+j=0
+
+Aδ−j
+ker(C) ⊕ Sj,k
+
+, (B.12)
+where
+Sj,k = Aδ−j
+C+
+({yk−δ+j} ⊕ J−vk−δ+jK)
+⊕
+δ−j
+X
+l=1
+Aδ−j−l
+BJwl+k−δ+j−1K. (B.13)
+Let C̄ ∈ R(n−m)×n
+such that ker(C) = ran(C̄T
+).
+By Aδ−j
+ker(C) = Aδ−j
+ran(C̄T
+) = ran(Aδ−j
+C̄T
+) =:
+ran(D̄j), (B.12) can be rewritten as
+k
+\
+i=k−δ
+Ok,i =
+δ
+\
+j=0
+
+ran(D̄j) ⊕ Sj,k
+
+. (B.14)
+Since d(JwkK) ≤ dw and d(JvkK) ≤ dv, we know
+that {yk−δ+j} ⊕ J−vk−δ+jK and Jwl+k−δ+j−1K (l ∈
+{1, . . . , δ − j}) are uniformly bounded w.r.t. k ∈ N0.
+Hence, ∀j ∈ {0, . . . , δ}, by Lemma 2 Sj,k is uniformly
+bounded w.r.t. k ∈ N0. Now, the precondition of
+Lemma 3 is satisfied for (B.14). To guarantee the uni-
+form boundedness of (B.14), we only need to prove
+condition (B.5) with ker(DT
+j ) = ran(D̄j) in Lemma 3
+holds, where DT
+j := CAj−δ
+. The proof has two steps.
+24
+This is because d(S̸=∅
+k ) ≤ d(Sk) ≤
+qPδ
+i=0 d2(Si,k).
+Step 1: Prove ker(DT
+j ) = ran(D̄j). To be more specific,
+for non-singular A, we show that
+ker(DT
+j ) = ker(CAj−δ
+) = ran(Aδ−j
+C̄T
+) = ran(D̄j),
+(B.15)
+as follows: Firstly, we have
+DT
+j D̄j = CAj−δ
+Aδ−j
+C̄T
+= CC̄T
+= 0, (B.16)
+which implies ran(D̄j) ⊆ ker(DT
+j ). Secondly, we check
+the rank of D̄j as follows
+rank(D̄j) = rank(Aδ−j
+C̄T
+) = rank(C̄T
+) = n−rank(C)
+= n − rank(CAj−δ
+) = n − rank(DT
+j ), (B.17)
+which combined with (B.16) gives (B.15).
+Step 2: Prove (B.5). Since DT
+j = CAj−δ
+, we have DT
+=
+Oδ, and the left-hand side of (B.5) equals
+rank (Oδ) = rank
+
+
+
+
+
+
+
+
+
+
+C
+.
+.
+.
+CAδ
+
+
+
+
+
+A−δ
+
+
+
+
+
+(f)
+= n, (B.18)
+where (f) is established by observable (A, C) and δ ≥
+µ − 1 in Theorem 1.
+Therefore, by Lemma 3,
+Tk
+i=k−δ Ok,i in (B.14) is uni-
+formly bounded w.r.t. k ≥ δ ≥ µ − 1.
+Next, we prove equation (16). With (B.10) and S̸=∅
+k ⊆
+Sk, we can rewrite (B.12) as
+k
+\
+i=k−δ
+Ok,i ⊆ O+
+δ
+δ
+Y
+j=0
+CAj−δ
+Sj,k, (B.19)
+where
+Q
+is the Cartesian product of the sequence of
+CAj−δ
+Sj,k with the following form
+CC+
+({yk−δ+j}⊕J−vk−δ+jK)⊕
+δ−j
+X
+l=1
+CA−l
+BJwl+k−δ+j−1K.
+Thus, noticing that ∥CC+
+∥ = 1, ∥O+
+δ ∥ = 1/σmin(O+
+δ ),
+and d({yk−δ+j}) = 0, we can get (16) from (B.19). □
+C Proof of Theorem 2
+Firstly, we consider the stability for observable (A, C),
+and a sufficient condition is provided in Proposition 4.
+Proposition 4 (Stability of Observable Systems)
+For observable (A, C) and bounded Jx̂0K ⊇ Jx0K, the
+classical SMFing framework in Algorithm 1 is stable and
+Jx̂k|y0:kK is uniformly bounded w.r.t. k ∈ N0.
+Proof: We prove the well-posedness, the uniform
+boundedness of the estimate, and the boundedness of
+the estimation gap as follows.
+Well-posedness: Since Jx̂0K ⊇ Jx0K, with (4), we have
+Jx̂0|y0K = X0(C, y0, Jv0K)
+\
+Jx̂0K
+⊇ X0(C, y0, Jv0K)
+\
+Jx0K = Jx0|y0K
+(g)
+̸= ∅, (C.1)
+i.e., Jx̂0|y0K ̸= ∅, where (g) follows from the fact
+that y0 is generated by (2) with at least one possi-
+ble x0 ∈ Jx0K. With (3), we have Jx̂1|y0K ⊇ Jx1|y0K,
+as Jx̂0|y0K ⊇ Jx0|y0K. Similarly to (C.1), by (4),
+Jx̂1|y0:1K ⊇ Jx1|y0:1K ̸= ∅ holds. Proceeding forward, we
+get Jx̂k|y0:kK ⊇ Jxk|y0:kK ̸= ∅ for k ∈ N0.
+Uniformly bounded estimate: Let x̄k = [(x̄a
+k)T
+(x̄b
+k)T
+]T
+=
+Qxk with a non-singular Q ∈ Rn×n
+such that
+"
+x̄a
+k+1
+x̄b
+k+1
+#
+=
+"
+Āa 0
+0 J0
+# "
+x̄a
+k
+x̄b
+k
+#
++
+"
+B̄a
+B̄b
+#
+wk,
+yk = C̄ax̄a
+k + C̄bx̄b
+k + vk,
+(C.2)
+where Āa is non-singular and J0 is a block diagonal ma-
+trix corresponding to all Jordan blocks associated with
+the eigenvalue 0. Thus, we have
+d(Jx̂k|y0:kK) ≤ sup
+ˆ
+x̄k,ˆ
+x̄′
+k
+∈Jˆ
+x̄k|y0:kK
+∥Q−1
+∥∥ˆ
+x̄k − ˆ
+x̄′
+k∥
+(h)
+≤ sup
+ˆ
+x̄a
+k
+,ˆ
+x̄′a
+k
+∈Jˆ
+x̄a
+k
+|y0:kK
+∥Q−1
+∥
+q
+∥ˆ
+x̄a
+k − ˆ
+x̄′a
+k ∥2 + ¯
+d2
+b,
+(C.3)
+where (h) follows from the uniform boundedness 25
+of
+Jˆ
+x̄b
+k|y0:kK w.r.t. k ∈ N0 that: ∀ˆ
+x̄b
+k, ˆ
+x̄′b
+k ∈ Jˆ
+x̄b
+k|y0:kK there
+exists a ¯
+db such that ∥ˆ
+x̄b
+k − ˆ
+x̄′b
+k ∥ ≤ ¯
+db. Then, we only
+need to focus on the first subsystem of (C.2), i.e.,
+x̄a
+k+1 = Āax̄a
+k + B̄awk,
+yk = C̄ax̄a
+k + v̄k,
+(C.4)
+where v̄k = C̄bx̄b
+k + vk is an equivalent measurement
+noise [which is related to w0:k−1 due to (C.2)] and Jv̄kK
+is uniformly bounded w.r.t. k ∈ N0. Define O
+a
+k,i :=
+Āk−i
+a X
+a
+i (C̄a, yi, Jv̄iK) ⊕
+Pk−1
+r=i Āk−1−r
+a B̄aJwrK with
+X
+a
+i (C̄a, yi, Jv̄iK) := ker(C̄a) ⊕ C̄+
+a ({yi} ⊕ J−v̄iK).
+Note that O
+a
+k,i is an observation-information set in
+terms of (C.4). Hence, we can derive Jˆ
+x̄a
+k|y0:kK ⊆
+Tk
+i=k−δ O
+a
+k,i. 26
+Thus, for k ≥ δ ≥ µa − 1, where µa is
+the observability index w.r.t. (Āa, C̄a), we get
+d(Jx̂k|y0:kK)
+(16)
+≤ ∥Q−1
+∥
+q
+¯
+dδ(Āa, B̄a, C̄a)2 + ¯
+d2
+b, (C.5)
+where ¯
+dδ(·, ·, ·) is defined in (16) with dv for the uniformly
+bounded equivalent noise v̄k. For k < δ, bounded Jx̂0K
+lead to bounded Jx̂k|y0:kK (determined by Algorithm 1).
+Thus Jx̂k|y0:kK is uniformly bounded w.r.t. k ∈ N0.
+Bounded estimation gap: Due to the page limit 27
+, we
+25
+Noticing that J0 is a nilpotent matrix, we can derive the
+uniform boundedness of Jˆ
+x̄b
+kK ⊇ Jˆ
+x̄b
+k|y0:kK from x̄b
+k = Jk
+0 x̄b
+0 +
+Pk−1
+i=0 Jk−1−i
+0 B̄bwi and the boundedness of Jx̂0K ⊂ Rn
+.
+26
+Even though w0:k−1 and v̄k are related, we can assume
+the unrelatedness holds and employ Theorem 3 in [10] to
+employ (14) and (15) to get this result.
+27
+We recommend the readers to follow the ideas in (C.10)-
+(C.20) and derive a tighter bound. However, the upper bound
+given in (C.6) is good enough to derive the boundedness of
+the estimation gap for observable systems.
+provide the proof based on
+dg
+k(Jx̂k|y0:kK) ≤ sup
+x̂k∈Jx̂k|y0:kK
+xk∈Jxk|y0:kK
+∥x̂k − xk∥,
+(j)
+≤ sup
+x̂k,x̂′
+k
+∈Jx̂k|y0:kK
+∥x̂k − x̂′
+k∥ = d(Jx̂k|y0:kK),
+(C.6)
+where (j) is from Jx̂k|y0:kK ⊇ Jxk|y0:kK (see the proof
+of well-posedness). Therefore, for observable (A, C), the
+boundedness of the estimation gap is established. □
+Now, we prove the stability of Algorithm 1 w.r.t. the ini-
+tial condition under conditions (i) and (ii) of Theorem 2.
+Well-posedness: Define e
+Oo
+k,i := Ãk−i
+o
+e
+Xo
+i (C̃o, yi, JviK) ⊕
+Pk−1
+r=i Ãk−1−r
+o B̃oJwrK with
+e
+Xo
+i (C̃o, yi, JviK) :=
+n
+x̃o
+i : yi = C̃ox̃o
+i + vi, vi ∈ JviK
+o
+= ker(C̃o) ⊕ C̃+
+o ({yi} ⊕ J−viK).
+Note that e
+Oo
+k,i is an observation-information set in terms
+of the observable subsystem of (17). Then, we have
+Jˆ
+x̃0|y0K = JPx̂0|y0K = P O0,0
+\
+Jx̂0K
+
+(k)
+= PO0,0
+\
+JPx̂0K
+(l)
+= e
+Oo
+0,0 × Rnō
+ \
+Jˆ
+x̃0K,
+(C.7)
+where (k) follows from the non-singularity of P;
+(l) is established by PX0(C, y0, Jv0K) = {x̃0 : y0 =
+CP−1
+x̃0+v0, v0 ∈ Jv0K} = {x̃0 : y0 = [C̃o 0]x̃0+v0, v0 ∈
+Jv0K} = {x̃o
+0 : y0 = C̃ox̃o
+0 + v0, v0 ∈ Jv0K} × {x̃ō
+0 ∈ Rnō
+}.
+Substituting Jˆ
+x̃0K = Jx̃0K into (C.7) and noticing that
+Jx̃0|y0K ̸= ∅, we have
+Jx̃0|y0K = e
+Oo
+0,0 × Rnō
+ \
+Jx̃0K ̸= ∅. (C.8)
+This means ∃{x̃0} = {x̃o
+0} × {x̃ō
+0} such that
+∅ ̸= e
+Oo
+0,0×Rnō
+ \
+{x̃o
+0}×{x̃ō
+0}
+
+= e
+Oo
+0,0
+\
+{x̃o
+0}
+
+×{x̃ō
+0},
+where x̃o
+0 ∈ Jx̃o
+0K. Since Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K in condition (i)
+holds, we get x̃o
+0 ∈ Jˆ
+x̃o
+0K. Thus, ∃x̃′ō
+0 such that Jˆ
+x̃0K ⊇
+{x̃o
+0} × {x̃′ō
+0 }, which together with (C.7) gives
+Jˆ
+x̃0|y0K = e
+Oo
+0,0 × Rnō
+ \
+Jˆ
+x̃0K
+⊇ e
+Oo
+0,0
+\
+{x̃o
+0}
+
+× {x̃′ō
+0 } ̸= ∅.
+(C.9)
+From the first equalities of (C.8) and (C.9), we can de-
+rive Jˆ
+x̃o
+0|y0K ⊇ Jx̃o
+0|y0K, which combined with the observ-
+able subsystem in (17) yields Jˆ
+x̃o
+1|y0K ⊇ Jx̃o
+1|y0K. Pro-
+ceeding forward, we can obtain that Jˆ
+x̃k|y0:kK ̸= ∅ and
+Jˆ
+x̃o
+k|y0:kK ⊇ Jx̃o
+k|y0:kK for k ∈ N0.
+Boundedness of estimation gap: From Definition 3, the
+estimation gap dg
+k(Jx̂k|y0:kK) = dH(Jx̂k|y0:kK, Jxk|y0:kK)
+can be upper bounded by
+dg
+k(Jx̂k|y0:kK) ≤ ∥P−1
+∥dH(Jˆ
+x̃k|y0:kK, Jx̃k|y0:kK). (C.10)
+Noticing the structure of dH(S, T ) in (10), firstly we
+prove the upper boundedness of
+sup
+ˆ
+x̃k∈Jˆ
+x̃k|y0:kK
+inf
+x̃k∈Jx̃k|y0:kK
+∥ˆ
+x̃k − x̃k∥. (C.11)
+Applying Proposition 4 to the observable subsystem
+of (17), we get that ∀ˆ
+x̃o
+k ∈ Jˆ
+x̃o
+k|y0:kK and ∀x̃o
+k ∈ Jx̃o
+k|y0:kK,
+there exists a ˜
+do such that ∥ˆ
+x̃o
+k − x̃o
+k∥ ≤ ˜
+do for k ∈ N0.
+Thus, (C.11) can be upper bounded by
+sup
+ˆ
+x̃ō
+k
+∈Jˆ
+x̃ō
+k
+|y0:kK
+inf
+x̃ō
+k
+∈Jx̃ō
+k
+|y0:kK
+q
+˜
+d2
+o + ∥ˆ
+x̃ō
+k − x̃ō
+k∥2. (C.12)
+From the unobservable subsystem of (17), we have
+Jˆ
+x̃ō
+k|y0:kK =
+r
+Ãk
+ō
+ˆ
+x̃ō
+0 +
+k−1
+X
+i=0
+Ãk−1−i
+ō (Ã21
+ˆ
+x̃o
+i + B̃ōwi) y0:k
+z
+(m)
+⊆ Ãk
+ōJˆ
+x̃ō
+0K ⊕
+k−1
+X
+i=0
+Ãk−1−i
+ō (Ã21Jˆ
+x̃o
+i |y0:iK ⊕ B̃ōJwiK),
+(C.13)
+where (m) follows from Ja + bK ⊆ JaK ⊕ JbK and
+Ja|bK ⊆ JaK. Hence, ∀ˆ
+x̃ō
+k ∈ Jˆ
+x̃ō
+k|y0:kK, ∃ˆ
+x̃o
+0 ∈ Jˆ
+x̃o
+0K, ˆ
+x̃o
+i ∈
+Jˆ
+x̃o
+i |y0:iK, wi ∈ JwiK (i = 0, . . . , k − 1) such that
+ˆ
+x̃ō
+k = Ãk
+ō
+ˆ
+x̃ō
+0 +
+k−1
+X
+i=0
+Ãk−1−i
+ō (Ã21
+ˆ
+x̃o
+i + B̃ōwi). (C.14)
+Likewise, ∀x̃ō
+k ∈ Jx̃ō
+k|y0:k, w0:kK ⊆ Jx̃ō
+k|y0:kK, ∃x̃o
+0 ∈
+Jx̃o
+0K, x̃o
+i ∈ Jx̃o
+i |y0:iK (i = 0, . . . , k − 1) such that
+x̃ō
+k = Ãk
+ōx̃ō
+0 +
+k−1
+X
+i=0
+Ãk−1−i
+ō (Ã21x̃o
+i + B̃ōwi). (C.15)
+Therefore, (C.12) is upper bounded by
+sup
+ˆ
+x̃ō
+k
+∈Jˆ
+x̃ō
+k
+|y0:kK
+inf
+x̃ō
+k
+∈Jx̃ō
+k
+|y0:k,w0:kK
+q
+˜
+d2
+o + ∥ˆ
+x̃ō
+k − x̃ō
+k∥2, (C.16)
+where [based on (C.14) and (C.15)]
+ˆ
+x̃ō
+k−x̃ō
+k = Ãk
+ō(ˆ
+x̃ō
+0−x̃ō
+0)+
+k−1
+X
+i=0
+Ã21Ãk−1−i
+ō (ˆ
+x̃o
+i −x̃o
+i ). (C.17)
+By condition (ii), (C.17), and the uniform boundedness
+of Jˆ
+x̃o
+k|y0:kK and Jx̃o
+k|y0:kK, there exists a ¯
+dō such that
+∥ˆ
+x̃ō
+k − x̃ō
+k∥ ≤ ¯
+dō, (C.18)
+which yields the boundedness of (C.11).
+Secondly, we analyze the boundedness of
+sup
+x̃k∈Jx̃k|y0:kK
+inf
+ˆ
+x̃k∈Jˆ
+x̃k|y0:kK
+∥ˆ
+x̃k − x̃k∥ (C.19)
+in dH(Jˆ
+x̃k|y0:kK, Jx̃k|y0:kK). From Jˆ
+x̃o
+k|y0:kK ⊇ Jx̃o
+k|y0:kK
+[guaranteed by condition (i)], (C.19) can be rewritten as
+sup
+x̃ō
+k
+∈Jx̃ō
+k
+|y0:kK
+inf
+ˆ
+x̃ō
+k
+∈Jˆ
+x̃ō
+k
+|y0:kK
+∥ˆ
+x̃ō
+k − x̃ō
+k∥
+(C.18)
+≤ ¯
+dō. (C.20)
+Therefore, (C.19) is bounded for k ∈ N0. To sum up, the
+estimation gap dg
+k(Jx̂k|y0:kK) is bounded w.r.t. k ∈ N0.□
+D Proof of Proposition 2
+The estimation gap can be lower bounded by
+dg
+k(Jx̂k|y0:kK) ≥ ∥P∥−1
+dH(Jˆ
+x̃k|y0:kK, Jx̃k|y0:kK)
+(10)
+≥ sup
+ˆ
+x̃k∈Jˆ
+x̃k|y0:kK
+inf
+x̃k∈Jx̃k|y0:kK
+∥P∥−1
+∥ˆ
+x̃k − x̃k∥
+≥ sup
+ˆ
+x̃k∈Jˆ
+x̃k|y0:kK
+inf
+x̃k∈Jx̃k|y0:kK
+∥P∥−1
+∥ˆ
+x̃ō
+k − x̃ō
+k∥.
+(D.1)
+From (D.1) and (C.17), we know: if Ãō is not marginally
+stable, then there exists a bounded Jx̂0K such that ∥ˆ
+x̃ō
+k −
+x̃ō
+k∥ in (D.1) unboundedly increases with k. Thus, for all
+bounded Jx̂0K ⊂ Rn
+, the boundedness of the estimation
+gap cannot be guaranteed when Ãō is not marginally sta-
+ble. Therefore, Ãō must be marginally stable to ensure
+the bounded dg
+k(Jx̂k|y0:kK). □
+E Proof of Corollary 1
+By Theorem 2, the classical SMFing framework with
+bounded Jx̂0K and Jˆ
+x̃o
+0K ⊇ Jx̃o
+0K is stable w.r.t. the initial
+condition if (A, C) is detectable. Thus, we only focus on
+the uniform boundedness of the estimate.
+From Proposition 4, d(Jˆ
+x̃o
+k|y0:kK) is bounded. Thus, with
+d(Jx̂k|y0:kK) = ∥P−1
+∥
+q
+d(Jˆ
+x̃o
+k|y0:kK)2 + d(Jˆ
+x̃ō
+k|y0:kK)2,
+we know that Jx̂k|y0:kK is uniformly bounded w.r.t.
+k ∈ N0 if and only if Jˆ
+x̃ō
+k|y0:kK is uniformly bounded
+w.r.t. k ∈ N0. From (C.13) with ρ(Ãō) < 1 [as (A, C)
+is detectable], bounded Jx̂0K, and uniformly bounded
+Jˆ
+x̃o
+k|y0:kK and JwkK, we can derive the uniform bound-
+edness of Jˆ
+x̃ō
+k|y0:kK. Therefore, Jx̂k|y0:kK is uniformly
+bounded w.r.t. k ∈ N0 for detectable (A, C). □
+F Proof of Lemma 1
+Since for any S ⊆ Rno
+, PoFk,0(P−1
+(S × Jˆ
+x̃ō
+0K)) in (18)
+corresponds to the observable subsystem and the result-
+ing set is independent of Jˆ
+x̃ō
+0K, without loss of generality,
+we consider the pair (A, C) is observable, i.e., A = Ão.
+In that case, (18) becomes
+Fk,0(B∞
+θ′
+k
+[ĉo
+0]) ⊆ Fk,0(B∞
+θ̄k
+[ĉo
+0]) = Fk,0(B∞
+θ′′
+k
+[ĉo
+0]). (F.1)
+Firstly, we prove (F.1) for non-singular A. Because
+B∞
+θ′
+k
+[ĉo
+0] ⊆ B∞
+θ̄k
+[ĉo
+0] ⊆ B∞
+θ′′
+k
+[ĉo
+0] for all θ′
+k ≤ θ̄k ≤ θ′′
+k , from
+Definition 1 we have
+Fk,0(B∞
+θ′
+k
+[ĉo
+0]) ⊆ Fk,0(B∞
+θ̄k
+[ĉo
+0]) ⊆ Fk,0(B∞
+θ′′
+k
+[ĉo
+0]). (F.2)
+By Theorem 1, ∀k ≥ max{µo−1+nλo
+0
+, 1},
+Tk
+i=k−nλo
+0
+Ok,i
+is bounded, and ∃θ̄k ≥ 0 s.t. ∀x0 ∈ Rn
+\ B∞
+θ̄k
+[ĉo
+0]:
+Ak
+x0 +
+k−1
+X
+i=0
+Ak−1−i
+Bwi = xk /
+∈
+k
+\
+i=k−nλo
+0
+Ok,i, (F.3)
+which together with (14) and (15) gives Fk,0(B∞
+θ′′
+k
+[ĉo
+0] \
+B∞
+θ̄k
+[ĉo
+0]) = ∅ for θ′′
+k ≥ θ̄k. Thus, Fk,0(B∞
+θ̄k
+[ĉo
+0]) =
+Fk,0(B∞
+θ′′
+k
+[ĉo
+0]), and with (F.2) we get (F.1).
+When A is singular, from (C.2) we have x̄b
+k =
+Pk−1
+i=0 Jk−1−i
+0 B̄bwi for k ≥ nλo
+0
+, which is not affected
+by the choice of B∞
+θk
+[ĉo
+0]; for the subsystem w.r.t. x̄a
+k,
+the proof is the same as that of (F.1), where the mea-
+surement equation is in (C.4) with the equivalent noise
+v̄k = C̄b
+Pk−1
+i=0 Jk−1−i
+0 B̄bwi + vk for k ≥ nλo
+0
+. □
+G Proof of Theorem 3
+Well-posedness: For k < k∗, Line 5 resets every empty
+Jx̂k|y0:kK to a non-empty set. For k ≥ k∗, the estimate
+Jx̂k|y0:kK in Line 7 is non-empty, which is guaranteed
+by Jˆ
+x̃o
+0K = B∞
+θ̄k
+[ĉo
+0] ⊇ Jx̃o
+0K (see Remark 7) and the well-
+posedness part [see (C.7)-(C.9)] in the proof of Theo-
+rem 2. Thus, Jx̂k|y0:kK ̸= ∅ holds for k ∈ N0.
+Boundedness of estimation gap: For k < k∗, bounded
+Jx0K with Lines 3 and 5 indicates dg
+k(Jx̂k|y0:kK) < ∞.
+For k ≥ k∗, using the same techniques in (C.10)-(C.20)
+[note that Jˆ
+x̃o
+0K = B∞
+θ̄k
+[ĉo
+0] ⊇ Jx̃o
+0K ensures the precondi-
+ton Jx̂0K ⊇ Jx0K in Proposition 4 when it is applied to the
+observable system to derive (C.12)], we can obtain the
+boundedness of dg
+k(Jx̂k|y0:kK). Therefore, the estimation
+gap dg
+k(Jx̂k|y0:kK) is bounded for k ∈ N0. □
+H Proof of Theorem 4
+Firstly, we provide Lemma 4 for bounding the norm of
+matrix power, which is a variant of Lemma 3 in [9].
+Lemma 4 (Bound on Norm of Matrix Power)
+Given F ∈ Rn×n
+with ρ(F) < 1, for γ ∈ (ρ(F), 1),
+∥Fk
+∥∞ ≤ βγ(F)γk
+holds for all k ∈ N0, where
+βγ(F) = max{γ−k
+∥Fk
+∥∞ : k ∈ N0}.
+Proof: ∀γ ∈ (ρ(F), 1), let F̃ = γ−1
+F, and we have
+ρ(F̃) = ρ(F)/γ < 1. Since limk→∞ ∥F̃k
+∥∞ = 0, we can
+find a k ∈ N0 such that for all k ≥ k, the following holds
+γ−k
+∥Fk
+∥∞ = ∥γ−k
+Fk
+∥∞ = ∥F̃k
+∥∞ < 1, (H.1)
+which implies ∥Fk
+∥∞ < γk
+. It together with βγ(F) =
+max{1, γ−k
+∥Fk
+∥∞ (1 ≤ k ≤ k)} = max{γ−k
+∥Fk
+∥∞ : k ∈
+N0} 28
+gives ∥Fk
+∥∞ ≤ βγ(F)γk
+for all k ∈ N0. □
+When (A, C) is detectable, the uniform boundedness of
+the estimate and the boundedness of the estimation gap
+can be readily derived based on the results in Section 5,
+when we replace Fk,0 and Jˆ
+x̃ō
+0K with Fk,k−δ̄ and T̂ ō
+k−δ̄
+,
+respectively. Thus, we only focus on the well-posedness
+and finite-time inclusion property of Algorithm 3.
+Well-posedness: Similarly to the well-posedness part in
+Appendix G (Lines 5 and 8 in Algorithm 3 play the same
+role as Lines 5 and 7 in Algorithm 2), we have Zk ̸= ∅
+for k ∈ N0 and
+e
+Zo
+k ⊇ Jx̃o
+k|y0:kK, k ≥ δ̄. (H.2)
+The only part needs highlighting is: for Line 8,
+when δ̄ ≤ k < 2δ̄, Lemma 1 guarantees T̂ o
+k−δ̄
+=
+28
+Note that γ−0
+∥F0
+∥∞ = 1 and γ−k
+∥Fk
+∥∞ < 1 for k > k.
+B∞
+θ̄k
+
+center PoIH(Z−
+k−δ̄
+)
+
+⊇ Jx̃o
+k−δ̄
+|y0:k−δ̄−1K; when
+k ≥ 2δ̄, T̂ o
+k−δ̄
+= PoIH(Z−
+k−δ̄
+) ⊇ Jx̃o
+k−δ̄
+|y0:k−δ̄−1K; thus,
+T̂ o
+k ⊇ Jx̃o
+k|y0:k−1K ⊇ Jx̃o
+k|y0:kK, k ∈ N0. (H.3)
+Boundedness of estimation gap: When (A, C) is de-
+tectable, condition (ii) in Theorem 2 holds. Then, the
+proof is similar to that of Theorem 3.
+Finite-time inclusion: The proof includes two steps. In
+the first step, we show that
+Jx̃k|y0:kK = JPxk|y0:kK ⊆ Jx̃o
+k|y0:kK × T ō
+k (H.4)
+holds for k ∈ N0, where
+T ō
+k :=Ãk
+ōJx̃ō
+0K⊕
+k−1
+X
+i=0
+Ãk−1−i
+ō (Ã21Jx̃o
+i |y0:iK⊕B̃ōJwiK). (H.5)
+In the second step, the finite-time inclusion property (24)
+is proven based on (H.4).
+Step 1: We use the mathematical induction on (H.4).
+Base case: For k = 0, we have Jx̃0|y0K ⊆ Jx̃o
+0|y0K ×
+Jx̃ō
+0|y0K = Jx̃o
+0|y0K × T ō
+0 . Thus, (H.4) holds for k = 0.
+Inductive step: Assume (H.4) holds for any k = l ∈ N0.
+For k = l + 1, with (17) we have
+Jx̃l+1|y0:l+1K ⊆ (ÃoJx̃o
+l |y0:lK ⊕ B̃oJwlK)
+× (ÃōT ō
+l ⊕ Ã21Jx̃o
+l |y0:lK ⊕ B̃ōJwlK). (H.6)
+Noticing that T ō
+l+1 = ÃōT ō
+l ⊕Ã21Jx̃o
+l |y0:lK⊕B̃ōJwlK and
+Jx̃l+1|y0:l+1K ⊆ Jx̃o
+l+1|y0:l+1K × Jx̃ō
+l+1|y0:l+1K, (H.7)
+we have [as (T1 ×T2)
+T
+(T3 ×T4) = (T1
+T
+T3)×(T2
+T
+T4)]
+Jx̃l+1|y0:l+1K ⊆
+h
+(ÃoJx̃o
+l |y0:lK ⊕ B̃oJwlK)
+\
+Jx̃o
+l+1|y0:l+1K
+i
+× T ō
+l+1
+\
+Jx̃ō
+l+1|y0:l+1K
+
+. (H.8)
+It implies Jx̃l+1|y0:l+1K ⊆ Jx̃o
+l+1|y0:l+1K×T ō
+l+1, i.e., (H.4)
+holds for k = l + 1. Thus, (H.4) is proven by induction.
+Step 2: We split the RHS of (H.5) as T ō
+k = T ō
+k,1 + T ō
+k,2:
+T ō
+k,1 =Ãk
+ōJx̃ō
+0K⊕
+δ̄−1
+X
+i=0
+Ãk−1−i
+ō (Ã21Jx̃o
+i |y0:iK⊕B̃ōJwiK), (H.9)
+T ō
+k,2 =
+k−1
+X
+i=δ̄
+Ãk−1−i
+ō (Ã21Jx̃o
+i |y0:iK ⊕ B̃ōJwiK). (H.10)
+Then, we also spilt B∞
+αk
+[ĉō
+k] in Line 12 into two parts:
+T̂ ō
+k = B∞
+αk
+[ĉō
+k] = B∞
+αk,1
+[ĉō
+k,1] ⊕ B∞
+αk,2
+[ĉō
+k,2], (H.11)
+where αk,1 = 1
+2 ∥Ak−δ̄
+ō ∥∞d∞(Jˆ
+x̃ō
+δ̄
+|y0:δ̄K) + ε, αk,2 =
+Υ∞ℓk−1, ĉō
+k,1 = Ãk−δ̄
+ō ĉō
+δ̄
+, and ĉō
+k,2 =
+Pk−1
+i=δ̄ Ãk−1−i
+ō ĉin
+i
+such that αk = αk,1 + αk,2 and ĉō
+k = ĉō
+k,1 + ĉō
+k,2. Next,
+we prove
+T ō
+k,1 ⊆ B∞
+αk,1
+[ĉō
+k,1], k ≥ k′
+, (H.12)
+for sufficiently large k′
+≥ δ̄, and
+T ō
+k,2 ⊆ B∞
+αk,2
+[ĉō
+k,2], k ≥ δ̄, (H.13)
+such that
+T ō
+k = T ō
+k,1 ⊕ T ō
+k,2 ⊆ B∞
+αk
+[ĉō
+k] = T̂ ō
+k , k ≥ k′
+. (H.14)
+For (H.12), ∀tk ∈ T ō
+k,1, its distance from the center of
+B∞
+αk,1
+[ĉō
+k,1] is upper bounded by
+∥tk − ĉō
+k,1∥∞ ≤ ∥tk∥∞ + ∥Ãk−δ̄
+ō ĉō
+δ̄∥∞, k ≥ δ̄. (H.15)
+Since (H.9) implies limk→∞ ∥tk∥∞ = 0, we can further
+derive that for ε > 0 given in Line 1, ∃k′
+≥ δ̄ such that
+∥tk − ĉō
+k,1∥∞ ≤ ε ≤ αk,1, k ≥ k′
+, (H.16)
+which means tk ∈ B∞
+αk,1
+[ĉō
+k,1], i.e., (H.12) holds.
+For (H.13), as (H.2) holds, T ō
+k,2 in (H.10) is bounded by
+T ō
+k,2 ⊆
+k−1
+X
+i=δ̄
+Ãk−1−i
+ō (Ã21
+e
+Zo
+i ⊕ B̃ōJwiK)
+⊆
+k−1
+X
+i=δ̄
+Ãk−1−i
+ō IH(Ã21
+e
+Zo
+i ⊕ B̃ōJwiK)
+(n)
+⊆
+k−1
+X
+i=δ̄
+Ãk−1−i
+ō B∞
+ℓi
+[ĉin
+i ]
+(o)
+⊆ B∞
+αk,2
+[ĉō
+k,2],
+(H.17)
+where (n) follows from Lines 9-10 and the fact
+that 2∥Ĝin
+i ∥∞ gives the maximum edge length of
+the interval hull. Recall that αk,2 = Υ∞ℓk−1 and
+ĉō
+k,2 =
+Pk−1
+i=δ̄ Ãk−1−i
+ō ĉin
+i , and observe that
+k−1
+X
+i=δ̄
+Ãk−1−i
+ō B∞
+ℓi
+[ĉin
+i ] ⊆
+k−1
+X
+i=δ̄
+B∞
+∥Ãk−1−i
+ō ∥∞ℓi
+[ĉin
+i ],
+k−1
+X
+i=δ̄
+∥Ãk−1−i
+ō ∥∞
+Lemma 4
+≤ inf
+γ∈(ρ(Ãō),1)
+βγ(Ãō)
+1 − γ
+= Υ∞.
+We can further derive (o) in (H.17), i.e., (H.13) holds.
+Thus, (H.12) and (H.13) give (H.14).
+With (H.3), (H.4), and (H.14) we get Jxk|y0:kK ⊆
+P−1
+T̂ o
+k × T̂ ō
+k
+
+for k ≥ k′
+. Setting k = k′
++ δ̄, we can
+obtain for k ≥ k ≥ 2δ̄,
+Jxk−δ̄|y0:k−δ̄K ⊆ P−1
+T̂ o
+k−δ̄ × T̂ ō
+k−δ̄
+
+. (H.18)
+Therefore, we have
+Jxk|y0:kK
+(7)
+= Fk,k−δ̄ Jxk−δ̄|y0:k−δ̄K
+
+(H.18)
+⊆ Fk,k−δ̄ P−1
+T̂ o
+k−δ̄ × T̂ ō
+k−δ̄
+ Line 8
+= Zk (H.19)
+for k ≥ k, i.e., (24) holds.
+Uniformly bounded estimate: From Algorithm 3, the uni-
+form boundedness of Zk only depends on k ≥ δ̄. By
+Line 8, Zo
+k = PoFk,k−δ̄ P−1
+T̂ o
+k−δ̄
+× T̂ ō
+k−δ̄
+
+holds for
+k ≥ δ̄, which combined with Proposition 4 and (H.3)
+guarantees the uniform boundedness of Zo
+k w.r.t. k ≥ δ̄.
+Then, similarly to Corollary 1, we can get the uniform
+boundedness of Zk w.r.t. k ∈ N0. □
+

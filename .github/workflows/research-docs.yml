@@ -64,7 +64,7 @@ jobs:
           # documents are excluded because their original relative paths are preserved.
           markdown_files = [
               p for p in Path(".").rglob("*.md")
-              if "archive" not in p.parts and ".git" not in p.parts
+              if not set(p.parts).intersection({"archive", ".git", ".venv", ".obsidian", ".worktrees"})
           ]
           # Validate the archive's two human entrypoints as well; historical
           # internal documents are preserved verbatim under their original tree.
@@ -87,7 +87,11 @@ jobs:
               raise SystemExit("Broken active Markdown links: " + "; ".join(missing_links))
           print(f"Research structure, {len(markdown_files)} active Markdown files and archive entrypoints passed local-link validation.")
           PY
-      - name: Exact startup gate unit and integration tests
+      - name: Install mathematical benchmark dependencies
+        run: python -m pip install -r requirements-research.txt
+      - name: Research unit and integration tests
         run: python -m unittest discover -s tests -v
+      - name: Exact finite-memory algebra certificate
+        run: python -m experiments.finite_memory_certificate --check
       - name: Recompute exact startup experiment certificate
         run: python -m experiments.cz_startup_predecessor --check

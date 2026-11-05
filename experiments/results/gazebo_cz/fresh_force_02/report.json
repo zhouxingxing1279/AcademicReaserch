@@ -1,0 +1,34 @@
+{
+  "name": "fresh_force_02",
+  "delivery": "fresh",
+  "force_newtons": 0.02,
+  "contract": {
+    "T": 0.5,
+    "acceleration": 0.02,
+    "noise": 0.005,
+    "missing": 1,
+    "delay": 1,
+    "initial_p": 0.005,
+    "initial_v": 0.01
+  },
+  "completed": false,
+  "landed": true,
+  "scope": "Empirical SITL; ideal initial prior and synthetic outer position channel",
+  "instrumented_model": false,
+  "offboard_entered": true,
+  "target_ned": [
+    0.17182502652712933,
+    0.016502278877769446,
+    -2.767419228718736
+  ],
+  "force_subscriber_connected": true,
+  "force_publish_accepted": true,
+  "error": "Algorithm stopped at k=2: Empty CZ during representative selection",
+  "computed_steps": 2,
+  "source_hashes": {
+    "scripts/simulation/cz_sitl.py": "55d94a7f76861a0950f90aea85a40bc79e33fa70c0832f30165dfeb88a41d227",
+    "src/outerloop/finite_memory.py": "efb978a40f824f2c40c79323857c7291dbba321f3ba9a7395b4a34f688dd2ed0",
+    "src/outerloop/tube_mpc.py": "37c65b56dafda6a30e12ee64b95520f9b301096cfce54776e88a84ec3d0ebf71"
+  },
+  "px4_commit": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4"
+}

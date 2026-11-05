@@ -1,0 +1,14 @@
+/home/alfred/px4-research/.venv/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+test_excitation_balanced_without_input_clipping (__main__.IdentificationChecks.test_excitation_balanced_without_input_clipping) ... ok
+test_lag_rollout_matches_continuous_step_solution (__main__.IdentificationChecks.test_lag_rollout_matches_continuous_step_solution) ... ok
+test_replay_distinguishes_empty_posterior_from_noncontainment (__main__.IdentificationChecks.test_replay_distinguishes_empty_posterior_from_noncontainment) ... ok
+test_replay_requires_disturbance_for_inconsistent_measurement (__main__.IdentificationChecks.test_replay_requires_disturbance_for_inconsistent_measurement) ... ok
+test_replay_uses_measurement_timestamp_for_delayed_packet (__main__.IdentificationChecks.test_replay_uses_measurement_timestamp_for_delayed_packet) ... ok
+test_split_separation (__main__.IdentificationChecks.test_split_separation) ... ok
+test_switched_input_position_moment_is_not_mean_input (__main__.IdentificationChecks.test_switched_input_position_moment_is_not_mean_input) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.073s
+
+OK

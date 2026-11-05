@@ -1,0 +1,16 @@
+{
+  "model": "x500",
+  "flight_requested": true,
+  "gui_requested": false,
+  "passed": true,
+  "log": "/home/alfred/px4-research/logs/smoke-x500-20261104-184424.log",
+  "heartbeat": true,
+  "vehicle_type": 2,
+  "local_position_ned": [
+    -0.01945863664150238,
+    -0.01722448505461216,
+    0.039348334074020386
+  ],
+  "landed_and_disarmed": true,
+  "max_relative_altitude_m": 4.759
+}

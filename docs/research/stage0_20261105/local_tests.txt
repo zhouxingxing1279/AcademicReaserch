@@ -1,0 +1,54 @@
+scope: initial working tree
+command: python -m unittest discover -s tests -v
+exit: 0
+test_complete_compression_outage_uses_plan_then_terminal (test_cong_mpc_validate.ValidationChecks.test_complete_compression_outage_uses_plan_then_terminal) ... ok
+test_conditioning_does_not_commute_with_outer_approximation (test_cong_mpc_validate.ValidationChecks.test_conditioning_does_not_commute_with_outer_approximation) ... ok
+test_polygon_support_matches_independent_lp (test_cong_mpc_validate.ValidationChecks.test_polygon_support_matches_independent_lp) ... ok
+test_causality_same_received_history (test_finite_memory_tube.FiniteMemoryTests.test_causality_same_received_history) ... ok
+test_conflicting_duplicate_and_timestamp_errors (test_finite_memory_tube.FiniteMemoryTests.test_conflicting_duplicate_and_timestamp_errors) ... ok
+test_empty_posterior_and_nonfeasible_center (test_finite_memory_tube.FiniteMemoryTests.test_empty_posterior_and_nonfeasible_center) ... ok
+test_full_delivery_graph (test_finite_memory_tube.FiniteMemoryTests.test_full_delivery_graph) ... ok
+test_full_history_is_inside_forgotten_window (test_finite_memory_tube.FiniteMemoryTests.test_full_history_is_inside_forgotten_window) ... ok
+test_no_second_timestamp_deadline (test_finite_memory_tube.FiniteMemoryTests.test_no_second_timestamp_deadline) ... ok
+test_pair_against_explicit_disturbance_vertices (test_finite_memory_tube.FiniteMemoryTests.test_pair_against_explicit_disturbance_vertices) ... ok
+test_zero_noise_and_zero_disturbance (test_finite_memory_tube.FiniteMemoryTests.test_zero_noise_and_zero_disturbance) ... ok
+test_nominal_reset_and_too_tight_input (test_finite_memory_tube.TubeTests.test_nominal_reset_and_too_tight_input) ... ok
+test_rpi_all_vertices_and_terminal_support (test_finite_memory_tube.TubeTests.test_rpi_all_vertices_and_terminal_support) ... ok
+test_shift_feasibility_and_cost_descent (test_finite_memory_tube.TubeTests.test_shift_feasibility_and_cost_descent) ... ok
+test_adr_for_noncentrally_symmetric_triangle (test_oit_mrpi.OitMrpiTests.test_adr_for_noncentrally_symmetric_triangle) ... ok
+test_batch_interval_hull_dominates (test_oit_mrpi.OitMrpiTests.test_batch_interval_hull_dominates) ... ok
+test_constant_bias_learning_retains_future_support (test_oit_mrpi.OitMrpiTests.test_constant_bias_learning_retains_future_support) ... ok
+test_generalized_intersection_and_tightening (test_oit_mrpi.OitMrpiTests.test_generalized_intersection_and_tightening) ... ok
+test_homothetic_synthesis_matches_analytic_triangle (test_oit_mrpi.OitMrpiTests.test_homothetic_synthesis_matches_analytic_triangle) ... ok
+test_joint_dynamics_against_plant_and_observer (test_oit_mrpi.OitMrpiTests.test_joint_dynamics_against_plant_and_observer) ... ok
+test_one_step_certificate (test_oit_mrpi.OitMrpiTests.test_one_step_certificate) ... ok
+test_rakovic_rank_deficient_disturbance (test_oit_mrpi.OitMrpiTests.test_rakovic_rank_deficient_disturbance) ... ok
+test_tail_rpi_on_all_polygon_facets (test_oit_mrpi.OitMrpiTests.test_tail_rpi_on_all_polygon_facets) ... ok
+test_unrestricted_window_is_inside_literal_oit (test_oit_mrpi.OitMrpiTests.test_unrestricted_window_is_inside_literal_oit) ... ok
+test_window_shift_and_true_containment (test_oit_mrpi.OitMrpiTests.test_window_shift_and_true_containment) ... ok
+test_contract_failure_is_retained_without_fallback (test_robustness.RobustnessTests.test_contract_failure_is_retained_without_fallback) ... ok
+test_rational_envelope_and_boundary_against_design (test_robustness.RobustnessTests.test_rational_envelope_and_boundary_against_design) ... ok
+test_recovery_requires_complete_tail_and_uses_state_time (test_robustness.RobustnessTests.test_recovery_requires_complete_tail_and_uses_state_time) ... ok
+test_stimuli_are_paired_and_contract_legal (test_robustness.RobustnessTests.test_stimuli_are_paired_and_contract_legal) ... ok
+test_box_support_and_vertices (test_startup_gate.StartupGateTests.test_box_support_and_vertices) ... ok
+test_budget_exhaustion_is_not_infeasibility (test_startup_gate.StartupGateTests.test_budget_exhaustion_is_not_infeasibility) ... ok
+test_command_budget_exhaustion_is_unresolved (test_startup_gate.StartupGateTests.test_command_budget_exhaustion_is_unresolved) ... ok
+test_common_command_causality_gap (test_startup_gate.StartupGateTests.test_common_command_causality_gap) ... ok
+test_correlations_avoid_false_infeasibility (test_startup_gate.StartupGateTests.test_correlations_avoid_false_infeasibility) ... ok
+test_cross_axis_state_and_correlated_disturbance (test_startup_gate.StartupGateTests.test_cross_axis_state_and_correlated_disturbance) ... ok
+test_euler_and_zoh_must_not_be_mixed (test_startup_gate.StartupGateTests.test_euler_and_zoh_must_not_be_mixed) ... ok
+test_float_and_bad_dimensions_rejected (test_startup_gate.StartupGateTests.test_float_and_bad_dimensions_rejected) ... ok
+test_inconsistent_information_is_not_feasible (test_startup_gate.StartupGateTests.test_inconsistent_information_is_not_feasible) ... ok
+test_initial_unsafety_is_separate (test_startup_gate.StartupGateTests.test_initial_unsafety_is_separate) ... ok
+test_input_coupling_and_lower_dimensional_feasible_set (test_startup_gate.StartupGateTests.test_input_coupling_and_lower_dimensional_feasible_set) ... ok
+test_nonzero_rhs_center_not_member (test_startup_gate.StartupGateTests.test_nonzero_rhs_center_not_member) ... ok
+test_point_cz_and_zero_generator (test_startup_gate.StartupGateTests.test_point_cz_and_zero_generator) ... ok
+test_redundant_constraints (test_startup_gate.StartupGateTests.test_redundant_constraints) ... ok
+test_scott_equation_10_noncentral_triangle (test_startup_gate.StartupGateTests.test_scott_equation_10_noncentral_triangle) ... ok
+test_three_axis_regression_entrypoint (test_startup_gate.StartupGateTests.test_three_axis_regression_entrypoint) ... ok
+test_translated_information_requires_common_nonzero_command (test_startup_gate.StartupGateTests.test_translated_information_requires_common_nonzero_command) ... ok
+
+----------------------------------------------------------------------
+Ran 46 tests in 2.848s
+
+OK

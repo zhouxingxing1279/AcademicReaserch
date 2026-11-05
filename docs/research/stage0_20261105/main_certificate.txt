@@ -1,0 +1,12 @@
+scope: git archive 9882220234a20d730a38d648d5c08ac47c3b9d6d (src experiments tests)
+command: python -m experiments.cz_startup_predecessor --check
+exit: 0
+{
+  "schema": 1,
+  "evidence": "exact rational finite instances; no full-loop guarantee",
+  "cases": 64,
+  "feasible": 30,
+  "infeasible": 34,
+  "verified_joint_vertices": 8976
+}
+PASS exact certificate comparison

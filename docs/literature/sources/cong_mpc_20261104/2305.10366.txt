@@ -1,0 +1,621 @@
+                                                                                                                                                                                       1
+
+
+
+
+                                           Set-Membership Filtering-Based Cooperative State
+                                                 Estimation for Multi-Agent Systems
+                                                                  Yu Ding, Yirui Cong, Member, IEEE, Xiangke Wang, Senior Member, IEEE,
+
+
+
+
+                                            Abstract—In this article, we focus on the cooperative state                       a method to reduce the amount of information at each
+                                         estimation problem of a multi-agent system. Each agent is                            time, which considered the trade-off between communi-
+                                         equipped with absolute and relative measurements. The purpose
+arXiv:2305.10366v1 [cs.MA] 17 May 2023
+
+
+
+
+                                                                                                                              cation burden and estimation performance. A distributed
+                                         of this research is to make each agent generate its own state
+                                         estimation with only local measurement information and local                         zonotopic filter is proposed for robust observation and
+                                         communication with neighborhood agents using Set Membership                          FDI (Fault Detection and Isolation) of LTV (Linear Time
+                                         Filter(SMF). To handle this problem, we analyzed centralized                         Varying) cyber-physical systems in [9]. The concept of
+                                         SMF framework as a benchmark of distributed SMF and                                  bit-level reduction is introduced to relax the bit-rate
+                                         propose a finite-horizon method called OIT-Inspired centralized                      requirements to communicate zonotopic sets between
+                                         constrained zonotopic algorithm. Moreover, we put forward a
+                                         distributed Set Membership Filtering(SMFing) framework and                           agents, and the negociation of data reconciliation strate-
+                                         develop a distributed constained zonotopic algorithm. Finally,                       gies to maintain robustness/consistency under potential
+                                         simulation verified our theoretical results, that our proposed                       packet losses is proposed.
+                                         algorithms can effectively estimate the state of each agent.
+                                                                                                                           However, to the best of our knowledge, few studies paid
+                                            Index Terms—Distributed Set-membership filter, Cooperative                  attention to the second kind of cooperative estimation prob-
+                                         estimation, Absolute and relative measurements.
+                                                                                                                        lem with set-membership filter. Reference [10] defined the
+                                                                                                                        parameterized distributed state bounding zonotope for each
+                                                                   I. I NTRODUCTION                                     interconnected system, and proposed an optimization prob-
+                                            Recent years, cooperative estimation over sensor networks                   lem to minimize the effect of uncertainties based on the P-
+                                         has received considerable research attention due to its ex-                    radius minimization criterion. Similarly, [11] minimized the
+                                         tensive applications in many fields such as target tracking,                   intersection zonotopes using an optimization-based method
+                                         environmental monitoring and industrial automation [1]. So far                 with a series of linear matrix inequalities (LMIs). An on-line
+                                         theories such as consensus [2] and diffusion strategies [3] have               method is also discussed for updating the correction matrices
+                                         been used for developing filters over sensor networks. From                    method. These two articles are the first propose pioneer of
+                                         the purpose of cooperative estimation, there are mainly two                    the distributed set-membership estimation problem of systems
+                                         kinds of problems. The first one is to estimate a common target                with inertial interactions. However, relative measurements
+                                         state by using multiple sensors, and this scene is common in                   between neighbourhood agents are not considered in the above
+                                         cooperative detection [4]. The second one is each agent utilizes               mentioned two studies. In the literature, systematic studies
+                                         absolute and relative measurements to make the estimation of                   of distributed SMFing framework are also neglected. Thus
+                                         its own state [5].                                                             in this article, we study the centralized and distributed set-
+                                            For the first kind of cooperative estimation, there are a few               membership filtering frameworks in the cooperative estimation
+                                         articles with set-membership theory to handle this problem,                    problem of multi-agent systems with absolute and relative
+                                         which can be mainly divided into the following two types:                      measurements, such that each agent can obtain the estimate
+                                                                                                                        of its own state with high accuracy.
+                                            • Ellipsoidal SMF. In [6], a recursive resource-efficient
+                                               filtering algorithm is proposed to realize distributed es-                  The contributions of this paper are summarized as follows:
+                                               timation in the simultaneous presence of the Round-                        • To provide a benchmark for distributed set-membership
+                                               Robin transmission protocol, the multi-rate mechanism                        filters, we firstly analyzed the centralized set-membership
+                                               and bounded noises, such that there exists a certain                         filtering framework, and put forward a finite horizon
+                                               ellipsoid that includes all possible error states at each time               constrained zonotopic algorithm. Compared with classical
+                                               instant. Reference [7] considered system with sensor sat-                    constrained zonotopic algorithm, our algorithm works
+                                               uration, and derived a sufficient condition for distributed                  productively.
+                                               average set-membership filtering algorithm to contain the                  • Most importantly, we propose a distributed set-
+                                               true state with recursive ellipsoids.                                        membership filter framework, each can estimate its own
+                                            • Polytopic SMF. Reference [8] developed a zonotopic                            state with only local measurements and measurements of
+                                               estimation algorithm providing a design of obsever gains                     its neighbours.
+                                               to minimize the estimation uncertainties, and proposed                     • A decentralized SMF algorithm based on constrained
+                                                                                                                            zonotope is then developed with our distributed frame-
+                                           Y. Ding, Y. Cong, and X. Wang are with the College of Intelligence Science
+                                         and Technology, National University of Defense Technology, China.                  work. Finally, simulations examples verified our proposed
+                                                                                                                            algorithms.
+                                                                                                                                                            2
+
+
+
+   This paper is organized as follows: Section II gives the             is the measurement matrix. ri,j,k ∈ [[ri,j,k ]] is the measurement
+system model and the problem description. Section III pro-              noise, with d([[ri,j,k ]]) ≤ ri,j .
+vides the framework of centralized SMF and our proposed                    In this article, we consider the communication topology is
+finite-horizon method called OIT-Inspired constrained zono-             consistent with the time-invariant measurement topology, i.e.,
+topic algorithm. In Section IV, we present the framework of             (vi , vj ) ∈ E implies agent i takes a relative measurement from
+distributed SMF, based on this, a distributed constrained zono-         agent j and receives information from agent j simultaneously.
+topic algorithm is developed. Simulation results are provided              The aim of this paper is to derive an estimate of uncertain
+to verify our theoretical results in Section V.                         range Si,k ⊇ [[xi,k |y0:k , z0:k ]] for each agent i by using all the
+   Notation: For a sample space Ω, a measurable function x :            measurements yi,k , yj,k and zi,j,k , j ∈ Ni , such that at each
+Ω → χ from the sample space Ω to a measurable set χ is                  instant k, xi,k ∈ Si,k .
+called an uncertain variable. A realization of x is defined as
+x(ω) = x. The range of an uncertain variable is described                       III. C ENTRALIZED SMF ING F RAMEWORK AND
+by its range: [[x]] = {x(ω) : ω ∈ Ω}, Rn denotes the n-                                         A LGORITHM
+dimensional Euclidean space. The conditional range of x given
+                                                                           In this section, a centralized SMFing framework is presented
+y = y is [[x|y]] = {x(ω) : y(ω) = y, ω ∈ Ω} = {x(ω) : ω ∈
+                                                                        as the benchmark. Based on this framework, we propose a
+Ωy=y }. A directed graph G = (V, E) is used to represent
+                                                                        finite-horizon SMFing constrained zonotopic algorithm with
+system topology. E = {(vi , vj ) : i, j ∈ V} is the set of edges
+                                                                        high efficiency. Let xk = [xT1,k , xT2,k , · · · , xTN,k ]T and wk =
+which models information flow. In this paper, a set N i is                 T     T              T
+                                                                        [w1,k , w2,k , · · · , wN,k ]T . The system dynamics can be written
+defined as N i = i ∪ Ni to denote the union set of the ith
+                                                                        as follows:
+agent and its in-neighbors, and qi = |N i |, where | · | returns
+the cardinality of a given set. The out-neighborhood of agent                                     xk+1 = Ac xk + Bc wk ,                                  (4)
+i is denoted by Mi = {l ∈ V : (vl , vi ) ∈ E}. N denotes
+the natural number set, while N0 is the set of positive natural         where
+set. ⊕ stands for the Minkowski sum. 1N denotes a N-length                                 Ac = diag{A1 , A2 , · · · , AN },                              (5)
+column vector whose each element is 1.
+                                                                                           Bc = diag{B1 , B2 , · · · , BN }.
+
+     II. S YSTEM M ODEL AND P ROBLEM D ESCRIPTION                          The augmented form of absolute measurements is
+                                                                                                      T      T              T
+  Consider a system composed by N agents, where each                                           yk = [y1,k , y2,k , · · · , yN,k ]T                        (6)
+agent is identified by a positive integer i ∈ {1, 2, . . . , N }. The                              = C c x k + vk ,
+dynamic of agent i is represented by a discrete-time equation
+                                                                        where
+          xi,k+1 = Ai xi,k + Bi wi,k ,     i = 1, . . . , N,     (1)
+                                                                                            Cc = diag{C1 , C2 , · · · , CN },                             (7)
+where k ∈ N. As a realization of xi,k , xi,k ∈ Rni denotes the                                      T
+                                                                                             vk = [v1,k    T
+                                                                                                        , v2,k            T
+                                                                                                               , · · · , vN,k ]T .
+state at time instant k for agent i, xi,k ∈ [[xi,k ]] ⊆ Rni ; wi,k is
+the process noise, which is the realization of wi,k ∈ [[wi,k ]] ⊆          Since the relative measurements of an agent are related
+Rpi . Ai ∈ Rni ×ni stand for the system matrix, while Bi is             to its in-neighbors, we define zi,k as the all the relative
+the input matrix with appropriate dimensions.                           measurements taken by agent i, i.e.,
+   In this work, we consider two types of measurements, i.e.,                       
+                                                                                      xi,k − xj1 ,k
+                                                                                                     
+                                                                                                         ri,j1 ,k
+                                                                                                                  
+absolute measurements and relative measurements, which are                          xi,k − xj2 ,k  ri,j2 ,k 
+widely considered in the literature [12].                                 zi,k = Dc                 +  ..  , j1 , · · · , js ∈ Ni ,
+                                                                                                               
+                                                                                            ..
+   Absolute measurement: An absolute measurement refers                                     .        . 
+to agent i takes an observation on its state directly, with an                             xi,k − xjs ,k            ri,js ,k
+observation equation as the following form:                                                                                                               (8)
+
+                      yi,k = Ci xi,k + vi,k ,                    (2)    where Dc = diag{D1 , D2 , · · · , DN }.
+                                                                          The relative measurements for all the agents can be written
+                                                                                                            T     T            T      T
+where yi,k ∈ Rmi is the measurement at time instant k for               as a compact form  zk = [z1,k , z2,k , · · · , zN,k ] .
+                        i ×ni
+agent i. Ci ∈ Rm              is the measurement matrix, vi,k is                            yk                     T          T                  T
+                      i                                                   Let Yk =               , ri,k = [ri,j      1 ,k
+                                                                                                                          , ri,j 2 ,k
+                                                                                                                                      , · · · , ri,j s ,k
+                                                                                                                                                          ]T ,
+unknown but bounded measurement noise. vi,k ∈ [[vi,k ]], with                               zk
+d([[vi,k ]]) ≤ v i , where d(·) returns the diameter of a set.                       T
+                                                                        Vk = [vkT , r1,k    T
+                                                                                         , r2,k            T
+                                                                                                , · · · , rN,k ]T . The augment form of all the
+   Relative measurement: Relative measurements generate                 measurements can be written as
+the observation with both the state of agent i the in-                                                                 
+                                                                                                                           vk
+                                                                                                                               
+neighborhood agents j ∈ Ni ,                                                                                          r1,k 
+                                                                                                          Cc
+                                                                                              Yk =              xk +  .                                 (9)
+                                                                                                                              
+           zi,j,k = Di (xi,k − xj,k ) + ri,j,k , j ∈ Ni ,        (3)                                      Dc            .. 
+                                                                                                                            rN,k
+where zi,j,k ∈ Rpi is the measurement at time instant k
+between agent i and its in-neighborhood agent j. Di ∈ Rpi i ×ni                                      = Hc xk + Vk .
+                                                                                                                                                                      3
+
+
+
+  The prediction and update of classical centralized set-                     its local observation and communication to realized its own
+membership filter are given as follows:                                       high-accuracy state estimation. Based on this framework, we
+                                                                              develop a distributed constrained zonotopic SMF algorithm.
+   [[xk |Y0:k−1 ]] = Ac [[xk−1 |Y0:k−1 ]] ⊕ Bc [[wk−1 ]],              (10)
+                     [
+   [[xk |Y0:k ]] = [        Hc−1 (Yk − Vk )] ∩ [[xk |Y0:k−1 ]],        (11)   A. Distributed SMFing Framework
+                   Vk ∈[[Vk ]]
+                                                                                  Without loss of generality, we assume agents
+where Hc−1 (·) is the inverse map of Hc (·). The uncertain set of             j1 , j2 , · · · , js are the in-neighborhood agents
+agent i solved by centralized set-membership filter is denoted                of i. Let xN i ,k               =       [xTi,k , xTj1 ,k , · · · , xTjs ,k ]T and
+     c
+by Si,k = {xi,k : (x1,k , x2,k , . . . , xN,k ) ∈ [[xk |Y0:k ]]}.                           T    T                 T
+                                                                              WN i ,k = [wi,k , wj1 ,k , · · · , wjs ,k ]T with WN i ,k ∈ [[WN i ,k ]].
+   A common geometric figure to realize this centralized                      Then the system dynamic and measurement equation can be
+framework is the extended constrained zonotope, which is                      written as
+defined as follows.                                                                                                                               
+                                                                                                        Ai                                    xi,k
+Definition 1. (Extended Constrained Zonotope [13]) A set                                                       Aj 1                    xj1 ,k 
+Z ⊆ Rn is an extended constrained zonotope if there exists                             xN i ,k+1 =                                                         (13)
+                                                                                                                                                  
+                                                                                                                         . ..            .. 
+                                                                                                                                        . 
+a quintuple (G, c, A, b, h) ∈ Rn×ng × Rn × Rnc ×ng × Rnc ×
+                                                                                                     
+[0, ∞]ng such that Z is expressed by                                                                                            Aj s          xj ,k
+                                                                                                                                      s 
+                                 ng
+                                 Y                                                                     Bi                                     wi,k
+{Gξ + c : Aξ = b, ξ ∈                 [−h(j) , h(j) ]} =: Z(G, c, A, b, h),                                    B j1                         w
+                                                                                                                                        j1 ,k 
+                                                                                                                                                   
+                                                                                                 +
+                                                                                                    
+                                                                                                                         . ..                    .
+                                 j=1                                                                                                    .. 
+                                                                                                                                                   
+                                                                                                    
+                                                                       (12)
+                                                                                                                                Bjs          wjs ,k
+         (j)              th
+where h        is the j        component of h.                                                          = AN i xN i ,k + BN i WN i ,k ,
+   When h(j) = 1, j = 1, · · · , ng , Definition 1 be-
+comes the classical constrained zonotope in [14]. Zbkc =                                                                                
+                                                                                                                   Ci xi,k    vi,k
+(Gc , cc , Ac , bc , hc ) ⊇ [[xk |Y0:k ]] denotes the centralized pos-                                           Cj1 xj1 ,k
+                                                                                                                            vj1 ,k 
+terior uncertain range of the augmented system state at k.                                                                         
+                                                                                                                     ..    .. 
+   Since the centralized method is optimal, we can employ it                                          
+                                                                                                                      .    . 
+                                                                                                                                    
+as a benchmark. However, the complexity will go unbounded                                              Cjs ,k xjs ,k  +  vjs ,k 
+                                                                                            YN i ,k =                                                        (14)
+as time elapses. To handle this problem, we propose a finite-                                         Di (xi,k − xj1 ,k ) ri,j1 ,k 
+                                                                                                                                   
+horizon algorithm (see Algorithm 1) based on the theoretical                                                    ..          . 
+                                                                                                                            .. 
+                                                                                                      
+result of [13], and we provide a line by line explanation as
+                                                                                                                .
+follows:                                                                                                      Di (xi,k − xjs ,k )              ri,js ,k
+                                                                                                      = HN i ,k xN i ,k + VN i ,k ,
+Algorithm 1 OIT Inspired Centralized Constrained Zonotopic
+                                                                                                T
+SMF Algorithm                                                                 where VN i ,k = [vi,k                                T
+                                                                                                    , vjT1 ,k , · · · , vjTs ,k , ri,j 1 ,k
+                                                                                                                                                       T
+                                                                                                                                            , · · · , ri,js ,k
+                                                                                                                                                               ]T .
+                                                                                                              d
+ 1: Initialization. Bounded Constrained zonotope [[x0 ]] ⊂                      For each agent i, S i,k and Si,k    d
+                                                                                                                         denote the prior and posterior
+    Rn×N , δ ≥ µ0 − 1.                                                        uncertain set at k, respectively. The joint uncertain prior
+ 2: if k ≤ δ then                                                             and posterior range of (xi , xj1 , · · · , xjs ) at k are denoted
+ 3: Zbc ← (10) and (11).                                                           d                         d
+      k                                                                       by S i,j1 ,j2 ,··· ,js ,k and Si,j1 ,j2 ,··· ,js ,k
+                                                                                                                                  . For convenience, we
+ 4: else                                                                                                  d    d
+ 5: Set Zbc = Rn×N , with (10) and (11), solve Z  bc .                        simplify them as S N i ,k and SN        , respectively. The frame-
+                                                   k                                                             i ,k
+          k−δ                                                                 work of joint distributed set-membership filter is proposed in
+                                                                              Algorithm 2 and its detailed explanation is given as follows:
+  • Line 1 initializes Algorithm 1, where the additional pa-                                                th
+                                                                                • Line 1 initializes the i agent and its in-neighborhood
+    rameter δ is the length of time slide window, that a larger                   agents’ joint uncertain range SN     d
+                                                                                                                              .
+                                                                                                                         i ,0
+    δ leads to higher accuracy but increases the complexity.                    • Line 4 denotes the communication process that transmits
+    µ0 is the observability index of the augmented system.                        the information required in the joint progress.
+  • Line 3 is for k ≤ δ, which is the same as the classical                                                                     d
+                                                                                • Line 6 calculates the joint prediction S N i ,k .
+    constrained zonotope SMF algorithm [15].                                    • Line 7-8 formulate S
+                                                                                                           d∗
+                                                                                                                  using a projection method,
+  • Line 5 is for k > δ, which is a finite-horizon version                                                N i ,k
+                                                                                  where the state estimation can be implemented by com-
+    of Section 5 of [14] over the time window [k − δ, k];
+                                                                                  puting the intersection of the posterior uncertain range of
+    it is a simplified version of the OIT inspired constrained
+                                                                                  agents that receive information from i.
+    zonotopic SMF in [13].
+
+      IV. D ISTRIBUTED SMF ING F RAMEWORK AND                                 B. Distributed Constrained Zonotopic SMF Algorithm
+          C ONSTRAINED Z ONOTOPIC A LGORITHM                                    In this section, we design the distributed SMF algorithm
+  In this section, we propose a framework of distributed set-                 based on constrained zonotope method. To distinguish with
+membership filtering framework that each agent only utilizes                  the system dynamic matrix Ai , in this section we use Ai,k
+                                                                                                                                                                                4
+
+
+
+Algorithm 2 Distributed Set-membership Filtering Framework                                         The joint prior uncertain range is given by
+ 1: Initialization. For agent i, set the initial joint prior
+                                                                                                             d             d                    d     d         d
+            d
+    range Si,0                                                                                           Z N i ,k = (GN i ,k , cdN i ,k , AN i ,k , bN i ,k , hN i ,k )      (20)
+ 2: loop                                                                                                                                                   d 
+                                                                                                                                                              ci,k
+                             d
+ 3:   Prediction. Given Si,k−1  , each agent’s prior range                                                            d        d                 d         .. 
+               d                                                                                         = (diag{Gi,k , Gj1 ,k , · · · , Gjs ,k },  .  ,
+         S i,k is given by
+                                                                                                                                                      cdj ,k
+                 d          d                                                                                                                    d s  d 
+               S i,k = Ai (Si,k−1 ) ⊕ Bi [[wi,k−1 ]],               i = 1, 2, · · · , N                                                           b          h
+                                                                                     (15)                                                        i,k   i,k
+                                                                                                                                                    .
+                                                                                                         diag{Ai,k , Aj1 ,k , · · · , Ajs ,k },  .  ,  ... 
+                                                                                                               d      d                d                       
+                                                                                                                                                   .     
+                                                                                                                                                               )
+                           d                                                                                                                              d          d
+ 4:      Receive S j,k from neighborhood agents The joint prior                                                                                       bjs ,k        hjs ,k
+                           p          d     Q d
+         uncertain range S N i ,k = S i,k ×  S j,k .
+                                                             j∈Ni                                     (3) Joint update. Given Sample integrated measurements at
+ 5:      Measurement. Take integrated measurements YN i ,k                                         instant k yi,k and zi,k , joint update is given by
+         .
+ 6:      Joint Update. For k ∈ N0 , given the observation                                          bd
+                                                                                                   Z          bd , b
+                                                                                                           = (G        cd , A bd , bbd , b hd )                              (21)
+                                                                                                    N i ,k     N i ,k N i ,k
+         YN i ,k the joint posterior set SNd
+                                                  is formulated by                                                          dN i ,k N i ,k N i ,k                                  
+                                             i ,k                                                                            A                       0
+                          [                                        d                                       p         d
+                                                                                                                            N i ,k                 Vi                              
+            d                      −1                                                              = ([GN i ,k 0], cN ,k ,  0                     AN i ,k
+           SN  i ,k
+                    = [         HN      (Y
+                                      ,k N i ,k
+                                                  − VN i ,k )] ∩ S N i ,k                                                  
+                                                                                                                           i
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                  i                                                                                d
+                            Vi,k ∈[[Vi,k ]]                                                                                     (HN   T
+                                                                                                                                 GN i ,k     HN i ,k )−1 HN i ,k GVNi ,k
+                                                                                                                                        i ,k                         i
+                                                                                            (16)                   d                       
+                                                                                                                   bN i ,k                      "   d
+                                                                                                                                                          #
+                    d,i
+         Receive Sl,k                                                d
+                        = {xi,k : (xl,k , xi,k , · · · , xls ,k ) ∈ SN      }                                      bVNi ,k                   hN i ,k
+ 7:                                                                                                ,                                         ,            ).
+                                                                                                    
+                                                                       l ,k                                                                       hVNi ,k
+                                                                                                                       i
+                                                                                                                                            
+         from l ∈ Mi ∩ Ni , l1 , · · · , ls ∈ Nl . If Mi ∩ Ni = ∅,                                    d        T             −1
+                                                                                                     cN ,k + (HN ,k HN i ,k ) HN i ,k Yi,k            i
+           d,i
+         Sl,k  = Rin .                                                                                   i             i
+
+
+ 8:      Update Intersection. The joint posterior uncertain                                           (4) Update intersection. Let eα,u denote a projection matrix
+         range of UAV i is formulated by                                                           to choose the αth element from a u-length vector, and Eα,u =
+                 d                      d,i                                  d                     eα,u ⊗ In .
+                Si,k =[         ∩      Sl,k ]∩[              Proj           SN      ] (17)
+                           l∈Mi ∩Ni                   Rn
+                                                             Q
+                                                                  Rn   n       i ,k                   The final uncertain range at instant k after update intersec-
+                                                       i ×         j →Ri
+                                                                                                          d      bd , b d     bd bd b d
+                                                           j∈Ni                                    tion Zbi,k = (G i,k ci,k , Ai,k , bi,k , hi,k ) is formulated by
+
+ 9:   k = k + 1;                                                                                                           b di,k = [E1,q G
+                                                                                                                           G               b              0],                (22)
+                                                                                                                                         i   N i ,k
+10: end loop
+                                                                                                                           cdi,k = E1,qi b
+                                                                                                                           b             cN i ,k ,                           (23)
+                                                                                                                                   "        #
+                                                                                                                                       1,1
+                                                                                                                              d      A i,k
+                                                                                                                            Ab =              ,                              (24)
+and A bi,k to denote prior and posterior in the constrained                                                                   i,k
+                                                                                                                                     A2,1
+                                                                                                                                       i,k
+zonotope expression, respectively. The calculation in each step                                                                   "
+                                                                                                                                      1,1
+                                                                                                                                           #
+                                                                                                                             d      B i,k
+is highlighted as follows:                                                                                                 bb =
+                                                                                                                             i,k      2,1 ,                                  (25)
+                                                                                                                                    Bi,k
+   (1) Initialization. For agent i, set the initial uncertain range                                                                          
+as                                                                                                                                   hdN ,k
+                                                                                                                                     b
+                                                                                                                                          i
+                                                                                                                                   b d       
+   d
+                                                                                                                                   h
+                   cdi,0 , A
+          b di,0 , b                        hdi,0 )
+                           bdi,0 , bbdi,0 , b
+                                                                                                                                              
+ Zbi,0 = (G                                                                                 (18)                              d       N l1 ,k 
+                                                                                                                            hi,k =  .  ,                                   (26)
+                                                                                                                            b      
+                                                                    nig
+                                                                                                                                    .. 
+                                                                    Y                                                                        
+             b di,0 ξ + b
+  = {z : z = G          cdi,0 , A
+                                bdi,0 ξ = bbdi,0 , ξ ∈                      hd,t
+                                                                          [−b       b d,t
+                                                                              i,0 , hi,0 ]},
+                                                                                                                                    bhdN ,k
+                                                                                                                                           ls
+                                                                   t=1
+                                                                                                   where     A1,1
+                                                                                                              i,k       = diagl∈Mi ∩N i {A   bd } , and A2,1 =
+                                                                                                                                               N l ,k                 i,k
+where bhd,t               th
+        i,0 denotes the t component of hi,0 .
+                                               bd
+                                                                                                   [A1,1 A    1,2
+                                                                                                                    ] is a block matrix composed by A1,1 = 1qi ⊗
+   (2) Prediction. Given the uncertain range of last instant                                            bd
+                                                                                                   E1,q G           with qi = |N i |; Eαl ,ql denotes the serial number
+                                                                                                        i    N i ,k
+bd
+Z             bd               bd
+                     cdi,k−1 , A         bd       bd
+  i,k−1 = (Gi,k−1 , b            i,k−1 , bi,k−1 , hi,k−1 ), the prior                                                                                     b d }, B 1,1 =
+uncertain range at k is given by                                                                   of i in N l ; A1,2 = diagl∈Mi ∩N i {Eαl ,ql G            N l ,k      i,k
+                                                                                                                                                                      
+                                                                                                     bb                          E   c          −   E     c
+                                                                                                       N i ,k                       1 i,j∈Ni ,k         α1 l1 ,m∈Nl1 ,k
+           d           d               d      d        d                                            . 
+      Z i,k = (Gi,k , cdi,k , Ai,k , bi,k , hi,k )                                          (19)    . , and B 2,1 =                               ..
+                                                                                                                                                                         .
+                                                                                                                                                                         
+                                                        "                           #               .                   i,k                        .
+                                                           d
+                        d                                A                     0                    bb                           E1 ci,j∈Ni ,k − Eαls cls ,m∈Nls ,k
+       = ([AN i Gi,k            Bi Gwi,k ], AN i cdi,k , i,k                            ,              N js ,k
+                                                          0                 Awi,k                     Taking the topology in Fig. 1 as an example, we explain the
+       "
+           d
+               # "
+                    d
+                                #                                                                  update intersection step in Line 6 of Algorithm 3 as follows:
+          bi,k     hi,k
+                ,       ).                                                                            • The augmented state of UAV2 and its in-neighbourhood
+         bwi,k    hwi,k                                                                                   UAVs can be written as xN 2 ,k = [xT2,k , xT1,k , xT3,k , xT4,k ]T ,
+                                                                                                                                                 5
+
+
+
+Algorithm 3 Distributed Constrained Zonotopic SMF Algo-                                                      UAV1
+rithm
+  1: The initial uncertain range of agent i is given by (18).
+  2: loop
+  3:   The joint prior uncertain range of agent i and its in-
+       neighborhood agents at instant k is given by (20).
+  4:   The joint posterior uncertain range is updated as (21).                       UAV2                                             UAV3
+
+ 5:   The posterior uncertain range of agent i at instant k is
+                       d∗       b d∗ , bd∗ bd bd b d
+      formulated by Zbi,k = (G    i,k ci,k , Ai,k , bi,k , hi,k ), where
+      each matrix is given in (22) - (26).
+                               bd , b  d                   bd
+ 6:   Find an interval hull (G   i,k ci,k ) such that Zi,k = {z =
+        d       d         d∗
+      Gb ξ+b
+        i,k    ci,k } ⊇ Zi,k , and the final posterior uncertain
+      range at instant k is Z bd = (G    bd , b d
+                               i,k        i,k ci,k , [ ], [ ], B∞ ).                                                           UAV5
+ 7:   k = k + 1;                                                                             UAV4
+ 8: end loop                                                               Fig. 1.   System measurement and communication topology.
+
+
+
+    q2 = |N 2 | = 4. Clearly, x2,k = [I 0 0 0]xN 2 ,k , the                  The topology is shown in Fig. 1 and the noise constrained
+    projection matrix is E1,4 = [I 0 0 0].                                 zonotope is as follows:
+  • Notice that UAV2 is also the in-neighbourhood agent of
+    UAV4, which implies x2,k will appear in the augmented
+    vector xN 4 ,k , i.e., x2,k = [0 I 0][xT4,k , xT2,k , xT3,k ]T ,         [[wi,k ]] = [[ri,j,k ]] = [−1, 1] × [−1, 1], [[vi,k ]] = [−1, 1]. (30)
+    q4 = |N 4 | = 3. The corresponding projection matrix                      The initial state and its uncertain range are randomly
+    is E2,3 = [0 I 0]. The posterior range after update                    generated by Matlab.
+                    d
+    intersection Zb2,k  is given by                                           Due to the page limit, we only present the results of UAV
+                b d2,k = [E1,4 G
+                               bd                                          4 and UAV 5. In Fig. 2, the trajectory of UAV5 is the black
+                G                            0],                   (27)
+                                 N 2 ,k                                    line, with the dots representing the real positions at different
+                cd2,k = E1,4 b
+                b             d
+                             cN 2 ,k
+                                     ,                                     time steps. The position estimation set in 2-D plane are rect-
+                         
+                              bd
+                                                                          angles. The constrained zonotope generated by OIT-Inspired
+                              A N ,k
+                                                    0                      centralized SMF zonotopic algorithm is presented by pink
+                                   2
+                bd =                           bd
+                                                             
+                A 2,k           0              A N 4 ,k
+                                                              ,
+                                                                          rectangles, shown as Fig. 2(a). The interval hull corresponding
+                                 bd
+                            E1,4 G                  bd
+                                              −E2,3 G                      to the distributed SMF algorithm is plotted by blue rectangles;
+                                   N ,k2               N 4 ,k
+                                                                           see Fig. 2(b). At each step, We can see that the constrained
+                                      bbd              
+                                         N 2 ,k                            zonotope presented by both the OIT centralized algorithm and
+                bbd =                 bbd         ,
+                                                                          distributed SMF algorithm contain the real positions of UAV 5,
+                  2,k                N 4 ,k
+                         E1,4 b   d
+                                cN ,k − E2,3 bd
+                                             cN ,k                         which corroborates the effectiveness of our proposed methods.
+                        "          #2           4
+                                                                              In Fig. 3(a), we compare the proposed OIT Inspired central-
+                            d
+                          h
+                          b                                                ized algorithm and distributed SMF algorithm with the bench-
+                 hd2,k = b dN 2 ,k .
+                 b
+                          hN ,k                                            mark (the standard centralized algorithm). The constrained
+                              4
+                                                                           zonotopes generated by standard centralized SMF algorithm
+  In Line 8, we take an interval hull instead of the precise               each step are presented with red solid line rectangles. The OIT
+posterior constrained zonotope for fast calculation.                       Inspired centralized zonotopes are depicted by pink dash line
+                                                                           rectangles. Zonotopic rectangles presented by our proposed
+                   V. S IMULATION R ESULTS                                 distributed algorithm is plotted by blue dotted line. At instant
+    In this section, we consider five UAVs in a 2-D plane,                 k = 5 and k = 12, the three rectangles are labeled together.
+each utilizes absolute and relative measurements to localize               The red rectangle, corresponding to the standard centralized
+                                     T
+its position. Let xi,k = [pTx,i,k , vx,i,k              T
+                                           , pTy,i,k , vy,i,k ]T , where   algorithm, is the smallest among three boxes, which implies
+  T         T
+pi,k and vi,k denote the position and velocity of UAV i at                 both OIT-Inspired method and distributed method have con-
+instant k, respectively. The parameters are listed as follows:             servativeness. To measure the conservativeness directly, we
+                              
+                               a      a12
+                                                                          consider using the diameter of sets, i.e.,
+                      Ai,k = 11                                     (28)
+                               a21 a22                                                         d(S) = sup ks1 − s2 k∞ .                       (31)
+                                                                                                        s1 ,s2 ∈S
+with a11 = a22 = 1 + ω1 (sin(k + 1)ωT − sin(kωT )),
+a12 = −a21 = − ω1 (cos(k + 1)ωT − cos(kωT )), and                             For an interval hull in 2-D plane, d(S) is the maximum edge
+         T2                                                              length, which is the twice of the infinite norm of G  b matrix.
+                                                 π
+   Bi = 2 , Ci = [1 0], Di = I2 , ω = 1, T =                       (29)    Thus in Fig. 3(b) we execute comparison of infinite norm of
+          T                                     12                         Gb matrix of the interval hull computed by three algorithms.
+                                                                                                                                                            6
+
+
+
+
+                                   (a)                                                                             (a)
+
+
+
+
+                                   (b)                                                                             (b)
+
+Fig. 2. Position estimation of UAV 5 with OIT-Inspired centralized and        Fig. 3. The comparison of standard centralized, OIT-Inspired centralized
+distributed SMF algorithm. (a)UAV 5 position estimation sketch map with       algorithm and distributed SMF constrained zonotopic algorithm. (a) The
+OIT-Inspired centralized constrained zonotopic algorithm. (b) UAV5 position   constrained zonotope generated by standard centralized SMF algorithm, OIT
+estimation with proposed distributed SMF constrained zonotopic algorithm.     Inspired centralized algorithm and distributed SMF algorithm simultaneously.
+                                                                              (b) The infinite norm of generator matrix kGk∞ corresponding to the
+                                                                              diameter of uncertain range.
+From Fig. 3(b) we can see that the curve corresponding to
+OIT-Inspired centralized method and distributed method is al-
+                                                                              generate estimation with relatively low conservativeness, and
+ways above the standard centralized method; This implies our
+                                                                              effective facing linear time varying systems.
+OIT inspired centralized algorithm sacrifice over-estimation
+                                                                                 For future work, we aim to focus on extending our frame-
+accuracy to obtain low complexity, and our distributed SMF
+                                                                              work to non-linear systems, and consider the stability of our
+method realize distributed structure with low conservativeness.
+                                                                              proposed framework.
+
+                          VI. C ONCLUSION
+                                                                                                            R EFERENCES
+   In this paper, we study the state estimation problem of a
+                                                                               [1] X. Zhang, S. Li, Z. Lin, and W. Hui, “Range based target localization
+multi-agent system with absolute and relative measurements.                        using a single mobile robot or multiple cooperative mobile robots,” in
+Firstly, we analyzed the centralized SMF framework as the                          Proc. of the 10th IEEE Int. Conf. on Control and Automation, 2013.
+benchmark. To restrict the unlimited complexity increasing                     [2] R. Olfati-Saber, “Kalman-consensus filter: Optimality, stability, and
+                                                                                   performance,” in Proc. of the 48h IEEE Conf. on Decision and Control
+in the classical constrained zonotopic algorithm, we develop                       (CDC) and 28th Chinese Control Conf., 2009, pp. 7036–7042.
+a finite-horizon version called OIT-Inspired centralized algo-                 [3] M. G. Bruno and S. S. Dias, “A bayesian interpretation of distributed
+rithm Secondly, a distributed SMFing framework is presented.                       diffusion filtering algorithms,” IEEE Signal Process. Mag., vol. 35, no. 3,
+                                                                                   pp. 118–123, 2018.
+Utilizing this framework, each agent can estimate its own state                [4] Y. Zhentao, W. Zhongqing, and L. Peng, “Multi-robot cooperative
+with local measurements and communications with neighbour-                         localization based on maximum consensus cubature kalman filter,”
+hood agents. Based on our proposed framework, a distributed                        Navigation Positioning and Timing, vol. 9, no. 1, pp. 104–110, 2022.
+                                                                               [5] D. Viegas, P. Batista, P. Oliveira, and C. Silvestre, “Discrete-time
+SMF zonotopic algorithm is developed. Finally, simulation                          distributed kalman filter design for multi-vehicle systems,” in 2017 Amer.
+results indicate that our proposed algorithms are feasible to                      Control Conf. (ACC), 2017, pp. 5538–5543.
+                                                                                7
+
+
+
+ [6] S. Liu, Z. Wang, G. Wei, and M. Li, “Distributed set-membership
+     filtering for multirate systems under the round-robin scheduling over
+     sensor networks,” IEEE Trans. Cybern., vol. 50, no. 5, pp. 1910–1920,
+     2020.
+ [7] H. Zhang, H. Yan, F. Yang, and Q. Chen, “Distributed average filtering
+     for sensor networks with sensor saturation,” IEEE Trans. Control Theory
+     Appl., pp. 887–893, 2013.
+ [8] L. Orihuela, P. Millán, S. Roshany-Yamchi, and R. A. Garcı́a, “Negoti-
+     ated distributed estimation with guaranteed performance for bandwidth-
+     limited situations,” Automatica, vol. 87, pp. 94–102, 2018.
+ [9] A. Combastel, C.;Zolghadri, “Fdi in cyber physical systems: A dis-
+     tributed zonotopic and gaussian kalman filter with bit-level reduction,”
+     IFAC papers Online, pp. 776–783, 2018.
+[10] Y. Wang, T. Alamo, V. Puig, and G. Cembrano, “A distributed set-
+     membership approach based on zonotopes for interconnected systems,”
+     in 2018 IEEE Conf. on Decision and Control (CDC). IEEE, 2018, pp.
+     668–673.
+[11] ——, “Distributed zonotopic set-membership state estimation based on
+     optimization methods with partial projection,” IFAC papers online, pp.
+     4039–4044, 2017.
+[12] W. Li, Y. Jia, and J. Du, “Distributed kalman filter for cooperative lo-
+     calization with integrated measurements,” IEEE Trans. Aerosp. Electron.
+     Syst., vol. 56, no. 4, pp. 3302–3310, 2020.
+[13] Y. C. W. Zhou, “Stability of linear set-membership filters,” 2022.
+[14] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz],
+     “Constrained zonotopes: A new tool for set-based estimation and fault
+     detection,” Automatica, 2016.
+[15] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical frame-
+     work and optimality of set-membership filtering,” IEEE Trans. Autom.
+     Control, vol. PP, no. 99, pp. 1–1, 2021.
+

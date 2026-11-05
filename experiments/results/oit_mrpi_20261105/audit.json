@@ -1,0 +1,551 @@
+{
+  "source_checks": [
+    {
+      "stage": "theory",
+      "mismatches": []
+    },
+    {
+      "stage": "static",
+      "mismatches": []
+    },
+    {
+      "stage": "estimator",
+      "mismatches": []
+    },
+    {
+      "stage": "matched",
+      "mismatches": []
+    },
+    {
+      "stage": "feasible",
+      "mismatches": []
+    },
+    {
+      "stage": "closedloop",
+      "mismatches": []
+    },
+    {
+      "stage": "montecarlo",
+      "mismatches": []
+    }
+  ],
+  "exact_reduction_counterexample": {
+    "exact_gap": "247/2500",
+    "exact_schur_witness": "F^2=(14/25)I",
+    "batch_generators": [
+      [
+        "429/625",
+        "0"
+      ],
+      [
+        "0",
+        "468/625"
+      ]
+    ],
+    "sequential_generators": [
+      [
+        "1547/2500",
+        "1799/2500"
+      ],
+      [
+        "1547/2500",
+        "-1799/2500"
+      ]
+    ],
+    "direction": [
+      "1/2",
+      "1/2"
+    ],
+    "exact_arithmetic": true
+  },
+  "direct_MC_max_constraint_violation": -0.1956889295962797,
+  "MC_reconstructed_sets": [
+    {
+      "trajectory": 0,
+      "k": 0,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 0,
+      "k": 1,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 0,
+      "k": 15,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 0,
+      "k": 30,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 1,
+      "k": 0,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 1,
+      "k": 1,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 1,
+      "k": 15,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 1,
+      "k": 30,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 37,
+      "k": 0,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 37,
+      "k": 1,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 37,
+      "k": 15,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 37,
+      "k": 30,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 128,
+      "k": 0,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 128,
+      "k": 1,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 128,
+      "k": 15,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 128,
+      "k": 30,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 9999,
+      "k": 0,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 9999,
+      "k": 1,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 9999,
+      "k": 15,
+      "true_state_contained": true
+    },
+    {
+      "trajectory": 9999,
+      "k": 30,
+      "true_state_contained": true
+    }
+  ],
+  "cost_comparisons": {
+    "fixed": {
+      "paired_reductions": [
+        0.07135117756608889,
+        0.06946242866187136,
+        0.2605735599958311,
+        0.26031013428952365,
+        0.06828832753682168,
+        0.07502771933137398,
+        0.2695118397641385,
+        0.2597265689824131,
+        0.07656257890863272,
+        0.07132210906100889,
+        0.27028928120558093,
+        0.2503632372261748
+      ],
+      "median": 0.16346290806740377,
+      "minimum": 0.06828832753682168,
+      "maximum": 0.27028928120558093
+    },
+    "known_d_only": {
+      "paired_reductions": [
+        0.00044874512623283014,
+        0.00015434572370465194,
+        4.497899275257566e-09,
+        1.3730986125892741e-08,
+        0.00010896359607925898,
+        0.00032274761089456927,
+        1.680286954020005e-08,
+        1.251515013844795e-08,
+        0.00035737047265027577,
+        0.0002068765273465223,
+        2.2404770261275075e-09,
+        4.670623443558952e-09
+      ],
+      "median": 5.449019947439959e-05,
+      "minimum": 2.2404770261275075e-09,
+      "maximum": 0.00044874512623283014
+    }
+  },
+  "closedloop_timings": {
+    "fixed_RPI": {
+      "median_ms": 0.0359000000571541,
+      "p95_ms": 0.5243449997806247,
+      "max_ms": 1.3535999996747705,
+      "fraction_le20ms": 1.0,
+      "fraction_le50ms": 1.0,
+      "QP_solves": 24,
+      "steps": 360
+    },
+    "known_d_only": {
+      "median_ms": 8.872999999994136,
+      "p95_ms": 10.916805000169916,
+      "max_ms": 13.420600000245031,
+      "fraction_le20ms": 1.0,
+      "fraction_le50ms": 1.0,
+      "QP_solves": 24,
+      "steps": 360
+    },
+    "OIT_CZ_compatible": {
+      "median_ms": 30.320899999878748,
+      "p95_ms": 37.578330000269496,
+      "max_ms": 53.42130000008183,
+      "fraction_le20ms": 0.0,
+      "fraction_le50ms": 0.9972222222222222,
+      "QP_solves": 25,
+      "steps": 360
+    }
+  },
+  "feasible_grid_counts": {
+    "ordinary_zonotope": 545,
+    "OIT_CZ_compatible": 549,
+    "fixed_RPI": 459,
+    "known_d_only": 535
+  },
+  "feasible_grid_points_per_method": 775,
+  "support_width_improvements": {
+    "position": {
+      "fixed_RPI": 0.6418066042315376,
+      "known_d_slice": 0.09635238235078925,
+      "ordinary_zonotope": 0.3173077811393955
+    },
+    "velocity": {
+      "fixed_RPI": 0.5459248871302849,
+      "known_d_slice": 0.14297927257670884,
+      "ordinary_zonotope": 0.23281836796327737
+    },
+    "input": {
+      "fixed_RPI": 0.22198092750025178,
+      "known_d_slice": 0.09635240248937382,
+      "ordinary_zonotope": 0.3173078098493568
+    }
+  },
+  "full_one_step_width_improvements": {
+    "position": {
+      "fixed_RPI": 0.6171978310054477,
+      "known_d_slice": 0.0875772124396147,
+      "ordinary_zonotope": 0.29489765645070387
+    },
+    "velocity": {
+      "fixed_RPI": 0.46177687687536817,
+      "known_d_slice": 0.1070140474680662,
+      "ordinary_zonotope": 0.17801195916138335
+    },
+    "input": {
+      "fixed_RPI": 0.1549042440049,
+      "known_d_slice": 0.0641923026982103,
+      "ordinary_zonotope": 0.22993912032855168
+    }
+  },
+  "generated_system_checks": [
+    {
+      "system_id": "random_n4_rho0.7",
+      "closedloop_radius": 0.6999999999999997,
+      "observability_rank": 4,
+      "n": 4,
+      "observability_min_singular_value": 0.0003178792457343864
+    },
+    {
+      "system_id": "random_n4_rho0.95",
+      "closedloop_radius": 0.9500000000000005,
+      "observability_rank": 4,
+      "n": 4,
+      "observability_min_singular_value": 0.002629716493505017
+    },
+    {
+      "system_id": "random_n8_rho0.7",
+      "closedloop_radius": 0.7000000000000001,
+      "observability_rank": 8,
+      "n": 8,
+      "observability_min_singular_value": 0.0010709436883652816
+    },
+    {
+      "system_id": "random_n8_rho0.95",
+      "closedloop_radius": 0.9499999999999993,
+      "observability_rank": 8,
+      "n": 8,
+      "observability_min_singular_value": 0.0029592881096062278
+    },
+    {
+      "system_id": "random_n16_rho0.7",
+      "closedloop_radius": 0.6999999999999993,
+      "observability_rank": 16,
+      "n": 16,
+      "observability_min_singular_value": 0.0006662616290640823
+    },
+    {
+      "system_id": "random_n16_rho0.95",
+      "closedloop_radius": 0.9500000000000011,
+      "observability_rank": 16,
+      "n": 16,
+      "observability_min_singular_value": 0.002048421934616451
+    },
+    {
+      "system_id": "random_n32_rho0.7",
+      "closedloop_radius": 0.7000000000000003,
+      "observability_rank": 32,
+      "n": 32,
+      "observability_min_singular_value": 0.00014400847568676707
+    },
+    {
+      "system_id": "random_n32_rho0.95",
+      "closedloop_radius": 0.9499999999999981,
+      "observability_rank": 32,
+      "n": 32,
+      "observability_min_singular_value": 0.0019470006965445297
+    }
+  ],
+  "static_certified_cases": 40,
+  "static_tight_2d4d": [
+    {
+      "system_id": "double_integrator_lqr",
+      "n": 2,
+      "rho_F": 0.2903530937324956,
+      "method": "CZ_batch_plus_certified_tail",
+      "oit_window": null,
+      "generator_count": 11,
+      "constraint_count": 0,
+      "runtime_set": 0.001472100000228238,
+      "runtime_mpc": null,
+      "runtime_total": 0.001472100000228238,
+      "hausdorff_error": 0.00010990046886205925,
+      "support_error": 0.00010989914130453415,
+      "volume_ratio": 1.0030448501742033,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation",
+      "support_signed_min": 6.930171082036862e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": 0.0,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 5.766712427270363e-10,
+      "all_polygon_facets_RPI_violation": -1.3877787807814457e-17
+    },
+    {
+      "system_id": "double_integrator_lqr",
+      "n": 2,
+      "rho_F": 0.2903530937324956,
+      "method": "rakovic_scaled",
+      "oit_window": null,
+      "generator_count": 39,
+      "constraint_count": 0,
+      "runtime_set": 0.0007778999997753999,
+      "runtime_mpc": null,
+      "runtime_total": 0.0007778999997753999,
+      "hausdorff_error": 0.0001956074360992005,
+      "support_error": 0.00019560740591893777,
+      "volume_ratio": 1.003933939170295,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation",
+      "support_signed_min": 0.00010272014708699595,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": -2.4203418283325062e-05,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 5.766712427270363e-10,
+      "all_polygon_facets_RPI_violation": -2.398703711094241e-05
+    },
+    {
+      "system_id": "double_integrator_weak",
+      "n": 2,
+      "rho_F": 0.9500000000000005,
+      "method": "rakovic_scaled",
+      "oit_window": null,
+      "generator_count": 1584,
+      "constraint_count": 0,
+      "runtime_set": 0.007360499999776948,
+      "runtime_mpc": null,
+      "runtime_total": 0.007360499999776948,
+      "hausdorff_error": 0.00026219602800906124,
+      "support_error": 0.0002621959766404558,
+      "volume_ratio": 1.0000524083072337,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation",
+      "support_signed_min": 1.1322223795240394e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": -9.521228072628674e-08,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 9.751390145906553e-10,
+      "all_polygon_facets_RPI_violation": -9.141844081739237e-08
+    },
+    {
+      "system_id": "double_integrator_weak",
+      "n": 2,
+      "rho_F": 0.9500000000000005,
+      "method": "CZ_batch_plus_certified_tail",
+      "oit_window": null,
+      "generator_count": 425,
+      "constraint_count": 0,
+      "runtime_set": 0.0028612999999495514,
+      "runtime_mpc": null,
+      "runtime_total": 0.0028612999999495514,
+      "hausdorff_error": 0.00019111143616973016,
+      "support_error": 0.00019110594032945016,
+      "volume_ratio": 1.000038824040275,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation",
+      "support_signed_min": 8.291928560111295e-06,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": 1.7763568394002505e-15,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 9.751390145906553e-10,
+      "all_polygon_facets_RPI_violation": 1.7763568394002505e-15
+    },
+    {
+      "system_id": "random_n4_rho0.7",
+      "n": 4,
+      "rho_F": 0.6999999999999997,
+      "method": "CZ_batch_plus_certified_tail",
+      "oit_window": null,
+      "generator_count": 22,
+      "constraint_count": 0,
+      "runtime_set": 0.00011279999989710632,
+      "runtime_mpc": null,
+      "runtime_total": 0.00011279999989710632,
+      "hausdorff_error": null,
+      "support_error": 0.0003572225865724754,
+      "volume_ratio": null,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation; volume/Hausdorff not evaluated; reference is implicit polytope support",
+      "support_signed_min": 5.833636981168733e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": 1.3877787807814457e-17,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 7.209431979060638e-10
+    },
+    {
+      "system_id": "random_n4_rho0.7",
+      "n": 4,
+      "rho_F": 0.6999999999999997,
+      "method": "rakovic_scaled",
+      "oit_window": null,
+      "generator_count": 195,
+      "constraint_count": 0,
+      "runtime_set": 0.00030259999994086684,
+      "runtime_mpc": null,
+      "runtime_total": 0.00030259999994086684,
+      "hausdorff_error": null,
+      "support_error": 0.00027648177365907634,
+      "volume_ratio": null,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation; volume/Hausdorff not evaluated; reference is implicit polytope support",
+      "support_signed_min": 3.640948298012231e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": -1.8844886410773407e-05,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 7.209431979060638e-10
+    },
+    {
+      "system_id": "random_n4_rho0.95",
+      "n": 4,
+      "rho_F": 0.9499999999999998,
+      "method": "rakovic_scaled",
+      "oit_window": null,
+      "generator_count": 1800,
+      "constraint_count": 0,
+      "runtime_set": 0.0027996000003440713,
+      "runtime_mpc": null,
+      "runtime_total": 0.0027996000003440713,
+      "hausdorff_error": null,
+      "support_error": 0.00034225336702253806,
+      "volume_ratio": null,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation; volume/Hausdorff not evaluated; reference is implicit polytope support",
+      "support_signed_min": 1.1112039600517931e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": -2.0029592562309517e-06,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 9.5008229515272e-10
+    },
+    {
+      "system_id": "random_n4_rho0.95",
+      "n": 4,
+      "rho_F": 0.9499999999999998,
+      "method": "CZ_batch_plus_certified_tail",
+      "oit_window": null,
+      "generator_count": 224,
+      "constraint_count": 0,
+      "runtime_set": 0.0008289999996122788,
+      "runtime_mpc": null,
+      "runtime_total": 0.0008289999996122788,
+      "hausdorff_error": null,
+      "support_error": 0.00014997336236666214,
+      "volume_ratio": null,
+      "max_constraint_violation": null,
+      "mpc_feasible": null,
+      "error_reason": "MPC fields not applicable to static set computation; volume/Hausdorff not evaluated; reference is implicit polytope support",
+      "support_signed_min": 4.9928096038494296e-05,
+      "support_tolerance_pass": true,
+      "sampled_RPI_violation": 0.0,
+      "certified_RPI": true,
+      "status": "ok",
+      "reference_tail_bound_inf": 9.5008229515272e-10
+    }
+  ],
+  "paper_noncontainment_counts": {
+    "Alice": 0,
+    "recursive_interval_reduction": 0,
+    "OIT_CZ_window_8": 0,
+    "literal_OIT_8": 0,
+    "true_prior_full_history": 0,
+    "literal_OIT_2": 0,
+    "David": 0,
+    "OIT_CZ_window_2": 0,
+    "literal_OIT_4": 0,
+    "Bob": 0,
+    "OIT_CZ_window_4": 0
+  },
+  "execution_notes": [
+    "Initial Monte Carlo shortcut implementation stopped on 140 fixed-envelope-ineligible initial plans.",
+    "It was corrected to evaluate the actual adaptive branch without altering any initial state or noise seed.",
+    "All 140 actual adaptive checks still admitted the unconstrained optimum; no MC QP solves occurred.",
+    "Final suite rerun once after adding known-d control and homothetic CZ synthesis to lock numerical source hashes.",
+    "No numerical data were filtered by performance; all coarse accuracy failures retained."
+  ]
+}

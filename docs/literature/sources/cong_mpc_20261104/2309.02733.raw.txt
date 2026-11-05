@@ -1,0 +1,1697 @@
+arXiv:2309.02733v1
+[eess.SY]
+6
+Sep
+2023 1
+Existence and Completeness of Bounded Disturbance
+Observers: A Set-Membership Viewpoint
+Yudong Li, Yirui Cong, Jiuxiang Dong
+Abstract—This paper investigates the boundedness of the Dis-
+turbance Observer (DO) for linear discrete-time systems. In con-
+trast to previous studies that focus on analyzing and/or designing
+observer gains, our analysis and synthesis approach is based on a
+set-membership viewpoint. From this viewpoint, a necessary and
+sufficient existence condition of bounded DOs is first established,
+which can be easily verified. Furthermore, a set-membership filter-
+based DO is developed, and its completeness is proved; thus, our
+proposed DO is bounded if and only if bounded DOs exist. We
+also prove that the proposed DO has the capability to achieve the
+worst-case optimality, which can provide a benchmark for the
+design of DOs. Finally, numerical simulations are performed to
+corroborate the effectiveness of the theoretical results.
+Index Terms—Disturbance observer/estimation, boundedness,
+set-membership filter, worst-case optimality, uncertain variables.
+I. INTRODUCTION
+A. Motivation and Related Work
+Disturbance observer (DO) is an effective method to es-
+timate external disturbances and unmodeled system dynam-
+ics. It is widely applied to modern control theory [1] and
+has a significant impact on disturbance attenuation [2], fault-
+detection [3], robust control [4], cyber-physical systems [5], etc.
+When designing a DO, one should guarantee the boundedness
+of the estimation error. Otherwise, the estimated disturbance
+can hardly provide useful information on the actual disturbance.
+For continuous-time systems, the DOs are capable of cap-
+turing the actual disturbance, i.e., the estimation error can not
+only be bounded, but also converge to zero. For example, [6]
+provided an observer framework that can realize asymptotic
+estimation of state, fault, and disturbance estimation under a
+Linear Matrix Inequality (LMI) condition; in [7], an adaptive
+sliding mode disturbance observer was designed to realize the
+disturbance estimation in finite time.
+For discrete-time systems, such convergence is not preserved
+in general, due to the influence of the sampling period.1
+For
+instance, [8] designed a proportional integral observer; the
+estimation error and the accumulated disturbance uncertainty
+(over each time step) had the same order of O(h2
+), where h is
+Y. Li and J. Dong are with the State Key Laboratory of Synthetical
+Automation of Process Industries, Northeastern University, China, also with
+the College of Information Science and Engineering, Northeastern University,
+China, and also with the Key Laboratory of Vibration and Control of Aero-
+Propulsion Systems Ministry of Education of China, Northeastern University,
+China (email: 2210325@stu.neu.edu.cn; dongjiuxiang@ise.neu.edu.cn).
+Y. Cong is with the College of Intelligence Science and Technology, National
+University of Defense Technology, China (congyirui11@nudt.edu.cn).
+1For discrete-time systems, the disturbance uncertainty is accumulated over
+each time step, which cannot be eliminated instantly since the measurement
+equation usually does not contain the disturbance. But for continuous-time
+systems, they are equivalent to having infinitesimal sampling periods; thus, the
+uncertainty is not accumulated and can be eventually eliminated.
+the sampling period. Similarly, [9] showed that the estimation
+error and the accumulated disturbance uncertainty shared the
+same order of O(h) for the proposed DO.
+To determine whether a DO is bounded (i.e., with bounded
+estimation error), it is essential to identify the conditions under
+which the boundedness can be achieved. In the literature,
+seeking boundedness conditions can be classified into two main
+types, based on different classes of DOs:
+• Joint state-disturbance estimation class: Since a dis-
+turbance can be viewed as a part of the augmented
+state, the disturbance is usually estimated jointly with the
+system state [10]. Recent studies [11] and [12] provided
+joint estimation methods with corresponding boundedness
+conditions. More specifically, in [11], the state and the
+disturbance were simultaneously estimated based on a
+proposed unknown-input-observer architecture; it is shown
+that the estimation error is bounded when the system is
+detectable and satisfies an easy-to-verify LMI condition.
+In [12], an iterative proportional-integral observer was first
+designed to give an interval estimation for the state and
+the disturbance, with the observability and a provided LMI
+condition to guarantee the boundedness of the estimation
+error. Note that the joint estimation can be regarded as a
+full-order DO, where the whole system state is involved.
+• State Functional Observer (SFO) class: With the SFO
+theory [13], it is possible to estimate the disturbance only
+using part of the system state; thus, the boundedness
+condition is generally less conservative than that of the
+joint estimation which requires the full state. In [9], the
+authors improved the results in their early work [14]
+and proposed an SFO-based DO with the minimal order;
+the established existence condition of bounded DOs was
+closely associated with a static output feedback problem.
+Then, [15] further developed the existence condition in [9],
+and an easily checked necessary and sufficient existence
+condition was derived, given any state functional matrix
+related to estimating the disturbance. In [16], an iterative
+procedure for input/disturbance functional observer was
+proposed, where the necessary and sufficient existence
+condition was provided. Nevertheless, within the SFO
+class, the existence condition of bounded DOs relies on
+the prerequisite of carefully designing a state functional
+matrix whose existence remains an open problem.
+To the best of our knowledge, the necessary and sufficient
+condition under which bounded DOs exist is still unknown; as a
+result, the ability of the existing DOs to ensure a bounded esti-
+mation error is inadequately understood. Therefore, it is crucial
+to establish the necessary and sufficient existence condition of
+2
+bounded DOs and develop a complete algorithm to guarantee
+boundedness whenever the condition is satisfied.
+B. Our Contributions
+From a set-membership viewpoint, this article first estab-
+lishes a necessary and sufficient existence condition of bounded
+DOs for linear discrete-time systems, and designs a complete
+algorithm to achieve the boundedness. The main contributions
+are as follows:
+• By introducing the uncertain variable [17], the bounded
+DO is rigorously formulated in a set-membership manner.
+Then, we put forward an explicit necessary and sufficient
+existence condition of bounded DOs. With this condition,
+one can easily determine whether bounded DOs exist.
+• We propose an SMF-based DO, and its completeness is
+proved. Consequently, our proposed DO is bounded if
+and only if bounded DOs exist (easily to check using
+the existence condition). Furthermore, we prove that the
+proposed DO is able to achieve the worst-case optimality,
+thereby providing a benchmark for the design of DOs.
+C. Notation and Preliminaries
+Throughout this paper, we use k·k to represent the Euclidean
+norm (of a vector) or the spectral norm (of a matrix), and
+k·k∞ to represent the infinite norm. For a sample space Ω,
+a measurable function x : Ω → X from sample space Ω to
+measurable set X, expressed by upright letters, is called an
+uncertain variable [17], [18], with its range JxK defined by:
+JxK := {x(ω): ω ∈ Ω} . (1)
+D(S) = sups,s′∈Sk
+ks − s′
+k stands for the diameter of S. For
+multiple uncertain variables with consecutive indices, we define
+xk1:k2 = xk1 , . . . , xk2 . In×m and 0n×m stands for unit matrix
+and null matrix respectively with compatible dimensions. Given
+two sets S1 and S1 in a Euclidean space, the operation ⊕ stands
+for the Minkowski sum of S1 and S1. The operation ⊗ stands
+for Kronecker product. The kernel is denoted by ker(A). R(A)
+stand for the row space of matrix A. A⊤
+stands for the transpose
+of A. The interval hull of a bounded set s = (s(1)
+, . . . s(n)
+) ∈ S
+is IH(S) =
+Qn
+i=1 [s
+−
+(i)
+, s̄(i)
+], where s
+−
+(i)
+= infs(i) {s ∈ S} and
+s̄(i)
+= sups(i) {s ∈ S}. A set Sk is uniformly bounded (w.r.t.
+k ∈ K) if there exists a ¯
+d > 0 such that D(Sk) ⩽ ¯
+d for all
+k ∈ K.
+II. SYSTEM MODEL AND PROBLEM DESCRIPTION
+Consider a class of linear discrete-time systems at time k ∈
+N0 modeled by uncertain variables as follows:
+xk+1 = Φxk + Γuk + Gdk, (2)
+yk = Ξxk, (3)
+where (2) and (3) are called the state and measurement equa-
+tions, respectively, with Φ ∈ Rn×n
+, Γ ∈ Rn×p
+, G ∈ Rn×q
+and Ξ ∈ Rl×n
+. The system state is xk (with its realization
+xk ∈ JxkK ⊆ Rn
+); the disturbance is denoted by dk (whose
+realization is dk ∈ JdkK ⊆ Rq
+); uk ∈ Rp
+is the control input;
+yk is the measurement (with its realization yk ∈ JykK ⊆ Rl
+).
+In (2), the disturbance is generated by the following exoge-
+nous system [15]:
+dk+1 = dk + ∆dk, (4)
+where ∆dk (with its realization ∆dk ∈ J∆dkK ⊆ Rq
+) satisfies
+D(J∆dkK) ⩽ D∆, with D∆ ∈ [0, ∞). The initial value of the
+disturbance is arbitrary, i.e., Jd0K = Rq
+. Besides, we consider
+the following commonly used assumptions.
+Assumption 1 (Unrelatedness [19]). ∀k ∈ N0, x0, ∆d0:k are
+unrelated.
+Assumption 2 ([9]). Unknown input matrix G has full column-
+rank, i.e., Rank(G) = q.
+For the system described by (2) and (3), the distur-
+bance observer (DO) is to estimate the disturbance dk based
+on all available control inputs and measurements up to k,
+i.e., u0:k−1, y0:k. Mathematically, the estimation of distur-
+bance is ˆ
+dk(u0:k−1, y0:k) at k ∈ N0, and we write it as
+ˆ
+dk(u0:k−1, y0:k) = ˆ
+dk for conciseness. A primary goal of DO
+is to make sure the estimation error (of the disturbance) ˆ
+dk −dk
+does not go unbounded as time elapses [9], [15]. To support
+the theoretical results in the rest of this paper, the boundedness
+of the estimation error is rigorously defined in an asymptotic
+manner as follows.
+Definition 1 (Boundedness Of Disturbance Observer). A DO
+is bounded if the estimation error ˆ
+dk − dk satisfies
+lim
+k→∞
+sup
+dk∈JdkK+
+ˆ
+dk − dk < ∞, (5)
+where JdkK+
+:= Jdk|u0:k−1, y0:kK.
+With Definition 1, in this work, we focus on (i) analyzing
+when a bounded DO exists (see Problem 1) and (ii) proposing
+a bounded DO under the existence condition given by (i) (see
+Problem 2).
+Problem 1 (Existence Condition). Given the system described
+by (2) and (3), what is the necessary and sufficient condition
+for the existence of bounded DOs?
+Problem 2 (Complete Algorithm). How to design an efficient
+DO framework such that it is bounded if and only if the
+existence condition in Problem 1 holds?
+To solve Problem 1, the necessary and sufficient existence
+condition of the bounded DOs is determined explicitly in
+Section III-A, and it is compared with related work in Sec-
+tion III-B. To tackle Problem 2, in Section IV, a complete
+algorithm is proposed based on SMF, with proved worst-
+case optimality. Finally, a simulation case subjected to the
+unbounded disturbance in Section V is performed to validate
+the theoretical results in Section III and Section IV.
+III. ANALYSIS OF THE EXISTENCE CONDITION
+In this section, firstly, we establish a necessary and sufficient
+existence condition of a bounded DO in Section III-A (see
+Theorem 1), which solves Problem 1. Secondly, in Section III-B
+comparisons between our provided condition and the state-of-
+the-art results are made.
+3
+A. Existence Condition Of Bounded Disturbance Observer
+To begin with, we provide Lemma 1 to show that the
+existence of bounded DOs is equivalent to the boundedness
+of JdkK+
+.
+Lemma 1. A bounded DO exists if and only if JdkK+
+is
+uniformly bounded (w.r.t. k ∈ N0).
+Proof: Sufficiency: If JdkK+
+is uniformly bounded, then ∃
+ˆ
+dk ∈ JdkK+
+such that
+lim
+k→∞
+sup
+dk∈JdkK+
+ˆ
+dk − dk ⩽ D(JdkK+
+) < ∞. (6)
+Necessity: By the contrapositive, if JdkK+
+is unbounded, then
+limk→∞ D(JdkK+
+) = ∞ and
+sup
+d1
+k,d2
+k∈JdkK+
+d1
+k − d2
+k
+= sup
+d1
+k,d2
+k∈JdkK+
+d1
+k − d2
+k + ˆ
+dk − ˆ
+dk
+⩽ sup
+d1
+k
+∈JdkK+
+d1
+k − ˆ
+dk + sup
+d2
+k
+∈JdkK+
+d2
+k − ˆ
+dk
+⩽ 2 sup
+dk∈JdkK+
+dk − ˆ
+dk .
+(7)
+Therefore, ∀ ˆ
+dk one has that
+lim
+k→∞
+sup
+dk∈JdkK+
+ˆ
+dk − dk = ∞, (8)
+which means bounded DOs do not exist.
+According to Lemma 1, there are two issues (i. determining
+the actual disturbance range JdkK+
+; ii. proving the boundedness
+of JdkK+
+) for the establishment of the existence condition of
+bounded DOs (see the proof of Theorem 1 in Appendix A). To
+better support the establishment of Theorem 1, we introduce
+the augmented form of (2)-(4):
+zk+1 = Azk + Γ̄uk + ∆d̄k, (9)
+yk = Czk, (10)
+where zk = [x⊤
+k , d⊤
+k ]
+⊤
+combines system states with distur-
+bance. Besides, the system parameters and ∆d̄k are as follows:
+A =
+
+Φ G
+0q×n Iq×q
+
+, Γ̄ =
+
+Γ
+0q×p
+
+,
+C =
+
+Ξ 0l×q
+
+, ∆d̄k =
+
+0n×q
+Iq×q
+
+∆dk.
+(11)
+Then, applying observability decomposition to (9)-(10), we
+have
+z̃k+1 = Ãz̃k + Γ̃uk + B̃∆dk, (12)
+yk = C̃z̃k, (13)
+where
+Ã = T AT −1
+=
+
+Ão 0
+Ã21 Ãō
+
+, B̃ =
+
+B̃o
+B̃ō
+
+= T
+
+0n×q
+Iq×q
+
+Γ̃ =
+
+Γ̃⊤
+o Γ̃⊤
+ō
+⊤
+= T Γ̄, C̃ =
+
+C̃o 0
+
+= CT −1
+;
+(14)
+z̃k = [ (z̃o
+k)
+⊤
+(z̃ō
+k)
+⊤
+]⊤
+= T zk, and T =
+
+To
+⊤
+Tō
+⊤
+⊤
+is
+the transformation matrix, with To ∈ RNo×(n+q)
+, and Tō ∈
+RNō×(n+q)
+; Now, we give Theorem 1 which is the necessary
+and sufficient existence condition of a bounded DO based on
+(9) and (10).
+Theorem 1 (Existence condition of bounded DO). There exists
+a bounded DO if and only if the system satisfies:
+rank(
+
+O ¯
+IOG
+
+) = rank(O) + q, (15)
+where
+O =
+
+
+
+
+
+Ξ
+ΞΦ
+.
+.
+.
+ΞΦn−1
+
+
+
+
+
+, ¯
+I =
+
+
+
+
+
+0 0 · · · 0
+1 0 · · · 0
+.
+.
+.
+...
+...
+.
+.
+.
+1 · · · 1 0
+
+
+
+
+
+⊗ Il×l. (16)
+Proof: See Appendix A.
+Remark 1. From Theorem 1, we can clearly see that a bounded
+DO exists if and only if No = no +q, where no is the dimension
+of the observable subsystem of (2).
+Moreover, the following corollary can be derived from The-
+orem 1.
+Corollary 1. Bounded DOs do not exist for the system de-
+scribed by (2) and (3) if no < q.
+Proof: By Theorem 1, a bounded DO exists if and only
+if (15) is satisfied. It implies that the system should satisfy the
+necessary condition
+rank(¯
+IOG) ⩾ q. (17)
+Besides, since
+rank(¯
+IOG) ⩽ min (rank(¯
+I), rank(O), rank(G)) = no, (18)
+we must have no ⩾ q to satisfy (17). Therefore, for any system
+with no < q, bounded DOs do not exist.
+Remark 2. From Corollary 1, we can see that if bounded DOs
+exist, the dimension of the observable subsystem of (2) should
+be larger than the dimension of disturbance. Thus, given a
+control system, its observable states determine the maximum
+number of disturbances that can be estimated with bounded
+error.
+The existence condition provided by Theorem 1 is explicit
+and can be easily verified based on the parameters of the
+original system. Thus, Problem 1 has been solved. In the
+following subsection, we compare our necessary and sufficient
+condition (in Theorem 1) with the existing results.
+B. Comparison To Existing Results
+In this subsection, we compare the existence condition in
+Theorem 1 and the results in [8], [9] and [15].
+In [8], the authors provide an existence condition for si-
+multaneously estimating the system state and the disturbance,
+i.e., the pair (A, C) is observable. This condition turns out
+to be a sufficient one for the existence of bounded DOs.
+More specifically, since the pair (A,C) is observable, we have
+rank([O ¯
+IOG]) = n + q, which implies (15) is satisfied, but
+the converse is not necessarily true.
+4
+References [9] and [15] provide different existence condi-
+tions for their designed DOs, respectively. The results in [15]
+show that its existence condition is less conservative than that
+in [9]. This is because the DO proposed in [15], called SFO-
+based DO, is a generalized version of that in [9]. Therefore, we
+only discuss the relationship between our results and the results
+in [15]. The existence condition of SFO-based DOs in [15] is
+related to a state function (i.e. z = Lx) that is designed by a
+search method (i.e. the selection of L starts with a low order in
+the complement space of C and then increases the order until
+the existence condition are satisfied), while the existence of L
+has not been proved. This means the existence condition in [15]
+is not necessary and sufficient for the existence of bounded
+DOs. Besides, even though L exists, the condition provided
+in [15] is not explicit and hard to verify; this is because the
+existence condition depends not only on the system parameters
+but also on the specific form of L to be designed. In contrast,
+our established existence condition is a necessary and sufficient
+one, which is only related to the system parameters, and is easy
+to verify.
+IV. BOUNDED AND OPTIMAL DISTURBANCE OBSERVER: A
+SET-MEMBERSHIP FILTER-BASED METHOD
+In this section, we focus on Problem 2. More specifically,
+a reduced-order SMF-based DO (SMFDO) is proposed in
+Section IV-A, which is proved to be bounded in Section IV-B.
+Furthermore, we prove the optimality of the proposed SMFDO
+in Section IV-C.
+A. Set-Membership Filter-Based Disturbance Observer
+Our proposed SMFDO is based on the Constrained Zonotope
+(CZ). To start with, we provide the definition of CZ as follows.
+Definition 2 ([19]). A set Z ⊆ Rn
+is a (extended) constrained
+zonotope if there exists a quintuple (Ĝ, ĉ, Â, b̂, ĥ) ∈ Rn×ng
+×
+Rn
+× Rnc×ng
+× Rnc
+× [0, ∞]ng
+such that Z is expressed by
+
+
+
+Ĝξ + ĉ : Âξ = b̂, ξ ∈
+ng
+Y
+j=1
+[−ĥ(j)
+, ĥ(j)
+]
+
+
+
+=: Z(Ĝ, ĉ, Â, b̂, ĥ),
+(19)
+where ĥ(j)
+is the j-th component of ĥ.
+Remark 3. The reason why we use CZ is two-fold: it is suitable
+for most of the disturbance models, including the classical one2
+in [9] and [15]; for any bounded disturbance models, we can
+always find a CZ as an outer bound of J∆dkK.
+Then, we provide the reduced-order SMFDO in Algorithm 1,
+and the line-by-line explanation as follows.
+Line 1 initializes the transformation matrix, the system
+parameters, the initial state range, and the initial disturbance
+range. The choice of the filtering interval δ is supposed to
+satisfy δ ⩾ µo − 1, where µo is the observability index of the
+pair (A, C). Larger δ brings more accurate estimation while
+increasing the computational complexity.
+2According to the previous work [9] and [15], ∆dk can be modeled by the
+following componentwise range ∆di
+k+1 = di
+k+1 − di
+k ⩽ ¯
+d, with ¯
+d a small
+positive value.
+Algorithm 1 SMF-based Disturbance Observer
+1: Initialization: Transformation matrix T; system parameters Ão, B̃o, Γ̃o
+and C̃o; initial disturbance range Jd0K = Rq; initial state range Jx0K ⊆
+Rn; filtering interval δ > µ − 1.
+2: Z−
+0 = Z(Ĝ−
+0 , ĉ−
+0 , Â−
+0 , b̂−
+0 , ĥ−
+0 ) ⊇ To(Jx0K × Jd0K);
+3: Solve the linear map P from P To =
+
+0q×n Iq×q
+
+;
+4: loop
+5: if k < δ then
+6: if k > 0 then
+7: Z∆
+k = Z(Ĝ∆
+k , ĉ∆
+k , Â∆
+k , b̂∆
+k , ĥ∆
+k ) ⊇ J∆dkK;
+8: Z−
+k = Z(Ĝ−
+k , ĉ−
+k , Â−
+k , b̂−
+k , ĥ−
+k ) with
+Ĝ−
+k =
+h
+ÃoĜk−1 B̃oĜ∆
+k−1
+i
+,
+c−
+k = Ãoĉk−1 + ĉ∆
+k−1 + Γ̃ouk−1,
+Â−
+k =
+"
+Âk−1 0
+0 Â∆
+k−1
+#
+, b̂−
+k =
+"
+b̂k−1
+b̂∆
+k−1
+#
+, ĥ−
+k =
+"
+ĥk−1
+ĥ∆
+k−1
+#
+.
+(20)
+9: end if
+10: Zk = Z(Ĝk, ĉk, Âk, b̂k, b̂k, ĥk), with
+Ĝk = Ĝ−
+k , ĉk = ĉ−
+k , ĥk = ĥ−
+k
+Âk =
+
+Â−
+k
+C̃oĜ−
+k
+
+, bk =
+
+b̂−
+k
+yk − C̃oĉ−
+k
+
+;
+(21)
+11: else
+12: Zk = Z(Ĝk, ĉk, Âk, b̂k, b̂k, ĥk), with the CZ parameter defined
+by (24);
+13: end if
+14: Zd
+k = P Zk;
+15: ˆ
+dk = center(IH(Zd
+k ));
+16: end loop
+Line 2 gives the estimate Z−
+0 , which is the observable part
+of the Cartesian product of the initial system state range and
+disturbance state range. Line 3 obtains the linear map P by
+solving PTo =
+
+0q×n Iq×q
+
+. Lines 5-11 give the estimate
+Zk when k < δ. Specifically, line 7 chooses a CZ set Z∆
+k that
+can outer bound J∆dkK. Line 8 gives prior estimate Z−
+k , where
+the quintuple (Ĝk, ĉk, Âk, b̂k, ĥk) is defined by (20). Line 10
+provides the posterior estimate Zk, with the CZ parameter
+determined by (21). Different from Lines 5-11, Lines 12-13
+provide the posterior estimate Zk when k ⩾ δ, where the
+quintuple of Zk is defined by (24), with
+b̂y
+(l) = yk−δ+1+l−C̃o[Ãl+1
+o ĉk−δ+
+l
+X
+i=0
+Ãi
+o(ĉ∆
+k−δ+i + Γ̃ouk−δ+i)]
+for 0 ⩽ l ⩽ δ. Specifically, the quintuple in (24) is derived by
+recursively using (20) and (21) δ times, and we let the interval
+hull of Zk−δ be the initial posterior range of the recursive
+process. Line 14 obtains the estimate Zd
+k by applying linear
+map P on Zk. Line 15 chooses the center of the interval hull
+of Zd
+k as the estimate of disturbance.
+Remark 4. From the Algorithm 1, we know that the estimation
+of disturbance is only related to the observable part of the
+system (9) and (10), which is illustrated in proof of Theorem 1
+[see (42) in Appendix A]. This implies that SMFDO is a
+reduced-order DO compared to other full-order DOs.
+B. Boundedness of SMFDO
+In this subsection, we focus on the boundedness of Algo-
+rithm 1, which is illustrated by the following theorem.
+5
+Theorem 2. The estimate ˆ
+dk derived from Algorithm 1 satis-
+fies (5), i.e., the proposed DO is bounded, if the system satisfies
+the existence condition in Theorem 1.
+Proof: See Appendix B.
+From Theorem 2, Algorithm 1 has a bounded disturbance
+estimation error for k ∈ N0, which guarantees the boundedness
+of Algorithm 1.
+C. Optimality of SMFDO
+In this subsection, we prove that the proposed bounded
+DO framework is worst-case optimal. Firstly, the optimality
+is defined as follows.
+Definition 3. An estimated disturbance ˆ
+dk ∈ Rq
+is optimal for
+system (2) and (3), if for any ˆ
+d′
+k ∈ Rq
+, the following holds
+sup
+dk∈JdkK+
+k ˆ
+dk − dkk ≤ sup
+dk∈JdkK+
+k ˆ
+d′
+k − dkk. (22)
+Definition 3 gives the optimality of disturbance estimation in
+a worst-case manner: since the real disturbance can be any point
+in JdkK+
+, the selected optimal estimate ˆ
+dk should minimize the
+worst-case (maximum) estimation error. The following theorem
+tells when Algorithm 1 is optimal.
+Theorem 3. The disturbance estimation ˆ
+dk derived from Al-
+gorithm 1 is optimal if k < δ and
+Z−
+0 = To(Jx0K × Jd0K), Z∆
+k = J∆dkK. (23)
+Proof: See Appendix C.
+Theorem 3 implies that the uncertainties should be con-
+strained zonotopes such that (23) holds (see also Remark 3).
+In addition, k should be less than δ, which indicates: for small
+k, the optimality is achieved; for large k, the filtering interval
+δ should be large enough3
+. Therefore, Algorithm 1 has the
+capability to achieve the worst-case optimality.
+V. NUMERICAL EXAMPLES
+In this section, we consider a simulation case subjected to
+unbounded disturbance to verify the boundedness and optimal-
+ity of SMFDO. To better compare with previous results, we
+take the system in [8] as an example, which is also used in [9]
+and [15]. The system parameters are as follows.
+Φ =
+
+
+0.9630 0.0181 0.0187
+0.1808 0.8195 -0.0514
+-0.1116 0.0344 0.9586
+
+, Γ = 03×1,
+G =
+
+
+0.0996 0.0213
+0.0050 0.1277
+0.1510 0.0406
+
+, Ξ =
+
+1 0 −1
+−1 1 1
+
+.
+(25)
+The disturbance is generated by the following exosystem:
+dk+1 = dk + ∆dk, (26)
+where ∆dk modeled by the following componentwise range
+∆di
+k = di
+k+1 − di
+k ⩽ 1. (27)
+3It implies the computing power should be strong enough to guarantee
+the worst-case optimality. But it should be noted that even for small δ, the
+estimation error of Algorithm 1 with such δ is very close to that of the worst-
+case optimal one [see Fig. 1(b)].
+We compare the performance of the present SMFDO with
+SFODO in [15]. In terms of parameter design, for SMFDO,
+J∆dkK is outer bounded by Z(Ĝ∆
+, ĉ∆
+, Â∆
+, b̂∆
+, ĥ∆
+), with
+Ĝ∆
+= I2×2, ĉ∆
+=
+
+0
+0
+
+, Â∆
+= [], b̂∆
+= [], ĥ∆
+=
+
+1
+1
+
+. (28)
+For SFODO, we use the optimal parameters designed by [8] to
+realize the SFODO, where the equivalence was proved in [15].
+Fig. 1(a) shows the estimation performance of SMFDO for
+each entry of dk; Fig. 1(b) compares the estimation accuracy of
+SFODO (under different δ) and SMFDO. We can see that the
+proposed SMFDO has a bounded estimation error, and SMFDO
+improves the estimation accuracy over 40%, which verifies
+the optimality of the SMFDO. Furthermore, the estimation
+accuracy of our proposed SMFDO does not experience a
+significant improvement from δ = 3 to δ = 20 (particularly
+from δ = 10 to δ = 20), which implies that even with small δ,
+the SMFDO is very close to optimal.
+VI. CONCLUSION
+In this paper, the boundedness of DOs has been studied
+for linear discrete-time systems. By analyzing through a set-
+membership viewpoint, a necessary and sufficient existence
+condition for bounded DO has been proposed. With this
+existence condition, one can easily check whether bounded
+DOs exist. Using the CZ representation, we have designed the
+SMFDO with proved completeness and worst-case optimality.
+Monte Carlo simulations have been employed to validate the
+effectiveness of the theoretical results.
+APPENDIX A
+PROOF OF THEOREM 1
+To start with, we provide the following lemmas to support
+our proof.
+Lemma 2 (Boundedness of estimation [19]). For the system
+described by (9) and (10), if the pair (A, C) is observable, then
+lim
+k→∞
+D(JzkK+
+) < ∞, (29)
+where JzkK+
+:= Jzk|u0:k−1, y0:kK.
+Lemma 3. There exists a solution for the system of linear
+equations AX = B if and only if:
+rank(A) = rank(
+
+A B
+
+). (30)
+Lemma 4. For any x1 and x2 satisfying D(Jx1K) = ∞ and
+D(Jx2K) < ∞, the following property holds:
+D(Jx1 + x2K) = ∞. (31)
+Proof: Since D(Jx1K) = ∞, one has that ∀D̄ > 0,
+∃ω1, ω2 ∈ Ω such that
+kx1(ω1) − x1(ω2)k ⩾ D̄. (32)
+Let D(Jx2K) = D2, and then we have
+D(Jx1 + x2K) ⩾ kx1(ω1) + x2(ω2) − x1(ω2) − x2(ω1)k
+⩾ kx1(ω1) − x1(ω2)k + kx2(ω1) − x2(ω2)k
+⩾ D̄ − D2.
+(33)
+6
+Ĝk =
+
+Ãδ
+o Ãδ−1
+o B̃oĜ∆
+k−δ Ãδ−2
+o B̃oĜ∆
+k−δ+1 · · · B̃oĜ∆
+k−1
+
+, ĉk = Ãδ
+oĉk−δ +
+δ−1
+X
+i=0
+Ãi
+o(ĉ∆
+k−i−1 + Γ̃ouk−i−1),
+Âk =
+
+
+
+
+
+
+
+
+
+
+
+
+0 Â∆
+k−δ 0 · · · 0
+C̃oÃo C̃oB̃oĜ∆
+k−δ 0 · · · 0
+0 0 Â∆
+k−δ+1 · · · 0
+C̃oÃ2
+o C̃oÃoB̃oĜ∆
+k−δ C̃oB̃oĜ∆
+k−δ+1 · · · 0
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+0 0 0 · · · Â∆
+k−1
+C̃oÃδ
+o C̃oÃδ−1
+o B̃oĜ∆
+k−δ C̃oÃδ−2
+o B̃oĜ∆
+k−δ+1 · · · C̃oB̃oĜ∆
+k−1
+
+
+
+
+
+
+
+
+
+
+
+
+, b̂k =
+
+
+
+
+
+
+
+
+
+
+
+b̂∆
+k−δ
+b̂y
+(0)
+b̂∆
+k−δ+1
+b̂y
+(1)
+.
+.
+.
+b̂y
+(δ)
+
+
+
+
+
+
+
+
+
+
+
+, ĥk =
+
+
+
+
+
+
+
+
+ĥk−δ
+ĥ∆
+k−δ
+.
+.
+.
+ĥk
+ĥ∆
+k
+
+
+
+
+
+
+
+
+(24)
+10 20 30 40 50 60 70 80 90 100
+k
+-20
+-10
+0
+10
+d
+k
+(1)
+Estimation
+Real disturbance
+10 20 30 40 50 60 70 80 90 100
+k
+-10
+-5
+0
+5
+d
+k
+(2)
+(a)
+10 20 30 40 50 60 70 80 90 100
+k
+0
+2
+4
+6
+8
+10
+12
+Infinity
+norm
+in
+worst
+case
+SFODO
+=3
+=10
+=20
+(b)
+Fig. 1. Performance of the SMFDO: (a) the estimated disturbance given by
+SMFDO and the real disturbance over k ∈ [0, 100]; (b) comparison (w.r.t.
+the infinite norm of estimation error, i.e., k ˆ
+dk − dkk∞) between SFODO and
+SMFDO under different δ using 5000 Monte Carlo simulation runs.
+As D̄ is arbitrary, we get D(Jx1 + x2K) = ∞.
+Recall that there are two issues for establishing the existence
+condition of bounded DOs. According to the structure of the
+augmented system described by (9) and (10), it is clear that
+the relationship between JdkK+
+and JzkK+
+can be expressed
+by (issue i)
+
+0n×q Iq×q
+
+JzkK+
+= JdkK+
+. (34)
+Meanwhile, (34) imples that the boundedness of JdkK+
+is
+related to the boundedness of JzkK+
+(issue ii). The above
+analysis provides the following two steps to complete the proof,
+corresponding to the sufficiency and necessity of Theorem 1
+respectively.
+Step 1 (Sufficiency): If (15) is satisfied, then one has4
+rank
+
+O ¯
+IOG
+
+= rank(
+
+O ¯
+IOG
+0 Iq×q
+
+), (35)
+which is equivalent to
+rank(
+
+O⊤
+0
+(¯
+IOG)
+⊤
+Iq×q
+
+) = rank(
+
+O⊤
+(¯
+IOG)
+⊤
+
+). (36)
+According to Lemma 3 and (36), there exists a P′
+∈ Rq×(l×n)
+such that 
+O⊤
+(¯
+IOG)
+⊤
+
+P′⊤
+=
+
+0
+Iq×q
+
+. (37)
+Transposing both sides of (37), we have
+P′
+
+O ¯
+IOG
+
+=
+
+0q×n Iq×q
+
+. (38)
+According to (16), we establish the observability matrix of the
+augmented system (9) as follows:
+Oaug =
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ξ 0
+ΞΦ ΞG
+ΞΦ2
+ΞΦG + ΞG
+ΞΦ3
+ΞΦ2
+G + ΞΦG + ΞG
+.
+.
+.
+.
+.
+.
+ΞΦn−1
+n−2
+P
+i=0
+ΞΦn−2
+G
+
+
+
+
+
+
+
+
+
+
+
+
+
+=
+
+O ¯
+IOG
+
+.
+(39)
+Let
+To = TcOaug, (40)
+where Tc ∈ Ro′
+×(l×n)
+stands for the linear map that chooses
+o′
+linearly independent row vectors from Oaug. Since o′
+=
+rank(Oaug), there must exists a linear map Tc
+′
+∈ R(l×n)×o′
+such that
+Tc
+′
+To = Oaug. (41)
+4According to (15), it is clear that ¯
+IOG has full column rank, with
+rank(¯
+IOG) = q. Then, we can readily construct the matrix
+
+O ¯
+IOG
+0 Iq×q
+
+such that (35) is satisfied.
+7
+Let P = P′
+Tc
+′
+, then the following equation can be obtained:
+JdkK+ (34)
+=
+
+0q×n Iq×q
+
+JzkK+ (38)
+= P′
+OaugJzkK+
+(41)
+= P′
+Tc
+′
+ToJzkK+
+= PJz̃o
+kK+
+.
+(42)
+Then, according to (42), we have the following equation
+lim
+k→∞
+sup
+ˆ
+dk,dk∈JdkK+
+ˆ
+dk − dk = lim
+k→∞
+sup
+ˆ
+z̃o
+k,z̃o
+k∈Jz̃o
+kK+
+P ˆ
+z̃o
+k − Pz̃o
+k
+⩽ lim
+k→∞
+kPk sup
+ˆ
+z̃o
+k,z̃o
+k∈Jz̃o
+kK+
+ˆ
+z̃o
+k − z̃o
+k < ∞,
+which gives the uniform boundedness of JdkK+
+.
+Step 2 (Necessity): By the contrapositive, if (15) is not
+satisfied, from Lemma 3, P′
+in (38) does not exist, which
+means there exists at least one row vetcor in
+
+0 Iq×q
+
+that
+can be expressed by the complement space of R(Oaug), i.e.,
+the R(Tō). Let
+
+0n×q Iq×q
+
+=
+
+r⊤
+1 r⊤
+2 . . . r⊤
+q
+⊤
+, then
+there exist i ∈ {1, . . ., q} and T̄i ∈ R1×q
+such that
+T̄iTō = r⊤
+i , (43)
+where T̄i is a linear map. This also implies that
+r⊤
+i /
+∈ R(To). (44)
+Then, by applying Corollary 1 in [18] to the system described
+by (12) and (13), Jz̃kK−
+:= Jz̃k|u0:k−1, y0:k−1K and Jz̃kK+
+:=
+Jz̃k|u0:k−1, y0:kK can be recursively derived by
+Jz̃kK−
+= ÃJz̃k−1K+
+⊕ Γ̃{uk−1} ⊕ B̃J∆dkK, (45)
+Jz̃kK+
+= Z (C̃, yk) ∩ Jz̃kK−
+, (46)
+where we define Jz̃0K−
+= Jz̃0K = T (Jz0K) with Jz0K = Jx0K ×
+Jd0K for consistency; Z (C̃, yk) = {zk : yk = C̃zk} is the
+affine space defined by C̃ and yk. Now, we prove
+D(JdkK+
+) = ∞, k ∈ N0 (47)
+by mathematical induction.
+Base case: For k = 0, we define To(Jz0K−
+) = S0 (with
+s0 ∈ S0). According to (46), one has
+Jz̃0K+
+= Z (C̃, y0) ∩ Jz̃0K−
+⊇ (Z (C̃o, y0) × RNō
+) ∩ ({s0} × TōJz0|s0K−
+)
+= (Z (C̃o, y0) ∩ {s0}) × TōJz0|s0K−
+= {s0} × TōJz0|s0K−
+,
+(48)
+where Nō is the dimension of unobservable states. We define
+T −1
+=
+
+So Sō
+
+. Then, we have
+T T −1
+=
+
+ToSo ToSō
+TōSo TōSō
+
+= I. (49)
+From (48), one has
+Jd0K+ (34)
+=
+
+0q×n Iq×q
+
+Jz0K+
+=
+
+0q×n Iq×q
+
+T −1
+Jz̃0K+
+(48)
+⊇
+
+0q×n Iq×q
+
+So Sō
+
+({s0} × TōJz0|s0K−
+)
+=
+
+0q×n Iq×q
+
+(So{s0} ⊕ SōTōJz0|s0K−
+).
+(50)
+Let Jdi
+kK+
+= e⊤
+i JdkK+
+, with e⊤
+i satisfying e⊤
+i
+
+0q×n Iq×q
+
+=
+r⊤
+i . Then, from (49) and (50), there exist i ∈ {1, . . ., q} and
+T̄i ∈ R1×q
+such that
+Jdi
+0K+
+= e⊤
+i Jd0K+
+(50)
+⊇ e⊤
+i
+
+0q×n Iq×q
+
+(So{s0} ⊕ SōTōJz0|s0K−
+)
+= r⊤
+i (So{s0} ⊕ SōTōJz0|s0K−
+)
+(43)
+= T̄iTō(So{s0} ⊕ SōTōJz0|s0K−
+)
+(49)
+= r⊤
+i Jz0|s0K− (a)
+= Jdi
+0K,
+(51)
+where (a) follows from r⊤
+i Jz0|s0K−
+= Jdi
+0|s0K and the fact that
+s0 is unrelated to Jdi
+0K [see (44)], i.e., Jdi
+0|s0K = Jdi
+0K. Finally,
+by applying Lemma 4, it can be concluded that D(Jdi
+0K+
+) =
+∞. Therefore, Jd0K+
+is unbounded.
+Inductive step: Assume D(Jdi
+k′ K+
+) = ∞ hold for any k =
+k′
+∈ N0. Then, according to (4) and Lemma 4, with JdkK−
+:=
+Jdk|u0:k−1, y0:k−1K, for k = k′
++ 1, one has
+D(Jdi
+k′+1K−
+) = D(Jdi
+k′ K+
+⊕ J∆di
+k′ K) = ∞, (52)
+where ∆di
+k′ stands for the ith entry of ∆dk′ . Besides, similarly
+to (51), one has
+Jdi
+k′+1K+
+⊇ Jdi
+k′+1K−
+, (53)
+which gives that D(Jdk′+1K−
+) = ∞.
+From the mathematical induction, we have D(JdkK−
+) = ∞
+(w.r.t. k ∈ N0). Thus, a bounded DO does not exist. 
+APPENDIX B
+PROOF OF THEOREM 2
+From (42), if (15) is satisfied, there exists a linear map P
+such that the posterior range of observable subsystem states
+Jz̃o
+kK+
+and actual disturbance range JdkK+
+satisfy
+PJz̃o
+kK+
+= JdkK+
+. (54)
+Thus, according to Corollary 1 in [18], we establish the
+bounded DO based on the SMF framework as follows:
+Jz̃o
+kK−
+= ÃoJz̃o
+k−1K+
+⊕ Γ̃o{uk−1} ⊕ B̃oJ∆dkK, (55)
+Jz̃o
+kK+
+= Z (C̃o, yk) ∩ Jz̃o
+kK−
+, (56)
+JdkK+
+= PJz̃o
+kK+
+, (57)
+where Ão ∈ RNo×No
+, B̃o ∈ RNo×q
+, Γ̃o ∈ RNo×p
+and C̃o ∈
+Rl×No
+, are defined by (12). The proposed algorithm is designed
+based on the SMF framework (55)-(57). By outer bounding
+J∆dkK with CZs, we can express the recursive step (55)-(57)
+with CZ operation in [20], which gives (20) and (21), where
+the prior range and posterior range are expressed by Z−
+k and
+Zk respectively. Then, by recursively using (20) and (21), we
+can obtain (24). With the preparation above, we introduce a
+two-step proof of the boundedness of Algorithm 1. In step 1,
+we prove Zd
+k ⊇ JdkK+
+∀k ∈ N0. In step 2, we prove the
+boundedness of Zd
+k .
+Step 1 (Outer bound): For k = 0, according to (56), we have
+Zd
+0 = PZ0 = P[Z (C̃o, yk) ∩ Z−
+0 ]
+(a)
+⊇ P[Z (C̃o, yk) ∩ Jz̃o
+0K−
+] ⊇ Jd0K+
+,
+(58)
+8
+where (a) follows from line 2 in Algorithm 1. For k = 1, we
+have
+Zd
+1 = PZ1 = P[Z (C̃o, y1) ∩ Z−
+1 ]
+= P[Z (C̃o, y1) ∩ (ÃoZ0 ⊕ Γ̃o{u0} ⊕ Z∆
+0 )]
+⊇ P[Z (C̃o, y1) ∩ (ÃoJz̃o
+0K+
+⊕ Γ̃o{u0} ⊕ B̃oJ∆d0K)]
+⊇ Jd1K+
+.
+(59)
+Proceeding forward, we have Zd
+k ⊇ JdkK+
+∀k ∈ N0 and k < δ.
+When k = δ, we introduce the definition of filtering map as
+follows.
+Definition 4 (Filtering map). At time k ∈ N0, the prediction-
+update map under system (55) and (56) is
+fk : (S, Mk) 7→ Z (C̃o, yk)∩(ÃoS+Γ̃ouk−1 +B̃oMk), (60)
+where S ∈ Rn
+and Mk ∈ Rq
+. The filtering map is Fk,i that
+Fk,i(S, Mi, . . . , Mk) = fk ◦ (· · · ◦ (fi+1(S, Mi), . . .), Mk).
+According to Algorithm 1, since (24) is derived by recur-
+sively using (20) and (21), we can explain (24) with a filtering
+map, which gives
+Zd
+k = PFk,k−δ[IH(Zk−δ), Z∆
+k−δ, . . . , Z∆
+k ]
+⊇ PFk,k−δ(Jz̃o
+k−δK+
+, J∆dk−δK, . . . , J∆dkK)
+⊇ PFk,0(Jz̃o
+0K+
+, J∆d0K, . . . , J∆dkK)
+= PJz̃o
+kK = JdkK+
+.
+(61)
+Proceeding forward, from the mathematical induction, we have
+Zd
+k ⊇ JdkK+
+∀k ∈ N0 and k > δ.
+Therefore, we can conclude that Zd
+k ⊇ JdkK+
+∀k ∈ N0.
+Step 2 (Boundedness): From our previous work [19], we
+know that Zk derived from Algorithm 1 is uniformly bounded
+w.r.t k ∈ N0. Then, one has
+lim
+k→∞
+sup
+ˆ
+dk∈Z∆
+k ,dk∈JdkK+
+ˆ
+dk − dk
+= lim
+k→∞
+sup
+ˆ
+z̃o
+k∈Zk,z̃o
+k∈Jz̃o
+kK+
+P ˆ
+z̃o
+k − Pz̃o
+k
+⩽ lim
+k→∞
+sup
+ˆ
+z̃o
+k,z̃o
+k∈Zk
+P ˆ
+z̃o
+k − Pz̃o
+k < ∞.
+(62)
+Therefore, ˆ
+dk is bounded w.r.t. k ∈ N0. 
+APPENDIX C
+PROOF OF THEOREM 3
+When (23) is satisfied, we have
+Zd
+0 = P[Z (C̃o, y0) ∩ Jz̃o
+0K] = Jd0|y0K = Jd0K+
+,
+Zd
+1 = P[Z (C̃o, y1) ∩ (ÃoJz̃o
+0|y0K ⊕ Γ̃o{u0} ⊕ B̃oJ∆d0K)]
+= Jd1K+
+,
+at k = 0 and k = 1, repectively. Proceeding forward, we have
+Zd
+k = JdkK+
+when k < δ. According to Algorithm 1, we
+choose the centroid of the interval hull of Zd
+k as the estimate
+(i.e., ˆ
+dk = center(IH(Zd
+k ))), which gives
+sup
+dk∈JdkK+
+k ˆ
+dk − dkk ≤ sup
+dk∈JdkK+
+k ˆ
+d′
+k − dkk (63)
+for any ˆ
+d′
+k ∈ Rq. Thus, (22) is satisfied. 
+REFERENCES
+[1] W.-H. Chen, J. Yang, L. Guo, and S. Li, “Disturbance-observer-based
+control and related methods—an overview,” IEEE Trans. Ind. Electron.,
+vol. 63, no. 2, pp. 1083–1095, Feb 2016.
+[2] X. Wang, S. Li, X. Yu, and J. Yang, “Distributed active anti-disturbance
+consensus for leader-follower higher-order multi-agent systems with
+mismatched disturbances,” IEEE Trans. Autom. Control, vol. 62, no. 11,
+pp. 5795–5801, Nov 2017.
+[3] K. Zhang, B. Jiang, M. Chen, and X.-G. Yan, “Distributed fault estima-
+tion and fault-tolerant control of interconnected systems,” IEEE Trans.
+Cybern., vol. 51, no. 3, pp. 1230–1240, Mar 2021.
+[4] B. Kürkçü, C. Kasnakoğlu, and M. Ö. Efe, “Disturbance/uncertainty
+estimator based integral sliding-mode control,” IEEE Trans. Autom.
+Control, vol. 63, no. 11, pp. 3940–3947, Nov 2018.
+[5] H. Liu, Y. Li, Q.-L. Han, T. Raı̈ssi, and T. Chai, “Secure estimation,
+attack isolation and reconstruction based on zonotopic unknown input
+observer,” IEEE Trans. Autom. Control, pp. 1–13, May 2023.
+[6] J. Lan, “Asymptotic estimation of state and faults for linear systems with
+unknown perturbations,” Automatica, vol. 118, p. 108955, Aug 2020.
+[7] H. Rabiee, M. Ataei, and M. Ekramian, “Continuous nonsingular terminal
+sliding mode control based on adaptive sliding mode disturbance observer
+for uncertain nonlinear systems,” Automatica, vol. 109, p. 108515, Nov
+2019.
+[8] J.-L. Chang, “Applying discrete-time proportional integral observers for
+state and disturbance estimations,” IEEE Trans. Autom. Control, vol. 51,
+no. 5, pp. 814–818, May 2006.
+[9] K.-S. Kim and K.-H. Rew, “Reduced order disturbance observer for
+discrete-time linear systems,” Automatica, vol. 49, no. 4, pp. 968–975,
+Apr 2013.
+[10] M. Corless and J. Tu, “State and input estimation for a class of uncertain
+systems,” Automatica, vol. 34, no. 6, pp. 757–764, Jun 1998.
+[11] B. Alenezi, M. Zhang, S. Hui, and S. H. Żak, “Simultaneous estimation
+of the state, unknown input, and output disturbance in discrete-time linear
+systems,” IEEE Trans. Autom. Control, vol. 66, no. 12, pp. 6115–6122,
+Dec 2021.
+[12] M. Shen, T. Zhang, J. H. Park, Q.-G. Wang, and L.-W. Li, “Iterative
+proportional-integral interval estimation of linear discrete-time systems,”
+IEEE Trans. Autom. Control, vol. 68, no. 7, pp. 4249–4256, Jul 2023.
+[13] M. Darouach, “Existence and design of functional observers for linear
+systems,” IEEE Trans. Autom. Control, vol. 45, no. 5, pp. 940–943, May
+2000.
+[14] K.-S. Kim, K.-H. Rew, and S. Kim, “Disturbance observer for estimating
+higher order disturbances in time series expansion,” IEEE Trans. Autom.
+Control, vol. 55, no. 8, pp. 1905–1911, Aug 2010.
+[15] J. Su and W.-H. Chen, “Further results on “reduced order disturbance
+observer for discrete-time linear systems”,” Automatica, vol. 93, pp. 550–
+553, Jul 2018.
+[16] I. Sakhraoui, B. Trajin, and F. Rotella, “Design procedure for linear un-
+known input functional observers,” IEEE Trans. Autom. Control, vol. 65,
+no. 2, pp. 831–838, Feb 2020.
+[17] G. N. Nair, “A nonstochastic information theory for communication and
+state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6, pp. 1497–
+1510, Jun 2013.
+[18] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical frame-
+work and optimality of set-membership filtering,” IEEE Transactions on
+Automatic Control, vol. 67, no. 5, pp. 2544–2551, 2021.
+[19] ——, “Stability of linear set-membership filters,” arXiv:2203.13966,
+2022.
+[20] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz,
+“Constrained zonotopes: A new tool for set-based estimation and fault
+detection,” Automatica, vol. 69, pp. 126–136, Jul 2016.
+

@@ -1,0 +1,656 @@
+                                                                                                                                                                                                  1
+
+
+
+
+                                                     Rethinking the Mathematical Framework and
+                                                       Optimality of Set-Membership Filtering
+                                            Yirui Cong, Member, IEEE,, Xiangke Wang, Senior Member, IEEE, and Xiangyun Zhou, Senior Member, IEEE
+
+
+
+
+                                              Abstract—Set-Membership Filter (SMF) has been extensively                prediction step (using the set image under system function,
+                                           studied for state estimation in the presence of bounded noises              which becomes the Minkowski sum for linear systems) and the
+                                           with unknown statistics. Since it was first introduced in the               update step (using the set intersection). Under this classical
+arXiv:2004.04524v2 [eess.SY] 13 Oct 2020
+
+
+
+
+                                           1960s, the studies on SMF have used the set-based description
+                                           as its mathematical framework. One important issue that has                 SMFing framework, the follow-up/existing studies focused on
+                                           been overlooked is the optimality of SMF. In this work, we                  how to derive the exact or approximate solution for different
+                                           put forward a new mathematical framework for SMF using                      scenarios. More specifically, there are mainly two types of
+                                           concepts of uncertain variables. We first establish two basic               SMFs in the literature1 :
+                                           properties of uncertain variables, namely, the law of total range
+                                           (a non-stochastic version of the law of total probability) and the             • Ellipsoidal SMF. This type of SMFs approximates the
+                                           equivalent Bayes’ rule. This enables us to put forward a general                 Minkowski sum and set intersection using ellipsoidal
+                                           SMFing framework with established optimality. Furthermore,                       outer bounds. In [10], a continuous-discrete ellipsoidal
+                                           we obtain the optimal SMF under a non-stochastic Markov                          SMF was proposed to outer bound the estimate of the
+                                           condition, which is shown to be fundamentally equivalent to
+                                           the Bayes filter. Note that the classical SMF in the literature is               linear systems with two specific types of noises, which
+                                           only equivalent to the optimal SMF we obtained under the non-                    has a similar structure to the Kalman filter. With a
+                                           stochastic Markov condition. When this condition is violated, we                 similar system setting, both SMFing and smoothing prob-
+                                           show that the classical SMF is not optimal and it only gives an                  lems were investigated in [11] by solving corresponding
+                                           outer bound on the optimal estimation.                                           Riccati equations. In [12] and [13], algorithms were
+                                             Index Terms—Set-membership filtering, optimality, uncertain                    provided for minimizing the volume of the outer bounds
+                                           variables, law of total range, Bayes’ rule for uncertain variables.              on the Minkowski sum and intersection of ellipsoids.
+                                                                                                                            Nevertheless, minimizing the volume can result in a very
+                                                                                                                            narrow ellipsoid with an unacceptably large diameter.
+                                                                    I. I NTRODUCTION                                        Thus, the semi-axes of ellipsoids were constrained, e.g.,
+                                                                                                                            via the trace of the matrix in the quadratic form. In [14],
+                                           A. Motivation and Related Work
+                                                                                                                            a volume-minimizing and a trace-minimizing ellipsoidal
+                                               The filtering problems in the state-space description are                    outer bounds (each described by two ellipsoids) were de-
+                                           concerned with estimating the state information in the presence                  rived for the linear discrete-time SMF, and the description
+                                           of noises, and thus are widely considered in control systems,                    of outer bounds were generalized to multiple ellipsoids
+                                           telecommunications, navigation, and many other important                         in [15]. Note that the ellipsoidal SMF is computationally
+                                           fields [1], [2]. When the statistics of the noises are known,                    cheaper but usually less accurate than the polytopic SMF
+                                           the corresponding solution method is called stochastic filter.                   discussed below.
+                                           A famous optimal filtering framework for Hidden Markov                         • Polytopic SMF. This type of SMFs describes or outer
+                                           Models (HMMs) is the Bayes filter [1]–[3] which provides                         bounds the prediction and the update using convex poly-
+                                           the complete solution to the filtering problem. As a special                     topes. Different from the ellipsoidal SMF, the polytopic
+                                           case, if the noises are white Gaussian in linear systems, the                    SMF can derive the exact solution for linear filtering
+                                           corresponding Bayes filter is known as the Kalman filter [4].                    problems, because polytopes are closed under Minkowski
+                                           Note that in the Bayes filter, the white noise assumption plays                  sum and set intersection. Nevertheless, the complexity
+                                           an important role in supporting the optimality, since otherwise                  is unacceptable for deriving exact solutions. Noticing
+                                           the HMM condition can hardly be guaranteed.                                      this fact, researchers used different subclasses of convex
+                                               When the noises have unknown statistics but known ranges,                    polytopes to give the outer bounds. In [16], the recursive
+                                           the corresponding solution method is called non-stochastic                       optimal bounding parallelotope algorithm was proposed
+                                           filter. In the 1960s, Witsenhausen proposed a famous filtering                   to give an outer bound of the exact solution. In [17],
+                                           framework for linear systems [5], [6], which is also suitable                    a zonotopic SMF was designed for linear discrete-time
+                                           for nonlinear systems, known as the Set-Membership Filter                        systems by using singular-value-decomposition-based ap-
+                                           (SMF). Similarly to the Bayes filter, the SMF also has the                       proximation. In [18], a zonotopic SMF was proposed
+                                                                                                                            for nonlinear discrete-time systems, where the zonotopic
+                                             Y. Cong and X. Wang are with the College of Intelligence Science and
+                                           Technology, National University of Defense Technology, China.
+                                             X. Zhou is with the Research School of Electrical, Energy and Materials      1 Interval observers [7]–[9] are not included in the SMF, since the basic
+                                           Engineering, Australian National University, Australia.                     idea in the update step is based on designing an observer, which is different
+                                                                                                                       from that of the SMFing framework discussed in this paper.
+                                                                                                                                                 2
+
+
+
+      outer bound is derived by using convex optimization,                         •   Furthermore, we prove that when this Markoveness con-
+      which was improved in [19] by using the DC (Difference                           dition is violated, the classical SMFing gives an outer
+      of two Convex functions) programming. In [20] and [21],                          bound on the optimal estimation. We also use two ex-
+      the zonotopic SMFs were given for linear systems under                           amples to illustrate the performance gap between the
+      P-radius-based and weighted-Frobenius-norm criteria, re-                         classical SMFing framework in the literature and the
+      spectively, which efficiently balanced the complexity and                        optimal SMFing framework proposed in this work.
+      the accuracy of the zonotopic outer bounds. In [22], the
+      constrained zonotope was proposed and applied to the lin-                  C. Notation
+      ear polytope-SMF, which can balance the complexity and
+                                                                                    Throughout this paper, R, N0 , and Z+ denote the sets
+      the accuracy, and is closed under linear transformations,
+                                                                                 of real numbers, non-negative integers, and positive integers,
+      Minkowski sums, and set intersections. In [23], an SMF
+                                                                                 respectively. Rn stands for the n-dimensional Euclidean space.
+      was proposed for nonlinear systems by combining the
+      interval arithmetic and constrained zonotopes. In [24], a
+      zonotopic SMF was studied for nonlinear systems which                       II. U NCERTAIN VARIABLES : P RELIMINARIES AND N EW
+      has advantages in handling high dimensionality.                                                 R ESULTS
+   All the above-mentioned studies on SMFs used the set-based                       In this work, the uncertainties are with known ranges but
+description as its mathematical framework (see Remark 2 for                      unknown probability distributions. To model the uncertain-
+a detailed discussion). We argue that this classical framework                   ties rigorously, we introduce the uncertain variable proposed
+has the optimality issue: for stochastic filters, we know that                   in [25] and derive two important properties which will consti-
+even with the same marginal distributions, the white noises                      tute the foundation of the optimal SMFing framework.
+and correlated noises in linear systems lead to different
+Kalman filters [3]; for the SMFs, however, the noises with                       A. Preliminaries of Uncertain Variables
+different non-stochastic correlations2 (which should result in                      Consider a sample space Ω. A measurable function x : Ω →
+different optimal estimations) were not distinguished; thus,                     X from the sample space Ω to a measurable set X is called an
+the prior studies overlooked the condition (as shown later                       uncertain variable [25]. We define a realization of x as x(ω) =:
+in Assumption 1) under which the SMFs are optimal, and                           x, and sometimes we write it as x = x for conciseness.
+the optimal SMFing framework has not been rigorously es-                            Different from random variables which can be described by
+tablished. Departing from the classical/suboptimal set-based                     probability distributions, an uncertain variable (say x) does not
+SMFing description, in this article, we aim to establish the                     have any information on the probability, but it can be described
+optimal SMFing framework in a completely different way.                          by its range JxK:
+                                                                                                     JxK := {x(ω) : ω ∈ Ω} .                  (1)
+B. Our Contributions
+                                                                                    Similar to the probability distribution for multiple random
+    In this work, we put forward a new mathematical framework
+                                                                                 variables, the range can also be defined w.r.t. multiple uncer-
+for SMFing, based on the concepts of uncertain variables
+                                                                                 tain variables.
+proposed by Nair in the 2010s [25]. Similarly to the Bayesian
+filtering, our filtering framework recursively derives the non-                  Definition 1 (Joint Range, Conditional Range, Marginal
+stochastic prior and posterior. The main contributions are:                      Range [25]). Let x and y be two uncertain variables. The
+    • We first establish two new and fundamental properties of                   joint range of x and y is
+       uncertain variables: the first one is called the law of total                           Jx, yK := {(x(ω), y(ω)) : ω ∈ Ω} .             (2)
+       range, which is a non-stochastic version of the law of
+       total probability; the second one is the equivalent Bayes’                The conditional range of x given y = y is
+       rule for uncertain variables. These properties enable us                   Jx|yK := {x(ω) : y(ω) = y, ω ∈ Ω} = {x(ω) : ω ∈ Ωy=y } ,
+       to define a new SMFing framework using the notion of                                                                                (3)
+       uncertain variables.                                                      where Ωy=y := y−1 ({y}) = {ω : y(ω) = y, ω ∈ Ω} is the
+    • Most importantly, we establish an optimal SMFing frame-
+                                                                                 preimage of {y(ω) = y : ω ∈ Ω}, and Jy|xK is defined in a
+       work that is more general than the well-known classical                   similar way. The marginal range of x is JxK expressed by (1).
+       SMFing framework in the literature. With this new frame-
+       work, we obtain the optimal SMF under an unrelatedness                      In analogy with the joint probability distribution, the joint
+       assumption (to guarantee a non-stochastic Markov condi-                   range can be fully determined by the conditional and marginal
+       tion), which is shown to be fundamentally equivalent to                   ranges [25], i.e.,
+       the Bayes filter. We also show that the classical SMFing                                [                    [                  
+                                                                                    Jx, yK =        Jx|yK × {y} =         {x} × Jy|xK , (4)
+       framework in the literature is only optimal under this
+                                                                                             y∈JyK                    x∈JxK
+       Markov condition, since it cannot capture the relatedness
+       between the noises and the initial prior.                                 where × is the Cartesian product.
+                                                                                   Next, we introduce the definition of unrelatedness [25],
+  2 Unfortunately, such non-stochastic correlations can be neither captured by
+                                                                                 which is a non-stochastic analogue of statistical independence.
+the set-based description nor characterized by the statistical dependence.
+                                                                                                                                                       3
+
+
+
+Definition 2 (Unrelatedness and Conditional Unrelated-
+ness [25]). Uncertain variables u1 , . . . , ur are unrelated if
+              Ju1 , . . . , ur K = Ju1 K × · · · × Jur K.          (5)
+They are conditionally unrelated given v if
+  Ju1 , . . . , ur |vK = Ju1 |vK × · · · × Jur |vK,   ∀v ∈ JvK.    (6)
+    If the uncertain variables are not unrelated, we say they are
+related. Based on Definition 2, we have the following proper-
+ties for unrelatedness and conditional unrelatedness [25]:
+   i) u1 and u2 are unrelated if and only if (iff)
+                   Ju1 |u2 K = Ju1 K,      ∀u2 ∈ Ju2 K.            (7)
+ ii) u1 and u2 are conditionally unrelated given v iff
+             Ju1 |u2 , vK = Ju1 |vK,     ∀(u2 , v) ∈ Ju2 , vK.     (8)
+                                                                         Fig. 1. An illustrative example of the law of total range and Bayes’ rule for
+                                                                         uncertain variables. The prior range is JxK = [1, 3], and the likelihood range
+B. Law of Total Range and New Bayes’ Rule                                is Jy|xKS= {x} + [0, 2] = [x, x + 2]. The law of total range (9) implies
+  In this subsection, we establish two properties, namely, the           JyK = x∈JxK Jy|xK = [1, 5] which can be verified easily in this figure.
+                                                                         To illustrate how Bayes’ rule works, we take Jx|yK with y = 2 (the purple
+law of total range and Bayes’ rule for uncertain variables, as           dash-dotted line) for an example. When x = 1.5 (the green dashed line), the
+the non-stochastic counterparts of the law of total probability          likelihood range marked by the green Tsolid line segment is [1.5, 3.5] which has
+and Bayes’ rule. They establish a mathematical foundation of             a intersection with y = 2, i.e., Jy|xK {y = 2} 6= ∅. Thus, x = 1.5 ∈ Jx|yK
+                                                                         for y = 2. When x = 2.5 (the red dashed line), the likelihood range marked
+the optimal SMF which will be introduced in Section III.                 by the red solid lineT segment is [2.5, 4.5] which has no intersections with
+                                                                         y = 2, i.e., Jy|xK {y = 2} = ∅. Hence, x = 2.5 ∈           / Jx|yK for y = 2.
+Lemma 1 (Law of Total Range).                                            By applying Bayes’ rule to all x ∈ JxK, the posterior range Jx|yK = [1, 2]
+               [                [                                        marked by the purple solid line segment is obtained.
+        JxK =      Jx|yK, JyK =   Jy|xK.                           (9)
+                    y∈JyK                    x∈JxK
+
+     Proof: See Appendix A.                                              the measurement (with its realization, called observed mea-
+   The law of total range links the marginal range and the               surement, yk ∈ Jyk K ⊆ Rm ) and vk (with its realization
+conditional range. An illustrative example is given in Fig. 1.           vk ∈ Jvk K ⊆ Rq ) stands for the measurement noise, and
+With (9), we know that Jx|yK ⊆ JxK which implies observa-                gk : Jxk K × Jvk K → Jyk K is the measurement function.
+tions can reduce uncertainty.                                               Now, we define the optimality criterion for SMF and then
+                                                                         provide the optimal SMFing framework as follows.
+Lemma 2 (Bayes’ Rule for Uncertain Variables).
+               n         \                   o                           Definition 3 (Optimal SMF). An SMF is a process that ∀k ∈
+       Jx|yK = x : Jy|xK {y} =  6 ∅, x ∈ JxK .                    (10)   N0 , it gives an estimator Xk (y0:k ) that includes all possible
+      Proof: See Appendix B.                                             xk given the measurements up to k, i.e., y0:k := y0 , . . . , yk .
+   Bayes’ rule for uncertain variables reflects the fundamental          An SMF is optimal if Xk∗ (y0:k ) returns the smallest set such
+relationship among the prior range JxK, the likelihood range             that Xk∗ (y0:k ) ⊆ Xk0 (y0:k ) holds for any Xk0 and y0:k .
+Jy|xK, and the posterior range Jx|yK. An illustrative example            Theorem 1 (Optimal Set-Membership Filtering Framework).
+is given in Fig. 1.                                                      For the system described by (11) and (12), the optimal SMF
+                                                                         is obtained by the following steps:
+        III. T HE O PTIMAL F ILTERING F RAMEWORK                            •   Initialization. Set the initial prior range Jx0 K.
+  Now, we model the SMFing problem in the framework of                      •   Prediction. For k ∈ Z+ , given the posterior range
+uncertain variables. Consider the following nonlinear system:                   Jxk−1 |y0:k−1 K in the previous time step, the prior range
+                                                                                Jxk |y0:k−1 K is predicted by the law of total range that
+                       xk+1 = fk (xk , wk ),                      (11)
+                                                                                           [
+                          yk = gk (xk , vk ),                     (12)                            fk−1 (xk−1 , Jwk−1 |xk−1 , y0:k−1 K). (13)
+                                                                                  xk−1 ∈Jxk−1 |y0:k−1 K
+for time k ∈ N0 , where (11) and (12) are called the state
+equation and the measurement equation, respectively. The                    •   Update. For k ∈ N0 , given the observed measurement
+state equation describes how the system state xk (with its                      yk and the prior range Jxk |y0:k−1 K, the posterior range
+realization xk ∈ Jxk K ⊆ Rn ) changes over time, where wk                       Jxk |y0:k K is updated by Bayes’ rule for uncertain vari-
+is the process/dynamical noise (with its realization wk ∈                       ables that
+Jwk K ⊆ Rp ), and fk : Jxk K × Jwk K → Jxk+1 K stands for                       n                                                 \          o
+the system transition function. The measurement equation                                                                                 6 ∅
+                                                                                 xk ∈ Jxk |y0:k−1 K : gk (xk , Jvk |xk , y0:k−1 K) {yk } =
+gives how the system state is measured, where yk represents                                                                               (14)
+                                                                                                                                                   4
+
+
+
+      where we define Jx0 K := Jx0 |y0:−1 K and Jv0 |x0 K =                  In the Bayes filter, the prediction step is based on the
+      Jv0 |x0 , y0:−1 K for consistency.                                   Chapman-Kolmogorov equation, i.e., the law of total prob-
+Note that the posterior range obtained in (14) is the optimal              ability combined with the Markov property (17) that
+estimator, i.e., Xk∗ (y0:k ) = Jxk |y0:k K.
+                                                                                             Z
+                                                                             p(xk |y0:k−1 ) = p(xk |xk−1 )p(xk−1 |y0:k−1 )dxk−1 . (21)
+     Proof: See Appendix C.
+   In general, it is not easy to obtain Jwk−1 |xk−1 , y0:k−1 K             In the optimal SMF under Assumption 1, the prediction step
+and Jvk |xk , y0:k−1 K in Theorem 1. They depend on how the                is given by the law of total range (9) and the non-stochastic
+process noises, the measurement noises, and the initial prior              Markov property (19) that4
+w0:k , v0:k , x0 are related. However, if the noises and the initial                                       [
+                                                                                    Jxk |y0:k−1 K =                 Jxk |xk−1 K.   (22)
+state are unrelated (see Assumption 1), the optimal filter is
+                                                                                                       xk−1 ∈Jxk−1 |y0:k−1 K
+easy to derive (see Theorem 2).
+                                                                              For the update steps, the Bayes filter derives the posterior
+Assumption 1 (Unrelated Noises and Initial State). ∀k ∈ N0 ,               distribution p(xk |y0:k ) by Bayes’ rule, while the optimal SMF
+w0:k , v0:k , x0 are unrelated.                                            gets the posterior range Jxk |y0:k K by Bayes’ rule for uncertain
+Theorem 2 (Optimal SMFing Under Assumption 1). For the                     variables (10).
+system described by (11) and (12), the optimal SMF under                     Further, if the system is linear, the optimal SMFing under
+Assumption 1 is given by the following steps:                              Assumption 1 is obtained in Corollary 1.
+  •   Initialization. Set the initial prior range Jx0 K.
+                                                                           Corollary 1. For the linear system described by
+  •   Prediction. For k ∈ Z+ , given Jxk−1 |y0:k−1 K derived in
+      the previous time step k − 1, the prior range is                                            xk+1 = Axk + Bwk ,                            (23)
+                                                                                                     yk = Cxk + Dvk ,                           (24)
+         Jxk |y0:k−1 K = fk−1 (Jxk−1 |y0:k−1 K, Jwk−1 K).          (15)
+                                                                           where A ∈ Rn×n , B ∈ Rn×p , C ∈ Rm×n , and D ∈ Rm×q ,
+  •   Update. For k ∈ N0 , given the observed measurement yk               the optimal SMF under Assumption 1 has the following steps:
+      and the prior range Jxk |y0:k−1 K, the posterior range is              • Initialization. Set the initial prior range Jx0 K.
+                                                                           • Prediction. For k ∈ Z+ , the prior range is
+                      [                     \
+                             −1
+       Jxk |y0:k K =       gk,v k
+                                   ({yk }) Jxk |y0:k−1 K, (16)                      Jxk |y0:k−1 K = AJxk−1 |y0:k−1 K ⊕ BJwk−1 K,               (25)
+                      vk ∈Jvk K
+                                                                                 where ⊕ stands for the Minkowski sum5 .
+             −1                                                                  Update. For k ∈ N0 , given yk , the posterior range is
+      where gk,v k
+                   (·) is the inverse map of gk (·, vk ).                    •
+                                                                                                                    \
+      Proof: See Appendix D.                                                       Jxk |y0:k K = Xk (C, yk , DJvk K) Jxk |y0:k−1 K, (26)
+Remark 1 (Fundamental Equivalence Between SMF Under                              where we define Jx0 K := Jx0 |y0:−1 K for consistency, and
+Assumption 1 and Bayes Filter). The Bayes filter [1] is based                    Xk (C, yk , DJvk K) = {xk : yk = Cxk +Dvk , vk ∈ Jvk K}.
+on the stochastic Hidden Markov Model (HMM) with
+                                                                           Remark 2 (The Existing SMFing Framework). The classical
+              p(xk |x0:k−1 , y0:k−1 ) = p(xk |xk−1 ),              (17)    SMFing framework in the literature is under the set-based
+                                                                           description: e.g., [10], [16], [22] for linear filters and [24],
+                  p(yk |x0:k , y0:k−1 ) = p(yk |xk ),              (18)
+                                                                           [26] for nonlinear filters. Specifically:
+where p(a|b) is the conditional distribution of the random vari-             • In [10], the classical SMFing framework was applied [see
+
+able a given the realization b = b(ω). For the optimal SMF,                     equations (9) and (11) therein] to linear systems, and an
+the system described by (11) and (12) under Assumption 1                        ellipsoidal outer bound was proposed.
+satisfies the following non-stochastic HMM3 :                                • In [16], the classical SMFing framework was also con-
+                                                                                sidered [see equations (5) and (6) therein] for linear
+                Jxk |x0:k−1 , y0:k−1 K = Jxk |xk−1 K,              (19)         systems, and a paralleltopic outer bound was given.
+                   Jyk |x0:k , y0:k−1 K = Jyk |xk K.               (20)      • In [22], the classical SMFing framework was also em-
+                                                                                ployed [see equation (32) therein] for linear systems, and
+These two HMMs are equivalent, since p(·) and J·K describe                      the exact solution or outer bounds can be given by the
+the uncertainties for random variables and uncertain vari-                      proposed constrained zonotopes.
+ables, respectively. Furthermore, (17) reflects the conditional              • In [24], the classical SMFing framework was also used
+independence between xk and x0:k−2 , y0:k−1 given xk−1 ;                        [see equations (2) and (3) therein] for nonlinear systems,
+while (19) indicates the conditional unrelatedness (8) between                  and an efficient constrained zonotopic SMF was designed
+them. Similar observation can be obtained between (18)                       4 The RHS of (22) is f
+                                                                                                     k−1 (Jxk−1 |y0:k−1 K, Jwk−1 K) as stated in The-
+and (20).                                                                  orem 2. But the Bayes filter does not have such an elegant expression for
+                                                                           general nonlinear systems.
+   3 Equations (19) and (20) can be proved by using Lemma 4 and the same     5 Given two sets S and S in Euclidean space, the Minkowski sum of S
+                                                                                               1       2                                            1
+technique in (50) of Appendix D.                                           and S2 is S1 ⊕ S2 = {s1 + s2 : s1 ∈ S1 , s2 ∈ S2 }.
+                                                                                                                                               5
+
+
+
+     based on two new methods (i.e., the mean value and first-        wk−1 and the multiplicative measurement noise vk satisfy
+     order Taylor extensions).                                        Jvk |wk−1 K = [max{1, 1.8 − wk−1 }, 2 − wk−1 ] (k ∈ Z+ ).
+   • In [26], the classical SMFing framework was also                    If we ignore this relatedness, Algorithm 1 will give the exact
+     taken into account [see Lemma 1 therein] for nonlinear           solution for classical SMFing (in Theorem 2), where Line 4
+     systems, and an approximate solution was derived by              gives the prediction step and Line 6 provides the update step.
+     proposing a novel particle filter.
+                                                                      Algorithm 1 Optimal Algorithm Under Classical Framework
+Note that all these prior works require Assumption 1 to hold.
+However, when Assumption 1 is violated, the property of               1: Initialization: Jx0 K = [a−       −
+                                                                                                      0 , b0 ] = [0, 1]; {Comments: Jxk |y0:k K =
+                                                                         [ak , bk ] (k ∈ Z+ ), Jxk |y0:k−1 K = [a−     −
+                                                                                                                  k , bk ] (k ∈ N0 ).}
+non-stochastic HMM described by (19) and (20) can hardly              2: loop
+be guaranteed. Without this property, the classical SMFing            3:    if k > 0 then
+framework is not optimal any more, i.e., it cannot give the           4:        a−                             −
+                                                                                  k = sin(ak−1 ) + ak−1 , bk = sin(bk−1 ) + bk−1 + 1;
+                                                                      5:    end if
+exact set of all possible states determined by the optimal                  [ak , bk ] = [min{0.5yk , yk }, max{0.5yk , yk }] [a−
+                                                                                                                                T        −
+                                                                      6:                                                            k , bk ];
+SMFing framework in Theorem 1.                                        7:    k = k + 1;
+                                                                      8: end loop
+   Although the classical SMFing framework does not give
+the optimal solution for state estimation when Assumption 1
+is violated, the following theorem tells that it is still useful in   Algorithm 2 Approximation of the Optimal SMF
+giving a more conservative estimate.                                   1: Initialization: Jx0 K = [0, 1], N = 10000; {Comments: N is the
+                                                                          number of random samples for Jx∗k |y0:k K = [a∗k , b∗k ] (k ∈ Z+ ).}
+Theorem 3 (Outer Bound).        Let Jx∗k |y0:k K and Jxk |y0:k K be    2: loop
+the posterior ranges derived by Theorem 1 and Theorem 2,               3:    if k = 0 then
+respectively. Then, Jx∗k |y0:k K ⊆ Jxk |y0:k K holds.                  4:        [a∗0 , b∗0 ] = Jx∗0 |y0 K ← Jx0 |y0 K in Algorithm 1;
+                                                                       5:    else if k > 0 then
+                                                                       6:        i = 1;
+      Proof: See Appendix E.                                           7:        while i ≤ N do
+   Furthermore, a class of systems with state-and-process-noise        8:            xk−1 ← U (a∗k−1 , b∗k−1 ) and wk−1 ← U (0, 1); {Comments:
+relatedness can be converted to non-stochastic HMMs with the                         x ← U (a, b) means x is a realization of a random variable
+following model-modification method.                                                 uniformly distributed in [a, b].}
+                                                                       9:            xk = sin(xk−1 ) + xk−1 + wk−1 ;
+Remark 3 (Relatedness Cancellation). For related states x0:k          10:            if (xk 6= 0 && xyk ∈ Jvk |wk−1 K) || (xk = yk = 0) then
+                                                                                                    k
+                                                                                       (i)
+and process noises w0:k , let zk = [xT        T T
+                                        k , wk ]     (k ∈ N0 ) be     11:             xk ← xk , i = i + 1;
+                                                                      12:           end if
+the new state, if the system described by (11) and (12) can be        13:       end while
+                                                                                             (i)               (i)
+rewritten as                                                          14:       a∗k = mini {xk }, b∗k = maxi {xk };
+                                       "             #                15:   end if
+                                          ¯(x) (zk )
+               
+           xk+1                          f                            16:   k = k + 1;
+                   = zk+1 = f¯k (zk ) = k(w)           ,     (27)     17: end loop
+          wk+1                           f¯k (zk )
+                        yk = ḡk (zk , vk ) = gk (xk , vk ),   (28)      Now, we design the optimal SMF from Theorem 1, and its
+for ∀k ∈ N0 , where v̄0:k and z0 are unrelated (i.e., Assump-         state range is denoted by Jx∗ |·K to be distinguished from the
+tion 1 holds). Then, the optimal SMF can be obtained by               ranges in Algorithm 1. For k = 0, the posterior range Jx∗0 |y0 K
+directly applying Theorem 2 to the modified system described          is identical to that derived in Algorithm 1, as Jx∗0 K = Jx0 K.
+by (27) and (28).                                                     For k > 1, assume Jx∗k−1 |y0:k−1 K := [a∗k−1 , b∗k−1 ] has already
+                                                                      been derived at k − 1. Since wk−1 is only related to vk , we
+   Nevertheless, the relatedness cancellation method in Re-           have Jwk−1 |xk−1 , y0:k K = Jwk−1 K in (13) of the prediction
+mark 3 cannot deal with all kinds of relatedness, such as             step. Similarly, we have Jvk |xk , y0:k−1 K = Jvk |xk K in (14) of
+inequality-type relatedness (e.g., wk + wk−1 ≤ 1) and the             the update step. However, we would not use (13) to obtain
+related noises in Section IV-A.                                       Jx∗k |y0:k−1 K directly, because in the update step, Jvk |xk K is
+                                                                      not explicit which cannot help to derive Jx∗k |y0:k K. Instead,
+                 IV. N UMERICAL E XAMPLES                             we can rewrite (13) and (14) as
+   In this section, we illustrate the performance gap between            n
+                                                                                                        −1
+                                                                            xk = fk−1 (xk−1 , wk−1 ) : gk,x   ({yk }) ∈ Jvk |wk−1 K,
+the optimal SMFing framwork (in Theorem 1) and the classical                                                k
+                                                                                                                               o
+framework (equivalent to Theorem 2) through two examples.                            xk−1 ∈ Jx∗k−1 |y0:k−1 K, wk−1 ∈ Jwk−1 K , (31)
+                                                                                −1
+A. System with Related Process and Measurement Noises                 where gk,x   k
+                                                                                     (·) is the inverse map of gk (xk , ·). From (31), we
+                                                                      can derive the posterior range by the following steps: for each
+  Consider the nonlinear system described by                          xk−1 ∈ Jx∗k−1 |y0:k−1 K and wk−1 ∈ Jwk−1 K, we calculate
+                                                                                                                             −1
+                 xk+1 = sin(xk ) + xk + wk ,                   (29)   xk = sin(xk−1 ) + xk−1 + wk−1 via (29); if gk,x           k
+                                                                                                                                  ({yk }) ∈
+                    yk = vk xk ,                               (30)   Jvk |wk−1 K, then xk = fk−1 (xk−1 , wk−1 ) is a possible state
+                                                                      in Jx∗k |y0:k K. With all such possible xk , we get the posterior
+where Jx0 K = [0, 1], Jwk K = [0, 1], and Jvk K = [1, 2]. ∀k ∈        range Jx∗k |y0:k K. The Monte Carlo technique can be employed
+N0 , w0:k , v0:k , x0 are unrelated, except that the process noise    to approximate the posterior range (see Algorithm 2).
+                                                                                                                                                                                       6
+
+
+
+   Fig. 2 shows the average diameters of the estimates in Algo-                                                                      5              PB-SMF 1         CZ-SMF 1
+rithm 1, Algorithm 2, and the algorithm in [18], respectively.6                                                                                     PB-SMF 2         CZ-SMF 2
+
+We can see that the optimal SMF in Algorithm 2 performs the                                                                          4
+best, which corroborates our theoretical results.
+
+
+
+
+                                                                                                                       x(2) - axis
+                                                                                                                                     3
+                          5
+                                                                             Algorithm 1
+                                                                                                                                     2
+                         4.5                                                 Algorithm 2
+                                                                             Algorithm in [18]
+                          4                                                                                                          1
+
+                         3.5
+      Average Diameter
+
+
+
+
+                                                                                                                                               26         26.5          27      27.5
+                          3
+                                                                                                                                                               x(1) - axis
+                         2.5
+                                                                                                                                                               (a)
+                          2
+
+                         1.5                                                                                                         4          PB-SMF 1
+                                                                                                                                                PB-SMF 2
+                          1                                                                                                                     CZ-SMF 1
+                                                                                                                                     3
+                                                                                                                                                CZ-SMF 2
+                         0.5
+
+
+
+
+                                                                                                                       x(2) - axis
+                                                                                                                                     2
+                          0
+                               0   10   20   30   40      50       60   70   80      90      100                                     1
+                                                       Time Step
+                                                                                                                                     0
+Fig. 2. Comparison of Algorithm 1, Algorithm 2, and the algorithm in [18].
+The diameter of each algorithm is averaged over 10000 simulation runs. The                                                           -1
+averaged execution times in each time step for Algorithm 1, Algorithm 2, and
+the algorithm in [18] are 1.144 × 10−5 s, 3.181 × 10−3 s and 1.194 × 10−5 s,                                                              38            40             42        44
+respectively, where the simulation is conducted by using Matlab 2019b on a                                                                                     x(1) - axis
+laptop with Intel Core i7-7700HQ@2.80GHz CPU.                                                                                                                  (b)
+
+                                                                                                          Fig. 3. Comparisons of the PB-SMF and the CZ-SMF under the classical
+                                                                                                          and the optimal SMFing frameworks at: (a) k = 10, (b) k = 20. CZ-SMF 1
+B. Linear System with Identical Process Noise                                                             (under the classical framework) and CZ-SMF 2 (under the optimal framework)
+   Consider the linear system described by                                                                are simulated with the help of CORA 2020 toolbox [28], where the degree-
+                                                                                                      of-freedom order and the number of constraints are 0 and 5, respectively.
+                          1 1         0.5
+               xk+1 =           xk +       w,                                                      (32)
+                          0 1          1
+                                                                                                        can see that Jx∗10 |y0:10 K (based on PB-SMF2) is smaller than
+                  yk = 1 0 xk + vk ,                                                               (33)   Jx10 |y0:10 K (based on PB-SMF1) at k = 10 in Fig. 3(a),
+where Jx0 K = [−10, 10] × [−10, 10], JwK = [−1, 1], and                                                   and the area ratio is 27.1%; finally, Jx∗10 |y0:20 K becomes
+Jvk K = [−1, 1]. ∀k ∈ N0 , x0 , w, v0:k are unrelated.                                                    much smaller than Jx20 |y0:20 K at k = 20 in Fig. 3(b), and
+   If we replace w with wk and assume Assumption 1 holds,                                                 the area ratio is 1.04%, which means approximately 99%
+the classical SMFing is Corollary 1 with                                                                  of the estimated range by the classical SMFing is excluded
+                                                                                                      by the optimal SMFing. Besides, Fig. 3 also presents the
+        1 1             0.5                  
+  A=            , B=           , C = 1 0 , D = 1. (34)                                                    gaps between the Constrained Zonotopic SMF (CZ-SMF) [22]
+        0 1               1
+                                                                                                          under the optimal and classical frameworks. The area ratios
+We employ the Projection-Based (PB) method in [27] to give                                                are 19.0% and 0.174% for k = 10 and k = 20, respectively.
+the estimate Jxk |y0:k K exactly, labeled as PB-SMF 1.
+   Now we design the optimal SMF using Remark 3, and the                                                                        V. C ONCLUSION
+                                              (1)  (2)
+modified system with zk = [xT            T                 T
+                                 k , wk ] = [xk , xk , wk ] is                                               In this work, we have studied the optimal SMFing problem
+                           
+                             1 1 0.5
+                                                                                                         for discrete-time systems. Based on the uncertain variables,
+                 zk+1 = 0 1 1  zk ,                       (35)                                          we have put forward an optimal SMFing framework. Then, we
+                             0 0 1                                                                        have obtained the optimal SMF under non-stochastic Markov
+                                                                                                        condition, and revealed the fundamental equivalence between
+                    y k = 1 0 0 zk + v k ,                  (36)
+                                                                                                          the SMF and the Bayes filter. We have also shown that
+which gives the optimal filter, labeled as PB-SMF 2, when                                                 the classical SMF in the literature must rely on the non-
+Corollary 1 is applied. Similarly to Section IV-A, we denote                                              stochastic Markov condition to guarantee optimality. When the
+Jx∗k |y0:k K as the optimal posterior range, which can be derived                                         Markovness is violated, the classical SMF is not optimal and
+by the projection of Jzk |y0:k K to the x(1) x(2) -plane.                                                 can only provide an outer bound on the optimal estimation.
+  Fig. 3 shows the performance gap between the (optimal)
+PB-SMFs under the optimal and classical frameworks. We                                                                             A PPENDIX A
+                                                                                                                             P ROOF OF L EMMA 1
+  6 The probability distributions of uncertain variables x , w
+                                                          0   0:k , v0:k can be
+                                                                                                                                   S
+arbitrary for simulations. In Section IV, these uncertain variables are set to                            S We only prove JxK = y∈JyK Jx|yK, and the Sproof for JyK =
+be uniformly distributed in their ranges/conditional ranges.                                               x∈JxK Jy|xK is similar.  From (3), we have   y∈JyK Jx|yK =
+                                                                                                                                               7
+
+
+                             (a)
+                                                                             that x0 ∈ JxK, we get x0 ∈ T2 , and thus T1T⊆ T2 . Conversely,
+S
+    y∈JyK {x(ω)S: ω ∈ Ωy=y } = {x(ω)S: ω ∈ Ω} = JxK, where
+(a) is from y∈JyK x(Ωy=y ) = x(                     y∈JyK Ωy=y )   = x(Ω).   ∀x00 ∈ T2 , we have   00                00
+                                                                                             T x ∈ JxK and Jy|x00 K {y} 6= ∅. Hence,
+                                                                                00        00
+Thus, (9) holds.                                                            {x }× Jy|x K {y} 6= ∅ holds with x ∈ JxK which implies
+                                                                             x00 ∈ T1 and therefore T2 ⊆ T1 . Combining it with T1 ⊆ T2 ,
+                                A PPENDIX B                                  we get T1 = T2 .                                            
+                            P ROOF OF L EMMA 2
+                                                                                                      A PPENDIX C
+  Firstly, we define Jx, yK as {(x(ω), y(ω)) : y(ω) = y, ω ∈
+                                                                                                 P ROOF OF T HEOREM 1
+Ω} = {(x(ω), y(ω)) : ω ∈ Ωy=y }. With (3), we have
+                                                                               We divide the proof of Theorem 1 into two parts, the
+                            Jx, yK = Jx|yK × {y},                     (37)   prediction step and the update step.
+and conversely we have                                                         For the prediction step, the law of total range in (9) gives
+                                                                                                       [
+                            Jx|yK = Proj Jx, yK,                      (38)      Jxk |y0:k−1 K =                   Jxk |xk−1 , y0:k−1 K. (43)
+                                       (x,y)7→x                                                 xk−1 ∈Jxk−1 |y0:k−1 K
+
+where Proj(x,y)7→x (·) is a projection from the space w.r.t.                 From (11), the following holds
+(x, y) to the subspace w.r.t. x that Proj(x,y)7→x (Sx , Sy ) = Sx              Jxk |xk−1 , y0:k−1 K = Jf (xk−1 , wk−1 )|xk−1 , y0:k−1 K
+for sets Sx and Sy .
+                                                                                                   = Jf (xk−1 , wk−1 )|xk−1 , y0:k−1 K     (44)
+   Secondly, we prove the following equation holds
+                                                                                                   (a)
+                                \                                                                   = f (xk−1 , Jwk−1 |xk−1 , y0:k−1 K),
+                Jx, yK = Jx, yK (JxK × {y}) .                 (39)
+                                                                             where (a) follows from (3) that
+With the RHS of the first equality in (4), the RHS of (39) can
+be rewritten as                                                                 Jf (xk−1 , wk−1 )|xk−1 , y0:k−1 K
+            h [                   i \                                        ={f (xk−1 , wk−1 (ω)) : ω ∈ Ωxk−1 ,y0:k−1 =xk−1 ,y0:k−1 }
+                   Jx|yK × {y 0 }       (JxK × {y})                                                                                        (45)
+                 y 0 ∈JyK
+                                                                              ={f (xk−1 , wk−1 ) : wk−1 ∈ Jwk−1 |xk−1 , y0:k−1 K}
+                  [ h                                                         =f (xk−1 , Jwk−1 |xk−1 , y0:k−1 K).
+                                              \             i
+           =                 Jx|y 0 K × {y 0 }   (JxK × {y})
+                y 0 ∈JyK                                              (40)   Combining (43) with (44), we get (13).
+          (a)    [ h                \           \    i                       For the update step, we prove it with Bayes’ rule for
+          =                 Jx|y 0 K JxK × {y 0 } {y}                        uncertain variables. From (10), we have
+                y∈JyK                                                                      n                                      \          o
+          (b)                    (c)                                                                                                     6 ∅ .
+                                                                             Jxk |y0:k K = xk ∈ Jxk |y0:k−1 K : Jyk |xk , y0:k−1 K {yk } =
+         =Jx|yK × {y} = Jx, yK,
+                                  T                   T                                                                                    (46)
+    T (a) follows (S1 × S2 ) (S3 × S4 ) = (S1 S3 ) ×
+where                                                                        Similarly to dealing with Jxk |xk−1 , y0:k−1 K in (44), we have
+(S2 S4 ) for sets S1 , . . . , S4 . Equality (b) is established              Jyk |xk , y0:k−1 K = gk (xk , Jvk |xk , y0:k−1 K). Thus, the RHS
+by (9) (which implies Jx|y 0 K ⊆ JxK) and S × ∅ = ∅ for set S.               of (46) can be rewritten as (14).
+Then, (c) follows from (37).                                                   By Definition 1, the set of all possible xk given y0:k is
+  Thirdly, we prove a projection-based version of Bayes’ rule                exact the posterior range Jxk |y0:k K. Therefore, Xk∗ (y0:k ) =
+                                                     !                       Jxk |y0:k K which satisfies the condition Xk∗ (y0:k ) ⊆ Xk0 (y0:k )
+                      [                           
+                                                                             holds for any Xk0 and y0:k in Definition 3.
+                                            \
+  Jx|yK = Proj                {x} × Jy|xK {y}           . (41)                                                                               
+            (x,y)7→x
+                             x∈JxK
+                                                                                                     A PPENDIX D
+With (39) and the RHS of the second equality in (4), we get
+              [                                                                                P ROOF OF T HEOREM 2
+    Jx, yK =        {x} × Jy|xK
+                                 \
+                                      (JxK × {y})                              Before start, we need the following two lemmas.
+                    x∈JxK                                                    Lemma 3 (Function of Conditional Range). Given uncertain
+                   [ h                                         i
+            =                {x} × Jy|xK
+                                               \
+                                                    (JxK × {y})              variables u1 , u2 and map h, Jh(u1 )|u2 K = h(Ju1 |u2 K) holds.
+                  x∈JxK
+                                                                      (42)       Proof: Jh(u1 )|u2 K = {h(u1 (ω)) : ω ∈ Ωu2 =u2 } =
+                   [ h                                i
+                                                                             h({u1 (ω) : ω ∈ Ωu2 =u2 }) = h(Ju1 |u2 K).
+                                   \             \
+            =                {x}       JxK × Jy|xK {y}
+                  x∈JxK                                                      Lemma 4 (Invariance of Unrelatedness under Maps). If u1
+                   [ h                         \      i
+            =               {x} × Jy|xK            {y} .                     and u2 are unrelated, h1 (u1 ) and h2 (u2 ) are unrelated, i.e.,
+                  x∈JxK
+                                                                                      Jh1 (u1 )|h2 (u2 )K = Jh1 (u1 )K,   ∀u2 ∈ Ju2 K.     (47)
+By (38) and (42), (41) is obtained.
+                                                                                  Proof: By Lemma 3, the LHS and RHS of equation (47)
+   Finally, we prove that (10) and (41) are equivalent. Let T1
+                                                                             can be written as h1 (Ju1 |h2 (u2 )K) and h1 (Ju1 K), respectively.
+and T2 denote the RHS of (41) and  T the RHS of (10), respec-                Since a sufficient condition to h1 (Ju1 |h2 (u2 )K) = h1 (Ju1 K) is
+tively. ∀x0 ∈ T1T, we have Jy|x0 K {y} =6 ∅, since otherwise
+{x0 } × Jy|x0 K {y} = ∅ which means x0 ∈      / T1 . Observing                                     Ju1 |h2 (u2 )K = Ju1 K,                 (48)
+                                                                                                                                                                8
+
+
+
+we need to prove that (48) holds for u2 ∈ Ju2 K.                                   [4] R. E. Kalman, “A new approach to linear filtering and prediction
+  ∀u2 ∈ Ju2 K, we have Ju1 |u2 K = {u1 (ω) : ω ∈ Ωu2 =u2 }                             problems,” J. Basic Eng., vol. 82, no. 1, pp. 35–45, Mar. 1960.
+                                                                                   [5] H. S. Witsenhausen, “Minimax controls of uncertain systems,” M.I.T.
+and Ju1 |h2 (u2 )K = {u1 (ω) : ω ∈ Ωh2 (u2 )=h2 (u2 ) }. As                            Electron. Syst. Lab., Cambridge, Tech. Rep. Mass. Rept. ESL-R-269
+Ωh2 (u2 )=h2 (u2 ) = u−1    −1                   −1
+                      2 ◦h2 ({h2 (u2 )}) and h2 ({h2 (u2 )}) ⊇                         (NASA Rept. N66-33441), May 1966.
+{u2 }, we get Ωh2 (u2 )=h2 (u2 ) ⊇ Ωu2 =u2 which implies                           [6] H. Witsenhausen, “Sets of possible states of linear systems given
+                                                                                       perturbed observations,” IEEE Trans. Autom. Control, vol. 13, no. 5,
+Ju1 |h2 (u2 )K ⊇ Ju1 |u2 K. Thus (48) is established by                                pp. 556–558, Oct. 1968.
+                                                                                   [7] L. Jaulin, M. Kieffer, O. Didrit, and E. Walter, Applied Interval Analysis.
+                                                      (a)
+              Ju1 K ⊇ Ju1 |h2 (u2 )K ⊇ Ju1 |u2 K = Ju1 K,                (49)          London, UK: Springer-Verlag, 2001.
+                                                                                   [8] D. Efimov, T. Raı̈ssi, S. Chebotarev, and A. Zolghadri, “Interval state
+where (a) follows from the fact that ∀u2 ∈ Ju2 K, Ju1 |u2 K =                          observer for nonlinear time varying systems,” Automatica, vol. 49, no. 1,
+                                                                                       pp. 200–205, Jan. 2013.
+Ju1 K for unrelated u1 and u2 [see (7)]. Therefore, (47) holds,                    [9] W. Tang, Z. Wang, Y. Wang, T. Raı̈ssi, and Y. Shen, “Interval estimation
+and combining it with (7), we know that h1 (u1 ) and h2 (u2 )                          methods for discrete-time linear time-invariant systems,” IEEE Trans.
+are also unrelated.                                                                    Autom. Control, vol. 64, no. 11, pp. 4717–4724, Nov. 2019.
+                                                                                  [10] F. Schweppe, “Recursive state estimation: Unknown but bounded errors
+   Now we prove the prediction and update steps in Theorem 2,                          and system inputs,” IEEE Trans. Autom. Control, vol. 13, no. 1, pp.
+respectively. In the prediction step, for Jwk−1 |xk−1 , y0:k−1 K                       22–28, Feb. 1968.
+in (13), we know that the collection of xk−1 , y0:k−1 is a func-                  [11] D. Bertsekas and I. Rhodes, “Recursive state estimation for a set-
+                                                                                       membership description of uncertainty,” IEEE Trans. Autom. Control,
+tion of w0:k−2 , v0:k−1 , x0 =: $ k−1 , i.e., (xk−1 , y0:k−1 ) =:                      vol. 16, no. 2, pp. 117–128, Apr. 1971.
+ξ($ k−1 ). By Assumption 1, wk−1 and $ k−1 are unrelated.                         [12] F. L. Chernousko, “Optimal guaranteed estimates of indeterminacies
+Thus, applying Lemma 4, we get                                                         with the aid of ellipsoids. parts I-III,” Eng. Cybern., vol. 18, pp. 1–
+                                                                                       9, 1980.
+                                                                                  [13] E. Fogel and Y. Huang, “On the value of information in system
+  Jwk−1 |xk−1 , y0:k−1 K = Jwk−1 |ξ($k−1 )K = Jwk−1 K, (50)                            identification—bounded noise case,” Automatica, vol. 18, no. 2, pp. 229–
+                                                                                       238, Mar. 1982.
+where $k−1 is the realization of $ k−1 . With (50), (13)                          [14] D. G. Maksarov and J. P. Norton, “State bounding with ellipsoidal set
+becomes (15).                                                                          description of the uncertainty,” Int. J. Control, vol. 65, no. 5, pp. 847–
+   In the update step, we can use a similar technique in (50)                          866, Jan. 1996.
+                                                                                  [15] C. Durieu, É. Walter, and B. Polyak, “Multi-input multi-output ellip-
+to obtain Jvk |xk , y0:k−1 K = Jvk K. Then, (14) becomes                               soidal state bounding,” J. Optimization Theory and Appl., vol. 111, no. 2,
+ n                                     \             o                                 pp. 273–303, Nov. 2001.
+   xk ∈ Jxk |y0:k−1 K : gk (xk , Jvk K) {yk } = 6 ∅                               [16] L. Chisci, A. Garulli, and G. Zappa, “Recursive state bounding by
+              n                                             o                          parallelotopes,” Automatica, vol. 32, no. 7, pp. 1049–1055, Jul. 1996.
+ (a) [                                        −1                                  [17] C. Combastel, “A state bounding observer based on zonotopes,” in Proc.
+ =              xk ∈ Jxk |y0:k−1 K : {xk } = gk,v k
+                                                    ({y k })                           Eur. Control Conf. (ECC), Sep. 2003, pp. 2589–2594.
+    vk ∈Jvk K
+                                                              (51)
+                                                                                  [18] T. Alamo, J. Bravo, and E. Camacho, “Guaranteed state estimation by
+      [      h
+                −1
+                             \             i                                           zonotopes,” Automatica, vol. 41, no. 6, pp. 1035–1043, Jun. 2005.
+ =             gk,v k
+                      ({yk }) Jxk |y0:k−1 K = RHS of (16).                        [19] T. Alamo, J. Bravo, M. Redondo, and E. Camacho, “A set-membership
+  vk ∈Jvk K                                                                            state estimation algorithm based on dc programming,” Automatica,
+                                      S                                                vol. 44, no. 1, pp. 216–224, Jan. 2008.
+where (a) is from gk (xk , Jvk K) = vk ∈Jvk K {gk (xk , vk )} and                 [20] V. T. H. Le, C. Stoica, T. Alamo, E. F. Camacho, and D. Dumur, “Zono-
+                             T                       −1                                topic guaranteed state estimation for uncertain systems,” Automatica,
+                                    6 ∅ iff {xk } = gk,v
+the fact that {gk (xk , vk )} {yk } =                    k
+                                                           ({yk }),                    vol. 49, no. 11, pp. 3418–3424, Nov. 2013.
+            −1
+in which gk,vk ({yk }) = {xk : gk (xk , vk ) = yk }.                             [21] C. Combastel, “Zonotopes and kalman observers: Gain optimality under
+                                                                                       distinct uncertainty paradigms and robust convergence,” Automatica,
+                                                                                       vol. 55, pp. 265–273, May 2015.
+                             A PPENDIX E                                          [22] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz,
+                        P ROOF OF T HEOREM 3                                           “Constrained zonotopes: A new tool for set-based estimation and fault
+                                                                                       detection,” Automatica, vol. 69, pp. 126–136, Jul. 2016.
+   In the initialization step, Jx∗0 K = Jx0 K holds. In the update                [23] B. S. Rego, D. M. Raimondo, and G. V. Raffo, “Set-based state
+                                                                                       estimation of nonlinear systems using constrained zonotopes and interval
+step at k = 0, since (9) implies Jx|yK ⊆ JxK, we have                                  arithmetic,” in Proc. Eur. Control Conf. (ECC), Jun. 2018, pp. 1584–
+Jv0 |x0 K ⊆ Jv0 K in (14). Thus,                                                       1589.
+               n                                 \         o                      [24] B. S. Rego, G. V. Raffo, J. K. Scott, and D. M. Raimondo, “Guaranteed
+                                                                                       methods based on constrained zonotopes for set-valued state estimation
+   Jx∗0 |y0 K = x0 ∈ Jx∗0 K : g0 (x0 , Jv0 |x0 K) {y0 } =
+                                                        6 ∅                            of nonlinear discrete-time systems,” Automatica, vol. 111, p. 108614,
+     n                            \              o (a)                                 Jan. 2020.
+  ⊆ x0 ∈ Jx∗0 K : g0 (x0 , Jv0 K) {y0 } =   6 ∅ = Jx0 |y0 K, (52)                 [25] G. N. Nair, “A nonstochastic information theory for communication and
+                                                                                       state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6, pp. 1497–
+where (a) follows from (16) and (51). Similarly, in the                                1510, Jun. 2013.
+                                                                                  [26] P. H. Leong and G. N. Nair, “Set-membership filtering using random
+prediction step at k = 1, we have Jw1 |x0 , y0 K ⊆ Jw1 K,                              samples,” in Proc. Int. Conf. Inform. Fusion (FUSION), July 2016, pp.
+which implies Jx∗1 |y0 K ⊆ Jx1 |y0 K. Proceeding forward, we                           1087–1094.
+get Jx∗k |y0:k K ⊆ Jxk |y0:k K for k ∈ N0 .                                      [27] J. S. Shamma and K.-Y. Tu, “Set-valued observers and optimal dis-
+                                                                                       turbance rejection,” IEEE Trans. Autom. Control, vol. 44, no. 2, pp.
+                                                                                       253–264, Feb. 1999.
+                              R EFERENCES                                         [28] M. Althoff, N. Kochdumper, and M. Wetzlinger, “CORA 2020 manual,”
+                                                                                       2020. [Online]. Available: https://tumcps.github.io/CORA/
+ [1] S. Särkkä, Bayesian filtering and smoothing. New York, NY, USA:
+     Cambridge University Press, 2013.
+ [2] Z. Chen, “Bayesian filtering: From kalman filters to particle filters, and
+     beyond,” Statistics, vol. 182, no. 1, pp. 1–69, 2003.
+ [3] A. H. Jazwinski, Stochastic Processes and Filtering Theory. New York,
+     NY, USA: New York, USA: Academic Press, 1970.
+

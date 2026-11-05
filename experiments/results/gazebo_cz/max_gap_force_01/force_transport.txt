@@ -1,0 +1,2 @@
+No publishers on topic [/world/default/wrench/persistent]
+No subscribers on topic [/world/default/wrench/persistent]

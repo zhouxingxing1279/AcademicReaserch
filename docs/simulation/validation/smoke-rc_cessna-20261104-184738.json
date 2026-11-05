@@ -1,0 +1,15 @@
+{
+  "model": "rc_cessna",
+  "flight_requested": false,
+  "gui_requested": false,
+  "passed": true,
+  "log": "/home/alfred/px4-research/logs/smoke-rc_cessna-20261104-184738.log",
+  "heartbeat": true,
+  "vehicle_type": 1,
+  "local_position_ned": [
+    0.03611958771944046,
+    0.010006144642829895,
+    -0.05103351175785065
+  ],
+  "max_relative_altitude_m": 0.11
+}

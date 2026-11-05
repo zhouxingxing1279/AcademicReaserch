@@ -1,0 +1,84 @@
+{
+  "name": "fresh_force_02",
+  "requested_force": 0.02,
+  "delivery": "fresh",
+  "completed": false,
+  "landed": true,
+  "error": "Algorithm stopped at k=2: Empty CZ during representative selection",
+  "algorithm_samples": 3,
+  "commands": 2,
+  "duration_until_last_sample": 0.980000000000004,
+  "sent_commands": 2,
+  "commands_matched_in_px4": 2,
+  "first_containment_failure": 1,
+  "first_tube_failure": null,
+  "first_error_bound_failure": null,
+  "max_position_error": [
+    0.20347319965437105,
+    0.012372762999978226,
+    0.029699845884585407
+  ],
+  "max_reference_speed": [
+    0.2552272149125179,
+    0.07068865069378047,
+    0.0709539235948742
+  ],
+  "max_command": 0.4694300960436466,
+  "maximum_compute_ms": 22.101643000041804,
+  "sample_intervals": [
+    0.480000000000004,
+    0.5
+  ],
+  "actual_dt_residual": [
+    {
+      "k": 1,
+      "dt": 0.480000000000004,
+      "a_position": [
+        -0.3003981761204882,
+        0.03936944996133934,
+        0.0416900713161586
+      ],
+      "a_velocity": [
+        -0.19535052346422416,
+        0.010161847110182547,
+        0.05649985163808546
+      ]
+    },
+    {
+      "k": 2,
+      "dt": 0.5,
+      "a_position": [
+        0.17395072435216558,
+        0.11541503577133073,
+        0.09142512198089327
+      ],
+      "a_velocity": [
+        0.08011177483032828,
+        0.05149706945522861,
+        0.08851361481538944
+      ]
+    }
+  ],
+  "command_reception": [
+    {
+      "k": 0,
+      "matched": 2,
+      "acceleration_only": true,
+      "px4_times": [
+        40.848,
+        41.064
+      ]
+    },
+    {
+      "k": 1,
+      "matched": 3,
+      "acceleration_only": true,
+      "px4_times": [
+        41.284,
+        41.44,
+        41.656
+      ]
+    }
+  ],
+  "source_algorithm_hashes_match": true
+}

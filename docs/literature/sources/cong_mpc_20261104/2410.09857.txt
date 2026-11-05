@@ -1,0 +1,616 @@
+                                                                                                                                                                                                          1
+
+
+
+
+                                                                 Optimal Set-Membership Smoothing
+                                                                                 Yudong Li, Yirui Cong, Xiangyun Zhou, Jiuxiang Dong
+
+
+
+                                              Abstract—This article studies the Set-Membership Smoothing                          Kalman     RTS          Two-filter Optimal Baysian     Unscented,
+                                           (SMSing) problem for non-stochastic Hidden Markov Models.                    Stochastic filter  smoother        smoother     smoothing    Particle smoothing
+                                           By adopting the mathematical concept of uncertain variables,                  methods (1960) (1965, optimal) (1969, optimal)  (1987)
+                                           an optimal SMSing framework is established for the first time.
+                                           This optimal framework reveals the principles of SMSing and
+                                           the relationship between set-membership filtering and smoothing.                Set-            Set-mebership    Two-filter    Batch-style         Optimal
+                                                                                                                        membership              filter      based SMS        SMS              SMSing
+                                           Based on the design principles, we put forward two SMSing                     methods               (1966)         (1971)        (1999)
+arXiv:2410.09857v1 [eess.SY] 13 Oct 2024
+
+
+
+
+                                                                                                                                                                                                 ?
+                                           algorithms: one for linear systems with zonotopic constrained
+                                           uncertainties, where the solution is given in a closed form, and
+                                           the other for a class of nonlinear systems. Numerical simulations
+                                           corroborate the effectiveness of our theoretical results.                    Fig. 1. Timelines of stochastic and set-membership smoothing methods.
+                                                                                                                        Various stochastic smoothing methods such as the RTS smoother, unscented
+                                             Index Terms—Set-membership smoothing, optimal state esti-                  RTS smoother, two-filter smoother, and particle smoother have been exten-
+                                           mation, non-stochastic systems, uncertain variables, constrained             sively studied over the past few decades. In contrast, very few studies were
+                                           zonotopes.                                                                   conducted on SMSing, and importantly, the knowledge on optimal SMSing
+                                                                                                                        is still lacking.
+
+                                                                    I. I NTRODUCTION
+                                                                                                                        1960s, the first Set-Membership Filter (SMF) was proposed by
+                                           A. Motivation and Related Work
+                                                                                                                        Witsenhausen [12], [13]. Afterward, by introducing different
+                                              The smoothing problem for state-space models subject to                   set representations, various SMFs (e.g., with ellipsoidal [14],
+                                           system uncertainties has been extensively studied in the past                polytopic [15], zonotopic [16], and constrained zonotopic [17]
+                                           few decades. Compared to filtering (which estimates the cur-                 SMFs) were investigated to handle different types of system
+                                           rent state), smoothing reconstructs past states given available              uncertainties. The optimal SMFing framework was established
+                                           noisy measurements. It has broad applications in epidemic                    in [18] very recently. However, the optimal solution for
+                                           tracking [1], target tracking [2], volatility models for financial           SMSing remains under-investigated, even for linear systems.
+                                           data [3], etc.                                                               The research on SMSing started in the 1970s, following
+                                              When the statistics of system uncertainties are known, the                the development of SMFing: In [19], two-filter-based Set-
+                                           Bayesian smoothing approach provides a complete probability-                 Membership Smoothers (SMSs) were studied, where ellip-
+                                           based solution to the smoothing problem. The research on                     soidal estimates were obtained by solving Riccati equations;
+                                           Bayesian smoothing began in the 1960s, following the devel-                  In [20], a batch-style framework for SMSing was established
+                                           opment of the Kalman filter [4], [5]: The Rauch–Tung–Striebel                based on information-based complexity theory for the systems
+                                           (RTS) smoother, also known as the Kalman smoother, was                       with norm-bounded uncertainties, where an ellipsoidal SMS-
+                                           introduced as an optimal closed-form solution for linear                     ing solution is provided. Compared to stochastic smoothing, a
+                                           Gaussian models [6]; then, an optimal two-filter smoothing                   considerably less amount of work studied SMSing (see Fig. 1),
+                                           framework was proposed in [7]. In the 1980s, the optimal                     and the following important problems are still open:
+                                           Bayesian smoothing framework for stochastic Hidden Markov                       • A general optimal mathematical framework for SMSing,
+                                           Models (HMMs) was established in [8], [9], which is suitable                       which can inspire more SMSs, is lacking.
+                                           for any probability model. This optimal framework inspired                      • For linear systems, optimal closed-form SMSing solu-
+                                           the follow-up research on smoothing methods in terms of non-                       tions, akin to the RTS smoother, remain unknown.
+                                           linear (unscented RTS smoother [10]), non-Gaussian models                       • Unlike the stochastic method, the relationship between
+                                           (particle smoothing [11]), etc (see Fig. 1).                                       SMFing and SMSing is unclear.
+                                              When the system uncertainties have unknown statistics
+                                                                                                                           To solve the above issues, this paper focuses on establishing
+                                           but known ranges, set-membership estimation is a powerful
+                                                                                                                        an optimal SMSing framework, finding a closed-form solution
+                                           tool for solving the smoothing problem. Similarly to its
+                                                                                                                        for linear SMSing, and revealing the fundamental relationship
+                                           stochastic counterpart, Set-Membership Smoothing (SMSing)
+                                                                                                                        between SMFing and SMSing.
+                                           also followed the development of the corresponding filtering
+                                           technique, i.e., Set-Membership Filtering (SMFing). In the
+                                                                                                                        B. Our Contributions
+                                              Y. Li and J. Dong are with the State Key Laboratory of Synthetical           In this article, we put forward an optimal SMSing frame-
+                                           Automation of Process Industries, Northeastern University, China, (email:
+                                           2210325@stu.neu.edu.cn; dongjiuxiang@ise.neu.edu.cn).
+                                                                                                                        work based on uncertain variables [18], [21]. The main con-
+                                              Y. Cong is with the College of Intelligence Science and Technology, Na-   tributions are as follows.
+                                           tional University of Defense Technology, China (congyirui11@nudt.edu.cn).       • We propose a (set-membership) smoothing equation
+                                              X. Zhou is with the School of Engineering, The Australian National
+                                           University, Australia (xiangyun.zhou@anu.edu.au).                                  with rigorously proven optimality. It together with opti-
+                                              Corresponding authors: Jiuxiang Dong and Yirui Cong.                            mal SMFing establishes an optimal SMSing framework,
+                                                                                                                                        2
+
+
+
+    which can handle any set representations. This optimal        to provide a set containing all the possible xk for k ∈ N0 , after
+    framework reveals the principles of SMSing and the rela-      collecting the measurements up to a future time step T > k
+    tionship between set-membership filtering and smoothing.      (i.e., y0:T := y0 , . . . , yT ). We define this set as Xk (y0:T ), with
+    Furthermore, we present the optimal SMSing framework          Xk standing for the SMSing map. The optimality criterion for
+    for linear systems in a more explicit form.                   an SMS is defined as follows.
+  • The optimal SMSing framework provides a guideline for
+                                                                  Definition 1 (Optimal SMSing). An SMS is optimal if its
+    designing SMSing algorithms. With the established linear
+                                                                  SMSing map, labeled by Xk∗ , returns the smallest set such
+    SMSing framework, we propose a constrained zonotopic
+                                                                  that Xk∗ (y0:T ) ⊆ Xk (y0:T ) holds for any Xk and y0:T .
+    closed-form solution to linear SMSing problems. We also
+    develop a nonlinear SMS for a class of nonlinear systems.        In this work, we focus on establishing an optimal SMSing
+                                                                  framework to derive Xk∗ (y0:T ); see Section III. Based on this
+C. Notation and Preliminaries                                     optimal framework, in Section IV, two SMSing algorithms are
+   Throughout this paper, for a sample space Ω, a measurable      proposed for linear and nonlinear systems, respectively.
+function x : Ω → X from sample space Ω to measurable
+set X , expressed by bold letters, is called an uncertain vari-          III. O PTIMAL S ET-M EMBERSHIP S MOOTHING
+able [21], with its range JxK defined by:                                                F RAMEWORK
+                   JxK := {x(ω) : ω ∈ Ω} .                  (1)     The optimal SMSing framework is established based on the
+                           ′                                      optimal SMFing, which is introduced as follows.
+D(S) = sups,s′ ∈Sk ∥s − s ∥ stands for the diameter of S.
+For multiple uncertain variables with consecutive indices,        Lemma 3 (Optimal SMFing [18]). For the system described
+we define xk1 :k2 = xk1 , . . . , xk2 . Given two sets S1 and     by (4) and (5), under the non-stochastic HMM assumption,
+S2 in a Euclidean space, the operation ⊕ stands for the           the optimal SMF is given by the following steps.
+Minkowski sum of S1 and S2 . In×m stands for unit matrix
+with compatible dimensions. The Moore-Penrose inverse of a         1) Initialization. Set the initial prior range Jx0 K.
+matrix M is M + . Moreover, to facilitate understanding of the     2) Prediction. For k ∈ Z+ , given Jxk−1 |y0:k−1 K derived in
+rest of the paper, we introduce the Law of Total Range and            the previous time step k − 1, the prior range is
+Bayes’ Rule for uncertain variables as follows.
+                                                                            Jxk |y0:k−1 K = fk−1 (Jxk−1 |y0:k−1 K, Jwk−1 K).          (6)
+Lemma 1 (Law of Total range [18]).
+               [                   [                               3) Update. For k ∈ N0 , given the observed measurement yk
+        JxK =      Jx|yK, JyK =      Jy|xK.                 (2)       and the prior range Jxk |y0:k−1 K, the posterior range is
+                 y∈JyK                    x∈JxK                                                           
+Lemma 2 (Bayes’ Rule for uncertain variables [18]).                                    [
+                                                                                               −1
+                                                                                                             \
+                                                                       Jxk |y0:k K =        gk,v k
+                                                                                                    ({yk }) Jxk |y0:k−1 K, (7)
+                                    ̸ ∅, x ∈ JxK}
+           Jx|yK = {x : Jy|xK ∩ {y} =                       (3)                           vk ∈Jvk K
+
+                                                                              −1
+    II. S YSTEM M ODEL AND P ROBLEM D ESCRIPTION                       where gk,v k
+                                                                                    (·) is the inverse map of gk (·, vk ).
+   In this work, we investigate the SMSing problem by adopt-         Note that the posterior range Jxk |y0:k K derived by the
+ing the mathematical concept of uncertain variables. Consider     optimal SMFing is the smallest set that includes all possible
+the following nonlinear system:                                   xk given the measurements sequence y0:k . With Jxk |y0:k K, the
+                     xk+1 = fk (xk , wk ),                  (4)   following theorem presents an optimal SMSing framework,
+                                                                  where the optimal smoothing equation for recursively com-
+                         yk = gk (xk , vk ),                (5)
+                                                                  puting Xk∗ (y0:T ) is provided.
+where (4) and (5) are the state and measurement equations,
+                                                                  Theorem 1 (Optimal smoothing equation). For the system
+respectively. The state equation characterizes how the system
+                                                                  described by (4) and (5), the optimal SMS provides the
+state xk (with its realization xk ∈ Jxk K ⊆ Rn ) varies
+                                                                  conditional range Jxk |y0:T K = Xk∗ (y0:T ) for k < T . Under
+over time, where wk is the process/dynamical noise (with its
+                                                                  the non-stochastic HMM assumption, Jxk |y0:T K is derived by
+realization wk ∈ Jwk K ⊆ Rp ), and fk : Jxk K×Jwk K → Jxk+1 K
+                                                                  the optimal backward recursive equation:
+is the system transition function. The measurement equation
+describes how the system state is measured, where yk repre-
+                                                                                  "                             #
+                                                                                     [                            \
+                                                                                             −1
+sents the measurement (with its realization, called observed        Jxk |y0:T K =          fk,wk (Jxk+1 |y0:T K)    Jxk |y0:k K,
+measurement, yk ∈ Jyk K ⊆ Rm ) and vk (with its realization                          wk ∈Jwk K
+vk ∈ Jvk K ⊆ Rq ) stands for the measurement noise, and                                                                     (8)
+gk : Jxk K×Jvk K → Jyk K is the measurement function. Besides,    where Jxk |y0:k K is the posterior range obtained by Lemma 3.
+∀k ∈ N0 , x0 , v0:k , w0:k are unrelated such that the system          Proof: Based on Lemma 1, we have
+described by (4) and (5) becomes a non-stochastic HMM [18].
+                                                                                          [
+   Unlike SMFing, which computes its estimates only utilizing             Jxk |y0:T K =            Jxk |xk+1 , y0:T K.                (9)
+the measurements up to the current time step k, SMSing aims                               xk+1 ∈Jxk+1 |y0:T K
+                                                                                                                                                                3
+
+
+
+In (9), Jxk |xk+1 , y0:T K is equivalent to Jxk |xk+1 , y0:k K ac-
+cording to the Markov property. With Lemma 2, we have
+                       
+                                                          ̸ ∅,
+   Jxk |xk+1 , y0:k K = xk : Jxk+1 |xk , y0:k K ∩ {xk+1 } =
+                                                      xk ∈ Jxk |y0:k K . (10)
+
+Thus, Jxk |xk+1 , y0:T K in (9) can be rewritten as
+
+                                      ̸ ∅, xk ∈ Jxk |y0:k K}
+   {xk : Jxk+1 |xk , y0:k K ∩ {xk+1 } =
+   (a)
+   = {xk : Jxk+1 |xk K ∩ {xk+1 } =
+                                 ̸ ∅, xk ∈ Jxk |y0:k K}
+   (b)
+   = {xk : fk ({xk }, Jwk K) ∩ {xk+1 } =
+                                       ̸ ∅, xk ∈ Jxk |y0:k K},
+where (a) follows from the Markov property; (b) holds since
+the state equation (4) indicatesSJxk+1 |xk K = fk ({xk }, Jwk K).                  Fig. 2. Illustration of deriving the smoothed range Jxk |y0:T K at k (the red
+Noticing fk ({xk }, Jwk K) = wk ∈Jwk K fk ({xk }, {wk }) and                       hexagon), based on the smoothed range Jxk+1 |y0:T K derived in the previous
+the fact that fk ({xk }, {wk }) ∩ {xk+1 } = ̸ ∅ if and only if                     smoothing step k + 1 (the darker red triangle on the RHS) and the posterior
+        −1                                                                         range Jxk |y0:k K at k (the grey triangle on the LHS). For each xk+1 in
+xk ∈ fk,w  k
+             ({xk+1 }), we have                                                    Jxk+1 |y0:T K, we obtain the preimage of {xk+1 } under the map fk,wk and
+                                                                                                                                S            −1
+                                                                                   take the union for all wk ∈ Jwk K to derive wk ∈Jwk K fk,w     ({xk+1 }), i.e.,
+                                                                                                                                                k
+   {xk : fk (xk , Jwk K) ∩ {xk+1 } ≠ ∅, xk ∈ Jxk |y0:k K}                         the quadrangle with    dashed  edges; all such “quadrangles” form   the lighter
+                                                                                                      S             −1
+         [ n
+                                               −1
+                                                               o                   red triangle, i.e., wk ∈Jwk K fk,w     (Jxk+1 |y0:T K), which intersecting the
+   =              xk : xk ∈ Jxk |y0:k K, xk ∈ fk,w k
+                                                     ({x k+1 }) .                                                       k
+                                                                                   posterior range Jxk |y0:k K gives the smoothed range Jxk |y0:T K.
+         wk ∈Jwk K
+                                                           (11)
+Specifically, the right hand side of (11) can be rewritten as                         Then, consider a general linear system as follows:
+       [ n                                               o
+                                         −1                                                                xk+1 = Φk xk + Γk wk ,                           (13)
+                xk : xk ∈ Jxk |y0:k K ∩ fk,w k
+                                               ({xk+1 })
+     wk ∈Jwk K                                                                                                yk = Ξk xk + Ψk vk ,                          (14)
+              [       h                                 i
+                        −1
+     =                 fk,w   ({x k+1 }) ∩ Jx k |y0:k K                            where Φk ∈ Rn×n , Γk ∈ Rn×p , Ξk ∈ Rm×n , and Ψk ∈
+                            k
+                                                                          (12)
+          wk ∈Jwk K
+          "                                  #                                     Rm×q are time-varying matrices. The optimal smoothing
+                [
+                           −1
+                                                 \                                 equation for linear systems is established by the following
+     =                    fk,w k
+                                 ({xk+1 })           Jxk |y0:k K.                  corollary.
+              wk ∈Jwk K
+                                                                                   Corollary 1 (Optimal smoothing equation for linear systems).
+Then, combining (9) and (12), we have                                              For the linear system described by (13) and (14), under
+               "                             #                                     the non-stochastic HMM assumption, the smoothed range
+                                                                                   Jxk |y0:T K is given by the following equation:
+                     [                         \
+                               −1
+ Jxk |y0:T K =                fk,wk ({xk+1 })    Jxk |y0:k K
+                       xk+1 ∈Jxk+1 |y0:T K
+                                                                                                                                    \
+                           wk ∈Jwk K                                                 Jxk |y0:T K = Xk (Φk , Jxk+1 |y0:T K, Γk Jwk K) Jxk |y0:k K, (15)
+     "                                       #
+                                                                                   where
+            [                                    \
+                      −1
+ =                   fk,w k
+                            (Jxk+1 |y0:T K)           Jxk |y0:k K,
+         wk ∈Jwk K
+                                                                                      Xk (Φk , Jxk+1 |y0:T K, Γk Jwk K)
+which is the optimal smoothing equation (8).                                                    = ker(Φk ) ⊕ Φ+
+                                                                                                              k (Jxk+1 |y0:T K ⊕ Γk J−wk K). (16)
+   From Definition 1, the set of all possible xk given y0:T is ex-
+actly the conditional range Jxk |y0:T K generated by (8). There-                       Proof: For the linear state equation (13), the preimage of
+fore, Xk∗ (y0:T ) = Jxk |y0:T K satisfies Xk∗ (y0:T ) ⊆ Xk (y0:T )                 Jxk+1 |y0:T K under the linear map fk,wk is:
+for any Xk and y0:T in Definition 1.                                                −1
+                                                                                   fk,w k
+                                                                                          (Jxk+1 |y0:T K) = {xk : Φk xk + Γk wk ∈ Jxk+1 |y0:T K}.
+Remark 1. In Theorem 1, Jxk |y0:T K is called the smoothed                                                                                    (17)
+range. From the optimal smoothing equation (8), we can                             With (8) in Theorem 1, we have
+see that Jxk |y0:T K ⊆ Jxk |y0:k K, which means the optimal                                                         \
+                                                                                                    Jxk |y0:T K = Sl Jxk |y0:k K,             (18)
+SMS always performs not worse than the optimal SMF. How-
+ever, this conclusion cannot be directly derived for Bayesian                      where
+smoothing (the stochastic counterpart of SMSing) for general                                      [
+systems [22].1                                                                        Sl :=               {xk : Φk xk + Γk wk ∈ Jxk+1 |y0:T K}.             (19)
+                                                                                              wk ∈Jwk K
+
+    1 For linear systems, we can easily observe that the mean-squared error of     To derive (15), we need to prove
+the Rauch–Tung–Striebel (RTS) smoother cannot be worse than the Kalman
+filter [22], while the same result cannot be easily derived for general systems.     Sl = ker(Φk ) ⊕ Φ+
+                                                                                                      k (Jxk+1 |y0:T K ⊕ Γk J−wk K) =: Sr . (20)
+                                                                                                                                                       4
+
+
+
+  (i) Prove Sr ⊆ Sl . ∀sr ∈ Sr , there exist a ∈ ker(Φk ),                  where ĥ(j) is the j-th component of ĥ.
+xk+1 ∈ Jxk+1 |y0:T K, and wk ∈ Jwk K such that
+                                                                              The constrained zonotopic version of Corollary 1, i.e., the
+                    sr = a + Φ+
+                              k (xk+1 − Γk wk ).                            optimal smoothing equation for linear systems, is provided in
+                                                                            Proposition 1.
+Replacing xk with sr in Φk xk + Γk wk of (19), we have
+  Φk sr + Γk wk = Φk [a + Φ+                                                Proposition 1. Consider the constrained zonotopic posterior
+                           k (xk+1 − Γk wk )] + Γk wk . (21)
+                                                                            and process noise ranges
+Since Φk a = 0 [as a ∈ ker(Φk )] and
+                                                                                       Jxk |y0:k K := Z(Ĝk , ĉk , Âk , b̂k , ĥk ),
+       Φk Φ+
+                                  (13)
+                                   +                                                                                                               (23)
+           k (xk+1 − Γk wk ) = Φk Φk (Φk xk )                                                Jwk K := Z(Ĝwk , ĉwk , Âwk , b̂wk , ĥwk ).
+                                   =Φk xk = xk+1 − Γk wk ,
+                                                                            The smoothed range derived from the smoothing equation (15)
+equation (21) indicates                                                     for 0 ≤ k < T can be expressed by Jxk |y0:T K =
+             Φk sr + Γk wk = xk+1 ∈ Jxk+1 |y0:T K.                          Z(G̃k , c̃k , Ãk , b̃k , h̃k ) with the following parameters:
+                                                                                                       
+Observing that wk ∈ Jwk K, we get                                                G̃k = Ĝk 0 , c̃k = ĉk ,
+                                                                                                                             
+          [                                                                                     Âk           0           0
+  sr ∈          {xk : Φk xk + Γk wk ∈ Jxk+1 |y0:T K} = Sl ,
+                                                                                            0              Ãk+1         0   
+         wk ∈Jwk K                                                               Ãk =     0
+                                                                                                                              ,
+                                                                                                              0         Âw 
+                                                                                                                            k
+which means Sr ⊆ Sl .
+                                                                                             Φk Ĝk    −G̃k+1       −Γk Ĝwk                       (24)
+  (ii) Prove Sr ⊇ Sl . ∀sl ∈ Sl , there exist wk ∈ Jwk K and                                                         
+xk+1 ∈ Jxk+1 |y0:T K such that                                                                          b̂k                            
+                                                                                                                                    ĥk
+                                                                                                   b̃k+1               
+                       Φk sl + Γk wk = xk+1 ,                                     b̃k =                                , h̃k = h̃k+1  .
+                                                                                                    b̂wk               
+which implies                                                                                                                      ĥwk
+                                                                                           c̃k+1 + Γk ĉwk − Φk ĉk
+        sl ∈ ker(Φk ) ⊕ Φ+
+                         k ({xk+1 } ⊕ {−wk })                                    Proof: Equation (15) can be rewritten as:
+           ⊆ ker(Φk ) ⊕ Φ+
+                         k (Jxk+1 |y0:T K ⊕ Γk J−wk K)
+                                                                                                                              \
+                                                                               Jxk |y0:T K = Xk (Φk , Jxk+1 |y0:T K, Γk Jwk K) Jxk |y0:k K
+           = Sr .
+                                                                               = {xk ∈ Jxk |y0:k K : Φk xk ∈ Γk J−wk K ⊕ Jxk+1 |y0:T K}.
+Thus, sl ∈ Sr and we have Sr ⊇ Sl .                                                                                                            (25)
+  To conclude, we get (20), which together with (18) and (19)               First, based on the linear map and Minkowski sum of
+yields (15).                                                                CZs [17],2 the term Γk J−wk K ⊕ Jxk+1 |y0:T K in (25) can be
+   Theorem 1 and Corollary 1 provide clear frameworks for                   expressed by Z(G̃−       −       − −       −
+                                                                                               k , c̃k , Ãk , b̃k , h̃k ), where
+designing smoothing algorithms of nonlinear and linear sys-
+                                                                                 G̃−                               c̃−
+                                                                                                             
+tems, respectively.                                                                k = G̃k+1 Γk Ĝwk ,               k = Γk ĉwk + c̃k+1 ,
+                                                                                                                                               (26)
+                                                                                                                                       
+                                                                                      Ãk+1     0                   b̃k+1             h̃k+1
+                    IV. A LGORITHM D ESIGN                                    Ã−
+                                                                                k  =                   ,  b̃ −
+                                                                                                             k  =            , h̃−
+                                                                                                                                 k =         .
+                                                                                         0    Âwk                   b̂wk              ĥwk
+   In this section, we design specific algorithms for implement-
+ing SMSing based on the optimal framework established in the                Then, Jxk |y0:T K is the generalized intersection [17] (see also
+previous section. In Section IV-A, we provide a closed-form                 Appendix A) of Jxk |y0:k K and Z(G̃−        −     − −         −
+                                                                                                                  k , c̃k , Ãk , b̃k , h̃k ) under
+solution (see Algorithm 1) for the optimal smoothing equation               the linear map Φk xk , whose parameters are exactly (24).
+for linear systems with constrained zonotopic uncertainties.                  Based on Proposition 1, we established the optimal CZ-
+In Section IV-B, we provide an optimal SMSing algorithm                     based SMS for linear systems in Algorithm 1.
+(see Algorithm 2) for nonlinear systems. In Section IV-C,
+                                                                            Algorithm 1 Optimal Linear Constrained Zonotopic SMS
+we numerically investigate the performance of the designed
+                                                                            Input: posterior ranges Jxk |y0:k K for k ∈ {0, . . . , T } and process noise
+algorithms.                                                                     ranges Jwk K for k ∈ {0, . . . , T − 1};
+                                                                            Output: smoothed ranges Jxk |y0:T K for k ∈ {0, . . . , T − 1};
+A. Optimal Constrained Zonotopic SMS for Linear Systems                      1: for k = T − 1 → 0 do
+                                                                             2:    Jxk |y0:T K = Z(G̃k , c̃k , Ãk , b̃k , h̃k ) ← (24);
+  In this subsection, the realization of linear optimal SMS is               3: end for
+based on the constrained zonotope (CZ) [17], [23], which is
+defined as follows.
+                                                                            Remark 2. Algorithm 1 provides a closed-form solution of
+Definition 2 ([23]). A set S ⊆ Rn is a (extended) constrained               SMSing for linear systems with CZ-type uncertainties.
+zonotope if there exists a quintuple (Ĝ, ĉ, Â, b̂, ĥ) ∈ Rn×ng ×
+Rn × Rnc ×ng × Rnc × [0, ∞]ng such that S is expressed by                     The line-by-line explanation of Algorithm 1 is presented
+                                                                          as follows. The inputs are the posterior ranges and process
+                           ng
+                          Y                                               noise ranges described by (23). The outputs are the smoothed
+  Ĝξ + ĉ : Âξ = b̂, ξ ∈    [−ĥ(j) , ĥ(j) ] =: Z(Ĝ, ĉ, Â, b̂, ĥ),   ranges, recursively derived by Lines 1-3 from k = T − 1
+                                              
+                           j=1
+                                                                   (22)       2 The details of the operations can be found in Appendix A.
+                                                                                                                                                              5
+
+
+
+to 0. Note that in each time step k ∈ {0, . . . , T − 1},                        C. Performance Comparison with Known Algorithms
+Line 2 calculates the smoothed range Jxk |y0:T K based on                           To corroborate the effectiveness of the proposed SMSing
+Proposition 1, where the last smoothed range Jxk+1 |y0:T K =                     framework, first, the performance of Algorithm 1 is compared
+Z(G̃k+1 , c̃k+1 , Ãk+1 , b̃k+1 , h̃k+1 ), the current posterior range           with the optimal SMFing [18]. Consider the linear system
+Jxk |y0:k K, and the current process noise range Jwk K are                       described by (13) and (14), with parameters3
+employed.                                                                                                                    
+                                                                                                       sin 1   cos 1           0.5
+                                                                                             Φk =                     , Γk =        ,
+                                                                                                      − cos 1 sin 1              1
+B. Optimal SMS for a Class of Nonlinear Systems                                                                             
+                                                                                                      0.5 0.5             1 0            (31)
+  Consider the following one-dimensional affine nonlinear                                    Ξk =              , Ψk =           ,
+                                                                                                       1 0.3              0 1
+system:
+                                                                                             Jwk K = [−1, 1],         Jvk K = [−1, 1]2 .
+                          xk+1 = η(xk ) + wk ,                          (27)     Fig. 3 shows the comparison between the optimal SMF [18]
+                             yk = g(xk , vk ),                          (28)     and the optimal SMS implemented by Algorithm 1 for k ∈
+                                                                                 [0, 50]. Specifically, Fig. 3(a) compares the interval hull of pos-
+where Jxk K ⊆ R, Jwk K ⊆ R, and η : R → R is invertible.
+                                                                                 terior ranges Jxk |y0:k K (from the optimal SMF) and smoothed
+With Theorem 1, we provide the optimal smoothing equation
+                                                                                 ranges Jxk |y0:T K (from Algorithm 1). Besides, the average
+for (27) and (28) in the following proposition.
+                                                                                 diameters of Jxk |y0:k K and Jxk |y0:T K over k ∈ [0, 50] through
+Proposition 2. Consider Jxk |y0:k K = [ak , bk ] and Jwk K =                     5000 times Monte Carlo simulations are shown in Fig. 3(b).
+[awk , bwk ] for the system described by (27) and (28). The                      From Fig. 3, we can see that our proposed Algorithm 1
+smoothed range derived from the optimal smoothing equation                       outperforms the optimal SMF.
+(8) for 0 ≤ k < T is Jxk |y0:T K = [ãk , b̃k ], where
+             ãk = max(āk , ak ),            b̃k = min(b̄k , bk ),     (29)
+with
+             āk =          min              (η −1 (xk+1 − wk )),
+                         wk ∈Jwk K
+                     xk+1 ∈[ãk+1 ,b̃k+1 ]
+                                                                        (30)
+             b̄k =          max              (η −1 (xk+1 − wk )).
+                         wk ∈Jwk K
+                     xk+1 ∈[ãk+1 ,b̃k+1 ]
+
+                                                                                                                       (a)
+Note that η −1 is the inverse function of η.
+                                                                                                         9
+      Proof: Considering fk,wk (x) = η(x) + wk , we know                                                                                      SMF
+                                                                                                         8                                    SMS
+that
+S the left−1 and right endpoints of the range of term
+   wk ∈Jwk K fk,wk (Jxk+1 |y0:T K) in (8) is the minimum and                                             7
+the maximum of η −1 (xk+1 − wk ) over Jwk K ∋ wk and
+                                                                                              Diameter
+
+
+
+
+                                                                                                         6
+Jxk |y0:T K ∋ xk+1 , which are āk and b̄k in (30), respectively.
+Then, the smoothed range Jxk |y0:T K = [ãk , b̃k ] is the intersec-                                     5
+
+tion of [āk , b̄k ] and Jxk |y0:k K = [ak , bk ], where the end points                                  4
+ãk and b̃k are given in (29).
+                                                                                                         3
+
+Algorithm 2 An Optimal Nonlinear SMS                                                                     2
+Input: posterior ranges Jxk |y0:k K = [awk , bwk ] for k ∈ {0, . . . , T } and                               0   10   20         30     40          50
+    process noise ranges Jwk K = [ak , bk ] for k ∈ {0, . . . , T − 1};                                                      k
+Output: smoothed ranges Jxk |y0:T K for k ∈ {0, . . . , T − 1};                                                        (b)
+ 1: for k = T − 1 → 0 do                                                         Fig. 3. Comparison between optimal SMFing and optimal SMSing: (a)
+ 2:    Jxk |y0:T K = [ãk , b̃k ] ← (29);                                        interval hulls of the smoothed range Jxk |y0:T K (red rectangles) and posterior
+ 3: end for                                                                      range Jxk |y0:k K (green rectangles) derived by optimal SMSing and optimal
+                                                                                 SMFing over k ∈ [0, 10], respectively, and the real state trajectory marked
+   Now, based on Proposition 2, we establish the optimal                         by dashed lines; (b) diameters (in the sense of ∞-norm) of Jxk |y0:k K and
+                                                                                 Jxk |y0:T K from the optimal SMS Algorithm 1 and the optimal SMF [18]
+nonlinear SMS for the system described by (27) and (28);                         over k ∈ [0, 50], averaged under 5000 simulation runs, which is shown by red
+see Algorithm 2. The line-by-line explanation of Algorithm 2                     curve (with star markers) and green curve (with circle markers), respectively.
+is presented as follows. The inputs are the posterior and noise
+ranges in Proposition 2. The output is the smoothed range,                         Moreover, to show the effectiveness of the SMS w.r.t. the
+recursively derived by Lines 1-3 from k = T − 1 to 0.                            point estimation, we compare Algorithm 1 (i.e., the optimal
+Specifically, in each time step k ∈ {0, . . . , T − 1}, Line 2                   constrained zonotopic SMS) with the RTS smoother [6], [22].
+calculates the smoothed range Jxk |y0:T K based on (29), where                   The covariance matrices Q (for process noises) and R (for
+the last smoothed range Jxk+1 |y0:T K = [ãk+1 , b̃k+1 ], the                       3 The probability distribution of noise w , v can be arbitrary for simula-
+                                                                                                                             k   k
+current posterior range Jxk |y0:k K = [ak , bk ], and the current                tions. In Section IV, these noises are set to be uniformly distributed in their
+process noise range Jwk K = [awk , bwk ] are required.                           ranges.
+                                                                                                                                                     6
+
+
+
+                                                                            SMFing [18]. Consider the following nonlinear system:
+                                                                                                                    1
+                                                                                                          xk+1 = xk3 + xk + wk ,                  (33)
+                                                                                                            yk = 2xk + vk ,                       (34)
+
+                                                                            where Jwk K = [−1, 1] and Jvk K = [1, 3]. Fig. 6 compares
+
+                                                                                                 1
+
+                                                                                                0.9
+
+                                                                                                0.8
+                                                                                                                                        SMF
+                                                                                                                                        SMS
+                                                                                                0.7
+
+
+
+
+                                                                                     Diameter
+                                                                                                0.6
+Fig. 4. Average MSE (mean square error) of RTS smoothers with different
+parameters q and r in (32). The MSE is computed for k ∈ [0, 50] and is                          0.5
+averaged over 100 simulation runs for each parameter pair (q, r).
+                                                                                                0.4
+
+                                                                                                0.3
+measurement noises) of the RTS smoother have the following
+                                                                                                0.2
+forms                                                                                                 0   20       40       60     80     100
+                                                                                                                        k
+                         Q = q,        R = rI2×2 ,                   (32)
+                                                                            Fig. 6. Comparison between SMFing and SMSing for system (27) and (28).
+where q ≥ 0 and r ≥ 0.4 Since the statistics of noises                      The diameter (in the sense of ∞-norm) of Jxk |y0:k K and Jxk |y0:T K from
+are unknown to the RTS smoother, q and r are parameters                     SMSing and SMFing over k ∈ [0, 50] is averaged under 5000 times simulation
+                                                                            runs, which is shown by red curve (with star markers) and green curve (with
+to be tuned. In Fig. 4, we provide the performance of the                   circle markers), respectively.
+RTS smoother considering different q and r. We can see that
+the RTS smoother achieves the best smoothing performance                    the averaged diameters (in ∞-norm sense) of posterior ranges
+when q = 0.076 and r = 0.036. Then, the RTS smoother                        (from optimal SMF [18]) and smoothed ranges (from Algo-
+with the best parameters q and r is chosen to compare with                  rithm 2), over 5000 times Monte Carlo simulations. We can see
+Algorithm 1, shown in Fig. 5. The results show that, for                    that Algorithm 2 can achieve a more precise estimation, which
+                                                                            validates the effectiveness of the proposed SMSing framework.
+               1.4
+                                                          RTS
+                                                          SMS
+               1.2                                                                                             V. C ONCLUSION
+
+                                                                               In this paper, we have proposed an optimal SMSing frame-
+                1
+                                                                            work. Based on this framework, a corresponding constrained
+         MSE
+
+
+
+
+                                                                            zonotopic closed-form solution has been established for linear
+               0.8
+                                                                            SMSing problems, and a nonlinear SMS algorithm for a
+                                                                            class of nonlinear systems has been designed. Numerical
+               0.6                                                          simulations have shown that the proposed SMSing framework
+                                                                            can further improve the accuracy of state estimates from the
+               0.4                                                          optimal SMFing. Compared to stochastic smoothing methods,
+                     0   10       20        30       40         50
+                                        k                                   such as the RTS smoother, the proposed SMS offers a more
+                                                                            accurate state estimate for non-stochastic scenarios.
+Fig. 5. Comparison of point-estimation accuracy (in the sense of MSE)
+between the optimal SMS and the RTS smoother. The MSE is computed
+for k ∈ [0, 50] over 5000 times simulation runs, where the MSEs of the
+optimal SMS and the RTS smoother are shown by the red curve (with square                        A PPENDIX A
+markers) and the blue curve (with star markers), respectively.                   M ATHEMATICAL O PERATIONS FOR C ONSTRAINED
+                                                                                                 Z ONOTOPES
+point estimation, Algorithm 1 performs better than the RTS
+smoother (with parameter tuning) when the noise statistics                     To make the theoretical results related to CZs self-contained,
+are unknown to the designers, which often occurs in practical               we describe the linear map, Minkowski sum, and the gener-
+applications.                                                               alized intersection of CZs. The detailed proof can be found
+   Finally, we present simulation results for a nonlinear system.           in [17].
+In this regard, Algorithm 2 is compared with the optimal                       For a CZ Z = Z(Ĝz , ĉz , Âz , b̂z , ĥz ) ⊆ Rz and a linear map
+                                                                            F ⊆ Rz×z , the linear map of CZ is defined as:
+   4 From Jv K = [−1, 1]2 in (31), we know that the two components of v
+            k                                                           k
+are unrelated. Thus, we assume R has the form presented in (32).                F Z := {F z : z ∈ Z} = Z(F Ĝz , F ĉz , Âz , b̂z , ĥz ).       (35)
+                                                                                                                                                          7
+
+
+
+   Let W = Z(Ĝw , ĉw , Âw , b̂w , ĥw ) ⊆ Rz be another CZ, and             [20] A. Garulli, A. Vicino, and G. Zappa, “Optimal induced-norm and
+the Minkowski sum of Z and W is                                                     set membership state smoothing and filtering for linear systems with
+                                                                                    bounded disturbances,” Automatica, vol. 35, no. 5, pp. 767 – 776, May.
+   Z ⊕ W := {z + w : z ∈ Z, w ∈ W}                                                  1999.
+                                                                       [21] G. N. Nair, “A nonstochastic information theory for communication and
+                                        Â   0    b̂  ĥ                            state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6, pp. 1497–
+   = Z Ĝz Ĝw , ĉz + ĉw , z                  , z , z
+                   
+                                                              .                     1510, Jun. 2013.
+                                         0 Âw    b̂w ĥw
+                                                                               [22] S. Särkkä, Bayesian filtering and smoothing. New York, NY, USA:
+                                                              (36)                  Cambridge University Press, 2013.
+                                             y          z×y
+  Let Y = Z(Ĝy , ĉy , Ây , b̂y , ĥy ) ⊆ R and R ⊆ R     . The              [23] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-membership
+generalized intersection operations of CZ is                                        filters with respect to initial conditions: An observation-information
+                                                                                    perspective,” Automatica (arXiv:2203.13966), to be published.
+ Z∩R Y := {z ∈ Z : Rz ∈ Y}
+                                                
+                       Âz   0         b̂z       
+                                              , ĥz  .
+            
+ = Z  Ĝz 0 , ĉz ,  0    Ây ,  b̂y
+                                                 ĥy
+                      RĜz −Ĝy     cy − Rĉz
+                                                     (37)
+
+                             R EFERENCES
+ [1] S. F. McGough, M. A. Johansson, M. Lipsitch, and N. A. Menzies,
+     “Nowcasting by bayesian smoothing: A flexible, generalizable model
+     for real-time epidemic tracking,” PLoS computational biology, vol. 16,
+     no. 4, p. e1007735, Apr. 2020.
+ [2] W. Aftab and L. Mihaylova, “A learning gaussian process approach
+     for maneuvering target tracking and smoothing,” IEEE Trans. Aerosp.
+     Electron. Syst., vol. 57, no. 1, pp. 278–292, Feb. 2020.
+ [3] H. Singer, “Conditional gauss–hermite filtering with application to
+     volatility estimation,” IEEE Trans. Autom. Control, vol. 60, no. 9, pp.
+     2476–2481, Sep. 2015.
+ [4] R. E. Kalman, “A new approach to linear filtering and prediction
+     problems,” J. Basic Eng., vol. 82, no. 1, pp. 35–45, Mar. 1960.
+ [5] R. E. Kalman and R. S. Bucy, “New results in linear filtering and
+     prediction theory,” J. Basic Eng., vol. 83, no. 1, pp. 95–108, 1961.
+ [6] H. E. RAUCH, F. TUNG, and C. T. STRIEBEL, “Maximum likelihood
+     estimates of linear dynamic systems,” AIAA Journal, vol. 3, no. 8, pp.
+     1445–1450, Aug. 1965.
+ [7] D. Fraser and J. Potter, “The optimum linear smoother as a combination
+     of two optimum linear filters,” IEEE Trans. Autom. Control, vol. 14,
+     no. 4, pp. 387–390, Aug. 1969.
+ [8] M. Askar and H. Derin, “A recursive algorithm for the bayes solution
+     of the smoothing problem,” IEEE Trans. Autom. Control, vol. 26, no. 2,
+     pp. 558–561, Apr. 1981.
+ [9] G. Kitagawa, “Non-gaussian state—space modeling of nonstationary
+     time series,” Journal of the American Statistical Association, vol. 82,
+     no. 400, pp. 1032–1041, Mar. 1987.
+[10] S. Särkkä, “Unscented rauch–tung–striebel smoother,” IEEE Trans.
+     Autom. Control, vol. 53, no. 3, pp. 845–849, Apr. 2008.
+[11] G. Kitagawa, “Monte carlo filter and smoother for non-gaussian non-
+     linear state space models,” Journal of computational and graphical
+     statistics, vol. 5, no. 1, pp. 1–25, 1996.
+[12] H. S. Witsenhausen, “Minimax controls of uncertain systems,” M.I.T.
+     Electron. Syst. Lab., Cambridge, Tech. Rep. Mass. Rept. ESL-R-269
+     (NASA Rept. N66-33441), May 1966.
+[13] H. Witsenhausen, “Sets of possible states of linear systems given
+     perturbed observations,” IEEE Trans. Autom. Control, vol. 13, no. 5,
+     pp. 556–558, Oct. 1968.
+[14] F. Schweppe, “Recursive state estimation: Unknown but bounded errors
+     and system inputs,” IEEE Trans. Autom. Control, vol. 13, no. 1, pp.
+     22–28, Feb. 1968.
+[15] J. S. Shamma and K.-Y. Tu, “Set-valued observers and optimal dis-
+     turbance rejection,” IEEE Trans. Autom. Control, vol. 44, no. 2, pp.
+     253–264, Feb. 1999.
+[16] T. Alamo, J. M. Bravo, and E. F. Camacho, “Guaranteed state estimation
+     by zonotopes,” Automatica, vol. 41, no. 6, pp. 1035–1043, Jun. 2005.
+[17] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz,
+     “Constrained zonotopes: A new tool for set-based estimation and fault
+     detection,” Automatica, vol. 69, pp. 126–136, Jul. 2016.
+[18] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical frame-
+     work and optimality of set-membership filtering,” IEEE Transactions on
+     Automatic Control, vol. 67, no. 5, pp. 2544–2551, May. 2021.
+[19] D. Bertsekas and I. Rhodes, “Recursive state estimation for a set-
+     membership description of uncertainty,” IEEE Trans. Autom. Control,
+     vol. 16, no. 2, pp. 117–128, Apr. 1971.
+

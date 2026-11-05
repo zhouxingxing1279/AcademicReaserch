@@ -1,0 +1,857 @@
+                                                                                                                                                                               1
+
+
+
+
+                                                           Asymptotic Boundedness of Distributed
+                                                                Set-Membership Filtering
+                                                                    Yudong Li, Yirui Cong, Shimin Wang, Martin Guay, Jiuxiang Dong
+
+
+
+
+                                              Abstract—Asymptotic boundedness is a crucial property of                an analytical solution for the optimal observer gain
+                                           Distributed Set-Membership Filtering (DSMFing) that pre-                   using a similar strategy. Furthermore, employing
+                                           vents the unbounded growth of the set estimates caused by                  a comparable methodology, [7] designed a mean-
+                                           the wrapping effect. However, this important property remains
+                                                                                                                      shift-based robust zonotopic DSMF to handle outlier
+arXiv:2509.14106v1 [eess.SY] 17 Sep 2025
+
+
+
+
+                                           underinvestigated, compared to its noise-free and stochastic-
+                                           noise counterparts, i.e., the convergence of Distributed Ob-               contamination in DSMFing. In addition, [8] proposed
+                                           servers (DOs) and the bounded error covariance of Distributed              two DSMFs based on strip and set-propagation ap-
+                                           Kalman Filters (DKFs). This paper studies the asymptotic                   proaches, where the optimal parameters of the over-
+                                           boundedness of DSMFing for linear discrete-time systems. A                 approximating zonotopic set estimate were obtained
+                                           novel concept, termed the Collective Observation-Information
+                                           Tower (COIT), is introduced to characterize the fundamental                analytically.
+                                           relationship between the structure of graphs and the set                 • Ellipsoidal DSMF: Similar to the zonotopic DSMFs,
+                                           estimates, which enables the boundedness analysis. Leveraging              ellipsoidal DSMFs for linear systems focus on deriving
+                                           the COIT, an easily verifiable suﬀicient condition for the                 optimal observer gains to minimize the fused ellip-
+                                           asymptotic boundedness of linear DSMFing is established.                   soidal estimate. For example, [9] employed a coding–
+                                           Surprisingly, the suﬀicient condition generalizes the well-known
+                                           collective detectability condition for DOs and DKFs; it links              decoding communication strategy to reduce the com-
+                                           DSMFs to existing distributed estimation methods and reveals               munication burden in time-varying sensor networks,
+                                           the unique characteristic of DSMFs.                                        where the observer gain was obtained by solving
+                                              Index Terms—Distributed set-membership filter, asymptotic               an LMI-based optimization problem minimizing the
+                                           boundedness, collective observation-information tower, collec-             trace of the ellipsoidal estimate. In [10], an ellipsoidal
+                                           tive detectability, uncertain variable.                                    DSMF was designed for privacy-preserving purposes
+                                                                                                                      in linear systems, where an analytical observer gain
+                                                                                                                      minimized the trace of the ellipsoidal estimate. For
+                                                                    I. Introduction
+                                                                                                                      nonlinear systems, [11] introduced an event-triggered
+                                              Distributed Set-Membership Filters (DSMFs) serve as                     transmission scheme to handle resource constraints,
+                                           an effective solution to handle distributed state estimation               with the optimal parameter recursively computed
+                                           problems when systems are corrupted by unknown-but-                        through an LMI-based optimization problem to yield
+                                           bounded noises [1]–[3]. Thus, the DSMFs have great                         ellipsoids of minimum trace. Moreover, [12] devel-
+                                           potential for broad applications, e.g., in sensor networks                 oped a DSMF for multirate systems under Round-
+                                           of autonomous vehicles [4].                                                Robin scheduling; instead of minimizing the trace,
+                                              In the literature, there are two main classes of DSMFs                  the observer gain was obtained from an LMI-based
+                                           w.r.t. the set representations, shown as follows:                          optimization that enforces an optimal finite-horizon
+                                              • Zonotopic DSMF: Zonotopic DSMFs aim to de-                            constraint.
+                                                termine the optimal observer gain that minimizes
+                                                the F -radius of the fused zonotopic set estimate.                Overall, although zonotopic and ellipsoidal DSMFs pro-
+                                                For instance, [5] established a zonotopic DSMF for                vide analytical or optimization-based solutions for mini-
+                                                interconnected multi-rate linear systems, where the               mizing set estimates, they still suffer from the wrapping
+                                                optimal observer gain minimizing the F -radius of the             effect, which can lead to unbounded growth of the set
+                                                filtering zonotope was obtained analytically. Building            estimates. Indeed, it is unclear when the estimates can be
+                                                on this work, [6] introduced a multi-hop staircase                guaranteed to stay bounded as time elapses.
+                                                decomposition into the zonotopic DSMF framework                     It should be pointed out that other distributed state
+                                                to reduce computational complexity under the col-                 estimation methods, such as Distributed Observers (DOs)
+                                                lectively detectable condition, while also deriving               for noise-free systems and Distributed Kalman Fil-
+                                                                                                                  ters (DKFs) for systems with Gaussian noises, have
+                                             Y. Li and J. Dong are with the State Key Laboratory of Synthetical   achieved comprehensive and unified conclusions for con-
+                                           Automation of Process Industries, Northeastern University, China,
+                                           (email: 2210325@stu.neu.edu.cn; dongjiuxiang@ise.neu.edu.cn).          vergence/boundedness analysis. For linear discrete-time
+                                             Y. Cong is with the College of Intelligence Science and Tech-        systems, in [13], a necessary and suﬀicient condition for the
+                                           nology, National University of Defence Technology, China (email:       asymptotic convergence of DOs was proposed based on the
+                                           congyirui11@nudt.edu.cn).      S. Wang and M. Guay are with
+                                           Queen’s University, Kingston, ON K7L 3N6, Canada (e-mail:              consensus of the Luenberger observer, which is collectively
+                                           guaym@queensu.ca).                                                     detectable. The same condition (collective detectability)
+                                                                                                                                    2
+
+
+
+was also established for continuous-time systems in [14].        D(S) = sups,s′ ∈Sk ∥s − s′ ∥ stands for the diameter of S.
+This condition also provided a criterion for analyzing the       For multiple uncertain variables with consecutive indices,
+asymptotic boundedness of the error covariance in DKFs           we define xk1 :k2 = xk1 , . . . , xk2 . In and 0n,m stand for
+for stochastic systems. In [15], supported by the fused          identity and null matrices with compatible dimensions,
+Kullback–Leibler average of the local probability density        respectively. Given two sets S1 and S2 in a Euclidean
+functions, the bounds of error covariance of DKFs were           space, the operation + stands  Pb for the Minkowski sum of
+guaranteed under the collective detectability condition          S1 and S2 . The summation i=a Si represents Sa +Sa+1 +
+for linear time-invariant systems. A similar boundedness         · · · + Sb for a ⩽ b, but returns {0} for a > b.1 Given a
+condition for DKFs, known as collectively uniformly de-          matrix M ∈ Rn×m , the kernel, the range space, the Moore-
+tectable, was also achieved in linear time-varying systems       Penrose inverse, and the transpose are ker(M ), R(M ), M † ,
+[16].                                                            and M ⊤ , respectively; when M is a square matrix, its
+   Unlike those two distributed state estimation methods         spectrum is denoted by ΛM . The interval hull IH(S) of a
+(i.e., DOs and DKFs), no effective approaches have been          bounded set S is the smallest outerbounding interval of S
+developed to analyze the boundedness of DSMFing. To the          [19]. For a set of matrices {Xi | i = 1, 2, . . . , N } and a set of
+best of our knowledge, explicit conditions that guarantee        their index N = {1, 2, · · · , N }, define col(X1 , . . . , XN ) as a
+                                                                                                                                 
+                                                                                                                                ⊤ ⊤
+bounded set estimates of DSMFing are still lacking, even         matrix formed by stacking them (i.e., X1⊤ X2⊤ . . . XN              )
+for zonotopic and ellipsoidal DSMFs.                             if dimensions matched. diag(A, B) stands for the diagonal
+   Motivated by the discussions above, we aim to provide         matrix form by square matrix A and B.
+a unified analysis of boundedness for DSMFing. The main
+contributions of this article are highlighted as follows:               III. System Model and Problem Description
+   • By modeling a unified DSMFing process with uncer-             Consider a discrete-time linear sampled-data system2
+      tain variables, the fusion of the local set estimates is
+      outer bounded by a new concept called Collective                                 xk+1 = Axk + Bwk ,                         (2)
+      Observation-Information Tower (COIT). The pro-             where A ∈ R    n×n
+                                                                                    and B ∈ R      n×p
+                                                                                                    . The system state is xk
+      posed COIT indicates the fundamental relationship          (with its realization xk ∈ Jxk K ⊆ Rn ), and wk stands for
+      between the structure of graphs (more specifically,        the process noise (with its realization wk ∈ Jwk K ⊆ Rp ).
+      the source components) and the set estimates. Con-         The system state is estimated by a network of N sensors.
+      sequently, it enables the boundedness analysis of          Each sensor i in the network can obtain local measure-
+      DSMFing.                                                   ments at time k ∈ N0 , with the following measurement
+   • Based on the proposed COIT, an easily checked               equation:
+      suﬀicient condition for the asymptotic boundedness                               yki = Ci xk + vki ,                (3)
+      of linear DSMFing is established. Surprisingly, the
+      suﬀicient condition generalizes the well-known col-        where Ci is null if sensor i has no measurements; yki and vki
+      lective detectability condition for DOs and DKFs.          are the measurement (with its realization yki ∈ Jyki K ⊆ Rqi )
+      This presents two key benefits: (i) the collective         and measurement noise (with its realization vki ∈ Jvki K ⊆
+      detectability is applicable to DSMFs, thereby bridging     Rqi ) of sensor i, respectively. Besides, the process and
+      the gap between DSMFs and the existing estimation          measurement noises satisfy
+      methods; (ii) the suﬀicient condition reveals the              sup D(Jwk K) < ∞          and       sup D(Jvki K) < ∞.       (4)
+      unique characteristic of DSMFing.                              k∈N0                              k∈N0
+In the rest of the paper, the preliminaries of this study are    Sensors can exchange information with their neighbors in
+given in Section II. The system model and the problem            the network. The communication topology is expressed by
+description of DSMFing are presented in Section III. Then,       a directed graph G = (V, E), where V = {1, . . . , N } is the
+an asymptotic boundedness condition of the DSMFing               set of sensors and E ⊆ V × V denotes the set of edges.
+problem is established in Section IV. Finally, the proposed        For sensor i ∈ V , a DSMF aims to provide a set esti-
+asymptotic boundedness condition is corroborated via a           mate/approximation containing all possible xk for k ∈ N0
+simulation example in Section V.                                 based on its local measurements and the information
+                                                                 obtained from its neighbors, which is called a belief Bi (xk )
+                      II. Preliminaries                          defined as follows.
+
+A. Notation                                                      Definition 1 (Belief). From the perspective of sensor i, a
+                                                                 belief Bi (xk ) derived by a DSMF at k ∈ N0 is an outer
+  Throughout this paper, we use ∥·∥ to represent the             bound of posterior range Jxk |y0:k K, where Jxk |y0:k K de-
+Euclidean norm (of a vector) or the spectral norm (of            scribes all possible states xk given all the measurements in
+a matrix). For a sample space Ω, a measurable function
+x : Ω → X from sample space Ω to measurable set X is               1 This is different from the mathematical convention but can keep
+
+called an uncertain variable [17], [18], with its range JxK      many expressions compact in this paper.
+                                                                   2 For a sampled-data system, the system matrix is non-singular,
+defined by:
+                                                                 which is widely considered in discrete-time filtering problems [15],
+                 JxK := {x(ω) : ω ∈ Ω} .                (1)      [16].
+                                                                                                                                                              3
+
+
+
+V up to k, i.e., y0:k := y0 , . . . , yk , with yk = col(yk1 , . . . ykN )   Algorithm 1 Classical Distributed SMFing of Sensor i ∈ V
+being the joint measurement vector of the whole network                      1: Initialization: Initial prior belief Bi− (x0 ).
+at time k.                                                                   2: if k > 0 then
+                                                                             3:    Local prediction step:
+Remark 1. The estimate provided by the DSMF methods                                                   Bi− (xk+1 ) = ABi (xk ) + BJwk K;                     (6)
+in [5], [6], [9], [11], [12], [20], [21] can be regarded as
+different beliefs. Those beliefs are outer bounds of Jxk |y0:k K             4: end if
+at k ∈ N0 .                                                                  5: Local update step:
+
+  However, the belief of sensor i from DSMF may go                                              Bi+ (xk ) = Xk (Ci , yki , Jvki K) ∩ Bi− (xk ),             (7)
+unbounded as time elapses. Thus, for the synthesis of                           where
+DSMFs, it is necessary to consider the asymptotic bound-                                Xk (Ci , yki , Jvki K) = {xk : yki = Ci xk + vki , vki ∈ Jvki K}
+edness of the belief, as described in the following definition.                                                                                             (8)
+                                                                                                            = ker(Ci ) + Ci† ({yki } + J−vki K);
+Definition 2 (Asymptotic Boundedness of DSMFing). A
+                                                                             6: Fusion step:                           ∩
+DSMF is asymptotically bounded if, ∀i ∈ V                                                                Bi (xk ) =           Bj+ (xk ).                    (9)
+                        lim D(Bi (xk )) < ∞.                          (5)                                             j∈Mi0
+                       k→∞
+
+  In this work, we focus on the asymptotic boundedness
+condition of the DSMFing defined in Definition 2.
+                                                                             if no measurements are taken by i. Line 6 defines the
+ IV. Asymptotic Boundedness Condition for Distributed                        Fusion step, where the local posterior beliefs at time k
+                Set-Membership Filtering                                     that received from neighbors Ni,1 are fused with the local
+  To investigate the asymptotic boundedness condition, a                     posterior belief of sensor i, and returns the fused posterior
+general framework of classical DSMFing is established in                     belief Bi (xk ). Most existing DSMFing methods adhere to
+Section IV-A. In Section IV-B, we introduce a new con-                       the classical DSMFing framework outlined in Algorithm 1,
+cept – Collective Observation-Information Tower (COIT),                      although they differ in the strategy of communication
+which incorporates commonly known information of mea-                        protocol, such as event-trigger [22], reduced-order [6], [12],
+surements (in each “group”). Based on the COIT, an easy-                     and coding–decoding [9]. In what follows, the asymptotic
+to-check asymptotic boundedness condition of classical                       boundedness of DSMFing is investigated under the frame-
+DSMFing is presented in Section IV-C.                                        work of Algorithm 1.
+
+
+A. Classical Distributed Set-Membership Filtering                            B. Collective Observation-Information Tower
+  We establish a general framework of classical DSMFing
+                                                                                Let Gs1 , . . . , GsT be the source components4 of G. In
+using uncertain variables. First, we classify the sensors
+                                                                             this subsection, we introduce the concept of the Collective
+in G that have a directed path to i into sets of ρ-hop
+                                                                             Observation-Information Tower (COIT) of the source
+predecessors defined as follows.
+                                                                             component, which enables the analysis of the asymptotic
+Definition 3 (Set of ρ-Hop Predecessors). For a sensor i                     boundedness of DSMFing (see Section IV-C).
+in graph G, the set of all sensors having a direct path to i                    To start with, we propose an intersection-based outer
+involving ρ edges is the set of ρ-hop predecessors of sensor                 bound of Bi (xk ) for sensor i in source component Gst as
+i, labeled as Ni,ρ . We set Ni,ρ = ∅ for ρ > ρ̄i , where ρ̄i                 follows.
+stands for the eccentricity3 of sensor i.
+                                                   Sj+1                      Proposition 1 (Intersection-Based Outer Bound). Con-
+   Let Ni,0 := {i}, and we define Mij := ρ=0 Ni,ρ .                          sider a source component Gst = (Vts , Ets ) in G. ∀k ∈ N0 ,
+Thus, Miρ̄i −1 includes sensor i and all sensors that have                   an outer bound of Bi (xk ) (i ∈ Vts ) derived by Algorithm 1
+a directed path to sensor i. Recall that sensor i can only                   is
+receive information from its neighbors, i.e., Ni,1 . Through                                                  !                 !
+this, a general framework for classical DSMFing for sensor                                    \
+                                                                                              k     \             \     \
+                                                                                  Bi (xk ) ⊆             Ok,r
+                                                                                                           l
+                                                                                                                            Ek ,
+                                                                                                                              l
+                                                                                                                                      (10)
+i is presented in Algorithm 1.                                                                      r=0 l∈Mi                         l∈Mik
+   A detailed line-by-line description of Algorithm 1 is                                                       k−r
+
+
+given as follows. Line 1 initializes the algorithm. When                     where Mij = Vts when j ≥ ρ̄i − 1. In (10),
+k > 0, Lines 3 and 4 provide the prior belief Bi− (xk ) of the
+DSMF of sensor i, which is called the Local prediction step.                                                         X
+                                                                                                                     k−1
+Line 5, known as the Local update step, calculates the local                    Ok,r
+                                                                                 l
+                                                                                     := Ak−r Xr (Cl , yrl , Jvrl K) + Ak−1−τ BJwτ K                        (11)
+posterior belief Bi+ (xk ) based on the local measurement yki .                                                               τ =r
+Note that equation (7) degenerates to Bi+ (xk ) = Bi− (xk )
+                                                                               4 Given a directed graph G = (V, E), a source component Gs =
+                                                                                                                                                  t
+  3 The eccentricity of sensor i is the maximum graph distance               (Vts , Ets ) is defined as a strongly connected component of G such that
+between i and any other sensors in G.                                        there are no edges from V \Vt to Vt [13].
+                                                                                                                s     s
+                                                                                                                                                     4
+
+
+
+is the observation-information set [2] at time k ⩾ r                                            Sensor 1             Sensor 2          Sensor 3
+contributed by yrl ;
+                                      X
+                                      k−1
+           E lk := Ak Bl− (x0 ) +            Ak−1−τ BJwτ K       (12)
+                                      τ =0
+
+is the state-evolution set [2] at time k.
+Proof: See Appendix A.                                 ■
+  The geometric interpretation of Proposition 1 is shown
+in Fig. 1. At time k, sensor i can indirectly obtain the
+observation information up to k − ρ̃i + 1 (where ρ̃i =
+max{ρ̄i , 1}), i.e.,
+      k − ρ̄i + 1 for |Vts | > 1 and k − ρ̄i for |Vts | = 1.
+This fact defines the COIT of Gst as follows
+
+                        (t)
+                                \
+                               k− ρ̃+1   \
+                       Ck :=                     Ok,r
+                                                  l
+                                                      ,          (13)
+                                                                          Local update          Fusion     Local prediction & update   Fusion
+                                r=0      l∈Vts
+                                                                              k=0                k=0                  k=1                k=1
+
+where ρ̃ = max{ρ̃i : i ∈ Vts }, which includes the commonly
+known observation-information sets in a collective/com-
+                                                                        Fig. 1. Illustration of Proposition 1 and the COIT for a source
+plete manner. An example of the COIT can be found in                    component Gst . At k = 0, each sensor obtains a local posterior belief
+Fig. 1 (see the red circles). Note that ∀i ∈ Vts , we have              Bi+ (x0 ) through
+                                                                                    ∩ i the local update step (7) in Algorithm 1, which is ex-
+            (t)
+Bi (xk ) ⊆ Ck .                                                         actly O0,0
+                                                                                 i     E0 . After the fusion step defined by (9), the fused poste-
+                                                                                                                    (∩             )∩(∩             )
+                                                                        rior belief Bi (x0 ) is outer bounded by       l∈Mi0 O0,0
+                                                                                                                               l
+                                                                                                                                           l∈Mi0 E0 ,
+                                                                                                                                                  l
+
+                                                                        which satisfies (10). At k = 1, through (6) and (7), each sensor
+C. Asymptotic Boundedness of Classical DSMFing                          predicts and update the local posterior belief Bi+ (x1 ). Then, through
+                                                                        the fusion step(∩1 (9), ∩ the fused     )posterior
+                                                                                                                  ∩(∩      belief) Bi (x1 ) is outer
+  For the source component Gst , let i(t,m) denote the mth
+                                                                                                 l∈Mi1−r O1,r           l∈Mi1 E1 , where the COIT
+                                                                        bounded by                          l                  l
+                                                                                          r=0
+sensor in t, we lump the measurement equations of all                      ∩
+                                                                        is i∈V s O1,0i   (marked in red). The COIT contains the commonly
+sensors in Vts = {i(t,1) , . . . , i(t,m) } together, i.e.,                      t
+                                                                        known observation information sets in a collective manner. As a
+                                                                        counterexample, even though O1,1      2   is also commonly known to the
+                 (t)           i                  i
+               yk = col(yk(t,1) , . . . , yk(t,m) )                     three sensors (as ρ̃2 = 1), O1,1 and O1,1
+                                                                                                        1          3 are not (since ρ̃ = 2, ρ̃ = 2,
+                                                                                                                                               1
+                                         i                          ρ̃3 = 2); based on (13), at k = 1, the COIT can at most include the
+                      Ci(t,1)               vk(t,1)                     observation information (from the collection of these three sensors)
+                                         .                          up to time k − ρ̃ + 1 = 0.
+                  =  ... xk +           .. ,
+                                                                (14)
+                                             i
+                      Ci(t,m)              vk(t,m)
+                    |             {z                }                   outer bound of Bi (xk ) for i ∈ Vts is presented (see
+                                                 (t)
+                                   C (t) xk +vk                         Proposition 2).
+where C (t) is the joint measurement matrix w.r.t. Gst .                Proposition 2 (Observability Decomposition-Based
+Then, we perform an observability decomposition for                     Bound). When k > ρ̃, Bi (xk ) for i ∈ Vts is outer bounded
+(2) and (14), i.e., there exists a nonsingular P (t) =                  by                                              
+                                                                                   Bi (xk ) ⊆ (P (t) )−1 Po(t) Ck × S̃ki ,
+     (t)   (t)                                                                                                  (t)
+col(Po , Pō ) ∈ Rn×n such that the equivalence trans-                                                                         (16)
+formation
+                                                                        where
+                 x̃k = col(x̃ok , x̃ōk )
+                       "           # "           #                         S̃ki = (Ãō )k Pō Bi− (x0 )
+                                                                                          (t)     (t)
+                           (t)               (t)
+                         Po x k            Po
+                     =     (t)          =    (t) xk                              X (t)
+                                                                                 k−1                                             
+                         Pō xk            Pō                                                        (t)                 (t)
+                                                                               +     (Ãō )k−1−j Ã21 Po(t) Bi (xj ) + B̃ō Jwj K .              (17)
+                                          | {z }
+                                                                                    j=0
+                                              P (t)
+
+transforms (2) and (14) into                                            Proof: See Appendix B.                                ■
+       o  " (t)               #  "
+                                              (t)
+                                                  #                       Through Proposition 2, we are ready to provide an
+       x̃k+1         Ão    0     x̃ok      B̃o                         asymptotic boundedness condition for the classical DSMF-
+                 =                        +   (t) wk ,          (15a)
+       x̃ōk+1         (t)  (t)
+                     Ã21 Ãō    x̃ōk     B̃ō                        ing.
+                   h       i
+             (t)
+            yk = C̃o(t) 0 x̃k + vk ,
+                                       (t)
+                                                                (15b)   Theorem 1 (Asymptotic Boundedness of DSMF). ∀i ∈ V
+                                                                        with D(Bi− (x0 )) < ∞, Bi (xk ) derived from Algorithm 1
+                                                 (t)      (t)
+where x̃ok ∈ Rno , x̃ōk ∈ Rnō , and (Ão , C̃o ) is observable.       satisfies (5), if ∀Gst ⊆ G, the following two conditions hold:
+                                                                                 (t)
+Then, based on Proposition 1, an decomposition-based                     (i) Ãō is marginally stable;
+                                                                                                                                           5
+
+
+                                      (t)
+(ii) For all eigenvalues λ of Ãō with |λ| = 1,
+     h                           i                        
+                                                 (t)
+rank Ã(t)
+         ō −λI nō B̃
+                       (t)
+                       ō  Ã
+                              (t)
+                              21
+                                     = rank   Ã ō −λI n ō
+                                                               . (18)
+                                                                               1       2         3                       6    7
+Proof: See Appendix C.                                            ■                                         The System
+  Moreover, we have the following corollary.
+                                                                                           4           5                 8    9
+                                                                                1                                                     2
+Corollary 1.   ∀Gst of G, if the pair (A, C (t) ) is detectable,
+DSMFing can achieve asymptotic boundedness.
+                                                                                                       10      11        12
+Proof: If the pair (A, C (t) ) is detectable. ∀Gst of G, it
+              (t)                       (t)
+means that Ãō is Schur stable and Ãō −λI has full row
+rank. Thus, conditions (i) and (ii) in Theorem 1 hold, and              Fig. 2. A system measured by a sensor network with 12 sensors.
+                                                                        Sensors 1-9 directly obtain the measurements, which compose the
+                                                                        source components Gs1 and Gs2 marked in green and blue, respectively.
+          limk→∞ D(Bi (xk )) < ∞,                   ∀i ∈ V.     (19)    Sensors 10-12 cannot take measurements directly from the system,
+                                                                        and are not in any source components.
+                                                                  ■
+Remark 2. The condition in Corollary 1 is the well-known
+                                                                        are taken from different components of the system’s state
+collective detectability condition, which guarantees the
+                                                                        (see Fig. 3). Let xk(i) denote the ith component of xk .
+asymptotic convergence of DOs [13] and the asymptotic
+                                                                        For sensors 1,3, and 5 in Gs1 , we can see that sensor 5
+boundedness of the error covariance of DKF [15]. This
+                                                                        has the worst estimation performance compared to all the
+condition is proven to be a special case of Theorem 1. It
+                                                                        observable dimensions, as it is located at the edge of the
+implies that for certain unobservable substates that are
+                                                                        network.
+not Schur stable in (2), deploying additional sensors is
+                                                                          For sensor 7 in Gs2 , we can see that it can still achieve a
+not always necessary, since bounded DSMFing can still
+                                                                        bounded estimation error range for the marginally stable
+be achieved as long as Theorem 1 holds. This property is
+                                                                        unobservable dimension xk(4) . It will not go unbounded
+a unique advantage of DSMFing compared to DKFs.
+                                                                        because the disturbance does not influence the correspond-
+                                                                        ing system channel, which verifies the suﬀiciency of the
+                      V. Numerical Example                              conditions in Theorem 1.
+  In this section, we validate Theorem 1 through a
+simulation example by implementing the classical DSMF                                          VI. Conclusion
+in Algorithm 1 with constrained zonotopes [23]. Consider                   In this paper, the asymptotic boundedness of DSMFing
+the network of 12 sensors shown in Fig. 2. The system                   for linear discrete-time systems has been investigated. A
+parameters and the joint measurement matrices (w.r.t.                   novel concept, termed the COIT, has been introduced
+the 2 source components) are                                            to characterize the fundamental relationship between the
+                                                                        source components and the set estimates. Based on COIT,
+            A = diag(0.99, 1.01, 0.98, 1, 0.8, 0.9),                    a suﬀicient condition for the asymptotic boundedness of
+                                     ⊤
+                   1 0 1 0 1 0                                          general DSMFing has been established and shown to be
+            B=                           ,
+                   0 1 0 0 1 1                                          weaker than the classical collective detectability condition
+                                                                      for the convergence of DOs and bounded error covariance
+                   1  0       0      0 0 0 C1
+                 0 0.86                                                of DKFs, providing a guideline for the practical application
+                             0      0 0 0      C2                    of DSMFing.
+         C (1) = 
+                  0  1     1.01     0    0 0   C3 ,
+                 0   0       0      0 0 0 C 4                                                Appendix A
+                   0 0.6      0     0.2 0 0 C5                                            Proof of Proposition 1
+                 |             {z                }
+                         col(C1 ,C2 ,C3 ,C4 ,C5 )                         Initially, we provide a lemma to support the following
+                                                                      proof.
+                   0.95  0    0 0 0 0 C6
+                  0    1.05 0 0 0 0                                   Lemma 1 ([2]). For sets S1 , · · · , SJ , and T , we have
+         C (2) = 
+                  0
+                                      C7 ,
+                                                                                           
+                         0    2 0 0 0 C8
+                                                                                       \
+                                                                                       J                  \J
+                    0    0    0 0 1 0 C9                                                Sj  + T ⊆           (Sj + T ).          (20)
+                 |          {z       }
+                       col(C6 ,C7 ,C8 ,C9 )                                                j=1                 j=1
+
+        Jwk K = [−1, 1] , Jvki K = [−1, 1].
+                       2
+                                                                          Then, we prove (10) by mathematical induction.
+                                                                          Base case: When k = 0, according to (6)-(9), we have
+The joint subsystem formed by Gs1 satisfies the collectively                               \                                    
+detectable condition, while the joint subsystem formed by                       Bi (x0 ) =   X0 (Cl , y0l , Jv0l K) ∩ Bl− (x0 )
+Gs2 is not collectively detectable in the sense of Corollary 1.                                l∈Mi0
+However, it satisfies the conditions in Theorem 1.                                         (11) \                
+   Without loss of generality, we investigate the asymptotic                               =           O0,0
+                                                                                                        l
+                                                                                                            ∩ E0l ,
+boundedness of DSMF for sensors 1, 3, 5, 7, and 11, which                                      l∈Mi0
+                                                                                                                                                                      6
+
+
+
+                                                                                                                    Appendix B
+                                                                                                               Proof of Proposition 2
+                                                                                        To start with, we provide the following lemma to
+                                                                                      support our proof.
+                                                                                      Lemma 2 (An Outer Bound w.r.t. Block Matrix [2]). For
+                                                                                                              
+                                                                                                 H11 · · · H1q
+                                                                                                           .. , S = S × · · · × S ,
+                                                                                          H =  ...   ..
+                                                                                                         .   .         1          q
+                                                                                                       Hp1      ···     Hp1
+
+                                                                                      where Hij ∈ Rmi ×nj and Sj ⊂ Rnj , the following holds
+                                                                                                                          
+                                                                                                            Y
+                                                                                                            p    Xq
+                                                                                                     HS ⊆          Hij Sj .             (23)
+                                                                                                                       i=1      j=1
+
+
+                                                                                      Proof: For all t ∈ HS, there exists
+                                                                                                                                             Y
+                                                                                                                                             q
+                                                                                                               col(s1 , . . . , sq ) ∈  Si
+                                                                                                               |      {z          } i=1
+                                                                                                                        s
+
+                                                                                      such that t = Hs, i.e.,
+                                                                                                                            
+                                                                                               Xq                   X
+                                                                                                                    q            p X
+                                                                                                                                 Y   q
+                                                                                          col     H1j sj , . . . ,   Hpj sj  ∈   (   Hij Sj ).
+                                                                                                 j=1                    j=1                       i=1 j=1
+                                                                                          |                     {z                           }
+                                                                                                                 t
+
+                                                                                      Thus, (23) is derived.                                  ■
+                                                                                                                       (t)
+Fig. 3. Estimation error range of each sensor for different components                  From (13), we have Bi (xk ) ⊆ Ck for k > ρ̃, which gives
+of system’s state. From top to bottom, the estimation error bound
+of each component xk(1) to xk(6) for sensors 1, 3, 5, 7, 11 are shown                                                                            (t)
+in each sub-figure, respectively. In each subfigure, the estimation                                            Po(t) Bi (xk ) ⊆ Po(t) Ck .                         (24)
+error range of different sensors is shown using different colors, where
+the error range of each dimension for sensor i is calculated by                       Thus, to derive (16), we only need to prove Pō Bi (xk ) ⊆
+                                                                                                                                                             (t)
+IH(Bi (xk(j) )) − xk(j) for j ∈ [1, 6]. The details of each sub-figure
+are shown on the right.                                                               S̃ki which is provided as follows.
+                                                                                      For k = 0, according to Algorithm 1, one has
+
+                                                                                                         (t)            (6)     (t)
+                                                                                                                                        \
+                                                                                                       Pō Bi (x0 ) = Pō                        Bj+ (x0 )
+which means (10) holds for k = 0.
+                                                                                                                                      j∈Mi0
+  Inductive step: Assume (10) holds for k = k ′ , when                                                                  (9)             \
+k = k ′ + 1, we have                                                                                                      = Pō(t)               Bj− (x0 )         (25)
+                                                                                                                                      j∈Mi0
+                   \                                                                                                   ⊆ Pō Bi− (x0 ) .
+                                                                                                                                (t)
+Bi (xk′ +1 ) =             Xk′ +1 (Cl , ykl ′ +1 , Jvkl ′ +1 K) ∩ Bl− (xk′ +1 )                                           |   {z     }
+                  l∈Mi0                                                                                                               S̃0i
+                   \                       \                              
+            =              Okl ′ +1,k′ +1       (ABl (xk′ ) + BJwk′ K)                For k = 1, we have
+                  l∈Mi0
+                                                                                       (t)                 (t)
+                                                                                                                      \
+                        ′
+                                                                                         Pō Bi (x1 ) = Pō                  Bj+ (x1 )
+                       k\        \               \          \
+                          +1
+               
+            (22)
+                                                                                                                    j∈Mi0
+             ⊆                       Okl ′ +1,r                 Ekl ′ +1  .                                       \
+                                                                                                       (7)
+                       r=0 l∈Mi ′
+                                 k +1−r
+                                                          l∈Mik′ +1                                    = Pō(t)              Bj− (x1 )
+                                                                           (21)                                      j∈Mi0
+
+                                                                                                       ⊆ Pō Bi− (x1 )
+                                                                                                           (t)
+
+                                                                                                           (t)
+Specifically,
+      S       in the gray-shaded formula in (22), (a) holds                                            = Pō (ABi (x0 ) + BJw0 K)
+since l∈Mi Mlj = Mij+1 holds for j < ρ̄i − 1.
+                                                                                                       = Pō A(P (t) )−1 P (t) Bi (x0 ) + Pō BJw0 K.
+                                                                                                           (t)                              (t)
+              0
+
+  Thus, Proposition 1 is proved by induction.                                  ■                                                                                   (26)
+                                                                                                                                                                                 7
+
+
+
+
+                                                                                                                                                                  
+      \                        \                          (20) \
+                                                                    l          \ \
+                                                                                    k′                                   \                    \ \                   
+             Okl ′ +1,k′ +1         (ABl (xk′ ) + BJwk′ K) ⊆       Ok′ +1,k′ +1                                                Okj ′ +1,r                 Ekj′ +1 
+    l∈Mi0                                                                  l∈Mi0                               r=0 j∈Ml ′                         j∈Mlk′
+                                                                                                                          k −r
+                                                                                                                                                                        
+                                                                                                           ′
+                                                                (a)        \                      \\k             \                       \
+                                                                                                                                                         \                 
+                                                                   ⊆                Okl ′ +1,k′ +1                            Okl ′ +1,r                         Ekl ′ +1 
+                                                                         l∈Mi0                          r=0 l∈Mi ′                                      l∈Mik′ +1
+                                                                                                                                           
+                                                                                                                    k +1−r
+
+
+                                                                            k′ +1
+                                                                    \                    \                   \            \                
+                                                                   =                              Okl ′ +1,r                      Ekl ′ +1                           (22)
+                                                                               r=0 l∈Mi ′                                l∈Mik′ +1
+                                                                                          k +1−r
+
+
+
+
+                                                                                                                          
+Then, basd on (25), we can rewrite (26) as                                                                                 I
+                                                                     where k = k − ρ̃ − ν + 2, C̃o,l = Cl (P (t) )−1 no , and
+                                                                                                       (t)
+               h              i                                                   |     {z       }                          0
+  (t)                                                       (t)                          ≥0
+Pō Bi (x1 ) ⊆ Ã(t) 21
+                          (t)
+                        Ãō    (Po(t) Bi (x0 )) × S̃0i + Pō BJw0 K
+         Lemma 2 (t)
+                                                                                                             k−1
+                                                                                                                  X                   
+                                (t)                    (t)
+             ⊆ Ãō S̃0i + Ã21 Po(t) Bi (x0 ) + B̃ō Jw0 K            (r,l)            k−r †
+                                                                     S k = Po A  (t)
+                                                                                             Cl {yr }+J−vr K +
+                                                                                                    l       l
+                                                                                                                       A k−1−τ
+                                                                                                                                BJwτ K .
+             = S̃1i .                                                                                             τ =r
+
+                                                                (27) In (31), (b) follows from
+Proceeding forward, when k > 0, we have                                                       k−r (t)                            (t)
+                                                                        Po(t) Ak−r = Ã(t) o       Po , Po(t) ker(Cl ) = ker(C̃o,l ),
+                          (t)
+                        Pō Bi (xk ) ⊆ S̃ki ,                   (28)
+                                                                     and
+                                                                                      k−r                              r−k 
+which, upon combining with (24), gives (16).                      ■                               (t)          (t)
+                                                                                Ã(t)
+                                                                                  o        ker(C̃o,l ) = ker C̃o,l Ã(t)
+                                                                                                                      o         .
+                       Appendix C                                                         With (4) and k ⩽ r ⩽ k − ρ̃ + 1, we get
+                   Proof of Theorem 1
+                                                                                                                                     (r,l)
+  To start with, we provide two lemmas and a proposition.                                                                sup D(Sk            ) < ∞.
+                                                                                                                         k⩾k
+Lemma 3 ( [24]). Given A ∈ Rn×n , for each γ > Rho(A)                                                                                             (t)     (t)
+(Rho(A) stands for the spectral radius of A), there exists                                Let j = r|V | + l and Fj = F(r,l) = C̃o,l [Ão ]r−k . We group
+a constant cγ ≥ 1, such that ∀k ∈ N0 , F k ⩽ cγ γ k .                                     those Fj = F(r,l) with the same r together, and get
+
+Lemma 4. Let J ⊆ N0 be finite, and suppose that                                               F(r) = col(F(r,min Vts ) , . . . , F(r,max Vts ) ) = C̃o(t) [Ã(t)
+                                                                                                                                                             o ]
+                                                                                                                                                                 r−k
+                                                                                                                                                                     .
+
+                        sup D(Skj ) < ∞,         ∀j ∈ J ,                                 Thus, F = col(Fmin J , . . . , Fmax J ), with
+                        k⩾k
+                                                                                                                   min J = k|V | + min Vts
+where k ≥ 0. Define F = col(Fmin J , . . . , Fmax J ) and Fj ∈
+Rqj ×no , if rank(F ) = no , the following holds:                                         and
+                      \                                                                                 max J = (k − ρ̃ + 1)|V | + max Vts ,
+                                        j
+               sup D      [ker(Fj ) + Sk ] < ∞.           (29)
+                  k⩾k         j∈J                                                         has the following form:
+                                                                                                                        
+Proof: It directly follows from Lemma 3 in [2].                                      ■                         (t)
+                                                                                                            C̃o,l
+                                                                                                             ..          (t) k−k              k−k
+Proposition 3. ∀Gst ⊆ G, the following holds                                                   F =           .
+                                                                                                                          Ão
+                                                                                                                                   =: Õν Ã(t)
+                                                                                                                                             o        .
+                                                                                                      (t)     (t) ν−1
+                                 (t)
+                 sup D Po(t) Ck < ∞,                                               (30)               C̃o,l Ão
+                      k≥ρ̃+ν−2
+                                                                                                    |        {z          }
+                                                                                                                   Õν
+                                                             (t)         (t)
+where ν is the observability index [25] of (Ão , C̃o ).                                                                                                 (t)    (t)
+                                                                                          Since ν is the observability index of (Ão , C̃o ), we have
+Proof: ∀Gst ⊆ G, with (8), (11), and (13), we have                                        rank(Õν ) = no , and hence rank(F ) = no . Therefore,
+                   \
+                  k− ρ̃+1   \ h                                      i                    by (31) and Lemma 4, (30) is satisfied.                  ■
+        (t)
+ Po(t) Ck ⊆                         Po(t) Ak−r ker(Cl ) + Sk
+                                                             (r,l)                           Now, we prove Theorem 1, which includes two
+                   r=0      l∈Vts                                                         steps. In the first step, we show that (5) holds [i.e.,
+                                                                                   (31)   limk→∞ D(Bi (xk )) < ∞] for the sensors in the source
+            (b)    \
+                  k− ρ̃+1     \ h                                         i
+            ⊆
+                                           (t)
+                                    ker(C̃o,l Ão(t) r−k
+                                                           ) + Sk
+                                                                   (r,l)
+                                                                               ,          components; in the second step, (5) is proven for the other
+                    r=k     l∈Vts                                                         sensors.
+                                                                                                                                                                8
+
+
+                                             ST
+  Step 1: From Proposition 2, ∀i ∈                  s
+                                              t=1 Vt , we have             which means
+                                                                                                                        X
+                                                                                                                        k−1
+        lim D(Bi (xk )) ⩽ (P (t) )−1
+                                                              (t)
+                                             lim D(Po(t) Ck )               lim D(S̃k,3
+                                                                                    i
+                                                                                        ) ⩽ lim ∥Q−1 ∥                            k−1−j
+                                                                                                                                ∥J<1    ∥∥Q<1 ∥
+       k→∞                                  k→∞
+                                                                            k→∞                   k→∞
+                                      (t) −1
+                               + (P     )      lim D(S̃ki ).        (32)                              h
+                                                                                                                   j=ρ̃+ν−2
+                                                                                                                                                            i
+                                              k→∞                                                            (t)          (t)      (t)
+                                                                                                  ×       ∥Ã21 ∥D(Po(t) Cj ) + ∥B̃ō ∥D(Jwj K)
+From Proposition 3, we know that
+                                                                                            (c)
+                                       (t)                                                  < ∞.                                                           (41)
+                      lim     D(Po(t) Ck ) < ∞.
+                      k→∞
+                                                                                                                               (t) (t)
+                                                                           where (c) follows from limk→∞ D(Po Ck ) < ∞ (guaran-
+Thus, to prove (5), we only focus on limk→∞ D(S̃ki ) in (32).              teed by Proposition 3), equation (4), and Lemma 3.
+With (17), we divide S̃ki into three parts                                    Equation (33) together with (37) and (41) gives
+                                                                           limk→∞ D(S̃ki ) < ∞ in (32). Therefore,
+                    S̃ki = S̃k,1
+                             i
+                                 + S̃k,2
+                                     i
+                                         + S̃k,3
+                                             i
+                                                 ,                  (33)
+                                                                                                                                         [
+                                                                                                                                         T
+where                                                                               lim D(Bi (xk )) < ∞,                         ∀i ∈          Vts .       (42)
+                                                                                   k→∞
+         = (Ãō )k Pō Bi− (x0 ),
+               (t)     (t)                                                                                                               t=1
+   S̃k,1
+     i
+                                                                 (34)
+                                                                             Step 2: If sensor i is not included in any source
+            X
+          ρ̃+ν−3
+   S̃k,2
+     i
+         =
+                     (t)          (t)                   (t)
+                  (Ãō )k−1−j (Ã21 Po(t) Bi (xj ) + B̃ō Jwj K),         components, it can still receive a bounded local posterior
+            j=0                                                            belief from the sensor in source components. According to
+                                                                    (35)   (6)-(9), we have
+              X
+         (24) k−1
+                        (t)            (t)        (t)   (t)                             Bi (xk ) ⊆ ABj (xk−1 ) + BJwk−1 K,                                 (43)
+   S̃k,3
+     i
+         ⊆            (Ãō )k−1−j (Ã21 Po(t) Cj + B̃ō Jwj K).
+           j=ρ̃+ν−2                                                        where j ∈ Mi0 . Since there exists a sensor i′ that belongs
+                                                                    (36)   to a source component Gst has a direct path to i, letting
+         (t)
+                                                                           this sensor be the ρsc -hop predecessor of i, we have
+Since Ãō is marginally stable [condition (i) in Theorem 1],
+                                                                                                                        X
+                                                                                                                        ρsc
+
+                        lim
+                                   (t)
+                               ∥(Ãō )k ∥ < ∞,                              Bi (xk ) ⊆ A   ρsc
+                                                                                                  B (xk−ρsc ) +
+                                                                                                   i′                         Ar−1 BJwk−ρsc K,             (44)
+                       k→∞                                                                                              r=1
+
+which together with D(Bi− (x0 )) < ∞, (4), and Algo-                       by applying (43) recursively. Since limk→∞ D(Bi′ (xk )) <
+rithm 1 gives                                                              ∞ according to (44), we have
+                                                                                                       h
+        lim D(S̃k,1
+                i
+                    ) < ∞,            lim D(S̃k,2
+                                              i
+                                                  ) < ∞.            (37)        lim D(Bi (xk )) ≤ lim ∥Aρsc ∥D(Bi′ (xk−ρsc ))
+      k→∞                            k→∞                                        k→∞                          k→∞
+                                                                 (t)                                           X
+                                                                                                               ρsc                                     i
+Now, we focus on        S̃k,3
+                          i
+                              .  For marginally stable              its
+                                                               Ãō ,                                        +         ∥Ar−1 B∥D(Jwk−ρsc K)
+eigenvalues satisfy |λ| ≤ 1, and those with |λ| = 1                                                              r=1
+(namely, λ=1             =1
+            1 , . . . , λp ) are semisimple. Let q1 , . . . , qp be                                        < ∞.                                            (45)
+the left eigenvectors associated with λ=1                    =1
+                                                1 , . . . , λp . Under
+condition (ii) of Theorem 1, ∀j ∈ {1, . . . , p}, the following              Based on (42) and (45), Algorithm 1 can achieve a
+holds         h                                    i                       bounded estimate for all the sensors in G.       ■
+            qj Ã(t)
+                   ō   − λ =1
+                            j  I nō B̃
+                                        (t)
+                                        ō  Ã
+                                               (t)
+                                               21 = 0.            (38)
+                                                                                                             References
+Thus, with Q=1 := col(q1 , . . . , qp ), we have
+                                                                           [1] Y. Wang, Z. Wang, V. Puig, and G. Cembrano, “Zonotopic
+                              (t)                                              set-membership state estimation for discrete-time descriptor lpv
+                        Q=1 Ãō = Λ=1 Q=1 ,                                   systems,” IEEE Trans. Autom. Control, vol. 64, no. 5, pp. 2092–
+                              (t)                                              2099, 2019.
+                        Q=1 B̃ō = 0,                               (39)   [2] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-
+                              (t)                                              membership filters with respect to initial conditions: An
+                        Q=1 Ã21 = 0,                                          observation-information perspective,” Automatica, vol. 172, p.
+                                                                               111993, 2025.
+where Λ=1 = diag(λ=1            =1
+                   1 , . . . , λp ). This means that we can                [3] Y. Li, Y. Cong, and J. Dong, “Existence and completeness of
+find Q=1 such that                                                             bounded disturbance observers: A set-membership viewpoint,”
+                                                                           IEEE Trans. Autom. Control, pp. 1–8, 2024.
+           Q<1         (t)        −1 J<1                                   [4] R. A. García, L. Orihuela, P. Millán, F. R. Rubio, and M. G.
+     Q=          ,   Ãō = Q                    Q,    (40)                    Ortega, “Guaranteed estimation and distributed control of
+           Q=1                             Λ=1
+                                                                               vehicle formations,” International Journal of Control, vol. 93,
+                                                                               no. 11, pp. 2729–2742, 2020.
+where Rho(J<1 ) < 1.                                                       [5] L. Orihuela, S. Roshany-Yamchi, R. A. García, and P. Mil-
+  With (39) and (40), we can rewrite the RHS of (36) as                        lán, “Distributed set-membership observers for interconnected
+                                                                               multi-rate systems,” Automatica, vol. 85, pp. 221–226, 2017.
+        X J k−1−j Q (Ã(t) P (t) C (t) + B̃ (t) Jw K)
+        k−1                                                                [6] C. Ierardi, L. Orihuela, and I. Jurado, “A distributed set-
+  Q−1            <1     <1   21 o    j      ō     j
+                                                        ,                      membership estimator for linear systems with reduced compu-
+      j=ρ̃+ν−2
+                                0                                              tational requirements,” Automatica, vol. 132, p. 109802, 2021.
+                                                                         9
+
+
+
+ [7] “Mean-shift-based robust distributed set-membership fusion
+     filtering for sensor network systems with outliers,” Automatica,
+     vol. 177, p. 112345, 2025.
+ [8] A. Alanwar, J. J. Rath, H. Said, K. H. Johansson, and
+     M. Althoff, “Distributed set-based observers using diffusion
+     strategies,” Journal of the Franklin Institute, vol. 360, no. 10,
+     pp. 6976–6993, 2023.
+ [9] L. Liu, L. Ma, J. Guo, J. Zhang, and Y. Bo, “Distributed
+     set-membership filtering for time-varying systems: A coding–
+     decoding-based approach,” Automatica, vol. 129, p. 109684,
+     2021.
+[10] “Set-membership estimator design with privacy-preserving for
+     sensor networks: A state-decomposition-based approach,” Au-
+     tomatica, vol. 177, p. 112347, 2025.
+[11] D. Ding, Z. Wang, and Q.-L. Han, “A set-membership approach
+     to event-triggered filtering for general nonlinear systems over
+     sensor networks,” IEEE Trans. Autom. Control, vol. 65, no. 4,
+     pp. 1792–1799, 2020.
+[12] S. Liu, Z. Wang, G. Wei, and M. Li, “Distributed set-
+     membership filtering for multirate systems under the round-
+     robin scheduling over sensor networks,” IEEE Trans. Cybern.,
+     vol. 50, no. 5, pp. 1910–1920, 2020.
+[13] S. Park and N. C. Martins, “Design of distributed LTI observers
+     for state omniscience,” IEEE Trans. Autom. Control, vol. 62,
+     no. 2, pp. 561–576, 2017.
+[14] S. Wang and M. Guay, “Distributed state estimation for jointly
+     observable linear systems over time-varying networks,” Auto-
+     matica, vol. 163, p. 111564, 2024.
+[15] G. Battistelli and L. Chisci, “Kullback–leibler average, consen-
+     sus on probability densities, and distributed state estimation
+     with guaranteed stability,” Automatica, vol. 50, no. 3, pp. 707–
+     718, 2014.
+[16] W. Li, Z. Wang, D. W. C. Ho, and G. Wei, “On boundedness
+     of error covariances for kalman consensus filtering problems,”
+     IEEE Trans. Autom. Control, vol. 65, no. 6, pp. 2654–2661,
+     2020.
+[17] G. N. Nair, “A nonstochastic information theory for commu-
+     nication and state estimation,” IEEE Trans. Autom. Control,
+     vol. 58, no. 6, pp. 1497–1510, 2013.
+[18] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical
+     framework and optimality of set-membership filtering,” IEEE
+     Trans. Autom. Control, vol. 67, no. 5, pp. 2544–2551, 2021.
+[19] R. E. Moore, R. B. Kearfott, and M. J. Cloud, Introduction to
+     interval analysis. SIAM, 2009.
+[20] F. Farina, A. Garulli, and A. Giannitrapani, “Distributed
+     interpolatory algorithms for set membership estimation,” IEEE
+     Trans. Autom. Control, vol. 64, no. 9, pp. 3817–3822, 2019.
+[21] ——, “An interpolatory algorithm for distributed set mem-
+     bership estimation in asynchronous networks,” IEEE Trans.
+     Autom. Control, vol. 67, no. 10, pp. 5464–5470, 2022.
+[22] X. Ge, Q.-L. Han, and Z. Wang, “A dynamic event-triggered
+     transmission scheme for distributed set-membership estimation
+     over wireless sensor networks,” IEEE Trans. Cybern., vol. 49,
+     no. 1, pp. 171–183, 2019.
+[23] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz,
+     “Constrained zonotopes: A new tool for set-based estimation
+     and fault detection,” Automatica, vol. 69, pp. 126–136, jul 2016.
+[24] Y. Cong, X. Zhou, and R. A. Kennedy, “Finite blocklength
+     entropy-achieving coding for linear system stabilization,” IEEE
+     Trans. Autom. Control, vol. 66, no. 1, pp. 153–167, 2021.
+[25] C.-T. Chen, Linear system theory and design. Saunders college
+     publishing, 1984.
+

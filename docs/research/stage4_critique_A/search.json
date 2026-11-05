@@ -1,0 +1,383 @@
+[
+  {
+    "id": "Q1-crossref",
+    "provider": "crossref",
+    "query": "Equalized recovery state estimators delayed and missing observations",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.crossref.org/works?query.bibliographic=Equalized+recovery+state+estimators+delayed+and+missing+observations&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:22+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.crossref.org/works?query.bibliographic=Equalized+recovery+state+estimators+delayed+and+missing+observations&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:24+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.crossref.org/works?query.bibliographic=Equalized+recovery+state+estimators+delayed+and+missing+observations&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:25+00:00",
+        "http": 200,
+        "sha256": "dba914b5b900fa03c8e540b786075cd2f8c48778be85c247d523d0647fe47ef0",
+        "member": "Q1-crossref-2.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Equalized Recovery State Estimators for Linear Systems with Delayed and Missing Observations",
+        "doi": "10.23919/acc50511.2021.9482977",
+        "year": 2021,
+        "url": "https://doi.org/10.23919/acc50511.2021.9482977"
+      },
+      {
+        "title": "Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations",
+        "doi": "10.1109/lcsys.2021.3050300",
+        "year": 2022,
+        "url": "https://doi.org/10.1109/lcsys.2021.3050300"
+      },
+      {
+        "title": "Missing, delayed, and old: The status of ESA recovery plans",
+        "doi": "10.7287/peerj.preprints.2882v4",
+        "year": 2018,
+        "url": "https://doi.org/10.7287/peerj.preprints.2882v4"
+      },
+      {
+        "title": "Missing, delayed, and old: The status of ESA recovery plans",
+        "doi": "10.7287/peerj.preprints.2882v5",
+        "year": 2018,
+        "url": "https://doi.org/10.7287/peerj.preprints.2882v5"
+      },
+      {
+        "title": "Missing, delayed, and old: The status of ESA recovery plans",
+        "doi": "10.7287/peerj.preprints.2882v3",
+        "year": 2018,
+        "url": "https://doi.org/10.7287/peerj.preprints.2882v3"
+      },
+      {
+        "title": "Efficient RL with Impaired Observability: Learning to Act with Delayed and Missing State Observations",
+        "doi": "10.52202/075280-2012",
+        "year": 2023,
+        "url": "https://doi.org/10.52202/075280-2012"
+      },
+      {
+        "title": "Delayed Recovery from  Anaesthesia: Missing  Information",
+        "doi": "10.7860/jcdr/2016/16507.8591",
+        "year": 2016,
+        "url": "https://doi.org/10.7860/jcdr/2016/16507.8591"
+      }
+    ]
+  },
+  {
+    "id": "Q1-openalex",
+    "provider": "openalex",
+    "query": "Equalized recovery state estimators delayed and missing observations",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.openalex.org/works?search=Equalized+recovery+state+estimators+delayed+and+missing+observations&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:22+00:00",
+        "http": 200,
+        "sha256": "c9a5839563ba83208d8ae2fe22d8d12ead75ef26348e154b958f916a86962341",
+        "member": "Q1-openalex-0.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Equalized Recovery State Estimators for Linear Systems with Delayed and Missing Observations",
+        "doi": "10.23919/acc50511.2021.9482977",
+        "year": 2021,
+        "url": "https://openalex.org/W3120487673"
+      },
+      {
+        "title": "Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations",
+        "doi": "10.1109/lcsys.2021.3050300",
+        "year": 2021,
+        "url": "https://openalex.org/W3120171281"
+      },
+      {
+        "title": "Path-dependent controller and estimator synthesis with robustness to delayed and missing data",
+        "doi": "10.1145/3447928.3456655",
+        "year": 2021,
+        "url": "https://openalex.org/W3159607330"
+      },
+      {
+        "title": "Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data",
+        "doi": "10.1016/j.ifacol.2021.08.482",
+        "year": 2021,
+        "url": "https://openalex.org/W3199190049"
+      },
+      {
+        "title": "Turbo-equalization for QAM constellations",
+        "doi": "",
+        "year": 2002,
+        "url": "https://openalex.org/W7222380564"
+      },
+      {
+        "title": "Turbo equalization and its applications",
+        "doi": "",
+        "year": 2014,
+        "url": "https://openalex.org/W2607422495"
+      },
+      {
+        "title": "Improved Receivers for Digital High Frequency Communications : Iterative Channel Estimation, Equalization, and Decoding (Adaptive Turbo Equalization)",
+        "doi": "",
+        "year": 2002,
+        "url": "https://openalex.org/W382098212"
+      }
+    ]
+  },
+  {
+    "id": "Q2-crossref",
+    "provider": "crossref",
+    "query": "Set-valued state estimator sparse delayed measurements uncertain discrete-time linear systems",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.crossref.org/works?query.bibliographic=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:22+00:00",
+        "http": 200,
+        "sha256": "22a080ccfb48ddc19d547f2e3625d48b5879b5a72332fb0277aad2c289164ffd",
+        "member": "Q2-crossref-0.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Set-Valued State Estimator With Sparse and Delayed Measurements for Uncertain Discrete-Time Linear Systems",
+        "doi": "10.1109/lcsys.2024.3405376",
+        "year": 2024,
+        "url": "https://doi.org/10.1109/lcsys.2024.3405376"
+      },
+      {
+        "title": "Secure State Estimator for Uncertain Discrete-Time Linear Systems Based on Set-Valued Consistency Techniques",
+        "doi": "10.1109/codit62066.2024.10708477",
+        "year": 2024,
+        "url": "https://doi.org/10.1109/codit62066.2024.10708477"
+      },
+      {
+        "title": "Secure State Estimation Algorithm for Discrete-Time Linear Systems: A Set-Valued Approach",
+        "doi": "10.1007/978-3-031-94239-6_1",
+        "year": 2025,
+        "url": "https://doi.org/10.1007/978-3-031-94239-6_1"
+      },
+      {
+        "title": "Robust State Estimation for Uncertain Discrete Linear Systems with Delayed Measurements",
+        "doi": "10.3390/math10091365",
+        "year": 2022,
+        "url": "https://doi.org/10.3390/math10091365"
+      },
+      {
+        "title": "Set-Valued State Estimation of Linear Discrete-Time Systems with Linear Invariant",
+        "doi": "10.1109/codit55151.2022.9803988",
+        "year": 2022,
+        "url": "https://doi.org/10.1109/codit55151.2022.9803988"
+      },
+      {
+        "title": "Impulsive set-membership state estimators for continuous-time linear systems based on delayed discrete-time periodic measurements",
+        "doi": "10.1016/j.ejcon.2025.101232",
+        "year": 2025,
+        "url": "https://doi.org/10.1016/j.ejcon.2025.101232"
+      },
+      {
+        "title": "Set-valued discrete-time sliding-mode control of uncertain linear systems",
+        "doi": "10.1016/j.ifacol.2017.08.1697",
+        "year": 2017,
+        "url": "https://doi.org/10.1016/j.ifacol.2017.08.1697"
+      }
+    ]
+  },
+  {
+    "id": "Q2-openalex",
+    "provider": "openalex",
+    "query": "Set-valued state estimator sparse delayed measurements uncertain discrete-time linear systems",
+    "http": 429,
+    "requests": [
+      {
+        "url": "https://api.openalex.org/works?search=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:23+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.openalex.org/works?search=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:32+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.openalex.org/works?search=Set-valued+state+estimator+sparse+delayed+measurements+uncertain+discrete-time+linear+systems&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:41+00:00",
+        "http": 429
+      }
+    ],
+    "records": []
+  },
+  {
+    "id": "Q3-crossref",
+    "provider": "crossref",
+    "query": "impulsive set membership state estimators delayed discrete time periodic measurements",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.crossref.org/works?query.bibliographic=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&rows=7&sort=relevance&order=desc&select=DOI%2Ctitle%2Cauthor%2Cissued%2Ccontainer-title%2Cis-referenced-by-count%2Ctype%2Cabstract&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:25+00:00",
+        "http": 200,
+        "sha256": "3d76bcf9e581098ab2862eaa92c6f65fba53567f6481d04954a89fa070c1d66a",
+        "member": "Q3-crossref-0.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Impulsive set-membership state estimators for continuous-time linear systems based on delayed discrete-time periodic measurements",
+        "doi": "10.1016/j.ejcon.2025.101232",
+        "year": 2025,
+        "url": "https://doi.org/10.1016/j.ejcon.2025.101232"
+      },
+      {
+        "title": "Hybrid Interval-Ellipsoidal Set-Membership State Estimators for Uncertain Discrete-Time Linear Systems",
+        "doi": "10.1109/systol.2019.8864743",
+        "year": 2019,
+        "url": "https://doi.org/10.1109/systol.2019.8864743"
+      },
+      {
+        "title": "Set membership state estimation for discrete-time linear systems with binary sensor measurements",
+        "doi": "10.1016/j.automatica.2023.111396",
+        "year": 2024,
+        "url": "https://doi.org/10.1016/j.automatica.2023.111396"
+      },
+      {
+        "title": "Online Model Identification for Set-valued State Estimators With Discrete-Time Measurements",
+        "doi": "10.3182/20110828-6-it-1002.01571",
+        "year": 2011,
+        "url": "https://doi.org/10.3182/20110828-6-it-1002.01571"
+      },
+      {
+        "title": "On State Estimation for Discrete Time-Delayed Memristive Neural Networks under the WTOD Protocol: A Resilient Set-Membership Approach",
+        "doi": "10.1201/9781003189152-7",
+        "year": 2021,
+        "url": "https://doi.org/10.1201/9781003189152-7"
+      },
+      {
+        "title": "A new approach to design set-membership state estimators for discrete-time linear systems based on the observability matrix",
+        "doi": "10.1080/00207179.2019.1628296",
+        "year": 2019,
+        "url": "https://doi.org/10.1080/00207179.2019.1628296"
+      },
+      {
+        "title": "State estimation for processes with discrete-time and time-delayed measurements",
+        "doi": "10.23919/ecc.1999.7100097",
+        "year": 1999,
+        "url": "https://doi.org/10.23919/ecc.1999.7100097"
+      }
+    ]
+  },
+  {
+    "id": "Q3-openalex",
+    "provider": "openalex",
+    "query": "impulsive set membership state estimators delayed discrete time periodic measurements",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.openalex.org/works?search=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:26+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.openalex.org/works?search=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:34+00:00",
+        "http": 429
+      },
+      {
+        "url": "https://api.openalex.org/works?search=impulsive+set+membership+state+estimators+delayed+discrete+time+periodic+measurements&per-page=7&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Cabstract_inverted_index%2Ctype%2Creferenced_works%2Crelevance_score&cursor=%2A",
+        "retrieved_at": "2026-11-05T07:44:42+00:00",
+        "http": 200,
+        "sha256": "372902c7e54359376faa77ee2f29ed937f4d199da470d96d8cf73ea23a98268b",
+        "member": "Q3-openalex-2.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Impulsive set-membership state estimators for continuous-time linear systems based on delayed discrete-time periodic measurements",
+        "doi": "10.1016/j.ejcon.2025.101232",
+        "year": 2025,
+        "url": "https://openalex.org/W4409760915"
+      },
+      {
+        "title": "On State Estimation for Discrete Time-Delayed Memristive Neural Networks Under the WTOD Protocol: A Resilient Set-Membership Approach",
+        "doi": "10.1109/tsmc.2021.3049306",
+        "year": 2021,
+        "url": "https://openalex.org/W3122140041"
+      },
+      {
+        "title": "Synchronization and State Estimation for Discrete-Time Complex Networks With Distributed Delays",
+        "doi": "10.1109/tsmcb.2008.925745",
+        "year": 2008,
+        "url": "https://openalex.org/W2107084183"
+      },
+      {
+        "title": "Local Design of Distributed State Estimators for Linear Discrete Time-Varying Systems Over Binary Sensor Networks: A Set-Membership Approach",
+        "doi": "10.1109/tsmc.2024.3409611",
+        "year": 2024,
+        "url": "https://openalex.org/W4400188293"
+      },
+      {
+        "title": "Recursive Set-Membership State Estimation Over a FlexRay Network",
+        "doi": "10.1109/tsmc.2021.3071390",
+        "year": 2021,
+        "url": "https://openalex.org/W3155733702"
+      },
+      {
+        "title": "Design and Application of an Interval Estimator for Nonlinear Discrete-Time SEIR Epidemic Models",
+        "doi": "10.3390/fractalfract6040213",
+        "year": 2022,
+        "url": "https://openalex.org/W4224235361"
+      },
+      {
+        "title": "Synchronization for discrete coupled fuzzy neural networks with uncertain information via observer-based impulsive control",
+        "doi": "10.3934/mmc.2024003",
+        "year": 2024,
+        "url": "https://openalex.org/W4392871333"
+      }
+    ]
+  },
+  {
+    "id": "G1",
+    "provider": "oa_citing",
+    "query": "10.1109/LCSYS.2021.3050300",
+    "http": 200,
+    "requests": [
+      {
+        "url": "https://api.openalex.org/works/doi:10.1109/lcsys.2021.3050300?select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Ctype%2Creferenced_works",
+        "retrieved_at": "2026-11-05T07:44:27+00:00",
+        "http": 200,
+        "sha256": "2d8390cbf180a2ade55cfdaa14119fd3008fceec4f3bd0b8688ddca34e622dd0",
+        "member": "G1-0.json"
+      },
+      {
+        "url": "https://api.openalex.org/works?filter=cites%3AW3120171281&sort=cited_by_count%3Adesc&per-page=15&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ccited_by_count%2Cauthorships%2Cprimary_location%2Ctype",
+        "retrieved_at": "2026-11-05T07:44:27+00:00",
+        "http": 200,
+        "sha256": "c024ce3c0445b358bc76747a20f95cb48b578813be882e831736f881b36c040a",
+        "member": "G1-1.json"
+      }
+    ],
+    "records": [
+      {
+        "title": "Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data",
+        "doi": "10.1016/j.ifacol.2021.08.482",
+        "year": 2021,
+        "url": "https://openalex.org/W3199190049"
+      },
+      {
+        "title": "System-Level Recurrent State Estimators for Affine Systems Subject to Data Losses Modeled by Automata",
+        "doi": "10.1109/cdc51059.2022.9992499",
+        "year": 2022,
+        "url": "https://openalex.org/W4315472208"
+      },
+      {
+        "title": "Path-dependent controller and estimator synthesis with robustness to delayed and missing data",
+        "doi": "10.1145/3447928.3456655",
+        "year": 2021,
+        "url": "https://openalex.org/W3159607330"
+      }
+    ]
+  }
+]

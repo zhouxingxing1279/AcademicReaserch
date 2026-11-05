@@ -1,0 +1,104 @@
+{
+  "name": "fresh_nominal_04",
+  "initial_truth_velocity": [
+    -0.02372504025697708,
+    -0.09378395974636078,
+    0.023415401577949524
+  ],
+  "initial_rpy_deg": [
+    1.3267228380354834,
+    -0.11726491100272277,
+    -5.430225082673305
+  ],
+  "hover_thrust_at_handoff": 0.7234925627708435,
+  "finite_difference_velocity_max_difference": [
+    6.774680871846073e-09,
+    2.0306763770516767e-09,
+    3.0602305967075694e-09
+  ],
+  "clock_position_max_difference": [
+    1.418956369070301e-09,
+    1.3759712258476497e-09,
+    6.878044489511126e-08
+  ]
+}
+first residual {'k': 0, 'dt': np.float64(0.4799999999999969), 'equivalent_velocity': [-0.21860825465178332, -0.007904022974574099, 0.04030691149797177], 'equivalent_position': [-0.3419785951596757, 0.012979837861592652, 0.02924652201483161]}
+k2 replay {'original_fixed_T': {'k': 2, 'minimum_a': [0.20871987455204022, 0.002502468579266337, 0.03737415364301844], 'compatible_a_002': [False, True, False]}, 'actual_dt': {'k': 2, 'minimum_a': [0.19686356374407382, 0.007435849147408789, 0.03188364450958877], 'compatible_a_002': [False, True, False]}, 'actual_dt_oracle_initial': {'k': 2, 'minimum_a': [0.20107528577384395, 0.0, 0.03188364450958877], 'compatible_a_002': [False, True, False]}}
+{
+  "name": "fresh_force_01",
+  "initial_truth_velocity": [
+    -0.049875818192957666,
+    -0.12448532879352374,
+    0.01650641858577708
+  ],
+  "initial_rpy_deg": [
+    1.3142344658544227,
+    -0.833440213138459,
+    -5.473158497287224
+  ],
+  "hover_thrust_at_handoff": 0.723629891872406,
+  "finite_difference_velocity_max_difference": [
+    1.3430419887328071e-08,
+    2.5241700812861367e-09,
+    1.1272858202460156e-09
+  ],
+  "clock_position_max_difference": [
+    1.4786820379253385e-09,
+    9.023246594352941e-10,
+    1.0671360906044924e-07
+  ]
+}
+first residual {'k': 0, 'dt': np.float64(0.4799999999999969), 'equivalent_velocity': [-0.1648754520210941, -0.025022680132636477, 0.04327231141307407], 'equivalent_position': [-0.25834702004715665, -0.012081924986337866, 0.031618599600711096]}
+k2 replay {'original_fixed_T': {'k': 2, 'minimum_a': [0.12169476657800815, 0.0, 0.03624535788503133], 'compatible_a_002': [False, True, False]}, 'actual_dt': {'k': 2, 'minimum_a': [0.10223564283384459, 0.003854704536566524, 0.034129061114002913], 'compatible_a_002': [False, True, False]}, 'actual_dt_oracle_initial': {'k': 2, 'minimum_a': [0.11744367168138875, 0.0, 0.034129061114002913], 'compatible_a_002': [False, True, False]}}
+{
+  "name": "fresh_force_02",
+  "initial_truth_velocity": [
+    -0.04589261412620526,
+    -0.07068937718868222,
+    0.0007305629318579796
+  ],
+  "initial_rpy_deg": [
+    1.1442927089987391,
+    -0.5703710294310936,
+    -5.421000532813867
+  ],
+  "hover_thrust_at_handoff": 0.7237066626548767,
+  "finite_difference_velocity_max_difference": [
+    1.1705537693307289e-05,
+    1.2471908911008966e-05,
+    1.5127660203707871e-06
+  ],
+  "clock_position_max_difference": [
+    1.4790836640243832e-05,
+    7.569596420533425e-06,
+    2.6603457472518244e-06
+  ]
+}
+first residual {'k': 0, 'dt': np.float64(0.480000000000004), 'equivalent_velocity': [-0.1953419089004399, 0.010137377497663275, 0.056497225114437534], 'equivalent_position': [-0.3003011143919076, 0.039341124896814794, 0.04170913532547826]}
+k2 replay {'original_fixed_T': {'k': 2, 'minimum_a': [0.16439159995343533, 0.011789918285190895, 0.04621696043673426], 'compatible_a_002': [False, True, False]}, 'actual_dt': {'k': 2, 'minimum_a': [0.1485994784193396, 0.016150689161936297, 0.04542249289303873], 'compatible_a_002': [False, True, False]}, 'actual_dt_oracle_initial': {'k': 2, 'minimum_a': [0.15948959892594836, 0.0094532602361375, 0.04542249289303873], 'compatible_a_002': [False, True, False]}}
+{
+  "name": "max_gap_force_01",
+  "initial_truth_velocity": [
+    -0.04704749956727028,
+    -0.10473502427339554,
+    0.038515228778123856
+  ],
+  "initial_rpy_deg": [
+    1.3150877226624726,
+    -0.2743612651405356,
+    -5.1881228441005005
+  ],
+  "hover_thrust_at_handoff": 0.7237047553062439,
+  "finite_difference_velocity_max_difference": [
+    4.6850891777250325e-09,
+    7.308229077462869e-09,
+    8.138384144373845e-08
+  ],
+  "clock_position_max_difference": [
+    1.4298747297303294e-08,
+    3.916474450305074e-09,
+    1.0960718732633268e-07
+  ]
+}
+first residual {'k': 0, 'dt': np.float64(0.4799999999999969), 'equivalent_velocity': [-0.2324944283415432, -0.0012266367848710047, 0.02811791964361874], 'equivalent_position': [-0.3615657725167654, 0.01920236950130033, 0.02604045912178729]}
+k2 replay {'original_fixed_T': {'k': 2, 'minimum_a': [0.2269944155032173, 0.0, 0.0], 'compatible_a_002': [False, True, True]}, 'actual_dt': {'k': 2, 'minimum_a': [0.21652701519476156, 0.0, 0.0], 'compatible_a_002': [False, True, True]}, 'actual_dt_oracle_initial': {'k': 2, 'minimum_a': [0.21495721979951238, 0.0, 0.0], 'compatible_a_002': [False, True, True]}}

@@ -1,0 +1,63 @@
+[
+  {
+    "key": "M7",
+    "requested_url": "https://hal.science/hal-04597177/document",
+    "status": 200,
+    "final_url": "https://hal.science/hal-04597177/document",
+    "content": "HTML, not a PDF"
+  },
+  {
+    "key": "M7_display",
+    "requested_url": "https://css.paperplaza.net/images/temp/CDC/files/2323.pdf",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "M8",
+    "requested_url": "https://arxiv.org/pdf/2101.03389",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/2101.03389",
+    "sha256": "f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66",
+    "text_ok": true
+  },
+  {
+    "key": "M1",
+    "requested_url": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+    "status": 200,
+    "final_url": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+    "sha256": "c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2",
+    "text_ok": true
+  },
+  {
+    "key": "N1",
+    "requested_url": "https://skoge.folk.ntnu.no/prost/proceedings/cdc-ecc-2011/data/papers/1657.pdf",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>"
+  },
+  {
+    "key": "N2",
+    "requested_url": "https://arxiv.org/pdf/2105.03427",
+    "status": 200,
+    "final_url": "https://arxiv.org/pdf/2105.03427",
+    "sha256": "2dcdc404e2929fa1fe00e96e53f5450127d20a6faffce7f58498b2109215b68a",
+    "text_ok": true
+  },
+  {
+    "key": "N3",
+    "requested_url": "https://cse.lab.imtlucca.it/~bemporad/publications/papers/ijc_sm-mpc.pdf",
+    "status": 200,
+    "final_url": "https://cse.lab.imtlucca.it/~bemporad/publications/papers/ijc_sm-mpc.pdf",
+    "sha256": "d2b3c9805f6704b53a4aee65e5397610ab0f5d9b1384ce344e0707bc232b70d1",
+    "text_ok": true
+  },
+  {
+    "key": "N7",
+    "requested_url": "https://hal.science/hal-04484572/document",
+    "error": "HTTP Error 500: Internal Server Error"
+  },
+  {
+    "key": "N8",
+    "requested_url": "https://hal.science/hal-05051669/document",
+    "status": 200,
+    "final_url": "https://hal.science/hal-05051669/document",
+    "content": "HTML, not a PDF"
+  }
+]

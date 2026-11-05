@@ -1,0 +1,1434 @@
+IEEE ROBOTICS AND AUTOMATION LETTERS, VOL. 9, NO. 11, NOVEMBER 2024 9899
+Single-Beacon Localization for Mobile Robot: A Set
+Membership Filtering Approach
+Xujie Qin , Yirui Cong , Member, IEEE, Jun Lai , Jinyi Yang , and Xiangke Wang , Senior Member, IEEE
+Abstract—In this letter, we study the localization problem of
+a mobile robot with range measurement from a single beacon.
+Previous filtering-based studies usually required accurate statistics
+of noises to be theoretically sound and reliable, which is difficult to
+obtain in practical systems. To solve this problem, we propose an ac-
+curate and efficient localization method based on a set-membership
+filtering framework with constrained zonotopes. This method in-
+cludes three novel steps. First, we design a convex optimization
+relaxation method to handle the non-convexity caused by the single-
+beacon range measurement. Then, a halfspace-intersection refine-
+ment is proposed which improves the estimation accuracy. Finally,
+we provide a sliding-window recursive method that simultaneously
+guarantees the accuracy and the efficiency. Simulations and field
+experiments corroborate the effectiveness of our proposed method.
+Index Terms—Single-beacon localization, range measurement,
+set-membership filtering, constrained zonotope.
+I. INTRODUCTION
+RANGE-BASED localization for mobile robot systems
+has attracted significant research interest in recent
+years [1], [2], [3]. Different from the Global Positioning Sys-
+tem (GPS)/inertial navigation [4] and the Vision-Based local-
+ization [5], range-based localization usually relies on wireless
+communications; thus, it can not only enable robotic localization
+in a wider range of environments but also improve localization
+accuracy through information fusion. Most of the current range-
+basedlocalizationmethodsthroughmulti-beacon[6],requirethe
+installation of complex beacon networks in advance. However, if
+the beacon network can only be deployed temporarily while the
+robot is performing tasks, the network may only have one beacon
+available, which renders the existing methods inapplicable.
+Single-beacon localization methods in robot systems have
+been studied recently in [7], [8], [9]. The main focus of the
+research is to fuse the single-beacon range measurement and the
+existing localization system to improve overall performance. For
+example, Yang et al. [7] improved the accuracy of the Inertial
+Measurement Unit (IMU) data via single-beacon ranging mea-
+surement; a sensor fusion method for Ultra-wideband (UWB)
+Manuscript received 30 January 2024; accepted 6 May 2024. Date of pub-
+lication 28 May 2024; date of current version 2 October 2024. This letter
+was recommended for publication by Associate Editor Y. Wang and Editor S.
+Behnke upon evaluation of the reviewers’ comments. This work was supported
+by National Natural Science Foundation of China under Grant U23B2032 and
+Grant U2241214. (Corresponding author: Jun Lai.)
+Xujie Qin, Yirui Cong, Jun Lai, and Xiangke Wang are with the College of In-
+telligence Science and Technology, National University of Defense Technology,
+Changsha 410000, China (e-mail: laijun@nudt.edu.cn).
+Jinyi Yang is with the Aviation University of Air Force, Changsha 410073,
+China.
+This letter has supplementary downloadable material available at
+https://doi.org/10.1109/LRA.2024.3406190, provided by the authors.
+Digital Object Identifier 10.1109/LRA.2024.3406190
+and Visual Odometry (VO) was presented in [8], which provided
+location information over unknown environments.
+Note that sensor noise is a main factor affecting localization
+performance. In the literature, to attenuate the negative effects
+of the noise, the research of single-beacon localization relies on
+stochastic filters such as the Extended Kalman Filter (EKF) [10]
+or Unscented Kalman Filter (UKF) [11]. Stochastic filters per-
+form well when the noise conforms to known distribution [12].
+However, in real robot systems, the statistical characteristics of
+noise are assumed by approximation (e.g., Gaussian distribu-
+tion); if this approximation significantly deviates from the real
+distribution, the filtering results are inaccurate [13].
+Different from the stochastic filters, the Set-Membership
+Filterings (SMFs) [14], [15] only require the range of noises
+and without any statistical information, and the unknown-but-
+bounded (UBB) model is used to describe the noise. The SMF
+aims to estimate compact sets containing the true state of the
+mobile robot system. In recent years, many SMF state esti-
+mation methods with different set representation tools have
+been proposed. For example, Wang et al. [16] proposed an
+ellipsoidal SMF method with a new estimator, which improved
+the accuracy of estimation through effective parameters opti-
+mization. Tang et al. [17] provided an SMF method based on
+zonotopes, which minimized zonotopes via observer parameter
+optimization. Rego et al. [18] designed an SMF method based on
+constrained zonotopes, which recursively updated constrained
+zonotopes through mean value and first-order taylor extension.
+Based on the theoretical breakthroughs, the SMF method has
+drawn increasing attention to solving the localization problem
+of mobile robots. A lane boundary augmented set-membership
+global navigation satellite systems positioning was presented
+in [19], which computed the absolute robotic position of geo-
+metric constraints by bounded noises of the sensor. A global
+set-membership filtering approach was proposed in [20], which
+obtained accurate localization results of automatic guided vehi-
+cles based on a distributed localization network. Nevertheless,
+research on the SMF localization method for the range measure-
+ment is currently limited. In [21], a constrain-convex-generator
+method was provided to deal with the non-convexity of the
+2D range measurements by cutting the measurement annulus.
+Using a similar idea, [22] designed a cooperative SMF for
+distributed localization. Even though the above method can be
+appliedtothesingle-beaconlocalizationproblem,unfortunately,
+it faces the issue of balancing the computational complexity and
+the accuracy. To the best of our knowledge, SMF localization
+problem for the single-beacon range measurement is still open.
+In this letter, we propose an accurate and efficient method
+based on constrained zonotopes for the single-beacon localiza-
+tion problem with UBB noises. The main contributions are as
+follows:
+2377-3766 © 2024 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+9900 IEEE ROBOTICS AND AUTOMATION LETTERS, VOL. 9, NO. 11, NOVEMBER 2024
+r To handle the non-convexity caused by the range measure-
+ment, we rigorously derive the mathematical description
+of the intersection determined by the range measurement
+and the location prior. Based on this description, an outer-
+bounding zonotope of the intersection is obtained by our
+convex relaxation method.
+r With the zonotope, we design a halfspace-intersection re-
+finement to improve the accuracy of the estimate. Simu-
+lation results show that our relaxation-refinement strategy
+outperforms the existing methods [21], [22].
+r To further improve the efficiency of our algorithm while
+maintaining accuracy, a sliding window recursive method
+is proposed. Both the simulation and field experiments
+corroborate the effectiveness of our proposed method.
+II. SYSTEM MODEL AND PROBLEM FORMULATION
+Consider a mobile robot equipped with a range sensor (e.g.
+UWB [7]). The kinematic model and locational states of the mo-
+bile robot are described by the following equations of uncertain
+variables1
+(k ∈ N0):
+xk+1 = Akxk + Bkwk, (1)
+zk = Hxk, (2)
+which describe how the location zk (with its realization zk ∈
+[[zk]] ⊆ Rnz
+) changes over time, where xk is the robot state
+(with its realization xk ∈ [[xk]] ⊆ Rnx
+); wk is the process noise
+(with its realization wk ∈ [[wk]] ⊆ Rnw
+); Ak ∈ Rnx×nx
+, Bk ∈
+Rnx×nw
+, and H ∈ Rnz×nx
+are known matrices. Note that the
+linear model (1) can approximate nonlinear kinematics through
+linearization [24].
+In this work, we focus on the single-beacon range measure-
+ment that can be modeled as:
+yk = zk − pk + vk, k ∈ N0, (3)
+where the measurement yk ∈ R is a noise-corrupted distance
+between a known beacon pk ∈ Rnz
+(e.g. the location of a
+UWB beacon [7]) and the location of the robot zk; vk is the
+measurement noise (with its realization vk ∈ [[vk]] ⊆ Rnv
+). The
+initial state x0, the process noises w0:k := w0, . . . , wk, and
+the measurement noises v0:k := v0, . . . , vk are assumed to be
+unrelated.2
+The set-membership localization problem is to derive an
+estimate Zk that includes all possible locations zk given the mea-
+surements up to k, i.e., y0:k. The optimal estimate is the smallest
+one which is exactly the conditional range [[zk|y0:k]] [15]. An
+overview of the problem in Fig. 1.
+When x0, w0:k, and v0:k are unrelated, we can employ
+Theorem 2 in [15] to derive [[zk|y0:k]]; see Lemma 1.
+Lemma 1 (Set-Membership Localization Framework): For
+k ∈ N0, the range of location [[zk|y0:k]] can be recursively
+derived by the following steps:
+r Initialization: Set the initial prior set [[x0]].
+r Prediction: Given the posterior set [[xk−1|y0:k−1]], the prior
+set [[xk|y0:k−1]] is predicted by
+[[xk|y0:k−1]] = Ak−1[[xk−1|y0:k−1]] ⊕ Bk−1[[wk−1]]. (4)
+1We use [[x]] to represent the range of an uncertain variable [23] x, i.e.,
+[[x]] := {x(ω) : ω ∈ Ω} and apply x to denote the value in x.
+2This unrelatedness can be regarded as a non-stochastic version of the inde-
+pendence in stochastic model, defined in [15].
+Fig. 1. Overview of the set-membership localization problem.
+r Update: Given the measurement yk and the prior set
+[[xk|y0:k−1]], the posterior set [[xk|y0:k]] is updated by
+[[xk|y0:k]] = [[xk|y0:k−1]]
+
+H
+Y(yk, pk, vk), (5)
+where Y(yk, pk, vk) = {zk ∈ Rnz
+: yk = zk − pk +
+vk, vk ∈ [[vk]]}, and
+
+H denotes the generalized
+intersection [25].
+Then, the location set is [[zk|y0:k]] = H[[xk|y0:k]].
+Because the exact description of [[zk|y0:k]] is computation-
+ally intractable in general [26], we aim at computing an over-
+approximation of it (by [[zk|y0:k]] ⊆ Zk) in an accurate and effi-
+cient way. Since the non-convexity with the range measurement,
+the update step is key. Simultaneously, it is necessary to ensure
+the accuracy of localization estimation while the computational
+efficiency is guaranteed to solve online.
+To achieve this objective, this letter designs a SMF-based
+localization method with constrained zonotopes. More details
+are shown in Section III.
+III. SMF-BASED LOCALIZATION METHOD WITH
+CONSTRAINED ZONOTOPES
+Inthisarticle,weuse(extended)constrainedzonotopesin[27]
+to describe the outer bound calculated by Lemma 1, i.e., Zk ⊇
+[[zk|y0:k]] with the following form
+Zk := Z
+
+Ĝz
+k, ĉz
+k, Âz
+k, b̂z
+k, ĥz
+k
+
+=
+
+Ĝz
+kξ + ĉz
+k : ξ ∈ [ĥz−
+k , ĥz+
+k ], Âz
+kξ = b̂z
+k
+
+,
+where (Ĝz
+k, ĉz
+k, Âz
+k, b̂z
+k) ∈ Rnx×ng
+× Rnx
+× Rnc×ng
+× Rnc
+,
+and ĥz
+k ∈[ĥz−
+k , ĥz+
+k ]:={ξ ∈ Rng
+: ĥz−,i
+k ≤ ξi ≤ ĥz+,i
+k } refers
+to the interval vector of dimension ng; ng and nc are the
+generator and constraint dimensions [25], respectively. Const-
+rained zonotope operations are defined in [25] and [27]. When
+Âz
+k and b̂z
+k are empty and ĥz
+k is a unit interval constraint,
+constrained zonotope degenerates to zonotope and is denoted
+by the symbol Z(R̂z
+k, Ŝz
+k). Similarly, [[xk|y0:k−1]] ⊆ X̄k := Z
+(Ḡx
+k, c̄x
+k, Āx
+k, b̄x
+k, h̄x
+k) and [[xk|y0:k]] ⊆ X̂k :=Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k,
+ĥx
+k) and [[wk]] ⊆ Ŵk := Z(Ĝw
+k , ĉw
+k , Âw
+k , b̂w
+k , ĥw
+k ).
+Corresponding to Lemma 1, Fig. 2 shows the localization
+process of our method, which includes four parts as follows.
+1) Prediction: Given the posterior set X̂k−1 obtained at the
+previous time step k − 1, the prediction set X̄k = Ak−1X̂k−1 ⊕
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+QIN et al.: SINGLE-BEACON LOCALIZATION FOR MOBILE ROBOT: A SET MEMBERSHIP FILTERING APPROACH 9901
+Fig. 2. Process of SMF-based localization method. The green hexagon denotes
+the posterior set X̂k−1; the purple octagon denotes the prior set X̄k; the blue
+solid rectangle denotes the Z(R̃k, S̃k); the green shaded pentagon denotes the
+posterior set X̂k. The IH(X̂k) denotes the interval hull of X̂k, which is obtained
+by linear programming (LP) [25]. The three dashed boxes represent Section
+III-A, Section III-B and Section III-C, respectively.
+Bk−1Ŵk−1 is constructed to outer bound [[xk|y0:k−1]] at time
+step k. 2) Update phase 1: Given Y(yk, pk, vk) determined by
+a single-beacon range measurement and the prediction set X̄k,
+an outer-bounding zonotope of ˜
+Xk := X̄k
+
+HY(yk, pk, vk), i.e.,
+X̃k ⊆ Z(R̃k, S̃k), is calculated. 3) Update phase 2: Given X̄k,
+Z(R̃k, S̃k), Y(yk, pk, vk), the posterior set X̂k is computed by
+constrained zonotope intersection. 4) Sliding-window recursion:
+A sliding window recursive method is proposed to guarantee the
+efficiency and accuracy of the overall recursion.
+A. Phase 1: Convex Relaxation Approximation
+In the convex relaxation approximation phase (the blue
+dotted squares in Fig. 2), given X̄k−1, Y(yk, pk, vk), a con-
+vex relaxation approximation is proposed to obtain the outer-
+bounding zonotope of X̃k (with X̄k
+
+HY(yk, pk, vk) = X̃k ⊆
+Z(R̃k, S̃k)). The update set X̃k is formed by the intersection of
+the prediction set X̄k and Y(yk, pk, vk). It is a non-convexity
+set, the specific description and explanation about it is shown
+in Theorem 1.
+Theorem 1: Given X̄k = Z(Ḡx
+k, c̄x
+k, Āx
+k, b̄x
+k, h̄x
+k) and Y(yk,
+pk, vk), X̃k = X̄k
+
+HY(yk, pk, vk) is non-convex set,
+X̃k =
+
+HḠx
+kξ + Hc̄x
+k : ξ ∈ [h̄x−
+k , h̄x+
+k ], Āx
+kξ = b̄x
+k,
+ξT
+Q−
+k ξ + q−
+k ξ + d−
+k ⩽ 0, ξT
+Q+
+k ξ + q+
+k ξ + d+
+k ⩽ 0 , (6)
+Q−
+k = −
+nz
+i=1
+(ḡi
+k)T
+ḡi
+k , Q+
+k =
+nz
+i=1
+(ḡi
+k)T
+ḡi
+k ,
+q−
+k = −2
+nz
+i=1
+(c̄i
+k − pi
+k)ḡi
+k, q+
+k = 2
+nz
+i=1
+(c̄i
+k − pi
+k)ḡi
+k,
+d−
+k = (y−
+k )2
+−
+nz
+i=1
+c̄i
+k − pi
+k
+2
+, d+
+k =
+nz
+i=1
+c̄i
+k − pi
+k
+2
+− (y+
+k )2
+,
+y−
+k = yk − inf
+vk∈[[vk]]
+vk, y+
+k = yk − sup
+vk∈[[vk]]
+vk,
+ḡi
+k is the i-th row of HḠx
+k, c̄i
+k is the i-th element of Hc̄x
+k, and pi
+k
+is the i-th element of pk.
+Proof: See Appendix A. 
+Theorem 1 provides the specific form of ˜
+Xk and shows that ˜
+Xk
+is a non-convex set. This implies that this subsequent representa-
+tion cannot be described via the constrained zonotope [25], and
+non-convexity leads to unnecessary computational complexity.
+Therefore, we need to provide a convex relaxation representation
+of X̃k. In this letter, we propose a convex optimization to
+compute X̃k ⊆ Z(R̃k, S̃k), which is specifically computed as
+in Theorem 2.
+Theorem 2: X̃k = X̄k
+
+HY(yk, pk, vk) is outer bounded by
+Z(R̃k, S̃k) with
+R̃k =
+⎡
+⎢
+⎢
+⎣
+ρ1+
+k −ρ1−
+k
+2
+...
+ρnz+
+k −ρnz−
+k
+2
+⎤
+⎥
+⎥
+⎦ , S̃k =
+⎡
+⎢
+⎢
+⎣
+ρ1−
+k +ρ1+
+k
+2
+.
+.
+.
+ρnz−
+k +ρnz+
+k
+2
+⎤
+⎥
+⎥
+⎦ ,
+(7)
+where ρi−
+k , ρi+
+k denote the minimum and maximum values of
+X̃k in dimension i, respectively. ρi−
+k is obtained by the follow-
+ing convex optimization [ρi+
+k is obtained by maximizing the
+objective (8)]
+min ρi−
+k = ḡi
+kξ + c̄i
+k (8)
+s.t. ξT
+Q∗
+kξ + q∗
+kξ + d∗
+k ⩽ 0, (9)
+ξT
+Q+
+k ξ + q+
+k ξ + d+
+k ⩽ 0, (10)
+ξ ∈
+
+h̄x−
+k , h̄x+
+k
+
+, (11)
+Āx
+kξ = b̄x
+k, (12)
+where
+Q∗
+k =
+nz
+λi⩾0
+λiνiνT
+i , (13)
+q∗
+k =
+nz
+λi<0
+λi a−
+i + a+
+i νT
+i + q−
+k , (14)
+d∗
+k = d−
+k −
+nz
+λi<0
+λia−
+i a+
+i , (15)
+a−
+i = νT
+i h̄x−
+k , a+
+i = νT
+i h̄x+
+k , (16)
+Q−
+k =
+
+ν1, . . . νnz
+
+diag
+
+λ1, . . . , λnz
+ 
+ν1, . . . , νnz
+T
+.
+(17)
+Equation (17) denotes the eigenvalue decomposition of Q−
+k . In
+the above optimization process, Q∗
+k and Q+
+k both are positive
+semi-definiteness condition.
+Proof: See Appendix B. 
+Remark 1: Theorem 2 provides a convex optimization
+method for solving the outer bound of X̃k. The con-
+straint (9), (10) in Theorem 2 are transformed into quadratic
+cone constraints, i.e., ξT
+Q∗
+kξ + q∗
+kξ + d∗
+k ⩽ 0 is equivalent
+to
+
+(Q∗
+k)
+1
+2 ξ2 + (
+1+ 1
+2 d∗
+k+ 1
+2 (q∗
+k)T ξ
+√
+2
+)2 ≤
+1− 1
+2 d∗
+k− 1
+2 (q∗
+k)T
+ξ
+√
+2
+,here
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+9902 IEEE ROBOTICS AND AUTOMATION LETTERS, VOL. 9, NO. 11, NOVEMBER 2024
+(Q∗
+k)
+1
+2 is a real symmetric square matrix such that Q∗
+k =
+(Q∗
+k)
+1
+2 (Q∗
+k)
+1
+2 . The quadratic cone constraint can be solved
+quickly by the interior point method, and this ensures the overall
+computational efficiency of set-membership localization.
+B. Phase 2: Refinement of Intersection
+In the refinement of intersection phase (the red dotted squares
+in Fig. 2), given X̄k, Z(R̃k, S̃k), and Y(yk, pk, vk), the goal is
+to construct the posterior set X̂k via the constrained zonotope
+intersection.
+We define a halfspace constraint3
+HS(Lk, Fk) to refine the
+relaxed part of Z(R̃k, S̃k) to ensure localization accuracy,
+and HS(Lk, Fk) is obtained by the following steps. Intersect
+Z(R̃k, S̃k) and the equational constraints of Y(yk, pk, vk) to
+obtain the intersection points V−
+k and V+
+k.
+V−
+k =
+
+R̃kξ + S̃k : ξT
+Q−
+k ξ + q−
+k ξ + d−
+k = 0, ξ∞ ⩽ 1
+
+,
+V+
+k =
+
+R̃kξ + S̃k : ξT
+Q+
+k ξ + q+
+k ξ + d+
+k = 0, ξ∞ ⩽ 1
+
+.
+The halfspace constraint HS(Lk, Fk) is computed through
+the intersection points, see [29] for details. Eventually,
+the posterior set X̂k is obtained by constrained zono-
+tope intersection [25] and halfspace intersection [28], X̂k =
+X̄k
+
+H(HS(Lk, Fk)
+
+Z(R̃k, S̃k)), and Theorem 3 expresses
+the concrete intersection process.
+Theorem 3: Given X̄k = Z(Ḡx
+k, c̄x
+k, Āx
+k, b̄x
+k, h̄x
+k), Z(R̃k, S̃k),
+and HS(Lk, Fk), the posterior set ˆ
+Xk is obtained in the following
+form.
+X̂k =Z
+
+Ĝk, ĉk, Âk, b̂k, ĥk
+
+= Z
+⎛
+⎜
+⎜
+⎝
+
+Ḡx
+k 0
+
+, c̄x
+k,
+⎡
+⎢
+⎢
+⎣
+Āx
+k 0
+0
+
+LkR̃k Dk
+
+HḠx
+k −
+
+R̃k 0
+
+⎤
+⎥
+⎥
+⎦ ,
+×
+
+b̄x
+k
+Fk − LkS̃k − 1
+2
+
+d1
+k . . . d
+np
+k
+T
+S̃k − Hc̄x
+k
+
+,
+×
+
+h̄x
+k
+I(nz+np)×1
+
+⎞
+⎟
+⎟
+⎠ ,
+Dk =
+1
+2
+diag
+
+d1
+k . . . d
+np
+k
+
+, di
+k = fi
+k − li
+kS̃k +
+nz
+j=1
+"
+"
+"li
+krj
+k
+"
+"
+" ,
+(18)
+where np denotes the number of halfspaces, li
+k and fi
+k are
+parameters of the i-th planar constraints in HS(Lk, Fk), and
+rj
+k is the j-th row of R̃k.
+Proof: See Appendix C. 
+Remark 2: Theorem 3 describes how to compute the estimate
+X̂k of [[xk|y0:k]] in (5). An intuitive presentation in a 2D plane
+3HS(Lk, Fk) = {ρ ∈ Rnz : li
+kρ ≤ fi
+k, li
+k ∈ Lk, fi
+k ∈ Fk, i =
+1, . . . , np} is a tool for describing uncertain range [28].
+Fig. 3. A 2D example of Theorem 3. The green part denotes [[xk|y0:k]]; the
+red shaded part represents halfspace HS(Lk, Fk); the purple square represents
+the zonotope Z(R̃k, S̃k); the yellow polygon represents the posterior set X̂k.
+z1 and z2 are the coordinates.
+is shown in Fig. 3, without loss of generality, we assume beacon
+is the origin (with pk =
+
+0 0
+T
+).
+Remark 3: The segmentation-based approach method [21]
+and [22] divides the range measurement annulus into n chunks
+to obtain the posterior set X̂k in 2D space. The estimation
+accuracy and the computational efficiency are proportional to
+1/n and n, respectively. This means increasing the accuracy
+must sacrifice the efficiency, and vice versa. In contrast, our
+method can simultaneously have high accuracy and efficiency
+(see Fig. 5 in Section IV-A1). Moreover, different from the
+method in [21] and [22], our proposed method can handle the
+localization problem in 3D space.
+C. Phase 3: Sliding Window Recursive Method
+In the sliding window recursive method phase (the yellow
+dotted squares in Fig. 2), a fast and efficient recursive method is
+designed to ensure computational efficiency. To start with, we
+provide two definitions as follows.
+Definition 1 (SMF Map): At time k ∈ N0, the SMF map is
+Γk : X̂k−1 → X̂k, (19)
+where Γk denotes a one-step complete recursion containing
+prediction (4) and update (5), such that X̂k−1 maps to X̂k.
+Definition 2 (Sliding Window Map): The sliding window map
+Fk−δ:k with the sliding window side δ ≤ k is
+Fk−δ:k = Γk−δ+1 ◦ Γk−δ+2 · · · ◦ Γk, (20)
+where ◦ is the function composition.
+With the help of Definition 1 and Definition 2, we obtain
+Theorem 4.
+Theorem 4: For the sliding window size δ ≤ k,
+X̂k = Z
+
+Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k, ĥx
+k
+
+⊆ Fk−δ:k
+
+IH
+
+X̂k−δ
+
+, (21)
+where IH(X̂k−δ) is the interval hull of X̂k−δ.
+Proof: See Appendix D. 
+According to Theorem 4, we design the Algorithm 1.
+Remark 4: Existing studies commonly used reduction meth-
+ods (e.g., in [25]) to improve the computational efficiency.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+QIN et al.: SINGLE-BEACON LOCALIZATION FOR MOBILE ROBOT: A SET MEMBERSHIP FILTERING APPROACH 9903
+Algorithm 1: Sliding Window Recursive Algorithm.
+1: Initialization: Bounded
+[[x0]] = Z(Ĝx
+0 , ĉx
+0 , Âx
+0 , b̂x
+0 , ĥx
+0 ), select sliding window
+size δ.
+2: loop
+3: IH(X̂k−1) ← X̂k−1 by linear programming in [25].
+4: if k ⩽ δ then
+5: Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k, ĥx
+k) ← Γk(X̂k−1) by Lemma 1.
+6: else if k > δ then
+7: Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k, ĥx
+k) ← Fk−δ:k(IH(X̂k−δ))
+by Section III.
+8: end if
+9: X̂k = Z(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k, ĥx
+k).
+10: Ẑk = HZ(Ĝx
+k, ĉx
+k, Âx
+k, b̂x
+k, ĥx
+k).
+11: k + +
+12: end loop
+When posterior set X̂k = Z(Ĝk, ĉk, Âk, b̂k, ĥk) ⊂ Rnx
+and
+Âk ∈ Rnc×ng
+, the worst-case computational complexity for di-
+mensionalityreductionisO(kc(nc + ng)3
+).Theslidingwindow
+computational complexity is O(δn3
+x). Because δ and nx are
+much smaller than kc, nh and ng, the sliding window recursive
+method has higher efficiency.
+IV. SIMULATION AND FIELD EXPERIMENT
+A. Numerical Examples: Ablation Experiments
+Two 2-D numerical ablation experiments are used to demon-
+strate the high accuracy and efficiency of the proposed method.
+The common parameter settings for both experiments are:
+Ak =
+
+0.6 − 0.1 sin(0.1 k) 0
+−0.2 sin(0.2 k) 0.4
+
+,
+Bk =
+
+1 0
+0 sin(0.15 k)
+
+, H =
+
+1 0
+0 1
+
+,
+[[vk]] = [−0.2, 0.2],
+[[wk]] = Z
+
+5 sin(0.15 k) 5
+T
+,
+diag
+
+7 + 7 sin(k) 7 csc(0.15 k)+7 cos(k) csc (0.15 k)
+
+.
+(22)
+The initial state is x0=
+
+0 0
+T
+; we set [[x0]]=Z(
+
+−0.1 0.1
+T
+,
+diag(
+
+1 1
+
+)) and p =
+
+0 −50
+T
+.4
+1) Non-Convexity Measurement: In this simulation,
+Algorithm 1 was compared with the EKF method and other
+SMF methods (the constrained convex generators (CCG)
+in [21], [22]), where the point estimation for SMF methods
+are the centroid of the interval hull of the set estimate. For the
+CCG method, the number of chunks n is set to 25, and the
+sliding window size in Algorithm 1 is δ = 3. The simulation
+results are shown in Fig. 4 and Table I, where MAE is the mean
+4Note that the uncertain variables x0, w0:k, and v0:k are uniformly dis-
+tributed in their ranges.
+Fig. 4. The estimation results for the experiment in Section IV-A1. Besides
+point estimates, the SMF methods can also provide set estimates.
+TABLE I
+COMPARISON FOR THE EXPERIMENT IN SECTION IV-A1
+Fig. 5. Comparision between the CCG method and Algorithm 1 at k = 20.
+absolute error. The estimation results obtained by Algorithm 1
+are more accurate and faster than those by the CCG method.
+Also, Algorithm 1 outperforms the EKF with the best parameter
+after tuning.
+Furthermore, we compare Algorithm 1 with the CCG method
+for a fixed time instant (k = 20). For the CCG method, the
+number of chunking n varies from 25 to 200. The computational
+time and diameters5
+of the posterior are depicted in Fig. 5. From
+Fig. 5, we can see that the estimation accuracy and computa-
+tional time of the CCG method increase with n. When n = 25,
+the estimated result diameter is 31.7, and the time required is
+65.877 ms; when n = 200, the estimated result diameter is 29.5,
+andthetimerequiredis636.9ms.ComparedtotheCCGmethod,
+our Algorithm 1 has higher accuracy (with diameter 28.8) and
+efficiency (1.94 ms).
+2) Sliding Window Recursive Method Versus Existing Reduc-
+tion Methods: Using the same relaxation-refinement method in
+Section III-A and Section III-B, we compare our sliding window
+method in Algorithm 1 with the existing reduction methods.
+5The diameter is in the sense of ∞-norm, and larger diameters indicate lower
+estimation accuracy.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+9904 IEEE ROBOTICS AND AUTOMATION LETTERS, VOL. 9, NO. 11, NOVEMBER 2024
+TABLE II
+COMPARISON FOR THE EXPERIMENT IN SECTION IV-A2
+Fig. 6. The scenario and equipment for the air-to-ground localization. The
+UAV is equipped with a UWB receiver and a real-time kinematic (RTK)
+receiver, where the RTK provides the precise location for the UAV. The UGV is
+equipped with an IMU, a UWB receiver, and a GPS antenna. The GPS/IMU
+integrated navigation provided the unmanned vehicle status prediction, and
+UWB measurement from the UAV to the unmanned vehicle.
+TABLE III
+COMPARISON BETWEEN ALGORITHM 1 AND EKFS FOR THE
+AIR-TO-GROUND LOCALIZATION
+The results are shown in Table II: the first two columns provide
+the algorithm information (i.e., the “girard” and “combastel”
+methods in the toolbox CORA 2020 [30] and Algorithm 1,
+with different parameters, where oc and od are the constraint
+dimension and degrees-of-freedom order [25], respectively);
+columns 3-4 give the lengths of the estimate w.r.t. z1
+and z2
+axes,
+respectively; the averaged computation time of the constrained
+zonotopes in each time step is shown in the last column. We
+can see that our algorithm with δ = 3 outperforms the existing
+methods, and there is no need to further enlarge δ.
+B. Air-to-Ground Localization
+The experiment of locating an unmanned ground vehicle
+(UGV) by unmanned aerial vehicle (UAV) was conducted in the
+field, as shown in Fig. 6. We compare our proposed Algorithm 1
+with the EKF with different parameters r (the measurement error
+matrix in the EKF, which is a scalar in this case). The precise
+and estimated trajectories are shown in Fig. 7; the comparison
+w.r.t. the MAE is given in Table III.
+As shown in Table III, the performance of the EKF depends on
+the statistical information on the measurement noises; if r cannot
+reflect the truth, the MAE decreases; in contrast, Algorithm 1
+does not rely on this statistical information, and its performance
+is very close to the EKF with the optimal parameter r = 0.001.
+Fig. 7. Trajectories of the UGV for the air-to-ground localization.
+Fig. 8. Experimental UAV and trajectory. In (a), the purple point is the starting
+point, and the green point is the ending point.
+C. Field Flight Experiment: UAV Localization
+To further verify the effectiveness of Algorithm 1, a field
+experiment was carried out. A UAV equipped with low-precision
+IMU and GPS moves within the range that can be observed
+by the UWB beacon specific to Fig. 8(a). The IMU device is
+ICM-20649 and single-beacon range sensor uses LinkTrack P-B
+UWB specific to Fig. 8(b). A real-time kinematic (RTK) receiver
+isusedasahigh-accuracyreferenceforUAVspecifictoFig.8(c).
+After an alignment period, the GPS/INS is started in a loosely
+coupled integrated navigation mode. One-round experiment
+takes approximately 1 minute to complete, throughout the ex-
+periment, the UWB beacon provides range measurements at a
+frequency of 20 Hz.
+We compare the localization results obtained by fusing
+the GPS/INS navigation and UWB measurement through
+Algorithm 1 and EKF method in Fig. 9. Experimental results
+showthattheproposedmethodaccuratelyencompassestheUAV
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+QIN et al.: SINGLE-BEACON LOCALIZATION FOR MOBILE ROBOT: A SET MEMBERSHIP FILTERING APPROACH 9905
+Fig. 9. Field flight experiment results. The horizontal coordinate represents
+the RTK sampling point with a sampling frequency of 10 Hz.
+TABLE IV
+COMPARISON FOR UAV LOCALIZATION
+display location. compared to EKF, Algorithm 1 does not need
+to know the exact distribution of the noise, and the quantitative
+results are provided in Table IV.
+V. CONCLUSION
+In this letter, we have investigated an accurate and efficient
+set-membership filtering method based constrained zonotopes
+for the single-beacon localization problem. To handle the chal-
+lenge of requiring accurate statistics of noises for previous
+filtering-based studies, we have proposed a new solution for
+single-beacon localization by set-membership filtering with
+UBB noises. We have designed a convex optimization to handle
+the non-convexity caused by the single-beacon range measure-
+ment and a halfspace-intersection refinement to improve the
+accuracy of localization. At the same time, a sliding-window
+recursive method has been proposed to ensure accuracy and
+efficiency. Simulation and field experiment have proved the
+effectiveness and the advantages of the SMF-based localization
+method. For future work, we will explore effective localization
+methods for specific classes of nonlinear models (e.g., the uni-
+cycle model).
+APPENDIX A
+PROOF OF THEOREM 1
+From the definition of constrained zonotope, we obtain a
+representation formula for points in X̄k. With (6), we have
+ρi
+k = ḡi
+kξ + c̄i
+k. (23)
+By [[xk|y0:k−1]] ⊆ X̄k, we get
+X̃k = {xk ∈ X̄k : yk − zk − pk ∈ [[vk]], zk = Hxk}. (24)
+Denote by ρi
+k in (23) each component of zk in (24).
+Notingy−
+k = yk − infvk∈[[vk]] vk andy+
+k = yk − supvk∈[[vk]] vk,
+we transform zk − pk =
+#nz
+i=1 ρi
+k − pi
+k ⊆ [y−
+k , y+
+k ] in (24)
+into the following form
+$ nz
+i=1
+ρi
+k − pi
+k
+%2
+= ξT
+nz
+i=1
+
+ḡi
+k
+T
+ḡi
+k
+
+ξ
++ 2
+nz
+i=1
+c̄i
+k − pi
+k ḡi
+kξ,
++
+nz
+i=1
+c̄i
+k − pi
+k
+2
+⊆
+
+(y−
+)2
+k, (y+
+)2
+k
+
+.
+(25)
+When (
+#nz
+i=1 ρi
+k − pi
+k)2
+⩾ (y−
+k )2
+, it is equivalent to
+ξT
+nz
+i=1
+((ḡi
+k)T
+ḡi
+k)ξ + 2
+nz
+i=1
+(c̄i
+k − pi
+k)ḡi
+kξ
++
+nz
+i=1
+(c̄i
+k − pi
+k)2
+⩾ (y−
+k )2
+. (26)
+By defining Q−
+k = −
+#nz
+i=1((ḡi
+k)T
+ḡi
+k), q−
+k = −2
+#nz
+i=1(c̄i
+k −
+pi
+k)ḡi
+k, d−
+k = (y−
+)2
+k −
+#nz
+i=1(c̄i
+k − pi
+k)2
+, the formula (26) be-
+comes
+ξT
+Q−
+k ξ + q−
+k ξ + d−
+k ⩽ 0. (27)
+With a similar definition Q+
+k =
+#nz
+i=1((ḡi
+k)T
+ḡi
+k), q+
+k =
+2
+#nz
+i=1(c̄i
+k − pi
+k)ḡi
+k, d+
+k =
+#nz
+i=1(c̄i
+k − pi
+k)2
+− (y+
+k )2
+, we can
+obtain:
+$ nz
+i=1
+ρi
+k − pi
+k
+%2
+⩽ (y+
+k )2
+⇐⇒ ξT
+Q+
+k ξ + q+
+k ξ + d+
+k ⩽ 0.
+(28)
+Clearly, Q−
+k is a semi-negative definite matrix by its leading
+principal minors. Thus the range of constraints formed by (27)
+is non-convex. Finally, we prove Theorem 1.
+APPENDIX B
+PROOF OF THEOREM 2
+Because (Q−
+k )T
+= Q−
+k is a real symmetric matrix, we
+have the eigenvalue decomposition as Q−
+k =
+#
+λi⩾0 λiνiνT
+i +
+#
+λi<0 λiνiνT
+i = Q∗
+k +
+#
+λi<0 λiνiνT
+i . Q∗
+k is the semi-positive
+definite part of Q−
+k . As ξ ∈ [h̄x−
+k , h̄x+
+k ], we get a−
+i ⩽ νT
+i ξ ⩽ a+
+i .
+Then (νT
+i ξ)2
+⩽ (a−
+i + a+
+i )νT
+i ξ − a−
+i a+
+i . From (27), we have
+ξT
+$
+Q∗
+k +
+λi<0
+λiνiνT
+i
+%
+ξ + q−
+k ξ + d−
+k ⩽ 0, (29)
+⇐⇒ ξT
+Q∗
+kξ + q−
+k ξ + d−
+k ⩽ ξT
+$
+−
+λi<0
+λiνiνT
+i
+%
+ξ (30)
+⇐⇒ ξT
+Q∗
+kξ + q∗
+kξ + d∗
+k ⩽ 0, (31)
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+9906 IEEE ROBOTICS AND AUTOMATION LETTERS, VOL. 9, NO. 11, NOVEMBER 2024
+where q∗
+k =
+#
+λi<0 λi(a−
+i + a+
+i )νT
+i + q−
+k and d∗
+k =d−
+k −
+#
+λi<0
+λia−
+i a+
+i . Clearly, it can be judged that Q+
+k is a positive semi-
+definiteness matrix by its leading principal minors.
+APPENDIX C
+PROOF OF THEOREM 3
+Denote X̂k in the following intersection form
+X̂k = Z
+
+Ĝk, ĉk, Âk, b̂k, ĥk
+
+(32)
+= Z Ḡx
+k, c̄x
+k, Āx
+k, b̄x
+k, h̄x
+k
+
+H
+
+HS(Lk, Fk)
+
+Z
+
+R̃k, S̃k
+
+.
+(33)
+myr The following form is obtained by applying Theorem 1
+in [28] to each halfspace constrain in HS(Lk, Fk).
+HS(Lk, Fk)
+
+Z
+
+R̃k, S̃k
+
+= Z
+
+R̃k 0
+
+, S̃k,
+
+LkR̃k Dk
+
+,
+Fk − LkS̃k −
+1
+2
+
+d1
+k . . . d
+np
+k
+T
+, I(nz+np)×1
+&
+, (34)
+Finally, (18) is obtained with Proposition 1 in [25].
+APPENDIX D
+PROOF OF THEOREM 4
+First, with k ∈ N0, δ ≤ k, we compute the interval hull of
+X̂k−δ by linear programming in [25] as the following form
+X̂k−δ = Z
+
+Ĝx
+k−δ, ĉx
+k−δ, Âx
+k−δ, b̂x
+k−δ, ĥx
+k−δ
+
+⊆ IH
+
+X̂k−δ
+
+.
+(35)
+Second,basedon(20)andtheinclusionrelationprovidedby(35)
+the following relation is obtained
+X̂k = Fk−δ:k
+
+X̂k−δ
+
+⊆ Fk−δ:k
+
+IH
+
+X̂k−δ
+
+. (36)
+REFERENCES
+[1] J. Liu and G. Hu, “Relative localization estimation for multiple robots via
+the rotating ultra-wideband tag,” IEEE Robot. Autom. Lett., vol. 8, no. 7,
+pp. 4187–4194, Jul. 2023.
+[2] C. Justin and N. JeromeLe, “Ranging-based localizability optimiza-
+tion for mobile robotic networks,” IEEE Trans. Robot., vol. 39, no. 4,
+pp. 2842–2860, Aug. 2023.
+[3] X. Fang, C. Wang, T.-M. Nguyen, and L. Xie, “Graph optimization
+approach to range-based localization,” IEEE Trans. Syst., Man, Cybern.,
+Syst., vol. 51, no. 11, pp. 6830–6841, Nov. 2021.
+[4] C. Shen et al., “Seamless GPS/Inertial navigation system based on self-
+learning square-root cubature kalman filter,” IEEE Trans. Ind. Electron.,
+vol. 68, no. 1, pp. 499–508, Jan. 2021.
+[5] S. Felicioni, B. M. Rizzo, C. Tortorici, and G. Costante, “Vision-based
+topological localization for MAVs,” IEEE Robot. Autom. Lett., vol. 9, no. 2,
+pp. 1158–1165, Feb. 2024.
+[6] P. Alan, T. Nicole, and L. John, “Prioritized planning for cooperative
+range-only localization in multi-robot networks,” in Proc. Int. Conf. Robot.
+Automat., Philadelphia, PA, USA, 2022, pp. 10753–10759.
+[7] J. Yang, M. Wu, Y. Cong, Y. Guo, X. Zhou, and K. Tang, “A novel single-
+beacon positioning with inertial measurement optimization,” IEEE Robot.
+Autom. Lett., early access, Jun. 2023, doi: 10.1109/LRA.2023.3290816.
+[8] T. H. Nguyen and L. Xie, “Estimating odometry scale and UWB anchor
+location based on semidefinite programming optimization,” IEEE Robot.
+Autom. Lett., vol. 7, no. 3, pp. 7359–7366, Jul. 2022.
+[9] Y. Cao, C. Yang, and R. Li, “Accurate position tracking with a single UWB
+anchor,” in Proc. Int. Conf. Robot. Automat., Philadelphia, PA, USA, 2020,
+pp. 2344–2350.
+[10] J. Li, Y. Bi, K. Li, K. Wang, F. Lin, and B. M. Chen, “Accurate 3D
+localization for MAV swarms by UWB and IMU fusion,” in Proc. IEEE
+14th Int. Conf. Control Automat., Jun. 2018, pp. 100–105.
+[11] M. Shalaby, C. C. Cossette, J. Le Ny, and J. R. Forbes, “Cascaded filtering
+using the sigma point transformation,” IEEE Robot. Autom. Lett., vol. 6,
+no. 3, pp. 4758–4765, Mar. 2021.
+[12] R. E. Kalman, “A new approach to linear filtering and prediction prob-
+lems,” J. Basic Eng., vol. 82, no. 1, pp. 35–45, Mar. 1960.
+[13] J. Ibenthal, M. Kieffer, H. Piet-Lahanier, and L. Meyer, “Set-membership
+vs. stochastic approaches for target localization with UAVs,” IFAC-
+LettersOnLine, vol. 56, no. 2, pp. 3326–3333, 2023.
+[14] F. Schweppe, “Recursive state estimation: Unknown but bounded errors
+and system inputs,” IEEE Trans. Autom. Control, vol. 13, no. 1, pp. 22–28,
+Feb. 1968.
+[15] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical framework
+and optimality of set-membership filtering,” IEEE Trans. Autom. Control,
+vol. 67, no. 5, pp. 2544–2551, May 2022.
+[16] W. Zhenhua, Z. Yilian, S. Mouquan, and S. Yi, “Ellipsoidal set-
+membership filtering for discrete-time linear time-varying systems,” IEEE
+Trans. Autom. Control, vol. 68, no. 9, pp. 5767–5774, Sep. 2023.
+[17] W. Tang, Z. Wang, Q. Zhang, and Y. Shen, “Set-membership estimation for
+linear time-varying descriptor systems,” Automatica, vol. 115, May 2020,
+Art. no. 108867.
+[18] B. S. Rego, J. K. Scott, D. M. Raimondo, and G. V. Raffo, “Set-valued
+state estimation of nonlinear discrete-time systems with nonlinear invari-
+ants based on constrained zonotopes,” Automatica, vol. 129, Apr. 2021,
+Art. no. 109638.
+[19] L. C. Bento, P. Bonnifait, and U. J. Nunes, “Set-membership posi-
+tion estimation with GNSS pseudorange error mitigation using lane-
+boundary measurements,” IEEE Trans. Intell. Transp. Syst., vol. 20, no. 1,
+pp. 185–194, Jan. 2019.
+[20] H. Yang, Y. Zhang, W. Gu, H. Yan, and F. Yang, “A novel global
+set-membership filtering approach for localization of automatic guided
+vehicles,” IEEE Trans. Ind. Informat., vol. 19, no. 3, pp. 3219–3228,
+Mar. 2023.
+[21] D. Silvestre, “Constrained convex generators: A tool suitable for set-based
+estimation with range and bearing measurements,” IEEE Control Syst.
+Lett., vol. 6, pp. 1610–1615, 2022.
+[22] Y. Ding, Y. Cong, X. Wang, and L. Cheng, “Cooperative filtering with
+range measurements: A distributed constrained zonotopic method,” in
+Proc. Chin. Conf. Swarm. Intell. Cooperative. Control., Nanjing, Chin,
+2023, pp. 487–502.
+[23] G. N. Nair, “A nonstochastic information theory for communication
+and state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6,
+pp. 1497–1510, Jun. 2013.
+[24] C. T. Chen, Linear System Theory and Design, 3rd ed. New York, NY,
+USA: Oxford Univ. Press, 1999.
+[25] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz, “Con-
+strained zonotopes: A new tool for set-based estimation and fault detec-
+tion,” Automatica, vol. 69, pp. 126–136, Jul. 2016.
+[26] A. Platzer and E. M. Clarke, “The image computation problem in hybrid
+systems model checking,” in Proc. Int. Workshop Hybrid. Syst. Comput.
+Control, 2007, pp. 473–486.
+[27] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-membership
+filters,” 2022, arXiv:2203.13966.
+[28] V. Raghuraman and J. P. Koeln, “Set operations and order reductions for
+constrained zonotopes,” Automatica, vol. 139, Feb. 2022, Art. no. 110204.
+[29] M. De Berg, M. van Kreveld, M. Overmars, and O. Schwarzkopf, “Com-
+putational geometry: Algorithms and applications,” 2000.
+[30] M. Althoff, N. Kochdumper, and M. Wetzlinger, “CORA 2020 manual,”
+2020. [Online]. Available: https://tumcps.github.io/CORA/
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:11:56 UTC from IEEE Xplore. Restrictions apply.
+

@@ -1,5 +1,26 @@
 # 唯一论文阅读总账
 
+## 2026-11-05 · 阶段 2 系统性文献调研
+
+本轮录入 37 项，沿用阶段 1 的 21 个文献身份，扩展 16 项。这里统计主库条目，新增条目中含仓库早已读过的工作。各篇的十一字段、作者、书目版本、原文链接、阅读定位及证据缺口见[逐篇阅读卡](stage2/reading_cards.md)。筛选与引用均可从[综述](stage2/literature_review.md)、[关键对比](stage2/key_comparison.md)、[BibTeX](stage2/references.bib)追溯。
+
+- Meslem（M7）的历史创新校正、区间交与块末 ER 是不同命题。Hassaan（M8/M9/M1）分别提供估计恢复、共同前缀策略、时变管与移位的对照。Brunner（M2）的期刊正文仍待核，窗口设计按机构摘要记录。
+- 补入 Bemporad–Garulli（N3）、Le 等（N1）、Köhler 等（N2）。分别定位相容状态的全称约束、zonotope 估计中心反馈和在线误差预算的移位归纳。N2 按 arXiv 作者稿登记。Kögel 的主动通信调度（N13）可作为有额外信息权限的对照。
+- 李育东、董久祥、丛一睿（N16）的正式 PDF 印刷页 32 经版面核读。式 (42) 的分块 Kronecker 矩阵与式 (43) 的逐轴交错向量需要置换后使用。图 7 是六维无人机轨迹重构数值比较；未复现作者仿真。[原版](sources/cong_mpc_20261104/线性离散系统的自适应集员滤波方法.pdf)
+- M6 署名及会议届次按正式会议程序复核。保留 Crossref 注册原件与导出说明。来源受限或定理未取得者按实际阅读层级记录，统计与数学判据见[验收表](stage2/literature_review.md)。
+
+## 2026-11-05 · 阶段 1 背景与技术路线
+
+项目版本仅取自本地仓库，论文使用本地原文与在线学术来源。[21 项文献的题录、定位与逐项阅读层级](../research/research_background.md)是本阶段的证据索引。该数目统计本轮对照的不同论文，其中包含既有记录。
+
+- **Meslem, Hably, Wang, Raïssi (2024)**，*Set-Valued State Estimator With Sparse and Delayed Measurements for Uncertain Discrete-Time Linear Systems*，IEEE Control Systems Letters 8，904–909。式 (8)–(11) 描述固定稀疏指数及过去时刻的输出，Assumption 1 针对该采样律的可检测性，式 (14)–(15) 区分有校正与仅预测时的误差传播。其区间观测器可作为周期延迟对照。任意乱序、永久丢失与 MPC 移位均需另外给出条件。定向核对会议展示稿及作者期刊记录，按一篇登记。[展示稿](https://css.paperplaza.net/images/temp/CDC/files/2323.pdf#page=1) · [期刊 DOI](https://doi.org/10.1109/LCSYS.2024.3405376)
+- **Hassaan, Shen, Yong** 的 IEEE Control Systems Letters 估计器论文在线核对 §II-B、可见事件 Def. 2 与前缀 Def. 6。**同作者 HSCC 2021** 的 Thm. 3.2 式 (26) 明确要求所有允许事件词、噪声与初始误差满足中间及末端界，并施加共同前缀约束。**Hassaan, Pati, Shen, Yong (IFAC 2021)** 的 Assumptions 1–3 与 Thm. 6 则将上述类型的误差管接入 MPC。分别登记三种结果的适用范围。[估计器](https://arxiv.org/pdf/2101.03389) · [HSCC](https://doi.org/10.1145/3447928.3456655) · [IFAC 作者稿](https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf)
+- **几何与应用核对**涵盖 Scott Prop. 1、Rego §2、Ji §V-B，以及本地 Cong 的最优集员滤波 Thms. 1–2、OIT Thm. 1、Qin 的有限窗 CZ Thm. 1、Li 的平滑 Thm. 1 式 (8)。Brunner 与 Santos–Lagoa 两项的可访问材料支持摘要层判断，具体窗口移位和终端条件分别列入待查项。[论文版本及定位](../research/research_background.md) · [技术路线中的时间戳对照](../research/research_technology_map.md)
+
+## 2026-11-05 — 阶段 0 既有关键引用抽核
+
+见[阶段 0 审查报告 §4](../research/STAGE_0_AUDIT_20261105.md)：Scott Prop. 1、Hassaan Assumptions 1–3 / Thm. 6、Ji 十二状态算例定向复核；Rego、Cong、Brunner 核对摘要、版本或机构题录。保留 DOI 网页不可访问与 PMC 验证页等限制。此条仅记录核验范围，不新增论文计数、不认定全文复现或创新。
+
 ## 2026-11-04 — 六维CZ启动共同输入专题定向复核（既有DOI，不新增计数）
 
 本轮围绕[一步共同输入证明](../research/cz_startup_predecessor.md)复读以下原始正文；阅读等级为相关章节精读，未声称本轮三篇全文精读。定理核验卡、量词、输入/状态/噪声、终端条件及迁移限制集中在专题第6节。
@@ -2405,3 +2426,71 @@ Four paper/report sources received targeted body reading this run: Hu (2018), Bo
 - **Wehbeh & Sharf (2024)**, DOI 10.1002/rnc.7627: re-read the SO(3) local error model, bidirectional thrust/rate constraints, scenario uncertainty treatment, sensor assumptions and simulation/timing tables.
 - **Gupta et al. (2025)**, DOI 10.1109/IROS60139.2025.11246583: new partial body-read record above, plus public model-code review.
 - **Count**: 5 original quadrotor/multirotor MPC papers received targeted body reading from primary full-text sources; 0 were read cover-to-cover; 5 are partial body reads; 1 additional 2026 candidate is metadata/abstract-only. Existing Ru/Bicego/Nan/Wehbeh entries are cross-referenced, not duplicated. The 2026 candidate is not used as evidence until full text is obtained.
+
+## 2026-11-04 — 有限记忆输出反馈课题方案的定向核验
+
+见 [本轮证据补充](../research/proposal/LITERATURE_UPDATE.md) 与 [完整课题方案](../research/proposal/RESEARCH_PROPOSAL.md)。本轮0篇新增完整全文精读；Scott2016、Hassaan2021和Ji2022为既有来源相关正文定向复核；Rego2020为摘要/书目复核。新增候选：Andrade等2024（DOI 10.1109/ACCESS.2024.3381622，Crossref书目及作者学校目录，独立正文未取得）；Robbins等ACC2026（作者单位摘要，pp.585–592）；Krsmanovic等arXiv:2609.03699和Baranowski arXiv:2610.26326（作者摘要，未升级同行评审状态）。后三项只做摘要核验。各原始链接、实际范围与迁移限制见专题，不重复增加既有来源数量。
+
+Ji2022 §V-B的四旋翼示例采用12状态平衡点线性化、输出矩阵C=I和0.2s离散，不可表述为位置-only间歇观测或成熟飞控外环验证。CZ Tube MPC与在线CZ约束收紧已有直接先例，故本题贡献需限于时间戳、有限记忆、因果准入与模式收紧的可检验差异。本轮独立数学基线有解析证明、Fraction代数证书与本地闭环运行，不是原论文完整实验R3。
+
+## 2026-11-04 — 丛一睿集员论文与 MPC 选题分析
+
+入口为 [丛一睿论文清单](CONG_YIRUI_SET_MEMBERSHIP_PAPERS.md)，详细证据及五个课题见 [专题报告](../research/proposal/CONG_MPC_RESEARCH_TOPICS.md)，文件版本、SHA256、页数及逐篇阅读范围见 [manifest](sources/cong_mpc_20261104/manifest.json)。本条统计整个本次文献任务，不与上一条已有 MPC 核验重复计数。
+
+- **阅读数量：** 主清单第1–8、10–13篇，共12篇定向正文阅读；0篇升级为全部证明/全文逐行精读，0篇完成实验复现。第9篇未取得本地全文，按用户要求不再获取，不用于推断具体控制结构。
+- **全文版本：** 7篇arXiv作者稿、4篇正式出版PDF（含中文期刊）、1篇IEEE接收稿。第6篇所用作者稿称COIT，正式摘要称DOIT，具体结果按版本区分。
+- **SPIN-SMF：** 新取得第3篇并读取§II–IV、Proposition 1、Theorems 1–2、Algorithms 1–3及结论。结构不变性、离线预计算、参数差异界和热启动均已有；新方向应转向控制约束方向、模式切换和有限迭代外包证书。未把论文仿真加速比当作本地测量结果。
+- **中文ASMF：** 核实《导航定位与授时》13(3)，2026年5月，25–34；模型的过程噪声界已知，测量噪声界未知。正文目标为式(8)–(10)的非空与渐近有界；没有据此推断每拍真实包含。由于文本乱码，视觉核对PDF第3、4、6页（印刷页27、28、30）。
+- **单信标与多机定位：** 第11篇已有凸松弛、半空间修正和滑窗；第13篇采用绝对观测与相对测距，Algorithm 2第15行取区间外包，几何假设限制需保留。不能把它们称为尚无估计理论或完全无绝对定位信息。
+- **INS/GNSS：** 九维导航误差模型、位置差观测、截断离散化及滑窗；作者将INS线性化误差处理列为未来工作。未经残差外包不能用于宣称真实非线性飞行硬安全。
+- **已有理论边界：** OIT最终恢复包含不代替启动期安全；有界扰动观测误差不代替输入饱和下的可控性；平滑不使用未到达数据，同一信息下也不凭空优于精确当前后验。撤回的arXiv:2305.15797未作为理论依据。
+- **额外竞争检索：** Qiu2020（出版社摘要/引言）、Hung等2020（机构全文摘要/引言）、Wang–Manzie arXiv:2005.04006（作者摘要）、Ding等PLOS One2026（出版社摘要/引言）；与此前Hassaan、Ji、Andrade、Robbins、Parsi及预测降阶线索共同约束创新表述。完整新增检索返回见 [trace](sources/cong_mpc_20261104/novelty_search_trace.json)。此为定向检索，不是穷尽综述。
+- **产出与限制：** 推荐优先比较联合状态—扰动抗扰MPC（B）与现有项目延续方案（A）；计算证书（C）、主动单信标（D）、相对安全分布式MPC（E）作为另外三个候选。均为待验证方案；未改变当前算法/接口选择，未执行新的闭环测试。
+
+## 2026-11-04 — 硕士两项创新点：理论与机制仿真重评
+
+用户明确两个创新点服务于硕士论文，抗扰不再是首要排序。详见 [评估报告](../research/proposal/CONG_MPC_MASTERS_EVALUATION.md)、[冻结试验计划](../research/proposal/CONG_MPC_MASTERS_PROBE_PLAN.md)及 [本轮检索记录](sources/cong_mpc_20261104/masters_search_trace.json)。原12篇阅读数量不变；没有追加原论文实验复现。
+
+- **新增/深化的竞争阅读：** Zhang–Liu–Shi自触发自适应MPC作者稿（摘要、模型及算法入口）；Cai等2026 anytime原始—对偶MPC证书（摘要及模型相关部分）；Badalamenti等CDC2025模板选择（摘要、模型与控制构造）；Krsmanovic等2026预测zonotope降阶由摘要升级为§II–III定向正文阅读。Brunner等2018有限窗集员OFMPC为作者机构摘要级，具体全文差异仍未核对。2020有界误差目标跟踪为出版社摘要级。各阅读层级在报告中逐项标明，不把摘要作全文证据。
+- **推导：** 标准支持保持、固定有限时域共同输入可行集等价、常值终端RPI假设下的每拍压缩移位可行性；另给条件化信息损失反例及预算上界/观测调度证明框架。这些不等于已证明新的学术贡献或一般输出反馈稳定性。
+- **实际实验：** 新独立脚本experiments/cong_mpc_screen.py完成A/B/C/D/E机制筛选；C为稳定二维系统2700网格案例和48条闭环、1440步。方向模板/同规模均匀模板可行数1198/1178；闭环成对代价改善中位仅0.00757%，不支持显著控制收益。B相关性半宽改善中位1.123%，D/E仅分别为离散动作与联合顶点机制。保留负结果和同规模强基线。
+- **审计：** experiments/cong_mpc_audit.py核对主脚本和10个CSV哈希，补报对偶最大间隙而非只用零中位数。无本轮PX4/Gazebo运行，无src控制算法修改，无Git提交。
+- **修订建议：** 优先验证“控制相关集合压缩→观测资源调度”，两点须分别有新命题和独立基线；单信标“全假设安全→主动消歧”为探索备选。当前固定模板原型尚不足以直接定为创新点，第二点完整算法及闭环未实现。
+
+## 2026-11-05 — 阶段 3 候选假设的定向核查
+
+问题是已交付的位置历史能支持什么恢复与控制保证。阶段 2 的 37 项是已交付的系统库快照。本节按 DOI 引用补查与重读。八项材料的作者、题名、年份、出处、原文链接与检索式见[阶段 3 创新性证据表](../research/innovation_analysis.md)。
+
+- **误差下界。** Haimovich 等的 Thm. 1 已给出规则采样下最佳因果微分的最坏情形精度。Wang 等 §4.3 研究椭球 SMF 的缺测持续时间与缺测率。Garulli、Vicino、Zappa（1997）已有信息复杂性与集员状态估计框架，后者仅核题录和摘要。[最优微分](https://arxiv.org/pdf/2106.05320) · [不完整观测](https://lab.bciml.cn/wp-content/uploads/2020/08/Set-Membership-Filtering-with-Incomplete-Observations.pdf) · [IFAC 书目](https://www.sciencedirect.com/science/article/pii/S1474667017428321)
+- **历史与首步。** Nouwens 等作者稿 Def. 1、Thm. 1 给出删约束保持控制解的条件，Bemporad 等 Thm. 2 给出固定活动集上的参数解。候选 B 须额外说明哪些可达历史能改变相应约束右端。Brunner 2018 的期刊定理细节仍待核。[删约束作者稿](https://arxiv.org/pdf/2303.16581) · [参数 QP 出版正文](https://cse.lab.imtlucca.it/~bemporad/publications/papers/automatica-mpqp.pdf)
+- **交付期限。** 重读原总账 Yang–Ozay 2021 的 Props. 4–5，补查同作者 CDC 2020 的 Thm. 1 与 Chen 等的有限图增时延算法。成功时观测状态、有噪状态、仅位置带戳交付分别对待。论文实验复现数本轮为零。[缺测安全博弈](https://web.eecs.umich.edu/~necmiye/pubs/YangO_adhs21.pdf) · [有噪状态](https://web.eecs.umich.edu/~necmiye/pubs/YangO_cdc20.pdf) · [延迟博弈](https://link.springer.com/article/10.1007/s00236-020-00374-7)
+
+## 2026-11-05 — 阶段 4 定题核对：哪一拍算跨块
+
+重读已登记的 M1、M8、M9 作者稿第 2 页的延迟数据模型。三份 PDF 均以作者或 arXiv 版本取得，使用 pdftotext 定页读数。M1 与 M9 的文字分别以 \(i+\omega(i)>T_d\)、\(i+\omega(i)>T\) 描述超出时域并视同缺测。M8 的文字以 \(i+\tau(i)\ge T\) 描述与缺测相似的情况。这里记录作者稿的端点写法；跨版本复现还须对齐“观测何时可供状态估计及输入决策使用”。本项目将边界拍到达和严格越界到达分列，并只从实际交付拍起使用旧信息。[M1 作者稿 §2.2](https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf#page=2) · [M8 作者稿](https://arxiv.org/pdf/2101.03389#page=2) · [M9 作者稿 §2.1](https://qiangs.github.io/Papers/Conf_HSCC2021Hassaan.pdf#page=2)
+
+| 已登记的论文 | DOI | 本次获取的作者稿 SHA-256 |
+|---|---|---|
+| Syed M. Hassaan, Tarun Pati, Qiang Shen, Sze Zheng Yong，*Time-Varying Tube-Based Output Feedback MPC for Constrained Linear Systems with Intermittently Delayed Data*，IFAC-PapersOnLine，2021 | 10.1016/j.ifacol.2021.08.482 | c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2 |
+| Syed M. Hassaan, Qiang Shen, Sze Zheng Yong，*Equalized Recovery State Estimators for Linear Systems With Delayed and Missing Observations*，IEEE Control Systems Letters，2022 | 10.1109/LCSYS.2021.3050300 | f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66 |
+| Syed M. Hassaan, Qiang Shen, Sze Zheng Yong，*Path-Dependent Controller and Estimator Synthesis with Robustness to Delayed and Missing Data*，HSCC，2021 | 10.1145/3447928.3456655 | 7f80d95bf6e44b3c9068576351c47e0dbe0c46738b8cf40f2926fd0f972ffea7 |
+
+另重查 Haimovich 等 Thm. 1 的规则采样最优微分精度，以及 Köhler 等 Thm. 4 对一步预算、移位与终端的要求。上述重读不增加阶段 2 书目数；本次论文实验复现数为零。与本地端点、对象及估计器的对应关系见[阶段 4 定题建议](../research/final_research_topic.md)。[最优微分作者稿](https://arxiv.org/pdf/2106.05320) · [在线估计界作者稿](https://arxiv.org/pdf/2105.03427)
+
+## 2026-11-05 — 已选 A 的专项反方评审
+
+从 M8 的前向引文定向核查 Syed M. Hassaan、Sze Zheng Yong，*System-Level Recurrent State Estimators for Affine Systems Subject to Data Losses Modeled by Automata*，IEEE CDC，2022，DOI 10.1109/CDC51059.2022.9992499。已阅读原文 Assumption 1、Definitions 4–5 与 Theorem 2 的问题和保证。其对有界仿射系统的缺测自动机构造路径和回返节点的恢复界，要求研究 A 明确延迟状态增广后究竟多得到什么。原文的缺测语义和估计器类别需对齐；用它否定一般的“首次重复恢复”有依据，用它否定 A 的所有窄命题仍证据不足。[CDC 原文](https://par.nsf.gov/servlets/purl/10411809)
+
+六份主来源 PDF 的实际获取与 SHA-256、双库查询、引文边和限流记录见[原文指纹](../research/stage4_critique_A/primary_sources.json)与[检索记录](../research/stage4_critique_A/search.json)。本轮新增的是针对 A 的适用条件比对和本地信息价值算例；论文实验复现数为零，阶段 2 的固定书目快照沿用原计数。[审稿意见与数学核验](../research/stage4_critique_A/REVIEW.md)
+
+## 2026-11-05 — Hassaan–Yong CDC 2022 可归约性补证
+
+对照式 (1)、Definitions 1–5、Assumption 1、式 (2)–(5) 与定理 2 式 (18)–(19)，核查了整组观测有/无、已知观测矩阵、当拍残差用于下一估计、从直接路径起点误差球重新准入等条件。PDF 排版第 4118 页给出无穷范数。与前次记录一致的原文 SHA-256 为 023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a。ACC 2019 中的观察器误差增广与保存延迟位置的状态寄存器应分别理解。[CDC 原文](https://par.nsf.gov/servlets/purl/10411809) · [ACC 原文](https://bpb-us-e1.wpmucdn.com/sites/northeastern.edu/dist/e/2626/files/2020/04/Hassaan_ACC19.pdf)
+
+本地有理数反例仅排除按物理拍合并成“有包/无包”的直接代换。统一缓冲至截止拍后可得到原文二值观测形式；本地紧恢复界来自独立的滑窗证明和极值证书，未声称复现 IEEE 仿射综合。查新状态保持未决，本文为已有论文复读。[逐项映射、数值及证据边界](../research/stage4_critique_A/CDC22_REDUCTION.md)
+
+## 2026-11-05 — 选题 A 的控制侧信息增量
+
+Florian D. Brunner、Matthias A. Müller、Frank Allgöwer，*Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation*，IEEE Transactions on Automatic Control 63(9)，2018，2976–2986，DOI 10.1109/TAC.2018.2791899。作者机构摘要明确将所用量测数量与预测步关联，并以此建立递归可行；本轮没有获得可核查的期刊逐定理文本。Köhler 等既有作者稿 Thm. 4 则明确需要新预算不超过此前一步预测预算，再作移位。本次重查不增加系统库条数。以上来源支持选择强基线，未据此认定本地条件检查具有新颖性。[Brunner 机构摘要](https://research.uni-hannover.de/en/publications/enhancing-output-feedback-mpc-with-set-valued-moving-horizon-esti/) · [Köhler 作者稿](https://arxiv.org/pdf/2105.03427)
+
+本地新证书区分了原始速度约束、名义收紧行及最优首步。在所选可达记录上，提前一拍的数据改变了唯一最优首步；同信息精确增广得到相同结论。这里检验的是本地构造，论文实验复现数为零。[控制侧补证](../research/stage4_critique_A/CONTROL_PREFIX_SHIFT.md)

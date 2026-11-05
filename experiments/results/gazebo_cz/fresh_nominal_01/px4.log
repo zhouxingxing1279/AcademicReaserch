@@ -1,0 +1,1 @@
+ERROR [px4] Error opening startup file, does not exist: etc/init.d-posix/rcS

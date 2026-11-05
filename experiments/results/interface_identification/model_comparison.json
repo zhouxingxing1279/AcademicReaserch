@@ -1,0 +1,666 @@
+{
+  "calibration_audit": {
+    "name": "interface_calibration_01",
+    "completed": true,
+    "landed": true,
+    "block_count": 6,
+    "logger_config_restored": true,
+    "send_interval_wall_max": 0.06065893900000674,
+    "logged_command_interval_sim_median": 0.05200000000000671,
+    "logged_command_interval_sim_max": 0.060000000000002274,
+    "receive_minus_latest_reference_range": [
+      0.0,
+      0.012000000000000455
+    ],
+    "hover_thrust_at_blocks": [
+      0.7252139449119568,
+      0.726381778717041,
+      0.726875901222229,
+      0.7273099422454834,
+      0.7276723384857178,
+      0.7277882993221283
+    ],
+    "max_abs_velocity": [
+      0.3656938672065735,
+      0.3748813569545746,
+      0.5997242331504822
+    ]
+  },
+  "validation_audit": {
+    "name": "interface_validation_01",
+    "completed": true,
+    "landed": true,
+    "block_count": 3,
+    "logger_config_restored": true,
+    "send_interval_wall_max": 0.05725934299999835,
+    "logged_command_interval_sim_median": 0.0519999999999996,
+    "logged_command_interval_sim_max": 0.056000000000011596,
+    "receive_minus_latest_reference_range": [
+      0.0,
+      0.01199999999999335
+    ],
+    "hover_thrust_at_blocks": [
+      0.7252215147018433,
+      0.7263989150524139,
+      0.727052628993988
+    ],
+    "max_abs_velocity": [
+      0.20800280570983887,
+      0.21036258339881897,
+      0.34475329518318176
+    ]
+  },
+  "models": {
+    "N": {
+      "ideal": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 1.0,
+          "bias": 0.0
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.028413523407796567,
+            "velocity_rmse": 0.043302469136119,
+            "position_absmax": 0.1050315511714379,
+            "velocity_absmax": 0.1219724225229579
+          },
+          "half_second": {
+            "position_rmse": 0.011731544979126714,
+            "velocity_rmse": 0.05591653409205586,
+            "position_absmax": 0.03853985816581518,
+            "velocity_absmax": 0.17569912225007567
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.01799845551270031,
+            "velocity_rmse": 0.030730411811302268,
+            "position_absmax": 0.0513310320705636,
+            "velocity_absmax": 0.07404098454862877
+          },
+          "half_second": {
+            "position_rmse": 0.014488509597453897,
+            "velocity_rmse": 0.04534641119750179,
+            "position_absmax": 0.05677055902851885,
+            "velocity_absmax": 0.13085553050041282
+          }
+        }
+      },
+      "static": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 0.9199457703167581,
+          "bias": -0.0031916292214819817,
+          "calibration_velocity_rmse": 0.042000813578568656
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.024101742030280735,
+            "velocity_rmse": 0.04200083956928021,
+            "position_absmax": 0.08067367018382769,
+            "velocity_absmax": 0.12294878534739892
+          },
+          "half_second": {
+            "position_rmse": 0.012314317820587171,
+            "velocity_rmse": 0.05602580448608603,
+            "position_absmax": 0.03948761200316184,
+            "velocity_absmax": 0.17166966572403464
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.024777838907940577,
+            "velocity_rmse": 0.03255419827307249,
+            "position_absmax": 0.07178369952045997,
+            "velocity_absmax": 0.0867644274607305
+          },
+          "half_second": {
+            "position_rmse": 0.014141798081344322,
+            "velocity_rmse": 0.04395985443956567,
+            "position_absmax": 0.05365429853504271,
+            "velocity_absmax": 0.12817794419825163
+          }
+        }
+      },
+      "lag": {
+        "parameters": {
+          "tau": 0.04,
+          "delay": 0.16,
+          "gain": 1.0120612728589364,
+          "bias": -0.0034595031627357624,
+          "calibration_velocity_rmse": 0.015058936798199172
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.02532387301538342,
+            "velocity_rmse": 0.015058934400856091,
+            "position_absmax": 0.079227308280662,
+            "velocity_absmax": 0.06673679148638617
+          },
+          "half_second": {
+            "position_rmse": 0.004661212255889963,
+            "velocity_rmse": 0.01333949114408315,
+            "position_absmax": 0.01441533641751775,
+            "velocity_absmax": 0.03606307973131634
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.02335659646814799,
+            "velocity_rmse": 0.017288115546742422,
+            "position_absmax": 0.06795343501122628,
+            "velocity_absmax": 0.04907694621475733
+          },
+          "half_second": {
+            "position_rmse": 0.0044542273554730024,
+            "velocity_rmse": 0.01110046387286945,
+            "position_absmax": 0.01184654300901089,
+            "velocity_absmax": 0.026788443012615355
+          }
+        }
+      }
+    },
+    "E": {
+      "ideal": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 1.0,
+          "bias": 0.0
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.02670319731818178,
+            "velocity_rmse": 0.04298414258505444,
+            "position_absmax": 0.08070142964818644,
+            "velocity_absmax": 0.11427825428544955
+          },
+          "half_second": {
+            "position_rmse": 0.011492657322513,
+            "velocity_rmse": 0.05739882156358079,
+            "position_absmax": 0.03983479262438304,
+            "velocity_absmax": 0.18216656297444975
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.013854877261550453,
+            "velocity_rmse": 0.03085538624680536,
+            "position_absmax": 0.04545927446783713,
+            "velocity_absmax": 0.07707961760461397
+          },
+          "half_second": {
+            "position_rmse": 0.015062386833171822,
+            "velocity_rmse": 0.047972802099979554,
+            "position_absmax": 0.05844335244109896,
+            "velocity_absmax": 0.13845792599022388
+          }
+        }
+      },
+      "static": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 0.9185162254640521,
+          "bias": 0.0010199050416151109,
+          "calibration_velocity_rmse": 0.04222408440532915
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.02401840689459239,
+            "velocity_rmse": 0.04222409997745168,
+            "position_absmax": 0.06790258831657028,
+            "velocity_absmax": 0.12667021229862765
+          },
+          "half_second": {
+            "position_rmse": 0.01211509449040467,
+            "velocity_rmse": 0.05762598465368219,
+            "position_absmax": 0.04092578516166645,
+            "velocity_absmax": 0.17865800261497175
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.014923707466662084,
+            "velocity_rmse": 0.030390725025977835,
+            "position_absmax": 0.05180804196305628,
+            "velocity_absmax": 0.08672232441603912
+          },
+          "half_second": {
+            "position_rmse": 0.014719965554695465,
+            "velocity_rmse": 0.04644550048370404,
+            "position_absmax": 0.05580502840727893,
+            "velocity_absmax": 0.13569902814924717
+          }
+        }
+      },
+      "lag": {
+        "parameters": {
+          "tau": 0.02,
+          "delay": 0.18,
+          "gain": 1.009706049074107,
+          "bias": 0.0010561601117547773,
+          "calibration_velocity_rmse": 0.01505325506545596
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.024638402285402268,
+            "velocity_rmse": 0.015053255161712851,
+            "position_absmax": 0.05621109054353895,
+            "velocity_absmax": 0.05301850975538147
+          },
+          "half_second": {
+            "position_rmse": 0.004430160351330028,
+            "velocity_rmse": 0.014220693376951154,
+            "position_absmax": 0.008909484905007023,
+            "velocity_absmax": 0.03262702242305726
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.007393335489945182,
+            "velocity_rmse": 0.009271289929210669,
+            "position_absmax": 0.026052432584115028,
+            "velocity_absmax": 0.032979058634469954
+          },
+          "half_second": {
+            "position_rmse": 0.00414890473907707,
+            "velocity_rmse": 0.01035681168577777,
+            "position_absmax": 0.012240644420419639,
+            "velocity_absmax": 0.025075175929944016
+          }
+        }
+      }
+    },
+    "D": {
+      "ideal": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 1.0,
+          "bias": 0.0
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.09519666714586421,
+            "velocity_rmse": 0.08360946895823947,
+            "position_absmax": 0.38844845332205225,
+            "velocity_absmax": 0.2775366652756941
+          },
+          "half_second": {
+            "position_rmse": 0.01660111555141905,
+            "velocity_rmse": 0.05509523368207078,
+            "position_absmax": 0.038375328702275446,
+            "velocity_absmax": 0.13974129855632783
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.10654175535329465,
+            "velocity_rmse": 0.08324180971966323,
+            "position_absmax": 0.33563838742673413,
+            "velocity_absmax": 0.18632251434028307
+          },
+          "half_second": {
+            "position_rmse": 0.010963599949181444,
+            "velocity_rmse": 0.03858776879685125,
+            "position_absmax": 0.028868068996263485,
+            "velocity_absmax": 0.10488888472318578
+          }
+        }
+      },
+      "static": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 1.6487799264559464,
+          "bias": 0.01738596230057738,
+          "calibration_velocity_rmse": 0.039909889336416746
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.06255902883222327,
+            "velocity_rmse": 0.03990990904257395,
+            "position_absmax": 0.2493609706164106,
+            "velocity_absmax": 0.1159121871925888
+          },
+          "half_second": {
+            "position_rmse": 0.003654957079050558,
+            "velocity_rmse": 0.01734190441961943,
+            "position_absmax": 0.011701712789726315,
+            "velocity_absmax": 0.05643712580204513
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.06343306743553212,
+            "velocity_rmse": 0.04390526269506723,
+            "position_absmax": 0.22297752403743187,
+            "velocity_absmax": 0.11981526222079988
+          },
+          "half_second": {
+            "position_rmse": 0.005190199906450332,
+            "velocity_rmse": 0.017602211068162565,
+            "position_absmax": 0.017529157196805922,
+            "velocity_absmax": 0.04084367305040629
+          }
+        }
+      },
+      "lag": {
+        "parameters": {
+          "tau": 0.0,
+          "delay": 0.04,
+          "gain": 1.6524755119122465,
+          "bias": 0.01739592824736218,
+          "calibration_velocity_rmse": 0.03851538285534271
+        },
+        "calibration": {
+          "full_block": {
+            "position_rmse": 0.06368729948817342,
+            "velocity_rmse": 0.03851514940877144,
+            "position_absmax": 0.2492809924957493,
+            "velocity_absmax": 0.1158722297288475
+          },
+          "half_second": {
+            "position_rmse": 0.002476548758776425,
+            "velocity_rmse": 0.00983517732931326,
+            "position_absmax": 0.007704043787198245,
+            "velocity_absmax": 0.024540327489370573
+          }
+        },
+        "validation": {
+          "full_block": {
+            "position_rmse": 0.06373457593406831,
+            "velocity_rmse": 0.04317453890031275,
+            "position_absmax": 0.2229127843673373,
+            "velocity_absmax": 0.11977903004735704
+          },
+          "half_second": {
+            "position_rmse": 0.0027479096026474196,
+            "velocity_rmse": 0.01106907033620396,
+            "position_absmax": 0.0051244563619126104,
+            "velocity_absmax": 0.020080281049013014
+          }
+        }
+      }
+    }
+  },
+  "calibration_top_candidates": {
+    "N": [
+      {
+        "tau": 0.04,
+        "delay": 0.16,
+        "gain": 1.0120612728589364,
+        "bias": -0.0034595031627357624,
+        "calibration_velocity_rmse": 0.015058936798199172
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.18,
+        "gain": 1.0094628087984483,
+        "bias": -0.0033394763448479784,
+        "calibration_velocity_rmse": 0.015099338949275289
+      },
+      {
+        "tau": 0.06,
+        "delay": 0.14,
+        "gain": 1.016161651617659,
+        "bias": -0.003580236312703299,
+        "calibration_velocity_rmse": 0.01510000503763764
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.2,
+        "gain": 1.0085787470868792,
+        "bias": -0.0032203007126578335,
+        "calibration_velocity_rmse": 0.01518956669874069
+      },
+      {
+        "tau": 0.08,
+        "delay": 0.12,
+        "gain": 1.0215961817216417,
+        "bias": -0.003701615380613057,
+        "calibration_velocity_rmse": 0.015243807889626482
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.16,
+        "gain": 1.0090864316015469,
+        "bias": -0.0033340289500135337,
+        "calibration_velocity_rmse": 0.015321681071337842
+      },
+      {
+        "tau": 0.04,
+        "delay": 0.14,
+        "gain": 1.0116148551004427,
+        "bias": -0.003454020499498653,
+        "calibration_velocity_rmse": 0.015322523283087778
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.18,
+        "gain": 1.0082246873907157,
+        "bias": -0.0032148991299455875,
+        "calibration_velocity_rmse": 0.015397703047235329
+      },
+      {
+        "tau": 0.06,
+        "delay": 0.12,
+        "gain": 1.0155953360530146,
+        "bias": -0.0035747603980348184,
+        "calibration_velocity_rmse": 0.015431646697369393
+      },
+      {
+        "tau": 0.1,
+        "delay": 0.1,
+        "gain": 1.0282142733215094,
+        "bias": -0.003823664942291493,
+        "calibration_velocity_rmse": 0.015505218442321448
+      }
+    ],
+    "E": [
+      {
+        "tau": 0.02,
+        "delay": 0.18,
+        "gain": 1.009706049074107,
+        "bias": 0.0010561601117547773,
+        "calibration_velocity_rmse": 0.01505325506545596
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.2,
+        "gain": 1.008839134890365,
+        "bias": 0.0010272408954200792,
+        "calibration_velocity_rmse": 0.015076728089316694
+      },
+      {
+        "tau": 0.04,
+        "delay": 0.16,
+        "gain": 1.0121758438344284,
+        "bias": 0.00108514987074242,
+        "calibration_velocity_rmse": 0.015130767144154608
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.16,
+        "gain": 1.0092501573625803,
+        "bias": 0.001054140970527316,
+        "calibration_velocity_rmse": 0.01532244278455719
+      },
+      {
+        "tau": 0.06,
+        "delay": 0.14,
+        "gain": 1.0160763100091459,
+        "bias": 0.0011143930150908597,
+        "calibration_velocity_rmse": 0.015326286917203828
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.18,
+        "gain": 1.0084010972811286,
+        "bias": 0.0010252361729840341,
+        "calibration_velocity_rmse": 0.015335282659546418
+      },
+      {
+        "tau": 0.04,
+        "delay": 0.14,
+        "gain": 1.0116588831212932,
+        "bias": 0.0010831117863319146,
+        "calibration_velocity_rmse": 0.015433408442719109
+      },
+      {
+        "tau": 0.08,
+        "delay": 0.12,
+        "gain": 1.0212595983911692,
+        "bias": 0.0011439406322888742,
+        "calibration_velocity_rmse": 0.015645163417145336
+      },
+      {
+        "tau": 0.06,
+        "delay": 0.12,
+        "gain": 1.015450253800656,
+        "bias": 0.0011123159900492973,
+        "calibration_velocity_rmse": 0.0156861275195966
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.2,
+        "gain": 1.0081735693605287,
+        "bias": 0.0010584313308747788,
+        "calibration_velocity_rmse": 0.01594430536724119
+      }
+    ],
+    "D": [
+      {
+        "tau": 0.0,
+        "delay": 0.04,
+        "gain": 1.6524755119122465,
+        "bias": 0.01739592824736218,
+        "calibration_velocity_rmse": 0.03851538285534271
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.02,
+        "gain": 1.6520939312374743,
+        "bias": 0.01739080163316817,
+        "calibration_velocity_rmse": 0.03866138696744148
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.02,
+        "gain": 1.654058536785575,
+        "bias": 0.017524964237717936,
+        "calibration_velocity_rmse": 0.038696642130159956
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.0,
+        "gain": 1.6536689972512117,
+        "bias": 0.017519796145876093,
+        "calibration_velocity_rmse": 0.03884486791228998
+      },
+      {
+        "tau": 0.04,
+        "delay": 0.0,
+        "gain": 1.6585489641884947,
+        "bias": 0.017656466419467776,
+        "calibration_velocity_rmse": 0.038856356039969404
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.06,
+        "gain": 1.6499025052395626,
+        "bias": 0.017401316452725094,
+        "calibration_velocity_rmse": 0.0394931738572657
+      },
+      {
+        "tau": 0.02,
+        "delay": 0.04,
+        "gain": 1.6515134704421526,
+        "bias": 0.017530399405108907,
+        "calibration_velocity_rmse": 0.03965867709491932
+      },
+      {
+        "tau": 0.04,
+        "delay": 0.02,
+        "gain": 1.6560861388641328,
+        "bias": 0.017661966677164243,
+        "calibration_velocity_rmse": 0.039781609301682924
+      },
+      {
+        "tau": 0.06,
+        "delay": 0.0,
+        "gain": 1.6633311096901848,
+        "bias": 0.017794632931748496,
+        "calibration_velocity_rmse": 0.03988799724755316
+      },
+      {
+        "tau": 0.0,
+        "delay": 0.0,
+        "gain": 1.6487799264559464,
+        "bias": 0.01738596230057738,
+        "calibration_velocity_rmse": 0.039909889336416746
+      }
+    ]
+  },
+  "validation_estimator_diagnostic": [
+    {
+      "block": 0,
+      "first_failure_by_axis": [
+        {
+          "first_containment_failure": 1,
+          "first_empty_posterior": 3
+        },
+        {
+          "first_containment_failure": null,
+          "first_empty_posterior": null
+        },
+        {
+          "first_containment_failure": 1,
+          "first_empty_posterior": 2
+        }
+      ],
+      "scope": "Offline exact known-input moment compensation then original CZ replay; actual switched commands, ideal initial truth and bounded synthetic position noise. Not online controller validation."
+    },
+    {
+      "block": 1,
+      "first_failure_by_axis": [
+        {
+          "first_containment_failure": null,
+          "first_empty_posterior": null
+        },
+        {
+          "first_containment_failure": null,
+          "first_empty_posterior": null
+        },
+        {
+          "first_containment_failure": 1,
+          "first_empty_posterior": 4
+        }
+      ],
+      "scope": "Offline exact known-input moment compensation then original CZ replay; actual switched commands, ideal initial truth and bounded synthetic position noise. Not online controller validation."
+    },
+    {
+      "block": 2,
+      "first_failure_by_axis": [
+        {
+          "first_containment_failure": 5,
+          "first_empty_posterior": null
+        },
+        {
+          "first_containment_failure": 1,
+          "first_empty_posterior": 2
+        },
+        {
+          "first_containment_failure": null,
+          "first_empty_posterior": null
+        }
+      ],
+      "scope": "Offline exact known-input moment compensation then original CZ replay; actual switched commands, ideal initial truth and bounded synthetic position noise. Not online controller validation."
+    }
+  ],
+  "scope": "Empirical identification, groundtruth/difference initialized. Validation never used for fitting. Effective lag/delay not uniquely physical."
+}

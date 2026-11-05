@@ -1,0 +1,44 @@
+[
+  {
+    "id": "M1",
+    "url": "https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf",
+    "http": 200,
+    "sha256": "c62443c17324b63bb40a60808ed010a125f03a2f15d9dd97088d2fd0af0313c2",
+    "retrieved_at": "2026-11-05T07:46:20+00:00"
+  },
+  {
+    "id": "M8",
+    "url": "https://arxiv.org/pdf/2101.03389",
+    "http": 200,
+    "sha256": "f964ebc69a0c6acc4cd18fd7a1afd3d0516609a43b20c7493c73d49966550a66",
+    "retrieved_at": "2026-11-05T07:46:19+00:00"
+  },
+  {
+    "id": "M5",
+    "url": "https://arxiv.org/pdf/2410.09857",
+    "http": 200,
+    "sha256": "1aaa0ff95b5c0caaf67ef19a04685accaa525b4a51c35245b009243f6ce9bd3a",
+    "retrieved_at": "2026-11-05T07:46:19+00:00"
+  },
+  {
+    "id": "RR",
+    "url": "https://par.nsf.gov/servlets/purl/10411809",
+    "http": 200,
+    "sha256": "023e728b05be57abe5053f8a6687912d5295c0065335594902f72afbc7be416a",
+    "retrieved_at": "2026-11-05T07:46:23+00:00"
+  },
+  {
+    "id": "DIF",
+    "url": "https://arxiv.org/pdf/2106.05320",
+    "http": 200,
+    "sha256": "3198679f149fc42c8832d7655d1c084805aa330514f2873a47e26bdd533ac425",
+    "retrieved_at": "2026-11-05T07:46:21+00:00"
+  },
+  {
+    "id": "N2",
+    "url": "https://arxiv.org/pdf/2105.03427",
+    "http": 200,
+    "sha256": "2dcdc404e2929fa1fe00e96e53f5450127d20a6faffce7f58498b2109215b68a",
+    "retrieved_at": "2026-11-05T07:46:23+00:00"
+  }
+]

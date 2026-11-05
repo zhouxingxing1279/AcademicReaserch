@@ -1,0 +1,4 @@
+scope: initial working tree
+command: python -m experiments.finite_memory_certificate --check
+exit: 0
+{"pair_vertices": 328, "E": ["2/25", "9/100"], "state_margin": ["61/400", "61/100"], "input_margin": "121/50", "terminal_inscribed_box_radius": "79/350"}

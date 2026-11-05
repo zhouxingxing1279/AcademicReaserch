@@ -1,0 +1,1098 @@
+{
+  "audit_date": "2026-11-05",
+  "plan_date": "2026-11-04",
+  "execution_date_note": "summary.date is the frozen plan date; run.log and result files were completed on 2026-11-05 Asia/Shanghai.",
+  "hashes_verified": 8,
+  "unique_paired_scenarios": 96,
+  "counts": {
+    "cases": 1056,
+    "steps": 31680,
+    "static": 2592
+  },
+  "safety": {
+    "max_state_residual": -0.029851101750778763,
+    "max_input_residual": 1.2513896641141997e-08
+  },
+  "timing_caveat": "Exact posterior prediction is outside its recorded online_ms. Do not compare exact online_ms with compressed-method end-to-end timings. The three bounded methods include prediction, conditioning, selection and QP, but exclude the common nominal observer update and independent audits. These are single-run measurements, not WCET.",
+  "groups": [
+    {
+      "method": "uniform",
+      "budget": 6,
+      "cases": 96,
+      "mean_cost": 1.1828059978263081,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.12083083021695584,
+        0.0,
+        0.02540184302703974,
+        0.121808791038025
+      ],
+      "fallback_steps": 4,
+      "shift_lost_steps": 12,
+      "static_count": 288,
+      "static_qp_feasible": 284,
+      "static_shift_preserved": 268,
+      "static_max_gap": 0.16763315442178212,
+      "online_ms_min_median_p95_max": [
+        4.742599999985941,
+        8.592449999980545,
+        16.94084499995938,
+        31.09770000003209
+      ],
+      "queries_min_median_p95_max": [
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "stored_faces_max": 6,
+      "working_vertices_max": 14
+    },
+    {
+      "method": "geometry",
+      "budget": 6,
+      "cases": 96,
+      "mean_cost": 1.1828062051216566,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0021751321676255486,
+        0.0,
+        0.011896998469085318,
+        0.03225007369314081
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.048451161266737264,
+      "online_ms_min_median_p95_max": [
+        4.817000000002736,
+        9.092599999974027,
+        16.744180000029015,
+        81.48359999995591
+      ],
+      "queries_min_median_p95_max": [
+        42.0,
+        54.0,
+        66.0,
+        66.0
+      ],
+      "stored_faces_max": 6,
+      "working_vertices_max": 12
+    },
+    {
+      "method": "control",
+      "budget": 6,
+      "cases": 96,
+      "mean_cost": 1.182793542250472,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0024164451908115225,
+        0.0,
+        0.00039805340922849375,
+        0.018822412756236417
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.28963093757401026,
+      "online_ms_min_median_p95_max": [
+        4.87169999996695,
+        9.023549999994884,
+        16.961129999958757,
+        84.2781000000059
+      ],
+      "queries_min_median_p95_max": [
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "stored_faces_max": 6,
+      "working_vertices_max": 12
+    },
+    {
+      "method": "uniform",
+      "budget": 8,
+      "cases": 96,
+      "mean_cost": 1.1827906752059705,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0032721628857590446,
+        0.0,
+        0.00036909528378648027,
+        0.02006958041438356
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.08678975483588963,
+      "online_ms_min_median_p95_max": [
+        5.564500000048156,
+        10.401449999989154,
+        18.94388499997035,
+        30.42219999997542
+      ],
+      "queries_min_median_p95_max": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "stored_faces_max": 8,
+      "working_vertices_max": 14
+    },
+    {
+      "method": "geometry",
+      "budget": 8,
+      "cases": 96,
+      "mean_cost": 1.182790783255246,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.006608911516003957,
+        0.0,
+        2.9202951168372238e-08,
+        0.04088617729400834
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.016102177306306587,
+      "online_ms_min_median_p95_max": [
+        5.598800000029769,
+        10.637950000045748,
+        19.858670000076014,
+        49.750900000049114
+      ],
+      "queries_min_median_p95_max": [
+        42.0,
+        54.0,
+        66.0,
+        66.0
+      ],
+      "stored_faces_max": 8,
+      "working_vertices_max": 14
+    },
+    {
+      "method": "control",
+      "budget": 8,
+      "cases": 96,
+      "mean_cost": 1.1827903630268028,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0006074778522324742,
+        0.0,
+        7.169110066707063e-06,
+        0.008880771541130983
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.2896309375740099,
+      "online_ms_min_median_p95_max": [
+        5.750100000000202,
+        10.272500000013451,
+        19.201295000067375,
+        44.32699999995293
+      ],
+      "queries_min_median_p95_max": [
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "stored_faces_max": 8,
+      "working_vertices_max": 14
+    },
+    {
+      "method": "uniform",
+      "budget": 12,
+      "cases": 96,
+      "mean_cost": 1.1827897817092554,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0030891022670065382,
+        0.0,
+        0.00014427444744447016,
+        0.01893789846849625
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.06363758033904143,
+      "online_ms_min_median_p95_max": [
+        7.492200000001503,
+        13.43624999998383,
+        24.84448500002827,
+        99.67970000002424
+      ],
+      "queries_min_median_p95_max": [
+        12.0,
+        12.0,
+        12.0,
+        12.0
+      ],
+      "stored_faces_max": 12,
+      "working_vertices_max": 17
+    },
+    {
+      "method": "geometry",
+      "budget": 12,
+      "cases": 96,
+      "mean_cost": 1.1827884119797918,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0011412825381418301,
+        0.0,
+        1.2779663993711665e-07,
+        0.006962036915214576
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.0028778674694664164,
+      "online_ms_min_median_p95_max": [
+        7.728199999974095,
+        14.107900000055906,
+        25.773305000018354,
+        53.3256999999594
+      ],
+      "queries_min_median_p95_max": [
+        42.0,
+        54.0,
+        66.0,
+        66.0
+      ],
+      "stored_faces_max": 12,
+      "working_vertices_max": 18
+    },
+    {
+      "method": "control",
+      "budget": 12,
+      "cases": 96,
+      "mean_cost": 1.1827888425347808,
+      "cost_change_vs_exact_pct_min_median_p95_max": [
+        -0.0006074884735474129,
+        0.0,
+        7.169110083360408e-06,
+        0.00370075205713416
+      ],
+      "fallback_steps": 0,
+      "shift_lost_steps": 0,
+      "static_count": 288,
+      "static_qp_feasible": 288,
+      "static_shift_preserved": 288,
+      "static_max_gap": 0.2896309375740099,
+      "online_ms_min_median_p95_max": [
+        7.781399999998939,
+        14.296199999989767,
+        26.336649999967673,
+        237.8224000000273
+      ],
+      "queries_min_median_p95_max": [
+        12.0,
+        12.0,
+        12.0,
+        12.0
+      ],
+      "stored_faces_max": 12,
+      "working_vertices_max": 15
+    }
+  ],
+  "pairs": [
+    {
+      "budget": 6,
+      "baseline": "geometry",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.013423331902473468,
+        0.0,
+        7.91033905045424e-11,
+        0.001667546815564691
+      ],
+      "lower_count_tol_1e_6_pct": 13,
+      "higher_count_tol_1e_6_pct": 4
+    },
+    {
+      "budget": 6,
+      "baseline": "uniform",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.1074299559800096,
+        0.0,
+        8.721107169762377e-09,
+        0.12092495322189034
+      ],
+      "lower_count_tol_1e_6_pct": 8,
+      "higher_count_tol_1e_6_pct": 4
+    },
+    {
+      "budget": 8,
+      "baseline": "geometry",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.03717022775165946,
+        0.0,
+        0.001000189284217079,
+        0.008880771541086574
+      ],
+      "lower_count_tol_1e_6_pct": 4,
+      "higher_count_tol_1e_6_pct": 6
+    },
+    {
+      "budget": 8,
+      "baseline": "uniform",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.0163655438612742,
+        0.0,
+        1.0313021547858625e-06,
+        0.004044343346354395
+      ],
+      "lower_count_tol_1e_6_pct": 6,
+      "higher_count_tol_1e_6_pct": 6
+    },
+    {
+      "budget": 12,
+      "baseline": "geometry",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.003261057822023794,
+        0.0,
+        0.0005325317368798377,
+        0.002238150110867032
+      ],
+      "lower_count_tol_1e_6_pct": 4,
+      "higher_count_tol_1e_6_pct": 6
+    },
+    {
+      "budget": 12,
+      "baseline": "uniform",
+      "n": 96,
+      "cost_change_pct_min_median_p95_max": [
+        -0.015234261362429002,
+        0.0,
+        7.175935828884761e-06,
+        0.0024816904554025854
+      ],
+      "lower_count_tol_1e_6_pct": 6,
+      "higher_count_tol_1e_6_pct": 6
+    }
+  ],
+  "observation": [
+    {
+      "model": "fast",
+      "period_vs_every_step": 0,
+      "n": 16,
+      "cost_change_pct_min_median_p95_max": [
+        -0.11926216757628394,
+        0.24492728451614987,
+        27.317342273425552,
+        72.67718720451359
+      ]
+    },
+    {
+      "model": "fast",
+      "period_vs_every_step": 3,
+      "n": 16,
+      "cost_change_pct_min_median_p95_max": [
+        -0.036515723883834283,
+        0.10692238856044867,
+        17.920324917069486,
+        46.36585993992883
+      ]
+    },
+    {
+      "model": "slow",
+      "period_vs_every_step": 0,
+      "n": 16,
+      "cost_change_pct_min_median_p95_max": [
+        -0.13744181414946377,
+        1.6235673531856176,
+        94.96117558890549,
+        221.93701385818017
+      ]
+    },
+    {
+      "model": "slow",
+      "period_vs_every_step": 3,
+      "n": 16,
+      "cost_change_pct_min_median_p95_max": [
+        -0.2992728408689138,
+        0.1452086253739049,
+        23.74949319008963,
+        54.269685548790704
+      ]
+    }
+  ],
+  "by_model_period": [
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 122
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "full",
+      "budget": 42,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 36
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 0,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9293985429683065,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 27
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "full",
+      "budget": 42,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 27
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 1,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.921953720686308,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 48
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "full",
+      "budget": 42,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 31
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "fast",
+      "period": 3,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 0.9268805310368234,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 1.4793117970036889,
+      "fallback_steps": 0,
+      "max_stored_faces": 122
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "full",
+      "budget": 66,
+      "cases": 16,
+      "mean_cost": 1.479312529841272,
+      "fallback_steps": 0,
+      "max_stored_faces": 66
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.479388041631829,
+      "fallback_steps": 2,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4793226423647439,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4793178398504063,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.4793779301004681,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4793198842261275,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4793127733593323,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.4793409060689047,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4793247228657935,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 0,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.479315600230598,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 1.412533476305105,
+      "fallback_steps": 0,
+      "max_stored_faces": 30
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "full",
+      "budget": 66,
+      "cases": 16,
+      "mean_cost": 1.4125334759127859,
+      "fallback_steps": 0,
+      "max_stored_faces": 34
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.412533475617503,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.412533475879707,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.412533475613326,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.412544172968675,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4125334755670238,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4125334766351307,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.4125334755749013,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4125334759097958,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 1,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4125334756141692,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "exact",
+      "budget": 0,
+      "cases": 16,
+      "mean_cost": 1.4266504511590528,
+      "fallback_steps": 0,
+      "max_stored_faces": 39
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "full",
+      "budget": 66,
+      "cases": 16,
+      "mean_cost": 1.4266511846919512,
+      "fallback_steps": 0,
+      "max_stored_faces": 36
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "uniform",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.4266816750170785,
+      "fallback_steps": 2,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "uniform",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4266551382999337,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "uniform",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4266545801003625,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "geometry",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.4266823329693576,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "geometry",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4266585450468865,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "geometry",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4266514271928499,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "control",
+      "budget": 6,
+      "cases": 16,
+      "mean_cost": 1.426654077167588,
+      "fallback_steps": 0,
+      "max_stored_faces": 6
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "control",
+      "budget": 8,
+      "cases": 16,
+      "mean_cost": 1.4266511846937893,
+      "fallback_steps": 0,
+      "max_stored_faces": 8
+    },
+    {
+      "model": "slow",
+      "period": 3,
+      "method": "control",
+      "budget": 12,
+      "cases": 16,
+      "mean_cost": 1.4266511846724788,
+      "fallback_steps": 0,
+      "max_stored_faces": 12
+    }
+  ],
+  "independent_support_checks": 240,
+  "max_independent_support_disagreement": 2.3684217736151536e-07,
+  "audit_script_sha256": "0e73e3e4e89e3d3e5326807c3af87667d2bfd6504ecdb1f12c14bf622ec1e0dc"
+}

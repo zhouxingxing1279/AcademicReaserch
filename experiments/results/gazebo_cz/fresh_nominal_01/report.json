@@ -1,0 +1,25 @@
+{
+  "name": "fresh_nominal_01",
+  "delivery": "fresh",
+  "force_newtons": 0.0,
+  "contract": {
+    "T": 0.5,
+    "acceleration": 0.02,
+    "noise": 0.005,
+    "missing": 1,
+    "delay": 1,
+    "initial_p": 0.005,
+    "initial_v": 0.01
+  },
+  "completed": false,
+  "landed": false,
+  "scope": "Empirical SITL; ideal initial prior and synthetic outer position channel",
+  "error": "Simulator/PX4 process exited",
+  "computed_steps": 0,
+  "source_hashes": {
+    "scripts/simulation/cz_sitl.py": "08d618aabb8bc9b7d84ea341b4c5012aa350fb0dcd73d83703d6db503048938d",
+    "src/outerloop/finite_memory.py": "efb978a40f824f2c40c79323857c7291dbba321f3ba9a7395b4a34f688dd2ed0",
+    "src/outerloop/tube_mpc.py": "37c65b56dafda6a30e12ee64b95520f9b301096cfce54776e88a84ec3d0ebf71"
+  },
+  "px4_commit": "d6f12ad1c4f70ad3230afd7d86e971421e02fef4"
+}

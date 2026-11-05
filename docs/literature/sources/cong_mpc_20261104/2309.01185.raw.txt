@@ -1,0 +1,1031 @@
+Cooperative Filtering with Range
+Measurements: A Distributed Constrained
+Zonotopic Method
+Yu Ding1
+, Yirui Cong1
+Xiangke Wang1
+, and Long Cheng2,3
+1
+College of Intelligence Science and Technology, National University of Defense
+Technology, Changsha 410073, China,
+xkwang@nudt.edu.cn,
+2
+School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing
+100049, China.
+3
+State Key Laboratory for Management and Control of Complex Systems, Institute
+of Automation, Chinese Academy of Sciences, Beijing 100190, China.
+Abstract. This article studies the distributed estimation problem of a
+multi-agent system with bounded absolute and relative range measure-
+ments. Parts of the agents are with high-accuracy absolute measure-
+ments, which are considered as anchors; the other agents utilize low-
+accuracy absolute and relative range measurements, each derives an un-
+certain range that contains its true state in a distributed manner. Differ-
+ent from previous studies, we design a distributed algorithm to handle
+the range measurements based on extended constrained zonotopes, which
+has low computational complexity and high precision. With our proposed
+algorithm, agents can derive their uncertain range sequentially along the
+chain topology, such that agents with low-accuracy sensors can benefit
+from the high-accuracy absolute measurements of anchors and improve
+the estimation performance. Simulation results corroborate the effective-
+ness of our proposed algorithm and verify our method can significantly
+improve the estimation accuracy.
+Keywords: Set-membership estimation, constrained zonotope, absolute
+and relative measurements.
+1 Introduction
+In this work, we are interested in problems where parts of agents are equipped
+with high-accuracy absolute measurements, which are considered as anchors,
+while the other agents need to utilize low-accuracy absolute measurements and
+relative range measurements to derive an uncertain range that contains the true
+state of each agent in a distributed manner.
+Recently, cooperative localization problems with absolute and relative mea-
+surements for multi-agent systems has received considerable research atten-
+tion [1,2].
+arXiv:2309.01185v1
+[cs.MA]
+3
+Sep
+2023
+2 Yu Ding et al.
+– For Luenberger observer methods, in [3], a distributed self-localization algo-
+rithm was developed for multi-agent systems by using relative position mea-
+surements. The results were extended to study the problem of distributed
+source localization by using bearing angle measurements in [4]. In [5], dis-
+tributed consensus filters were developed for a set of targets to utilize velocity
+and distance relative measurements to estimate the relative positions.
+– For stochastic methods, as in [6], distributed Kalman filters have been de-
+signed for a multi-agent system with linear relative measurements based on
+the trace minimization of the covariance matrix. A similar problem has been
+investigated in [7], with different methods to derive suboptimal filter gains.
+In [8], nonlinear relative measurements have been considered in the cooper-
+ative filtering problem for multi-agent systems, where a recursive quadratic
+filter has been proposed to compute the exact value of the variance explicitly.
+It is worth mentioning that the above-mentioned methods have limitations
+when facing unknown but bounded noises, which motivates us to focus on the
+guaranteed method, i.e., the set-membership filter (SMF), to solve the cooper-
+ative estimation problem of absolute and relative measurements. To the best of
+our knowledge, few articles have investigated this problem. In [9], the author
+proposed the constrained convex generator (CCG) as a generalization of the
+constrained zonotope, and applied CCG to deal with the relative range measure-
+ment, which provides us much inspiration in this article. However, the method
+proposed in [9] only works with a known beacon, which implies its limitation
+facing the scene that anchors belong to an uncertain range. In [10], the first
+step of distributed SMF of taking general relative measurements into account
+has been taken, the authors provided a framework to derive uncertain range in a
+distributed manner, which is an important base of our work. It should be pointed
+out that [10] mainly focused on the general framework analysis, but neglected
+the design of algorithms. In [11], a distributed constrained zonotopic algorithm
+to was developed based on the distributed framework proposed in [10], but only
+linear relative measurements were considered.
+Thus in this article, we study the set-membership estimation problem of
+multi-agent systems with absolute and relative range measurements, such that
+agents with low absolute measurement accuracy sensors can benefit from relative
+range measurements with the agents with high accuracy absolute measurements.
+The main contributions of this paper are summarized as follows:
+– We propose an extended constrained zonotopic algorithm to deal with the
+relative range measurement. The proposed algorithm only utilizes local and
+neighborhood information, which can be realized in a distributed manner.
+– Based on our algorithm, agents with low-accuracy sensors can benefit from
+the high-accuracy absolute measurements of anchors along the chain topol-
+ogy, such that the estimation precisions can be efficiently improved.
+Notations: For an uncertain variable x, a realization is defined as x(ω) = x.
+The range of an uncertain variable is described by its range: [[x]] = {x(ω) :
+ω ∈ Ω}, the conditional range of x given y = y is [[x|y]] [12]. A directed graph
+Cooperative Filtering 3
+G = (V, E, A) is used to represent system topology. N0 is the set of natural
+number. Rn
+denotes the n-dimensional Euclidean space. Given two sets S1 and
+S2 in an Euclidean space, the operation ⊕ stands for the Minkowski sum of S1
+and S2, i.e., S1 ⊕ S2 = {s1 + s2 : s1 ∈ S1, s2 ∈ S2}. The diameter of a set S is
+defined by d(S) = sup
+s1,s2∈S
+∥s1 − s2∥.
+The rest paper is organized as follows: Section 2 gives the system model
+and the problem description. Main results are presented in Section 3, with the
+distributed SMFing framework analyzed in Section 3.1 and constrained zonotopic
+algorithm designed in Section 3.2. Simulation examples are provided in Section 4
+to corroborate our theoretical results. Finally, Section 5 gives the concluding
+remarks of the paper.
+2 System Model and Problem Description
+Consider a multi-agent system, where each agent is identified by a positive integer
+i ∈ {1, 2, . . . , N} and described by the following dynamics equation:
+xi,k+1 = Aixi,k + Biui,k + wi,k, (1)
+where k ∈ N0. As a realization of xi,k, xi,k ∈ [[xi,k]] ⊆ Rni
+denotes the state at
+time instant k for agent i; ui,k denotes the input of agent i at step k, which is
+assumed as a known signal in this article. wi,k ∈ [[wi,k]] ⊆ Rni
+is the process
+noise.
+In this work, we consider two types of measurements, i.e., absolute measure-
+ments and relative measurements, which are widely considered in the literature
+[7,8].
+Absolute measurement: An absolute measurement refers to agent i takes
+an observation on its state directly, with an measurement equation as the fol-
+lowing form:
+yi,k = Cixi,k + vi,k, (2)
+where yi,k ∈ Rmi
+is the measurement at time instant k for agent i; Ci ∈ Rni×mi
+is the measurement matrix, and the pair (Ci, Ai) is observable; vi,k ∈ [[vi,k]] is
+the measurement noise, with d([[vi,k]]) ≤ vi, and d(·) returns the diameter of a
+set.
+Note that the absolute measurement is accessible to all the agents, but with
+different precisions, i.e., parts of agents are equipped with high accuracy absolute
+sensors. These agents is considered as ‘anchors’(or ‘beacons’), which is common
+in cooperative localization studies [13,14]. The other agents, in this article, are
+called ‘non-anchors’ or ‘original agents’, which only possess low precision
+absolute measurements, and need to utilize relative measurements with their
+neighborhoods to improve estimation accuracy.
+Relative measurements: Relative measurements are related to agent i and
+its neighbors,
+yr
+i,j,k = ∥xi,k − xj,k∥2 + ri,j,k, j ∈ Ni, (3)
+4 Yu Ding et al.
+where yr
+i,j,k ∈ Rpi
+is the measurement at time instant k between agent i and its
+in-neighborhood agent j; gi,j : Rni
+× Rnj
+→ Rpi
+is the measurement function,
+in this article two types of relative measurements are considered, i.e., relative
+range measurement and relative bearing measurement. where ∥ · ∥2 is the 2-
+norm of a vector, which represents the range-based measurements (e.g., UWB
+measurements). ri,j,k ∈ [[ri,j,k]] is the range measurement noise, with ri,j,k ≤
+ri,j,k ≤ ri,j,k.
+In this article, the uncertain variables of noise at each time instant and the
+initial state of each agent are assumed to be unrelated to guarantee the non-
+stochastic Hidden Markov Model [15], i.e.,
+Assumption 1 (Unrelated Noises and Initial State). ∀k ∈ N0, wi,0:k,vi,0:k,ri,j,0:k,
+xi,0, ∀i, j = 1, . . . , N are unrelated.
+The relative range measurement is accessible to all the agents in the system,
+and the communication topology is consistent with the time-invariant measure-
+ment topology, i.e., (vj, vi) ∈ E implies agent i takes a relative measurement
+from agent j and receives information from agent j simultaneously.
+Consider a general topology of the multi-agent system as Fig. 1, where the
+red nodes represent agents with high precision absolute measurements.
+0
+1
+2
+3
+Fig. 1. Diagram of chain topology.
+As in [16], ordinary agents benefit from the absolute measurements of anchors
+through the chain, hence without loss of generality, we consider a subtopology
+of chain (circled by the blue dash line), and other chains in the topology can be
+generalized in a similar way. Without loss of generality, the anchor node is labeled
+as 0, while other sensor nodes along the chain are labeled as 1, 2, · · · , lmax.
+The aim of this paper is to derive an uncertain range Si,k for each agent i
+at each instant k in a distributed manner, using all the measurements yi,k and
+yr
+i,i−1,k, j ∈ Ni up to k, such that xi,k ∈ Si,k, ∀k ∈ N0.
+Cooperative Filtering 5
+3 Main Results
+In this section, we provide a distributed SMFing framework such that each agent
+can derive its uncertain range sequentially along the chain topology (see Sec-
+tion 3.1). Then in Section 3.2, a detailed algorithm based on the extend con-
+strained zonotope is developed to realize the framework proposed in Section 3.1.
+3.1 Sequentail SMFing Framework
+According to the distributed SMFing framework proposed in [10], the estimation
+process can be expressed as the following framework (see Algorithm 1).
+Algorithm 1 Sequential SMFing Framework
+1: Initialization. For each agent i, set the initial prior range Si,0.
+2: loop
+3: Prediction. For k ∈ N0 ,given the posterior range Si,k−1 in the previous step,
+the prior range Si,k is predicted by
+Si,k = Ai(Si,k−1) ⊕ Biui,k ⊕ [[wi,k−1]]. (4)
+4: Measurement. Take measurements y0,k and yr
+i,i−1,k.
+5: Update. The update is divided into lmax steps.
+6: i = 0, i.e., the update of anchor 0
+S0,k = X0,k(C0, y0,k, [[v0,k]]) ∩ S0,k, (5)
+where X0,k(C0, y0,k, [[v0,k]]) = {x0,k : y0,k = C0x0,k + v0,k, v0,k ∈ [[v0,k]]}.
+7: While 1 ≤ i ≤ lmax
+Si,k = Si,k ∩ g−1
+i,i−1({yr
+i,i−1,k} ⊕ [[−ri,i−1,k]], Si−1,k) ∩ Xi,k(Ci, yi,k, [[vi,k]]). (6)
+8: i = i + 1;
+9: End while.
+10: k = k + 1;
+11: end loop
+It should be noticed that the posterior uncertain range of each agent i is com-
+puted step by step from 0 to lmax, and hence the process shown in Algorithm 1
+is called “sequential localization” in cooperative localization problems.
+It should be noticed that for relative range measurements gi,j(xi,k, xj,k) =
+∥xi,k − xj,k∥2, g−1
+i,j has its specific geometrical significance.
+Proposition 1. The measurement set derived by the relative range measure-
+ment satisfies:
+{xi,k : xi,k ∈ g−1
+i,j ({zi,j,k} ⊕ [[−ri,j,k]], Sj,k)} = Sj,k ⊕ Y r
+i,j,k, (7)
+6 Yu Ding et al.
+where Y r
+i,j,k is a geometrical ring defined by Y r
+i,j,k = {s : Ri,j,k ≤ ∥s∥2 ≤ Ri,j,k},
+Ri,j,k = yr
+i,j,k − ri,j,k and Ri,j,k = yr
+i,j,k − ri,j,k.
+Proof. Let s = xi,k − xj,k, then we have ∥s∥2 + ri,j,k = zi,j,k, ri,j,k ∈ [[−ri,j,k]],
+which implies ∥s∥2 ∈ [Ri,j,k, Ri,j,k] and Y r
+i,j,k =
+S
+{s}.
+Moreover, there holds
+xi,k = xj,k + s, xj,k ∈ Sj,k, s ∈ Y r
+i,j,k. (8)
+From the definition of Minkowski sum, we have
+xi,k ∈ Sj,k ⊕ Y r
+i,j,k, (9)
+which completes the proof.
+3.2 Extended Constrained Zonotopic Algorithm Design
+In this section, the state estimation strategy is presented to over-approximate
+the measurement set.
+Definition 1. (Extended Constrained Zonotope [17]) A set Z ⊆ Rn
+is an ex-
+tended constrained zonotope if there exists a quintuple (G, c, A, b, h) ∈ Rn×ng
+×
+Rn
+× Rnc×ng
+× Rnc
+× [0, ∞]ng
+such that Z is expressed by
+{Gξ + c : Aξ = b, ξ ∈
+ng
+Y
+j=1
+[−h(j)
+, h(j)
+]} =: Z(G, c, A, b, h), (10)
+where h(j)
+is the jth
+component of h.
+When h(j)
+= 1, j = 1, · · · , ng, Definition 1 becomes the classical constrained
+zonotope in [18].
+Lemma 1. For every Z = (Gz, cz, Az, bz, hz) ⊂ Rn
+, W = (Gw, cw, Aw, bw, hw) ⊂
+Rn
+, Y = (Gy, cy, Ay, by, hy) ⊂ Rk
+and T ∈ Rk×n
+, the three identities hold:
+TZ = (TGz, Tcz, Az, bz, hz), (11)
+Z ⊕ W = ([Gz Gw], cz + cw,
+
+Az 0
+0 Aw
+
+,
+
+bz
+bw
+
+,
+
+hz
+hw
+
+), (12)
+Z ∩T Y = ([Gz 0], cz,
+
+
+Az 0
+0 Ay
+TGz −Gy
+
+ ,
+
+
+bz
+by
+cy − Tcz
+
+ ,
+
+hz
+hy
+
+). (13)
+The prior and posterior uncertain range of agent i is denoted by Zi,k =
+(Gi,k, ci,k, Ai,k, bi,k, hi,k) and Zi,k = ( b
+Gi,k, b
+ci,k, b
+Ai,k,b
+bi,k,b
+hi,k), respectively.
+Proposition 2. Let R =
+S
+q∈I
+Rq
+, the following equation holds
+(S1 ⊕ R) ∩ S2 =
+[
+s∈S1
+[
+[
+q∈I
+({s} ⊕ Rq
+) ∩ S2]. (14)
+Cooperative Filtering 7
+Proof. This conclusion comes directly from the commutativity of set union and
+Minkowski sum, i.e.,
+(S1 ⊕
+[
+q∈I
+Rq
+) =
+[
+q∈I
+(S1 ⊕ Rq
+). (15)
+Hence to calculate b
+Zi−1,k ⊕ Y r
+i,i−1,k, we first consider a fixed point x0
+i,i−1,k ∈
+b
+Zi−1,k. Assume there is a relative bearing measurement between x0
+i−1,k and agent
+i
+yb
+i,i−1,k = ang(xi,k − x0
+i−1,k) + rb
+i,i−1,k, (16)
+where rb
+i,i−1,k ∈ [rb
+i,i−1,k, rb
+i,i−1,k] is the relative bearing measurement noise.
+Lemma 2. The measurement set given Y br
+i,i−1,k by the relative range measure-
+ment yr
+i,i−1,k and relative bearing measurement yb
+i,i−1,k is outer bounded by
+Y br
+i,i−1,k ⊆ {z : z = [Gybr 0]
+
+ξ1
+ξ2
+
++ cybr ,
+
+Hbr
+Gyb (σ1 − σ2)
+
+
+ξ1
+ξ2
+
+= σ1 − Hcyb ,
+
+ξ1
+ξ2
+
+∈ hyb × [0, 1]}, (17)
+where
+Gybr =
+
+cos(θi,i−1,k) cos(θi,i−1,k)
+sin(θi,i−1,k) sin(θi,i−1,k)
+
+, cybr = x0
+i−1,k, (18)
+Hbr
+=
+h
+cos(
+θi,i−1,k+θi,i−1,k
+2 ) sin(
+θi,i−1,k+θi,i−1,k
+2 )
+i
+,
+σbr
+1 = Ri,i−1,kcos(
+θ
+b
+i,i−1,k + θb
+i,i−1,k
+2
+) + Hbr
+x0
+i−1,k, σbr
+2 = Ri,i−1,k + Hbr
+x0
+i−1,k,
+hybr = [0,
+Ri,i−1,k
+cos(
+rb
+i,i−1,k−rb
+i,i−1,k
+2 )
+] × [0,
+Ri,i−1,k
+cos(
+rb
+i,i−1,k−rb
+i,i−1,k
+2 )
+],
+θi,i−1,k = yb
+i,i−1,k − rb
+i,i−1,k, θi,i−1,k = yb
+i,i−1,k − rb
+i,i−1,k.
+Proof. According to the geometrical significance, Y br
+i,i−1,k = Y b
+i,i−1,k ∩ Y r
+i,i−1,k is
+outer bounded by the trapezoid ABCD, which is the intersection of triangle {z :
+z ∈ △COD} and hyperplane {z : Hz =
+
+cos(zb
+i,i−1,k) sin(zb
+i,i−1,k)
+
+z ∈ [σ1, σ2]}.
+For the triangle △COD, each point can be covered by the linear combination
+of
+⃗
+OC
+∥ ˜
+OD∥
+and
+⃗
+OD
+∥OD∥ , hence △COD can be expressed by the following zonotope:
+Zb
+i,i−1,k = {z = Gybr ξ1 + x0
+i−1,k,
+ξ1 ∈ [0,
+Ri,i−1,k
+cos(
+rb
+i,i−1,k−rb
+i,i−1,k
+2 )
+] × [0,
+Ri,i−1,k
+cos(
+rb
+i,i−1,k−rb
+i,i−1,k
+2 )
+]}. (19)
+8 Yu Ding et al.
+Notice that point A = x0
+i−1,k +Ri,i−1,k
+
+cos(θi,i−1,k)
+sin(θi,i−1,k)
+
+and point C = x0
+i−1,k +
+Ri,i−1,k
+
+cos(θi,i−1,k)
+sin(θi,i−1,k)
+
+, σbr
+1 and σbr
+2 can be obtained by A ∈ {z : Hz = σbr
+1 } and
+C ∈ {z : Hz = σbr
+2 }. Write [σbr
+1 , σbr
+2 ] as Zσ = {σ : σ = (σbr
+2 − σbr
+1 )ξ2 + σbr
+1 , ξ2 ∈
+[0, 1]}, (17) can be obtained by Y br
+i,i−1,k ⊆ Zb
+i,i−1,k ∩br
+H Zσ with Lemma 1.
+tower
+O
+A
+D
+C
+B
+Fig. 2. The diagram of proof of Lemma 2.
+For only relative range measurement yr
+i,i−1,k, the set Y r
+i,i−1,k can be approx-
+imated by segmenting the full circle into M parts, each part has the minimum
+angle value of 2πq
+M and maximum angle value 2π(q+1)
+M , q = 0, 1, . . . , M −1. Repeat
+the computations above replacing the interval [θi,i−1,k, θi,i−1,k] by [2πq
+M , 2π(q+1)
+M ].
+Each set Z0,r
+i,i−1,k, . . . , ZM−1,r
+i,i−1,k needs to be intersected independently with the pre-
+diction prior uncertain range Si,k, and discarded if Zq,r
+i,i−1,k ∩Si,k = ∅. The range
+measurement set is a uncertain range correlated with the position of x0
+i−1,k, i.e.,
+Zr
+i,i−1,k(x0
+i−1,k) =
+[
+Zq,r
+i,i−1,k∩Si,k̸=∅
+Zq,r
+i,i−1,k. (20)
+Assumption 2. The diameter of Zi,k satisfies
+d(Zi,k) < Ri,i−1,k < d(x0
+i−1,k, Zi,k). (21)
+Cooperative Filtering 9
+Proposition 3. Under Assumption 2, if there exists q1, q2 ∈ [0, M − 1], (q1 <
+q2) such that Zq1,r
+i,i−1,k ∩ Zi,k ̸= ∅ and Zq2,r
+i,i−1,k ∩ Zi,k ̸= ∅,
+Zq,r
+i,i−1,k ∩ Zi,k ̸= ∅, ∀q ∈ [q1, q2]. (22)
+Especially, let q1 = inf
+q
+Zq,r
+i,i−1,k ∩Zi,k ̸= ∅ and q2 = sup
+q
+Zq,r
+i,i−1,k ∩Zi,k ̸= ∅, there
+holds
+2π(q2 − q1)
+M
+<
+π
+3
+. (23)
+Proof. Consider point E ∈ Zq1,r
+i,i−1,k ∩ Zi,k and point F ∈ Zq2,r
+i,i−1,k ∩ Zi,k, and
+focus on the △OEF. Notice that ∥EF∥ ≤ d(Zi,k) < Ri,i−1,k, according to the
+law of sines, ∠EOF < π
+3 .
+Moreover Zi,k is convex, hence ∀G ∈ EF, there holds G ∈ Zi,k. From
+Ri,i−1,k < d(x0
+i−1,k, Zi,k) we have ∥OG∥ ≥ Ri,i−1,k. Moreover, △EOF is a oxy-
+gon, which implies ∥OG∥ < ∥OF∥ ≤ Ri,i−1,k and G ∈ Zq2,r
+i,i−1,k ∩ Zi,k, ∀G ∈ EF.
+Hence EF ⊂ Zq,r
+i,i−1,k ∩ Zi,k, Proposition 3 has been proved.
+tower
+O
+A1
+D1
+E C1
+B1
+B2
+A2
+C2
+D2
+F
+G
+Fig. 3. The diagram of proof of Proposition 3.
+With Proposition 3, the sectors can be united with the minimum phase angle
+2πq1
+M and maximum phase angle 2π(q2+1)
+M .
+10 Yu Ding et al.
+Corollary 1. The zonotope union
+[
+Rq
+i,i−1,k(k)∩Si,k̸=∅
+Rq
+i,i−1,k ⊆ ZR
+i,i−1,k(x0
+i−1,k) = ( b
+GR
+i,i−1,k, b
+cR
+i,i−1,k,
+[HR
+q
+b
+GR
+i,i−1,k (σR
+2 − σR
+1 )], σR
+1 − HR
+q x0
+i−1,k, b
+hR
+i,i−1,k × [0, 1]), (24)
+where
+b
+GR
+i,i−1,k =
+"
+cos(2π(q2+1)
+M ) cos(2πq1
+M )
+sin(2π(q2+1)
+M ) sin(2πq1
+M )
+#
+, b
+cR
+i,i−1,k = x0
+i−1,k, (25)
+HR
+q =
+h
+cos(π(q1+q2+1)
+M ) sin(π(q1+q2+1)
+M )
+i
+,
+σR
+1 = Ri,i−1,kcos(
+(q2 − q1 + 1)π
+M
+) + HR
+q x0
+i−1,k, σR
+2 = Ri,i−1,k + HR
+q x0
+i−1,k,
+he
+Rq = [0,
+Ri,i−1,k
+cos((q2−q1+1)π
+M )
+] × [0,
+Ri,i−1,k
+cos((q2−q1+1)π
+M )
+].
+It should be pointed out that ZR
+i,i−1,k(x0
+i−1,k) is correlated with the choice of
+x0
+i−1,k, a different choice x1
+i−1,k ̸= x0
+i−1,k would affect q1 and q2 (see Fig. 4(a) ),
+hence calculating b
+Zi−1,k ⊕ Y r
+i,i−1,k directly is with huge computation burden.
+Assumption 3. The diameter d( b
+Zi−1,k) satisfies
+d( b
+Zi−1,k) ≪ yi,i−1,k. (26)
+Remark 1. Assumption 2 and Assumption 3 imply xi−1,k is far from xi,k, this
+assumption is reasonable since the relative distance between agents is often much
+larger than the uncertain range caused by noise.
+Theorem 1. Under Assumption 2 and Assumption 3, there holds
+( b
+Zi−1,k ⊕ Y r
+i,i−1,k) ∩ Zi,k ⊆ e
+ZR
+i,i−1,k(x∗
+i−1,k) (27)
+where
+e
+ZR
+i,i−1,k(x∗
+i−1,k) = {z = [ e
+GR
+i,i−1,k 0]
+
+ξ1
+ξ2
+
++ e
+cR
+i,i−1,k,
+h
+e
+H e
+GR
+i,i−1,k (e
+σ1 − e
+σ2)
+i 
+ξ1
+ξ2
+
+= e
+σ1 − e
+He
+cR
+i,i−1,k,
+
+ξ1
+ξ2
+
+∈ e
+hR
+i,i−1,k × [0, 1]}, (28)
+and e
+q1, e
+q2 are defined in Proposition 3, replacing Ri,i−1,k and Ri,i−1,k with
+e
+Ri,i−1,k = d( b
+Zi−1,k) + Ri,i−1,k, e
+Ri,i−1,k = Ri,i−1,k − d( b
+Zi−1,k) (29)
+Cooperative Filtering 11
+and
+e
+GR
+i,i−1,k =
+"
+cos(2π(e
+q2+1)
+M ) cos(2πe
+q1
+M )
+sin(2π(e
+q2+1)
+M ) sin(2πe
+q1
+M )
+#
+; e
+cR
+i,i−1,k = ∀x∗
+i−1,k ∈ b
+Zi−1,k, (30)
+e
+σ1 = (e
+Ri,i−1,k)cos(
+(e
+q2 − e
+q1 + 1)π
+M
+) + e
+Hx∗
+i−1,k, e
+σ2 = e
+Ri,i−1,k + e
+Hx∗
+i−1,k,
+e
+H =
+h
+cos(π(e
+q1+e
+q2+1)
+M ) sin(π(e
+q1+e
+q2+1)
+M )
+i
+,
+e
+hR
+i,i−1,k = [0,
+e
+Ri,i−1,k
+cos((e
+q2−e
+q1+1)π
+M )
+] × [0,
+e
+Ri,i−1,k
+cos((e
+q2−e
+q1+1)π
+M )
+].
+Proof. For a given point xi,k ∈ Zi,k, there holds
+∥x∗
+i−1,k − xi,k∥2 ≤ ∥x∗
+i−1,k − xi−1,k∥2 + ∥xi−1,k − xi,k∥2
+≤ d( b
+Zi−1,k) + Ri,i−1,k = e
+Ri,i−1,k. (31)
+Similarly, e
+Ri,i−1,k = Ri,i−1,k − d( b
+Zi−1,k) and ∥x∗
+i−1,k − xi,k∥2 ≥ e
+Ri,i−1,k holds.
+Hence, xi,k ∈ {s : e
+Ri,i−1,k ≤ ∥s∥2 ≤ e
+Ri,i−1,k}. The rest proof is same with
+Lemma 2 and Corollary 1.
+(a) (b)
+Fig. 4. (a) The calculation of Zq,r
+i,i−1,k relies on the center point choice of xi−1,k. (b)
+The diagram of equivalence relative range measurement noise.
+To summarize, given the posterior uncertain range b
+Zi−1,k of agent i−1, prior
+uncertain range Zi,k and measurements yi,k, yr
+i,i−1,k, the posterior extended
+constrained zonotope b
+Zi,k (line 7 in Algorithm 1) can be calculated as follows:
+12 Yu Ding et al.
+Algorithm 2 Posterior Constrained Zonotope Calculation for Agent i
+1: Let x∗
+i−1,k = b
+ci−1,k, then the diameter of b
+Zi−1,k is given by d( b
+Zi−1,k) =
+sup
+∥ξ∥≤1
+∥ b
+Gi−1,kξ∥∞ ≤ ∥ b
+Gi−1,k∥∞.
+2: The equivalent relative range measurement set is given by the ring e
+Y r
+i,i−1,k = {s :
+e
+Ri,i−1,k ≤ ∥s∥2 ≤ e
+Ri,i−1,k}, where e
+Ri,i−1,k = yr
+i,i−1,k − ri,i−1,k − d( b
+Zi−1,k) and
+e
+Ri,i−1,k = yr
+i,i−1,k − ri,i−1,k + d( b
+Zi−1,k).
+3: Segment e
+Y r
+i,i−1,k into M parts. Each part is outer bounded by the extended con-
+strained zonotope Zq,r
+i,i−1,k as in (18).
+4: loop
+5: Zq,r
+i−i−1,k ∩ Zi,k, q ∈ [0, M].
+6: q = q + 1.
+7: end loop
+8: Let q1 = inf
+q
+Zq,r
+i−i−1,k ∩ Zi,k ̸= ∅ and q2 = sup
+q
+Zq,r
+i−i−1,k ∩ Zi,k ̸= ∅, the extended
+constrained zonotope e
+ZR
+i,i−1,k given by the relative range measurement yr
+i,i−1,k can
+be represented as (28) and (30).
+9: Calculate Zi,k = Zi,k ∩ e
+ZR
+i,i−1,k ∩ Xi,k(Ci, yi,k, [[vi,k]]) with (11).
+10: Calculate the interval hull of Zi,k as the posterior uncertain range b
+Zi,k of agent i.
+4 Simulation Results
+In this section, we consider four UAVs in a 2-D plane with the topology shown
+in Fig. 5. UAV1 is the anchor node, while UAVs 2, 3, and 4 are equipped with low
+precision absolute sensors. The state of each UAV is xi,k = [pT
+i,k,x, pT
+i,k,y, e
+vT
+i,k,x, e
+vT
+i,k,y]T
+.4
+The aim of this simulation is to verify the uncertain range derived by our al-
+gorithm contains the real position of each UAV. The parameters are settled as
+1
+2
+3
+4
+Fig. 5. Simulation topology.
+4
+To distinguish with the absolute measurement noise vi,k, in this section we use tilde
+e
+vi,k to denote the velocity of UAV i at time instant k.
+Cooperative Filtering 13
+follows:
+Ai =
+
+1 T
+0 1
+
+⊗ I2, Bi =
+T 2
+2
+T
+
+⊗ 12, Ci = I4
+5
+. (32)
+where T = 0.5s. The process noise for each UAV is
+[[wi,k]] = {w = 0.1 ∗ I4ξ, ∥ξ∥∞ ≤ 1}, (33)
+while the measurement noise are settled as:
+[[v1,k]] = {v1 = 0.1 ∗ I4ξ, ∥ξ∥∞ ≤ 1}; (34)
+[[v2,k]] = [[v3,k]] = [[v4,k]] = {v = I4ξ, ∥ξ∥∞ ≤ 1};
+[[ri,i−1,k]] = [−0.1, 0.1], i = 2, 3, 4.
+The initial states and uncertain ranges of each UAV are randomly generated by
+Matlab.
+Simulation results of position estimation of UAV4 are presented in Fig. 6,
+where the black line is the real trajectory, with the dots representing the real
+positions at different time steps. The true state at each time step is contained
+by the uncertain range (rectangles) derived by our proposed algorithm, which
+implies the effectiveness of our method in deriving uncertain ranges along the
+chain.
+To demonstrate our method effectively improves estimation accuracy, we
+make a Monte Carlo experiment of 50 times, and compare our proposed methods
+with pure absolute measurement filtering method. To measure the conservative-
+ness directly, we consider using the diameter of sets, i.e.,
+d(S) = sup
+s1,s2∈S
+∥s1 − s2∥∞. (35)
+For an interval hull in 2-D plane, d(S) is the maximum edge length, which
+is the twice of the infinite norm of b
+G matrix. Thus we compare ∥G∥∞ of the
+interval hull derived by our proposed method with pure absolute measurement
+filtering, as shown in Tabel 1.
+Table 1. Conservativeness comparison with pure absolute measurement filtering
+UAV2 UAV3 UAV4
+∥Gpro∥∞/∥Gabs∥∞ 0.4928 0.5695 0.7066
+From Tabel 1 we can see that for UAV2, 3 and 4, estimation accuracy im-
+proved by our proposed method is up to 50.72%, 44.05% and 29.44%, respec-
+tively.
+14 Yu Ding et al.
+75 80 85 90 95 100 105
+Position on X-axis (m)
+75
+80
+85
+90
+95
+100
+105
+Position
+on
+Y-axis
+(m)
+UAV4 Position Estimation
+k=0
+k=1
+k=2
+k=3
+k=4
+k=5
+k=6
+k=7
+k=8
+Fig. 6. Position estimation simulation results with proposed algorithm.
+5 Conclusion
+In this article, we have studied the distributed estimation problem of a multi-
+agent system with absolute and relative range measurements. Parts of agents are
+equipped with high accuracy absolute measurements, while the other agents need
+to utilize low accuracy absolute measurements and relative range measurements
+to realize guaranteed estimation. Firstly, we analyzed the set-membership filter-
+ing framework, where each agent in the chain topology can derive its uncertain
+range sequentially, such that agents with low accuracy can benefit from the high
+accuracy absolute measurements of anchors and improve estimation precisions.
+Moreover, an algorithm based on the extended constrained zonotope has been
+developed to deal with the relative range measurements, such that each agent
+can derive its uncertain range in a distributed manner. Finally, several simula-
+tion results were presented, which corroborate the effectiveness of our proposed
+algorithm and verify our method achieves siginificant accuracy improvement in
+estimation.
+For future work, we aim to focus on the estimation error boundedness analysis
+of our proposed algorithm.
+References
+1. K. Gu and Y. Shen, “Cooperative detection via direct localization in mobile multi-
+agent networks,” in ICASSP 2019 - 2019 IEEE International Conference on Acous-
+tics, Speech and Signal Processing (ICASSP), 2019.
+Cooperative Filtering 15
+2. W. S. Rossi, P. Frasca, and F. Fagnani, “Distributed estimation from relative and
+absolute measurements,” IEEE Trans. Autom. Control, vol. 62, no. 12, pp. 6385–
+6391, 2017.
+3. Z. Lin, M. Fu, and Y. Diao, “Distributed self localization for relative position sensing
+networks in 2d space,” IEEE Trans. Signal Process., vol. 63, no. 14, pp. 3751–3761,
+2015.
+4. C. Lin, Z. Lin, R. Zheng, G. Yan, and G. Mao, “Distributed source localization
+of multi-agent systems with bearing angle measurements,” IEEE Trans. Autom.
+Control, vol. 61, no. 4, pp. 1105–1110, 2016.
+5. Z. Han, K. Guo, L. Xie, and Z. Lin, “Integrated relative localization and
+leader–follower formation control,” IEEE Trans. on Autom. Control, 2018.
+6. D. Viegas, P. Batista, P. Oliveira, and C. Silvestre, “Discrete-time distributed
+kalman filter design for formations of autonomous vehicles,” Control Eng. Prac-
+tice, vol. 75, pp. 55–68, 2018.
+7. W. Li, Y. Jia, and J. Du, “Distributed kalman filter for cooperative localization
+with integrated measurements,” IEEE Trans. Aerosp. Electron. Syst., vol. 56, no. 4,
+pp. 3302–3310, 2020.
+8. S. Battilotti, F. Cacace, angelo, and A. Germani, “Cooperative filtering with abso-
+lute and relative measurements,” in 2018 IEEE Conference on Decision and Control
+(CDC), 2018.
+9. D. Silvestre, “Constrained convex generators: A tool suitable for set-based estima-
+tion with range and bearing measurements,” IEEE Control Syst. Lett., vol. 6, pp.
+1610–1615, 2022.
+10. Y. Ding, Y. Cong and X. Wang, “Distributed set-membership filtering frame-
+works for multi-agent systems with absolute and relative measurements,”
+arXiv:2305.15797, May 2023.
+11. Y. Ding, Y. Cong, and X. Wang, “Set-membership filtering-based cooperative state
+estimation for multi-agent systems,” arXiv:2305.10366, May 2023.
+12. G. N. Nair, “A nonstochastic information theory for communication and state
+estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6, pp. 1497–1510, 2013.
+13. U. A. Khan, S. Kar, and J. M. F. Moura, “Distributed sensor localization in random
+environments using minimal number of anchor nodes,” IEEE Trans. Signal Process.,
+vol. 57, no. 5, pp. 2000–2016, 2009.
+14. S. Tian, X. Zhang, X. Wang, P. Sun, and H. Zhang, “A selective anchor node
+localization algorithm for wireless sensor networks,” in Int. Conf. on Convergence
+Inform. Technol., 2007.
+15. Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical framework and
+optimality of set-membership filtering,” IEEE Trans. Autom. Control, vol. 67, no. 5,
+pp. 2544–2551, 2022.
+16. B. Huang, C. Yu, and B. Anderson, “Understanding error propagation in multihop
+sensor network localization,” IEEE Trans. Ind. Electron., vol. 60, no. 12, pp. 5811–
+5819, 2013.
+17. Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-membership filters,”
+arXiv:2203.13966, Mar. 2022.
+18. J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz, “Constrained
+zonotopes: A new tool for set-based estimation and fault detection,” Automatica,
+vol. 69, pp. 126–136, 2016.
+

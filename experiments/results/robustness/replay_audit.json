@@ -1,0 +1,8 @@
+{
+  "cases": 226,
+  "axis_steps": 37770,
+  "maximum_replay_residual": 0.0,
+  "estimator_failure_stops_reproduced": 20,
+  "all_checks": "passed",
+  "scope": "Same-library numerical replay of estimates, dynamics, controls and flags; not independent theorem review; MPC optimum and shifted sequence not recomputed"
+}

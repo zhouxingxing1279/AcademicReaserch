@@ -3,3 +3,22 @@ __pycache__/
 .venv/
 results/my*/
 .worktrees/
+
+# Obsidian 本地编辑器配置（个人界面状态，不纳入版本库）
+.obsidian/
+
+# 大体积实验原始数据（单文件 > 5 MB）：仅保留在本地，可由对应 experiments/*.py 重新生成。
+# 需要长期归档时另走外部对象存储，不进入 Git 历史。
+experiments/results/oit_mrpi_20261105/closedloop.json
+experiments/results/oit_mrpi_20261105/monte_carlo_10000.npz
+experiments/results/oit_mrpi_20261105/delivery_records.json
+experiments/results/oit_mrpi_20261105/delivery_records.csv
+experiments/results/oit_mrpi_20261105/matched.json
+experiments/results/gazebo_cz/max_gap_force_01/flight.ulg
+experiments/results/gazebo_cz/fresh_force_02/flight.ulg
+experiments/results/gazebo_cz/fresh_nominal_04/flight.ulg
+experiments/results/gazebo_cz/fresh_force_01/flight.ulg
+experiments/results/gazebo_cz/interface_calibration_01/flight.ulg
+experiments/results/gazebo_cz/interface_validation_01/flight.ulg
+experiments/results/robustness/trajectories.csv
+experiments/results/cong_mpc_validation/steps.csv

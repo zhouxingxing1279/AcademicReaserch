@@ -1,0 +1,267 @@
+{
+  "input_hashes_verified": 10,
+  "closed_loop": {
+    "horizon": {
+      "completed": 16,
+      "total": 16,
+      "mean_cost": 1.7495436252941001,
+      "max_residuals": {
+        "state_violation": -0.11355777586124849,
+        "input_violation": -0.12988235725472502,
+        "shift_violation": -0.13913587157161683
+      },
+      "update_plus_solve_ms_median_p95_max": [
+        174.00355000427226,
+        270.3921750071458,
+        455.1028999994742
+      ]
+    },
+    "uniform": {
+      "completed": 16,
+      "total": 16,
+      "mean_cost": 1.7497797325493527,
+      "max_residuals": {
+        "state_violation": -0.11355777586124849,
+        "input_violation": -0.12992963101447144,
+        "shift_violation": -0.139183717260843
+      },
+      "update_plus_solve_ms_median_p95_max": [
+        176.63000000902684,
+        290.0514700239,
+        633.926499998779
+      ]
+    },
+    "box": {
+      "completed": 16,
+      "total": 16,
+      "mean_cost": 1.7700042402161658,
+      "max_residuals": {
+        "state_violation": -0.11355777586124849,
+        "input_violation": -0.10914987103573418,
+        "shift_violation": -0.11882997420714703
+      },
+      "update_plus_solve_ms_median_p95_max": [
+        81.0649499981082,
+        140.46692500050992,
+        272.23960000264924
+      ]
+    }
+  },
+  "paired_cost": {
+    "uniform": {
+      "cases": [
+        {
+          "seed": 0,
+          "period": 1,
+          "relative_cost_change": -0.0005562706651168758
+        },
+        {
+          "seed": 1,
+          "period": 1,
+          "relative_cost_change": -0.001002322138277223
+        },
+        {
+          "seed": 2,
+          "period": 1,
+          "relative_cost_change": -1.0231436004204397e-05
+        },
+        {
+          "seed": 3,
+          "period": 1,
+          "relative_cost_change": 0.0006905805161934175
+        },
+        {
+          "seed": 4,
+          "period": 1,
+          "relative_cost_change": -0.0006107108053897692
+        },
+        {
+          "seed": 5,
+          "period": 1,
+          "relative_cost_change": -4.571444093781629e-05
+        },
+        {
+          "seed": 6,
+          "period": 1,
+          "relative_cost_change": -0.00011712835449562142
+        },
+        {
+          "seed": 7,
+          "period": 1,
+          "relative_cost_change": -0.00010191325140540552
+        },
+        {
+          "seed": 0,
+          "period": 3,
+          "relative_cost_change": -0.0002858892062479468
+        },
+        {
+          "seed": 1,
+          "period": 3,
+          "relative_cost_change": -0.0005150315441960762
+        },
+        {
+          "seed": 2,
+          "period": 3,
+          "relative_cost_change": -9.79002221768166e-06
+        },
+        {
+          "seed": 3,
+          "period": 3,
+          "relative_cost_change": 0.0007621143805154329
+        },
+        {
+          "seed": 4,
+          "period": 3,
+          "relative_cost_change": -0.00014416229329949903
+        },
+        {
+          "seed": 5,
+          "period": 3,
+          "relative_cost_change": -4.956423929936005e-05
+        },
+        {
+          "seed": 6,
+          "period": 3,
+          "relative_cost_change": -3.7736514077901795e-05
+        },
+        {
+          "seed": 7,
+          "period": 3,
+          "relative_cost_change": -3.3346909148912474e-05
+        }
+      ],
+      "min_median_max": [
+        -0.001002322138277223,
+        -7.573874535238279e-05,
+        0.0007621143805154329
+      ],
+      "strictly_lower_count": 14
+    },
+    "box": {
+      "cases": [
+        {
+          "seed": 0,
+          "period": 1,
+          "relative_cost_change": -0.010439868259569995
+        },
+        {
+          "seed": 1,
+          "period": 1,
+          "relative_cost_change": -0.005924769435043831
+        },
+        {
+          "seed": 2,
+          "period": 1,
+          "relative_cost_change": -0.01478990642789546
+        },
+        {
+          "seed": 3,
+          "period": 1,
+          "relative_cost_change": -0.003145034548020287
+        },
+        {
+          "seed": 4,
+          "period": 1,
+          "relative_cost_change": -0.011607094832897236
+        },
+        {
+          "seed": 5,
+          "period": 1,
+          "relative_cost_change": -0.011337635114376021
+        },
+        {
+          "seed": 6,
+          "period": 1,
+          "relative_cost_change": -0.015264275756512569
+        },
+        {
+          "seed": 7,
+          "period": 1,
+          "relative_cost_change": -0.016265270549957522
+        },
+        {
+          "seed": 0,
+          "period": 3,
+          "relative_cost_change": -0.008114677517250812
+        },
+        {
+          "seed": 1,
+          "period": 3,
+          "relative_cost_change": -0.0015641191866477833
+        },
+        {
+          "seed": 2,
+          "period": 3,
+          "relative_cost_change": -0.018400228382242645
+        },
+        {
+          "seed": 3,
+          "period": 3,
+          "relative_cost_change": -0.0006155093886385243
+        },
+        {
+          "seed": 4,
+          "period": 3,
+          "relative_cost_change": -0.00677412007435374
+        },
+        {
+          "seed": 5,
+          "period": 3,
+          "relative_cost_change": -0.009557667786556756
+        },
+        {
+          "seed": 6,
+          "period": 3,
+          "relative_cost_change": -0.016184555403846
+        },
+        {
+          "seed": 7,
+          "period": 3,
+          "relative_cost_change": -0.013846309182779848
+        }
+      ],
+      "min_median_max": [
+        -0.018400228382242645,
+        -0.010888751686973008,
+        -0.0006155093886385243
+      ],
+      "strictly_lower_count": 16
+    }
+  },
+  "dual": {
+    "positive_initial_gap_cases": 246,
+    "total_queries": 504,
+    "0": {
+      "mean_gap": 0.08946369588772424,
+      "max_gap": 0.3394112549695429,
+      "active_median_gap": 0.18891430288697114
+    },
+    "1": {
+      "mean_gap": 3.19459503770866e-05,
+      "max_gap": 0.0021141463971327545,
+      "active_median_gap": 0.0
+    },
+    "3": {
+      "mean_gap": 5.0048818950100924e-08,
+      "max_gap": 4.204100792160048e-06,
+      "active_median_gap": 0.0
+    },
+    "10": {
+      "mean_gap": -3.96508223080413e-18,
+      "max_gap": 5.551115123125783e-17,
+      "active_median_gap": 0.0
+    },
+    "30": {
+      "mean_gap": -3.96508223080413e-18,
+      "max_gap": 5.551115123125783e-17,
+      "active_median_gap": 0.0
+    }
+  },
+  "conditioning_counterexample_h_e1": {
+    "diamond": 0.5,
+    "box": 1.0
+  },
+  "scope": "Postprocessing frozen data; conditioning LP is a separate analytic counterexample, not a new closed-loop trial.",
+  "audit_script_sha256": "d46e8ae76da3bcd6b41fa3ec506c110b9348205832760e52b781f44467f073a3"
+}

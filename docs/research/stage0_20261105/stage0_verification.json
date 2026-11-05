@@ -1,0 +1,19 @@
+{
+  "initial_manifest_changed": [
+    "docs/literature/PAPER_READING_LOG.md",
+    "docs/research/CURRENT_CHECKPOINT.md",
+    "docs/research/RESEARCH_MAP.md"
+  ],
+  "original_checkpoint_preserved": true,
+  "open_prs": 44,
+  "drafts": 7,
+  "finite_memory_driver_LF_normalized_sha256": "d665f39e20561647258a25c00a31d3aac65ea66c04c7631b924c17f249ac233d",
+  "working_tree_navigation": {
+    "exit": 0,
+    "output": "Research structure, 85 active Markdown files and archive entrypoints passed local-link validation."
+  },
+  "edited_docs_links": {
+    "targets_checked": 164,
+    "broken": []
+  }
+}

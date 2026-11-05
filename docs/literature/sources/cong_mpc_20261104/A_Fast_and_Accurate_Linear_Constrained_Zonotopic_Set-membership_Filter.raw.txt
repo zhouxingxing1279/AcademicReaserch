@@ -1,0 +1,1613 @@
+1
+A Fast and Accurate Linear Constrained Zonotopic
+Set-membership Filter
+Xujie Qin, Yirui Cong, Member, IEEE, Xiangke Wang, Senior Member, IEEE, and
+Tengfei Liu, Senior Member, IEEE
+Abstract—This article proposes a fast and accurate linear
+constrained zonotopic set-membership filter (CZ-SMF), where
+the interval hulls of the estimates are computed online in real
+time. Unlike existing methods solving interval hulls independently
+and inefficiently at different time steps, we effectively leverage
+the temporal relations inherent in the recursive filtering pro-
+cess. More specifically, we establish two fundamental properties
+of linear CZ-SMFs: (i) structural invariance, which provides
+invariant parameters in constrained zonotopic estimates over
+time, and (ii) parametric similarity that guarantees the uniform
+boundedness of the time-varying optimization parameters for
+consecutive time steps. Inspired by the fundamental properties,
+we develop the structural-parametric information-based SMF
+(SPIN-SMF), which offers two important advantages. First, our
+designed optimization algorithm only involves linear operations
+by exploiting the structural invariance to precompute matrix
+inversions. Second, utilizing the parametric similarity, we propose
+a warm-start strategy to efficiently initialize the optimization pro-
+cess. Baseline and Monte Carlo simulations show that the SPIN-
+SMF reduces computation time by 98.72%-99.98% compared to
+the classical SMFs while maintaining high accuracy.
+Index Terms—Set-membership filter, constrained zonotope,
+fast and accurate algorithm.
+I. INTRODUCTION
+Constrained zonotopic set-membership filter (CZ-SMF)1
+has emerged as a key framework for robust state estimation in
+dynamical systems with bounded noises and limited statistical
+properties [1]–[3]. With high estimation accuracy [4], the CZ-
+SMF has demonstrated its great potential in applications such
+as localization [5] and fault diagnosis [6].
+Despite its accuracy advantages, the CZ-SMF faces signif-
+icant computational bottlenecks in practice. Specifically, the
+real-time applicability of the CZ-SMF depends on solving
+the interval hulls for the constrained zonotopic estimates effi-
+ciently and accurately [4]; however, efficiently solving interval
+hulls is challenging, even for linear systems, as the complexity
+of constrained zonotopes grows unboundedly due to recursive
+prediction-update operations [1].
+Xujie Qin, Yirui Cong, and Xiangke Wang are with the College of
+Intelligence Science and Technology, National University of Defense Tech-
+nology, and the National Key Laboratory of Equipment State Sensing and
+Smart Support, Changsha 410073, China (e-mail: qinxujie@nudt.edu.cn,
+congyirui11@nudt.edu.cn, xkwang@nudt.edu.cn).
+Tengfei Liu is with the State Key Laboratory of Synthetical Automation for
+Process Industries, Northeastern University, Shenyang 110004, China (e-mail:
+tfliu@mail.neu.edu.cn). (Corresponding author: Yirui Cong)
+This work was supported by the National Natural Science Foundation of
+China under Grant U23B2032 and Grant U2241214.
+1The CZ-SMF is an important class of set-membership filters, where the
+constrained zonotopes characterize the system uncertainty (including noises
+and states).
+To deal with the growth of complexity while maintaining
+guaranteed estimates, current research has developed various
+outer-approximation order reduction techniques. These tech-
+niques approximate high-complexity constrained zonotopes
+with lower-complexity ones that tightly contain them. Geomet-
+rically, constrained zonotopes are described by generators (the
+same as traditional zonotopes [7]) and linear constraints. Based
+on the geometric properties of constrained zonotopes, [1] pro-
+posed order reduction methods for the constraints (associated
+with a rescaling strategy) and generators, respectively. Note
+that for the generator reduction, a lift-then-reduce strategy [1]
+can be employed, allowing the order reduction techniques for
+traditional zonotopes to be applied directly: for example, the
+first systematic method for generator reduction [7], seminal
+generator sorting strategies [8] and [9], and a principal com-
+ponent analysis (PCA)-based reduction method [10]. Different
+from the above geometry-based methods, an Observation-
+Information Tower-inspired method (OIT-CZ SMF) [11] was
+developed recently, by only utilizing the properties of dynami-
+cal systems to achieve efficient order reduction. These methods
+effectively address the complexity-growth issue and have been
+widely used [2], [3], [6].
+While existing linear CZ-SMFs achieved a balance between
+estimation accuracy and computational efficiency for solving
+interval hulls at individual time steps, their relations caused
+by the recursive filtering process were totally and implicitly
+overlooked. This leads to low efficiency when sequentially
+solving interval hulls: 1) existing methods did not utilize
+(or even disrupt2
+) common/invariant structures across the
+estimated sets in different time steps, which could have
+significantly accelerated the computations; 2) solving interval
+hulls independently ignores the inherent parametric similarity
+between the optimization problems at consecutive time steps,
+where the similarity can help remove the redundancy in com-
+putations. Thus, it is necessary to seek fundamental properties
+of sequentially solving interval hulls for linear CZ-SMFs and
+develop fast and accurate algorithms accordingly.
+In this work, we propose a fast and accurate CZ-SMF for
+linear time-invariant systems. The key novelty over existing
+methods (e.g., [1], [7]–[11]) is to exploit the temporal relation
+of recursive interval hull computations. It substantially reduces
+online computational complexity while preserving high accu-
+racy. Our contributions are as follows:
+• We establish two fundamental properties of linear CZ-
+2The connections between the estimated sets can be cut off when the
+geometric descriptions of constrained zontopes are improperly simplified.
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+2
+SMFs. The first is structural invariance, as the prediction-
+update operations are temporally similar over time. It
+provides the common/invariant parameters in the con-
+structed constrained zonotopic estimates at different time
+steps. The second is parametric similarity in sequentially
+solving interval hulls, given that the other parameters are
+invariant from the structural invariance. We rigorously
+prove the uniform boundedness of the time-varying pa-
+rameters in consecutive time steps.
+• Inspired by the established fundamental properties, we
+propose a structural-parametric information-based SMF
+(SPIN-SMF). First, by applying the structural invariance
+to precompute the matrix inversions, a fast coordinate
+descent augmented Lagrangian algorithm is developed,
+which only involves linear operations. Second, moti-
+vated by the parametric similarity, we design a warm-
+start strategy to efficiently reuse the information of the
+previous time step. It constructs a guaranteed initial
+point to significantly accelerate the convergence of the
+algorithm. Simulations show that the SPIN-SMF reduces
+computation time by 98.72% − 99.98% compared to the
+classical SMFs while maintaining high accuracy.
+Notation: Throughout this article, R, N0, and N denote the
+sets of real numbers, nonnegative integers, and positive inte-
+gers, respectively. Rn
+stands for the n-dimensional Euclidean
+space. For a, b ∈ Rn
+, a ≤ b means that each component of a is
+not greater than that of b. For an uncertain variable x defined
+on a sample space Ω, its range is JxK = {x(ω): ω ∈ Ω}
+and its realization is x = x(ω) [12], [13]. We use ∥ · ∥∞ to
+represent the infinity norm (of a vector) or the row sum norm
+(of a matrix). The set Sk is uniformly bounded (w.r.t. k ∈ K)
+if there exists ds > 0 such that d(Sk) ≤ ds for all k ∈ K,
+where d(Sk) = sups,s′∈Sk
+∥s − s′
+∥∞ is the diameter of Sk.
+The interval hull of a bounded set S ∋ s = (s(1)
+, . . . , s(n)
+)
+is IH(S) =
+Qn
+i=1[s(i)
+, s(i)
+], where s(i)
+= infs(i) {s ∈ S}
+and s(i)
+= sups(i) {s ∈ S}. Given a matrix M ∈ Rm×n
+, the
+Moore-Penrose inverse and the kernel (null space) are M+
+and ker(M), respectively; ρ(·) returns the spectral radius of a
+square matrix; In is an identity matrix of size n and [ ] is a
+null matrix. The operator ◦ is the composition of two maps.
+II. PROBLEM FORMULATION
+Consider the following discrete-time linear system described
+by uncertain variables [12] (k ∈ N0):
+xk+1 = Axk + Bwk, (1)
+yk = Cxk + vk, (2)
+where (1) and (2) are the state and measurement equations,
+respectively. The state equation describes how the system state
+xk ∈ JxkK ⊆ Rn
+changes over time, affected by the process
+noise wk ∈ JwkK ⊆ Rp
+. The measurement equation gives
+how the system state is measured from the measurement yk ∈
+JykK ⊆ Rm
+, and vk ∈ JvkK ⊆ Rm
+represents the measurement
+noise; A ∈ Rn×n
+, B ∈ Rn×p
+, and C ∈ Rm×n
+.
+We assume that ∀k ∈ N0, the process noises w0:k, the
+measurement noises v0:k, and the initial state x0 are mutually
+unrelated3
+. This makes the system satisfy a non-stochastic
+hidden Markov model, which guarantees the optimality of the
+classical SMFing [13], provided in Lemma 1.
+Lemma 1 (Optimal Linear SMFing). For the system described
+by (1) and (2), the optimal estimate4
+Jxk|y0:kK can be recur-
+sively derived by the following steps.
+• Initialization (k = 0): Set the initial prior set Jx0K.
+• Prediction (k ∈ N): Given the estimate (posterior set)
+Jxk−1|y0:k−1K derived at k − 1, the prior set at k is
+Jxk|y0:k−1K = AJxk−1|y0:k−1K ⊕ BJwk−1K, (3)
+where ⊕ denotes the Minkowski sum.
+• Update (k ∈ N0): Given the measurement yk and the
+prior set obtained in (3), the posterior set Jxk|y0:kK is
+Jxk|y0:kK = Xk(C, yk, JvkK)
+\
+Jxk|y0:k−1K, (4)
+where Jx0|y0:−1K := Jx0K and
+Xk(C, yk, JvkK) = ker(C) ⊕ C+
+({yk} ⊕ J−vkK). (5)
+In this work, we consider SMFs with constrained zono-
+topic descriptions [1], where Jxk|y0:kK are represented by
+constrained zonotopes to perform prediction/update set oper-
+ations5
+. For computational purposes, an extended version of
+the constrained zonotope is given in Definition 1.
+Definition 1 (Extended Constrained Zonotope [11]). A set
+Z ⊆ Rn
+is an extended constrained zonotope if there exists a
+quintuple (Ĝ, ĉ, Â, b̂, ĥ) ∈ Rn×ng
+×Rn
+×Rnc×ng
+×Rnc
+×R
+ng
++
+such that Z is expressed by
+Z(Ĝ, ĉ, Â, b̂, ĥ) :=
+n
+Ĝξ + ĉ: Âξ = b̂, −ĥ ≤ ξ ≤ ĥ
+o
+,
+where ng and nc are the generator and constraint dimen-
+sions [1], respectively.
+The extended constrained zonotope and the (standard)
+constrained zonotope in [1] are mathematically equivalent.
+However, the former has better numerical stability, as ĥ helps
+maintain a good condition number for Â.
+With a slight abuse of notation, we define an extended
+zonotope by Z(Ĝ, ĉ, ĥ) :=
+n
+Ĝξ + ĉ: − ĥ ≤ ξ ≤ ĥ
+o
+. For a
+unified algebraic representation, we describe the interval hull
+of an extended constrained zonotope Z ∈ Rn
+by using the
+above extended zonotopic form:
+IH(Z) = [ρ, ρ] = Z(In, □ĉ, □ĥ), (6)
+where □ĉ = (ρ + ρ)/2 and □ĥ = (ρ − ρ)/2.
+Under Definition 1, the initial set Jx0K, process noise sets
+JwkK, and measurement noise sets JvkK are constructed by
+extended constrained zonotopes as follows
+x0 ∈ Jx0K = Z(Ĝ−
+0 , ĉ−
+0 , Â−
+0 , b̂−
+0 , ĥ−
+0 ), (7a)
+wk ∈ JwkK = Z(Ĝw, ĉw, Âw, b̂w, ĥw), (7b)
+vk ∈ JvkK = Z(Ĝv, ĉv, Âv, b̂v, ĥv), (7c)
+3Uncertain variables x1, . . . , xr are mutually unrelated if Jx1, . . . , xrK =
+Jx1K × · · · × JxrK, where × is the Cartesian product.
+4The optimal estimate is the smallest set containing all possible states [13].
+5Here Jxk|y0:kK can be viewed as a bounded support set (the set of admis-
+sible realizations), which aligns with the support-propagation interpretation of
+zonotopic filtering discussed in [14].
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+3
+where Jx0K, JwkK, and JvkK are bounded; we define dw =
+d(JwkK) and dv = d(JvkK). With (7), the prior set Jxk|y0:k−1K
+and the posterior set Jxk|y0:kK in Lemma 1 inherently preserve
+the constrained zonotopic structure [1] without approxima-
+tions; thus, we call such an SMFing in Lemma 1 with exact
+constrained zonotopic descriptions the optimal linear CZ-SMF
+(constrained zonotopic set-membership filter). We write the
+optimal estimate set as
+Jxk|y0:kK = Z(Ĝ∗
+k, ĉ∗
+k, Â∗
+k, b̂∗
+k, ĥ∗
+k). (8)
+However, the resulting extended constrained zonotope (8)
+cannot explicitly describe the interval of each state component
+[fully characterized by the interval hull (6)], and solving 2n
+linear programmings (LPs) is required [1], [4]; see Problem 1.
+Problem 1 (Calculate the Exact Interval Hull). Calculate the
+interval hull of Jxk|y0:kK returned by the CZ-SMF for k ∈ N0:
+IH(Jxk|y0:kK) = [ρ∗
+k
+, ρ∗
+k]
+(6)
+= Z(In, □ĉ∗
+k, □ĥ∗
+k), (9)
+where ρ∗
+k
+= [ρ∗,1
+k
+, . . . , ρ∗,n
+k
+]T
+and ρ∗
+k = [ρ∗,1
+k , . . . , ρ∗,n
+k ]T
+are
+solved by LPs for each dimension i = 1, . . . , n as follows:
+P∗
+k :
+ρ∗,i
+k
+= min
+ξ
+
+Ĝ
+∗,(i)
+k ξ + ĉ
+∗,(i)
+k
+
+ρ∗,i
+k = max
+ξ
+
+Ĝ
+∗,(i)
+k ξ + ĉ
+∗,(i)
+k
+ s.t.
+(
+Â∗
+kξ = b̂∗
+k,
+−ĥ∗
+k ≤ ξ ≤ ĥ∗
+k,
+where Ĝ
+∗,(i)
+k is row i of Ĝ∗
+k and ĉ
+∗,(i)
+k is component i of ĉ∗
+k.
+Note that the CZ-SMF suffers from unbounded increases
+of the generator and constraint dimensions (i.e., ng and
+nc in Definition 1) due to successive extended constrained
+zonotope operations [1]. This fact makes solving Problem 1
+computationally intractable as time elapses. Although existing
+order reduction techniques (e.g., [1], [7]–[11], [15]–[18]) can
+balance the efficiency and accuracy by reducing ng and nc
+for each P∗
+k , the relationship among P∗
+k for different k is
+overlooked, which results in:
+• Invariant Structure Breaking: Even though P∗
+k varies
+over time, these problems share common/invariant struc-
+tures (analyzed in Section III-A), which can inspire
+offline calculated parts to significantly enhance efficiency
+(designed in Section IV-A). However, the existing meth-
+ods calculate these problems independently, which does
+not utilize the invariant structure or even breaks it.
+• Redundancy in Sequential Computation: Apart from
+the invariant structure, existing methods ignore the para-
+metric similarity between consecutive optimization prob-
+lems in recursive filtering processes (analyzed in Sec-
+tion III-B), which leads to redundant computations. In-
+deed, when solving an optimization for a new time step,
+the solution from the previous time step can be lever-
+aged due to their similarity (see the warm-start strategy
+designed in Section IV-B).
+In this article, we focus on efficiently and accurately solv-
+ing Problem 1 at each k ∈ N0. First, we provide two funda-
+mental properties (i.e., the structural invariance and parametric
+similarity) in Section III. Based on these two properties, a fast
+and accurate algorithm is designed in Section IV.
+III. FUNDAMENTAL PROPERTIES
+This section establishes two fundamental properties: struc-
+tural invariance of the linear CZ-SMF process and parametric
+similarity between sequential optimization problems.
+A. Structural Invariance
+To facilitate analysis, we introduce the recursion operator
+in Definition 2.
+Definition 2 (Recursion Operator). For i ∈ N0, the prediction-
+update operator determined by (3) and (4) is (S ⊆ Rn
+)
+gi :
+(
+S 7→ Xi(C, yi, JviK)
+T
+(AS ⊕ BJwi−1K) , i > 0,
+S 7→ Xi(C, yi, JviK)
+T
+S, i = 0.
+For k ∈ N, a recursion operator Rk,i, describing any set S
+at i under recursive prediction-update operations up to k, is
+Rk,i(S) = gk ◦ · · · ◦ gi+1(S), k > i. (10)
+Based on Definition 2, the optimal linear CZ-SMF is
+Jxk|y0:kK = Rk,k−δ(Jxk−δ|y0:k−δK), k ≥ δ, (11)
+where δ ∈ N0 and
+Jxk−δ|y0:k−δK = Rk−δ,0(Jx0|y0K)
+= Z(Ĝ∗
+k−δ, ĉ∗
+k−δ, Â∗
+k−δ, b̂∗
+k−δ, ĥ∗
+k−δ).
+(12)
+Note that (11) divides the filtering process into two parts:
+(i) the historical posterior Jxk−δ|y0:k−δK is derived at k −δ;
+(ii) the recursion operator Rk,k−δ describes the prediction-
+update operations over the time window {k−δ+1, . . . , k}
+with length δ.
+With these two parts, we give the structural invariance of the
+optimal linear CZ-SMF in (11); see Proposition 1.
+Proposition 1 (Structural Invariance). ∀k, δ ∈ N0 with k ≥ δ,
+the optimal estimate Jxk|y0:kK [see (8)] has the parameters
+(Ĝ∗
+k, ĉ∗
+k, Â∗
+k, b̂∗
+k, ĥ∗
+k) = (Ĝk, ĉk, Âk, b̂k, ĥk) in (13) as follows
+Ĝk =
+
+Aδ
+ϕG Aδ
+BĜw 0 Aδ−1
+BĜw . . . BĜw 0
+
+,
+ĉk = Aδ
+ϕc +
+k−1
+X
+r=k−δ
+Ak−1−r
+Bĉw,
+Âk =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ϕA 0 0 0 0 · · · 0 0
+0 Âw 0 0 0 · · · 0 0
+0 0 Âv 0 0 · · · 0 0
+CAϕG CBĜw Ĝv 0 0 · · · 0 0
+0 0 0 Âw 0 · · · 0 0
+0 0 0 0 Âv · · · 0 0
+CA2
+ϕG CABĜw 0 CBĜw Ĝv · · · 0 0
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+...
+.
+.
+.
+.
+.
+.
+0 0 0 0 0 · · · Âw 0
+0 0 0 0 0 · · · 0 Âv
+CAδ
+ϕG CAδ−1
+BĜw 0 0 0 · · · CBĜw Ĝv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+b̂k =
+
+ϕb b̂w b̂v b̂yk−δ
+. . . b̂w b̂v b̂yl
+. . . b̂yk
+T
+,
+ĥk =
+
+ϕh ĥw ĥv . . . ĥw ĥv . . . ĥw ĥv
+T
+,
+b̂yl
+= yl − ĉv − C(Al−k+δ
+ϕc +
+l−1
+X
+r=k−δ
+Al−1−r
+Bĉw), (13)
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+4
+where k − δ ≤ l ≤ k, Ĝk ∈ Rn×nk
+g , ĉk ∈ Rn
+, Âk ∈ Rnk
+c ×nk
+g ,
+b̂k ∈ Rnk
+c , ĥk ∈ Rnk
+g , nk
+g = n+δ(p+m), and nk
+c = δ(p+2m).
+The structure of the parameters is invariant with k, and the
+only time-varying parts are as follows.
+• Historical posterior: ϕG = Ĝ∗
+k−δ, ϕc = ĉ∗
+k−δ, ϕA =
+Â∗
+k−δ, ϕb = b̂∗
+k−δ, and ϕh = ĥ∗
+k−δ.
+• Recursion operator: {yk−δ+1, . . . , yk}.
+Proof: Equation (13) follows from (11), (12), and basic
+set operations of extended constrained zonotopes [1], [11]. The
+time-varying parts can be observed from (13).
+Due to the unbounded increases of ng and nc, calculat-
+ing the exact IH(Jxk|y0:kK) in Problem 1 is computation-
+ally intractable for large k. When k ≥ δ, we can replace
+Jxk−δ|y0:k−δK in (11) with a low-complexity interval hull
+to compute an outer bound Zk = Z(Ĝk, ĉk, Âk, b̂k, ĥk) ⊇
+Jxk|y0:kK as follows
+Zk =
+(
+Rk,k−δ(IH(Zk−δ)), k ≥ δ,
+Jxk|y0:kK, 0 ≤ k < δ,
+(14)
+where we set Zk = Jxk|y0:kK (k < δ) for compactness, which
+implies Ĝk := Ĝ∗
+k, ĉk := ĉ∗
+k, Âk := Â∗
+k, b̂k := b̂∗
+k, and
+ĥk := ĥ∗
+k for k < δ.
+Note that the structural invariance in Proposition 1 also
+holds for (14). This motivates us to replace Jxk|y0:kK in
+Problem 1 with Zk in (14), transforming6
+it into Problem 2.
+Problem 2 (Calculate the Near Optimal Interval Hull). For
+k ∈ N0, calculate the interval hull of Zk defined by (14):
+IH(Zk) = [ρk
+, ρk]
+(6)
+= Z(In, □ĉk, □ĥk), (15)
+where ρk
+= [ρ1
+k
+, . . . , ρn
+k
+]T
+and ρk = [ρ1
+k, . . . , ρn
+k ]T
+are solved
+by LPs for each dimension i = 1, . . . , n as follows7
+:
+Pk :
+ρi
+k
+= min
+η,ζ
+
+Ĝ
+(i)
+k η + ĉ
+(i)
+k
+
+ρi
+k = max
+η,ζ
+
+Ĝ
+(i)
+k η + ĉ
+(i)
+k
+ s.t.
+
+
+
+
+
+Âkη = b̂k,
+η = ζ,
+−ĥk ≤ ζ ≤ ĥk,
+where Ĝ
+(i)
+k is row i of Ĝk and ĉ
+(i)
+k is component i of ĉk.
+Transforming Problem 1 into Problem 2 has two advantages:
+• Utilizing Invariant Structure: For k ≥ δ, by structural
+invariance, the parameters of the extended constrained
+zonotope Zk = Z(Ĝk, ĉk, Âk, b̂k, ĥk) are in (13), where
+ϕG = In, ϕc = □ĉk−δ, ϕA = [ ],
+ϕb = [ ], ϕh = □ĥk−δ. (16)
+Since ϕG = In and ϕA = [ ], the parameters Ĝk and
+Âk are time-invariant. This also fixes the generator and
+constraint dimensions of Zk to nk
+g and nk
+c , respectively.
+• Utilizing Historical Solutions: For k ≥ δ, the historical
+posterior IH(Zk−δ) in (14) has already been derived at
+6This transformation typically incurs only a small accuracy loss; see
+Section V for the accuracy gap between the SPIN SMF and the optimal SMF.
+In the future, we will quantify the accuracy loss incurred when transforming
+Problem 1 into Problem 2.
+7Introducing η = ζ can effectively handle the box constraint −ĥk ≤ ζ ≤
+ĥk; see Section IV.
+k − δ. More specifically, for Pk, the parameters □ĉk−δ
+and ĥk−δ are directly from (15) at k − δ, which does not
+rely on additional order reduction methods.
+Next, we show that the computation of (14) is reasonable,
+i.e., Zk remains uniformly bounded under the detectable
+pair (A, C). The result is established in Theorem 1, which
+relies on the observability decomposition of (1) and (2). The
+transformed (decomposed) system has the form
+
+x̃o
+k+1
+x̃ō
+k+1
+
+=
+
+Ão 0
+Ã21 Ãō
+ 
+x̃o
+k
+x̃ō
+k
+
++
+
+B̃o
+B̃ō
+
+wk,
+yk = C̃ox̃o
+k + vk,
+(17)
+where x̃o
+k = Toxk and x̃ō
+k = Tōxk are the states of
+the observable and unobservable subsystems, respectively.
+Here, T = [T⊤
+o T⊤
+ō ]⊤
+is the transformation matrix with
+T−1
+=
+
+Uo Uō
+
+such that Ão = ToAUo, Ãō = TōAUō,
+Ã21 = TōAUo, B̃o = ToB, B̃ō = TōB, and C̃o = CUo.
+Theorem 1 (Uniform Boundedness). For detectable (A, C),
+there exists a δ ∈ N0 satisfying
+δ > − logγ(Mγ∥Tō∥∞∥T−1
+∥∞) (18)
+such that ∀δ ≥ δ, Zk in (14) is uniformly bounded, the scalar
+γ satisfies ρ(Ãō) ≤ γ ≤ 1 and Mγ ≥ 1.
+Proof: Let Zo
+k = ToZk and Zō
+k = TōZk. We prove the
+uniform boundedness of Zk, i.e., ∃ ¯
+d ≥ 0 such that d(Zk) ≤
+∥T−1
+∥∞ max{d(Zo
+k), d(Zō
+k)} ≤ ¯
+d for k ≥ δ. By Proposition
+4 in [11], ∃ ¯
+do ≥ 0 such that d(Zo
+k) ≤ ¯
+do. Thus, we only focus
+on d(Zō
+k). With (14) and (17), we have
+d(Zō
+k) ≤ ∥Ãδ
+ō∥∞∥Tō∥∞d(IH(Zk−δ))+
+k−1
+X
+j=k−δ
+∥Ãk−j−1
+ō ∥∞(∥Ã21∥∞d(Zo
+j ) + ∥B̃ō∥∞dw). (19)
+Since (A, C) is detectable, the unobservable part Ãō is Schur
+stable and hence ρ(Ãō) < 1. By Lemma 3 in [19], ∀γ ∈
+]ρ(Ãō), 1[, ∃Mγ ≥ 1 such that ∥Ãδ
+ō∥∞ ≤ Mγγδ
+holds for
+δ ∈ N0. Since d(Zo
+j ) ≤ ¯
+do,
+Pk−1
+j=k−δ γk−j−1
+≤ 1
+1−γ , and
+d(IH(Zk−δ)) = d(Zk−δ) ≤ ∥T−1
+∥∞ max{ ¯
+do, d(Zō
+k−δ)},
+the RHS of (19) can be upper bounded by
+d(Zō
+k) ≤ Mγγδ
+∥Tō∥∞∥T−1
+∥∞ max{ ¯
+do, d(Zō
+k−δ)} + Θ,
+where Θ = Mγ(∥Ã21∥∞
+¯
+do + ∥B̃ō∥∞dw)/(1 − γ). Let K :=
+Mγ∥Tō∥∞∥T−1
+∥∞. Since 0 < γ < 1, limδ→∞ Kγδ
+= 0.
+Hence, ∃δ ∈ N0 such that Kγδ
+= Mγγδ
+∥Tō∥∞∥T−1
+∥∞ <
+1. Moreover, for all δ ≥ δ, γδ
+≤ γδ
+, and thus
+Mγγδ
+∥Tō∥∞∥T−1
+∥∞ ≤ Mγγδ
+∥Tō∥∞∥T−1
+∥∞ < 1. This
+implies lim supk→∞ d(Zō
+k) < ∞ (since max{ ¯
+do, d(Zō
+k−δ)} ≤
+¯
+do + d(Zō
+k−δ)), and thus Zk is uniformly bounded.
+As a complement to Theorem 1, our simulation shows that
+the estimated accuracy loss when transforming Problem 1
+into Problem 2 is very small (see Section IV-B). Structural
+invariance inspires us to design a fast algorithm for Problem 2
+(see Section IV-A), i.e., common/invariant parts are computed
+offline so that the online computation involves only linear
+operations.
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+5
+B. Parametric Similarity
+In Section III-A, we know that for different k (k ≥ δ), the
+only time-varying parameters affecting the solution to Pk are
+b̂k and ĥk.8
+In this subsection, we show that the parametric
+difference between Pk and Pk+1 is uniformly bounded; see
+Theorem 2. As a result, the solution to Pk can provide useful
+information when solving Pk+1, which inspires a warm-start
+strategy in Section IV-B to further improve the efficiency.
+Theorem 2 (Parametric Similarity). Let ∆b̂k = b̂k+1 − b̂k,
+∆ĥk = ĥk+1 − ĥk, ∥wk∥∞ ≤ dw, ∥vk∥∞ ≤ dv, and ¯
+d =
+supk≥δ d(Zk). ∀k ≥ δ, we have
+∥∆b̂k∥∞ ≤ max
+k−δ≤l≤k
+{∥CAl−k+δ
+∥∞} ¯
+d + Ψ, ∥∆ĥk∥∞ ≤
+¯
+d
+2
+, (20)
+where Ψ = 2(
+Pδ−1
+j=0 ∥CAj
+B∥∞dw + dv) is the noise-induced
+bound constant.
+Proof: Based on (13), we can derive
+∆b̂k =
+h
+0 0 0 ∆b̂k
+yk−δ
+· · · ∆b̂k
+yl
+· · · ∆b̂k
+yk
+iT
+, (21)
+where ∆b̂k
+yl
+= b̂k+1
+yl+1
+− b̂k
+yl
+; thus, we have
+∥∆b̂k
+yl
+∥∞ = ∥yl+1 − yl − CAl−k+δ
+(□ĉk+1−δ − □ĉk−δ)∥∞
+(2)
+= ∥C(xl+1 − xl) − ∆vl − CAl−k+δ
+(□ĉk+1−δ − □ĉk−δ)∥∞
+(1)
+= ∥CAl−k+δ
+[(xk+1−δ − □ĉk+1−δ) − (xk−δ − □ĉk−δ)]
++ C
+l−1
+X
+j=k−δ
+Al−1−j
+B(wj+1 − wj) + ∆vl∥∞,
+where ∆vl = (vl+1 − vl). Since d(Zk) = d(IH(Zk)) =
+supz,z′∈IH(Zk) ∥z − z′
+∥∞ and xk, □ĉk ∈ IH(Zk), we get
+∥∆b̂k
+yl
+∥∞ ≤ ∥CAl−k+δ
+∥∞
+¯
+d+2
+Pl−1
+j=k−δ ∥CAl−1−j
+B∥∞dw+
+2dv. Let Ψ = 2(
+Pδ−1
+j=0 ∥CAj
+B∥∞dw +dv). Then, ∥∆b̂k∥∞ =
+maxk−δ≤l≤k{∥∆b̂k
+yl
+∥∞} and maxk−δ≤l≤k{∥∆b̂k
+yl
+∥∞} ≤
+maxk−δ≤l≤k{∥CAl−k+δ
+∥∞} ¯
+d + Ψ.
+Similarly, based on (13), ∆ĥk is given by
+∆ĥk =
+
+(□ĥk+1−δ − □ĥk−δ) 0 · · · 0
+T
+, (22)
+and ∥∆ĥk∥∞ can be upper bounded by
+∥∆ĥk∥∞ = ∥□ĥk+1−δ − □ĥk−δ∥∞ ≤ ∥□ĥk+1−δ∥∞ =
+¯
+d
+2
+.
+Therefore, (20) holds.
+Our simulations show that ∥∆b̂k∥∞ and ∥∆ĥk∥∞ are very
+small; see Fig. 1 in Section V-A. The parametric similarity in
+the sequential Pk enables efficient reuse of information from
+prior steps, which significantly improves the computational
+efficiency (see Section IV-B).
+IV. FAST AND ACCURATE ALGORITHM
+In this section, we propose a fast and accurate algorithm
+for solving Problem 2, inspired by structural invariance in
+Section III-A and parametric similarity in Section III-B.
+8For Zk = Z(Ĝk, ĉk, Âk, b̂k, ĥk) in Pk, parameters Ĝk and Âk are
+time-invariant, and ĉk has no effect on the optimal solution.
+A. Structural Information-Based Algorithm
+Based on the structural invariance of the linear CZ-SMF
+(Proposition 1), this section proposes a coordinate descent
+augmented Lagrangian method (CD-AL) for solving Pk. The
+method precomputes common/invariant parts offline such that
+the designed online algorithm requires only linear operations.
+Recall that Pk in Problem 2 includes 2n LPs with the
+same constraints but different objectives. We label the LPs
+with the objectives ρ
+(i)
+k = minη,ζ(Ĝ
+(i)
+k η + ĉ
+(i)
+k ) and ρ̄
+(i)
+k =
+maxη,ζ(Ĝ
+(i)
+k η + ĉ
+(i)
+k ) by P
+(i)
+k and P
+(i)
+k , respectively, where
+i ∈ {1, . . . , n}. Without loss of generality, we only consider
+P
+(i)
+k , and define the shorthand N = Ĝ
+(i)
+k , M = ĉ
+(i)
+k , Q = Âk,
+p = b̂k, and h = ĥk for the parameters of P
+(i)
+k .9
+Within the augmented Lagrangian framework [20], the
+augmented Lagrangian function is
+Lρ(η, ζ, α, β) = Nη − α(Qη − p) − β(η − ζ)
++
+ρ
+2
+(∥Qη − p∥2
+2 + ∥η − ζ∥2
+2), (23)
+where −h ≤ ζ ≤ h, and ρ > 0 is the vector of Lagrange
+multipliers associated with the equality constraints.
+Following the augmented Lagrangian method, we update η,
+ζ, α, and β in (23) by the following iteration framework:
+ηt+1
+= argmin
+ηt
+Lρ(ηt
+, ζt
+, αt
+, βt
+), (24)
+ζt+1
+= argmin
+−h≤ζt≤h
+Lρ(ηt+1
+, ζt
+, αt
+, βt
+), (25)
+αt+1
+= αt
+− ρt
+(Qηt+1
+− p), (26)
+βt+1
+= βt
+− ρt
+(ηt+1
+− ζt+1
+), (27)
+where t = 0, 1, . . . , Nout, which involves the minimization
+step of the primal vector η and ζ [in (24) and (25)] and the up-
+date step of α and β [in (26) and (27)]. The iteration terminates
+if either: 1) the primal residual satisfies ∥Qηt
+− p∥∞ ≤ ϵpri
+and ∥ηt
+−ζt
+∥∞ ≤ ϵcon, indicating primal feasibility; or 2) the
+maximum iteration count Nout is reached. Following Nesterov
+acceleration framework [21], we use the dynamic parameter
+update ρt+1
+=
+1+
+√
+1+4(ρt)2
+2 .
+In each iteration t, we need to solve two minimization
+problems, i.e., (24) and (25). For (24), it is an unconstrained
+quadratic optimization, the minimizer is
+ηt+1
+= (QT
+Q + I)−1
+
+QT
+
+p +
+αt
+ρt
+
++ ζt
++
+βt
+− N
+ρt
+
+.
+Based on structural invariance from Proposition 1, Q is time-
+invariant for different Pk (k ≥ δ). Thus, when k ≥ δ, we only
+need to precompute Ξ = (QT
+Q+I)−1
+once offline10
+, making
+the update process for η consist only of linear operations.
+Different from (24), (25) contains a box constraint −h ≤
+ζ ≤ h in (25). We use the coordinate descent method (CD)
+to update ζ. The CD method optimizes one variable [w.r.t.
+component i ∈ {1, . . . , nk
+g}] at a time while keeping the others
+fixed [22]. More specifically, we employ a randomized cyclic
+9For P
+i
+k, we can simply set N = −Ĝ
+(i)
+k and M = −ĉ
+(i)
+k .
+10When k < δ, Ξ needs to be recalculated at each k.
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+6
+coordinate descent method in [22], where the following nk
+g
+calculations are performed:
+ζt+1
+i = B[−hi,hi](ηt+1
+i −
+1
+ρt
+βt
+i ), ∀i ∈ π({1, . . . , nk
+g}),
+where ηt
+i , ζt
+i , βt
+i , and ht
+i denote the ith
+components of ηt
+, ζt
+,
+βt
+, and ht
+, respectively; π(·) represents a random arrange-
+ment of coordinates; and B[−hi,hi](·) is the box-constrained
+projection operator: B[−hi,hi](x) = max{−hi, min{x, hi}}.
+The detailed CD-AL method for solving each Pi
+k (P
+i
+k) in
+Pk (see Problem 2) is provided in Algorithm 1.
+Algorithm 1 Structural Information-Based Algorithm
+1: Input: set t = 0, η0, ζ0 ∈ [−h, h], α0, β0, and ρ0 > 0; select parameter
+Nout, ϵpri, ϵcon; offline precomputation Ξ = (QTQ + I)−1.
+2: while (∥Qηt − p∥∞ > ϵpri or ∥ηt − ζt∥∞ > ϵcon) and t ≤ Nout do
+3: ηt+1 = Ξ
+
+QT
+
+p + αt
+ρt
+
++ ζt + βt
+−N
+ρt
+
+;
+4: ζt+1
+i = B[−hi,hi](ηt+1
+i − 1
+ρt βt
+i ), ∀i ∈ π({1, . . . , nk
+g });
+5: αt+1 = αt − ρt(Qηt+1 − p);
+6: βt+1 = βt − ρt(ηt+1 − ζt+1);
+7: ρt+1 ←
+1+
+√
+1+4(ρt)2
+2
+;
+8: t = t + 1;
+9: end while
+10: Ouput: Optimal solution z∗ = (η∗, ζ∗) and optimal value Nη∗ + M.
+Leveraging the structural invariance described in Sec-
+tion III-A, Algorithm 1 only involves low-complexity linear
+operations, thus ensuring high computational efficiency.
+B. Warm-Start Strategy Based on Parametric Similarity
+For k ≥ δ, a warm-start strategy for Algorithm 1 is proposed
+in this subsection. The strategy generates a warm-start point
+utilizing the parametric similarity (see Theorem 2) between
+Pk and Pk+1 to improve the efficiency of solving Pk+1.
+Let the quadruple D := (Q, p, N, h) be the parameters
+of P
+(i)
+k . We use ∆D = (∆Q, ∆p, ∆N, ∆h) to denote the
+parametric perturbation between P
+(i)
+k and P
+(i)
+k+1 such that
+D + ∆D is the parameters of P
+(i)
+k+1. The warm-start strategy
+generates a warm-start point zw
+= (ηw
+, ζw
+) for P
+(i)
+k+1 from
+the optimal solution z∗
+= (η∗
+, ζ∗
+) of P
+(i)
+k .11
+Specifically,
+we compute ∆z := (∆η, ∆ζ) = zw
+− z∗
+by utilizing
+the information of ∆D and z∗
+. Thus, the warm-start point
+zw
+= z∗
++∆z has fewer iterations than a randomly generated
+start point for Lines 2-9 in Algorithm 1.
+First, ∆η is obtained by solving the optimization problem:
+min
+∆η
+∥Σ∆η∥2
+2, s.t. (Q + ∆Q)(η∗
++ ∆η) = p + ∆p, (28)
+where Σ is a positive diagonal matrix, which can be I,
+diag(η∗
+)−1
+, or diag(η∗
+)−2
+[23]. Due to the structral invari-
+ance, ∆Q = 0, and the closed-form solution for (28) is
+∆η = (ΣT
+Σ)−1
+QT
+Q(ΣT
+Σ)−1
+QT
+−1
+∆p, (29)
+which is computationally efficient. Note that the constraints
+of (28) ensure ∥(Q+∆Q)ηw
+−(p+∆p)∥∞ = 0 ≤ ϵpri. Thus,
+the condition ∥Qηt
+− p∥∞ > ϵpri in Line 2 of Algorithm 1 is
+violated, which can reduce the number of iterations.
+11In Line 1 of Algorithm 1, (η0, ζ0) is replaced by (ηw, ζw).
+Then, we compute ∆ζ. To satisfy the box constraint −h ≤
+ζ ≤ h, we set
+∆ζ = B[−(h+∆h),(h+∆h)](η∗
++ ∆η) − ζ∗
+. (30)
+The parametric similarity in Theorem 2 implies that ∆η in
+(29) and ∆ζ in (30) are uniformly bounded w.r.t. k ≥ δ, which
+guarantees the efficiency. The detailed strategy is provided in
+Algorithm 2.
+Algorithm 2 Parametric Similarity-Based Warm-Start Strategy
+1: Input: Optimal point z∗ = (η∗, ζ∗), data quadruple D = (Q, p, N, h),
+perturbation ∆D = (∆Q, ∆p, ∆N, ∆h), selection Σ.
+2: ∆η = (ΣT Σ)−1QT Q(ΣT Σ)−1QT
+−1
+∆p;
+3: ∆ζ = B[−(h+∆h),(h+∆h)](η∗ + ∆η) − ζ∗;
+4: Ouput: A warm-start point zw = z∗ + ∆z.
+Leveraging the parameter similarity from Section III-B, the
+warm-start point provided by Algorithm 2 accelerates the
+convergence speed of Algorithm 1.
+C. Structural-Parametric Information-Based SMF Algorithm
+The detailed design of the fast and accurate linear CZ-SMF
+is given in Algorithm 3, and we call it the structural-parametric
+information-based SMF (SPIN-SMF).
+If k < δ, we use Algorithm 1 with cold-start strategy to
+solve Pk in Problem 2. The cold-start point zc
+= (ηc
+, ζc
+) is
+constructed as follows:
+ηc
+= QT
+(QT
+Q)−1
+p + ση1,
+ζc
+= B[−h,h]([QT
+(QT
+Q)−1
+p + σζ1]),
+(31)
+where ση and σζ are hyperparameters.
+If k ≥ δ, we couple Algorithm 1 and Algorithm 2 to solve
+Pk in Problem 2 efficiently. We present the time and space
+complexity analysis of the SPIN-SMF algorithm and compare
+it with the state-of-the-art benchmark algorithms (such as
+Scott, PCA, OIT-CZ SMF, and Optimal SMF); see Table I.
+Algorithm 3 Structural-Parametric Information-Based SMF
+1: Initialization: Bounded Jx0K = Z(Ĝ−
+0 , ĉ−
+0 , Â−
+0 , b̂−
+0 , ĥ−
+0 ) and k = 0,
+select δ ∈ N0.
+2: if k < δ then
+3: Zk = Rk,k−1(Zk−1) = Z(Ĝk, ĉk, Âk, b̂k, ĥk);
+4: z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) and z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) are solved
+by Algorithm 1 with cold-start point in (31);
+5: else if k ≥ δ then
+6: Zk = Z(Ĝk, ĉk, Âk, b̂k, ĥk) with (13) and (16);
+7: if k = δ then
+8: z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) and z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) are solved
+by Algorithm 1 with cold-start point in (31);
+9: else if k > δ then
+10: ∆z(i) and ∆z(i) are solved by Algorithm 2 with z
+∗,(i)
+k−1 and z
+∗,(i)
+k−1 ;
+11: z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) and z
+∗,(i)
+k = (η
+∗,(i)
+k , ζ
+∗,(i)
+k ) are solved
+by Algorithm 1 with warm-start points zw,(i) = z
+∗,(i)
+k−1 + ∆z(i)
+and zw,(i) = z
+∗,(i)
+k−1 + ∆z(i);
+12: end if
+13: end if
+14: ρ
+(i)
+k = Ĝ
+(i)
+k η
+∗,(i)
+k + ĉ
+(i)
+k and ρ
+(i)
+k = Ĝ
+(i)
+k η
+∗,(i)
+k + ĉ
+(i)
+k , i = 1, . . . , n;
+15: ρk
+= [ρ1
+k
+, . . . , ρn
+k
+]T and ρk = [ρ1
+k, . . . , ρn
+k ]T;
+16: IH(Zk) = [ρk
+, ρk] = Z(In, □ĉk, □ĥk), where □ĉk = (ρk
++ ρk)/2
+and □ĥk = (ρk − ρk
+)/2.
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+7
+TABLE I
+TIME AND SPACE COMPLEXITY
+Methods Time Complexity Space Complexity
+SPIN-SMF O(nnz(Q) + ng) O((ng)2 + ngnc)
+OR (Scott) [1] O((no
+g + no
+c)3 + (N)3) O(nno
+g + no
+cno
+g + (N)2)
+OR (PCA) [10] O(n2no
+g + n3 + (N)3) O(nno
+g + n2 + (N)2)
+OIT-CZ [11] O(n3 + (ng + nc)3) O((n + nc)ng + (ng + nc)2)
+Optimal SMF O(F(k)3) O(F(k)2)
+Note: OR denotes the order reduction method. The number of nonzero
+elements in matrix Q is represented by nnz(Q). The dimensions are defined
+as follows: ng = n + δ(p + m), nc = δ(p + 2m), N = n
+tgt
+g + n
+tgt
+c , and
+F(k) = n + k(2p + 3m) increases with time k. For Scott and PCA, no
+g and
+no
+c denote the generator and constraint dimensions before reduction, while
+n
+tgt
+g and n
+tgt
+c denote the corresponding target dimensions after reduction.
+V. NUMERICAL EXAMPLES
+We compare our proposed SPIN-SMF and the state-of-the-
+art SMFs in this section. The simulations are conducted on
+a computer with an Intel Core i9-13900KF CPU (3.00 GHz)
+using MATLAB (.m files).
+A. Vehicle Model
+We validate the theoretical results for both classical and the
+proposed SPIN-SMF using the established vehicle benchmark
+system (V1) from the comparison study in [4]. The state vector
+comprises the sideslip angle, yaw rate, yaw angle, lateral
+position, steering angle, and steering rate. The discretized
+system (n = 6, p = 6, m = 4) is described by
+A =
+
+
+
+
+
+
+
+
+0.9947 −0.0079 0 0 0.0210 0.0001
+0.3148 0.9313 0 0 0.2273 0.0007
+0.0015 0.0097 1 0 0.0012 0
+0.1726 0.1442 0 1 0.0197 0
+0.2649 0.0143 0 0 0.7400 0.0043
+39.0353 1.9603 0 0 −37.7608 0.0506
+
+
+
+
+
+
+
+
+B = diag(0.005, 0.055, 0.005, 0.04, 0.02, 0.2),
+C =
+
+
+
+
+0 15 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+
+
+
+ ,
+JwkK = [−1, 1]6
+, JvkK = [−0.1, 0.1]6
+, Jx0K = {06×1}.
+The measurement matrix C is a linearized measurement
+model: yaw rate is inferred from lateral acceleration at 15m/s,
+and the other outputs are yaw angle, lateral position, and
+steering angle. The simulations are conducted for 100 runs
+over the time window [0, 300]. We compare the estimation
+diameter and the computation time of the proposed SPIN-SMF
+and four classical CZ-SMFs, i.e., the Scott order reduction
+method [1], the PCA order reduction method [10] (the Scott
+and PCA methods are given in CORA 2025 [24]), the OIT-CZ
+SMF method in [11], and the optimal SMF in [13]; see Fig. 1,
+where the diameter is in the sense of ∞-norm, i.e., d(IH(Zk)),
+which can be easily calculated based on the derived IH(Zk).
+From Fig. 1, we can see that the optimal SMF, the Scott
+method, and the SPIN-SMF exhibit nearly identical estimation
+accuracy. However, the SPIN-SMF reduces the computational
+time by 2 to 4 orders of magnitude compared to the optimal
+Fig. 1. The diameters of the estimates, computation times, and the per-
+turbations (w.r.t. Theorem 2). The SPIN-SMF runs with Σ = I, ρ = 1,
+δ = n − rank(C) + 3, Nout = 106, and ϵpri = ϵcon = 10−4 (suitable
+for most applications); the Scott and PCA order reduction methods are with
+ng = 2(δ + 1)p, nc = (δ + 1)m, and the degrees-of-freedom order [1]
+od = (ng − nc)/n; the OIT-CZ SMF method runs with δ̄ = 5.
+SMF and Scott method. The SPIN-SMF method achieves an
+average computation time below 1ms while maintaining near-
+optimal accuracy, demonstrating a significant improvement
+over the four classical SMF methods. Next, we evaluate the
+effect of δ on the SPIN-SMF. A larger δ exploits more
+historical information, producing tighter set estimates (smaller
+diameter) at the expense of increased computational load. As
+shown in Table II, increasing δ leads to a gradual decrease in
+diameter while the runtime increases slightly.
+TABLE II
+AVERAGED TIME AND DIAMETER OF CZ-SMFS
+SMFs parameter setting time (ms) diameter
+SPIN δ = 5 0.51 3.0418
+δ = 8 0.89 2.9475
+δ = 10 1.15 2.8944
+δ = 20 2.91 2.8362
+Scott ng = 72, nc = 24 1852.23 2.8794
+ng = 108, nc = 48 2644.91 2.8517
+PCA ng = 72, nc = 24 1198.14 30.3184
+ng = 108, nc = 48 2132.50 22.4688
+OIT-CZ SMF δ̄ = 5 41.47 6.7533
+δ̄ = 20 62.19 3.0856
+Optimal SMF - 1126.64 2.8155
+Note: Scott, PCA, Optimal SMF: any system; OIT-CZ SMF: LTI systems.
+To illustrate the efficiency of the SPIN-SMF, Table II also
+lists other SMFs with different parameters. We can calculate
+from Table II that the SPIN-SMF reduces computation time by
+98.76% (δ = 5) compared to its fastest competitor (OIT-CZ
+SMF). Simultaneously, the estimation accuracy of the SPIN-
+SMF method is essentially the same as that of the highest-
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+8
+accuracy method (optimal SMF). This shows that the SPIN-
+SMF proposed in this paper is a fast and accurate method.
+B. Monte Carlo Experiment
+We conduct Monte Carlo simulations to evaluate the per-
+formance of the SPIN-SMF in high-dimensional systems. The
+system matrices (A, B, C) are randomly generated in MAT-
+LAB using drss function, ensuring (A, C) is observable. The
+process and measurement noises are with JwkK = [−1, 1]p
+and JvkK = [−1, 1]m
+. The true initial state set is Jx0K =
+[−10, 10]n
+, while the estimated initial condition incorporates
+an offset: Jx0K = [−10, 10]n
+⊕ {c}, where c is randomly
+generated in [−1, 1]n
+. Simulation parameters are n = 10,
+p = m ∈ {5, . . . , 10}, and δ = n − rank(C) + 3. For each
+p = m, 100 trials are conducted. We compare the proposed
+SPIN-SMF, the SPIN-SMF without warm-start (adopted as an
+ablation experiment), the Scott method, the PCA method, the
+OIT-CZ SMF, and optimal SMF under the identical parameter
+settings as those in Fig. 1. The results are shown in Table III.
+TABLE III
+TIME AND DIAMETER (AVERAGE) FOR MONTE CARLO EXPERIMENT
+SMFs average time (τ) average diameter
+SPIN 0.82ms 5.1366
+SPIN (No Warm-Start) 3.13ms 5.1369
+Scott 5243.51ms 6.5122
+PCA 4908.14ms 38.3014
+OIT-CZ SMF 64.50ms 6.5276
+Optimal SMF 3754.21ms 4.9581
+Table III shows that the SPIN-SMF achieves remarkable
+computational efficiency with high estimation accuracy re-
+tained. Specifically, its average computation time reaches the
+sub-millisecond level (τSPIN < 1ms), yielding a 99.98%
+reduction (τSPIN = 1.6 × 10−4
+τScott) against Scott, 99.98%
+reduction (1.7×10−4
+τPCA) against PCA, and 98.72% reduction
+(1.3×10−2
+τOIT) against OIT-CZ SMF. Ablation results further
+verify the warm-start’s efficacy: a 281.71% time increase is
+observed without warm start, confirming its convergence ac-
+celeration effect. Moreover, SPIN-SMF’s estimation diameter
+is comparable to that of optimal SMF, achieving near-optimal
+accuracy with far lower computational overhead.
+VI. CONCLUSION
+In this article, we have proposed a fast and accurate linear
+CZ-SMF – the SPIN-SMF, inspired by our established two
+fundamental properties: structural invariance and parametric
+similarity. For the structural invariance, it provides invariant
+parameters in constrained zonotopic estimates over time; for
+the parametric similarity, it guarantees the uniform bound-
+edness of the other parameters (which are time-varying) in
+consecutive time steps. By leveraging these properties, the
+SPIN-SMF achieves significant computational efficiency im-
+provements. Specifically, structural invariance enables precom-
+putation of matrix inversions such that our algorithm only
+involves linear operations; Parametric similarity supports an
+efficient warm-start strategy by reusing information from the
+previous time step to initialize our algorithm. For future work,
+we will explore extending the SPIN-SMF to linear time-
+varying systems and nonlinear systems.
+REFERENCES
+[1] J. K. Scott, D. M. Raimondo, G. R. Marseglia, and R. D. Braatz,
+“Constrained zonotopes: A new tool for set-based estimation and fault
+detection,” Automatica, vol. 69, pp. 126–136, Jul. 2016.
+[2] B. S. Rego, G. V. Raffo, J. K. Scott, and D. M. Raimondo, “Guaranteed
+methods based on constrained zonotopes for set-valued state estimation
+of nonlinear discrete-time systems,” Automatica, vol. 111, Jan. 2020,
+art. no. 108614.
+[3] A. A. de Paula, D. M. Raimondo, G. V. Raffo, and B. O. S. Teix-
+eira, “Set-based state estimation for discrete-time constrained nonlinear
+systems: An approach based on constrained zonotopes and DC program-
+ming,” Automatica, vol. 159, Jan. 2024, art. no. 111401.
+[4] M. Althoff and J. J. Rath, “Comparison of guaranteed state estimators
+for linear time-invariant systems,” Automatica, vol. 130, Aug. 2021, art.
+no. 109662.
+[5] X. Qin, Y. Cong, J. Lai, J. Yang, and X. Wang, “Single-beacon
+localization for mobile robot: A set membership filtering approach,”
+IEEE Robot. Autom. Lett., vol. 9, no. 11, pp. 9899–9906, Nov. 2024.
+[6] Z. Zhang, X. He, and D. Zhou, “Active fault diagnosis for LPV systems
+based on constrained zonotopes,” IEEE Trans. Autom. Control, vol. 69,
+no. 11, pp. 7893–7900, Nov. 2024.
+[7] W. Kühn, “Rigorously computed orbits of dynamical systems without
+the wrapping effect,” Computing, vol. 61, pp. 47–67, Jan. 1998.
+[8] C. Combastel, “A state bounding observer based on zonotopes,” in Proc.
+Eur. Control Conf., Cambridge, U.K., Sep. 2003, pp. 2589–2594.
+[9] A. Girard, “Reachability of uncertain linear systems using zonotopes,” in
+Proc. Int. Workshop Hybrid Syst. Comput. Control, 2005, pp. 291–305.
+[10] A.-K. Kopetzki, B. Schürmann, and M. Althoff, “Methods for order
+reduction of zonotopes,” in Proc. IEEE 56th Annu. Conf. Decis. Control,
+2017, pp. 5626–5633.
+[11] Y. Cong, X. Wang, and X. Zhou, “Stability of linear set-membership
+filters with respect to initial conditions: An observation-information
+perspective,” Automatica, vol. 172, Feb. 2025, art. no. 111993.
+[12] G. N. Nair, “A nonstochastic information theory for communication and
+state estimation,” IEEE Trans. Autom. Control, vol. 58, no. 6, pp. 1497–
+1510, Jun. 2013.
+[13] Y. Cong, X. Wang, and X. Zhou, “Rethinking the mathematical frame-
+work and optimality of set-membership filtering,” IEEE Trans. Autom.
+Control, vol. 67, no. 5, pp. 2544–2551, May 2022.
+[14] C. Combastel, “An extended zonotopic and gaussian kalman filter
+(EZGKF) merging set-membership and stochastic paradigms: Toward
+non-linear filtering and fault detection,” Annu. Rev. Control, vol. 42, pp.
+232–243, 2016.
+[15] M. Althoff, “Reachability analysis and its application to the safety as-
+sessment of autonomous cars,” Ph.D. dissertation, Technische Universität
+München, Munich, Germany, 2010.
+[16] X. Yang and J. K. Scott, “A comparison of zonotope order reduction
+techniques,” Automatica, vol. 95, pp. 378–384, Sep. 2018.
+[17] V. Raghuraman and J. P. Koeln, “Set operations and order reductions
+for constrained zonotopes,” Automatica, vol. 139, May 2022, art. no.
+110204.
+[18] F. Rego and D. Silvestre, “A novel and efficient order reduction for both
+constrained convex generators and constrained zonotopes,” IEEE Trans.
+Autom. Control, vol. 70, no. 6, pp. 4016–4023, Jun. 2025.
+[19] Y. Cong, X. Zhou, and R. A. Kennedy, “Finite blocklength entropy-
+achieving coding for linear system stabilization,” IEEE Trans. Autom.
+Control, vol. 66, no. 1, pp. 153–167, Jan. 2021.
+[20] D. P. Bertsekas, Constrained Optimization and Lagrange Multiplier
+Methods. New York, NY, USA: Academic, 2014.
+[21] M. Kang, M. Kang, and M. Jung, “Inexact accelerated augmented
+Lagrangian methods,” Comput. Optim. Appl., vol. 62, pp. 373–404, Mar.
+2015.
+[22] S. J. Wright, “Coordinate descent algorithms,” Math. Program., vol. 151,
+no. 1, pp. 3–34, Mar. 2015.
+[23] E. A. Yildirim and S. J. Wright, “Warm-start strategies in interior-point
+methods for linear programming,” SIAM J. Optim., vol. 12, no. 3, pp.
+782–810, Feb. 2002.
+[24] M. Althoff, N. Kochdumper, and M. Wetzlinger, CORA 2025
+Manual, 2025, accessed: Jul. 6, 2026. [Online]. Available: https:
+//tumcps.github.io/CORA/
+This article has been accepted for publication in IEEE Transactions on Automatic Control. This is the author's version which has not been fully edited and
+content may change prior to final publication. Citation information: DOI 10.1109/TAC.2026.3712691
+© 2026 IEEE. All rights reserved, including rights for text and data mining and training of artificial intelligence and similar technologies. Personal use is permitted,
+but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: National Univ of Defense Tech. Downloaded on November 04,2026 at 12:22:53 UTC from IEEE Xplore. Restrictions apply.
+

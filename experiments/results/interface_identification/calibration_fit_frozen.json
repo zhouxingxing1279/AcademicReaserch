@@ -1,0 +1,296 @@
+{
+  "source": "interface_calibration_01",
+  "models": {
+    "N": {
+      "static": {
+        "tau": 0.0,
+        "delay": 0.0,
+        "gain": 0.9199457703167581,
+        "bias": -0.0031916292214819817,
+        "calibration_velocity_rmse": 0.042000813578568656
+      },
+      "lag": {
+        "tau": 0.04,
+        "delay": 0.16,
+        "gain": 1.0120612728589364,
+        "bias": -0.0034595031627357624,
+        "calibration_velocity_rmse": 0.015058936798199172
+      },
+      "top_candidates": [
+        {
+          "tau": 0.04,
+          "delay": 0.16,
+          "gain": 1.0120612728589364,
+          "bias": -0.0034595031627357624,
+          "calibration_velocity_rmse": 0.015058936798199172
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.18,
+          "gain": 1.0094628087984483,
+          "bias": -0.0033394763448479784,
+          "calibration_velocity_rmse": 0.015099338949275289
+        },
+        {
+          "tau": 0.06,
+          "delay": 0.14,
+          "gain": 1.016161651617659,
+          "bias": -0.003580236312703299,
+          "calibration_velocity_rmse": 0.01510000503763764
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.2,
+          "gain": 1.0085787470868792,
+          "bias": -0.0032203007126578335,
+          "calibration_velocity_rmse": 0.01518956669874069
+        },
+        {
+          "tau": 0.08,
+          "delay": 0.12,
+          "gain": 1.0215961817216417,
+          "bias": -0.003701615380613057,
+          "calibration_velocity_rmse": 0.015243807889626482
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.16,
+          "gain": 1.0090864316015469,
+          "bias": -0.0033340289500135337,
+          "calibration_velocity_rmse": 0.015321681071337842
+        },
+        {
+          "tau": 0.04,
+          "delay": 0.14,
+          "gain": 1.0116148551004427,
+          "bias": -0.003454020499498653,
+          "calibration_velocity_rmse": 0.015322523283087778
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.18,
+          "gain": 1.0082246873907157,
+          "bias": -0.0032148991299455875,
+          "calibration_velocity_rmse": 0.015397703047235329
+        },
+        {
+          "tau": 0.06,
+          "delay": 0.12,
+          "gain": 1.0155953360530146,
+          "bias": -0.0035747603980348184,
+          "calibration_velocity_rmse": 0.015431646697369393
+        },
+        {
+          "tau": 0.1,
+          "delay": 0.1,
+          "gain": 1.0282142733215094,
+          "bias": -0.003823664942291493,
+          "calibration_velocity_rmse": 0.015505218442321448
+        }
+      ]
+    },
+    "E": {
+      "static": {
+        "tau": 0.0,
+        "delay": 0.0,
+        "gain": 0.9185162254640521,
+        "bias": 0.0010199050416151109,
+        "calibration_velocity_rmse": 0.04222408440532915
+      },
+      "lag": {
+        "tau": 0.02,
+        "delay": 0.18,
+        "gain": 1.009706049074107,
+        "bias": 0.0010561601117547773,
+        "calibration_velocity_rmse": 0.01505325506545596
+      },
+      "top_candidates": [
+        {
+          "tau": 0.02,
+          "delay": 0.18,
+          "gain": 1.009706049074107,
+          "bias": 0.0010561601117547773,
+          "calibration_velocity_rmse": 0.01505325506545596
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.2,
+          "gain": 1.008839134890365,
+          "bias": 0.0010272408954200792,
+          "calibration_velocity_rmse": 0.015076728089316694
+        },
+        {
+          "tau": 0.04,
+          "delay": 0.16,
+          "gain": 1.0121758438344284,
+          "bias": 0.00108514987074242,
+          "calibration_velocity_rmse": 0.015130767144154608
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.16,
+          "gain": 1.0092501573625803,
+          "bias": 0.001054140970527316,
+          "calibration_velocity_rmse": 0.01532244278455719
+        },
+        {
+          "tau": 0.06,
+          "delay": 0.14,
+          "gain": 1.0160763100091459,
+          "bias": 0.0011143930150908597,
+          "calibration_velocity_rmse": 0.015326286917203828
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.18,
+          "gain": 1.0084010972811286,
+          "bias": 0.0010252361729840341,
+          "calibration_velocity_rmse": 0.015335282659546418
+        },
+        {
+          "tau": 0.04,
+          "delay": 0.14,
+          "gain": 1.0116588831212932,
+          "bias": 0.0010831117863319146,
+          "calibration_velocity_rmse": 0.015433408442719109
+        },
+        {
+          "tau": 0.08,
+          "delay": 0.12,
+          "gain": 1.0212595983911692,
+          "bias": 0.0011439406322888742,
+          "calibration_velocity_rmse": 0.015645163417145336
+        },
+        {
+          "tau": 0.06,
+          "delay": 0.12,
+          "gain": 1.015450253800656,
+          "bias": 0.0011123159900492973,
+          "calibration_velocity_rmse": 0.0156861275195966
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.2,
+          "gain": 1.0081735693605287,
+          "bias": 0.0010584313308747788,
+          "calibration_velocity_rmse": 0.01594430536724119
+        }
+      ]
+    },
+    "D": {
+      "static": {
+        "tau": 0.0,
+        "delay": 0.0,
+        "gain": 1.6487799264559464,
+        "bias": 0.01738596230057738,
+        "calibration_velocity_rmse": 0.039909889336416746
+      },
+      "lag": {
+        "tau": 0.0,
+        "delay": 0.04,
+        "gain": 1.6524755119122465,
+        "bias": 0.01739592824736218,
+        "calibration_velocity_rmse": 0.03851538285534271
+      },
+      "top_candidates": [
+        {
+          "tau": 0.0,
+          "delay": 0.04,
+          "gain": 1.6524755119122465,
+          "bias": 0.01739592824736218,
+          "calibration_velocity_rmse": 0.03851538285534271
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.02,
+          "gain": 1.6520939312374743,
+          "bias": 0.01739080163316817,
+          "calibration_velocity_rmse": 0.03866138696744148
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.02,
+          "gain": 1.654058536785575,
+          "bias": 0.017524964237717936,
+          "calibration_velocity_rmse": 0.038696642130159956
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.0,
+          "gain": 1.6536689972512117,
+          "bias": 0.017519796145876093,
+          "calibration_velocity_rmse": 0.03884486791228998
+        },
+        {
+          "tau": 0.04,
+          "delay": 0.0,
+          "gain": 1.6585489641884947,
+          "bias": 0.017656466419467776,
+          "calibration_velocity_rmse": 0.038856356039969404
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.06,
+          "gain": 1.6499025052395626,
+          "bias": 0.017401316452725094,
+          "calibration_velocity_rmse": 0.0394931738572657
+        },
+        {
+          "tau": 0.02,
+          "delay": 0.04,
+          "gain": 1.6515134704421526,
+          "bias": 0.017530399405108907,
+          "calibration_velocity_rmse": 0.03965867709491932
+        },
+        {
+          "tau": 0.04,
+          "delay": 0.02,
+          "gain": 1.6560861388641328,
+          "bias": 0.017661966677164243,
+          "calibration_velocity_rmse": 0.039781609301682924
+        },
+        {
+          "tau": 0.06,
+          "delay": 0.0,
+          "gain": 1.6633311096901848,
+          "bias": 0.017794632931748496,
+          "calibration_velocity_rmse": 0.03988799724755316
+        },
+        {
+          "tau": 0.0,
+          "delay": 0.0,
+          "gain": 1.6487799264559464,
+          "bias": 0.01738596230057738,
+          "calibration_velocity_rmse": 0.039909889336416746
+        }
+      ]
+    }
+  },
+  "audit": {
+    "name": "interface_calibration_01",
+    "completed": true,
+    "landed": true,
+    "block_count": 6,
+    "logger_config_restored": true,
+    "send_interval_wall_max": 0.06065893900000674,
+    "logged_command_interval_sim_median": 0.05200000000000671,
+    "logged_command_interval_sim_max": 0.060000000000002274,
+    "receive_minus_latest_reference_range": [
+      0.0,
+      0.012000000000000455
+    ],
+    "hover_thrust_at_blocks": [
+      0.7252139449119568,
+      0.726381778717041,
+      0.726875901222229,
+      0.7273099422454834,
+      0.7276723384857178,
+      0.7277882993221283
+    ],
+    "max_abs_velocity": [
+      0.3656938672065735,
+      0.3748813569545746,
+      0.5997242331504822
+    ]
+  }
+}

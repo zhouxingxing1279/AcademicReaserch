@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-05",
+  "task": "Stage 2 literature deliverables",
+  "local_head": "9882220234a20d730a38d648d5c08ac47c3b9d6d",
+  "records": 37,
+  "unique_doi": 37,
+  "unique_citekey": 37,
+  "extraction_fields": 11,
+  "populated_fields_including_explicit_unknowns": 407,
+  "metadata_identity": {
+    "crossref": 35,
+    "datacite_preprint": 1,
+    "local_published_pdf_and_manifest": 1
+  },
+  "retrieval_http_final": {
+    "200": 77,
+    "429": 6
+  },
+  "successful_response_hashes_verified": 77,
+  "retrieved_keyword_and_chain_records": 223,
+  "unique_screened": 205,
+  "decisions": {
+    "待核": 116,
+    "排除": 52,
+    "纳入": 24,
+    "关联版本": 2,
+    "优先待核": 11
+  },
+  "doi_absent_among_candidates": 7,
+  "exports_byte_identical": true,
+  "bibtex": {
+    "exit": 0,
+    "engine": "This is BibTeX, Version 0.99e (MiKTeX 26.2)",
+    "compiled_items": 37
+  },
+  "local_links_checked": 73,
+  "N16_state_permutation": "P A P^T and C P^T verified on matrices for dt=1",
+  "protocol_sha256": "cc220c36a4910b96942eab29851d4f439265a100824a4133ae1a0bb632cd2345",
+  "A1_sha256": "d77f132dd5cfd4048733222b27fb5469fbd3f18bcd37587208b512c022ca894e",
+  "artifact_sha256": {
+    "database.json": "ba19503d50c9703c1fe5553ca50403ef23313cdf4be3ac4fbcc0be7214b1ac6f",
+    "references.bib": "04692b43ee02498a149f6402d0e2889347390455dd76454e779c811c651c42bf",
+    "comparison.csv": "299502de6d532727329b734127ca0da788de76731ffdb0cc5d90bf18a0dea22d",
+    "reading_cards.md": "a480f173ae3bb2741d7b8ed4bebac96aaeda14f3f3b74da328f2e43d75bea766",
+    "screening.csv": "70c1183b15064672954ee408ed5ac38a79190c2b6e3808a60a3ace15649566f9",
+    "literature_review.md": "a649f0326b0e393224e19e544c3a8bc296f32273bad047061dd3dc1f29672b6b",
+    "key_comparison.md": "a39cbf612dac7af53c9242b0804f6823da728e565f46004376c89ef0d61de88a",
+    "retrieval_log.json": "10f1bcb25d822d6387f93c3b6b033192baa33f733cebab26ad6757f009b6d864",
+    "evidence/web_supplement.json": "8e4b02416df00bdb49f88b5838722b6bc4e909a9c584bd05fde6403065a3bc6e",
+    "evidence/primary_access.json": "e0b172188ce723195c657dff5866f3a4583635e38cde9d1c87e484e38126018f"
+  },
+  "scope": "This validates artifacts and source identities, not eligibility completeness, controller code, or a new control theorem."
+}

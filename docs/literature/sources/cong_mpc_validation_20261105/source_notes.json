@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-05",
+  "scope": "Targeted comparison for the first proposal gate, not a systematic review or an assertion of novelty.",
+  "queries": [
+    "\"Enhancing Output-Feedback MPC\" pdf Brunner",
+    "\"10.1109/TAC.2018.2791899\" filetype:pdf",
+    "\"Predictive Zonotope Reduction\"",
+    "\"Suboptimal model predictive control\" \"feasibility implies stability\""
+  ],
+  "sources": [
+    {
+      "title": "Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation",
+      "authors": "Florian D. Brunner; Matthias A. Muller; Frank Allgower",
+      "year": 2018,
+      "doi": "10.1109/TAC.2018.2791899",
+      "url": "https://research.uni-hannover.de/en/publications/enhancing-output-feedback-mpc-with-set-valued-moving-horizon-esti/",
+      "read_scope": "Author institution abstract and bibliographic record.",
+      "full_text_obtained": false,
+      "access_note": "Exact-title/DOI searches did not produce an accessible matching manuscript. IEEE document page displayed a JavaScript robot-verification page; no access challenge was bypassed.",
+      "remaining_gap": "Theorem-by-theorem comparison with the nearest finite-complexity output-feedback estimator-MPC construction."
+    },
+    {
+      "title": "A Fast and Accurate Linear Constrained Zonotopic Set-membership Filter",
+      "authors": "Xujie Qin; Yirui Cong; Xiangke Wang; Tengfei Liu",
+      "year": 2026,
+      "doi": "10.1109/TAC.2026.3712691",
+      "source_file": "../cong_mpc_20261104/A_Fast_and_Accurate_Linear_Constrained_Zonotopic_Set-membership_Filter.pdf",
+      "text_file": "../cong_mpc_20261104/A_Fast_and_Accurate_Linear_Constrained_Zonotopic_Set-membership_Filter.raw.txt",
+      "read_scope": "Existing local accepted manuscript, Sections III-IV; structural invariance and parametric similarity; Algorithm 1 iteration/residual conditions and Algorithms 2-3.",
+      "full_text_obtained": true,
+      "implementation_reproduced": false
+    },
+    {
+      "title": "Efficient Configuration-Constrained Tube MPC via Variables Restriction and Template Selection",
+      "authors": "Filippo Badalamenti; Sampath Kumar Mulagaleti; Mario Eduardo Villanueva; Boris Houska; Alberto Bemporad",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2505.14440v1",
+      "read_scope": "Sections 2-4: current-state parameterization, Proposition 2, Algorithm 1, Proposition 3 and template refinement.",
+      "full_text_obtained": true,
+      "implementation_reproduced": false
+    },
+    {
+      "title": "Predictive Zonotope Reduction: Precise Runtime Monitoring under Uncertainty",
+      "authors": "Vladimir Krsmanovic; Florian Kohn; Bernd Finkbeiner; Milan Simovic",
+      "year": 2026,
+      "url": "https://arxiv.org/html/2609.03699v1",
+      "read_scope": "Sections II-III: runtime-monitor state, reducer actions, sound outer approximations, squared hull loss, recorded versus causal future inputs.",
+      "full_text_obtained": true,
+      "implementation_reproduced": false
+    },
+    {
+      "title": "Suboptimal Model Predictive Control (Feasibility Implies Stability)",
+      "authors": "P. O. M. Scokaert; D. Q. Mayne; J. B. Rawlings",
+      "year": 1999,
+      "doi": "10.1109/9.751369",
+      "url": "https://ieeexplore.ieee.org/abstract/document/751369?section=abstract",
+      "repository_url": "https://minds.wisconsin.edu/bitstream/1793/10898/1/file_1.pdf",
+      "read_scope": "Search-retrieved IEEE abstract and institution-indexed abstract only.",
+      "full_text_obtained": false,
+      "access_note": "Institution PDF fetch timed out and then redirected to a URL inaccessible through the web tool; IEEE open also failed. Used as background only, not as a theorem-level comparator."
+    }
+  ]
+}

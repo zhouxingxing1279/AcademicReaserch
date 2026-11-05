@@ -1,0 +1,15 @@
+{
+  "model": "standard_vtol",
+  "flight_requested": false,
+  "gui_requested": false,
+  "passed": true,
+  "log": "/home/alfred/px4-research/logs/smoke-standard_vtol-20261104-184852.log",
+  "heartbeat": true,
+  "vehicle_type": 22,
+  "local_position_ned": [
+    0.027239710092544556,
+    -0.0009316745563410223,
+    -0.10826444625854492
+  ],
+  "max_relative_altitude_m": 0.081
+}
