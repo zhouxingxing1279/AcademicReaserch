@@ -2494,3 +2494,38 @@ Ji2022 §V-B的四旋翼示例采用12状态平衡点线性化、输出矩阵C=I
 Florian D. Brunner、Matthias A. Müller、Frank Allgöwer，*Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation*，IEEE Transactions on Automatic Control 63(9)，2018，2976–2986，DOI 10.1109/TAC.2018.2791899。作者机构摘要明确将所用量测数量与预测步关联，并以此建立递归可行；本轮没有获得可核查的期刊逐定理文本。Köhler 等既有作者稿 Thm. 4 则明确需要新预算不超过此前一步预测预算，再作移位。本次重查不增加系统库条数。以上来源支持选择强基线，未据此认定本地条件检查具有新颖性。[Brunner 机构摘要](https://research.uni-hannover.de/en/publications/enhancing-output-feedback-mpc-with-set-valued-moving-horizon-esti/) · [Köhler 作者稿](https://arxiv.org/pdf/2105.03427)
 
 本地新证书区分了原始速度约束、名义收紧行及最优首步。在所选可达记录上，提前一拍的数据改变了唯一最优首步；同信息精确增广得到相同结论。这里检验的是本地构造，论文实验复现数为零。[控制侧补证](../research/stage4_critique_A/CONTROL_PREFIX_SHIFT.md)
+
+## 2026-11-05 — A 的固定窗口下界、条件删包与强基线
+
+- Brunner 等，IEEE TAC 2018，DOI 10.1109/TAC.2018.2791899，2976–2986。复核作者机构摘要中逐预测步选择量测历史、递归可行及事前有界复杂度的原述。IEEE 正文入口返回验证页，OpenAlex DOI 记录与 Semantic Scholar 均未指向开放正文。CDC 2016（10.1109/CDC.2016.7798675）单列为会议版；Brunner 2017 年专著（ISBN 978-3-8325-4622-9）核至目录 §6.1，未将章节标题当作定理假设。[期刊机构记录](https://research.uni-hannover.de/en/publications/enhancing-output-feedback-mpc-with-set-valued-moving-horizon-esti/) · [作者机构会议版题录](https://www.irt.uni-hannover.de/en/forschung/publikationen/publikation-detail?tx_t3luhpublications_publications%5Baction%5D=show&tx_t3luhpublications_publications%5Bcontroller%5D=Publication&tx_t3luhpublications_publications%5Bpublication%5D=281) · [专著目录](https://www.logos-verlag.de/tocs/9783832546229toc.pdf)
+- 复查 Köhler 等（arXiv:2105.03427）Thm. 4 的误差预算与移位条件、Nouwens 等（DOI 10.1016/j.automatica.2023.111243）作者稿 Thm. 1 中 C1/C2 的等价删约束条件，以及 Bemporad 等（DOI 10.1016/S0005-1098(01)00174-1）出版正文 Thm. 2 的参数 QP 分区。本地七格下界、删量测后的中点反馈反例为独立推导。本次未增加系统综述已读篇数。[Köhler 作者稿](https://www.ist.uni-stuttgart.de/dokumente/public/Output.pdf) · [Nouwens 作者稿](https://arxiv.org/pdf/2303.16581) · [Bemporad 出版正文](https://cse.lab.imtlucca.it/~bemporad/publications/papers/automatica-mpqp.pdf) · [本地逐项对照](../research/stage4_critique_A/PACKET_MEMORY_RESULT.md)
+
+## 2026-11-05 — 阶段 5 冻结数学合同的两项原文依据
+
+- J. K. Scott、D. M. Raimondo、G. R. Marseglia、R. D. Braatz，Automatica 69 (2016), 126–136，DOI 10.1016/j.automatica.2016.02.036。复核出版正文第 3 页 Prop. 1、式 (11)–(13) 的线性像、Minkowski 和与广义交集。阶段 5 仅借用其集表示；生成戳、启动时钟和六状态可观测秩由本地模型决定。[MIT 托管出版正文](https://web.mit.edu/braatzgroup/Scott_Automatica_2016.pdf) · [数学模型](../research/mathematical_model.md)
+- S. M. Hassaan、T. Pati、Q. Shen、S. Z. Yong，ADHS 2021，DOI 10.1016/j.ifacol.2021.08.482。复核作者稿第 5 页 Assumptions 1–3 及其引用的式 (12)、(18)，区分估计与跟踪误差要求、终端不变与下降条件。阶段 5 固定的是本项目的可见信息及比较目标。两项均为既有条目定向复读，保留原文献计数。[作者稿](https://qiangs.github.io/Papers/Conf_Hassaan2021ADHS.pdf) · [系统假设](../research/system_assumptions.md)
+
+## 2026-11-05 — M2 取得 IEEE 期刊版，核对观测时钟、移位与复杂度
+
+Florian D. Brunner、Matthias A. Müller、Frank Allgöwer，*Enhancing Output-Feedback MPC With Set-Valued Moving Horizon Estimation*，IEEE Transactions on Automatic Control，63(9)，2018，2976–2986。机构授权下载的出版版共 11 页，首页 DOI 为 10.1109/TAC.2018.2791899，文件 SHA-256 为 `913ea9eff1bdbd763f348863533a27a599d9fcd860b6a8eec30024d6ff3ffe29`。M2 从机构摘要升级为期刊正文定向核验，去重篇数沿用原计数。[IEEE 论文页](https://ieeexplore.ieee.org/document/8253530/) · [本地授权副本](sources/ieee_local/10.1109_tac.2018.2791899.pdf)
+
+- **原文的可用信息。** 第 2979 页 Algorithm 1 每拍取得当拍输出并更新点估计。第 2980 页 §IV-A1、式 (18) 与 Remark 2 以窗口起点误差界及最近创新构造集合。即使集合估计省去较早的创新，点估计仍携带过去量测的信息。项目的固定原始时间窗下界限定了可用记忆；与本文比较时，点估计和误差界的存储也要计入。
+- **移位条件。** 第 2979 页 Assumption 1、Theorem 1 把当前可行与下一拍可行联系起来。第 2980–2981 页 §IV-A2、Lemma 3 式 (22) 按预测步缩短所用创新历史，再接先验不确定性界，明确满足 Assumption 1 的前两项；终端另由 §IV-A3 处理。要迁移到本项目，还须对同一可见前缀下的乱序、空到达、同拍多包及每组相容读数重建这项移位包含关系。
+- **复杂度的口径。** 第 2982 页 §IV-C 计数优化问题 (11) 的变量和约束，显式列出估计/预测时域、系统维度与多面体面数假设。本文给出了可实际核对的强基线；本项目能否在相同信息、相同保证下减少峰值存储，仍待证明。以上为原文定向比对，未复现论文数值实验。
+
+<a id="b26-v1"></a>
+
+## 2026-11-05 — B26 的采样数、最坏重构误差与阶段 5 的固定时间窗
+
+Jerzy Baranowski，*Beyond Observability: Sharp Sample Bounds for Minimax State Reconstruction*。核对 arXiv 版本记录、PDF 首页版戳和本地文件：2610.26326v1 [eess.SY]，2026-10-19，28 页，586104 字节，SHA-256 为 `d1daa8eb6a9663825595eaa8249e897d734b20b7e720539b9e32f12d60d04c19`。登记的是公开预印本，DOI 10.48550/arXiv.2610.26326；提交页注明已投 *International Journal of Control*。本次将既有 B26 从摘要更新为指定页定向核读，保留原篇数。[版本记录](https://arxiv.org/abs/2610.26326v1) · [预印本 DOI](https://doi.org/10.48550/arXiv.2610.26326) · [本地 PDF](sources/arxiv/2610.26326v1.pdf)
+
+| 原文定位（PDF 页码与印刷页码一致） | 已核结论及条件 |
+|---|---|
+| 第 3 页 §2.1，式 (2)–(8) | 在给定当前时刻 \(t\) 和回看时长内，用已知输入校正标量输出，得到关于**当前** \(x(t)\) 的观测矩阵 \(D\)。动力学无未知过程输入，量测误差逐样本满足绝对值界 \(\delta\)。作者在页末区分每次重构使用的样本数和滑窗维持样本可用所需的存储。 |
+| 第 4 页命题 1，式 (9)–(12)；第 5 页首段 | 对满列秩 \(D\)，在无界状态空间、固定坐标和 \(\ell_\infty\) 误差下，所有估计器的全局最小最坏半径为 \(R^\star=\delta/\mu_\infty(D)\)，其中 \(\mu_\infty(D)=\min_{\lVert x\rVert_\infty=1}\lVert Dx\rVert_\infty\)。最优左逆达界，产生同一零观测的两状态给出下界。式 (7) 要求左逆，未对每组读数另加“估计点属于相容后验”的约束。不同物理单位可先按预定正对角尺度归一化。 |
+| 第 5–6 页式 (13)–(18)、定理 1；第 22 页附录 A.1 式 (72) | 连续窗口内标量观测行张成 \(n\) 维空间。在给定 \(t\) 可选采样时刻时，无噪精确重构所需最少样本 \(m_{\rm obs}=n\)；达到完整连续历史同一最坏半径所需最少样本满足 \(n\le m_{\rm sat}\le n^2\)。上界对该系统类紧，由特构解析系统取到。第 6 页末明确取样时刻可随 \(t\) 改变。 |
+| 第 11–12 页式 (55)–(60)、命题 3、表 1；第 27–28 页附录 B.4 式 (106)–(110) | 三层无阻尼楼体有六个状态，只测第一层位移。在 \([0,10]\) 内，六次标量采样可精确重构无噪状态，达到连续历史最优精度至少要七次。作者以区间证书排除六次并构造七个时刻；本文记录原文结论，未复跑其区间计算。 |
+
+**阶段 5 对照。** 已知实际输入的补偿、确定性有界读数及满秩与误差半径的区分有正文依据。项目另设三轴共戳的三维位置包、每拍未知匹配加速度、紧先验、外生生成/延迟和合法历史。两戳保证在拍 5 才成立、六格/七格的紧速度半宽和四拍块末预算来自项目自己的时序与证书。比较精度时分别报告 m 与 m/s，若合并成一个范数须指明尺度。对给定历史要求同一可行代表点，还需在相容后验内验证其各坐标预算。G99 的期刊定义保留待核。[系统假设 §1–3](../research/system_assumptions.md) · [可观测性分析 §4 与单轴反例](../research/observability_analysis.md) · [固定时间窗证书](../research/stage4_critique_A/PACKET_MEMORY_RESULT.md)
+
+**收件与物理依据。** 本次递归清点收件夹为 0 个文件。G99 仍为期刊题录与摘要，D4 仍为机构摘要；D4 所用的外环命令、实际可见量、平移扰动界来源及终端条件四项均待正文核对。把真实内环残差纳入匹配硬界仍是独立验证义务。[收件清单](FULLTEXT_DOWNLOAD_LIST.md) · [数学模型 §4](../research/mathematical_model.md)

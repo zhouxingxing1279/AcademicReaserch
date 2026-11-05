@@ -1,0 +1,68 @@
+{
+  "dispatch": "three concurrent ephemeral Codex CLI sessions, isolated prompts and separate working directories; same configured service, read-only; candidate retried on same route",
+  "cli": "0.166.0-alpha.6",
+  "contract_sha256": "bb72ee01afba24352a49d11fb69ce5305d1775f64cf65071a1eaed5f3c0716c4",
+  "attempts": [
+    {
+      "attempt": "baseline",
+      "role": "baseline",
+      "thread_id": "01a1aad0-6c9c-7f20-8f8b-4478d9469ee7",
+      "started_at": "2026-11-05T08:25:47.9472918+00:00",
+      "ended_at": "2026-11-05T08:33:13.2462045+00:00",
+      "exit_code": 0,
+      "prompt_sha256": "e7b652f64cbb90208e9ff0ee9fcb89183b51f460f8a083445c018ffa9fda8414",
+      "completed": true,
+      "report_file": "reviews/baseline.md",
+      "report_sha256": "2180972cc9775762bef89596b0ee3d29b41a6d0c919e75cb58eca00f1940c239"
+    },
+    {
+      "attempt": "candidate",
+      "role": "candidate",
+      "thread_id": "01a1aad0-6c9c-7471-b201-a0e05c44c04b",
+      "started_at": "2026-11-05T08:25:47.9376994+00:00",
+      "ended_at": "2026-11-05T08:34:15.3738096+00:00",
+      "exit_code": 1,
+      "prompt_sha256": "ee6ed44cab3ba961688888981900f8c562b4903da6e685af5be3603826002100",
+      "completed": false,
+      "reason": "service_license_expired_403; no final report"
+    },
+    {
+      "attempt": "adversary",
+      "role": "adversary",
+      "thread_id": "01a1aad0-6c9e-7563-9fb9-2beea4a622e4",
+      "started_at": "2026-11-05T08:25:47.9638065+00:00",
+      "ended_at": "2026-11-05T08:32:57.2438454+00:00",
+      "exit_code": 0,
+      "prompt_sha256": "585be1db36195890e8c72f76d3be03c70546245e32dc68dd5915314fa4bec85d",
+      "completed": true,
+      "report_file": "reviews/adversary.md",
+      "report_sha256": "96bc44fa82e30dc420529d400cc086d0e49b90bcb3a5a4cf4e6121dd7d283660"
+    },
+    {
+      "attempt": "candidate_retry",
+      "role": "candidate",
+      "thread_id": "01a1ab21-180e-7e60-8cbf-23ab3302440c",
+      "started_at": "2026-11-05T09:53:54.7510937+00:00",
+      "ended_at": "2026-11-05T09:59:36.6245571+00:00",
+      "exit_code": 0,
+      "prompt_sha256": "ee6ed44cab3ba961688888981900f8c562b4903da6e685af5be3603826002100",
+      "completed": true,
+      "report_file": "reviews/candidate.md",
+      "report_sha256": "1b67d387db18ce35051fb578e601289f9a7d6a9d19a5a05de00dcae6577347d1"
+    }
+  ],
+  "head_at_freeze": "9882220234a20d730a38d648d5c08ac47c3b9d6d",
+  "head_at_audit": "a43539da5d070d1ea497470df5c64d37df801411",
+  "runtime": "3.11.9",
+  "artifacts": {
+    "roles.json": "3b5c9e93a69a957c971021f68affedfa71c72730243b3f75cd81a9147e613047",
+    "brake_oracle.py": "c14900c837db4bfdd6788833619165b0d85ce0729fc7ae2f66d4d19ade6b8d41",
+    "oracle.json": "e85d5adc6689c5917ea3426dfadf8681b856162d33c5ea103ecffb96a12ddee7",
+    "check_claims.py": "0d86ade410d507a7727dc46687e69bb5048400dae0fe6383c0adf22aac0436e5",
+    "claims.json": "47f98bcb63d676b3b1e2807dc9d2535da49c23cec2ac850305f86f6bb5359d4a",
+    "suffix_certificate.py": "86e683e0dcbb45e46b1c5faf84c0e6c929d68a3f925023e07a5a1406234df2a3",
+    "suffix_checks.json": "080a0901290b756ed8509c6703112e5457d13b82bb5e493dc9870e27dc2c16d1",
+    "launch_team.py": "04c064517e82ed0a3cb551f108b9536ce4c8d31797da44c26db9e1398c176f4b"
+  },
+  "human_or_independent_model_review": false
+}

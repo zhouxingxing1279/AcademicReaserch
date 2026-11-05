@@ -17,7 +17,7 @@
 | 1 背景与路线 | research_background.md、research_technology_map.md、research_questions.md | 八类背景有直接/可迁移/基础证据；复用已有总账，不以少量题录结束调研 |
 | 2 系统文献 | 文献数据库、BibTeX、阅读记录、综述、对比表 | 按 DOI/版本去重；逐篇提取问题、模型、维度、输入、估计、不确定性、MPC、保证、实验、局限、关联；核验核心原文 |
 | 3 空白与创新 | research_gap.md、innovation_analysis.md、candidate_topics.md | 多个候选逐一列近邻、差异、条件、算法、难点、可证伪实验、风险与工作量 |
-| 4 定题 | final_research_topic.md、research_proposal.md | 从学术价值、创新、理论、数学、仿真、复杂度、文献和硕士周期比较主选、备选及不推荐项；用户定题 |
+| 4 定题 | final_research_topic.md、research_proposal.md | 从学术价值、创新、理论、数学、仿真、复杂度、文献比较主选、备选及不推荐项；用户定题 |
 | 5 模型与假设 | mathematical_model.md、system_assumptions.md、observability_analysis.md | 符号、维度、采样、时间戳、扰动与观测假设明确，标明物理映射界限 |
 | 6 核心理论 | estimation_theory.md、equalized_recovery.md、causal_tube_mpc.md、constraint_tightening.md、terminal_set.md、recursive_feasibility.md、theorem_and_proof_log.md | 按下述链条逐项核查假设、全称量词、证明、反例；未证/证伪项保留 |
 | 7 算法原型 | 独立模块、pytest、数值验证与实现说明 | 对应已审核公式，含维度、数值稳定性、有界随机和失败测试；保留既有基线 |

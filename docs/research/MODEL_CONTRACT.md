@@ -1,5 +1,7 @@
 # 外环抽象模型与理论合同（接口未选定）
 
+**2026-11-05 阶段 5 入口。** 本页记录 2026-11-04 的一般接口与历史限定算例。候选 A 的当前审阅版在[数学模型](mathematical_model.md)、[系统假设](system_assumptions.md)和[可观测性分析](observability_analysis.md)。其中已固定抽象 ZOH 特例的矩阵、时钟与误差界；实际飞控接口和物理残差覆盖另行验证。验收状态只读[统一检查点](CURRENT_CHECKPOINT.md)。
+
 > **状态：THEORETICAL BASELINE / NOT FROZEN.** 当前阶段只冻结理论变量和证明假设，不冻结 PX4/ArduPilot 指令接口。位置/速度/加速度 setpoint 不是本文件中的已选控制输入，也不假设其与实际状态之间存在理想映射。
 
 **2026-11-04限定算例补充：** [有限记忆专题](proposal/FINITE_MEMORY_THEORY.md)冻结了一个ZOH双积分数学合同及独立三轴盒约束，并实现控制验证。该算例的输入具有加速度量纲，残差限制为 \(Bw\)，不是具体飞控接口的选型或一般 \(G\mathcal W\) 的完成证明。所有参数是数学设计值；真实物理残差映射仍未冻结。
