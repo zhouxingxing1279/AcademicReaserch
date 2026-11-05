@@ -4,8 +4,9 @@ __pycache__/
 results/my*/
 .worktrees/
 
-# Obsidian 本地编辑器配置（个人界面状态，不纳入版本库）
+# 本地工具目录（编辑器配置与工作区记忆，不纳入版本库）
 .obsidian/
+.workbuddy/
 
 # 大体积实验原始数据（单文件 > 5 MB）：仅保留在本地，可由对应 experiments/*.py 重新生成。
 # 需要长期归档时另走外部对象存储，不进入 Git 历史。
